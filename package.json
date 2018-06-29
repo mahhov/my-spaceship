@@ -1,0 +1,18 @@
+{
+  "name": "canvasjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build": "[ -d build ] && rm -r build; cp -r src build; browserify --debug src/Canvas.js -o build/Canvas.js",
+    "dev": "nodemon --watch src -e html,js,css --exec npm run build & http-server ./build -o -a localhost -c-1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^16.2.2",
+    "http-server": "^0.11.1",
+    "nodemon": "^1.17.5"
+  }
+}
