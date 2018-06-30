@@ -1,35 +1,38 @@
-const Line = require('./painter/Line');
-const Rect = require('./painter/Rect');
-const RectC = require('./painter/RectC');
+const Keymapping = require('./Keymapping');
 const Rock = require('./entities/Rock');
-
-let speed = .004, size = .01;
-let x = .5, y = .5;
-let rock = new Rock(.2, .2);
+const Player = require('./entities/Player');
 
 class Logic {
-    constructor() {
+    constructor(controller, painter) {
+        this.controller = controller;
+        this.painter = painter;
+        this.keymapping = new Keymapping();
+
         this.rocks = [];
         for (let i = 0; i < 100; i++) // todo forEach
             this.rocks.push(new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1));
+
+        this.player = new Player(.5, .5);
     }
 
     iterate(controller, painter) {
-        if (controller.getKey('a'))
-            x -= speed;
-        if (controller.getKey('d'))
-            x += speed;
-        if (controller.getKey('w'))
-            y -= speed;
-        if (controller.getKey('s'))
-            y += speed;
-
-        let rect = new RectC(x, y, size, size);
+        this.movePlayer(controller);
 
         this.rocks.forEach(rock =>
             rock.paint(painter));
 
-        painter.add(rect);
+        this.player.paint(painter);
+    }
+
+    movePlayer(controller) {
+        if (this.keymapping.isActive(controller, this.keymapping.MOVE_LEFT))
+            this.player.moveLeft();
+        if (this.keymapping.isActive(controller, this.keymapping.MOVE_RIGHT))
+            this.player.moveRight();
+        if (this.keymapping.isActive(controller, this.keymapping.MOVE_UP))
+            this.player.moveUp();
+        if (this.keymapping.isActive(controller, this.keymapping.MOVE_DOWN))
+            this.player.moveDown();
     }
 }
 
