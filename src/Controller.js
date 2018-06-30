@@ -45,3 +45,5 @@ class Controller {
 }
 
 module.exports = Controller;
+
+// todo on lose focus, lift all keypresses

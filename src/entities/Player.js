@@ -1,3 +1,4 @@
+const Bounds = require('../intersection/Bounds');
 const RectC = require('../painter/RectC');
 
 class Player {
@@ -12,16 +13,21 @@ class Player {
         this.x -= this.speed;
     }
 
-    moveRight() {
-        this.x += this.speed;
-    }
-
     moveUp() {
         this.y -= this.speed;
     }
 
+    moveRight() {
+        this.x += this.speed;
+    }
+
     moveDown() {
         this.y += this.speed;
+    }
+
+    getBounds() {
+        let halfSize = this.Size / 2;
+        return new Bounds(this.x - halfSize, this.y - halfSize, this.x + halfSize, this.y + halfSize);
     }
 
     paint(painter) {
