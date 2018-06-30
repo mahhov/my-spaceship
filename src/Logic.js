@@ -9,6 +9,9 @@ let rock = new Rock(.2, .2);
 
 class Logic {
     constructor() {
+        this.rocks = [];
+        for (let i = 0; i < 100; i++) // todo forEach
+            this.rocks.push(new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1));
     }
 
     iterate(controller, painter) {
@@ -23,7 +26,8 @@ class Logic {
 
         let rect = new RectC(x, y, size, size);
 
-        rock.paint(painter);
+        this.rocks.forEach(rock =>
+            rock.paint(painter));
 
         painter.add(rect);
     }
