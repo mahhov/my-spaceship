@@ -9,20 +9,29 @@ class Player {
         this.size = .01;
     }
 
-    moveLeft() {
-        this.x -= this.speed;
+    move(dx, dy) {
+        this.x += dx;
+        this.y += dy;
     }
 
-    moveUp() {
-        this.y -= this.speed;
+    getX() {
+        return x;
     }
 
-    moveRight() {
-        this.x += this.speed;
+    getY() {
+        return y;
     }
 
-    moveDown() {
-        this.y += this.speed;
+    getSpeed() {
+        return this.speed;
+    }
+
+    setIntersectionHandle(intersectionHandle) {
+        this.intersectionHandle = intersectionHandle;
+    }
+
+    getIntersectionHandle() {
+        return this.intersectionHandle;
     }
 
     getBounds() {

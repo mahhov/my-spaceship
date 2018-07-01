@@ -18,6 +18,11 @@ class IntersectionFinder {
         return this.entities[layer].add(bounds)
     }
 
+    canMove(layer, x, y, dx, dy, magnitude) {
+
+
+        return magnitude * .1;
+    }
 }
 
 module.exports = IntersectionFinder;

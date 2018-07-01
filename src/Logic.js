@@ -3,6 +3,8 @@ const IntersectionFinder = require('./intersection/IntersectionFinder');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 
+const invSqrt2 = 1 / Math.sqrt(2);
+
 class Logic {
     constructor(controller, painter) {
         this.controller = controller;
@@ -18,7 +20,8 @@ class Logic {
         }
 
         this.player = new Player(.5, .5);
-        this.intersectionFinder.addEntity(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds())
+        let playerIntersectionHandle = this.intersectionFinder.addEntity(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
+        this.player.setIntersectionHandle(playerIntersectionHandle);
     }
 
     iterate(controller, painter) {
@@ -31,14 +34,30 @@ class Logic {
     }
 
     movePlayer(controller) {
-        if (this.keymapping.isActive(controller, this.keymapping.MOVE_LEFT))
-            this.player.moveLeft();
-        if (this.keymapping.isActive(controller, this.keymapping.MOVE_UP))
-            this.player.moveUp();
-        if (this.keymapping.isActive(controller, this.keymapping.MOVE_RIGHT))
-            this.player.moveRight();
-        if (this.keymapping.isActive(controller, this.keymapping.MOVE_DOWN))
-            this.player.moveDown();
+        let left = this.keymapping.isActive(controller, this.keymapping.MOVE_LEFT);
+        let up = this.keymapping.isActive(controller, this.keymapping.MOVE_UP);
+        let right = this.keymapping.isActive(controller, this.keymapping.MOVE_RIGHT);
+        let down = this.keymapping.isActive(controller, this.keymapping.MOVE_DOWN);
+
+        let dx = 0, dy = 0;
+
+        if (left)
+            dx -= 1;
+        if (up)
+            dy -= 1;
+        if (right)
+            dx += 1;
+        if (down)
+            dy += 1;
+
+
+        if (dx !== 0 && dy !== 0) {
+            dx = Math.sign(dx) * invSqrt2;
+            dy = Math.sign(dy) * invSqrt2;
+        }
+
+        let canMove = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getX(), this.player.getY(), dx, dy, player.getSpeed());
+        this.player.move(dx * canMove, dy * canMove);
     }
 }
 
