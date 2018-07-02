@@ -19,34 +19,61 @@ class IntersectionFinder {
     }
 
     canMove(layer, bounds, dx, dy, magnitude) {
-        if (dx === 0 || dy === 0) {
-            if (dx < 0)
-                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.LEFT);
-            else if (dy < 0)
-                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.TOP);
-            else if (dx > 0)
-                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.RIGHT);
-            else
-                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.BOTTOM);
-        }
+        let moveDistance = 0;
+
+        let horizontal = -1, vertical = -1;
+        if (dx)
+            horizontal = dx < 0 ? bounds.LEFT : bounds.RIGHT;
+        if (dy)
+            vertical = dy < 0 ? bounds.TOP : bounds.BOTTOM;
+
+        if (horizontal + 1 && vertical + 1)
+            return this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
+
+        if (horizontal + 1)
+            return this.canMoveOneDirection(layer, bounds, magnitude, horizontal);
+        if (vertical + 1)
+            return this.canMoveOneDirection(layer, bounds, magnitude, vertical);
+
         return 0;
+    }
+
+    canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
+        this.boundsGroups[this.PASSIVE].forEach(iBounds => {
+            let horizontalDelta = (iBounds.getOpposite(horizontal) - bounds.get(horizontal)) / dx;
+            let verticalDelta = (iBounds.getOpposite(vertical) - bounds.get(vertical)) / dy;
+
+            if (horizontalDelta > magnitude || verticalDelta > magnitude)
+                return;
+
+            horizontalDelta = Math.max(horizontalDelta, 0);
+            verticalDelta = Math.max(verticalDelta, 0);
+
+            let horizontalFarDelta = (iBounds.get(horizontal) - bounds.getOpposite(horizontal)) / dx;
+            let verticalFarDelta = (iBounds.get(vertical) - bounds.getOpposite(vertical)) / dy;
+
+            let maxDelta = Math.max(horizontalDelta, verticalDelta);
+            if (maxDelta < Math.min(horizontalFarDelta, verticalFarDelta))
+                magnitude = maxDelta;
+        });
+
+        return magnitude;
     }
 
     canMoveOneDirection(layer, bounds, magnitude, direction) {
         let newBounds = bounds.copy();
         newBounds.expand(direction, magnitude);
-        let moveDistance = magnitude;
 
         // todo don't hardcode the passive layer
-        this.boundsGroups[this.PASSIVE].forEach(entity => {
-            if (newBounds.intersects(entity)) {
-                newBounds.set(direction, entity.getOpposite(direction));
-                moveDistance = entity.getOpposite(direction) - bounds.get(direction);
+        this.boundsGroups[this.PASSIVE].forEach(iBounds => {
+            if (newBounds.intersects(iBounds)) {
+                newBounds.set(direction, iBounds.getOpposite(direction));
+                magnitude = iBounds.getOpposite(direction) - bounds.get(direction);
             }
         });
-        if (moveDistance < 0)
+        if (magnitude < 0)
             return 0;
-        return moveDistance;
+        return magnitude;
     }
 }
 

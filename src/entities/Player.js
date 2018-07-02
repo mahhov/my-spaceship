@@ -6,7 +6,7 @@ class Player {
         this.x = x;
         this.y = y;
         this.speed = .004;
-        this.size = .01;
+        this.size = .01 * 10;
         this.setBounds();
     }
 
