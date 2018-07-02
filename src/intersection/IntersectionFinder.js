@@ -10,31 +10,38 @@ class IntersectionFinder {
 
         this.layers = [this.PASSIVE, this.FRIENDLY_PROJECTILE, this.FRIENDLY_UNIT, this.HOSTILE_PROJECTILE, this.HOSTILE_UNIT];
 
-        this.entities = {};
-        this.layers.forEach(layer => this.entities[layer] = new LinkedList());
+        this.boundsGroups = {};
+        this.layers.forEach(layer => this.boundsGroups[layer] = new LinkedList());
     }
 
-    addEntity(layer, bounds) {
-        return this.entities[layer].add(bounds)
+    addBounds(layer, bounds) {
+        return this.boundsGroups[layer].add(bounds)
     }
 
     canMove(layer, bounds, dx, dy, magnitude) {
-        if (dx === 0) {
-            if (dy < 0) { // up
-                return this.canMoveUp(layer, bounds, magnitude);
-            }
+        if (dx === 0 || dy === 0) {
+            if (dx < 0)
+                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.LEFT);
+            else if (dy < 0)
+                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.TOP);
+            else if (dx > 0)
+                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.RIGHT);
+            else
+                return this.canMoveOneDirection(layer, bounds, magnitude, bounds.BOTTOM);
         }
         return 0;
     }
 
-    canMoveUp(layer, bounds, magnitude) {
-        let newTop = bounds.getTop() - magnitude;
+    canMoveOneDirection(layer, bounds, magnitude, direction) {
+        let newBounds = bounds.copy();
+        newBounds.expand(direction, magnitude);
         let moveDistance = magnitude;
+
         // todo don't hardcode the passive layer
-        this.entities[this.PASSIVE].forEach(entity => {
-            if (entity.getLeft() < bounds.getRight() && entity.getTop() < bounds.getTop() && entity.getRight() > bounds.getLeft() && entity.getBottom() > newTop) {
-                newTop = entity.getBottom();
-                moveDistance = entity.getBottom() - bounds.getTop();
+        this.boundsGroups[this.PASSIVE].forEach(entity => {
+            if (newBounds.intersects(entity)) {
+                newBounds.set(direction, entity.getOpposite(direction));
+                moveDistance = entity.getOpposite(direction) - bounds.get(direction);
             }
         });
         if (moveDistance < 0)
