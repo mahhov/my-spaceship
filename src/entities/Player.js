@@ -7,11 +7,13 @@ class Player {
         this.y = y;
         this.speed = .004;
         this.size = .01;
+        this.setBounds();
     }
 
     move(dx, dy) {
         this.x += dx;
         this.y += dy;
+        this.setBounds();
     }
 
     getX() {
@@ -35,8 +37,12 @@ class Player {
     }
 
     getBounds() {
-        let halfSize = this.Size / 2;
-        return new Bounds(this.x - halfSize, this.y - halfSize, this.x + halfSize, this.y + halfSize);
+        return this.bounds;
+    }
+
+    setBounds() {
+        let halfSize = this.size / 2;
+        this.bounds = new Bounds(this.x - halfSize, this.y - halfSize, this.x + halfSize, this.y + halfSize);
     }
 
     paint(painter) {

@@ -18,10 +18,28 @@ class IntersectionFinder {
         return this.entities[layer].add(bounds)
     }
 
-    canMove(layer, x, y, dx, dy, magnitude) {
+    canMove(layer, bounds, dx, dy, magnitude) {
+        if (dx === 0) {
+            if (dy < 0) { // up
+                return this.canMoveUp(layer, bounds, magnitude);
+            }
+        }
+        return 0;
+    }
 
-
-        return magnitude * .1;
+    canMoveUp(layer, bounds, magnitude) {
+        let newTop = bounds.getTop() - magnitude;
+        let moveDistance = magnitude;
+        // todo don't hardcode the passive layer
+        this.entities[this.PASSIVE].forEach(entity => {
+            if (entity.getLeft() < bounds.getRight() && entity.getTop() < bounds.getTop() && entity.getRight() > bounds.getLeft() && entity.getBottom() > newTop) {
+                newTop = entity.getBottom();
+                moveDistance = entity.getBottom() - bounds.getTop();
+            }
+        });
+        if (moveDistance < 0)
+            return 0;
+        return moveDistance;
     }
 }
 

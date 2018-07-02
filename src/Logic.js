@@ -13,11 +13,14 @@ class Logic {
         this.intersectionFinder = new IntersectionFinder();
 
         this.rocks = [];
-        for (let i = 0; i < 100; i++) {
-            let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
-            this.rocks.push(rock);
-            this.intersectionFinder.addEntity(this.intersectionFinder.PASSIVE, rock.getBounds());
-        }
+        // for (let i = 0; i < 100; i++) {
+        //     let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
+        //     this.rocks.push(rock);
+        //     this.intersectionFinder.addEntity(this.intersectionFinder.PASSIVE, rock.getBounds());
+        // }
+        let rock = new Rock(.5, .25, .1, .1);
+        this.rocks.push(rock);
+        this.intersectionFinder.addEntity(this.intersectionFinder.PASSIVE, rock.getBounds());
 
         this.player = new Player(.5, .5);
         let playerIntersectionHandle = this.intersectionFinder.addEntity(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
@@ -50,14 +53,16 @@ class Logic {
         if (down)
             dy += 1;
 
+        if (dx === 0 && dy === 0)
+            return;
 
         if (dx !== 0 && dy !== 0) {
             dx = Math.sign(dx) * invSqrt2;
             dy = Math.sign(dy) * invSqrt2;
         }
 
-        let canMove = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getX(), this.player.getY(), dx, dy, player.getSpeed());
-        this.player.move(dx * canMove, dy * canMove);
+        let moveDistance = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds(), dx, dy, this.player.getSpeed());
+        this.player.move(dx * moveDistance, dy * moveDistance);
     }
 }
 
