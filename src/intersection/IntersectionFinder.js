@@ -40,7 +40,6 @@ class IntersectionFinder {
             if (magnitude <= 0)
                 return [moveX, moveY];
 
-            console.log('intersection', intersection); // todo fix always 2
             if (intersection === 1)
                 horizontal = -1;
             else if (intersection === 2)
@@ -65,14 +64,14 @@ class IntersectionFinder {
             if (horizontalDelta > magnitude || verticalDelta > magnitude)
                 return;
 
+            let [maxDelta, whichDelta] = maxWhich(horizontalDelta, verticalDelta);
             horizontalDelta = Math.max(horizontalDelta, 0);
             verticalDelta = Math.max(verticalDelta, 0);
 
             let horizontalFarDelta = (iBounds.get(horizontal) - bounds.getOpposite(horizontal)) / dx;
             let verticalFarDelta = (iBounds.get(vertical) - bounds.getOpposite(vertical)) / dy;
 
-            let [maxDelta, whichDelta] = maxWhich(horizontalDelta, verticalDelta);
-            if (maxDelta < Math.min(horizontalFarDelta, verticalFarDelta)) {
+            if (maxDelta >= 0 && maxDelta < Math.min(horizontalFarDelta, verticalFarDelta)) {
                 magnitude = maxDelta;
                 intersection = whichDelta + 1;
             }
