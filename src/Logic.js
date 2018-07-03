@@ -61,8 +61,8 @@ class Logic {
             dy = Math.sign(dy) * invSqrt2;
         }
 
-        let moveDistance = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds(), dx, dy, this.player.getSpeed());
-        this.player.move(dx * moveDistance, dy * moveDistance);
+        let moveXY = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds(), dx, dy, this.player.getSpeed());
+        this.player.move(...moveXY);
     }
 }
 

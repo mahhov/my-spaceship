@@ -1,4 +1,5 @@
 const LinkedList = require('../util/LinkedList');
+const {maxWhich} = require('../util/Numbers');
 
 class IntersectionFinder {
     constructor() {
@@ -19,26 +20,44 @@ class IntersectionFinder {
     }
 
     canMove(layer, bounds, dx, dy, magnitude) {
-        let moveDistance = 0;
+        if (!dx && !dy || magnitude <= 0)
+            return [0, 0];
 
-        let horizontal = -1, vertical = -1;
+        let moveX = 0, moveY = 0;
+
+        let horizontal = -1, vertical = -1; // todo get rid of if's for x & y differentiation
         if (dx)
             horizontal = dx < 0 ? bounds.LEFT : bounds.RIGHT;
         if (dy)
             vertical = dy < 0 ? bounds.TOP : bounds.BOTTOM;
 
-        if (horizontal + 1 && vertical + 1)
-            return this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
+        if (horizontal + 1 && vertical + 1) {
+            let [move, intersection] = this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
+
+            magnitude -= move;
+            moveX += dx * move;
+            moveY += dy * move;
+            if (magnitude <= 0)
+                return [moveX, moveY];
+
+            console.log('intersection', intersection); // todo fix always 2
+            if (intersection === 1)
+                horizontal = -1;
+            else if (intersection === 2)
+                vertical = -1;
+        }
 
         if (horizontal + 1)
-            return this.canMoveOneDirection(layer, bounds, magnitude, horizontal);
+            moveX += this.canMoveOneDirection(layer, bounds, magnitude, horizontal) * Math.sign(dx); // todo avoid math.sign
         if (vertical + 1)
-            return this.canMoveOneDirection(layer, bounds, magnitude, vertical);
+            moveY += this.canMoveOneDirection(layer, bounds, magnitude, vertical) * Math.sign(dy);
 
-        return 0;
+        return [moveX, moveY];
     }
 
     canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
+        let intersection; // 0 = none, 1 = horizontal, 2 = vertical
+
         this.boundsGroups[this.PASSIVE].forEach(iBounds => {
             let horizontalDelta = (iBounds.getOpposite(horizontal) - bounds.get(horizontal)) / dx;
             let verticalDelta = (iBounds.getOpposite(vertical) - bounds.get(vertical)) / dy;
@@ -52,16 +71,18 @@ class IntersectionFinder {
             let horizontalFarDelta = (iBounds.get(horizontal) - bounds.getOpposite(horizontal)) / dx;
             let verticalFarDelta = (iBounds.get(vertical) - bounds.getOpposite(vertical)) / dy;
 
-            let maxDelta = Math.max(horizontalDelta, verticalDelta);
-            if (maxDelta < Math.min(horizontalFarDelta, verticalFarDelta))
+            let [maxDelta, whichDelta] = maxWhich(horizontalDelta, verticalDelta);
+            if (maxDelta < Math.min(horizontalFarDelta, verticalFarDelta)) {
                 magnitude = maxDelta;
+                intersection = whichDelta + 1;
+            }
         });
 
-        return magnitude;
+        return [magnitude, intersection];
     }
 
     canMoveOneDirection(layer, bounds, magnitude, direction) {
-        let newBounds = bounds.copy();
+        let newBounds = bounds.copy(); // todo , newBounds needed?
         newBounds.expand(direction, magnitude);
 
         // todo don't hardcode the passive layer
