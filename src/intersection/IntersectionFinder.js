@@ -25,13 +25,11 @@ class IntersectionFinder {
 
 		let moveX = 0, moveY = 0;
 
-		let horizontal = -1, vertical = -1; // todo get rid of if's for x & y differentiation
-		if (dx)
-			horizontal = dx < 0 ? bounds.LEFT : bounds.RIGHT;
-		if (dy)
-			vertical = dy < 0 ? bounds.TOP : bounds.BOTTOM;
+		// todo get rid of if's for x & y differentiation
+		let horizontal = dx <= 0 ? bounds.LEFT : bounds.RIGHT;
+		let vertical = dy <= 0 ? bounds.TOP : bounds.BOTTOM;
 
-		if (horizontal + 1 && vertical + 1) {
+		if (dx && dy) {
 			let [move, intersection] = this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
 
 			magnitude -= move;
@@ -41,10 +39,10 @@ class IntersectionFinder {
 				return [moveX, moveY];
 
 			if (intersection === 1) {
-				horizontal = -1;
+				horizontal = bounds.LEFT;
 				dx = 0;
 			} else if (intersection === 2) {
-				vertical = -1;
+				vertical = bounds.TOP;
 				dy = 0;
 			}
 		}
@@ -60,16 +58,16 @@ class IntersectionFinder {
 		let intersection; // 0 = none, 1 = horizontal, 2 = vertical
 
 		this.boundsGroups[this.PASSIVE].forEach(iBounds => {
-			let horizontalDelta = this.x(horizontal, dx, bounds, iBounds, false, true);
-			let verticalDelta = this.x(vertical, dy, bounds, iBounds, false, false);
+			let horizontalDelta = this.getDelta(horizontal, dx, bounds, iBounds, false);
+			let verticalDelta = this.getDelta(vertical, dy, bounds, iBounds, false);
 
 			if (horizontalDelta >= magnitude || verticalDelta >= magnitude || horizontalDelta < 0 && verticalDelta < 0)
 				return;
 
 			let [maxDelta, whichDelta] = maxWhich(horizontalDelta, verticalDelta);
 
-			let horizontalFarDelta = this.x(bounds.oppositeDirection(horizontal), dx, bounds, iBounds, true, true);
-			let verticalFarDelta = this.x(bounds.oppositeDirection(vertical), dy, bounds, iBounds, true, false);
+			let horizontalFarDelta = this.getDelta(bounds.oppositeDirection(horizontal), dx, bounds, iBounds, true);
+			let verticalFarDelta = this.getDelta(bounds.oppositeDirection(vertical), dy, bounds, iBounds, true);
 
 			if (maxDelta >= 0 && maxDelta < Math.min(horizontalFarDelta, verticalFarDelta)) {
 				magnitude = maxDelta;
@@ -80,13 +78,16 @@ class IntersectionFinder {
 		return [magnitude, intersection];
 	}
 
-	x(direction, d, bounds, iBounds, flipZero, horiz) {
-		if (direction + 1)
+	getDelta(direction, d, bounds, iBounds, flipZero) {
+		if (d)
 			return (iBounds.getOpposite(direction) - bounds.get(direction)) / d;
-		if (horiz)
-			return iBounds.get(iBounds.RIGHT) > bounds.get(bounds.LEFT) && iBounds.get(iBounds.LEFT) < bounds.get(bounds.RIGHT) ^ flipZero
-				? 0 : Infinity;
-		return iBounds.get(iBounds.BOTTOM) > bounds.get(bounds.TOP) && iBounds.get(iBounds.TOP) < bounds.get(bounds.BOTTOM) ^ flipZero
+
+		if (direction === bounds.RIGHT)
+			direction = bounds.LEFT;
+		if (direction === bounds.BOTTOM)
+			direction = bounds.TOP;
+
+		return iBounds.getOpposite(direction) > bounds.get(direction) && iBounds.get(direction) < bounds.getOpposite(direction) ^ flipZero
 			? 0 : Infinity;
 	}
 }
