@@ -25,18 +25,15 @@ class IntersectionFinder {
 
 		let moveX = 0, moveY = 0;
 
-		// todo get rid of if's for x & y differentiation
 		let horizontal = dx <= 0 ? bounds.LEFT : bounds.RIGHT;
 		let vertical = dy <= 0 ? bounds.TOP : bounds.BOTTOM;
 
 		if (dx && dy) {
 			let [move, intersection] = this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
 
-			magnitude -= move;
 			moveX += dx * move;
 			moveY += dy * move;
-			if (magnitude <= 0)
-				return [moveX, moveY];
+			magnitude -= move;
 
 			if (intersection === 1) {
 				horizontal = bounds.LEFT;
@@ -44,7 +41,8 @@ class IntersectionFinder {
 			} else if (intersection === 2) {
 				vertical = bounds.TOP;
 				dy = 0;
-			}
+			} else
+				return [moveX, moveY];
 		}
 
 		let [move] = this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
@@ -66,8 +64,8 @@ class IntersectionFinder {
 
 			let [maxDelta, whichDelta] = maxWhich(horizontalDelta, verticalDelta);
 
-			let horizontalFarDelta = this.getDelta(bounds.oppositeDirection(horizontal), dx, bounds, iBounds, true);
-			let verticalFarDelta = this.getDelta(bounds.oppositeDirection(vertical), dy, bounds, iBounds, true);
+			let horizontalFarDelta = this.getDelta(horizontal, dx, bounds, iBounds, true);
+			let verticalFarDelta = this.getDelta(vertical, dy, bounds, iBounds, true);
 
 			if (maxDelta >= 0 && maxDelta < Math.min(horizontalFarDelta, verticalFarDelta)) {
 				magnitude = maxDelta;
@@ -78,16 +76,14 @@ class IntersectionFinder {
 		return [magnitude, intersection];
 	}
 
-	getDelta(direction, d, bounds, iBounds, flipZero) {
-		if (d)
+	getDelta(direction, d, bounds, iBounds, far) {
+		if (d) {
+			if (far)
+				direction = bounds.oppositeDirection(direction);
 			return (iBounds.getOpposite(direction) - bounds.get(direction)) / d;
+		}
 
-		if (direction === bounds.RIGHT)
-			direction = bounds.LEFT;
-		if (direction === bounds.BOTTOM)
-			direction = bounds.TOP;
-
-		return iBounds.getOpposite(direction) > bounds.get(direction) && iBounds.get(direction) < bounds.getOpposite(direction) ^ flipZero
+		return iBounds.getOpposite(direction) > bounds.get(direction) && iBounds.get(direction) < bounds.getOpposite(direction) ^ far
 			? 0 : Infinity;
 	}
 }
