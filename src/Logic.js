@@ -13,14 +13,11 @@ class Logic {
 		this.intersectionFinder = new IntersectionFinder();
 
 		this.rocks = [];
-		// for (let i = 0; i < 100; i++) {
-		//     let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
-		//     this.rocks.push(rock);
-		//     this.intersectionFinder.addBounds(this.intersectionFinder.PASSIVE, rock.getBounds());
-		// }
-		let rock = new Rock(.5, .25, .1, .1);
-		this.rocks.push(rock);
-		this.intersectionFinder.addBounds(this.intersectionFinder.PASSIVE, rock.getBounds());
+		for (let i = 0; i < 5; i++) {
+			let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
+			this.rocks.push(rock);
+			this.intersectionFinder.addBounds(this.intersectionFinder.PASSIVE, rock.getBounds());
+		}
 
 		this.player = new Player(.5, .5);
 		let playerIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
