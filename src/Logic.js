@@ -2,6 +2,7 @@ const Keymapping = require('./Keymapping');
 const IntersectionFinder = require('./intersection/IntersectionFinder');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
+const Monster = require('./entities/Monster');
 
 const invSqrt2 = 1 / Math.sqrt(2);
 
@@ -22,6 +23,10 @@ class Logic {
 		this.player = new Player(.5, .5);
 		let playerIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
 		this.player.setIntersectionHandle(playerIntersectionHandle);
+
+		this.monster = new Monster(.5, .25);
+		let monsterIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.HOSTILE_UNIT, this.monster.getBounds());
+		this.monster.setIntersectionHandle(monsterIntersectionHandle);
 	}
 
 	iterate(controller, painter) {
@@ -31,6 +36,8 @@ class Logic {
 			rock.paint(painter));
 
 		this.player.paint(painter);
+
+		this.monster.paint(painter);
 	}
 
 	movePlayer(controller) {

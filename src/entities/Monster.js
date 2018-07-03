@@ -1,12 +1,12 @@
 const Bounds = require('../intersection/Bounds');
 const RectC = require('../painter/RectC');
 
-class Player {
+class Destroyer {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
 		this.speed = .004;
-		this.size = .01;
+		this.size = .04;
 		this.setBounds();
 	}
 
@@ -46,8 +46,8 @@ class Player {
 	}
 
 	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.size, this.size, 0, true));
+		painter.add(new RectC(this.x, this.y, this.size, this.size, '#0f0', true));
 	}
 }
 
-module.exports = Player;
+module.exports = Destroyer;
