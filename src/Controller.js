@@ -1,49 +1,55 @@
 class Controller {
-    constructor() {
-        this.UP = 0;
-        this.DOWN = 1;
-        this.PRESSED = 2;
-        this.RELEASED = 3;
+	constructor() {
+		this.UP = 0;
+		this.DOWN = 1;
+		this.PRESSED = 2;
+		this.RELEASED = 3;
 
-        this.keys = {};
+		this.keys = {};
 
-        document.addEventListener('keydown', event =>
-            !event.repeat && this.handleKeyPress(event.key));
+		document.addEventListener('keydown', event =>
+			!event.repeat && this.handleKeyPress(event.key));
 
-        document.addEventListener('keyup', event =>
-            this.handleKeyRelease(event.key));
-    }
+		document.addEventListener('keyup', event =>
+			this.handleKeyRelease(event.key));
 
-    handleKeyPress(key) {
-        this.keys[key] = this.PRESSED;
-    }
+		window.addEventListener('blur', () =>
+			this.handleBlur());
+	}
 
-    handleKeyRelease(key) {
-        this.keys[key] = this.RELEASED;
-    }
+	handleKeyPress(key) {
+		this.keys[key] = this.PRESSED;
+	}
 
-    getKey(key) {
-        return this.keys[key] || this.UP;
-    }
+	handleKeyRelease(key) {
+		this.keys[key] = this.RELEASED;
+	}
 
-    expire() {
-        Object.entries(this.keys)
-            .forEach(([key, value]) =>
-                this.keys[key] = this.expireKey(value));
-    }
+	handleBlur() {
+		Object.entries(this.keys)
+			.filter(([, value]) => value === this.DOWN || value === this.PRESSED)
+			.forEach(([key]) => this.keys[key] = this.RELEASED);
+	}
 
-    expireKey(key) {
-        switch (key) {
-            case this.RELEASED:
-                return this.UP;
-            case this.PRESSED:
-                return this.DOWN;
-            default:
-                return key;
-        }
-    }
+	getKey(key) {
+		return this.keys[key] || this.UP;
+	}
+
+	expire() {
+		Object.entries(this.keys)
+			.forEach(([key, value]) => this.keys[key] = this.expireKey(value));
+	}
+
+	expireKey(key) {
+		switch (key) {
+			case this.RELEASED:
+				return this.UP;
+			case this.PRESSED:
+				return this.DOWN;
+			default:
+				return key;
+		}
+	}
 }
 
 module.exports = Controller;
-
-// todo on lose focus, lift all keypresses
