@@ -10,7 +10,10 @@ class Destroyer {
 		this.setBounds();
 	}
 
-	move(dx, dy) {
+	moveRandomly() {
+		let dx = Math.random() * this.speed * 2 - this.speed;
+		let dy = Math.random() * this.speed * 2 - this.speed;
+
 		this.x += dx;
 		this.y += dy;
 		this.setBounds();

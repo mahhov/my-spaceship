@@ -31,12 +31,15 @@ class Logic {
 
 	iterate(controller, painter) {
 		this.movePlayer(controller);
+		this.monster.moveRandomly();
 
+		this.paint(painter);
+	}
+
+	paint(painter) {
 		this.rocks.forEach(rock =>
 			rock.paint(painter));
-
 		this.player.paint(painter);
-
 		this.monster.paint(painter);
 	}
 
