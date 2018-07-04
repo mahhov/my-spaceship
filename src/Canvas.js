@@ -6,7 +6,7 @@ const sleep = milli =>
     new Promise(resolve => setTimeout(resolve, milli));
 
 const canvas = document.getElementById('canvas');
-const controller = new Controller();
+const controller = new Controller(canvas);
 const painter = new Painter(canvas);
 const logic = new Logic(controller, painter);
 

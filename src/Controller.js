@@ -1,17 +1,21 @@
 class Controller {
-	constructor() {
+	constructor(mouseTarget) {
 		this.UP = 0;
 		this.DOWN = 1;
 		this.PRESSED = 2;
 		this.RELEASED = 3;
 
 		this.keys = {};
+		this.mouse = {};
 
 		document.addEventListener('keydown', event =>
 			!event.repeat && this.handleKeyPress(event.key));
 
 		document.addEventListener('keyup', event =>
 			this.handleKeyRelease(event.key));
+
+		document.addEventListener('mousemove', event =>
+			this.handleMouseMove(event.x - mouseTarget.offsetLeft, event.y - mouseTarget.offsetTop));
 
 		window.addEventListener('blur', () =>
 			this.handleBlur());
@@ -23,6 +27,11 @@ class Controller {
 
 	handleKeyRelease(key) {
 		this.keys[key] = this.RELEASED;
+	}
+
+	handleMouseMove(x, y) {
+		this.mouse.x = x;
+		this.mouse.y = y;
 	}
 
 	handleBlur() {
