@@ -12,9 +12,11 @@ class HostileProjectile extends MobileEntity {
 
 	update() {
 		const FRICTION = .9;
-		move(this.vx, this.vy);
+		this.move(this.vx, this.vy);
 		this.vx *= FRICTION;
 		this.vy *= FRICTION;
+		// todo check intersection and do damage or expire
+		// todo remove after timeout
 	}
 
 	paint(painter) {

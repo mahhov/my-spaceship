@@ -1,5 +1,6 @@
 const Keymapping = require('./Keymapping');
 const IntersectionFinder = require('./intersection/IntersectionFinder');
+const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 const Monster = require('./entities/Monster');
@@ -15,21 +16,33 @@ class Logic {
 		for (let i = 0; i < 5; i++) {
 			let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
 			this.rocks.push(rock);
-			this.intersectionFinder.addBounds(this.intersectionFinder.PASSIVE, rock.getBounds());
+			this.addIntersectionBounds(this.intersectionFinder.PASSIVE, rock);
 		}
 
+		this.hostileProjectiles = new LinkedList();
+
 		this.player = new Player(.5, .5);
-		let playerIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
-		this.player.setIntersectionHandle(playerIntersectionHandle);
+		this.addIntersectionBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player);
 
 		this.monster = new Monster(.5, .25);
-		let monsterIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.HOSTILE_UNIT, this.monster.getBounds());
-		this.monster.setIntersectionHandle(monsterIntersectionHandle);
+		this.addIntersectionBounds(this.intersectionFinder.HOSTILE_UNIT, this.monster);
+	}
+
+	addHostileProjectile(hostileProjectile) {
+		this.hostileProjectiles.add(hostileProjectile);
+		// todo add to intersection finder and set intersection handle (i.e. call addIntersectionBounds)
+	}
+
+	addIntersectionBounds(layer, entity) {
+		let intersectionHandle = this.intersectionFinder.addBounds(layer, entity.getBounds());
+		if (entity.setIntersectionHandle)
+			entity.setIntersectionHandle(intersectionHandle);
 	}
 
 	iterate() {
 		this.player.move(this.controller, this.keymapping, this.intersectionFinder);
-		this.monster.moveRandomly();
+		this.monster.moveRandomly(this);
+		this.hostileProjectiles.forEach(hostileProjectile => hostileProjectile.update());
 
 		this.paint(this.painter);
 	}
@@ -39,6 +52,8 @@ class Logic {
 			rock.paint(painter));
 		this.player.paint(painter);
 		this.monster.paint(painter);
+		this.hostileProjectiles.forEach(hostileProjectile => hostileProjectile.paint(painter));
+
 		this.player.paintUi(painter);
 		this.monster.paintUi(painter);
 	}
