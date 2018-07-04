@@ -42,7 +42,10 @@ class Logic {
 	iterate() {
 		this.player.move(this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.moveRandomly(this);
-		this.hostileProjectiles.forEach(hostileProjectile => hostileProjectile.update());
+		this.hostileProjectiles.forEach((hostileProjectile, item) => {
+			if (hostileProjectile.update())
+				this.hostileProjectiles.remove(item);
+		});
 
 		this.paint(this.painter);
 	}
