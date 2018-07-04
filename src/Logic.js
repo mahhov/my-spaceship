@@ -43,7 +43,7 @@ class Logic {
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.update(this);
 		this.hostileProjectiles.forEach((hostileProjectile, item) => {
-			if (hostileProjectile.update())
+			if (hostileProjectile.update(this.intersectionFinder))
 				this.hostileProjectiles.remove(item);
 		});
 

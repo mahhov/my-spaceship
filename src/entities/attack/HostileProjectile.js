@@ -11,9 +11,12 @@ class HostileProjectile extends MobileEntity {
 		this.damage = damage;
 	}
 
-	update() {
+	update(intersectionFinder) {
 		const FRICTION = .95;
-		this.move(this.vx, this.vy);
+
+		let moveXY = intersectionFinder.canMove('layer-replace-me', this.getBounds(), this.vx, this.vy, -1, true);
+		this.move(...moveXY);
+
 		this.vx *= FRICTION;
 		this.vy *= FRICTION;
 		if (!this.time--)

@@ -19,7 +19,14 @@ class IntersectionFinder {
 		return this.boundsGroups[layer].add(bounds)
 	}
 
-	canMove(layer, bounds, dx, dy, magnitude) {
+	canMove(layer, bounds, dx, dy, magnitude, noSlide) {
+		// if magnitude is -1, then <dx, dy> is not necessarily a unit vector, and its magnitude should be used
+		if (magnitude === -1) {
+			magnitude = Math.sqrt(dx * dx + dy * dy);
+			dx /= magnitude;
+			dy /= magnitude;
+		}
+
 		if (!dx && !dy || magnitude <= 0)
 			return [0, 0];
 
@@ -35,14 +42,15 @@ class IntersectionFinder {
 			moveY += dy * move;
 			magnitude -= move;
 
-			if (intersection === 1) {
+			if (!intersection || noSlide)
+				return [moveX, moveY];
+			else if (intersection === 1) {
 				horizontal = bounds.LEFT;
 				dx = 0;
-			} else if (intersection === 2) {
+			} else {
 				vertical = bounds.TOP;
 				dy = 0;
-			} else
-				return [moveX, moveY];
+			}
 		}
 
 		let [move] = this.canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical);
@@ -55,6 +63,7 @@ class IntersectionFinder {
 	canMoveTwoDirections(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
 		let intersection; // 0 = none, 1 = horizontal, 2 = vertical
 
+		// todo dont hardcode psasive
 		this.boundsGroups[this.PASSIVE].forEach(iBounds => {
 			let horizontalDelta = this.getDelta(horizontal, dx, bounds, iBounds, false);
 			let verticalDelta = this.getDelta(vertical, dy, bounds, iBounds, false);
