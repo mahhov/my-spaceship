@@ -1,22 +1,14 @@
-const Bounds = require('../intersection/Bounds');
+const MobileEntity = require('./MobileEntity');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
-class LivingEntity {
-	constructor(x, y, speed, size, color, paintUiRow) {
-		this.x = x;
-		this.y = y;
+class LivingEntity extends MobileEntity {
+	constructor(x, y, size, speed, color, paintUiRow) {
+		super(x, y, size, size);
 		this.speed = speed;
-		this.size = size;
 		this.health = 1;
 		this.color = color;
 		this.paintUiRow = paintUiRow;
-		this.setBounds();
-	}
-
-	move(dx, dy) {
-		this.x += dx;
-		this.y += dy;
 		this.setBounds();
 	}
 
@@ -24,35 +16,12 @@ class LivingEntity {
 		this.health = Math.max(this.health - amount, 0);
 	}
 
-	getX() {
-		return x;
-	}
-
-	getY() {
-		return y;
-	}
-
 	getSpeed() {
 		return this.speed;
 	}
 
-	setIntersectionHandle(intersectionHandle) {
-		this.intersectionHandle = intersectionHandle;
-	}
-
-	getBounds() {
-		return this.bounds;
-	}
-
-	setBounds() {
-		let halfSize = this.size / 2;
-		this.bounds = new Bounds(this.x - halfSize, this.y - halfSize, this.x + halfSize, this.y + halfSize);
-		// if (this.intersectionHandle)
-		// 	this.intersectionHandle.value = this.bounds;
-	}
-
 	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.size, this.size, this.color, true));
+		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color, true));
 	}
 
 	paintUi(painter) {

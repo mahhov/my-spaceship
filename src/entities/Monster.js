@@ -2,7 +2,7 @@ const LivingEntity = require('./LivingEntity');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .004, .04, '#0f0', 1);
+		super(x, y, .04, .004, '#0f0', 1);
 	}
 
 	moveRandomly() {

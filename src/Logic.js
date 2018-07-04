@@ -4,8 +4,6 @@ const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 const Monster = require('./entities/Monster');
 
-const invSqrt2 = 1 / Math.sqrt(2);
-
 class Logic {
 	constructor(controller, painter) {
 		this.controller = controller;
@@ -22,7 +20,6 @@ class Logic {
 
 		this.player = new Player(.5, .5);
 		let playerIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
-		console.log('playerIntersectionHandle', playerIntersectionHandle);
 		this.player.setIntersectionHandle(playerIntersectionHandle);
 
 		this.monster = new Monster(.5, .25);
@@ -30,11 +27,11 @@ class Logic {
 		this.monster.setIntersectionHandle(monsterIntersectionHandle);
 	}
 
-	iterate(controller, painter) {
-		this.movePlayer(controller);
+	iterate() {
+		this.player.move(this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.moveRandomly();
 
-		this.paint(painter);
+		this.paint(this.painter);
 	}
 
 	paint(painter) {
@@ -44,35 +41,6 @@ class Logic {
 		this.monster.paint(painter);
 		this.player.paintUi(painter);
 		this.monster.paintUi(painter);
-	}
-
-	movePlayer(controller) {
-		let left = this.keymapping.isActive(controller, this.keymapping.MOVE_LEFT);
-		let up = this.keymapping.isActive(controller, this.keymapping.MOVE_UP);
-		let right = this.keymapping.isActive(controller, this.keymapping.MOVE_RIGHT);
-		let down = this.keymapping.isActive(controller, this.keymapping.MOVE_DOWN);
-
-		let dx = 0, dy = 0;
-
-		if (left)
-			dx -= 1;
-		if (up)
-			dy -= 1;
-		if (right)
-			dx += 1;
-		if (down)
-			dy += 1;
-
-		if (dx === 0 && dy === 0)
-			return;
-
-		if (dx !== 0 && dy !== 0) {
-			dx = Math.sign(dx) * invSqrt2;
-			dy = Math.sign(dy) * invSqrt2;
-		}
-
-		let moveXY = this.intersectionFinder.canMove(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds(), dx, dy, this.player.getSpeed());
-		this.player.move(...moveXY);
 	}
 }
 
