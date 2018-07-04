@@ -42,6 +42,7 @@ class Logic {
 		this.player.paint(painter);
 		this.monster.paint(painter);
 		this.player.paintUi(painter);
+		this.monster.paintUi(painter);
 	}
 
 	movePlayer(controller) {
