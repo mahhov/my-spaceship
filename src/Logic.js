@@ -41,6 +41,7 @@ class Logic {
 			rock.paint(painter));
 		this.player.paint(painter);
 		this.monster.paint(painter);
+		this.player.paintUi(painter);
 	}
 
 	movePlayer(controller) {
