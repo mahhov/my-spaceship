@@ -17,8 +17,10 @@ class Rect {
 		if (this.fill) {
 			context.fillStyle = this.color || '#000';
 			context.fillRect(tx, ty, tWidth, tHeight);
-		} else
+		} else {
+			context.strokeStyle = this.color || '#000';
 			context.strokeRect(tx, ty, tWidth, tHeight);
+		}
 	}
 }
 
