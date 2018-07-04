@@ -40,10 +40,6 @@ class LivingEntity {
 		this.intersectionHandle = intersectionHandle;
 	}
 
-	getIntersectionHandle() { // todo needed?
-		return this.intersectionHandle;
-	}
-
 	getBounds() {
 		return this.bounds;
 	}
@@ -51,8 +47,8 @@ class LivingEntity {
 	setBounds() {
 		let halfSize = this.size / 2;
 		this.bounds = new Bounds(this.x - halfSize, this.y - halfSize, this.x + halfSize, this.y + halfSize);
-
-		// todo : update intersection handler?
+		// if (this.intersectionHandle)
+		// 	this.intersectionHandle.value = this.bounds;
 	}
 
 	paint(painter) {

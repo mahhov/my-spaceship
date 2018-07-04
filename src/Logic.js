@@ -22,6 +22,7 @@ class Logic {
 
 		this.player = new Player(.5, .5);
 		let playerIntersectionHandle = this.intersectionFinder.addBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player.getBounds());
+		console.log('playerIntersectionHandle', playerIntersectionHandle);
 		this.player.setIntersectionHandle(playerIntersectionHandle);
 
 		this.monster = new Monster(.5, .25);
