@@ -6,10 +6,10 @@ class Monster extends LivingEntity {
 		super(x, y, .04, .004, '#0f0', 1);
 	}
 
-	moveRandomly(logic) {
+	update(logic) {
 		let dx = Math.random() * this.speed * 2 - this.speed;
 		let dy = Math.random() * this.speed * 2 - this.speed;
-		super.move(dx, dy);
+		this.move(dx, dy);
 
 		let projectile = new HostileProjectile(this.x, this.y, .01, .01, dx * 4, dy * 4, 100, .1);
 		logic.addHostileProjectile(projectile);

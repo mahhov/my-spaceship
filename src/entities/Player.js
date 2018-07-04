@@ -5,7 +5,7 @@ class Player extends LivingEntity {
 		super(x, y, .01, .004, '#000', 0);
 	}
 
-	move(controller, keymapping, intersectionFinder) {
+	update(controller, keymapping, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
 		let left = keymapping.isActive(controller, keymapping.MOVE_LEFT);
@@ -33,7 +33,7 @@ class Player extends LivingEntity {
 		}
 
 		let moveXY = intersectionFinder.canMove(intersectionFinder.FRIENDLY_UNIT, this.getBounds(), dx, dy, this.speed);
-		super.move(...moveXY);
+		this.move(...moveXY);
 	}
 }
 
