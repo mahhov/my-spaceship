@@ -89,10 +89,9 @@ class IntersectionFinder {
 	checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
 		let magnitudeIntersectionPair = [magnitude]; // 2nd index for intersection: 0 = none, 1 = horizontal, 2 = vertical
 
-		// todo dont hardcode psasive
-		this.boundsGroups[this.PASSIVE].forEach(iBounds => {
-			magnitudeIntersectionPair = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, magnitude, horizontal, vertical, iBounds) || magnitudeIntersectionPair;
-		});
+		this.collisions[layer].forEach((_, iLayer) =>
+			this.boundsGroups[iLayer].forEach(iBounds =>
+				magnitudeIntersectionPair = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, magnitude, horizontal, vertical, iBounds) || magnitudeIntersectionPair));
 
 		return magnitudeIntersectionPair;
 	}

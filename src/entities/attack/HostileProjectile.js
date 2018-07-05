@@ -1,5 +1,4 @@
 const MobileEntity = require('../MobileEntity');
-const Bounds = require('../../intersection/Bounds');
 const RectC = require('../../painter/RectC');
 
 class HostileProjectile extends MobileEntity {
@@ -14,7 +13,7 @@ class HostileProjectile extends MobileEntity {
 	update(intersectionFinder) {
 		const FRICTION = .95;
 
-		let moveXY = intersectionFinder.canMove('layer-replace-me', this.getBounds(), this.vx, this.vy, -1, true);
+		let moveXY = intersectionFinder.canMove(intersectionFinder.HOSTILE_PROJECTILE, this.getBounds(), this.vx, this.vy, -1, true); // todo support dynamic layer
 		this.move(...moveXY);
 
 		this.vx *= FRICTION;
