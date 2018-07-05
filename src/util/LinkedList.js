@@ -20,9 +20,10 @@ class LinkedList {
 
 	forEach(handler) {
 		let iter = this.head;
-		do
+		while (iter) {
 			handler(iter.value, iter);
-		while (iter = iter.next) ;
+			iter = iter.next;
+		}
 	}
 }
 
