@@ -13,9 +13,8 @@ class Projectile extends MobileEntity {
 
 	update(intersectionFinder) {
 		const FRICTION = .95;
-		let layer = this.friendly ? intersectionFinder.FRIENDLY_PROJECTILE : intersectionFinder.HOSTILE_PROJECTILE;
 
-		let moveXY = intersectionFinder.canMove(layer, this.getBounds(), this.vx, this.vy, -1, true);
+		let moveXY = intersectionFinder.canMove(Projectile.getLayer(intersectionFinder, this.friendly), this.getBounds(), this.vx, this.vy, -1, true);
 		this.move(...moveXY);
 
 		this.vx *= FRICTION;
@@ -26,9 +25,19 @@ class Projectile extends MobileEntity {
 		// todo check intersection and do damage or expire
 	}
 
+	isFriendly() {
+		return this.friendly
+	}
+
+	static getLayer(intersectionFinder, friendly) {
+		return friendly ? intersectionFinder.FRIENDLY_PROJECTILE : intersectionFinder.HOSTILE_PROJECTILE;
+	}
+
 	paint(painter) {
 		painter.add(new RectC(this.x, this.y, this.width, this.height));
 	}
 }
 
 module.exports = Projectile;
+
+// todo remove from intersection finder when expired

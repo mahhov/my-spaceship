@@ -17,3 +17,5 @@ class Monster extends LivingEntity {
 }
 
 module.exports = Monster;
+
+// todo check for intersections when moving

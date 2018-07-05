@@ -4,6 +4,7 @@ const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 const Monster = require('./entities/Monster');
+const Projectile = require('./entities/attack/Projectile');
 
 class Logic {
 	constructor(controller, painter) {
@@ -30,7 +31,7 @@ class Logic {
 
 	addProjectile(projectile) {
 		this.projectiles.add(projectile);
-		// todo add to intersection finder and set intersection handle (i.e. call addIntersectionBounds)
+		this.addIntersectionBounds(Projectile.getLayer(this.intersectionFinder, projectile.isFriendly()), projectile)
 	}
 
 	addIntersectionBounds(layer, entity) {
