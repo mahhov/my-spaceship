@@ -15,14 +15,6 @@ class MobileEntity {
 		this.setBounds();
 	}
 
-	getX() {
-		return x;
-	}
-
-	getY() {
-		return y;
-	}
-
 	setIntersectionHandle(intersectionHandle) {
 		this.intersectionHandle = intersectionHandle;
 	}
@@ -35,6 +27,7 @@ class MobileEntity {
 		let halfWidth = this.width / 2;
 		let halfHeight = this.height / 2;
 		this.bounds = new Bounds(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
+		// todo
 		// if (this.intersectionHandle)
 		// 	this.intersectionHandle.value = this.bounds;
 	}
