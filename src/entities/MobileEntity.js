@@ -6,6 +6,7 @@ class MobileEntity {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.bounds = new Bounds();
 		this.setBounds();
 	}
 
@@ -26,10 +27,7 @@ class MobileEntity {
 	setBounds() {
 		let halfWidth = this.width / 2;
 		let halfHeight = this.height / 2;
-		this.bounds = new Bounds(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
-		// todo
-		// if (this.intersectionHandle)
-		// 	this.intersectionHandle.value = this.bounds;
+		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
 	}
 }
 

@@ -9,7 +9,6 @@ class LivingEntity extends MobileEntity {
 		this.health = 1;
 		this.color = color;
 		this.paintUiRow = paintUiRow;
-		this.setBounds();
 	}
 
 	takeDamage(amount) {
