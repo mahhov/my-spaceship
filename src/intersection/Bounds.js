@@ -15,32 +15,12 @@ class Bounds {
 		this.values[this.BOTTOM] = bottom;
 	}
 
-    getLeft() {
-        return this.get(this.LEFT);
-    }
-
-    getTop() {
-        return this.get(this.TOP);
-    }
-
-    getRight() {
-        return this.get(this.RIGHT);
-    }
-
-    getBottom() {
-        return this.get(this.BOTTOM);
-    }
-
-    get(direction) {
-        return this.values[direction];
-    }
+	get(direction) {
+		return this.values[direction];
+	}
 
 	getOpposite(direction) {
 		return this.get(this.oppositeDirection(direction));
-	}
-
-	expand(direction, magnitude) {
-		this.values[direction] += magnitude * this.SIGNS[direction];
 	}
 
 	intersects(bounds) {
