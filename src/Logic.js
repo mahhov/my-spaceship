@@ -48,18 +48,18 @@ class Logic {
 				this.projectiles.remove(item);
 		});
 
-		this.paint(this.painter);
+		this.paint();
 	}
 
-	paint(painter) {
+	paint() {
 		this.rocks.forEach(rock =>
-			rock.paint(painter));
-		this.player.paint(painter);
-		this.monster.paint(painter);
-		this.projectiles.forEach(projectile => projectile.paint(painter));
+			rock.paint(this.painter));
+		this.player.paint(this.painter);
+		this.monster.paint(this.painter);
+		this.projectiles.forEach(projectile => projectile.paint(this.painter));
 
-		this.player.paintUi(painter);
-		this.monster.paintUi(painter);
+		this.player.paintUi(this.painter);
+		this.monster.paintUi(this.painter);
 	}
 }
 
