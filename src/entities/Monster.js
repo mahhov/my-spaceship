@@ -11,7 +11,7 @@ class Monster extends LivingEntity {
 		let dy = Math.random() * this.speed * 2 - this.speed;
 		this.move(dx, dy);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx * 4, dy * 4, 100, .1);
+		let projectile = new Projectile(this.x, this.y, .01, .01, dx * 4, dy * 4, 100, .1, false);
 		logic.addProjectile(projectile);
 	}
 }
