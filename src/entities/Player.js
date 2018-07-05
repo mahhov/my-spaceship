@@ -1,5 +1,5 @@
 const LivingEntity = require('./LivingEntity');
-const HostileProjectile = require('./attack/HostileProjectile');
+const Projectile = require('./attack/Projectile');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
@@ -36,8 +36,8 @@ class Player extends LivingEntity {
 		let moveXY = intersectionFinder.canMove(intersectionFinder.FRIENDLY_UNIT, this.getBounds(), dx, dy, this.speed);
 		this.move(...moveXY);
 
-		let projectile = new HostileProjectile(this.x, this.y, .01, .01, moveXY[0] * 8, moveXY[1] * 8, 100, .1);
-		logic.addHostileProjectile(projectile);
+		let projectile = new Projectile(this.x, this.y, .01, .01, moveXY[0] * 8, moveXY[1] * 8, 100, .1);
+		logic.addProjectile(projectile);
 	}
 }
 

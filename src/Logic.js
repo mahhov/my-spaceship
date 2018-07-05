@@ -19,7 +19,7 @@ class Logic {
 			this.addIntersectionBounds(this.intersectionFinder.PASSIVE, rock);
 		}
 
-		this.hostileProjectiles = new LinkedList();
+		this.projectiles = new LinkedList();
 
 		this.player = new Player(.5, .5);
 		this.addIntersectionBounds(this.intersectionFinder.FRIENDLY_UNIT, this.player);
@@ -28,8 +28,8 @@ class Logic {
 		this.addIntersectionBounds(this.intersectionFinder.HOSTILE_UNIT, this.monster);
 	}
 
-	addHostileProjectile(hostileProjectile) {
-		this.hostileProjectiles.add(hostileProjectile);
+	addProjectile(projectile) {
+		this.projectiles.add(projectile);
 		// todo add to intersection finder and set intersection handle (i.e. call addIntersectionBounds)
 	}
 
@@ -42,9 +42,9 @@ class Logic {
 	iterate() {
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.update(this);
-		this.hostileProjectiles.forEach((hostileProjectile, item) => {
-			if (hostileProjectile.update(this.intersectionFinder))
-				this.hostileProjectiles.remove(item);
+		this.projectiles.forEach((projectile, item) => {
+			if (projectile.update(this.intersectionFinder))
+				this.projectiles.remove(item);
 		});
 
 		this.paint(this.painter);
@@ -55,7 +55,7 @@ class Logic {
 			rock.paint(painter));
 		this.player.paint(painter);
 		this.monster.paint(painter);
-		this.hostileProjectiles.forEach(hostileProjectile => hostileProjectile.paint(painter));
+		this.projectiles.forEach(projectile => projectile.paint(painter));
 
 		this.player.paintUi(painter);
 		this.monster.paintUi(painter);

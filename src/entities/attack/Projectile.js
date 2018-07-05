@@ -1,7 +1,7 @@
 const MobileEntity = require('../MobileEntity');
 const RectC = require('../../painter/RectC');
 
-class HostileProjectile extends MobileEntity {
+class Projectile extends MobileEntity {
 	constructor(x, y, width, height, vx, vy, time, damage) {
 		super(x, y, width, height);
 		this.vx = vx;
@@ -29,4 +29,4 @@ class HostileProjectile extends MobileEntity {
 	}
 }
 
-module.exports = HostileProjectile;
+module.exports = Projectile;
