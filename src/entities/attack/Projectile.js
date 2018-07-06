@@ -4,7 +4,8 @@ const RectC = require('../../painter/RectC');
 
 class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {
-		super(x, y, width, height, Projectile.getLayer(friendly));
+		let layer = friendly ? IntersectionFinderLayers.FRIENDLY_PROJECTILE : IntersectionFinderLayers.HOSTILE_PROJECTILE;
+		super(x, y, width, height, layer);
 		this.vx = vx;
 		this.vy = vy;
 		this.time = time;
@@ -14,7 +15,7 @@ class Projectile extends Entity {
 	update(intersectionFinder) {
 		const FRICTION = .95;
 
-		let moveXY = intersectionFinder.canMove(Projectile.getLayer(intersectionFinder, this.friendly), this.bounds, this.vx, this.vy, -1, true);
+		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, this.vx, this.vy, -1, true);
 		this.move(...moveXY);
 
 		this.vx *= FRICTION;
@@ -23,10 +24,6 @@ class Projectile extends Entity {
 			return true;
 
 		// todo check intersection and do damage or expire
-	}
-
-	static getLayer(friendly) {
-		return friendly ? IntersectionFinderLayers.FRIENDLY_PROJECTILE : IntersectionFinderLayers.HOSTILE_PROJECTILE;
 	}
 
 	paint(painter) {
