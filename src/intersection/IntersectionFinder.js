@@ -1,5 +1,5 @@
 const LinkedList = require('../util/LinkedList');
-const {EPSILON, maxWhich} = require('../util/Numbers');
+const {EPSILON, maxWhich, setMagnitude} = require('../util/Numbers');
 
 const IntersectionFinderLayers = {
 	PASSIVE: 0, // intersects with everything
@@ -52,11 +52,8 @@ class IntersectionFinder {
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {
 		// if magnitude is -1, then <dx, dy> is not necessarily a unit vector, and its magnitude should be used
-		if (magnitude === -1) {
-			magnitude = Math.sqrt(dx * dx + dy * dy);
-			dx /= magnitude;
-			dy /= magnitude;
-		}
+		if (magnitude === -1)
+			[dx, dy, magnitude] = setMagnitude(dx, dy);
 
 		if (!dx && !dy || magnitude <= 0)
 			return [0, 0];

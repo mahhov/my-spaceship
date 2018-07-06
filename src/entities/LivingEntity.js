@@ -20,7 +20,7 @@ class LivingEntity extends Entity {
 	}
 
 	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color, false));
+		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color, true));
 	}
 
 	paintUi(painter) {

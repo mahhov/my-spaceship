@@ -15,8 +15,7 @@ class Projectile extends Entity {
 	update(intersectionFinder) {
 		const FRICTION = .95;
 
-		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, this.vx, this.vy, -1, true);
-		this.move(...moveXY);
+		this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
 
 		this.vx *= FRICTION;
 		this.vy *= FRICTION;
@@ -32,5 +31,3 @@ class Projectile extends Entity {
 }
 
 module.exports = Projectile;
-
-// todo remove from intersection finder when expired

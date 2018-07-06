@@ -4,7 +4,7 @@ const Projectile = require('./attack/Projectile');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .01 * 10, .004, '#000', 0, IntersectionFinderLayers.FRIENDLY_UNIT);
+		super(x, y, .01, .004, '#000', 0, IntersectionFinderLayers.FRIENDLY_UNIT);
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
@@ -34,10 +34,9 @@ class Player extends LivingEntity {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		let moveXY = intersectionFinder.canMove(IntersectionFinderLayers.FRIENDLY_UNIT, this.bounds, dx, dy, this.speed);
-		this.move(...moveXY);
+		this.safeMove(intersectionFinder, dx, dy, this.speed);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, moveXY[0] * 8, moveXY[1] * 8, 100, .1, true);
+		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .03, dy * .03, 100, .1, true);
 		logic.addProjectile(projectile);
 	}
 }
