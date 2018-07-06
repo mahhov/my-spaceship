@@ -1,5 +1,5 @@
 const LinkedList = require('../util/LinkedList');
-const {maxWhich} = require('../util/Numbers');
+const {EPSILON, maxWhich} = require('../util/Numbers');
 
 const IntersectionFinderLayers = {
 	PASSIVE: 0, // intersects with everything
@@ -122,7 +122,7 @@ class IntersectionFinder {
 		let verticalFarDelta = IntersectionFinder.getDelta(vertical, dy, bounds, iBounds, true);
 
 		if (maxDelta >= 0 && maxDelta < Math.min(horizontalFarDelta, verticalFarDelta))
-			return [maxDelta, whichDelta + 1];
+			return [Math.max(maxDelta - EPSILON, 0), whichDelta + 1];
 	}
 
 	static getDelta(direction, d, bounds, iBounds, far) {
@@ -138,6 +138,3 @@ class IntersectionFinder {
 }
 
 module.exports = {IntersectionFinder, IntersectionFinderLayers};
-
-// todo buggy
-
