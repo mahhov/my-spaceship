@@ -1,11 +1,12 @@
 const Bounds = require('../intersection/Bounds');
 
-class MobileEntity {
-	constructor(x, y, width, height) {
+class Entity {
+	constructor(x, y, width, height, layer) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.layer = layer;
 		this.bounds = new Bounds();
 		this.setBounds();
 	}
@@ -16,8 +17,12 @@ class MobileEntity {
 		this.setBounds();
 	}
 
-	setIntersectionHandle(intersectionHandle) {
-		this.intersectionHandle = intersectionHandle;
+	addIntersectionBounds(intersectionFinder) {
+		this.intersectionHandle = intersectionFinder.addBounds(this.layer, this.bounds);
+	}
+
+	removeIntersectionBounds(intersectionFinder) {
+		intersectionFinder.removeBounds(this.layer, this.intersectionHandle);
 	}
 
 	getBounds() {
@@ -32,4 +37,4 @@ class MobileEntity {
 }
 
 
-module.exports = MobileEntity;
+module.exports = Entity;

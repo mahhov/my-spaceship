@@ -1,8 +1,17 @@
 const LinkedList = require('../util/LinkedList');
 const {maxWhich} = require('../util/Numbers');
 
+const IntersectionFinderLayers = {
+	PASSIVE: 0, // intersects with everything
+	FRIENDLY_PROJECTILE: 1, // intersects with hostile units and passives
+	FRIENDLY_UNIT: 2, // intersects with hostile units, hostile projectiles, and passives
+	HOSTILE_PROJECTILE: 3, // intersects with friendly units and passives
+	HOSTILE_UNIT: 4 // intersects with friendly units, friendly projectiles, and passives
+};
+
 class IntersectionFinder {
 	constructor() {
+		// todo migrate to const and remove these
 		this.PASSIVE = 0; // intersects with everything
 		this.FRIENDLY_PROJECTILE = 1; // intersects with hostile units and passives
 		this.FRIENDLY_UNIT = 2; // intersects with hostile units, hostile projectiles, and passives
@@ -43,6 +52,10 @@ class IntersectionFinder {
 
 	addBounds(layer, bounds) {
 		return this.boundsGroups[layer].add(bounds)
+	}
+
+	removeBounds(layer, item) {
+		return this.boundsGroups[layer].remove(item);
 	}
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {
@@ -124,4 +137,7 @@ class IntersectionFinder {
 	}
 }
 
-module.exports = IntersectionFinder;
+module.exports = {IntersectionFinder, IntersectionFinderLayers};
+
+// todo buggy
+

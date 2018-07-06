@@ -1,10 +1,10 @@
-const MobileEntity = require('./MobileEntity');
+const Entity = require('./Entity');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
-class LivingEntity extends MobileEntity {
-	constructor(x, y, size, speed, color, paintUiRow) {
-		super(x, y, size, size);
+class LivingEntity extends Entity {
+	constructor(x, y, size, speed, color, paintUiRow, layer) {
+		super(x, y, size, size, layer);
 		this.speed = speed;
 		this.health = 1;
 		this.color = color;
@@ -20,7 +20,7 @@ class LivingEntity extends MobileEntity {
 	}
 
 	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color, true));
+		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color, false));
 	}
 
 	paintUi(painter) {

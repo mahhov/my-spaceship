@@ -1,20 +1,20 @@
-const MobileEntity = require('../MobileEntity');
+const Entity = require('../Entity');
+const {IntersectionFinderLayers} = require('../../intersection/IntersectionFinder');
 const RectC = require('../../painter/RectC');
 
-class Projectile extends MobileEntity {
+class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {
-		super(x, y, width, height);
+		super(x, y, width, height, Projectile.getLayer(friendly));
 		this.vx = vx;
 		this.vy = vy;
 		this.time = time;
 		this.damage = damage;
-		this.friendly = friendly;
 	}
 
 	update(intersectionFinder) {
 		const FRICTION = .95;
 
-		let moveXY = intersectionFinder.canMove(Projectile.getLayer(intersectionFinder, this.friendly), this.getBounds(), this.vx, this.vy, -1, true);
+		let moveXY = intersectionFinder.canMove(Projectile.getLayer(intersectionFinder, this.friendly), this.bounds, this.vx, this.vy, -1, true);
 		this.move(...moveXY);
 
 		this.vx *= FRICTION;
@@ -25,12 +25,8 @@ class Projectile extends MobileEntity {
 		// todo check intersection and do damage or expire
 	}
 
-	isFriendly() {
-		return this.friendly
-	}
-
-	static getLayer(intersectionFinder, friendly) {
-		return friendly ? intersectionFinder.FRIENDLY_PROJECTILE : intersectionFinder.HOSTILE_PROJECTILE;
+	static getLayer(friendly) {
+		return friendly ? IntersectionFinderLayers.FRIENDLY_PROJECTILE : IntersectionFinderLayers.HOSTILE_PROJECTILE;
 	}
 
 	paint(painter) {
