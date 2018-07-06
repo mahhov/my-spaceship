@@ -104,7 +104,7 @@ class IntersectionFinder {
 
 		this.collisions[layer].forEach((_, iLayer) =>
 			this.boundsGroups[iLayer].forEach(iBounds =>
-				magnitudeIntersectionPair = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, magnitude, horizontal, vertical, iBounds) || magnitudeIntersectionPair));
+				magnitudeIntersectionPair = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, magnitudeIntersectionPair[0], horizontal, vertical, iBounds) || magnitudeIntersectionPair));
 
 		return magnitudeIntersectionPair;
 	}
