@@ -34,7 +34,7 @@ class Player extends LivingEntity {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		let moveXY = intersectionFinder.canMove(intersectionFinder.FRIENDLY_UNIT, this.bounds, dx, dy, this.speed);
+		let moveXY = intersectionFinder.canMove(IntersectionFinderLayers.FRIENDLY_UNIT, this.bounds, dx, dy, this.speed);
 		this.move(...moveXY);
 
 		let projectile = new Projectile(this.x, this.y, .01, .01, moveXY[0] * 8, moveXY[1] * 8, 100, .1, true);

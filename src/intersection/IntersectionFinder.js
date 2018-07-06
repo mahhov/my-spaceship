@@ -11,34 +11,26 @@ const IntersectionFinderLayers = {
 
 class IntersectionFinder {
 	constructor() {
-		// todo migrate to const and remove these
-		this.PASSIVE = 0; // intersects with everything
-		this.FRIENDLY_PROJECTILE = 1; // intersects with hostile units and passives
-		this.FRIENDLY_UNIT = 2; // intersects with hostile units, hostile projectiles, and passives
-		this.HOSTILE_PROJECTILE = 3; // intersects with friendly units and passives
-		this.HOSTILE_UNIT = 4; // intersects with friendly units, friendly projectiles, and passives
-
-		let layers = [this.PASSIVE, this.FRIENDLY_PROJECTILE, this.FRIENDLY_UNIT, this.HOSTILE_PROJECTILE, this.HOSTILE_UNIT];
-		this.collisions = layers.map(() => []);
-		this.boundsGroups = layers.map(() => new LinkedList());
+		this.collisions = Object.keys(IntersectionFinderLayers).map(() => []);
+		this.boundsGroups = Object.keys(IntersectionFinderLayers).map(() => new LinkedList());
 
 		this.initCollisions();
 	}
 
 	initCollisions() {
 		// passives intersect with everything
-		this.addCollision(this.PASSIVE, this.FRIENDLY_UNIT);
-		this.addCollision(this.PASSIVE, this.FRIENDLY_PROJECTILE);
-		this.addCollision(this.PASSIVE, this.FRIENDLY_UNIT);
-		this.addCollision(this.PASSIVE, this.HOSTILE_PROJECTILE);
-		this.addCollision(this.PASSIVE, this.HOSTILE_UNIT);
+		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_UNIT);
+		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_PROJECTILE);
+		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_UNIT);
+		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.HOSTILE_PROJECTILE);
+		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.HOSTILE_UNIT);
 
 		// friendly projectiles intersect with hostile units and passives
-		this.addCollision(this.FRIENDLY_PROJECTILE, this.HOSTILE_UNIT);
+		this.addCollision(IntersectionFinderLayers.FRIENDLY_PROJECTILE, IntersectionFinderLayers.HOSTILE_UNIT);
 
 		// friendly units intersect with hostile units, hostile projectiles, and passives
-		this.addCollision(this.FRIENDLY_UNIT, this.HOSTILE_UNIT);
-		this.addCollision(this.FRIENDLY_UNIT, this.HOSTILE_PROJECTILE);
+		this.addCollision(IntersectionFinderLayers.FRIENDLY_UNIT, IntersectionFinderLayers.HOSTILE_UNIT);
+		this.addCollision(IntersectionFinderLayers.FRIENDLY_UNIT, IntersectionFinderLayers.HOSTILE_PROJECTILE);
 
 		// hostile projectiles intersect with friendly units and passives
 
