@@ -5,8 +5,11 @@ class Controller {
 		this.PRESSED = 2;
 		this.RELEASED = 3;
 
+		this.mouseTargetWidth = mouseTarget.width;
+		this.mouseTargetHeight = mouseTarget.height;
+
 		this.keys = {};
-		this.mouse = {};
+		this.mouse = {x: .5, y: .5};
 
 		document.addEventListener('keydown', event =>
 			!event.repeat && this.handleKeyPress(event.key));
@@ -30,8 +33,8 @@ class Controller {
 	}
 
 	handleMouseMove(x, y) {
-		this.mouse.x = x;
-		this.mouse.y = y;
+		this.mouse.x = x / this.mouseTargetWidth;
+		this.mouse.y = y / this.mouseTargetHeight;
 	}
 
 	handleBlur() {
@@ -42,6 +45,10 @@ class Controller {
 
 	getKeyState(key) {
 		return this.keys[key] || this.UP;
+	}
+
+	getMouse() {
+		return this.mouse;
 	}
 
 	expire() {

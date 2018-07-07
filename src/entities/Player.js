@@ -1,5 +1,6 @@
 const LivingEntity = require('./LivingEntity');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
+const {setMagnitude} = require('../util/Numbers');
 const Projectile = require('./attack/Projectile');
 
 class Player extends LivingEntity {
@@ -8,6 +9,11 @@ class Player extends LivingEntity {
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
+		this.moveControl(controller, keymapping, intersectionFinder);
+		this.attackControl(logic, controller);
+	}
+
+	moveControl(controller, keymapping, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
 		let left = keymapping.isActive(controller, keymapping.MOVE_LEFT);
@@ -35,8 +41,15 @@ class Player extends LivingEntity {
 		}
 
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
+	}
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .03, dy * .03, 100, .001, true);
+	attackControl(logic, controller) {
+		let mouse = controller.getMouse();
+		let mx = mouse.x - this.x;
+		let my = mouse.y - this.y;
+		[mx, my] = setMagnitude(mx, my, .03);
+
+		let projectile = new Projectile(this.x, this.y, .01, .01, mx, my, 100, .001, true);
 		logic.addProjectile(projectile);
 	}
 }
