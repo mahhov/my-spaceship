@@ -13,6 +13,15 @@ const Keys = makeEnum(
 	'ABILITY_6',
 	'ABILITY_7');
 
+Keys.ABILITY_I = [
+	Keys.ABILITY_1,
+	Keys.ABILITY_2,
+	Keys.ABILITY_3,
+	Keys.ABILITY_4,
+	Keys.ABILITY_5,
+	Keys.ABILITY_6,
+	Keys.ABILITY_7];
+
 class Keymapping {
 	constructor() {
 		this.map = {};
