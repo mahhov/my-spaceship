@@ -18,8 +18,8 @@ class Keymapping {
 	}
 
 	isActive(controller, control) {
-		let key = controller.getKey(this.getKey(control));
-		return key === controller.PRESSED || key === controller.DOWN;
+		let state = controller.getKeyState(this.getKey(control));
+		return state === controller.PRESSED || state === controller.DOWN;
 	}
 }
 

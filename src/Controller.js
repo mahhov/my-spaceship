@@ -40,7 +40,7 @@ class Controller {
 			.forEach(([key]) => this.keys[key] = this.RELEASED);
 	}
 
-	getKey(key) {
+	getKeyState(key) {
 		return this.keys[key] || this.UP;
 	}
 
