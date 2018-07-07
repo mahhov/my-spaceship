@@ -6,7 +6,7 @@ const Projectile = require('./attack/Projectile');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .01, .004, '#000', 0, IntersectionFinderLayers.FRIENDLY_UNIT);
+		super(x, y, .01, .004, '#000', IntersectionFinderLayers.FRIENDLY_UNIT, 0);
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
