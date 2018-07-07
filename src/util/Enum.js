@@ -5,5 +5,3 @@ const makeEnum = (...values) => {
 };
 
 module.exports = makeEnum;
-
-// todo convert all enums to use makeEnum

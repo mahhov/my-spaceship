@@ -1,6 +1,6 @@
 class Controller {
 	constructor(mouseTarget) {
-		this.UP = 0;
+		this.UP = 0; // todo convert to enum
 		this.DOWN = 1;
 		this.PRESSED = 2;
 		this.RELEASED = 3;

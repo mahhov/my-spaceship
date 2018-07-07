@@ -1,6 +1,6 @@
 class Bounds {
 	constructor(...leftTopRightBottom) {
-		this.LEFT = 0, this.TOP = 1, this.RIGHT = 2, this.BOTTOM = 3;
+		this.LEFT = 0, this.TOP = 1, this.RIGHT = 2, this.BOTTOM = 3; // todo convert to enum
 		this.SIGNS = [-1, -1, 1, 1];
 
 		if (leftTopRightBottom)
