@@ -1,13 +1,13 @@
+const makeEnum = require('../util/Enum');
 const LinkedList = require('../util/LinkedList');
 const {EPSILON, maxWhich, setMagnitude} = require('../util/Numbers');
 
-const IntersectionFinderLayers = {
-	PASSIVE: 0, // intersects with everything
-	FRIENDLY_PROJECTILE: 1, // intersects with hostile units and passives
-	FRIENDLY_UNIT: 2, // intersects with hostile units, hostile projectiles, and passives
-	HOSTILE_PROJECTILE: 3, // intersects with friendly units and passives
-	HOSTILE_UNIT: 4 // intersects with friendly units, friendly projectiles, and passives
-};
+const IntersectionFinderLayers = makeEnum(
+	'PASSIVE',              // intersects with everything
+	'FRIENDLY_PROJECTILE',  // intersects with hostile units and passives
+	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
+	'HOSTILE_PROJECTILE',   // intersects with friendly units and passives
+	'HOSTILE_UNIT');        // intersects with friendly units, friendly projectiles, and passives
 
 class IntersectionFinder {
 	constructor() {
