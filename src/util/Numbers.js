@@ -7,6 +7,8 @@ let getMagnitude = (x, y) =>
 
 let setMagnitude = (x, y, magnitude = 1) => {
 	let prevMagnitude = getMagnitude(x, y);
+	if (!prevMagnitude)
+		return [magnitude, 0, 0];
 	let mult = magnitude / prevMagnitude;
 	return [x * mult, y * mult, prevMagnitude];
 };
