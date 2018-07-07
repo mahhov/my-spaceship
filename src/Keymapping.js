@@ -4,6 +4,13 @@ class Keymapping {
 		this.MOVE_UP = 1;
 		this.MOVE_RIGHT = 2;
 		this.MOVE_DOWN = 3;
+		this.ABILITY_1 = 4;
+		this.ABILITY_2 = 5;
+		this.ABILITY_3 = 6;
+		this.ABILITY_4 = 7;
+		this.ABILITY_5 = 8;
+		this.ABILITY_6 = 9;
+		this.ABILITY_7 = 10;
 
 		this.map = {};
 
@@ -11,6 +18,13 @@ class Keymapping {
 		this.map[this.MOVE_UP] = 'w';
 		this.map[this.MOVE_RIGHT] = 'd';
 		this.map[this.MOVE_DOWN] = 's';
+		this.map[this.ABILITY_1] = 'q';
+		this.map[this.ABILITY_2] = 'e';
+		this.map[this.ABILITY_3] = '1';
+		this.map[this.ABILITY_4] = '2';
+		this.map[this.ABILITY_5] = '3';
+		this.map[this.ABILITY_6] = '4';
+		this.map[this.ABILITY_7] = '5';
 	}
 
 	getKey(control) {

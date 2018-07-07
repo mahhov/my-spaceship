@@ -10,7 +10,7 @@ class Player extends LivingEntity {
 
 	update(logic, controller, keymapping, intersectionFinder) {
 		this.moveControl(controller, keymapping, intersectionFinder);
-		this.attackControl(logic, controller);
+		this.attackControl(logic, controller, keymapping);
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
@@ -43,7 +43,10 @@ class Player extends LivingEntity {
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 	}
 
-	attackControl(logic, controller) {
+	attackControl(logic, controller, keymapping) {
+		if (!keymapping.isActive(controller, keymapping.ABILITY_1))
+			return;
+
 		let mouse = controller.getMouse();
 		let mx = mouse.x - this.x;
 		let my = mouse.y - this.y;
