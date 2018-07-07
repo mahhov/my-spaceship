@@ -42,8 +42,8 @@ class IntersectionFinder {
 		this.collisions[layer2][layer1] = true;
 	}
 
-	addBounds(layer, bounds) {
-		return this.boundsGroups[layer].add(bounds)
+	addBounds(layer, bounds, reference) {
+		return this.boundsGroups[layer].add({bounds, reference})
 	}
 
 	removeBounds(layer, item) {
@@ -63,39 +63,45 @@ class IntersectionFinder {
 		let horizontal = dx <= 0 ? bounds.LEFT : bounds.RIGHT;
 		let vertical = dy <= 0 ? bounds.TOP : bounds.BOTTOM;
 
+		let intersectionReference;
 		if (dx && dy) {
-			let [move, intersection] = this.checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical);
+			let {move, side, reference} = this.checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical);
 
 			moveX += dx * move;
 			moveY += dy * move;
 			magnitude -= move;
 
-			if (!intersection || noSlide)
-				return [moveX, moveY];
-			else if (intersection === 1) {
+			if (!side || noSlide)
+				return [moveX, moveY, reference];
+			else if (side === 1) {
 				horizontal = bounds.LEFT;
 				dx = 0;
 			} else {
 				vertical = bounds.TOP;
 				dy = 0;
 			}
+
+			intersectionReference = reference; // todo can we make this prettier
 		}
 
-		let [move] = this.checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical);
+		let {move, reference} = this.checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical);
 		moveX += dx * move;
 		moveY += dy * move;
 
-		return [moveX, moveY];
+		return [moveX, moveY, intersectionReference || reference]; // todo don't return list
 	}
 
 	checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
-		let magnitudeIntersectionPair = [magnitude]; // 2nd index for intersection: 0 = none, 1 = horizontal, 2 = vertical
+		let intersection = {move: magnitude}; // side: 0 = none, 1 = horizontal, 2 = vertical
 
 		this.collisions[layer].forEach((_, iLayer) =>
-			this.boundsGroups[iLayer].forEach(iBounds =>
-				magnitudeIntersectionPair = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, magnitudeIntersectionPair[0], horizontal, vertical, iBounds) || magnitudeIntersectionPair));
+			this.boundsGroups[iLayer].forEach(({bounds: iBounds, reference}) => {
+				let iIntersection = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, intersection.move, horizontal, vertical, iBounds);
+				if (iIntersection)
+					intersection = {...iIntersection, reference};
+			}));
 
-		return magnitudeIntersectionPair;
+		return intersection;
 	}
 
 	static checkMoveEntityIntersection(bounds, dx, dy, magnitude, horizontal, vertical, iBounds) {
@@ -111,7 +117,7 @@ class IntersectionFinder {
 		let verticalFarDelta = IntersectionFinder.getDelta(vertical, dy, bounds, iBounds, true);
 
 		if (maxDelta >= 0 && maxDelta < Math.min(horizontalFarDelta, verticalFarDelta))
-			return [Math.max(maxDelta - EPSILON, 0), whichDelta + 1];
+			return {move: Math.max(maxDelta - EPSILON, 0), side: whichDelta + 1};
 	}
 
 	static getDelta(direction, d, bounds, iBounds, far) {

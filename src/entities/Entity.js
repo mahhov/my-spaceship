@@ -23,7 +23,7 @@ class Entity {
 	}
 
 	addIntersectionBounds(intersectionFinder) {
-		this.intersectionHandle = intersectionFinder.addBounds(this.layer, this.bounds);
+		this.intersectionHandle = intersectionFinder.addBounds(this.layer, this.bounds, this);
 	}
 
 	removeIntersectionBounds(intersectionFinder) {

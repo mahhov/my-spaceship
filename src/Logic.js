@@ -54,8 +54,8 @@ class Logic {
 		this.monster.paint(this.painter);
 		this.projectiles.forEach(projectile => projectile.paint(this.painter));
 
-		this.player.paintUi(this.painter);
-		this.monster.paintUi(this.painter);
+		// this.player.paintUi(this.painter);
+		// this.monster.paintUi(this.painter);
 	}
 }
 
