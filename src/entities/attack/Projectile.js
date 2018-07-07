@@ -15,14 +15,20 @@ class Projectile extends Entity {
 	update(intersectionFinder) {
 		const FRICTION = .95;
 
-		this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
+		let intersection = this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
 
-		this.vx *= FRICTION;
-		this.vy *= FRICTION;
+		if (intersection) {
+			intersection.takeDamage(this.damage);
+			return true;
+		}
+
 		if (!this.time--)
 			return true;
 
-		// todo check intersection and do damage or expire
+		this.vx *= FRICTION;
+		this.vy *= FRICTION;
+
+		// todo check expire and do damage when collided with
 	}
 
 	paint(painter) {

@@ -14,6 +14,7 @@ class Entity {
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 		this.move(...moveXY);
+		return moveXY[2];
 	}
 
 	move(dx, dy) {
@@ -34,6 +35,9 @@ class Entity {
 		let halfWidth = this.width / 2;
 		let halfHeight = this.height / 2;
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
+	}
+
+	takeDamage(amount) {
 	}
 }
 

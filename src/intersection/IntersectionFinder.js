@@ -89,6 +89,7 @@ class IntersectionFinder {
 		moveY += dy * move;
 
 		return [moveX, moveY, intersectionReference || reference]; // todo don't return list
+		// todo return list of all intersection references
 	}
 
 	checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical) {

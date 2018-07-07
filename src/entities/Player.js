@@ -36,7 +36,7 @@ class Player extends LivingEntity {
 
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .03, dy * .03, 100, .1, true);
+		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .03, dy * .03, 100, .001, true);
 		logic.addProjectile(projectile);
 	}
 }
