@@ -1,10 +1,9 @@
-const Keymapping = require('./Keymapping');
+const {Keymapping} = require('./Keymapping');
 const {IntersectionFinder} = require('./intersection/IntersectionFinder');
 const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 const Monster = require('./entities/Monster');
-const Projectile = require('./entities/attack/Projectile');
 
 class Logic {
 	constructor(controller, painter) {

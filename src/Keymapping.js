@@ -1,30 +1,33 @@
+const makeEnum = require('./util/Enum');
+
+const Keys = makeEnum(
+	'MOVE_LEFT',
+	'MOVE_UP',
+	'MOVE_RIGHT',
+	'MOVE_DOWN',
+	'ABILITY_1',
+	'ABILITY_2',
+	'ABILITY_3',
+	'ABILITY_4',
+	'ABILITY_5',
+	'ABILITY_6',
+	'ABILITY_7');
+
 class Keymapping {
 	constructor() {
-		this.MOVE_LEFT = 0;
-		this.MOVE_UP = 1;
-		this.MOVE_RIGHT = 2;
-		this.MOVE_DOWN = 3;
-		this.ABILITY_1 = 4;
-		this.ABILITY_2 = 5;
-		this.ABILITY_3 = 6;
-		this.ABILITY_4 = 7;
-		this.ABILITY_5 = 8;
-		this.ABILITY_6 = 9;
-		this.ABILITY_7 = 10;
-
 		this.map = {};
 
-		this.map[this.MOVE_LEFT] = 'a';
-		this.map[this.MOVE_UP] = 'w';
-		this.map[this.MOVE_RIGHT] = 'd';
-		this.map[this.MOVE_DOWN] = 's';
-		this.map[this.ABILITY_1] = 'q';
-		this.map[this.ABILITY_2] = 'e';
-		this.map[this.ABILITY_3] = '1';
-		this.map[this.ABILITY_4] = '2';
-		this.map[this.ABILITY_5] = '3';
-		this.map[this.ABILITY_6] = '4';
-		this.map[this.ABILITY_7] = '5';
+		this.map[Keys.MOVE_LEFT] = 'a';
+		this.map[Keys.MOVE_UP] = 'w';
+		this.map[Keys.MOVE_RIGHT] = 'd';
+		this.map[Keys.MOVE_DOWN] = 's';
+		this.map[Keys.ABILITY_1] = 'q';
+		this.map[Keys.ABILITY_2] = 'e';
+		this.map[Keys.ABILITY_3] = '1';
+		this.map[Keys.ABILITY_4] = '2';
+		this.map[Keys.ABILITY_5] = '3';
+		this.map[Keys.ABILITY_6] = '4';
+		this.map[Keys.ABILITY_7] = '5';
 	}
 
 	getKey(control) {
@@ -37,4 +40,4 @@ class Keymapping {
 	}
 }
 
-module.exports = Keymapping;
+module.exports = {Keymapping, Keys};
