@@ -1,17 +1,19 @@
 const LivingEntity = require('./LivingEntity');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
+const BasicAttack = require('../abilities/BasicAttack');
+const Dash = require('../abilities/Dash');
 const {Keys} = require('../Keymapping');
-const {setMagnitude} = require('../util/Numbers');
-const Projectile = require('./attack/Projectile');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .01, .004, '#000', IntersectionFinderLayers.FRIENDLY_UNIT, 0);
+
+		this.abilities = [new BasicAttack(0), new Dash(1)];
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
 		this.moveControl(controller, keymapping, intersectionFinder);
-		this.attackControl(logic, controller, keymapping);
+		this.abilityControl(logic, controller, keymapping);
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
@@ -44,17 +46,20 @@ class Player extends LivingEntity {
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 	}
 
-	attackControl(logic, controller, keymapping) {
-		if (!keymapping.isActive(controller, Keys.ABILITY_1))
-			return;
-
+	abilityControl(logic, controller, keymapping) {
 		let mouse = controller.getMouse();
-		let mx = mouse.x - this.x;
-		let my = mouse.y - this.y;
-		[mx, my] = setMagnitude(mx, my, .03);
+		let directX = mouse.x - this.x;
+		let directY = mouse.y - this.y;
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, mx, my, 100, .001, true);
-		logic.addProjectile(projectile);
+		this.abilities.forEach((ability, index) => {
+			if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
+				ability.activate(this.x, this.y, directX, directY, logic);
+		});
+	}
+
+	paintUi(painter) {
+		super.paintUi(painter);
+		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }
 
