@@ -1,11 +1,11 @@
 const EPSILON = 1e-10;
 
-let maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
+const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
 
-let getMagnitude = (x, y) =>
+const getMagnitude = (x, y) =>
 	Math.sqrt(x * x + y * y);
 
-let setMagnitude = (x, y, magnitude = 1) => {
+const setMagnitude = (x, y, magnitude = 1) => {
 	let prevMagnitude = getMagnitude(x, y);
 	if (!prevMagnitude)
 		return [magnitude, 0, 0];
