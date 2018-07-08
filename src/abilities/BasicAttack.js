@@ -1,6 +1,6 @@
 const Ability = require('./Ability');
 const Color = require('../util/Color');
-const {setMagnitude} = require('../util/Numbers');
+const {setMagnitude} = require('../util/Number');
 const Projectile = require('../entities/attack/Projectile');
 
 class BasicAttack extends Ability {

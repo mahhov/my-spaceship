@@ -14,5 +14,3 @@ const setMagnitude = (x, y, magnitude = 1) => {
 };
 
 module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude};
-
-// todo rename to number

@@ -1,6 +1,6 @@
 const makeEnum = require('../util/Enum');
 const LinkedList = require('../util/LinkedList');
-const {EPSILON, maxWhich, setMagnitude} = require('../util/Numbers');
+const {EPSILON, maxWhich, setMagnitude} = require('../util/Number');
 
 const IntersectionFinderLayers = makeEnum(
 	'PASSIVE',              // intersects with everything

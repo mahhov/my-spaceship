@@ -1,6 +1,6 @@
 const LivingEntity = require('./LivingEntity');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
-const {setMagnitude} = require('../util/Numbers');
+const {setMagnitude} = require('../util/Number');
 const Projectile = require('./attack/Projectile');
 
 class Monster extends LivingEntity {
