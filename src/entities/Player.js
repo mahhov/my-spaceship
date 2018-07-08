@@ -51,10 +51,12 @@ class Player extends LivingEntity {
 		let directX = mouse.x - this.x;
 		let directY = mouse.y - this.y;
 
-		this.abilities.forEach((ability, index) => {
-			if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
-				ability.activate(this.x, this.y, directX, directY, logic);
-		});
+		this.abilities
+			.forEach((ability, index) => {
+				ability.refresh();
+				if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
+					ability.safeActivate(this.x, this.y, directX, directY, logic);
+			});
 	}
 
 	paintUi(painter) {

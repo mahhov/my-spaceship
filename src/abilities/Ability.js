@@ -1,16 +1,31 @@
 const Rect = require('../painter/Rect');
 
 class Ability {
-	constructor(cooldown, stamina, maxCharges, paintUiColumn, paintUiColor) {
-		this.cooldown = cooldown;
+	constructor(cooldown, stamina, charges, paintUiColumn, paintUiColor) {
+		this.currentCooldown = this.cooldown = cooldown;
 		this.stamina = stamina;
-		this.maxCharges = maxCharges;
+		this.currentCharges = this.charges = charges;
+
 		this.paintUiColumn = paintUiColumn;
 		this.paintUiColor = paintUiColor;
 	}
 
+	safeActivate(originX, originY, directX, directY, logic) {
+		if (this.currentCharges) { // todo check stamina as well
+			this.currentCharges--;
+			// todo deplete stamina as well
+			this.activate(originX, originY, directX, directY, logic);
+		}
+	}
+
 	activate(originX, originY, directX, directY, logic) {
-		// todo add some coooldown, stamina, and charge management
+	}
+
+	refresh() {
+		if (this.currentCharges < this.charges && !--this.currentCooldown) {
+			this.currentCharges++;
+			this.currentCooldown = this.cooldown;
+		}
 	}
 
 	paintUi(painter) {
