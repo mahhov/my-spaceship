@@ -3,7 +3,7 @@ const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
 class LivingEntity extends Entity {
-	constructor(x, y, size, speed, color, layer, paintUiRow) {
+	constructor(x, y, size, speed, color, layer, paintUiRow) { // todo replace string colors with ColorX
 		super(x, y, size, size, layer);
 		this.speed = speed;
 		this.health = 1;

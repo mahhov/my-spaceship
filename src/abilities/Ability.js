@@ -29,17 +29,27 @@ class Ability {
 	}
 
 	paintUi(painter) {
+		// background
+		const BASE_COLOR_MULT = .5;
 		const MARGIN = .02, SIZE = .06, SIZE_WITH_MARGIN = SIZE + MARGIN; // todo extract Ability and LivingEnetity marigns and colors to Ui constants file
 		const LEFT = MARGIN + this.paintUiColumn * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
+		painter.add(new Rect(LEFT, TOP, SIZE, SIZE, this.paintUiColor.multiply(BASE_COLOR_MULT).get(), true));
 
-		painter.add(new Rect(LEFT, TOP, SIZE, SIZE, this.paintUiColor, true));
+		// foreground for current charges
+		const ROW_HEIGHT = SIZE / this.charges;
+		const HEIGHT = this.currentCharges * ROW_HEIGHT;
+		painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT, SIZE, HEIGHT, this.paintUiColor.get(), true));
 
-		// todo paint according to cooldown and charge remaining
+		// hybrid for current cooldown
+		if (this.currentCharges < this.charges) {
+			let colorMult = (this.cooldown - this.currentCooldown) / this.cooldown;
+			colorMult = BASE_COLOR_MULT + colorMult * (1 - BASE_COLOR_MULT);
+			painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT - ROW_HEIGHT, SIZE, ROW_HEIGHT, this.paintUiColor.multiply(colorMult).get(), true));
+		}
+
+		// todo line serpators
+
 		// todo paint stamina
-		// const EMPTY_COLOR = '#f66', FILL_COLOR = '#09c';
-		// painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, true));
-		// painter.add(new Rect(MARGIN, TOP, WIDTH * this.health, MARGIN, FILL_COLOR, true));
-		// painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, false));
 	}
 }
 
