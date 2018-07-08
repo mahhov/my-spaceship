@@ -10,11 +10,11 @@ class Ability {
 		this.paintUiColor = paintUiColor;
 	}
 
-	safeActivate(originX, originY, directX, directY, logic) {
+	safeActivate(originX, originY, directX, directY, logic, intersectionFinder, player) {
 		if (this.currentCharges && (this.repeatable || !this.repeating)) { // todo check stamina as well
 			this.currentCharges--;
 			// todo deplete stamina as well
-			this.activate(originX, originY, directX, directY, logic);
+			this.activate(originX, originY, directX, directY, logic, intersectionFinder, player);
 		}
 		this.repeating = 2;
 	}

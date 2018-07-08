@@ -13,7 +13,7 @@ class Player extends LivingEntity {
 
 	update(logic, controller, keymapping, intersectionFinder) {
 		this.moveControl(controller, keymapping, intersectionFinder);
-		this.abilityControl(logic, controller, keymapping);
+		this.abilityControl(logic, controller, keymapping, intersectionFinder);
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
@@ -46,7 +46,7 @@ class Player extends LivingEntity {
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 	}
 
-	abilityControl(logic, controller, keymapping) {
+	abilityControl(logic, controller, keymapping, intersectionFinder) {
 		let mouse = controller.getMouse();
 		let directX = mouse.x - this.x;
 		let directY = mouse.y - this.y;
@@ -55,7 +55,7 @@ class Player extends LivingEntity {
 			.forEach((ability, index) => {
 				ability.refresh();
 				if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
-					ability.safeActivate(this.x, this.y, directX, directY, logic);
+					ability.safeActivate(this.x, this.y, directX, directY, logic, intersectionFinder, this);
 			});
 	}
 
