@@ -1,21 +1,22 @@
 const Rect = require('../painter/Rect');
 
 class Ability {
-	constructor(cooldown, stamina, charges, paintUiColumn, paintUiColor) {
+	constructor(cooldown, stamina, charges, repeatable, paintUiColumn, paintUiColor) {
 		this.currentCooldown = this.cooldown = cooldown;
 		this.stamina = stamina;
 		this.currentCharges = this.charges = charges;
-
+		this.repeatable = repeatable;
 		this.paintUiColumn = paintUiColumn;
 		this.paintUiColor = paintUiColor;
 	}
 
 	safeActivate(originX, originY, directX, directY, logic) {
-		if (this.currentCharges) { // todo check stamina as well
+		if (this.currentCharges && (this.repeatable || !this.repeating)) { // todo check stamina as well
 			this.currentCharges--;
 			// todo deplete stamina as well
 			this.activate(originX, originY, directX, directY, logic);
 		}
+		this.repeating = 2;
 	}
 
 	activate(originX, originY, directX, directY, logic) {
@@ -26,6 +27,7 @@ class Ability {
 			this.currentCharges++;
 			this.currentCooldown = this.cooldown;
 		}
+		this.repeating && this.repeating--;
 	}
 
 	paintUi(painter) {
