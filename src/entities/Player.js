@@ -23,7 +23,7 @@ class Player extends LivingEntity {
 
 	refresh() {
 		if (this.stamina < this.maxStamina)
-			this.stamina += .02; // todo adjust stamina totoal , consupmtion, and replenish amounts
+			this.stamina = Math.min(this.stamina + .13, this.maxStamina);
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
