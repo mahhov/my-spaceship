@@ -5,21 +5,21 @@ class Painter {
         this.xCoordinateTransform = x => x * this.width;
         this.yCoordinateTransform = y => y * this.height;
         this.context = canvas.getContext('2d');
-        this.queue = [];
+	    this.elements = [];
     }
 
     clear() {
-        this.queue = [];
+	    this.elements = [];
     }
 
-    add(item) {
-        this.queue.push(item);
+	add(element) {
+		this.elements.push(element);
     }
 
     paint() {
         this.context.clearRect(0, 0, this.width, this.height);
-        this.queue.forEach(item =>
-            item.paint(this.xCoordinateTransform, this.yCoordinateTransform, this.context));
+	    this.elements.forEach(element =>
+		    element.paint(this.xCoordinateTransform, this.yCoordinateTransform, this.context));
     }
 }
 

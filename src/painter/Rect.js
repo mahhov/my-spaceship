@@ -1,5 +1,8 @@
-class Rect {
+const PainterElement = require('./PainterElement');
+
+class Rect extends PainterElement {
 	constructor(x, y, width, height, color, fill) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
