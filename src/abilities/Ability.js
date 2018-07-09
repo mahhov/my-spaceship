@@ -33,7 +33,7 @@ class Ability {
 	paintUi(painter) {
 		// background
 		const BASE_COLOR_MULT = .5;
-		const MARGIN = .02, SIZE = .06, SIZE_WITH_MARGIN = SIZE + MARGIN; // todo extract Ability and LivingEnetity marigns and colors to Ui constants file
+		const MARGIN = .02, SIZE = .06, SIZE_WITH_MARGIN = SIZE + MARGIN;
 		const LEFT = MARGIN + this.paintUiColumn * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
 		painter.add(new Rect(LEFT, TOP, SIZE, SIZE, this.paintUiColor.multiply(BASE_COLOR_MULT).get(), true));
 
@@ -48,8 +48,6 @@ class Ability {
 			colorMult = BASE_COLOR_MULT + colorMult * (1 - BASE_COLOR_MULT);
 			painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT - ROW_HEIGHT, SIZE, ROW_HEIGHT, this.paintUiColor.multiply(colorMult).get(), true));
 		}
-
-		// todo line serpators
 
 		// todo paint stamina
 	}

@@ -82,7 +82,7 @@ class IntersectionFinder {
 				dy = 0;
 			}
 
-			intersectionReference = reference; // todo can we make this prettier
+			intersectionReference = reference;
 		}
 
 		let {move, reference} = this.checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical);
