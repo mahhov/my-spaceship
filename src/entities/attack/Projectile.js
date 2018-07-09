@@ -18,7 +18,7 @@ class Projectile extends Entity {
 		let intersection = this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
 
 		if (intersection) {
-			intersection.takeDamage(this.damage);
+			intersection.changeHealth(-this.damage);
 			return true;
 		}
 

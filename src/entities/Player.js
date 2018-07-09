@@ -3,13 +3,14 @@ const Color = require('../util/Color');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
 const BasicAttack = require('../abilities/BasicAttack');
 const Dash = require('../abilities/Dash');
+const Heal = require('../abilities/Heal');
 const {Keys} = require('../Keymapping');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT, 0);
 
-		this.abilities = [new BasicAttack(0), new Dash(1)];
+		this.abilities = [new BasicAttack(0), new Dash(1), new Heal(2)];
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {

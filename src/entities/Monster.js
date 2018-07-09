@@ -13,7 +13,7 @@ class Monster extends LivingEntity {
 		let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .01, dy * .01, 100, .001, false);
+		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .01, dy * .01, 100, .005, false);
 		logic.addProjectile(projectile);
 	}
 }

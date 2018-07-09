@@ -1,4 +1,5 @@
 const Entity = require('./Entity');
+const {clamp} = require('../util/Number');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
@@ -6,13 +7,13 @@ class LivingEntity extends Entity {
 	constructor(x, y, size, speed, color, layer, paintUiRow) {
 		super(x, y, size, size, layer);
 		this.speed = speed;
-		this.health = 1;
+		this.currentHealth = this.health = 1;
 		this.color = color;
 		this.paintUiRow = paintUiRow;
 	}
 
-	takeDamage(amount) {
-		this.health = Math.max(this.health - amount, 0);
+	changeHealth(amount) {
+		this.currentHealth = clamp(this.currentHealth + amount, 0, this.health);
 	}
 
 	getSpeed() {
@@ -27,7 +28,7 @@ class LivingEntity extends Entity {
 		const MARGIN = .02, TOP = MARGIN * (1 + this.paintUiRow * 2), WIDTH = 1 - MARGIN * 2;
 		const EMPTY_COLOR = '#f66', FILL_COLOR = '#09c';
 		painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, true));
-		painter.add(new Rect(MARGIN, TOP, WIDTH * this.health, MARGIN, FILL_COLOR, true));
+		painter.add(new Rect(MARGIN, TOP, WIDTH * this.currentHealth, MARGIN, FILL_COLOR, true));
 		painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, false));
 	}
 }

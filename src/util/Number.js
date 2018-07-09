@@ -13,4 +13,10 @@ const setMagnitude = (x, y, magnitude = 1) => {
 	return [x * mult, y * mult, prevMagnitude];
 };
 
-module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude};
+const clamp = (x, min, max) => {
+	if (x < min)
+		return min;
+	return x > max ? max : x;
+};
+
+module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude, clamp};

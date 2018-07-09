@@ -37,7 +37,7 @@ class Entity {
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
 	}
 
-	takeDamage(amount) {
+	changeHealth(amount) {
 	}
 }
 
