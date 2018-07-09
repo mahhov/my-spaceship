@@ -1,10 +1,9 @@
+const makeEnum = require('./util/Enum');
+
+const KeyStates = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED');
+
 class Controller {
 	constructor(mouseTarget) {
-		this.UP = 0; // todo convert to enum
-		this.DOWN = 1;
-		this.PRESSED = 2;
-		this.RELEASED = 3;
-
 		this.mouseTargetWidth = mouseTarget.width;
 		this.mouseTargetHeight = mouseTarget.height;
 
@@ -25,11 +24,11 @@ class Controller {
 	}
 
 	handleKeyPress(key) {
-		this.keys[key] = this.PRESSED;
+		this.keys[key] = KeyStates.PRESSED;
 	}
 
 	handleKeyRelease(key) {
-		this.keys[key] = this.RELEASED;
+		this.keys[key] = KeyStates.RELEASED;
 	}
 
 	handleMouseMove(x, y) {
@@ -39,12 +38,12 @@ class Controller {
 
 	handleBlur() {
 		Object.entries(this.keys)
-			.filter(([, value]) => value === this.DOWN || value === this.PRESSED)
-			.forEach(([key]) => this.keys[key] = this.RELEASED);
+			.filter(([, value]) => value === KeyStates.DOWN || value === KeyStates.PRESSED)
+			.forEach(([key]) => this.keys[key] = KeyStates.RELEASED);
 	}
 
 	getKeyState(key) {
-		return this.keys[key] || this.UP;
+		return this.keys[key] || KeyStates.UP;
 	}
 
 	getMouse() {
@@ -58,14 +57,14 @@ class Controller {
 
 	expireKey(key) {
 		switch (key) {
-			case this.RELEASED:
-				return this.UP;
-			case this.PRESSED:
-				return this.DOWN;
+			case KeyStates.RELEASED:
+				return KeyStates.UP;
+			case KeyStates.PRESSED:
+				return KeyStates.DOWN;
 			default:
 				return key;
 		}
 	}
 }
 
-module.exports = Controller;
+module.exports = {Controller, KeyStates};

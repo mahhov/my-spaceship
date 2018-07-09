@@ -1,5 +1,5 @@
 const Logic = require('./Logic');
-const Controller = require('./Controller');
+const {Controller} = require('./Controller');
 const Painter = require('./painter/Painter');
 
 const sleep = milli =>

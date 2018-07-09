@@ -1,4 +1,5 @@
 const makeEnum = require('./util/Enum');
+const {KeyStates} = require('./Controller');
 
 const Keys = makeEnum(
 	'MOVE_LEFT',
@@ -45,7 +46,7 @@ class Keymapping {
 
 	isActive(controller, control) {
 		let state = controller.getKeyState(this.getKey(control));
-		return state === controller.PRESSED || state === controller.DOWN;
+		return state === KeyStates.PRESSED || state === KeyStates.DOWN;
 	}
 }
 
