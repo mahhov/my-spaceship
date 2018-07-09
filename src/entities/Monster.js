@@ -1,11 +1,12 @@
 const LivingEntity = require('./LivingEntity');
+const Color = require('../util/Color');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
 const {setMagnitude} = require('../util/Number');
 const Projectile = require('./attack/Projectile');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .04, .004, '#0f0', IntersectionFinderLayers.HOSTILE_UNIT, 1);
+		super(x, y, .04, .004, Color.fromHex(0x0, 0xf, 0x0, true), IntersectionFinderLayers.HOSTILE_UNIT, 1);
 	}
 
 	update(logic, intersectionFinder) {
