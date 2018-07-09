@@ -3,6 +3,7 @@ class Color {
 		this.r = r;
 		this.g = g;
 		this.b = b;
+		this.string = `rgb(${this.r}, ${this.g}, ${this.b})`;
 	}
 
 	static from255(r, g, b) {
@@ -18,7 +19,7 @@ class Color {
 	}
 
 	get() {
-		return `rgb(${this.r}, ${this.g}, ${this.b})`;
+		return this.string;
 	}
 
 	static hexTo255(hex, single) {
