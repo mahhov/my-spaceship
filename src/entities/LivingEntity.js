@@ -1,7 +1,7 @@
 const Entity = require('./Entity');
 const {clamp} = require('../util/Number');
-const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
+const WideBar = require('../painter/WideBar');
 
 class LivingEntity extends Entity {
 	constructor(x, y, size, speed, color, layer, paintUiRow) {
@@ -25,11 +25,8 @@ class LivingEntity extends Entity {
 	}
 
 	paintUi(painter) {
-		const MARGIN = .02, TOP = MARGIN * (1 + this.paintUiRow * 2), WIDTH = 1 - MARGIN * 2;
 		const EMPTY_COLOR = '#f66', FILL_COLOR = '#09c';
-		painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, true));
-		painter.add(new Rect(MARGIN, TOP, WIDTH * this.currentHealth, MARGIN, FILL_COLOR, true));
-		painter.add(new Rect(MARGIN, TOP, WIDTH, MARGIN, EMPTY_COLOR, false));
+		painter.add(new WideBar(this.paintUiRow, this.currentHealth, EMPTY_COLOR, FILL_COLOR, EMPTY_COLOR));
 	}
 }
 

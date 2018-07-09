@@ -5,17 +5,25 @@ const BasicAttack = require('../abilities/BasicAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const {Keys} = require('../Keymapping');
+const WideBar = require('../painter/WideBar');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT, 0);
 
+		this.maxStamina = this.stamina = 100;
 		this.abilities = [new BasicAttack(0), new Dash(1), new Heal(2)];
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
+		this.refresh();
 		this.moveControl(controller, keymapping, intersectionFinder);
 		this.abilityControl(logic, controller, keymapping, intersectionFinder);
+	}
+
+	refresh() {
+		if (this.stamina < this.maxStamina)
+			this.stamina += .02; // todo adjust stamina totoal , consupmtion, and replenish amounts
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
@@ -61,11 +69,18 @@ class Player extends LivingEntity {
 			});
 	}
 
+	consumeStamina(amount) {
+		if (amount > this.stamina)
+			return false;
+		this.stamina -= amount;
+		return true;
+	}
+
 	paintUi(painter) {
 		super.paintUi(painter);
+		painter.add(new WideBar(3, this.stamina / this.maxStamina, '#f66', '#09c', '#f66')); // todo adjust stamina bar colors
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }
-
 
 module.exports = Player;

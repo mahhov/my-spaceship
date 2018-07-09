@@ -11,9 +11,8 @@ class Ability {
 	}
 
 	safeActivate(originX, originY, directX, directY, logic, intersectionFinder, player) {
-		if (this.charges && (this.repeatable || !this.repeating)) { // todo check stamina as well
+		if (this.charges && (this.repeatable || !this.repeating) && player.consumeStamina(this.stamina)) {
 			this.charges--;
-			// todo deplete stamina as well
 			this.activate(originX, originY, directX, directY, logic, intersectionFinder, player);
 		}
 		this.repeating = 2;
@@ -49,7 +48,7 @@ class Ability {
 			painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT - ROW_HEIGHT, SIZE, ROW_HEIGHT, this.paintUiColor.multiply(colorMult).get(), true));
 		}
 
-		// todo paint stamina
+		// todo paint stamina sufficient or stamina cost
 	}
 }
 
