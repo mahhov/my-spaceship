@@ -1,18 +1,19 @@
+const makeEnum = require('../util/Enum');
+
+const Direction = makeEnum('LEFT', 'TOP', 'RIGHT', 'BOTTOM');
+
 class Bounds {
 	constructor(...leftTopRightBottom) {
-		this.LEFT = 0, this.TOP = 1, this.RIGHT = 2, this.BOTTOM = 3; // todo convert to enum
-		this.SIGNS = [-1, -1, 1, 1];
-
 		if (leftTopRightBottom)
 			this.set(...leftTopRightBottom);
 	}
 
 	set(left, top, right, bottom) {
 		this.values = [];
-		this.values[this.LEFT] = left;
-		this.values[this.TOP] = top;
-		this.values[this.RIGHT] = right;
-		this.values[this.BOTTOM] = bottom;
+		this.values[Direction.LEFT] = left;
+		this.values[Direction.TOP] = top;
+		this.values[Direction.RIGHT] = right;
+		this.values[Direction.BOTTOM] = bottom;
 	}
 
 	get(direction) {
@@ -24,20 +25,21 @@ class Bounds {
 	}
 
 	intersects(bounds) {
+		const signs = [-1, -1, 1, 1];
 		return this.values.every((value, direction) =>
-			value * this.SIGNS[direction] > bounds.getOpposite(direction) * this.SIGNS[direction]);
+			value * signs[direction] > bounds.getOpposite(direction) * signs[direction]);
 	}
 
 	oppositeDirection(direction) {
 		switch (direction) {
-			case this.LEFT:
-				return this.RIGHT;
-			case this.TOP:
-				return this.BOTTOM;
-			case this.RIGHT:
-				return this.LEFT;
-			case this.BOTTOM:
-				return this.TOP;
+			case Direction.LEFT:
+				return Direction.RIGHT;
+			case Direction.TOP:
+				return Direction.BOTTOM;
+			case Direction.RIGHT:
+				return Direction.LEFT;
+			case Direction.BOTTOM:
+				return Direction.TOP;
 		}
 	}
 
@@ -46,4 +48,4 @@ class Bounds {
 	}
 }
 
-module.exports = Bounds;
+module.exports = {Bounds, Direction};

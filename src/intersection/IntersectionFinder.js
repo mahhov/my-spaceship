@@ -1,6 +1,7 @@
 const makeEnum = require('../util/Enum');
 const LinkedList = require('../util/LinkedList');
 const {EPSILON, maxWhich, setMagnitude} = require('../util/Number');
+const {Direction} = require('./Bounds');
 
 const IntersectionFinderLayers = makeEnum(
 	'PASSIVE',              // intersects with everything
@@ -60,8 +61,8 @@ class IntersectionFinder {
 
 		let moveX = 0, moveY = 0;
 
-		let horizontal = dx <= 0 ? bounds.LEFT : bounds.RIGHT;
-		let vertical = dy <= 0 ? bounds.TOP : bounds.BOTTOM;
+		let horizontal = dx <= 0 ? Direction.LEFT : Direction.RIGHT;
+		let vertical = dy <= 0 ? Direction.TOP : Direction.BOTTOM;
 
 		let intersectionReference;
 		if (dx && dy) {
@@ -74,10 +75,10 @@ class IntersectionFinder {
 			if (!side || noSlide)
 				return [moveX, moveY, reference];
 			else if (side === 1) {
-				horizontal = bounds.LEFT;
+				horizontal = Direction.LEFT;
 				dx = 0;
 			} else {
-				vertical = bounds.TOP;
+				vertical = Direction.TOP;
 				dy = 0;
 			}
 
