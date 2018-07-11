@@ -1,10 +1,10 @@
 const Color = require('./util/Color');
 
 module.exports = {
-	LIFE_EMPTY_COLOR: '#4BC', // todo use Color
-	LIFE_FILL_COLOR: '#5DF',
-	STAMINA_EMPTY_COLOR: '#cc4',
-	STAMINA_FILL_COLOR: '#ff5',
+	LIFE_EMPTY_COLOR: Color.fromHex(0x4, 0xB, 0xC, true),
+	LIFE_FILL_COLOR: Color.fromHex(0x5, 0xD, 0xF, true),
+	STAMINA_EMPTY_COLOR: Color.fromHex(0xc, 0xc, 0x4, true),
+	STAMINA_FILL_COLOR: Color.fromHex(0xf, 0xf, 0x5, true),
 
 	// abilities
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
