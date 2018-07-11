@@ -10,6 +10,10 @@ class Color {
 		return new Color(r, g, b);
 	}
 
+	static from1(...ones) {
+		return new Color(...Color.onesTo255(ones));
+	}
+
 	static fromHex(rh, gh, bh, single) {
 		return new Color(...Color.hexesTo255([rh, gh, bh], single));
 	}
@@ -28,6 +32,14 @@ class Color {
 
 	static hexesTo255(hexes, single) {
 		return hexes.map(hex => Color.hexTo255(hex, single));
+	}
+
+	static oneTo255(one) {
+		return parseInt(one * 255);
+	}
+
+	static onesTo255(ones) {
+		return ones.map(Color.oneTo255);
 	}
 }
 

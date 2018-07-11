@@ -1,6 +1,7 @@
 const Entity = require('./Entity');
 const {clamp} = require('../util/Number');
 const RectC = require('../painter/RectC');
+const UiCs = require('../UiConstants');
 const WideBar = require('../painter/WideBar');
 
 class LivingEntity extends Entity {
@@ -25,10 +26,8 @@ class LivingEntity extends Entity {
 	}
 
 	paintUi(painter) {
-		const EMPTY_COLOR = '#f66', FILL_COLOR = '#09c';
-		painter.add(new WideBar(this.paintUiRow, this.currentHealth, EMPTY_COLOR, FILL_COLOR, EMPTY_COLOR));
+		painter.add(new WideBar(this.paintUiRow, this.currentHealth, UiCs.LIFE_EMPTY_COLOR, UiCs.LIFE_FILL_COLOR, UiCs.LIFE_EMPTY_COLOR));
 	}
 }
-
 
 module.exports = LivingEntity;

@@ -5,6 +5,7 @@ const BasicAttack = require('../abilities/BasicAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const {Keys} = require('../Keymapping');
+const UiCs = require('../UiConstants');
 const WideBar = require('../painter/WideBar');
 
 class Player extends LivingEntity {
@@ -78,7 +79,7 @@ class Player extends LivingEntity {
 
 	paintUi(painter) {
 		super.paintUi(painter);
-		painter.add(new WideBar(3, this.stamina / this.maxStamina, '#f66', '#09c', '#f66')); // todo adjust stamina bar colors
+		painter.add(new WideBar(3, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR, UiCs.STAMINA_FILL_COLOR, UiCs.STAMINA_EMPTY_COLOR));
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }
