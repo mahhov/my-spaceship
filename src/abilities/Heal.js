@@ -1,5 +1,5 @@
 const Ability = require('./Ability');
-const UiCs = require('../UiConstants');
+const {UiCs} = require('../UiConstants');
 const {setMagnitude} = require('../util/Number');
 
 class Dash extends Ability {

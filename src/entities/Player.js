@@ -5,7 +5,7 @@ const BasicAttack = require('../abilities/BasicAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const {Keys} = require('../Keymapping');
-const UiCs = require('../UiConstants');
+const {UiCs} = require('../UiConstants');
 const WideBar = require('../painter/WideBar');
 
 class Player extends LivingEntity {
