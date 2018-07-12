@@ -19,7 +19,10 @@ Colors.DASH_EMPTY_COLOR = Colors.DASH_COLOR.multiply(EMPTY_MULT);
 Colors.HEAL_EMPTY_COLOR = Colors.HEAL_COLOR.multiply(EMPTY_MULT);
 
 
-const Positions = {};
+const Positions = {
+	MARGIN: .02,
+	BAR_HEIGHT: .02
+};
 
 module.exports = {UiCs: Colors, UiPs: Positions};
 

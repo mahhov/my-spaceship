@@ -5,12 +5,12 @@ const BasicAttack = require('../abilities/BasicAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const {Keys} = require('../Keymapping');
-const {UiCs} = require('../UiConstants');
-const WideBar = require('../painter/WideBar');
+const {UiCs, UiPs} = require('../UiConstants');
+const Bar = require('../painter/Bar');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT, 20);
+		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new BasicAttack(0), new Dash(1), new Heal(2)];
@@ -78,8 +78,10 @@ class Player extends LivingEntity {
 	}
 
 	paintUi(painter) {
-		super.paintUi(painter);
-		painter.add(new WideBar(21, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
+		let barX = .5;
+		painter.add(new Bar(barX, 1 - (UiPs.BAR_HEIGHT + UiPs.MARGIN), 1 - barX - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
+		painter.add(new Bar(barX, 1 - (UiPs.BAR_HEIGHT + UiPs.MARGIN) * 2, 1 - barX - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get()));
+
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }
