@@ -5,12 +5,12 @@ const {UiCs} = require('../UiConstants');
 const WideBar = require('../painter/WideBar');
 
 class LivingEntity extends Entity {
-	constructor(x, y, size, speed, color, layer, paintUiRow) {
+	constructor(x, y, size, speed, color, layer, uiIndex) {
 		super(x, y, size, size, layer);
 		this.speed = speed;
 		this.currentHealth = this.health = 1;
 		this.color = color;
-		this.paintUiRow = paintUiRow;
+		this.uiIndex = uiIndex;
 	}
 
 	changeHealth(amount) {
@@ -26,7 +26,7 @@ class LivingEntity extends Entity {
 	}
 
 	paintUi(painter) {
-		painter.add(new WideBar(this.paintUiRow, this.currentHealth, UiCs.LIFE_COLOR.multiply(.5).get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.multiply(.5).get()));
+		painter.add(new WideBar(this.uiIndex, this.currentHealth, UiCs.LIFE_COLOR.multiply(.5).get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.multiply(.5).get()));
 	}
 }
 

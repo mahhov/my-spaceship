@@ -1,12 +1,12 @@
 const Rect = require('../painter/Rect');
 
 class Ability {
-	constructor(cooldown, charges, stamina, repeatable, paintUiColumn, paintUiColor) {
+	constructor(cooldown, charges, stamina, repeatable, uiIndex, paintUiColor) {
 		this.maxCooldown = this.cooldown = cooldown;
 		this.maxCharges = this.charges = charges;
 		this.stamina = stamina;
 		this.repeatable = repeatable;
-		this.paintUiColumn = paintUiColumn;
+		this.uiIndex = uiIndex;
 		this.paintUiColor = paintUiColor;
 	}
 
@@ -33,7 +33,7 @@ class Ability {
 		// background
 		const BASE_COLOR_MULT = .5;
 		const MARGIN = .02, SIZE = .06, SIZE_WITH_MARGIN = SIZE + MARGIN;
-		const LEFT = MARGIN + this.paintUiColumn * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
+		const LEFT = MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
 		painter.add(new Rect(LEFT, TOP, SIZE, SIZE, this.paintUiColor.multiply(BASE_COLOR_MULT).get(), true));
 
 		// foreground for current charges
