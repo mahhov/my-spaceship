@@ -1,6 +1,5 @@
 const Color = require('./util/Color');
 
-const EMPTY_MULT = .5;
 
 const Colors = {
 	LIFE_COLOR: Color.from1(.8, .3, .3),
@@ -10,17 +9,21 @@ const Colors = {
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
 	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
 	HEAL_COLOR: Color.fromHex(0x4, 0x4, 0xa, true),
+
+	EMPTY_MULT: .5,
 };
 
-Colors.LIFE_EMPTY_COLOR = Colors.LIFE_COLOR.multiply(EMPTY_MULT);
-Colors.STAMINA_EMPTY_COLOR = Colors.STAMINA_COLOR.multiply(EMPTY_MULT);
-Colors.BASIC_ATTACK_EMPTY_COLOR = Colors.BASIC_ATTACK_COLOR.multiply(EMPTY_MULT);
-Colors.DASH_EMPTY_COLOR = Colors.DASH_COLOR.multiply(EMPTY_MULT);
-Colors.HEAL_EMPTY_COLOR = Colors.HEAL_COLOR.multiply(EMPTY_MULT);
+Colors.LIFE_EMPTY_COLOR = Colors.LIFE_COLOR.multiply(Colors.EMPTY_MULT);
+Colors.STAMINA_EMPTY_COLOR = Colors.STAMINA_COLOR.multiply(Colors.EMPTY_MULT);
+Colors.BASIC_ATTACK_EMPTY_COLOR = Colors.BASIC_ATTACK_COLOR.multiply(Colors.EMPTY_MULT);
+Colors.DASH_EMPTY_COLOR = Colors.DASH_COLOR.multiply(Colors.EMPTY_MULT);
+Colors.HEAL_EMPTY_COLOR = Colors.HEAL_COLOR.multiply(Colors.EMPTY_MULT);
 
 const Positions = {
 	MARGIN: .02,
-	BAR_HEIGHT: .02
+	BAR_HEIGHT: .02,
+	PLAYER_BAR_X: .5,
+	ABILITY_SIZE: .06,
 };
 
 module.exports = {UiCs: Colors, UiPs: Positions};

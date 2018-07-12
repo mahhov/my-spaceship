@@ -1,3 +1,4 @@
+const {UiCs, UiPs} = require('../UiConstants');
 const Rect = require('../painter/Rect');
 
 class Ability {
@@ -31,21 +32,20 @@ class Ability {
 
 	paintUi(painter) {
 		// background
-		const BASE_COLOR_MULT = .5;
-		const MARGIN = .02, SIZE = .06, SIZE_WITH_MARGIN = SIZE + MARGIN;
-		const LEFT = MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(LEFT, TOP, SIZE, SIZE, this.paintUiColor.multiply(BASE_COLOR_MULT).get(), true));
+		const SIZE_WITH_MARGIN = UiPs.ABILITY_SIZE + UiPs.MARGIN;
+		const LEFT = UiPs.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
+		painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, this.paintUiColor.multiply(UiCs.EMPTY_MULT).get(), true));
 
 		// foreground for current charges
-		const ROW_HEIGHT = SIZE / this.maxCharges;
+		const ROW_HEIGHT = UiPs.ABILITY_SIZE / this.maxCharges;
 		const HEIGHT = this.charges * ROW_HEIGHT;
-		painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT, SIZE, HEIGHT, this.paintUiColor.get(), true));
+		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, this.paintUiColor.get(), true));
 
 		// hybrid for current cooldown
 		if (this.cooldown < this.maxCooldown) {
 			let colorMult = (this.maxCooldown - this.cooldown) / this.maxCooldown;
-			colorMult = BASE_COLOR_MULT + colorMult * (1 - BASE_COLOR_MULT);
-			painter.add(new Rect(LEFT, TOP + SIZE - HEIGHT - ROW_HEIGHT, SIZE, ROW_HEIGHT, this.paintUiColor.multiply(colorMult).get(), true));
+			colorMult = UiCs.EMPTY_MULT + colorMult * (1 - UiCs.EMPTY_MULT);
+			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, this.paintUiColor.multiply(colorMult).get(), true));
 		}
 
 		// todo paint stamina sufficient or stamina cost

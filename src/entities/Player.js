@@ -78,9 +78,9 @@ class Player extends LivingEntity {
 	}
 
 	paintUi(painter) {
-		let barX = .5;
-		painter.add(new Bar(barX, 1 - (UiPs.BAR_HEIGHT + UiPs.MARGIN), 1 - barX - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
-		painter.add(new Bar(barX, 1 - (UiPs.BAR_HEIGHT + UiPs.MARGIN) * 2, 1 - barX - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get()));
+		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
+		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
+		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get()));
 
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
