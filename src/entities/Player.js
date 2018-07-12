@@ -79,7 +79,7 @@ class Player extends LivingEntity {
 
 	paintUi(painter) {
 		super.paintUi(painter);
-		painter.add(new WideBar(21, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.multiply(.5).get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.multiply(.5).get()));
+		painter.add(new WideBar(21, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }

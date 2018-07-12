@@ -26,7 +26,7 @@ class LivingEntity extends Entity {
 	}
 
 	paintUi(painter) {
-		painter.add(new WideBar(this.uiIndex, this.currentHealth, UiCs.LIFE_COLOR.multiply(.5).get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.multiply(.5).get()));
+		painter.add(new WideBar(this.uiIndex, this.currentHealth, UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get()));
 	}
 }
 
