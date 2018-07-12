@@ -18,6 +18,15 @@ class Color {
 		return new Color(...Color.hexesTo255([rh, gh, bh], single));
 	}
 
+	static fromHexString(hex) {
+		if (hex[0] === '#')
+			hex = hex.substr(1);
+		return Color.from255(
+			parseInt(hex.substr(0, 2), 16),
+			parseInt(hex.substr(2, 2), 16),
+			parseInt(hex.substr(4, 2), 16));
+	}
+
 	multiply(mult) {
 		return new Color(this.r * mult, this.g * mult, this.b * mult);
 	}

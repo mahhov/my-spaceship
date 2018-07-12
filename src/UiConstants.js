@@ -2,8 +2,8 @@ const Color = require('./util/Color');
 
 
 const Colors = {
-	LIFE_COLOR: Color.from1(.8, .3, .3),
-	STAMINA_COLOR: Color.from1(1, .8, .6),
+	LIFE_COLOR: Color.fromHexString('FD5F63'),
+	STAMINA_COLOR: Color.fromHexString('57D550'),
 
 	// abilities
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
@@ -44,5 +44,7 @@ const localStamina = "#ffcc99";
 const localShield = "#6680b3";
 const localReserve = "#339999";
 const localExperience = "#e6991a";
+
+// http://paletton.com/#uid=75C0F0kj+zZ9XRtfuIvo0ulsJqf
 
 // todo find prettier colors
