@@ -9,7 +9,7 @@ class BasicAttack extends Ability {
 	}
 
 	activate(originX, originY, directX, directY, logic, intersectionFinder, player) {
-		[directX, directY] = setMagnitude(directX, directY, .03);
+		[directX, directY] = setMagnitude(directX, directY, .015);
 		let projectile = new Projectile(originX, originY, .01, .01, directX, directY, 100, .001, true);
 		logic.addProjectile(projectile);
 	}

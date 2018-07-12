@@ -11,11 +11,12 @@ class Monster extends LivingEntity {
 		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
 	}
 
-	update(logic, intersectionFinder) {
-		let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
-		this.safeMove(intersectionFinder, dx, dy, this.speed);
+	update(logic, intersectionFinder, player) {
+		// let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
+		// this.safeMove(intersectionFinder, dx, dy, this.speed);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx * .01, dy * .01, 100, .005, false);
+		let [dx, dy] = setMagnitude(player.x - this.x, player.y - this.y, .015);
+		let projectile = new Projectile(this.x, this.y, .01, .01, dx, dy, 100, .005, false);
 		logic.addProjectile(projectile);
 	}
 
