@@ -10,7 +10,7 @@ const WideBar = require('../painter/WideBar');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT, 0);
+		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT, 20);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new BasicAttack(0), new Dash(1), new Heal(2)];
@@ -79,7 +79,7 @@ class Player extends LivingEntity {
 
 	paintUi(painter) {
 		super.paintUi(painter);
-		painter.add(new WideBar(3, this.stamina / this.maxStamina, UiCs.STAMINA_EMPTY_COLOR.get(), UiCs.STAMINA_FILL_COLOR.get(), UiCs.STAMINA_EMPTY_COLOR.get()));
+		painter.add(new WideBar(21, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.multiply(.5).get(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.multiply(.5).get()));
 		this.abilities.forEach(ability => ability.paintUi(painter));
 	}
 }

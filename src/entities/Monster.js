@@ -6,7 +6,7 @@ const Projectile = require('./attack/Projectile');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT, 1);
+		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT, 0);
 	}
 
 	update(logic, intersectionFinder) {
