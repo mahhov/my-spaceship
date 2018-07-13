@@ -31,13 +31,13 @@ class Keymapping {
 		this.map[Keys.MOVE_UP] = 'w';
 		this.map[Keys.MOVE_RIGHT] = 'd';
 		this.map[Keys.MOVE_DOWN] = 's';
-		this.map[Keys.ABILITY_1] = 'q';
-		this.map[Keys.ABILITY_2] = 'e';
-		this.map[Keys.ABILITY_3] = '1';
-		this.map[Keys.ABILITY_4] = '2';
-		this.map[Keys.ABILITY_5] = '3';
-		this.map[Keys.ABILITY_6] = '4';
-		this.map[Keys.ABILITY_7] = '5';
+		this.map[Keys.ABILITY_1] = 'j';
+		this.map[Keys.ABILITY_2] = 'k';
+		this.map[Keys.ABILITY_3] = 'l';
+		this.map[Keys.ABILITY_4] = 'u';
+		this.map[Keys.ABILITY_5] = 'i';
+		this.map[Keys.ABILITY_6] = 'o';
+		this.map[Keys.ABILITY_7] = 'p';
 	}
 
 	getKey(control) {
