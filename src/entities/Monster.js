@@ -14,20 +14,31 @@ class Monster extends LivingEntity {
 	}
 
 	update(logic, intersectionFinder, player) {
-		// let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
-		// this.safeMove(intersectionFinder, dx, dy, this.speed);
-
 		if (this.phase.complete())
 			this.phase.nextPhase();
 
-		if (this.phase.tick() === 1)
+		if (this.phase.tick() === 0)
+			this.movePhase(logic, intersectionFinder, player);
+		else
+			this.attackPhase(logic, intersectionFinder, player);
+	}
+
+	movePhase(logic, intersectionFinder, player) {
+		let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
+		this.safeMove(intersectionFinder, dx, dy, this.speed);
+	}
+
+	attackPhase(logic, intersectionFinder, player) {
+		if (Math.random() > .1)
 			return;
 
-		let [dx, dy] = setMagnitude(player.x - this.x, player.y - this.y, .015);
-		let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), .0015 * Math.random());
+		for (let i = 0; i < 10; i++) {
+			let [dx, dy] = setMagnitude(player.x - this.x, player.y - this.y, .015);
+			let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), .015 * Math.random() * .2);
 
-		let projectile = new Projectile(this.x, this.y, .01, .01, dx + rdx, dy + rdy, 100, .005, false);
-		logic.addProjectile(projectile);
+			let projectile = new Projectile(this.x, this.y, .01, .01, dx + rdx, dy + rdy, 100, .005, false);
+			logic.addProjectile(projectile);
+		}
 	}
 
 	paintUi(painter) {
