@@ -19,4 +19,6 @@ const clamp = (x, min, max) => {
 	return x > max ? max : x;
 };
 
-module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude, clamp};
+const thetaToUnitVector = theta => [Math.cos(theta), Math.sin(theta)];
+
+module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude, clamp, thetaToUnitVector};
