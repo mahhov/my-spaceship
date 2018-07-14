@@ -1,21 +1,22 @@
 class Color {
-	constructor(r, g, b) {
+	constructor(r, g, b, a = 1) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
-		this.string = `rgb(${this.r}, ${this.g}, ${this.b})`;
+		this.a = a;
+		this.string = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
 	}
 
-	static from255(r, g, b) {
-		return new Color(r, g, b);
+	static from255(r, g, b, a) {
+		return new Color(r, g, b, a);
 	}
 
-	static from1(...ones) {
-		return new Color(...Color.onesTo255(ones));
+	static from1(r1, g1, b1, a) {
+		return new Color(...Color.onesTo255([r1, g1, b1]), a);
 	}
 
-	static fromHex(rh, gh, bh, single) {
-		return new Color(...Color.hexesTo255([rh, gh, bh], single));
+	static fromHex(rh, gh, bh, single, a) {
+		return new Color(...Color.hexesTo255([rh, gh, bh], single), a);
 	}
 
 	static fromHexString(hex) {
