@@ -13,6 +13,7 @@ class BasicAttack extends Ability {
 		let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), .015 * Math.random() * .1);
 		let projectile = new Projectile(originX, originY, .01, .01, directX + rdx, directY + rdy, 100, .001, true);
 		logic.addProjectile(projectile);
+		return true;
 	}
 }
 

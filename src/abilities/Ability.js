@@ -12,10 +12,11 @@ class Ability {
 	}
 
 	safeActivate(originX, originY, directX, directY, logic, intersectionFinder, player) {
-		if (this.charges && (this.repeatable || !this.repeating) && player.consumeStamina(this.stamina)) {
-			this.charges--;
-			this.activate(originX, originY, directX, directY, logic, intersectionFinder, player);
-		}
+		if (this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating))
+			if (this.activate(originX, originY, directX, directY, logic, intersectionFinder, player)) {
+				this.charges--;
+				player.consumeStamina(this.stamina);
+			}
 		this.repeating = 2;
 	}
 

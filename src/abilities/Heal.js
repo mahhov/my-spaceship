@@ -8,7 +8,10 @@ class Dash extends Ability {
 	}
 
 	activate(originX, originY, directX, directY, logic, intersectionFinder, player) {
+		if (player.isFullHealth())
+			return false;
 		player.changeHealth(.1);
+		return true;
 	}
 }
 

@@ -46,14 +46,12 @@ class Player extends LivingEntity {
 		if (down)
 			dy += 1;
 
-		if (dx === 0 && dy === 0)
-			return;
-
 		if (dx !== 0 && dy !== 0) {
 			dx = Math.sign(dx) * invSqrt2;
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
+		this.moveDirection = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, this.speed);
 	}
 
@@ -70,11 +68,12 @@ class Player extends LivingEntity {
 			});
 	}
 
+	sufficientStamina(amount) {
+		return amount <= this.stamina;
+	}
+
 	consumeStamina(amount) {
-		if (amount > this.stamina)
-			return false;
 		this.stamina -= amount;
-		return true;
 	}
 
 	paintUi(painter) {
