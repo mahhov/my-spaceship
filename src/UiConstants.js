@@ -1,9 +1,8 @@
 const Color = require('./util/Color');
 
-
 const Colors = {
-	LIFE_COLOR: Color.fromHexString('FD5F63'),
-	STAMINA_COLOR: Color.fromHexString('57D550'),
+	LIFE_COLOR: Color.fromHexString('#FD5F63'),
+	STAMINA_COLOR: Color.fromHexString('#57D550'),
 
 	// abilities
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
