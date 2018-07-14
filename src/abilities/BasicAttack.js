@@ -1,6 +1,6 @@
 const Ability = require('./Ability');
 const {UiCs} = require('../UiConstants');
-const {setMagnitude} = require('../util/Number');
+const {setMagnitude, thetaToUnitVector} = require('../util/Number');
 const Projectile = require('../entities/attack/Projectile');
 
 class BasicAttack extends Ability {
@@ -10,7 +10,8 @@ class BasicAttack extends Ability {
 
 	activate(originX, originY, directX, directY, logic, intersectionFinder, player) {
 		[directX, directY] = setMagnitude(directX, directY, .015);
-		let projectile = new Projectile(originX, originY, .01, .01, directX, directY, 100, .001, true);
+		let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), .015 * Math.random() * .1);
+		let projectile = new Projectile(originX, originY, .01, .01, directX + rdx, directY + rdy, 100, .001, true);
 		logic.addProjectile(projectile);
 	}
 }
