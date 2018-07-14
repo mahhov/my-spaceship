@@ -9,7 +9,7 @@ const Colors = {
 	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
 	HEAL_COLOR: Color.fromHex(0x4, 0x4, 0xa, true),
 
-	EMPTY_MULT: .5,
+	EMPTY_MULT: 2,
 };
 
 Colors.LIFE_EMPTY_COLOR = Colors.LIFE_COLOR.multiply(Colors.EMPTY_MULT);

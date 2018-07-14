@@ -1,8 +1,8 @@
 class Color {
 	constructor(r, g, b, a = 1) {
-		this.r = r;
-		this.g = g;
-		this.b = b;
+		this.r = Math.min(r, 255);
+		this.g = Math.min(g, 255);
+		this.b = Math.min(b, 255);
 		this.a = a;
 		this.string = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
 	}
