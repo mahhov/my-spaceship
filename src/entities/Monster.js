@@ -11,20 +11,20 @@ const Bar = require('../painter/Bar');
 class Monster extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
-		this.phase = new Phase(100, 100, 200);
+		this.attackPhase = new Phase(100, 100, 200);
+		this.enragePhase = new Phase(7000);
+		this.enragePhase.setPhase(0);
 		this.degenRange = .33;
 	}
 
 	update(logic, intersectionFinder, player) {
-		if (this.phase.complete())
-			this.phase.nextPhase();
+		this.attackPhase.sequentialTick();
+		this.enragePhase.tick();
 
-		this.phase.tick();
-
-		if (this.phase.get() === 1)
+		if (this.attackPhase.get() === 1)
 			this.distanceDegen(logic, intersectionFinder, player);
-		else if (this.phase.get() === 2)
-			this.attackPhase(logic, intersectionFinder, player);
+		else if (this.attackPhase.get() === 2)
+			this.projecitlePhase(logic, intersectionFinder, player);
 	}
 
 	distanceDegen(logic, intersectionFinder, player) {
@@ -33,7 +33,7 @@ class Monster extends LivingEntity {
 			player.changeHealth(-.002);
 	}
 
-	attackPhase(logic, intersectionFinder, player) {
+	projecitlePhase(logic, intersectionFinder, player) {
 		if (Math.random() > .1)
 			return;
 
@@ -48,14 +48,15 @@ class Monster extends LivingEntity {
 
 	paint(painter) {
 		super.paint(painter);
-		if (this.phase.get() === 0)
+		if (this.attackPhase.get() === 0)
 			painter.add(new RectC(this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0).get(), false));
-		else if (this.phase.get() === 1)
+		else if (this.attackPhase.get() === 1)
 			painter.add(new RectC(this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0, .3).get(), true));
 	}
 
 	paintUi(painter) {
 		painter.add(new Bar(UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get()));
+		painter.add(new Bar(UiPs.MARGIN, UiPs.MARGIN * 3, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.enragePhase.getRatio(), UiCs.LIFE_EMPTY_COLOR.get(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_EMPTY_COLOR.get())); // todo adjust color
 	}
 }
 

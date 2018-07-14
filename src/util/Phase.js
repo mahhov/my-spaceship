@@ -14,14 +14,25 @@ class Phase {
 	}
 
 	tick() {
-		return --this.duration ? this.phase : -1;
+		this.duration && this.duration--;
+	}
+
+	sequentialTick() {
+		if (this.isComplete())
+			this.nextPhase();
+		this.tick();
 	}
 
 	get() {
 		return this.phase;
 	}
 
-	complete() {
+	// starts at 0, increases to 1
+	getRatio() {
+		return 1 - this.duration / this.durations[this.phase];
+	}
+
+	isComplete() {
 		return !this.duration;
 	}
 }
