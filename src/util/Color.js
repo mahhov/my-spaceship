@@ -1,3 +1,5 @@
+const SHADE_ADD = 1;
+
 class Color {
 	constructor(r, g, b, a = 1) {
 		this.r = Math.min(r, 255);
@@ -34,6 +36,12 @@ class Color {
 
 	get() {
 		return this.string;
+	}
+
+	getShade(shade = 1) {
+		if (shade === 1)
+			return this.shadeString || (this.shadeString = this.multiply(1 + SHADE_ADD).get());
+		return this.multiply(1 + SHADE_ADD * shade).get();
 	}
 
 	static hexTo255(hex, single) {

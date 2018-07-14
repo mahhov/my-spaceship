@@ -3,20 +3,13 @@ const Color = require('./util/Color');
 const Colors = {
 	LIFE_COLOR: Color.fromHexString('#FD5F63'),
 	STAMINA_COLOR: Color.fromHexString('#57D550'),
+	ENRAGE_COLOR: Color.fromHexString('#57D550'),
 
 	// abilities
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
 	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
 	HEAL_COLOR: Color.fromHex(0x4, 0x4, 0xa, true),
-
-	EMPTY_MULT: 2,
 };
-
-Colors.LIFE_EMPTY_COLOR = Colors.LIFE_COLOR.multiply(Colors.EMPTY_MULT);
-Colors.STAMINA_EMPTY_COLOR = Colors.STAMINA_COLOR.multiply(Colors.EMPTY_MULT);
-Colors.BASIC_ATTACK_EMPTY_COLOR = Colors.BASIC_ATTACK_COLOR.multiply(Colors.EMPTY_MULT);
-Colors.DASH_EMPTY_COLOR = Colors.DASH_COLOR.multiply(Colors.EMPTY_MULT);
-Colors.HEAL_EMPTY_COLOR = Colors.HEAL_COLOR.multiply(Colors.EMPTY_MULT);
 
 const Positions = {
 	MARGIN: .02,
