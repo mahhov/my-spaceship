@@ -17,6 +17,10 @@ class Phase {
 		return --this.duration ? this.phase : -1;
 	}
 
+	get() {
+		return this.phase;
+	}
+
 	complete() {
 		return !this.duration;
 	}

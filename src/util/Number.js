@@ -2,6 +2,10 @@ const EPSILON = 1e-10;
 
 const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
 
+const getDiamondDistance = (x, y) => Math.abs(x) + Math.abs(y);
+
+const getRectDistance = (x, y) => Math.max(Math.abs(x), Math.abs(y));
+
 const getMagnitude = (x, y) =>
 	Math.sqrt(x * x + y * y);
 
@@ -21,4 +25,4 @@ const clamp = (x, min, max) => {
 
 const thetaToUnitVector = theta => [Math.cos(theta), Math.sin(theta)];
 
-module.exports = {EPSILON, maxWhich, getMagnitude, setMagnitude, clamp, thetaToUnitVector};
+module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector};

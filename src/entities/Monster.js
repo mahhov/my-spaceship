@@ -2,30 +2,35 @@ const LivingEntity = require('./LivingEntity');
 const Color = require('../util/Color');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
 const Phase = require('../util/Phase');
-const {setMagnitude, thetaToUnitVector} = require('../util/Number');
+const {getRectDistance, getMagnitude, setMagnitude, thetaToUnitVector} = require('../util/Number');
 const Projectile = require('./attack/Projectile');
 const {UiCs, UiPs} = require('../UiConstants');
+const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
-		this.phase = new Phase(100, 100);
+		this.phase = new Phase(100, 100, 200);
+		this.degenRange = .33;
 	}
 
 	update(logic, intersectionFinder, player) {
 		if (this.phase.complete())
 			this.phase.nextPhase();
 
-		if (this.phase.tick() === 0)
-			this.movePhase(logic, intersectionFinder, player);
-		else
+		this.phase.tick();
+
+		if (this.phase.get() === 1)
+			this.distanceDegen(logic, intersectionFinder, player);
+		else if (this.phase.get() === 2)
 			this.attackPhase(logic, intersectionFinder, player);
 	}
 
-	movePhase(logic, intersectionFinder, player) {
-		let [dx, dy] = setMagnitude(Math.random() - .5, Math.random() - .5, 1);
-		this.safeMove(intersectionFinder, dx, dy, this.speed);
+	distanceDegen(logic, intersectionFinder, player) {
+		let playerDistance = getRectDistance(player.x - this.x, player.y - this.y);
+		if (playerDistance < this.degenRange)
+			player.changeHealth(-.002);
 	}
 
 	attackPhase(logic, intersectionFinder, player) {
@@ -39,6 +44,14 @@ class Monster extends LivingEntity {
 			let projectile = new Projectile(this.x, this.y, .01, .01, dx + rdx, dy + rdy, 100, .005, false);
 			logic.addProjectile(projectile);
 		}
+	}
+
+	paint(painter) {
+		super.paint(painter);
+		if (this.phase.get() === 0)
+			painter.add(new RectC(this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0).get(), false));
+		else if (this.phase.get() === 1)
+			painter.add(new RectC(this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0, .3).get(), true));
 	}
 
 	paintUi(painter) {
