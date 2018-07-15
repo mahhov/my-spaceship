@@ -5,16 +5,20 @@ const ProjectileAttack = require('../abilities/ProjectileAttack');
 const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
+const Decay = require('../util/Decay');
 const {Keys} = require('../Keymapping');
 const {UiCs, UiPs} = require('../UiConstants');
 const Bar = require('../painter/Bar');
+const Rect = require('../painter/Rect');
 
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .01, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
-		this.abilities = [new LaserAttack(0), new Dash(1), new Heal(2)];
+		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
+
+		this.recentDamage = new Decay(.1, .001);
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
@@ -77,12 +81,20 @@ class Player extends LivingEntity {
 		this.stamina -= amount;
 	}
 
+	changeHealth(amount) {
+		super.changeHealth(amount);
+		this.recentDamage.add(-amount);
+	}
+
 	paintUi(painter) {
 		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
 		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.getShade(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.getShade()));
 		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 
 		this.abilities.forEach(ability => ability.paintUi(painter));
+
+		let damageColor = UiCs.DAMAGE_COLOR.getShade(254 * (1 - this.recentDamage.get()));
+		painter.add(new Rect(0, 0, 1, 1, damageColor, true));
 	}
 }
 

@@ -5,6 +5,8 @@ const Colors = {
 	STAMINA_COLOR: Color.fromHexString('#57D550'),
 	ENRAGE_COLOR: Color.fromHexString('#616600'),
 
+	DAMAGE_COLOR: Color.from255(255, 1, 1, .3),
+
 	// abilities
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
 	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
