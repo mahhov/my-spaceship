@@ -34,6 +34,11 @@ class Logic {
 	}
 
 	iterate() {
+		this.update();
+		this.paint();
+	}
+
+	update() {
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.update(this, this.intersectionFinder, this.player);
 		this.projectiles.forEach((projectile, item) => {
@@ -42,8 +47,6 @@ class Logic {
 				projectile.removeIntersectionBounds(this.intersectionFinder);
 			}
 		});
-
-		this.paint();
 	}
 
 	paint() {
