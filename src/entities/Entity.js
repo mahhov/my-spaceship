@@ -11,6 +11,11 @@ class Entity {
 		this.setBounds();
 	}
 
+	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {
+		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
+		return moveXY[2];
+	}
+
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 		this.move(...moveXY);
