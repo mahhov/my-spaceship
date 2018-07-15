@@ -31,7 +31,7 @@ class Color {
 	}
 
 	multiply(mult) {
-		return new Color(this.r * mult, this.g * mult, this.b * mult);
+		return new Color(this.r * mult, this.g * mult, this.b * mult, this.a);
 	}
 
 	get() {
