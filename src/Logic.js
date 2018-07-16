@@ -62,3 +62,17 @@ class Logic {
 }
 
 module.exports = Logic;
+
+// todo graphics
+// particles
+// asteroid vectors
+// ship graphics
+// starfield background
+
+// todo content
+// instances
+// mobs
+// sector modes
+// resources
+// crafting
+// skill leveling

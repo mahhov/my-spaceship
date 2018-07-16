@@ -15,6 +15,10 @@ class LivingEntity extends Entity {
 		return this.currentHealth === 1;
 	}
 
+	isEmptyHealth() {
+		return !this.currentHealth;
+	}
+
 	changeHealth(amount) {
 		this.currentHealth = clamp(this.currentHealth + amount, 0, this.health);
 	}
