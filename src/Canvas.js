@@ -3,7 +3,7 @@ const Painter = require('./painter/Painter');
 const Logic = require('./Logic');
 const Color = require('./util/Color');
 const {thetaToUnitVector} = require('./util/Number');
-const VShip = require('./graphics/VShip');
+const TestShip = require('./graphics/WShip');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
@@ -30,11 +30,11 @@ let GraphicsDemo = async () => {
 
 	while (true) {
 		painter.clear();
-		VShip(painter, x, y, w, h, thetaToUnitVector(theta += dtheta), new Color(0, 0, 1), new Color(1, 0, 0));
+[]		TestShip(painter, x, y, w, h, thetaToUnitVector(theta += dtheta), new Color(0, 0, 1), new Color(1, 0, 0));
 		painter.paint();
 		await sleep(10);
 	}
 };
 
-// loop();
-GraphicsDemo();
+loop();
+// GraphicsDemo();

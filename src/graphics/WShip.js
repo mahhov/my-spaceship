@@ -5,11 +5,14 @@ const paint = (painter, x, y, width, height, moveDirection, primaryColor, second
 	pathCreator
 		.setTranslation(x, y)
 		.setForward(...moveDirection)
-		.setScale(width, height, 1.25)
-		.moveTo(0, 1)
-		.moveTo(.5, 0)
-		.moveTo(0, -.5)
-		.moveTo(-.5, 0);
+		.setScale(width, height, .4)
+		.moveTo(1, .5)
+		.moveTo(3, 2)
+		.moveTo(2, -2)
+		.moveTo(0, -1)
+		.moveTo(-2, -2)
+		.moveTo(-3, 2)
+		.moveTo(-1, .5);
 	painter.add(pathCreator.create())
 };
 

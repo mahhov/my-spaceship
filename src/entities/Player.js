@@ -88,7 +88,7 @@ class Player extends LivingEntity {
 	}
 
 	paint(painter) {
-		VShip(painter, this.x, this.y, this.width, this.height, this.color, UiCs.ENRAGE_COLOR);
+		VShip(painter, this.x, this.y, this.width, this.height, this.moveDirection, this.color, UiCs.ENRAGE_COLOR);
 	}
 
 	paintUi(painter) {

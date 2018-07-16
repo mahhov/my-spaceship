@@ -26,9 +26,9 @@ class PathCreator {
 		return this;
 	}
 
-	setScale(x, y) {
-		this.sx = x;
-		this.sy = y;
+	setScale(x, y, s) {
+		this.sx = x * s;
+		this.sy = y * s;
 		return this;
 	}
 
