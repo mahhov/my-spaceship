@@ -7,6 +7,7 @@ const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Decay = require('../util/Decay');
 const {Keys} = require('../Keymapping');
+const VShip = require('../graphics/VShip');
 const {UiCs, UiPs} = require('../UiConstants');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
@@ -84,6 +85,10 @@ class Player extends LivingEntity {
 	changeHealth(amount) {
 		super.changeHealth(amount);
 		this.recentDamage.add(-amount);
+	}
+
+	paint(painter) {
+		VShip(painter, this.x, this.y, this.width, this.height, this.color, UiCs.ENRAGE_COLOR);
 	}
 
 	paintUi(painter) {
