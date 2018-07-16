@@ -2,6 +2,7 @@ const {Controller} = require('./Controller');
 const Painter = require('./painter/Painter');
 const Logic = require('./Logic');
 const Color = require('./util/Color');
+const {thetaToUnitVector} = require('./util/Number');
 const VShip = require('./graphics/VShip');
 
 const sleep = milli =>
@@ -22,10 +23,17 @@ let loop = async () => {
 	}
 };
 
-let GraphicsDemo = () => {
-	painter.clear();
-	VShip(painter, .5, .5, .03, .03, [0, 1], new Color(0, 0, 1), new Color(1, 0, 0));
-	painter.paint();
+let GraphicsDemo = async () => {
+	let x = .5, y = .5;
+	let w = .03, h = .03;
+	let theta = 0, dtheta = .2 * Math.PI / 180;
+
+	while (true) {
+		painter.clear();
+		VShip(painter, x, y, w, h, thetaToUnitVector(theta += dtheta), new Color(0, 0, 1), new Color(1, 0, 0));
+		painter.paint();
+		await sleep(10);
+	}
 };
 
 // loop();
