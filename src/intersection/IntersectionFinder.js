@@ -135,3 +135,5 @@ class IntersectionFinder {
 }
 
 module.exports = {IntersectionFinder, IntersectionFinderLayers};
+
+// todo support rectangular mobile (rotating)entities

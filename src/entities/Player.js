@@ -15,7 +15,6 @@ const Rect = require('../painter/Rect');
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .05, .05, .004, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT);
-		// todo fix bug in intersection finder not supporting rectangular mobile entities
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
