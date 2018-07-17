@@ -66,7 +66,7 @@ module.exports = Logic;
 // todo graphics
 // particles
 // asteroid vectors
-// ship graphics
+// textures
 // starfield background
 
 // todo content

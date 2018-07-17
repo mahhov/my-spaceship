@@ -1,6 +1,5 @@
 const Graphics = require('./Graphics');
 
-const SCALE = .4;
 const POINTS = [
 	[1, .5],
 	[3, 2],
@@ -12,7 +11,7 @@ const POINTS = [
 
 class WShip extends Graphics {
 	constructor(color, width, height) {
-		super(color, width, height, SCALE, POINTS);
+		super(color, width, height, POINTS);
 	}
 }
 

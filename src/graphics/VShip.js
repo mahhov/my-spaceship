@@ -1,6 +1,5 @@
 const Graphics = require('./Graphics');
 
-const SCALE = .5;
 const POINTS = [
 	[0, 3 / 2], // front
 	[1, -1 / 2], // right
@@ -9,7 +8,7 @@ const POINTS = [
 
 class VShip extends Graphics {
 	constructor(color, width, height) {
-		super(color, width, height, SCALE, POINTS);
+		super(color, width, height, POINTS);
 	}
 }
 
