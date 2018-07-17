@@ -10,7 +10,7 @@ const Bar = require('../painter/Bar');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
+		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
