@@ -1,6 +1,6 @@
 const Ability = require('./Ability');
 const {UiCs} = require('../UiConstants');
-const {setMagnitude} = require('../util/Number');
+const {booleanArray} = require('../util/Number');
 
 class Dash extends Ability {
 	constructor(paintUiColumn) {
@@ -8,7 +8,7 @@ class Dash extends Ability {
 	}
 
 	activate(originX, originY, directX, directY, logic, intersectionFinder, player) {
-		if (!player.moveDirection[0] && !player.moveDirection[1])
+		if (!booleanArray(player.moveDirection))
 			return false;
 		player.safeMove(intersectionFinder, ...player.moveDirection, .1, true);
 		return true;
