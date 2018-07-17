@@ -6,8 +6,8 @@ const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Decay = require('../util/Decay');
-const {Keys} = require('../Keymapping');
 const VShip = require('../graphics/VShip');
+const {Keys} = require('../Keymapping');
 const {UiCs, UiPs} = require('../UiConstants');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
@@ -20,6 +20,8 @@ class Player extends LivingEntity {
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
 		this.recentDamage = new Decay(.1, .001);
+
+		this.ship = new VShip(this.color, this.width, this.height);
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {
@@ -88,7 +90,7 @@ class Player extends LivingEntity {
 	}
 
 	paint(painter) {
-		VShip(painter, this.x, this.y, this.width, this.height, this.moveDirection, this.color, UiCs.ENRAGE_COLOR);
+		this.ship.paint(painter, this.x, this.y, this.moveDirection);
 	}
 
 	paintUi(painter) {

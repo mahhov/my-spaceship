@@ -29,4 +29,6 @@ const cos = theta => Math.cos(theta);
 
 const sin = theta => Math.sin(theta);
 
-module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin};
+const booleanArray = array => array.some(a => a);
+
+module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray};

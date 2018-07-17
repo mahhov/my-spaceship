@@ -1,8 +1,7 @@
 const Path = require('../painter/Path');
 
 class PathCreator {
-	constructor(color) {
-		this.color = color;
+	constructor() {
 		this.xys = [];
 		this.cx = .5;
 		this.cy = .5;
@@ -12,52 +11,71 @@ class PathCreator {
 		this.sy = .1;
 		this.x = 0;
 		this.y = 0;
+		this.pathPoints = [];
+	}
+
+	setColor(color) {
+		this.color = color;
 	}
 
 	setTranslation(x, y) {
+		if (this.cx === x && this.cy === y)
+			return;
 		this.cx = x;
 		this.cy = y;
-		return this;
+		this.pathChanged = true;
 	}
 
 	setForward(x, y) {
+		if (this.fx === x && this.fy === y)
+			return;
 		this.fx = x;
 		this.fy = y;
-		return this;
+		this.pathChanged = true;
 	}
 
 	setScale(x, y, s) {
+		if (this.sx === x * s && this.sy === y * s)
+			return;
 		this.sx = x * s;
 		this.sy = y * s;
-		return this;
+		this.pathChanged = true;
 	}
 
 	moveTo(x, y, skipAdd) {
-		// 0, 1 maps to center + forward
-		x *= this.sx;
-		y *= this.sy;
-		this.x = this.cx + this.fx * y - this.fy * x;
-		this.y = this.cy + this.fy * y + this.fx * x;
+		this.x = x;
+		this.y = y;
 		skipAdd || this.add();
-		return this;
 	}
 
 	moveBy(x, y, skipAdd) {
-		x *= this.sx;
-		y *= this.sy;
-		this.x += this.fx * y - this.fy * x;
-		this.y += this.fy * y + this.fx * x;
+		this.x += x;
+		this.y += y;
 		skipAdd || this.add();
-		return this;
 	}
 
 	add() {
 		this.xys.push([this.x, this.y]);
-		return this;
+		this.pathChanged = true;
 	}
 
 	create() {
-		return new Path(this.xys, this.color.get());
+		if (this.pathChanged)
+			this.computePathPoints();
+		return new Path(this.pathPoints, this.color.get());
+	}
+
+	computePathPoints() {
+		// 0, 1 maps to center + forward
+		this.pathPoints = [];
+		this.xys.forEach(([x, y]) => {
+			x *= this.sx;
+			y *= this.sy;
+			let pathX = this.cx + this.fx * y - this.fy * x;
+			let pathY = this.cy + this.fy * y + this.fx * x;
+			this.pathPoints.push([pathX, pathY]);
+		});
+		this.pathChanged = false;
 	}
 }
 

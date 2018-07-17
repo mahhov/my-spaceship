@@ -24,13 +24,16 @@ let loop = async () => {
 };
 
 let GraphicsDemo = async () => {
-	let x = .5, y = .5;
 	let w = .03, h = .03;
+	let x = .5, y = .5;
 	let theta = 0, dtheta = .2 * Math.PI / 180;
+
+	let ship = new TestShip(Color.from1(0, 0, 1), w, h);
 
 	while (true) {
 		painter.clear();
-[]		TestShip(painter, x, y, w, h, thetaToUnitVector(theta += dtheta), new Color(0, 0, 1), new Color(1, 0, 0));
+		let direction = thetaToUnitVector(theta += dtheta);
+		ship.paint(painter, x, y, direction);
 		painter.paint();
 		await sleep(10);
 	}
