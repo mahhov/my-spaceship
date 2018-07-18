@@ -14,18 +14,20 @@ class Projectile extends Entity {
 	}
 
 	update(intersectionFinder) {
+		if (!this.moveX)
+			[this.moveX, this.moveY, this.intersection] = this.checkMove(intersectionFinder, this.dx, this.dy, -1, true);
+
 		if (this.time--)
 			return;
 
-		let intersection = this.checkMove(intersectionFinder, this.dx, this.dy, -1, true);
-		if (intersection)
-			intersection.changeHealth(-this.damage);
+		if (this.intersection)
+			this.intersection.changeHealth(-this.damage);
 
 		return true;
 	}
 
 	paint(painter) {
-		painter.add(new Line(this.x, this.y, this.x + this.dx, this.y + this.dy));
+		painter.add(new Line(this.x, this.y, this.x + this.moveX, this.y + this.moveY));
 	}
 }
 

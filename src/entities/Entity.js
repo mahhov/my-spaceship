@@ -12,8 +12,7 @@ class Entity {
 	}
 
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
-		return moveXY[2];
+		return intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 	}
 
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
