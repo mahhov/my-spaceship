@@ -21,7 +21,7 @@ class Bounds {
 	}
 
 	getOpposite(direction) {
-		return this.get(this.oppositeDirection(direction));
+		return this.get(Bounds.oppositeDirection(direction));
 	}
 
 	intersects(bounds) {
@@ -30,7 +30,7 @@ class Bounds {
 			value * signs[direction] > bounds.getOpposite(direction) * signs[direction]);
 	}
 
-	oppositeDirection(direction) {
+	static oppositeDirection(direction) {
 		switch (direction) {
 			case Direction.LEFT:
 				return Direction.RIGHT;
@@ -41,10 +41,6 @@ class Bounds {
 			case Direction.BOTTOM:
 				return Direction.TOP;
 		}
-	}
-
-	copy(bound) {
-		return new Bounds(...this.values);
 	}
 }
 
