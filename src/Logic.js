@@ -81,3 +81,14 @@ module.exports = Logic;
 // resources
 // crafting
 // skill leveling
+
+// todo ordered
+// line draws (e.g. laser) to consider camera
+// account for camera for muse input
+// consider player position for camera location
+// allow locking on targets
+// use graphics for monster
+// add 2 mob types (moving shotgun + stationary far / near turret)
+// add larger map
+// add map background
+// particles
