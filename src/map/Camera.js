@@ -1,10 +1,14 @@
 class Camera {
 	constructor() {
-		this.move(0, 0);
+		this.move(.5, .5);
 		this.zoom(1);
 	}
 
-	move(x, y) {
+	move(center, adjustment) {
+		const ADJUSTMENT_WEIGHT = .5;
+		let x = center.x + (adjustment.x - .5) * ADJUSTMENT_WEIGHT;
+		let y = center.y + (adjustment.y - .5) * ADJUSTMENT_WEIGHT;
+
 		if (this.x === x && this.y === y)
 			return;
 		this.x = x;
