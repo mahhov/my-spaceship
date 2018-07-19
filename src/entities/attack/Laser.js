@@ -26,8 +26,8 @@ class Projectile extends Entity {
 		return true;
 	}
 
-	paint(painter) {
-		painter.add(new Line(this.x, this.y, this.x + this.moveX, this.y + this.moveY));
+	paint(painter, camera) {
+		painter.add(Line.withCamera(camera, this.x, this.y, this.x + this.moveX, this.y + this.moveY));
 	}
 }
 

@@ -10,6 +10,10 @@ class Line extends PainterElement {
 		this.color = color;
 	}
 
+	static withCamera(camera, x, y, x2, y2, color) {
+		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), color);
+	}
+
 	paint(xt, yt, context) {
 		context.strokeStyle = this.color || '#000';
 		context.beginPath();

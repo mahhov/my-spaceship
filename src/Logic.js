@@ -83,7 +83,6 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// line draws (e.g. laser) to consider camera
 // account for camera for muse input
 // consider player position for camera location
 // allow locking on targets
