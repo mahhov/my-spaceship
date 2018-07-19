@@ -31,4 +31,6 @@ const sin = theta => Math.sin(theta);
 
 const booleanArray = array => array.some(a => a);
 
-module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray};
+const avg = (a, b, weight = .5) => a * weight + b * (1 - weight);
+
+module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg};
