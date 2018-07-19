@@ -1,23 +1,21 @@
+const {avg} = require('../util/Number');
+
 class Camera {
 	constructor() {
-		this.move(.5, .5);
+		this.x = .5;
+		this.y = .5;
 		this.zoom(1);
 	}
 
 	move(center, adjustment) {
-		const ADJUSTMENT_WEIGHT = .5;
+		const ADJUSTMENT_WEIGHT = .5, FILTER_WEIGHT = .93;
 		let x = center.x + (adjustment.x - .5) * ADJUSTMENT_WEIGHT;
 		let y = center.y + (adjustment.y - .5) * ADJUSTMENT_WEIGHT;
-
-		if (this.x === x && this.y === y)
-			return;
-		this.x = x;
-		this.y = y;
+		this.x = avg(this.x, x, FILTER_WEIGHT);
+		this.y = avg(this.y, y, FILTER_WEIGHT);
 	}
 
 	zoom(z) {
-		if (this.z === z)
-			return;
 		this.z = z;
 		this.s = 1 / this.z;
 	}

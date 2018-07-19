@@ -83,7 +83,6 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// filtered camera movement
 // allow locking on targets
 // use graphics for monster
 // add 2 mob types (moving shotgun + stationary far / near turret)
