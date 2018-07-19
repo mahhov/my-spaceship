@@ -12,10 +12,10 @@ class Controller {
 		this.transformedMouse = {};
 
 		document.addEventListener('keydown', event =>
-			!event.repeat && this.handleKeyPress(event.key));
+			!event.repeat && this.handleKeyPress(event.key.toLowerCase()));
 
 		document.addEventListener('keyup', event =>
-			this.handleKeyRelease(event.key));
+			this.handleKeyRelease(event.key.toLowerCase()));
 
 		document.addEventListener('mousemove', event =>
 			this.handleMouseMove(event.x - mouseTarget.offsetLeft, event.y - mouseTarget.offsetTop));
@@ -62,10 +62,10 @@ class Controller {
 
 	expire() {
 		Object.entries(this.keys)
-			.forEach(([key, value]) => this.keys[key] = this.expireKey(value));
+			.forEach(([key, value]) => this.keys[key] = Controller.expireKey(value));
 	}
 
-	expireKey(key) {
+	static expireKey(key) {
 		switch (key) {
 			case KeyStates.RELEASED:
 				return KeyStates.UP;
