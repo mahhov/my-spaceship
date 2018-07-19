@@ -29,6 +29,14 @@ class Camera {
 	st(s) {
 		return s * this.s;
 	}
+
+	xit(x) {
+		return this.x + (x - .5) * this.z;
+	}
+
+	yit(y) {
+		return this.y + (y - .5) * this.z;
+	}
 }
 
 module.exports = Camera;

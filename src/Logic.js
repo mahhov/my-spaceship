@@ -41,8 +41,9 @@ class Logic {
 	}
 
 	update() {
-		let m = this.controller.getMouse();
+		let m = this.controller.getRawMouse();
 		this.camera.move(m.x, m.y);
+		this.controller.inverseTransformMouse(this.camera);
 
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.update(this, this.intersectionFinder, this.player);
@@ -83,8 +84,8 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// account for camera for muse input
 // consider player position for camera location
+// filtered camera movement
 // allow locking on targets
 // use graphics for monster
 // add 2 mob types (moving shotgun + stationary far / near turret)

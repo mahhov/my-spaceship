@@ -9,6 +9,7 @@ class Controller {
 
 		this.keys = {};
 		this.mouse = {x: .5, y: .5};
+		this.transformedMouse = {};
 
 		document.addEventListener('keydown', event =>
 			!event.repeat && this.handleKeyPress(event.key));
@@ -46,8 +47,17 @@ class Controller {
 		return this.keys[key] || KeyStates.UP;
 	}
 
-	getMouse() {
+	getRawMouse() {
 		return this.mouse;
+	}
+
+	inverseTransformMouse(inverseTransformer) {
+		this.transformedMouse.x = inverseTransformer.xit(this.mouse.x);
+		this.transformedMouse.y = inverseTransformer.yit(this.mouse.y);
+	}
+
+	getMouse() {
+		return this.transformedMouse;
 	}
 
 	expire() {
