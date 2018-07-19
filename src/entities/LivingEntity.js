@@ -23,10 +23,6 @@ class LivingEntity extends Entity {
 		this.currentHealth = clamp(this.currentHealth + amount, 0, this.health);
 	}
 
-	getSpeed() {
-		return this.speed;
-	}
-
 	paint(painter, camera) {
 		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, this.color.get(), true));
 	}
