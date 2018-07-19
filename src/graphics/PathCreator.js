@@ -14,6 +14,11 @@ class PathCreator {
 		this.pathPoints = [];
 	}
 
+	setCamera(camera) {
+		this.camera = camera;
+		this.pathChanged = true; // todo remove pathChanged caching or make it smarter about camera changes, otherwise it's useless as is
+	}
+
 	setColor(color) {
 		this.color = color;
 	}
@@ -73,7 +78,7 @@ class PathCreator {
 			y *= this.sy;
 			let pathX = this.cx + this.fx * y - this.fy * x;
 			let pathY = this.cy + this.fy * y + this.fx * x;
-			this.pathPoints.push([pathX, pathY]);
+			this.pathPoints.push([this.camera.xt(pathX), this.camera.yt(pathY)]);
 		});
 		this.pathChanged = false;
 	}

@@ -89,8 +89,8 @@ class Player extends LivingEntity {
 		this.recentDamage.add(-amount);
 	}
 
-	paint(painter) {
-		this.ship.paint(painter, this.x, this.y, this.moveDirection);
+	paint(painter, camera) {
+		this.ship.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}
 
 	paintUi(painter) {

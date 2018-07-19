@@ -7,8 +7,8 @@ class Rock extends Entity {
 		super(x, y, width, height, IntersectionFinderLayers.PASSIVE);
 	}
 
-	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.width, this.height));
+	paint(painter, camera) {
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height));
 	}
 }
 

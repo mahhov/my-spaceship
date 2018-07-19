@@ -9,7 +9,8 @@ class Graphics {
 		points.forEach(point => this.pathCreator.moveTo(...point));
 	}
 
-	paint(painter, x, y, moveDirection) {
+	paint(painter, camera, x, y, moveDirection) {
+		this.pathCreator.setCamera(camera);
 		this.pathCreator.setTranslation(x, y);
 		if (booleanArray(moveDirection))
 			this.pathCreator.setForward(...moveDirection);

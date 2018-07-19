@@ -27,8 +27,8 @@ class LivingEntity extends Entity {
 		return this.speed;
 	}
 
-	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.width, this.height, this.color.get(), true));
+	paint(painter, camera) {
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, this.color.get(), true));
 	}
 }
 

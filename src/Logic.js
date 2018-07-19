@@ -1,5 +1,6 @@
 const {Keymapping} = require('./Keymapping');
 const {IntersectionFinder} = require('./intersection/IntersectionFinder');
+const Camera = require('./map/Camera');
 const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
@@ -11,6 +12,7 @@ class Logic {
 		this.painter = painter;
 		this.keymapping = new Keymapping();
 		this.intersectionFinder = new IntersectionFinder();
+		this.camera = new Camera();
 
 		this.rocks = [];
 		for (let i = 0; i < 5; i++) {
@@ -39,6 +41,9 @@ class Logic {
 	}
 
 	update() {
+		let m = this.controller.getMouse();
+		this.camera.move(m.x, m.y);
+
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monster.update(this, this.intersectionFinder, this.player);
 		this.projectiles.forEach((projectile, item) => {
@@ -51,10 +56,10 @@ class Logic {
 
 	paint() {
 		this.rocks.forEach(rock =>
-			rock.paint(this.painter));
-		this.player.paint(this.painter);
-		this.monster.paint(this.painter);
-		this.projectiles.forEach(projectile => projectile.paint(this.painter));
+			rock.paint(this.painter, this.camera));
+		this.player.paint(this.painter, this.camera);
+		this.monster.paint(this.painter, this.camera);
+		this.projectiles.forEach(projectile => projectile.paint(this.painter, this.camera));
 
 		this.player.paintUi(this.painter);
 		this.monster.paintUi(this.painter);

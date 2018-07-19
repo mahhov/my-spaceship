@@ -31,8 +31,8 @@ class Projectile extends Entity {
 		// todo check expire and do damage when collided with
 	}
 
-	paint(painter) {
-		painter.add(new RectC(this.x, this.y, this.width, this.height));
+	paint(painter, camera) {
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height));
 	}
 }
 
