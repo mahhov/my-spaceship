@@ -61,8 +61,8 @@ class Logic {
 		this.monster.paint(this.painter, this.camera);
 		this.projectiles.forEach(projectile => projectile.paint(this.painter, this.camera));
 
-		this.player.paintUi(this.painter);
-		this.monster.paintUi(this.painter);
+		this.player.paintUi(this.painter, this.camera);
+		this.monster.paintUi(this.painter, this.camera);
 	}
 }
 
@@ -83,7 +83,6 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// indicator for target locking
 // use graphics for monster
 // add 2 mob types (moving shotgun + stationary far / near turret)
 // add larger map

@@ -10,8 +10,11 @@ const VShip = require('../graphics/VShip');
 const {Keys} = require('../Keymapping');
 const {Bounds} = require('../intersection/Bounds');
 const {UiCs, UiPs} = require('../UiConstants');
+const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
+
+const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
 	constructor(x, y) {
@@ -81,10 +84,10 @@ class Player extends LivingEntity {
 	}
 
 	targetLockControl(logic, controller, keymapping, intersectionFinder) {
-		const CLICK_HSIZE = .02;
-
 		if (!keymapping.isPressed(controller, Keys.TARGET_LOCK))
 			return;
+
+		// todo bug , seems to allow repeat twice
 
 		if (this.targetLock) {
 			console.log('unlocked'); // todo remove when locking complete
@@ -92,7 +95,12 @@ class Player extends LivingEntity {
 		}
 
 		let mouse = controller.getMouse();
-		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, new Bounds(mouse.x - CLICK_HSIZE, mouse.y - CLICK_HSIZE, mouse.x + CLICK_HSIZE, mouse.y + CLICK_HSIZE));
+		let targetLockBounds = new Bounds(
+			mouse.x - TARGET_LOCK_BORDER_SIZE / 2,
+			mouse.y - TARGET_LOCK_BORDER_SIZE / 2,
+			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
+			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
+		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, targetLockBounds);
 		if (this.targetLock)
 			console.log('locked', this.targetLock); // todo remove when locking complete
 		else
@@ -116,13 +124,23 @@ class Player extends LivingEntity {
 		this.ship.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}
 
-	paintUi(painter) {
+	paintUi(painter, camera) {
+		// target lock
+		if (this.targetLock)
+			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
+				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
+				Color.from1(0, 0, 0).get(), false));
+		// todo use target ui thicker rect
+
+		// life & stamina bar
 		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
 		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.getShade(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.getShade()));
 		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.currentHealth, UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 
-		this.abilities.forEach(ability => ability.paintUi(painter));
+		// abilities
+		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
+		// damage overlay
 		let damageColor = UiCs.DAMAGE_COLOR.getShade(254 * (1 - this.recentDamage.get()));
 		painter.add(new Rect(0, 0, 1, 1, damageColor, true));
 	}

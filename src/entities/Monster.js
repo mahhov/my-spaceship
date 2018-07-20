@@ -59,7 +59,7 @@ class Monster extends LivingEntity {
 			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0, .3).get(), true));
 	}
 
-	paintUi(painter) {
+	paintUi(painter, camera) {
 		painter.add(new Bar(
 			UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.currentHealth,
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));

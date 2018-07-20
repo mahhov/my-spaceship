@@ -31,7 +31,7 @@ class Ability {
 		this.repeating && this.repeating--;
 	}
 
-	paintUi(painter) {
+	paintUi(painter, camera) {
 		// background
 		const SIZE_WITH_MARGIN = UiPs.ABILITY_SIZE + UiPs.MARGIN;
 		const LEFT = UiPs.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
