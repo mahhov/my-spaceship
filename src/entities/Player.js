@@ -87,11 +87,9 @@ class Player extends LivingEntity {
 		if (!keymapping.isPressed(controller, Keys.TARGET_LOCK))
 			return;
 
-		// todo bug , seems to allow repeat twice
-
 		if (this.targetLock) {
-			console.log('unlocked'); // todo remove when locking complete
 			this.targetLock = null;
+			return;
 		}
 
 		let mouse = controller.getMouse();
@@ -101,10 +99,6 @@ class Player extends LivingEntity {
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, targetLockBounds);
-		if (this.targetLock)
-			console.log('locked', this.targetLock); // todo remove when locking complete
-		else
-			console.log('no lock target found'); // todo remove when locking complete
 	}
 
 	sufficientStamina(amount) {
