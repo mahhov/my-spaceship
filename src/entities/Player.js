@@ -74,7 +74,7 @@ class Player extends LivingEntity {
 			.forEach((ability, index) => {
 				ability.refresh();
 				if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
-					ability.safeActivate(this.x, this.y, directX, directY, logic, intersectionFinder, this);
+					ability.safeActivate(this, direct, logic, intersectionFinder, this);
 			});
 	}
 

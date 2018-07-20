@@ -11,16 +11,16 @@ class Ability {
 		this.paintUiColor = paintUiColor;
 	}
 
-	safeActivate(originX, originY, directX, directY, logic, intersectionFinder, player) {
+	safeActivate(origin, direct, logic, intersectionFinder, player) {
 		if (this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating))
-			if (this.activate(originX, originY, directX, directY, logic, intersectionFinder, player)) {
+			if (this.activate(origin, direct, logic, intersectionFinder, player)) {
 				this.charges--;
 				player.consumeStamina(this.stamina);
 			}
 		this.repeating = 2;
 	}
 
-	activate(originX, originY, directX, directY, logic) {
+	activate(origin, direct, logic, intersectionFinder, player) {
 	}
 
 	refresh() {
