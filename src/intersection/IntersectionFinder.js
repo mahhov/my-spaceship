@@ -1,7 +1,7 @@
 const makeEnum = require('../util/Enum');
 const LinkedList = require('../util/LinkedList');
 const {EPSILON, maxWhich, setMagnitude} = require('../util/Number');
-const {Direction} = require('./Bounds');
+const {Direction, Bounds} = require('./Bounds');
 
 const IntersectionFinderLayers = makeEnum(
 	'PASSIVE',              // intersects with everything
@@ -49,6 +49,12 @@ class IntersectionFinder {
 
 	removeBounds(layer, item) {
 		return this.boundsGroups[layer].remove(item);
+	}
+
+	hasIntersection(layer, bounds) {
+		let item = this.boundsGroups[layer].find(({bounds: iBounds}) =>
+			iBounds.intersects(bounds));
+		return item && item.value.reference;
 	}
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {
@@ -125,7 +131,7 @@ class IntersectionFinder {
 	static getDelta(direction, d, bounds, iBounds, far) {
 		if (d) {
 			if (far)
-				direction = bounds.oppositeDirection(direction);
+				direction = Bounds.oppositeDirection(direction);
 			return (iBounds.getOpposite(direction) - bounds.get(direction)) / d;
 		}
 

@@ -8,6 +8,7 @@ const Heal = require('../abilities/Heal');
 const Decay = require('../util/Decay');
 const VShip = require('../graphics/VShip');
 const {Keys} = require('../Keymapping');
+const {Bounds} = require('../intersection/Bounds');
 const {UiCs, UiPs} = require('../UiConstants');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
@@ -28,6 +29,7 @@ class Player extends LivingEntity {
 		this.refresh();
 		this.moveControl(controller, keymapping, intersectionFinder);
 		this.abilityControl(logic, controller, keymapping, intersectionFinder);
+		this.targetLockControl(logic, controller, keymapping, intersectionFinder);
 	}
 
 	refresh() {
@@ -74,6 +76,23 @@ class Player extends LivingEntity {
 				if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
 					ability.safeActivate(this.x, this.y, directX, directY, logic, intersectionFinder, this);
 			});
+	}
+
+	targetLockControl(logic, controller, keymapping, intersectionFinder) {
+		if (!keymapping.isActive(controller, Keys.TARGET_LOCK))
+			return;
+
+		if (this.targetLock) {
+			console.log('unlocked'); // todo remove when locking complete
+			this.targetLock = null;
+		}
+
+		let mouse = controller.getMouse();
+		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, new Bounds(mouse.x, mouse.y));
+		if (this.targetLock)
+			console.log('locked', this.targetLock); // todo remove when locking complete
+		else
+			console.log('no lock target found'); // todo remove when locking complete
 	}
 
 	sufficientStamina(amount) {

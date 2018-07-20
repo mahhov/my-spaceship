@@ -8,7 +8,7 @@ class Bounds {
 			this.set(...leftTopRightBottom);
 	}
 
-	set(left, top, right, bottom) {
+	set(left, top, right = left, bottom = top) {
 		this.values = [];
 		this.values[Direction.LEFT] = left;
 		this.values[Direction.TOP] = top;

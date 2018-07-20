@@ -25,6 +25,15 @@ class LinkedList {
 			iter = iter.next;
 		}
 	}
+
+	find(handler) {
+		let iter = this.head;
+		while (iter) {
+			if (handler(iter.value, iter))
+				return iter;
+			iter = iter.next;
+		}
+	}
 }
 
 module.exports = LinkedList;
