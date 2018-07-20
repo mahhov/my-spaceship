@@ -81,6 +81,8 @@ class Player extends LivingEntity {
 	}
 
 	targetLockControl(logic, controller, keymapping, intersectionFinder) {
+		const CLICK_HSIZE = .02;
+
 		if (!keymapping.isActive(controller, Keys.TARGET_LOCK))
 			return;
 
@@ -90,7 +92,7 @@ class Player extends LivingEntity {
 		}
 
 		let mouse = controller.getMouse();
-		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, new Bounds(mouse.x, mouse.y));
+		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, new Bounds(mouse.x - CLICK_HSIZE, mouse.y - CLICK_HSIZE, mouse.x + CLICK_HSIZE, mouse.y + CLICK_HSIZE));
 		if (this.targetLock)
 			console.log('locked', this.targetLock); // todo remove when locking complete
 		else
