@@ -83,7 +83,7 @@ class Player extends LivingEntity {
 	targetLockControl(logic, controller, keymapping, intersectionFinder) {
 		const CLICK_HSIZE = .02;
 
-		if (!keymapping.isActive(controller, Keys.TARGET_LOCK))
+		if (!keymapping.isPressed(controller, Keys.TARGET_LOCK))
 			return;
 
 		if (this.targetLock) {

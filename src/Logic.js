@@ -83,7 +83,7 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// allow locking on targets (prevent repeat lock/unlcok)
+// indicator for target locking
 // use graphics for monster
 // add 2 mob types (moving shotgun + stationary far / near turret)
 // add larger map

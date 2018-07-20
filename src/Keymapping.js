@@ -50,6 +50,10 @@ class Keymapping {
 		let state = controller.getKeyState(this.getKey(control));
 		return state === KeyStates.PRESSED || state === KeyStates.DOWN;
 	}
+
+	isPressed(controller, control) {
+		return controller.getKeyState(this.getKey(control)) === KeyStates.PRESSED;
+	}
 }
 
 module.exports = {Keymapping, Keys};
