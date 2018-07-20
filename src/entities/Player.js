@@ -66,9 +66,11 @@ class Player extends LivingEntity {
 	}
 
 	abilityControl(logic, controller, keymapping, intersectionFinder) {
-		let mouse = controller.getMouse();
-		let directX = mouse.x - this.x;
-		let directY = mouse.y - this.y;
+		let directTarget = this.targetLock || controller.getMouse();
+		let direct = {
+			x: directTarget.x - this.x,
+			y: directTarget.y - this.y
+		};
 
 		this.abilities
 			.forEach((ability, index) => {
