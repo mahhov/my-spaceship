@@ -8,6 +8,8 @@ const {UiCs, UiPs} = require('../../UiConstants');
 const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
 
+const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 2, PROJECTILE_PHASE = 3;
+
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true));
@@ -28,9 +30,9 @@ class Boss1 extends Monster {
 		this.attackPhase.sequentialTick();
 		this.enragePhase.tick();
 
-		if (this.attackPhase.get() === 1)
+		if (this.attackPhase.get() === DEGEN_PHASE)
 			this.distanceDegen(logic, intersectionFinder, player);
-		else if (this.attackPhase.get() === 2)
+		else if (this.attackPhase.get() === PROJECTILE_PHASE)
 			this.projecitlePhase(logic, intersectionFinder, player);
 	}
 
@@ -57,9 +59,9 @@ class Boss1 extends Monster {
 	paint(painter, camera) {
 		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
 
-		if (this.attackPhase.get() === 0)
+		if (this.attackPhase.get() === PRE_DEGEN_PHASE)
 			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {color: Color.from1(1, 0, 0).get()}));
-		else if (this.attackPhase.get() === 1)
+		else if (this.attackPhase.get() === DEGEN_PHASE)
 			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
 	}
 

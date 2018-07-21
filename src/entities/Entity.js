@@ -43,6 +43,9 @@ class Entity {
 
 	changeHealth(amount) {
 	}
+
+	paint(painter, camera) {
+	}
 }
 
 
