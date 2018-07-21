@@ -123,8 +123,7 @@ class Player extends LivingEntity {
 		if (this.targetLock)
 			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
-				{color: Color.from1(0, 0, 0).get()}));
-		// todo use target ui thicker rect
+				{color: Color.from1(.5, .5, .5).get(), thickness: 3}));
 
 		// life & stamina bar
 		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
