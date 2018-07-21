@@ -2,9 +2,11 @@ const PathCreator = require('./PathCreator');
 const {booleanArray} = require('../util/Number');
 
 class Graphics {
-	constructor(color, width, height, points) {
+	constructor(width, height, points, {fill, color, thickness} = {}) {
 		this.pathCreator = new PathCreator();
+		this.pathCreator.setFill(fill);
 		this.pathCreator.setColor(color);
+		this.pathCreator.setThickness(thickness);
 		this.pathCreator.setScale(width, height, Graphics.calculateScale(points));
 		points.forEach(point => this.pathCreator.moveTo(...point));
 	}

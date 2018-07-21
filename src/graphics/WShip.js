@@ -10,8 +10,8 @@ const POINTS = [
 	[-1, .5]];
 
 class WShip extends Graphics {
-	constructor(color, width, height) {
-		super(color, width, height, POINTS);
+	constructor(width, height, {fill, color, thickness} = {}) {
+		super(width, height, POINTS, {fill, color, thickness});
 	}
 }
 

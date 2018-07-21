@@ -25,7 +25,7 @@ class Player extends LivingEntity {
 
 		this.recentDamage = new Decay(.1, .001);
 
-		this.ship = new VShip(this.color, this.width, this.height);
+		this.ship = new VShip(this.width, this.height, {color: this.color});
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {

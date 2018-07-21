@@ -19,8 +19,16 @@ class PathCreator {
 		this.pathChanged = true; // todo remove pathChanged caching or make it smarter about camera changes, otherwise it's useless as is
 	}
 
+	setFill(fill) {
+		this.fill = fill;
+	}
+
 	setColor(color) {
 		this.color = color;
+	}
+
+	setThickness(thickness) {
+		this.thickness = thickness;
 	}
 
 	setTranslation(x, y) {
@@ -67,7 +75,7 @@ class PathCreator {
 	create() {
 		if (this.pathChanged)
 			this.computePathPoints();
-		return new Path(this.pathPoints, {color: this.color.get(), thickness: 3});
+		return new Path(this.pathPoints, {fill: this.fill, color: this.color, thickness: this.thickness});
 	}
 
 	computePathPoints() {

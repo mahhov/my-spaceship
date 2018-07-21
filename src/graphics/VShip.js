@@ -7,8 +7,8 @@ const POINTS = [
 	[-1, -1 / 2]]; // left
 
 class VShip extends Graphics {
-	constructor(color, width, height) {
-		super(color, width, height, POINTS);
+	constructor(width, height, {fill, color, thickness} = {}) {
+		super(width, height, POINTS, {fill, color, thickness});
 	}
 }
 

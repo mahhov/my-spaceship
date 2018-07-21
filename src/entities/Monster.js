@@ -8,13 +8,18 @@ const {UiCs, UiPs} = require('../UiConstants');
 const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 
+const WShip = require('../graphics/WShip');
+
 class Monster extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true), IntersectionFinderLayers.HOSTILE_UNIT);
+
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
 		this.degenRange = .33;
+
+		this.ship = new WShip(this.width, this.height, {color: this.color});
 	}
 
 	isEnraged() {
@@ -53,6 +58,8 @@ class Monster extends LivingEntity {
 
 	paint(painter, camera) {
 		super.paint(painter, camera);
+		// this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
+
 		if (this.attackPhase.get() === 0)
 			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {color: Color.from1(1, 0, 0).get()}));
 		else if (this.attackPhase.get() === 1)
