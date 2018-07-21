@@ -18,14 +18,14 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .05, .05, .005, Color.fromHex(0x0, 0x0, 0x0, true), IntersectionFinderLayers.FRIENDLY_UNIT);
+		super(x, y, .05, .05, .005, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinderLayers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
 		this.recentDamage = new Decay(.1, .001);
 
-		this.ship = new VShip(this.width, this.height, {color: this.color});
+		this.ship = new VShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	update(logic, controller, keymapping, intersectionFinder) {

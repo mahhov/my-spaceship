@@ -19,7 +19,7 @@ class Monster extends LivingEntity {
 		this.enragePhase.setPhase(0);
 		this.degenRange = .33;
 
-		this.ship = new WShip(this.width, this.height, {color: this.color});
+		this.ship = new WShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	isEnraged() {
@@ -57,8 +57,7 @@ class Monster extends LivingEntity {
 	}
 
 	paint(painter, camera) {
-		super.paint(painter, camera);
-		// this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
+		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
 
 		if (this.attackPhase.get() === 0)
 			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {color: Color.from1(1, 0, 0).get()}));
