@@ -4,6 +4,7 @@ const Camera = require('./map/Camera');
 const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
+const Turret = require('./entities/monsters/Turret');
 const Boss1 = require('./entities/monsters/Boss1');
 
 class Logic {
@@ -26,6 +27,13 @@ class Logic {
 		this.player = new Player(.5, .5);
 		this.player.addIntersectionBounds(this.intersectionFinder);
 
+		this.monsters = [];
+		for (let i = 0; i < 5; i++) {
+			let monster = new Turret(Math.random(), Math.random());
+			this.monsters.push(monster);
+			monster.addIntersectionBounds(this.intersectionFinder);
+		}
+
 		this.boss1 = new Boss1(.5, .25);
 		this.boss1.addIntersectionBounds(this.intersectionFinder);
 	}
@@ -45,6 +53,12 @@ class Logic {
 		this.controller.inverseTransformMouse(this.camera);
 
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
+		this.monsters.forEach((monster, item) => {
+			if (monster.update(this, this.intersectionFinder, this.player)) {
+				this.monstes.remove(item);
+				monster.removeIntersectionBounds(this.intersectionFinder);
+			}
+		});
 		this.boss1.update(this, this.intersectionFinder, this.player);
 		this.projectiles.forEach((projectile, item) => {
 			if (projectile.update(this.intersectionFinder)) {
@@ -55,9 +69,9 @@ class Logic {
 	}
 
 	paint() {
-		this.rocks.forEach(rock =>
-			rock.paint(this.painter, this.camera));
+		this.rocks.forEach(rock => rock.paint(this.painter, this.camera));
 		this.player.paint(this.painter, this.camera);
+		this.monsters.forEach(monster => monster.paint(this.painter, this.camera));
 		this.boss1.paint(this.painter, this.camera);
 		this.projectiles.forEach(projectile => projectile.paint(this.painter, this.camera));
 
@@ -83,7 +97,7 @@ module.exports = Logic;
 // skill leveling
 
 // todo ordered
-// add 2 mob types (moving shotgun + stationary far / near turret)
+// add 2 mob types (moving shotgun + stationary far / near turret) (see todo list in Turret.js)
 // add larger map
 // add map background
 // particles
