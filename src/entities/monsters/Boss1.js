@@ -9,16 +9,14 @@ const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
 
 const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 2, PROJECTILE_PHASE = 3;
+const DEGEN_RANGE = .33;
 
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true));
-
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
-		this.degenRange = .33;
-
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
@@ -38,7 +36,7 @@ class Boss1 extends Monster {
 
 	distanceDegen(logic, intersectionFinder, player) {
 		let playerDistance = getRectDistance(player.x - this.x, player.y - this.y);
-		if (playerDistance < this.degenRange)
+		if (playerDistance < DEGEN_RANGE)
 			player.changeHealth(-.002 * (this.isEnraged() * 4 + 1));
 	}
 
@@ -60,9 +58,9 @@ class Boss1 extends Monster {
 		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
 
 		if (this.attackPhase.get() === PRE_DEGEN_PHASE)
-			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {color: Color.from1(1, 0, 0).get()}));
+			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {color: Color.from1(1, 0, 0).get()}));
 		else if (this.attackPhase.get() === DEGEN_PHASE)
-			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
+			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
 	}
 
 	paintUi(painter, camera) {
