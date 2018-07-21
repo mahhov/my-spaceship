@@ -2,13 +2,12 @@ const LivingEntity = require('./LivingEntity');
 const Color = require('../util/Color');
 const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
 const Phase = require('../util/Phase');
+const StarShip = require('../graphics/StarShip');
 const {getRectDistance, getMagnitude, setMagnitude, thetaToUnitVector} = require('../util/Number');
 const Projectile = require('./attack/Projectile');
 const {UiCs, UiPs} = require('../UiConstants');
 const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
-
-const WShip = require('../graphics/WShip');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {
@@ -19,7 +18,7 @@ class Monster extends LivingEntity {
 		this.enragePhase.setPhase(0);
 		this.degenRange = .33;
 
-		this.ship = new WShip(this.width, this.height, {fill: true, color: this.color.get()});
+		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	isEnraged() {
