@@ -67,7 +67,7 @@ class PathCreator {
 	create() {
 		if (this.pathChanged)
 			this.computePathPoints();
-		return new Path(this.pathPoints, this.color.get());
+		return new Path(this.pathPoints, {color: this.color.get(), thickness: 3});
 	}
 
 	computePathPoints() {

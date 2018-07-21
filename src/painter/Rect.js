@@ -1,14 +1,15 @@
 const PainterElement = require('./PainterElement');
 
 class Rect extends PainterElement {
-	constructor(x, y, width, height, color, fill) {
+	constructor(x, y, width, height, {fill, color = '#000', thickness = 1} = {}) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.color = color;
 		this.fill = fill;
+		this.color = color;
+		this.thickness = thickness;
 	}
 
 	paint(xt, yt, context) {
@@ -18,10 +19,10 @@ class Rect extends PainterElement {
 		let tHeight = xt(this.height);
 
 		if (this.fill) {
-			context.fillStyle = this.color || '#000';
+			this.setFillMode(context);
 			context.fillRect(tx, ty, tWidth, tHeight);
 		} else {
-			context.strokeStyle = this.color || '#000';
+			this.setLineMode(context);
 			context.strokeRect(tx, ty, tWidth, tHeight);
 		}
 	}

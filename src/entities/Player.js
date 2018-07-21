@@ -123,7 +123,7 @@ class Player extends LivingEntity {
 		if (this.targetLock)
 			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
-				Color.from1(0, 0, 0).get(), false));
+				{color: Color.from1(0, 0, 0).get()}));
 		// todo use target ui thicker rect
 
 		// life & stamina bar
@@ -136,7 +136,7 @@ class Player extends LivingEntity {
 
 		// damage overlay
 		let damageColor = UiCs.DAMAGE_COLOR.getShade(254 * (1 - this.recentDamage.get()));
-		painter.add(new Rect(0, 0, 1, 1, damageColor, true));
+		painter.add(new Rect(0, 0, 1, 1, {fill: true, color: damageColor}));
 	}
 }
 

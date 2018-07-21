@@ -54,9 +54,9 @@ class Monster extends LivingEntity {
 	paint(painter, camera) {
 		super.paint(painter, camera);
 		if (this.attackPhase.get() === 0)
-			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0).get(), false));
+			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {color: Color.from1(1, 0, 0).get()}));
 		else if (this.attackPhase.get() === 1)
-			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, Color.from1(1, 0, 0, .3).get(), true));
+			painter.add(RectC.withCamera(camera, this.x, this.y, this.degenRange * 2, this.degenRange * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
 	}
 
 	paintUi(painter, camera) {

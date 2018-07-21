@@ -35,17 +35,17 @@ class Ability {
 		// background
 		const SIZE_WITH_MARGIN = UiPs.ABILITY_SIZE + UiPs.MARGIN;
 		const LEFT = UiPs.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, this.paintUiColor.getShade(), true));
+		painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, {fill: true, color: this.paintUiColor.getShade()}));
 
 		// foreground for current charges
 		const ROW_HEIGHT = UiPs.ABILITY_SIZE / this.maxCharges;
 		const HEIGHT = this.charges * ROW_HEIGHT;
-		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, this.paintUiColor.get(), true));
+		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, {fill: true, color: this.paintUiColor.get()}));
 
 		// hybrid for current cooldown
 		if (this.cooldown < this.maxCooldown) {
 			let shade = 1 - (this.maxCooldown - this.cooldown) / this.maxCooldown;
-			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, this.paintUiColor.getShade(shade), true));
+			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.paintUiColor.getShade(shade)}));
 		}
 
 		// todo paint stamina sufficient or stamina cost
