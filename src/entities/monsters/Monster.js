@@ -1,13 +1,13 @@
-const LivingEntity = require('./LivingEntity');
-const Color = require('../util/Color');
-const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
-const Phase = require('../util/Phase');
-const StarShip = require('../graphics/StarShip');
-const {getRectDistance, getMagnitude, setMagnitude, thetaToUnitVector} = require('../util/Number');
-const Projectile = require('./attack/Projectile');
-const {UiCs, UiPs} = require('../UiConstants');
-const RectC = require('../painter/RectC');
-const Bar = require('../painter/Bar');
+const LivingEntity = require('../LivingEntity');
+const Color = require('../../util/Color');
+const {IntersectionFinderLayers} = require('../../intersection/IntersectionFinder');
+const Phase = require('../../util/Phase');
+const StarShip = require('../../graphics/StarShip');
+const {getRectDistance, getMagnitude, setMagnitude, thetaToUnitVector} = require('../../util/Number');
+const Projectile = require('../attack/Projectile');
+const {UiCs, UiPs} = require('../../UiConstants');
+const RectC = require('../../painter/RectC');
+const Bar = require('../../painter/Bar');
 
 class Monster extends LivingEntity {
 	constructor(x, y) {

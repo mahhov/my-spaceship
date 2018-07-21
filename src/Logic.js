@@ -4,7 +4,7 @@ const Camera = require('./map/Camera');
 const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
-const Monster = require('./entities/Monster');
+const Monster = require('./entities/monsters/Monster');
 
 class Logic {
 	constructor(controller, painter) {
