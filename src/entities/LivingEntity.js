@@ -7,7 +7,7 @@ class LivingEntity extends Entity {
 	constructor(x, y, width, height, speed, color, layer) {
 		super(x, y, width, height, layer);
 		this.speed = speed;
-		this.currentHealth = this.health = 1;
+		this.currentHealth = this.health = 1; // todo rename to maxHealth and health
 		this.color = color;
 	}
 

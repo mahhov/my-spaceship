@@ -5,7 +5,7 @@ const StarShip = require('../../graphics/StarShip');
 const {getRectDistance} = require('../../util/Number');
 const {UiCs, UiPs} = require('../../UiConstants'); // todo remove if not used
 const RectC = require('../../painter/RectC');
-const Bar = require('../../painter/Bar'); // todo remove if not used
+const BarC = require('../../painter/BarC'); // todo remove if not used
 
 const REST_PHASE = 0, ATTACK_PHASE = 1;
 const DEGEN_RANGE = .4;
@@ -37,6 +37,9 @@ class Turret extends Monster {
 			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {color: Color.from1(1, 0, 0).get()}));
 		else if (this.attackPhase.get() === ATTACK_PHASE)
 			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
+
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.currentHealth,
+			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 	}
 }
 
@@ -44,7 +47,6 @@ module.exports = Turret;
 
 
 // todo
-// make degen turret
 // customizable health
 // offset phasing
 // make shotgun warrior
