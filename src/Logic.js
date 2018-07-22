@@ -27,10 +27,10 @@ class Logic {
 		this.player = new Player(.5, .5);
 		this.player.addIntersectionBounds(this.intersectionFinder);
 
-		this.monsters = [];
+		this.monsters = new LinkedList();
 		for (let i = 0; i < 5; i++) {
 			let monster = new Turret(Math.random(), Math.random());
-			this.monsters.push(monster);
+			this.monsters.add(monster);
 			monster.addIntersectionBounds(this.intersectionFinder);
 		}
 
@@ -55,7 +55,7 @@ class Logic {
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monsters.forEach((monster, item) => {
 			if (monster.update(this, this.intersectionFinder, this.player)) {
-				this.monstes.remove(item);
+				this.monsters.remove(item);
 				monster.removeIntersectionBounds(this.intersectionFinder);
 			}
 		});
@@ -101,3 +101,5 @@ module.exports = Logic;
 // add larger map
 // add map background
 // particles
+// refactor health, stamina, cooldown to share utility. maybe converge with decay and phase as well
+// refactor coordinate system to support coordintaes, centered coordintaes, and camera coordintaes to replace current constructor overloading
