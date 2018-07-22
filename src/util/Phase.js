@@ -1,3 +1,5 @@
+const {randInt} = require('./Number');
+
 class Phase {
 	// durations should be > 0
 	constructor(...durations) {
@@ -7,6 +9,11 @@ class Phase {
 	setPhase(phase) {
 		this.phase = phase;
 		this.duration = this.durations[phase];
+	}
+
+	setPhaseWithRandomTick(phase) {
+		this.phase = phase;
+		this.duration = randInt(this.durations[phase]);
 	}
 
 	nextPhase() {
