@@ -7,20 +7,20 @@ class LivingEntity extends Entity {
 	constructor(x, y, width, height, speed, color, layer) {
 		super(x, y, width, height, layer);
 		this.speed = speed;
-		this.currentHealth = this.health = 1; // todo rename to maxHealth and health
+		this.health = this.maxHealth = 1;
 		this.color = color;
 	}
 
 	isFullHealth() {
-		return this.currentHealth === 1;
+		return this.health === 1;
 	}
 
 	isEmptyHealth() {
-		return !this.currentHealth;
+		return !this.health;
 	}
 
 	changeHealth(amount) {
-		this.currentHealth = clamp(this.currentHealth + amount, 0, this.health);
+		this.health = clamp(this.health + amount, 0, this.maxHealth);
 	}
 
 	paint(painter, camera) {

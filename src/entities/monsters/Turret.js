@@ -38,7 +38,7 @@ class Turret extends Monster {
 		else if (this.attackPhase.get() === ATTACK_PHASE)
 			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
 
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.currentHealth,
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.health,
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 	}
 }
