@@ -18,7 +18,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .05, .05, .005, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinderLayers.FRIENDLY_UNIT);
+		super(x, y, .05, .05, .005, 1, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinderLayers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
@@ -128,7 +128,7 @@ class Player extends LivingEntity {
 		// life & stamina bar
 		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
 		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.getShade(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.getShade()));
-		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.health, UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
+		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.getHealthRatio(), UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));

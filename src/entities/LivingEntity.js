@@ -4,15 +4,19 @@ const RectC = require('../painter/RectC');
 const {UiCs} = require('../UiConstants');
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, speed, color, layer) {
+	constructor(x, y, width, height, speed, health, color, layer) {
 		super(x, y, width, height, layer);
 		this.speed = speed;
-		this.health = this.maxHealth = 1;
+		this.health = this.maxHealth = health;
 		this.color = color;
 	}
 
+	getHealthRatio() {
+		return this.health / this.maxHealth;
+	}
+
 	isFullHealth() {
-		return this.health === 1;
+		return this.health === this.maxHealth;
 	}
 
 	isEmptyHealth() {

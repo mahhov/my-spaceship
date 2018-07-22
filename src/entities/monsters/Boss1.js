@@ -13,7 +13,7 @@ const DEGEN_RANGE = .33;
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, .004, 1, Color.fromHex(0x9, 0x0, 0x4, true));
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
@@ -65,7 +65,7 @@ class Boss1 extends Monster {
 
 	paintUi(painter, camera) {
 		painter.add(new Bar(
-			UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.health,
+			UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.getHealthRatio(),
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 		painter.add(new Bar(
 			UiPs.MARGIN, UiPs.MARGIN * 2.5, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT * .5, this.enragePhase.getRatio(),

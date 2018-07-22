@@ -12,12 +12,15 @@ const DEGEN_RANGE = .4;
 
 class Turret extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .004, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, .004, .04, Color.fromHex(0x9, 0x0, 0x4, true));
 		this.attackPhase = new Phase(200, 200);
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	update(logic, intersectionFinder, player) {
+		if (this.isEmptyHealth()) // todo refactor to isExpired, to make it reusuable for all monsters & projectiles without duplicating this code
+			return true;
+
 		this.attackPhase.sequentialTick();
 
 		if (this.attackPhase.get() === ATTACK_PHASE)
@@ -38,16 +41,14 @@ class Turret extends Monster {
 		else if (this.attackPhase.get() === ATTACK_PHASE)
 			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
 
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.health,
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.getHealthRatio(),
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 	}
 }
 
 module.exports = Turret;
 
-
 // todo
-// customizable health
 // offset phasing
 // make shotgun warrior
 // modularize monster
