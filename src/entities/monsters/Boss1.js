@@ -1,6 +1,7 @@
 const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
+const NearbyDegen = require('../module/NearbyDegen');
 const StarShip = require('../../graphics/StarShip');
 const {getRectDistance, getMagnitude, setMagnitude, thetaToUnitVector} = require('../../util/Number');
 const Projectile = require('../attack/Projectile');
@@ -9,7 +10,6 @@ const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
 
 const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;
-const DEGEN_RANGE = .33;
 
 class Boss1 extends Monster {
 	constructor(x, y) {
@@ -17,6 +17,11 @@ class Boss1 extends Monster {
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
+
+		let nearbyDegen = new NearbyDegen(.33, .002, this); // todo *5 when enraged
+		nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
+		this.modules = [nearbyDegen];
+
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
@@ -28,19 +33,16 @@ class Boss1 extends Monster {
 		this.attackPhase.sequentialTick();
 		this.enragePhase.tick();
 
-		if (this.attackPhase.get() === DEGEN_PHASE)
-			this.distanceDegen(logic, intersectionFinder, player);
-		else if (this.attackPhase.get() === PROJECTILE_PHASE)
-			this.projecitlePhase(logic, intersectionFinder, player);
+		this.modules.forEach(module => {
+			module.setStage(this.attackPhase.get());
+			module.apply(logic, intersectionFinder, player);
+		});
+
+		if (this.attackPhase.get() === PROJECTILE_PHASE)
+			this.projectilePhase(logic, intersectionFinder, player);
 	}
 
-	distanceDegen(logic, intersectionFinder, player) {
-		let playerDistance = getRectDistance(player.x - this.x, player.y - this.y);
-		if (playerDistance < DEGEN_RANGE)
-			player.changeHealth(-.002 * (this.isEnraged() * 4 + 1));
-	}
-
-	projecitlePhase(logic, intersectionFinder, player) {
+	projectilePhase(logic, intersectionFinder, player) {
 		if (!this.isEnraged() && Math.random() > .1)
 			return;
 
@@ -57,10 +59,8 @@ class Boss1 extends Monster {
 	paint(painter, camera) {
 		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
 
-		if (this.attackPhase.get() === PRE_DEGEN_PHASE)
-			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {color: Color.from1(1, 0, 0).get()}));
-		else if (this.attackPhase.get() === DEGEN_PHASE)
-			painter.add(RectC.withCamera(camera, this.x, this.y, DEGEN_RANGE * 2, DEGEN_RANGE * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));
+		this.modules.forEach(module =>
+			module.paint(painter, camera));
 	}
 
 	paintUi(painter, camera) {
