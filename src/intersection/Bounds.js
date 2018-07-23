@@ -44,4 +44,6 @@ class Bounds {
 	}
 }
 
-module.exports = {Bounds, Directions};
+Bounds.Directions = Directions;
+
+module.exports = Bounds;

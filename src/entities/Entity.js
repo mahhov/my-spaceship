@@ -1,4 +1,4 @@
-const {Bounds} = require('../intersection/Bounds');
+const Bounds = require('../intersection/Bounds');
 
 class Entity {
 	constructor(x, y, width, height, layer) {
