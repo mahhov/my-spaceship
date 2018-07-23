@@ -30,4 +30,6 @@ class NearbyDegen extends AttackModule {
 	}
 }
 
-module.exports = {Stages, NearbyDegen}; // todo see if we can set stages on nearbydegen class directly
+NearbyDegen.Stages = Stages;
+
+module.exports = NearbyDegen;

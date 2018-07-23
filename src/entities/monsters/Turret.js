@@ -1,11 +1,10 @@
 const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
+const NearbyDegen = require('../attackmodule/NearbyDegen');
 const StarShip = require('../../graphics/StarShip');
 const {UiCs} = require('../../UiConstants');
 const BarC = require('../../painter/BarC');
-
-const {Stages, NearbyDegen} = require('../attackmodule/NearbyDegen');
 
 const REST_PHASE = 0, ATTACK_PHASE = 1;
 
@@ -16,7 +15,7 @@ class Turret extends Monster {
 		this.attackPhase.setPhaseWithRandomTick(0);
 
 		let nearbyDegen = new NearbyDegen(.4, .001, this);
-		nearbyDegen.setStagesMapping({[REST_PHASE]: Stages.PRE, [ATTACK_PHASE]: Stages.ACTIVE});
+		nearbyDegen.setStagesMapping({[REST_PHASE]: NearbyDegen.Stages.PRE, [ATTACK_PHASE]: NearbyDegen.Stages.ACTIVE});
 		this.modules = [nearbyDegen]; // todo add modules system to all monst entities
 
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
