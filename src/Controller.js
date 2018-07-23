@@ -77,4 +77,6 @@ class Controller {
 	}
 }
 
-module.exports = {Controller, KeyStates};
+Controller.KeyStates = KeyStates;
+
+module.exports = Controller;

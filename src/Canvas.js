@@ -1,4 +1,4 @@
-const {Controller} = require('./Controller');
+const Controller = require('./Controller');
 const Painter = require('./painter/Painter');
 const Logic = require('./Logic');
 const Color = require('./util/Color');
