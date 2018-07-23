@@ -1,6 +1,6 @@
 const makeEnum = require('../util/Enum');
 
-const Direction = makeEnum('LEFT', 'TOP', 'RIGHT', 'BOTTOM');
+const Directions = makeEnum('LEFT', 'TOP', 'RIGHT', 'BOTTOM');
 
 class Bounds {
 	constructor(...leftTopRightBottom) {
@@ -10,10 +10,10 @@ class Bounds {
 
 	set(left, top, right = left, bottom = top) {
 		this.values = [];
-		this.values[Direction.LEFT] = left;
-		this.values[Direction.TOP] = top;
-		this.values[Direction.RIGHT] = right;
-		this.values[Direction.BOTTOM] = bottom;
+		this.values[Directions.LEFT] = left;
+		this.values[Directions.TOP] = top;
+		this.values[Directions.RIGHT] = right;
+		this.values[Directions.BOTTOM] = bottom;
 	}
 
 	get(direction) {
@@ -32,16 +32,16 @@ class Bounds {
 
 	static oppositeDirection(direction) {
 		switch (direction) {
-			case Direction.LEFT:
-				return Direction.RIGHT;
-			case Direction.TOP:
-				return Direction.BOTTOM;
-			case Direction.RIGHT:
-				return Direction.LEFT;
-			case Direction.BOTTOM:
-				return Direction.TOP;
+			case Directions.LEFT:
+				return Directions.RIGHT;
+			case Directions.TOP:
+				return Directions.BOTTOM;
+			case Directions.RIGHT:
+				return Directions.LEFT;
+			case Directions.BOTTOM:
+				return Directions.TOP;
 		}
 	}
 }
 
-module.exports = {Bounds, Direction};
+module.exports = {Bounds, Directions};
