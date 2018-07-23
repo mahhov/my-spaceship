@@ -3,6 +3,9 @@ class AttackModule {
 		this.stage = 0;
 	}
 
+	config() {
+	}
+
 	setStagesMapping(stagesMaps) {
 		this.stagesMap = stagesMaps;
 	}

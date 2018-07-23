@@ -18,9 +18,10 @@ class Boss1 extends Monster {
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
 
-		let nearbyDegen = new NearbyDegen(.33, .002, this); // todo *5 when enraged
-		nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
-		this.modules = [nearbyDegen];
+		this.nearbyDegen = new NearbyDegen();
+		this.nearbyDegen.config(.33, .002, this);
+		this.nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
+		this.modules = [this.nearbyDegen];
 
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
@@ -33,8 +34,11 @@ class Boss1 extends Monster {
 		this.attackPhase.sequentialTick();
 		this.enragePhase.tick();
 
+		if (this.isEnraged())
+			this.nearbyDegen.config(.33, .01, this); // todo can we avoid doing this every iteration
+
 		this.modules.forEach(module => {
-			module.setStage(this.attackPhase.get());
+			module.setStage(this.attackPhase.get()); // todo can we avoid doing this every iteration
 			module.apply(logic, intersectionFinder, player);
 		});
 

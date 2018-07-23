@@ -14,7 +14,8 @@ class Turret extends Monster {
 		this.attackPhase = new Phase(200, 200);
 		this.attackPhase.setPhaseWithRandomTick(0);
 
-		let nearbyDegen = new NearbyDegen(.4, .001, this);
+		let nearbyDegen = new NearbyDegen();
+		nearbyDegen.config(.4, .001, this);
 		nearbyDegen.setStagesMapping({[REST_PHASE]: NearbyDegen.Stages.PRE, [ATTACK_PHASE]: NearbyDegen.Stages.ACTIVE});
 		this.modules = [nearbyDegen]; // todo add modules system to all monst entities
 

@@ -7,8 +7,7 @@ const RectC = require('../../painter/RectC');
 const Stages = makeEnum('PRE', 'ACTIVE', 'INACTIVE');
 
 class NearbyDegen extends AttackModule {
-	constructor(range, damage, origin) {
-		super();
+	config(range, damage, origin) {
 		this.range = range;
 		this.damage = damage;
 		this.origin = origin;
