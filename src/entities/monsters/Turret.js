@@ -15,28 +15,22 @@ class Turret extends Monster {
 		this.attackPhase.setPhaseWithRandomTick(0);
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.config(.4, .001, this);
 		nearbyDegen.setStagesMapping({[REST_PHASE]: NearbyDegen.Stages.PRE, [ATTACK_PHASE]: NearbyDegen.Stages.ACTIVE});
-		this.modules = [nearbyDegen]; // todo add modules system to all monst entities
+		nearbyDegen.config(.4, .001, this);
+		this.addModule(nearbyDegen);
 
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	update(logic, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
-			this.modules.forEach(module =>
-				module.setStage(this.attackPhase.get()));
-
-		this.modules.forEach(module =>
-			module.apply(logic, intersectionFinder, player));
+			this.modulesSetStage(this.attackPhase.get());
+		this.modulesApply(logic, intersectionFinder, player);
 	}
 
 	paint(painter, camera) {
 		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
-
-		this.modules.forEach(module =>
-			module.paint(painter, camera));
-
+		this.modulesPaint(painter, camera);
 		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.getHealthRatio(),
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 	}

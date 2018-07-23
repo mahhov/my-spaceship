@@ -19,9 +19,9 @@ class Boss1 extends Monster {
 		this.enragePhase.setPhase(0);
 
 		this.nearbyDegen = new NearbyDegen();
-		this.nearbyDegen.config(.33, .002, this);
 		this.nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
-		this.modules = [this.nearbyDegen];
+		this.nearbyDegen.config(.33, .002, this);
+		this.addModule(this.nearbyDegen);
 
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
@@ -32,14 +32,12 @@ class Boss1 extends Monster {
 
 	update(logic, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
-			this.modules.forEach(module =>
-				module.setStage(this.attackPhase.get()));
+			this.modulesSetStage(this.attackPhase.get());
 
 		if (this.enragePhase.tick())
 			this.nearbyDegen.config(.33, .01, this);
 
-		this.modules.forEach(module =>
-			module.apply(logic, intersectionFinder, player));
+		this.modulesApply(logic, intersectionFinder, player);
 
 		if (this.attackPhase.get() === PROJECTILE_PHASE)
 			this.projectilePhase(logic, intersectionFinder, player);
@@ -62,8 +60,7 @@ class Boss1 extends Monster {
 	paint(painter, camera) {
 		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
 
-		this.modules.forEach(module =>
-			module.paint(painter, camera));
+		this.modulesPaint(painter, camera);
 	}
 
 	paintUi(painter, camera) {
