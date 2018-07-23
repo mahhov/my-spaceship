@@ -1,11 +1,11 @@
 const Entity = require('../Entity');
-const {IntersectionFinderLayers} = require('../../intersection/IntersectionFinder');
+const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const Line = require('../../painter/Line');
 
 class Projectile extends Entity {
 	constructor(x, y, dx, dy, time, damage, friendly) {
 		const THICKNESS = .001;
-		let layer = friendly ? IntersectionFinderLayers.FRIENDLY_PROJECTILE : IntersectionFinderLayers.HOSTILE_PROJECTILE;
+		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
 		super(x, y, THICKNESS, THICKNESS, layer);
 		this.dx = dx;
 		this.dy = dy;

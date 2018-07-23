@@ -3,7 +3,7 @@ const LinkedList = require('../util/LinkedList');
 const {EPSILON, maxWhich, setMagnitude} = require('../util/Number');
 const Bounds = require('./Bounds');
 
-const IntersectionFinderLayers = makeEnum(
+const Layers = makeEnum(
 	'PASSIVE',              // intersects with everything
 	'FRIENDLY_PROJECTILE',  // intersects with hostile units and passives
 	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
@@ -12,26 +12,26 @@ const IntersectionFinderLayers = makeEnum(
 
 class IntersectionFinder {
 	constructor() {
-		this.collisions = Object.keys(IntersectionFinderLayers).map(() => []);
-		this.boundsGroups = Object.keys(IntersectionFinderLayers).map(() => new LinkedList());
+		this.collisions = Object.keys(Layers).map(() => []);
+		this.boundsGroups = Object.keys(Layers).map(() => new LinkedList());
 
 		this.initCollisions();
 	}
 
 	initCollisions() {
 		// passives intersect with everything
-		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_UNIT);
-		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_PROJECTILE);
-		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.FRIENDLY_UNIT);
-		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.HOSTILE_PROJECTILE);
-		this.addCollision(IntersectionFinderLayers.PASSIVE, IntersectionFinderLayers.HOSTILE_UNIT);
+		this.addCollision(Layers.PASSIVE, Layers.FRIENDLY_UNIT);
+		this.addCollision(Layers.PASSIVE, Layers.FRIENDLY_PROJECTILE);
+		this.addCollision(Layers.PASSIVE, Layers.FRIENDLY_UNIT);
+		this.addCollision(Layers.PASSIVE, Layers.HOSTILE_PROJECTILE);
+		this.addCollision(Layers.PASSIVE, Layers.HOSTILE_UNIT);
 
 		// friendly projectiles intersect with hostile units and passives
-		this.addCollision(IntersectionFinderLayers.FRIENDLY_PROJECTILE, IntersectionFinderLayers.HOSTILE_UNIT);
+		this.addCollision(Layers.FRIENDLY_PROJECTILE, Layers.HOSTILE_UNIT);
 
 		// friendly units intersect with hostile units, hostile projectiles, and passives
-		this.addCollision(IntersectionFinderLayers.FRIENDLY_UNIT, IntersectionFinderLayers.HOSTILE_UNIT);
-		this.addCollision(IntersectionFinderLayers.FRIENDLY_UNIT, IntersectionFinderLayers.HOSTILE_PROJECTILE);
+		this.addCollision(Layers.FRIENDLY_UNIT, Layers.HOSTILE_UNIT);
+		this.addCollision(Layers.FRIENDLY_UNIT, Layers.HOSTILE_PROJECTILE);
 
 		// hostile projectiles intersect with friendly units and passives
 
@@ -140,6 +140,8 @@ class IntersectionFinder {
 	}
 }
 
-module.exports = {IntersectionFinder, IntersectionFinderLayers};
+IntersectionFinder.Layers = Layers;
+
+module.exports = IntersectionFinder;
 
 // todo support rectangular mobile (rotating)entities

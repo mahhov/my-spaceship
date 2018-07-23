@@ -1,6 +1,6 @@
 const LivingEntity = require('./LivingEntity');
 const Color = require('../util/Color');
-const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
+const IntersectionFinder = require('../intersection/IntersectionFinder');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
 const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
@@ -18,7 +18,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .05, .05, .005, 1, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinderLayers.FRIENDLY_UNIT);
+		super(x, y, .05, .05, .005, 1, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinder.Layers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
@@ -98,7 +98,7 @@ class Player extends LivingEntity {
 			mouse.y - TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
-		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinderLayers.HOSTILE_UNIT, targetLockBounds);
+		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
 	}
 
 	sufficientStamina(amount) {

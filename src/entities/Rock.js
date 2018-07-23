@@ -1,10 +1,10 @@
 const Entity = require('./Entity');
-const {IntersectionFinderLayers} = require('../intersection/IntersectionFinder');
+const IntersectionFinder = require('../intersection/IntersectionFinder');
 const RectC = require('../painter/RectC');
 
 class Rock extends Entity {
 	constructor(x, y, width, height) {
-		super(x, y, width, height, IntersectionFinderLayers.PASSIVE);
+		super(x, y, width, height, IntersectionFinder.Layers.PASSIVE);
 	}
 
 	paint(painter, camera) {
