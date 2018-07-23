@@ -23,11 +23,12 @@ class Turret extends Monster {
 	}
 
 	update(logic, intersectionFinder, player) {
-		this.attackPhase.sequentialTick();
-		this.modules.forEach(module => {
-			module.setStage(this.attackPhase.get());
-			module.apply(logic, intersectionFinder, player);
-		});
+		if (this.attackPhase.sequentialTick())
+			this.modules.forEach(module =>
+				module.setStage(this.attackPhase.get()));
+
+		this.modules.forEach(module =>
+			module.apply(logic, intersectionFinder, player));
 	}
 
 	paint(painter, camera) {

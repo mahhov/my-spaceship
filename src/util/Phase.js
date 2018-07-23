@@ -14,7 +14,7 @@ class Phase {
 
 	setPhaseWithRandomTick(phase) {
 		this.phase = phase;
-		this.duration = randInt(this.durations[phase]);
+		this.duration = randInt(this.durations[phase]) + 1;
 	}
 
 	nextPhase() {
