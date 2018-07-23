@@ -29,10 +29,6 @@ class Boss1 extends Monster {
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
-	isEnraged() {
-		return this.enragePhase.isComplete();
-	}
-
 	update(logic, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
 			this.modulesSetStage(this.attackPhase.get());

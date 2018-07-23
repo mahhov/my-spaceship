@@ -42,10 +42,6 @@ class Phase {
 	getRatio() {
 		return 1 - this.duration / this.durations[this.phase];
 	}
-
-	isComplete() { // todo remove this, only leaving temporarily to support boss1 during it's transformation to modules
-		return this.duration === 0 || this.duration === this.durations[this.phase];
-	}
 }
 
 module.exports = Phase;

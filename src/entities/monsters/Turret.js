@@ -40,4 +40,3 @@ module.exports = Turret;
 
 // todo
 // make shotgun warrior
-// modularize monster
