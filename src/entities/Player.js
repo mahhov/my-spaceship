@@ -7,7 +7,7 @@ const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Decay = require('../util/Decay');
 const VShip = require('../graphics/VShip');
-const {Keys} = require('../Keymapping');
+const Keymapping = require('../Keymapping');
 const Bounds = require('../intersection/Bounds');
 const {UiCs, UiPs} = require('../UiConstants');
 const RectC = require('../painter/RectC');
@@ -43,10 +43,10 @@ class Player extends LivingEntity {
 	moveControl(controller, keymapping, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
-		let left = keymapping.isActive(controller, Keys.MOVE_LEFT);
-		let up = keymapping.isActive(controller, Keys.MOVE_UP);
-		let right = keymapping.isActive(controller, Keys.MOVE_RIGHT);
-		let down = keymapping.isActive(controller, Keys.MOVE_DOWN);
+		let left = keymapping.isActive(controller, Keymapping.Keys.MOVE_LEFT);
+		let up = keymapping.isActive(controller, Keymapping.Keys.MOVE_UP);
+		let right = keymapping.isActive(controller, Keymapping.Keys.MOVE_RIGHT);
+		let down = keymapping.isActive(controller, Keymapping.Keys.MOVE_DOWN);
 
 		let dx = 0, dy = 0;
 
@@ -78,13 +78,13 @@ class Player extends LivingEntity {
 		this.abilities
 			.forEach((ability, index) => {
 				ability.refresh();
-				if (keymapping.isActive(controller, Keys.ABILITY_I[index]))
+				if (keymapping.isActive(controller, Keymapping.Keys.ABILITY_I[index]))
 					ability.safeActivate(this, direct, logic, intersectionFinder, this);
 			});
 	}
 
 	targetLockControl(logic, controller, keymapping, intersectionFinder) {
-		if (!keymapping.isPressed(controller, Keys.TARGET_LOCK))
+		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
 			return;
 
 		if (this.targetLock) {

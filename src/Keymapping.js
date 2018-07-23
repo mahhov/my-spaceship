@@ -56,4 +56,6 @@ class Keymapping {
 	}
 }
 
-module.exports = {Keymapping, Keys};
+Keymapping.Keys = Keys;
+
+module.exports = Keymapping;

@@ -1,4 +1,4 @@
-const {Keymapping} = require('./Keymapping');
+const Keymapping = require('./Keymapping');
 const IntersectionFinder = require('./intersection/IntersectionFinder');
 const Camera = require('./map/Camera');
 const LinkedList = require('./util/LinkedList');
