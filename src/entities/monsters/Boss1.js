@@ -39,7 +39,7 @@ class Boss1 extends Monster {
 
 		if (this.enragePhase.tick()) {
 			this.nearbyDegen.config(.33, .01, this);
-			this.shotgun.config(1, 10, .015, .009, 100, .005, this);
+			this.shotgun.config(.1, 30, .018, .006, 100, .005, this);
 		}
 
 		this.modulesApply(logic, intersectionFinder, player);
