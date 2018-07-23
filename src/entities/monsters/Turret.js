@@ -22,9 +22,6 @@ class Turret extends Monster {
 	}
 
 	update(logic, intersectionFinder, player) {
-		if (this.isEmptyHealth()) // todo refactor to isExpired, to make it reusuable for all monsters & projectiles without duplicating this code
-			return true;
-
 		this.attackPhase.sequentialTick();
 		this.modules.forEach(module => {
 			module.setStage(this.attackPhase.get());

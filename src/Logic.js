@@ -54,10 +54,11 @@ class Logic {
 
 		this.player.update(this, this.controller, this.keymapping, this.intersectionFinder);
 		this.monsters.forEach((monster, item) => {
-			if (monster.update(this, this.intersectionFinder, this.player)) {
+			if (monster.isEmptyHealth()) {
 				this.monsters.remove(item);
 				monster.removeIntersectionBounds(this.intersectionFinder);
-			}
+			} else
+				monster.update(this, this.intersectionFinder, this.player);
 		});
 		this.boss1.update(this, this.intersectionFinder, this.player);
 		this.projectiles.forEach((projectile, item) => {
