@@ -31,16 +31,15 @@ class Boss1 extends Monster {
 	}
 
 	update(logic, intersectionFinder, player) {
-		this.attackPhase.sequentialTick();
-		this.enragePhase.tick();
+		if (this.attackPhase.sequentialTick())
+			this.modules.forEach(module =>
+				module.setStage(this.attackPhase.get()));
 
-		if (this.isEnraged())
-			this.nearbyDegen.config(.33, .01, this); // todo can we avoid doing this every iteration
+		if (this.enragePhase.tick())
+			this.nearbyDegen.config(.33, .01, this);
 
-		this.modules.forEach(module => {
-			module.setStage(this.attackPhase.get()); // todo can we avoid doing this every iteration
-			module.apply(logic, intersectionFinder, player);
-		});
+		this.modules.forEach(module =>
+			module.apply(logic, intersectionFinder, player));
 
 		if (this.attackPhase.get() === PROJECTILE_PHASE)
 			this.projectilePhase(logic, intersectionFinder, player);
