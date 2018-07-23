@@ -8,7 +8,7 @@ const {UiCs, UiPs} = require('../../UiConstants');
 const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
 
-const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 2, PROJECTILE_PHASE = 3;
+const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;
 const DEGEN_RANGE = .33;
 
 class Boss1 extends Monster {
