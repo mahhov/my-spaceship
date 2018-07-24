@@ -1,4 +1,5 @@
 const Bounds = require('../intersection/Bounds');
+const {setMagnitude} = require('../util/Number');
 
 class Entity {
 	constructor(x, y, width, height, layer) {
@@ -9,6 +10,7 @@ class Entity {
 		this.layer = layer;
 		this.bounds = new Bounds();
 		this.setBounds();
+		this.moveDirection = [0, 1];
 	}
 
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {
@@ -24,6 +26,8 @@ class Entity {
 	move(dx, dy) {
 		this.x += dx;
 		this.y += dy;
+		if (dx || dy)
+			this.moveDirection = setMagnitude(dx, dy);
 		this.setBounds();
 	}
 

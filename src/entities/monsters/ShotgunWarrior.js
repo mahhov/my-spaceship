@@ -28,7 +28,6 @@ class Turret extends Monster {
 		this.modulesSetStage(this.attackPhase.get());
 
 		this.ship = new WShip(this.width, this.height, {fill: true, color: this.color.get()});
-		// todo x ship orientation
 	}
 
 	update(logic, intersectionFinder, player) {
@@ -38,7 +37,7 @@ class Turret extends Monster {
 	}
 
 	paint(painter, camera) {
-		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
+		this.ship.paint(painter, camera, this.x, this.y, this.moveDirection);
 		this.modulesPaint(painter, camera);
 		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.getHealthRatio(),
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
