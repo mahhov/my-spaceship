@@ -4,9 +4,8 @@ const RectC = require('../painter/RectC');
 const {UiCs} = require('../UiConstants');
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, speed, health, color, layer) {
+	constructor(x, y, width, height, health, color, layer) {
 		super(x, y, width, height, layer);
-		this.speed = speed;
 		this.health = this.maxHealth = health;
 		this.color = color;
 	}

@@ -18,7 +18,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
 	constructor(x, y) {
-		super(x, y, .05, .05, .005, 1, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinder.Layers.FRIENDLY_UNIT);
+		super(x, y, .05, .05, 1, Color.fromHex(0xa, 0x6, 0x1, true), IntersectionFinder.Layers.FRIENDLY_UNIT);
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
@@ -65,7 +65,7 @@ class Player extends LivingEntity {
 		}
 
 		this.moveDirection = [dx, dy];
-		this.safeMove(intersectionFinder, dx, dy, this.speed);
+		this.safeMove(intersectionFinder, dx, dy, .005);
 	}
 
 	abilityControl(logic, controller, keymapping, intersectionFinder) {
