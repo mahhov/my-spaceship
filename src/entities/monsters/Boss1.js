@@ -26,6 +26,8 @@ class Boss1 extends Monster {
 		this.shotgun.config(.1, 10, .015, .003, 100, .005, this);
 		this.addModule(this.shotgun);
 
+		this.modulesSetStage(this.attackPhase.get());
+
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 

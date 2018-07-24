@@ -19,6 +19,8 @@ class Turret extends Monster {
 		nearbyDegen.config(.4, .001, this);
 		this.addModule(nearbyDegen);
 
+		this.modulesSetStage(this.attackPhase.get());
+
 		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
