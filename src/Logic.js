@@ -5,6 +5,7 @@ const LinkedList = require('./util/LinkedList');
 const Rock = require('./entities/Rock');
 const Player = require('./entities/Player');
 const Turret = require('./entities/monsters/Turret');
+const ShotgunWarrior = require('./entities/monsters/ShotgunWarrior');
 const Boss1 = require('./entities/monsters/Boss1');
 
 class Logic {
@@ -28,8 +29,15 @@ class Logic {
 		this.player.addIntersectionBounds(this.intersectionFinder);
 
 		this.monsters = new LinkedList();
+
 		for (let i = 0; i < 5; i++) {
 			let monster = new Turret(Math.random(), Math.random());
+			this.monsters.add(monster);
+			monster.addIntersectionBounds(this.intersectionFinder);
+		}
+
+		for (let i = 0; i < 5; i++) {
+			let monster = new ShotgunWarrior(Math.random(), Math.random());
 			this.monsters.add(monster);
 			monster.addIntersectionBounds(this.intersectionFinder);
 		}
