@@ -2,6 +2,7 @@ const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
 const Shotgun = require('../module/Shotgun');
+const Chase = require('../module/Chase');
 const WShip = require('../../graphics/WShip');
 const {UiCs} = require('../../UiConstants');
 const BarC = require('../../painter/BarC');
@@ -19,7 +20,10 @@ class Turret extends Monster {
 		shotgun.config(.1, 10, .015, .003, 100, .005, this); // todo tone down config
 		this.addModule(shotgun);
 
-		// todo move module
+		let chase = new Chase();
+		chase.setStagesMapping({[MOVE_PHASE]: Chase.Stages.ACTIVE, [ATTACK_PHASE]: Chase.Stages.INACTIVE});
+		chase.config(0, 100, .01, this);
+		this.addModule(chase);
 
 		this.modulesSetStage(this.attackPhase.get());
 

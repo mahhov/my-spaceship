@@ -39,6 +39,3 @@ class Turret extends Monster {
 }
 
 module.exports = Turret;
-
-// todo
-// make shotgun warrior
