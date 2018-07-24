@@ -11,7 +11,9 @@ const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 1, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, 1);
+		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Color.fromHex(0x9, 0x0, 0x4, true).get()}));
+
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
@@ -27,8 +29,6 @@ class Boss1 extends Monster {
 		this.addModule(this.shotgun);
 
 		this.modulesSetStage(this.attackPhase.get());
-
-		this.ship = new StarShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	update(logic, intersectionFinder, player) {
@@ -41,11 +41,6 @@ class Boss1 extends Monster {
 		}
 
 		this.modulesApply(logic, intersectionFinder, player);
-	}
-
-	paint(painter, camera) {
-		this.ship.paint(painter, camera, this.x, this.y, [0, 1]);
-		this.modulesPaint(painter, camera);
 	}
 
 	paintUi(painter, camera) {

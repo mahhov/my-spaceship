@@ -4,14 +4,14 @@ const Phase = require('../../util/Phase');
 const Shotgun = require('../module/Shotgun');
 const Chase = require('../module/Chase');
 const WShip = require('../../graphics/WShip');
-const {UiCs} = require('../../UiConstants');
-const BarC = require('../../painter/BarC');
 
 const MOVE_PHASE = 0, ATTACK_PHASE = 1;
 
-class Turret extends Monster {
+class ShotgunWarrior extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .04, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, .04);
+		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Color.fromHex(0x9, 0x0, 0x4, true).get()}));
+
 		this.attackPhase = new Phase(100, 100);
 		this.attackPhase.setRandomTick();
 
@@ -26,8 +26,6 @@ class Turret extends Monster {
 		this.addModule(chase);
 
 		this.modulesSetStage(this.attackPhase.get());
-
-		this.ship = new WShip(this.width, this.height, {fill: true, color: this.color.get()});
 	}
 
 	update(logic, intersectionFinder, player) {
@@ -35,16 +33,8 @@ class Turret extends Monster {
 			this.modulesSetStage(this.attackPhase.get());
 		this.modulesApply(logic, intersectionFinder, player);
 	}
-
-	paint(painter, camera) {
-		this.ship.paint(painter, camera, this.x, this.y, this.moveDirection);
-		this.modulesPaint(painter, camera);
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.getHealthRatio(),
-			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
-		// todo x extract health bar painting logic and share with other monsters
-	}
 }
 
-module.exports = Turret;
+module.exports = ShotgunWarrior;
 
 // todo x smart phasing, stop movement when in range, start movmeent when out of range

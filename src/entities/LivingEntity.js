@@ -4,10 +4,13 @@ const RectC = require('../painter/RectC');
 const {UiCs} = require('../UiConstants');
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, health, color, layer) {
+	constructor(x, y, width, height, health, layer) {
 		super(x, y, width, height, layer);
 		this.health = this.maxHealth = health;
-		this.color = color;
+	}
+
+	setGraphics(graphics) {
+		this.graphics = graphics;
 	}
 
 	getHealthRatio() {
@@ -27,7 +30,7 @@ class LivingEntity extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: this.color.get()}));
+		this.graphics.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}
 }
 

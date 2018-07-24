@@ -111,7 +111,6 @@ module.exports = Logic;
 // skill leveling
 
 // todo x ordered
-// add 2 mob types (moving shotgun + stationary far / near turret)
 // add larger map
 // add map background
 // particles
