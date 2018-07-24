@@ -1,4 +1,4 @@
-const makeEnum = require('./util/Enum');
+const makeEnum = require('../util/Enum');
 
 const KeyStates = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED');
 

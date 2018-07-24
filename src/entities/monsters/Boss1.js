@@ -4,7 +4,7 @@ const Phase = require('../../util/Phase');
 const NearbyDegen = require('../module/NearbyDegen');
 const Shotgun = require('../module/Shotgun');
 const StarShip = require('../../graphics/StarShip');
-const {UiCs, UiPs} = require('../../UiConstants');
+const {UiCs, UiPs} = require('../../util/UiConstants');
 const Bar = require('../../painter/Bar');
 
 const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;

@@ -1,9 +1,9 @@
-const Controller = require('./Controller');
-const Painter = require('./painter/Painter');
-const Logic = require('./Logic');
-const Color = require('./util/Color');
-const {thetaToUnitVector} = require('./util/Number');
-const TestShip = require('./graphics/WShip');
+const Controller = require('../control/Controller');
+const Painter = require('../painter/Painter');
+const Logic = require('../Logic');
+const Color = require('../util/Color');
+const {thetaToUnitVector} = require('../util/Number');
+const TestShip = require('../graphics/WShip');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));

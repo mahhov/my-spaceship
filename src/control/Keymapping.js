@@ -1,4 +1,4 @@
-const makeEnum = require('./util/Enum');
+const makeEnum = require('../util/Enum');
 const Controller = require('./Controller');
 
 const Keys = makeEnum(

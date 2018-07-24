@@ -1,6 +1,6 @@
 const LivingEntity = require('../LivingEntity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {UiCs} = require('../../UiConstants');
+const {UiCs} = require('../../util/UiConstants');
 const BarC = require('../../painter/BarC');
 
 class Monster extends LivingEntity {

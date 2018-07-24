@@ -1,4 +1,4 @@
-const Color = require('./util/Color');
+const Color = require('./Color');
 
 const Colors = {
 	LIFE_COLOR: Color.fromHexString('#FD5F63'),

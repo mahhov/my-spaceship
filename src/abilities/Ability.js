@@ -1,4 +1,4 @@
-const {UiCs, UiPs} = require('../UiConstants');
+const {UiCs, UiPs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
 
 class Ability {

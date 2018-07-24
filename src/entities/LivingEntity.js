@@ -1,7 +1,7 @@
 const Entity = require('./Entity');
 const {clamp} = require('../util/Number');
 const RectC = require('../painter/RectC');
-const {UiCs} = require('../UiConstants');
+const {UiCs} = require('../util/UiConstants');
 
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {

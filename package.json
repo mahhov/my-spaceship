@@ -4,8 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "[ -d build ] && rm -r build; cp -r src build; browserify --debug src/Canvas.js -o build/Canvas.js",
-    "dev": "nodemon --watch src -e html,js,css --exec npm run build & http-server ./build -o -a localhost -c-1"
+    "build": "[ -d build ] && rm -r build; cp -r src build; browserify --debug src/view/Canvas.js -o build/view/Canvas.js",
+    "dev": "nodemon --watch src -e html,js,css --exec npm run build & http-server ./build/view -o -a localhost -c-1"
   },
   "author": "",
   "license": "ISC",
