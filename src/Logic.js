@@ -8,6 +8,9 @@ const Turret = require('./entities/monsters/Turret');
 const ShotgunWarrior = require('./entities/monsters/ShotgunWarrior');
 const Boss1 = require('./entities/monsters/Boss1');
 
+const UI = true;
+const ROCKS = 5, TURRETS = 5, SHOTGUN_WARRIORS = 5;
+
 class Logic {
 	constructor(controller, painter) {
 		this.controller = controller;
@@ -17,7 +20,7 @@ class Logic {
 		this.camera = new Camera();
 
 		this.rocks = [];
-		for (let i = 0; i < 5; i++) {
+		for (let i = 0; i < ROCKS; i++) {
 			let rock = new Rock(Math.random(), Math.random(), Math.random() * .1, Math.random() * .1);
 			this.rocks.push(rock);
 			rock.addIntersectionBounds(this.intersectionFinder);
@@ -30,13 +33,13 @@ class Logic {
 
 		this.monsters = new LinkedList();
 
-		for (let i = 0; i < 5; i++) {
+		for (let i = 0; i < TURRETS; i++) {
 			let monster = new Turret(Math.random(), Math.random());
 			this.monsters.add(monster);
 			monster.addIntersectionBounds(this.intersectionFinder);
 		}
 
-		for (let i = 0; i < 5; i++) {
+		for (let i = 0; i < SHOTGUN_WARRIORS; i++) {
 			let monster = new ShotgunWarrior(Math.random(), Math.random());
 			this.monsters.add(monster);
 			monster.addIntersectionBounds(this.intersectionFinder);
@@ -84,8 +87,10 @@ class Logic {
 		this.boss1.paint(this.painter, this.camera);
 		this.projectiles.forEach(projectile => projectile.paint(this.painter, this.camera));
 
-		this.player.paintUi(this.painter, this.camera);
-		this.boss1.paintUi(this.painter, this.camera);
+		if (UI) {
+			this.player.paintUi(this.painter, this.camera);
+			this.boss1.paintUi(this.painter, this.camera);
+		}
 	}
 }
 
