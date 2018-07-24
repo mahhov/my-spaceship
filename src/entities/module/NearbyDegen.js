@@ -1,12 +1,12 @@
 const makeEnum = require('../../util/Enum');
-const AttackModule = require('./AttackModule');
+const Module = require('./Module');
 const {getRectDistance} = require('../../util/Number');
 const Color = require('../../util/Color');
 const RectC = require('../../painter/RectC');
 
 const Stages = makeEnum('PRE', 'ACTIVE', 'INACTIVE');
 
-class NearbyDegen extends AttackModule {
+class NearbyDegen extends Module {
 	config(range, damage, origin) {
 		this.range = range;
 		this.damage = damage;

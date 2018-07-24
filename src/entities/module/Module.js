@@ -1,4 +1,4 @@
-class AttackModule {
+class Module {
 	constructor() {
 		this.stage = 0;
 	}
@@ -21,4 +21,4 @@ class AttackModule {
 	}
 }
 
-module.exports = AttackModule;
+module.exports = Module;

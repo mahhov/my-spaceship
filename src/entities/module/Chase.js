@@ -1,10 +1,10 @@
 const makeEnum = require('../../util/Enum');
-const AttackModule = require('./AttackModule');
+const Module = require('./Module');
 const {getMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
-class Chase extends AttackModule { // todo rename attack module
+class Chase extends Module {
 	config(nearDistance, farDistance, speed, origin) {
 		this.nearDistance = nearDistance;
 		this.farDistance = farDistance;

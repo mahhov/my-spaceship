@@ -1,11 +1,11 @@
 const makeEnum = require('../../util/Enum');
-const AttackModule = require('./AttackModule');
+const Module = require('./Module');
 const {setMagnitude, thetaToUnitVector} = require('../../util/Number');
 const Projectile = require('../attack/Projectile');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
-class Shotgun extends AttackModule {
+class Shotgun extends Module {
 	config(rate, count, velocity, spread, duration, damage, origin) {
 		this.rate = rate;
 		this.count = count;
