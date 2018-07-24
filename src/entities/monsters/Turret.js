@@ -10,7 +10,7 @@ const REST_PHASE = 0, ATTACK_PHASE = 1;
 
 class Turret extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .004, .04, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, 0, .04, Color.fromHex(0x9, 0x0, 0x4, true));
 		this.attackPhase = new Phase(200, 200);
 		this.attackPhase.setRandomTick();
 

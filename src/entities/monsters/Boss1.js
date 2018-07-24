@@ -11,7 +11,7 @@ const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .004, 1, Color.fromHex(0x9, 0x0, 0x4, true));
+		super(x, y, .04, .04, 0, 1, Color.fromHex(0x9, 0x0, 0x4, true));
 		this.attackPhase = new Phase(100, 100, 200);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
