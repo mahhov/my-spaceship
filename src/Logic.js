@@ -110,6 +110,10 @@ module.exports = Logic;
 // crafting
 // skill leveling
 
+// todo other
+// chat
+// save
+
 // todo x ordered
 // add larger map
 // add map background
