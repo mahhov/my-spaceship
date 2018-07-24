@@ -17,7 +17,7 @@ class Turret extends Monster {
 
 		let shotgun = new Shotgun();
 		shotgun.setStagesMapping({[MOVE_PHASE]: Shotgun.Stages.INACTIVE, [ATTACK_PHASE]: Shotgun.Stages.ACTIVE});
-		shotgun.config(.1, 10, .015, .003, 100, .005, this); // todo tone down config
+		shotgun.config(.1, 10, .015, .003, 100, .005, this); // todo x tone down config
 		this.addModule(shotgun);
 
 		let chase = new Chase();
@@ -28,7 +28,7 @@ class Turret extends Monster {
 		this.modulesSetStage(this.attackPhase.get());
 
 		this.ship = new WShip(this.width, this.height, {fill: true, color: this.color.get()});
-		// todo ship orientation
+		// todo x ship orientation
 	}
 
 	update(logic, intersectionFinder, player) {
@@ -42,7 +42,7 @@ class Turret extends Monster {
 		this.modulesPaint(painter, camera);
 		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.getHealthRatio(),
 			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
-		// todo extract health bar painting logic and share with other monsters
+		// todo x extract health bar painting logic and share with other monsters
 	}
 }
 

@@ -110,8 +110,8 @@ module.exports = Logic;
 // crafting
 // skill leveling
 
-// todo ordered
-// add 2 mob types (moving shotgun + stationary far / near turret) (see todo list in Turret.js)
+// todo x ordered
+// add 2 mob types (moving shotgun + stationary far / near turret)
 // add larger map
 // add map background
 // particles
