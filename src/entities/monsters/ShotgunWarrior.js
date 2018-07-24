@@ -22,7 +22,7 @@ class Turret extends Monster {
 
 		let chase = new Chase();
 		chase.setStagesMapping({[MOVE_PHASE]: Chase.Stages.ACTIVE, [ATTACK_PHASE]: Chase.Stages.INACTIVE});
-		chase.config(0, 100, .01, this);
+		chase.config(.15, .55, .003, this);
 		this.addModule(chase);
 
 		this.modulesSetStage(this.attackPhase.get());
