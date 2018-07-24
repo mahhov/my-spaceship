@@ -12,12 +12,12 @@ const MOVE_PHASE = 0, ATTACK_PHASE = 1;
 class Turret extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .04, Color.fromHex(0x9, 0x0, 0x4, true));
-		this.attackPhase = new Phase(300, 300);
+		this.attackPhase = new Phase(100, 100);
 		this.attackPhase.setRandomTick();
 
 		let shotgun = new Shotgun();
 		shotgun.setStagesMapping({[MOVE_PHASE]: Shotgun.Stages.INACTIVE, [ATTACK_PHASE]: Shotgun.Stages.ACTIVE});
-		shotgun.config(.1, 10, .015, .003, 100, .005, this); // todo x tone down config
+		shotgun.config(.05, 3, .01, .003, 100, .005, this);
 		this.addModule(shotgun);
 
 		let chase = new Chase();
@@ -47,3 +47,5 @@ class Turret extends Monster {
 }
 
 module.exports = Turret;
+
+// todo x smart phasing, stop movement when in range, start movmeent when out of range
