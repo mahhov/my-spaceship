@@ -31,7 +31,7 @@ class Logic {
 	paint() {
 		this.map.paint(this.painter, this.camera);
 
-		if (UI) {
+		if (UI) { // todo x reenable paint ui support
 			this.player.paintUi(this.painter, this.camera);
 			this.boss1.paintUi(this.painter, this.camera);
 		}
