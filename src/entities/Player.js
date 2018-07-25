@@ -31,7 +31,7 @@ class Player extends LivingEntity {
 		this.refresh();
 		this.moveControl(controller, keymapping, intersectionFinder);
 		this.abilityControl(map, controller, keymapping, intersectionFinder);
-		this.targetLockControl(map, controller, keymapping, intersectionFinder);
+		this.targetLockControl(controller, keymapping, intersectionFinder);
 	}
 
 	refresh() {
@@ -81,7 +81,7 @@ class Player extends LivingEntity {
 			});
 	}
 
-	targetLockControl(map, controller, keymapping, intersectionFinder) { // todo x unnecesary params
+	targetLockControl(controller, keymapping, intersectionFinder) {
 		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
 			return;
 
