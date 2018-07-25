@@ -12,7 +12,7 @@ class Chase extends Module {
 		this.origin = origin;
 	}
 
-	apply(logic, intersectionFinder, target) {
+	apply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 

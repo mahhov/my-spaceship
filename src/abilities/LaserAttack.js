@@ -8,12 +8,12 @@ class LaserAttack extends Ability {
 		super(3, 15, .6, true, paintUiColumn, UiCs.BASIC_ATTACK_COLOR);
 	}
 
-	activate(origin, direct, logic, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, player) {
 		const RANGE = .15, SPREAD = .05, TIME = 10, DAMAGE = .001;
 		let [directX, directY] = setMagnitude(direct.x, direct.y, RANGE);
 		let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * RANGE * SPREAD);
 		let laser = new Laser(origin.x, origin.y, directX + rdx, directY + rdy, TIME, DAMAGE, true);
-		logic.addProjectile(laser);
+		map.addProjectile(laser);
 		return true;
 	}
 }

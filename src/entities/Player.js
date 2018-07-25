@@ -27,11 +27,11 @@ class Player extends LivingEntity {
 		this.recentDamage = new Decay(.1, .001);
 	}
 
-	update(logic, controller, keymapping, intersectionFinder) {
+	update(map, controller, keymapping, intersectionFinder) {
 		this.refresh();
 		this.moveControl(controller, keymapping, intersectionFinder);
-		this.abilityControl(logic, controller, keymapping, intersectionFinder);
-		this.targetLockControl(logic, controller, keymapping, intersectionFinder);
+		this.abilityControl(map, controller, keymapping, intersectionFinder);
+		this.targetLockControl(map, controller, keymapping, intersectionFinder);
 	}
 
 	refresh() {
@@ -66,7 +66,7 @@ class Player extends LivingEntity {
 		this.safeMove(intersectionFinder, dx, dy, .005);
 	}
 
-	abilityControl(logic, controller, keymapping, intersectionFinder) {
+	abilityControl(map, controller, keymapping, intersectionFinder) {
 		let directTarget = this.targetLock || controller.getMouse();
 		let direct = {
 			x: directTarget.x - this.x,
@@ -77,11 +77,11 @@ class Player extends LivingEntity {
 			.forEach((ability, index) => {
 				ability.refresh();
 				if (keymapping.isActive(controller, Keymapping.Keys.ABILITY_I[index]))
-					ability.safeActivate(this, direct, logic, intersectionFinder, this);
+					ability.safeActivate(this, direct, map, intersectionFinder, this);
 			});
 	}
 
-	targetLockControl(logic, controller, keymapping, intersectionFinder) {
+	targetLockControl(map, controller, keymapping, intersectionFinder) { // todo x unnecesary params
 		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
 			return;
 

@@ -7,7 +7,7 @@ class Dash extends Ability {
 		super(120, 3, 10, false, paintUiColumn, UiCs.DASH_COLOR);
 	}
 
-	activate(origin, direct, logic, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, player) {
 		if (!booleanArray(player.moveDirection))
 			return false;
 		player.safeMove(intersectionFinder, ...player.moveDirection, .1, true);

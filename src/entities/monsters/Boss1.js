@@ -31,7 +31,7 @@ class Boss1 extends Monster {
 		this.modulesSetStage(this.attackPhase.get());
 	}
 
-	update(logic, intersectionFinder, player) {
+	update(map, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
 			this.modulesSetStage(this.attackPhase.get());
 
@@ -40,7 +40,7 @@ class Boss1 extends Monster {
 			this.shotgun.config(.1, 30, .018, .006, 100, .005, this);
 		}
 
-		this.modulesApply(logic, intersectionFinder, player);
+		this.modulesApply(map, intersectionFinder, player);
 	}
 
 	paintUi(painter, camera) {

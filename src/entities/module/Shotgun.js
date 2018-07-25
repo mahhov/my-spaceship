@@ -16,7 +16,7 @@ class Shotgun extends Module {
 		this.origin = origin;
 	}
 
-	apply(logic, intersectionFinder, target) {
+	apply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE || Math.random() > this.rate)
 			return;
 
@@ -25,7 +25,7 @@ class Shotgun extends Module {
 			let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * this.spread);
 
 			let projectile = new Projectile(this.origin.x, this.origin.y, .01, .01, dx + rdx, dy + rdy, this.duration, this.damage, false);
-			logic.addProjectile(projectile);
+			map.addProjectile(projectile);
 		}
 	}
 }

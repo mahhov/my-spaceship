@@ -7,7 +7,7 @@ class Dash extends Ability {
 		super(720, 1, 30, false, paintUiColumn, UiCs.HEAL_COLOR);
 	}
 
-	activate(origin, direct, logic, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, player) {
 		if (player.isFullHealth())
 			return false;
 		player.changeHealth(.1);

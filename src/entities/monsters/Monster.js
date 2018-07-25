@@ -18,14 +18,17 @@ class Monster extends LivingEntity {
 			module.setStage(stage));
 	}
 
-	modulesApply(logic, intersectionFinder, player) {
+	modulesApply(map, intersectionFinder, player) {
 		this.modules.forEach(module =>
-			module.apply(logic, intersectionFinder, player));
+			module.apply(map, intersectionFinder, player));
 	}
 
 	modulesPaint(painter, camera) {
 		this.modules.forEach(module =>
 			module.paint(painter, camera));
+	}
+
+	update(map, intersectionFinder, player) {
 	}
 
 	paint(painter, camera) {

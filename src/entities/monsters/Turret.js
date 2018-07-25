@@ -22,10 +22,10 @@ class Turret extends Monster {
 		this.modulesSetStage(this.attackPhase.get());
 	}
 
-	update(logic, intersectionFinder, player) {
+	update(map, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
 			this.modulesSetStage(this.attackPhase.get());
-		this.modulesApply(logic, intersectionFinder, player);
+		this.modulesApply(map, intersectionFinder, player);
 	}
 }
 
