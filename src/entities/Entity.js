@@ -27,7 +27,7 @@ class Entity {
 		this.x += dx;
 		this.y += dy;
 		if (dx || dy)
-			this.moveDirection = setMagnitude(dx, dy);
+			[this.moveDirection[0], this.moveDirection[1]] = setMagnitude(dx, dy); // todo avoid ugly stuff like this by returning {x, y, magnitude} instead of [x, y, magnitude]
 		this.setBounds();
 	}
 
