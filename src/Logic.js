@@ -1,6 +1,8 @@
 const Keymapping = require('./control/Keymapping');
 const Camera = require('./camera/Camera');
 const Map = require('./map/Map');
+const Player = require('./entities/Player');
+const MapGenerator = require('./map/MapGenerator');
 
 const UI = false;
 
@@ -11,8 +13,8 @@ class Logic {
 		this.keymapping = new Keymapping();
 		this.camera = new Camera();
 		this.map = new Map();
-		this.map.populate(); // todo x map shouldn't be repsonsible for pouplating itself
-		this.player = this.map.getPlayer();
+		this.player = new Player(.5, .5);
+		MapGenerator.generateSample(this.map, this.player);
 	}
 
 	iterate() {

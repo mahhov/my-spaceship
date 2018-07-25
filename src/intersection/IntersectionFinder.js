@@ -145,3 +145,5 @@ IntersectionFinder.Layers = Layers;
 module.exports = IntersectionFinder;
 
 // todo support rectangular mobile (rotating)entities
+
+// todo x consider hotstile entities colliding with themselves
