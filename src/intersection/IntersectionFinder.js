@@ -8,7 +8,7 @@ const Layers = makeEnum(
 	'FRIENDLY_PROJECTILE',  // intersects with hostile units and passives
 	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
 	'HOSTILE_PROJECTILE',   // intersects with friendly units and passives
-	'HOSTILE_UNIT');        // intersects with friendly units, friendly projectiles, and passives
+	'HOSTILE_UNIT');        // intersects with friendly units, hostile units, friendly projectiles, and passives
 
 class IntersectionFinder {
 	constructor() {
@@ -35,7 +35,8 @@ class IntersectionFinder {
 
 		// hostile projectiles intersect with friendly units and passives
 
-		// hostile uints intersects with friendly units, friendly projectiles, and passives
+		// hostile uints intersects with friendly units, hostile units, friendly projectiles, and passives
+		this.addCollision(Layers.HOSTILE_UNIT, Layers.HOSTILE_UNIT);
 	}
 
 	addCollision(layer1, layer2) {
@@ -104,6 +105,8 @@ class IntersectionFinder {
 
 		this.collisions[layer].forEach((_, iLayer) =>
 			this.boundsGroups[iLayer].forEach(({bounds: iBounds, reference}) => {
+				if (iBounds === bounds)
+					return;
 				let iIntersection = IntersectionFinder.checkMoveEntityIntersection(bounds, dx, dy, intersection.move, horizontal, vertical, iBounds);
 				if (iIntersection)
 					intersection = {...iIntersection, reference};
@@ -145,5 +148,3 @@ IntersectionFinder.Layers = Layers;
 module.exports = IntersectionFinder;
 
 // todo support rectangular mobile (rotating)entities
-
-// todo x consider hotstile entities colliding with themselves
