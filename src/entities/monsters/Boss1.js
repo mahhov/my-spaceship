@@ -21,26 +21,26 @@ class Boss1 extends Monster {
 		this.nearbyDegen = new NearbyDegen();
 		this.nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
 		this.nearbyDegen.config(.33, .002, this);
-		this.addModule(this.nearbyDegen);
+		this.moduleManager.addModule(this.nearbyDegen);
 
 		this.shotgun = new Shotgun();
 		this.shotgun.setStagesMapping({[PRE_DEGEN_PHASE]: Shotgun.Stages.INACTIVE, [DEGEN_PHASE]: Shotgun.Stages.INACTIVE, [PROJECTILE_PHASE]: Shotgun.Stages.ACTIVE});
 		this.shotgun.config(.1, 10, .015, .003, 100, .005, this);
-		this.addModule(this.shotgun);
+		this.moduleManager.addModule(this.shotgun);
 
-		this.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 
 	update(map, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
-			this.modulesSetStage(this.attackPhase.get());
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
 
 		if (this.enragePhase.tick()) {
 			this.nearbyDegen.config(.33, .01, this);
 			this.shotgun.config(.1, 30, .018, .006, 100, .005, this);
 		}
 
-		this.modulesApply(map, intersectionFinder, player);
+		this.moduleManager.modulesApply(map, intersectionFinder, player);
 	}
 
 	paintUi(painter, camera) {

@@ -17,15 +17,15 @@ class Turret extends Monster {
 		let nearbyDegen = new NearbyDegen();
 		nearbyDegen.setStagesMapping({[REST_PHASE]: NearbyDegen.Stages.PRE, [ATTACK_PHASE]: NearbyDegen.Stages.ACTIVE});
 		nearbyDegen.config(.4, .001, this);
-		this.addModule(nearbyDegen);
+		this.moduleManager.addModule(nearbyDegen);
 
-		this.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 
 	update(map, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
-			this.modulesSetStage(this.attackPhase.get());
-		this.modulesApply(map, intersectionFinder, player);
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesApply(map, intersectionFinder, player);
 	}
 }
 

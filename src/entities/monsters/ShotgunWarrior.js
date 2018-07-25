@@ -18,20 +18,20 @@ class ShotgunWarrior extends Monster {
 		let shotgun = new Shotgun();
 		shotgun.setStagesMapping({[MOVE_PHASE]: Shotgun.Stages.INACTIVE, [ATTACK_PHASE]: Shotgun.Stages.ACTIVE});
 		shotgun.config(.05, 3, .01, .003, 100, .005, this);
-		this.addModule(shotgun);
+		this.moduleManager.addModule(shotgun);
 
 		let chase = new Chase();
 		chase.setStagesMapping({[MOVE_PHASE]: Chase.Stages.ACTIVE, [ATTACK_PHASE]: Chase.Stages.INACTIVE});
 		chase.config(.15, .55, .003, this);
-		this.addModule(chase);
+		this.moduleManager.addModule(chase);
 
-		this.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 
 	update(map, intersectionFinder, player) {
 		if (this.attackPhase.sequentialTick())
-			this.modulesSetStage(this.attackPhase.get());
-		this.modulesApply(map, intersectionFinder, player);
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesApply(map, intersectionFinder, player);
 	}
 }
 
