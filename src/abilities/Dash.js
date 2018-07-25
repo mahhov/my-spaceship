@@ -8,9 +8,9 @@ class Dash extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
-		if (!booleanArray(player.moveDirection))
+		if (!booleanArray(player.currentMove))
 			return false;
-		player.safeMove(intersectionFinder, ...player.moveDirection, .1, true);
+		player.safeMove(intersectionFinder, ...player.currentMove, .1, true);
 		return true;
 	}
 }

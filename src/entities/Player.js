@@ -63,6 +63,7 @@ class Player extends LivingEntity {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
+		this.currentMove = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, .005);
 	}
 
