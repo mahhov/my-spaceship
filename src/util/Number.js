@@ -12,9 +12,9 @@ const getMagnitude = (x, y) =>
 const setMagnitude = (x, y, magnitude = 1) => {
 	let prevMagnitude = getMagnitude(x, y);
 	if (!prevMagnitude)
-		return [magnitude, 0, 0];
+		return {x: magnitude, y: 0, prevMagnitude};
 	let mult = magnitude / prevMagnitude;
-	return [x * mult, y * mult, prevMagnitude];
+	return {x: x * mult, y: y * mult, prevMagnitude};
 };
 
 const clamp = (x, min, max) => {

@@ -59,8 +59,12 @@ class IntersectionFinder {
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {
 		// if magnitude is -1, then <dx, dy> is not necessarily a unit vector, and its magnitude should be used
-		if (magnitude === -1)
-			[dx, dy, magnitude] = setMagnitude(dx, dy);
+		if (magnitude === -1) {
+			let xymag = setMagnitude(dx, dy);
+			dx = xymag.x;
+			dy = xymag.y;
+			magnitude = xymag.prevMagnitude;
+		} // todo x see if we can make this less verbose
 
 		if (!dx && !dy || magnitude <= 0)
 			return [0, 0];

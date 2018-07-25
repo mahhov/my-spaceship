@@ -21,10 +21,10 @@ class Shotgun extends Module {
 			return;
 
 		for (let i = 0; i < this.count; i++) {
-			let [dx, dy] = setMagnitude(target.x - this.origin.x, target.y - this.origin.y, this.velicity);
-			let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * this.spread);
+			let directv = setMagnitude(target.x - this.origin.x, target.y - this.origin.y, this.velicity);
+			let randv = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * this.spread);
 
-			let projectile = new Projectile(this.origin.x, this.origin.y, .01, .01, dx + rdx, dy + rdy, this.duration, this.damage, false);
+			let projectile = new Projectile(this.origin.x, this.origin.y, .01, .01, directv.x + randv.x, directv.y + randv.y, this.duration, this.damage, false);
 			map.addProjectile(projectile);
 		}
 	}

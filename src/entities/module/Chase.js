@@ -16,7 +16,7 @@ class Chase extends Module {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 
-		let [dx, dy, targetDistance] = setMagnitude(target.x - this.origin.x, target.y - this.origin.y);
+		let {x: dx, y: dy, prevMagnitude: targetDistance} = setMagnitude(target.x - this.origin.x, target.y - this.origin.y);
 		if (targetDistance > this.nearDistance && targetDistance < this.farDistance)
 			this.origin.safeMove(intersectionFinder, dx, dy, this.speed);
 	}

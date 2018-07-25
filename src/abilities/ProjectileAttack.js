@@ -10,9 +10,9 @@ class ProjectileAttack extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, player) {
 		const VELOCITY = .015, SPREAD = .1, SIZE = .01, TIME = 100, DAMAGE = .001;
-		let [directX, directY] = setMagnitude(direct.x, direct.y, VELOCITY);
-		let [rdx, rdy] = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * VELOCITY * SPREAD);
-		let projectile = new Projectile(origin.x, origin.y, SIZE, SIZE, directX + rdx, directY + rdy, TIME, DAMAGE, true);
+		let directv = setMagnitude(direct.x, direct.y, VELOCITY);
+		let randv = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * VELOCITY * SPREAD);
+		let projectile = new Projectile(origin.x, origin.y, SIZE, SIZE, directv.x + randv.x, directv.y + randv.y, TIME, DAMAGE, true);
 		map.addProjectile(projectile);
 		return true;
 	}

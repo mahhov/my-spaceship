@@ -14,8 +14,7 @@ class Graphics {
 	paint(painter, camera, x, y, moveDirection) {
 		this.pathCreator.setCamera(camera);
 		this.pathCreator.setTranslation(x, y);
-		if (booleanArray(moveDirection))
-			this.pathCreator.setForward(...moveDirection);
+		this.pathCreator.setForward(moveDirection.x, moveDirection.y);
 		painter.add(this.pathCreator.create())
 	}
 

@@ -10,7 +10,7 @@ class Entity {
 		this.layer = layer;
 		this.bounds = new Bounds();
 		this.setBounds();
-		this.moveDirection = [0, 1];
+		this.moveDirection = {x: 0, y: 1};
 	}
 
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {
@@ -27,7 +27,7 @@ class Entity {
 		this.x += dx;
 		this.y += dy;
 		if (dx || dy)
-			[this.moveDirection[0], this.moveDirection[1]] = setMagnitude(dx, dy); // todo x avoid ugly stuff like this by returning {x, y, magnitude} instead of [x, y, magnitude]
+			this.moveDirection = setMagnitude(dx, dy);
 		this.setBounds();
 	}
 
