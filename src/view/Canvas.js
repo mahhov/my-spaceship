@@ -23,21 +23,21 @@ let loop = async () => {
 	}
 };
 
-let GraphicsDemo = async () => {
+let graphicsDemo = async () => {
 	let w = .03, h = .03;
 	let x = .5, y = .5;
 	let theta = 0, dtheta = .2 * Math.PI / 180;
 
-	let ship = new TestShip(Color.from1(0, 0, 1), w, h);
+	let ship = new TestShip(w, h, {color: Color.from1(0, 0, 1)});
 
 	while (true) {
 		painter.clear();
 		let direction = thetaToUnitVector(theta += dtheta);
-		ship.paint(painter, x, y, direction);
+		ship.paint(painter, {xt: a => a, yt: a => a}, x, y, {x: direction[0], y: direction[1]});
 		painter.paint();
 		await sleep(10);
 	}
 };
 
 loop();
-// GraphicsDemo();
+// graphicsDemo();
