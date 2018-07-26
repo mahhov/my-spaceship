@@ -16,12 +16,12 @@ class ShotgunWarrior extends Monster {
 
 		let chase = new Chase();
 		chase.setStagesMapping({[ONE_PHASE]: Chase.Stages.ACTIVE});
-		chase.config(.15, .55, .003, this);
+		chase.config(.25, .55, .003, this);
 		this.moduleManager.addModule(chase);
 
 		let shotgun = new Shotgun();
 		shotgun.setStagesMapping({0: Shotgun.Stages.ACTIVE, 1: Shotgun.Stages.INACTIVE, 2: Shotgun.Stages.INACTIVE}); // todo x move to chase or make chase phases public
-		shotgun.config(.05, 3, .01, .003, 100, .005, this); // todo x adjust range
+		shotgun.config(.05, 3, .015, .003, 100, .005, this);
 		chase.addModule(shotgun);
 
 		chase.modulesSetStage(0);
@@ -36,5 +36,3 @@ class ShotgunWarrior extends Monster {
 }
 
 module.exports = ShotgunWarrior;
-
-// todo x smart phasing, stop movement when in range, start movmeent when out of range
