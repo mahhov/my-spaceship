@@ -1,10 +1,16 @@
-const {avg} = require('../util/Number');
+const {clamp, avg} = require('../util/Number');
+const Keymapping = require('../control/Keymapping');
 
 class Camera {
 	constructor() {
 		this.x = .5;
 		this.y = .5;
-		this.zoom(1);
+		this.zoom(3);
+	}
+
+	zoom(z) {
+		this.z = z;
+		this.s = 1 / this.z;
 	}
 
 	move(center, adjustment) {
@@ -15,9 +21,11 @@ class Camera {
 		this.y = avg(this.y, y, FILTER_WEIGHT);
 	}
 
-	zoom(z) {
-		this.z = z;
-		this.s = 1 / this.z;
+	controlZoom(controller, keymapping) {
+		const ZOOM_RATE = .2, MIN_Z = 1, MAX_Z = 10;
+		let dz = keymapping.isActive(controller, Keymapping.Keys.ZOOM_OUT) - keymapping.isActive(controller, Keymapping.Keys.ZOOM_IN);
+		if (dz)
+			this.zoom(clamp(this.z + dz * ZOOM_RATE, MIN_Z, MAX_Z));
 	}
 
 	xt(x) {

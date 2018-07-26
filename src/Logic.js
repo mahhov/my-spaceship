@@ -4,7 +4,7 @@ const Map = require('./map/Map');
 const Player = require('./entities/Player');
 const MapGenerator = require('./map/MapGenerator');
 
-const UI = true;
+const UI = false;
 
 class Logic {
 	constructor(controller, painter) {
@@ -24,6 +24,7 @@ class Logic {
 
 	update() {
 		this.camera.move(this.player, this.controller.getRawMouse());
+		this.camera.controlZoom(this.controller, this.keymapping);
 		this.controller.inverseTransformMouse(this.camera);
 		this.map.update(this.controller, this.keymapping);
 	}
