@@ -3,14 +3,18 @@ const {setMagnitude} = require('../util/Number');
 
 class Entity {
 	constructor(x, y, width, height, layer) {
-		this.x = x;
-		this.y = y;
+		this.bounds = new Bounds();
+		this.setPosition(x, y);
 		this.width = width;
 		this.height = height;
 		this.layer = layer;
-		this.bounds = new Bounds();
-		this.setBounds();
 		this.moveDirection = {x: 0, y: 1};
+	}
+
+	setPosition(x, y) {
+		this.x = x;
+		this.y = y;
+		this.setBounds();
 	}
 
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {

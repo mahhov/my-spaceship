@@ -13,7 +13,7 @@ const Phases = makeEnum('PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 1);
+		super(x, y, .04, .04, .5);
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Color.fromHex(0x9, 0x0, 0x4, true).get()}));
 
 		this.attackPhase = new Phase(100, 100, 200);

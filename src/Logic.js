@@ -44,6 +44,7 @@ module.exports = Logic;
 // starfield background
 
 // todo content
+// map generation
 // instances
 // mobs
 // sector modes
@@ -56,7 +57,6 @@ module.exports = Logic;
 // save
 
 // todo x ordered
-// add larger map
 // add map background
 // particles
 // refactor health, stamina, cooldown to share utility. maybe converge with decay and phase as well

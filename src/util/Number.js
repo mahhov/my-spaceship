@@ -33,6 +33,8 @@ const booleanArray = array => array.some(a => a);
 
 const avg = (a, b, weight = .5) => a * weight + b * (1 - weight);
 
-const randInt = max => parseInt(Math.random() * max);
+const rand = (max = 1) => Math.random() * max;
 
-module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg, randInt};
+const randInt = max => parseInt(rand(max));
+
+module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg, rand, randInt};
