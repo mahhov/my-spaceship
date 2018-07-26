@@ -3,7 +3,7 @@ const ModuleManager = require('./ModuleManager');
 const {getMagnitude, setMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
-const NEAR_PHASE = 0, MIDDLE_PHASE = 1, FAR_PHASE = 2;
+const Phases = makeEnum('NEAR', 'MIDDLE', 'FAR');
 
 class Chase extends ModuleManager {
 	config(nearDistance, farDistance, speed, origin) {
@@ -20,11 +20,11 @@ class Chase extends ModuleManager {
 		let {x: dx, y: dy, prevMagnitude: targetDistance} = setMagnitude(target.x - this.origin.x, target.y - this.origin.y);
 
 		if (targetDistance < this.nearDistance)
-			this.modulesSetStage(NEAR_PHASE);
+			this.modulesSetStage(Phases.NEAR);
 		else if (targetDistance > this.farDistance)
-			this.modulesSetStage(FAR_PHASE);
+			this.modulesSetStage(Phases.FAR);
 		else {
-			this.modulesSetStage(MIDDLE_PHASE);
+			this.modulesSetStage(Phases.MIDDLE);
 			this.origin.safeMove(intersectionFinder, dx, dy, this.speed);
 		}
 
@@ -33,5 +33,6 @@ class Chase extends ModuleManager {
 }
 
 Chase.Stages = Stages;
+Chase.Phases = Phases;
 
 module.exports = Chase;

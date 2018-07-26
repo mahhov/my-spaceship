@@ -1,10 +1,11 @@
+const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
 const NearbyDegen = require('../module/NearbyDegen');
 const StarShip = require('../../graphics/StarShip');
 
-const REST_PHASE = 0, ATTACK_PHASE = 1;
+const Phases = makeEnum('REST', 'ATTACK');
 
 class Turret extends Monster {
 	constructor(x, y) {
@@ -15,7 +16,10 @@ class Turret extends Monster {
 		this.attackPhase.setRandomTick();
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.setStagesMapping({[REST_PHASE]: NearbyDegen.Stages.PRE, [ATTACK_PHASE]: NearbyDegen.Stages.ACTIVE});
+		nearbyDegen.setStagesMapping({
+			[Phases.REST]: NearbyDegen.Stages.PRE,
+			[Phases.ATTACK]: NearbyDegen.Stages.ACTIVE
+		});
 		nearbyDegen.config(.4, .001, this);
 		this.moduleManager.addModule(nearbyDegen);
 

@@ -1,3 +1,4 @@
+const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
@@ -5,7 +6,7 @@ const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
 const WShip = require('../../graphics/WShip');
 
-const ONE_PHASE = 0;
+const Phases = makeEnum('ONE');
 
 class ShotgunWarrior extends Monster {
 	constructor(x, y) {
@@ -15,12 +16,16 @@ class ShotgunWarrior extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let chase = new Chase();
-		chase.setStagesMapping({[ONE_PHASE]: Chase.Stages.ACTIVE});
+		chase.setStagesMapping({[Phases.ONE]: Chase.Stages.ACTIVE});
 		chase.config(.25, .55, .003, this);
 		this.moduleManager.addModule(chase);
 
 		let shotgun = new Shotgun();
-		shotgun.setStagesMapping({0: Shotgun.Stages.ACTIVE, 1: Shotgun.Stages.INACTIVE, 2: Shotgun.Stages.INACTIVE}); // todo x move to chase or make chase phases public
+		shotgun.setStagesMapping({
+			[Chase.Phases.NEAR]: Shotgun.Stages.ACTIVE,
+			[Chase.Phases.MIDDLE]: Shotgun.Stages.INACTIVE,
+			[Chase.Phases.FAR]: Shotgun.Stages.INACTIVE
+		});
 		shotgun.config(.05, 3, .015, .003, 100, .005, this);
 		chase.addModule(shotgun);
 

@@ -1,3 +1,4 @@
+const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const Color = require('../../util/Color');
 const Phase = require('../../util/Phase');
@@ -7,7 +8,8 @@ const StarShip = require('../../graphics/StarShip');
 const {UiCs, UiPs} = require('../../util/UiConstants');
 const Bar = require('../../painter/Bar');
 
-const PRE_DEGEN_PHASE = 0, DEGEN_PHASE = 1, PROJECTILE_PHASE = 2;
+const Phases = makeEnum('PRE_DEGEN', 'DEGEN', 'PROJECTILE');
+
 
 class Boss1 extends Monster {
 	constructor(x, y) {
@@ -19,12 +21,20 @@ class Boss1 extends Monster {
 		this.enragePhase.setPhase(0);
 
 		this.nearbyDegen = new NearbyDegen();
-		this.nearbyDegen.setStagesMapping({[PRE_DEGEN_PHASE]: NearbyDegen.Stages.PRE, [DEGEN_PHASE]: NearbyDegen.Stages.ACTIVE, [PROJECTILE_PHASE]: NearbyDegen.Stages.INACTIVE});
+		this.nearbyDegen.setStagesMapping({
+			[Phases.PRE_DEGEN]: NearbyDegen.Stages.PRE,
+			[Phases.DEGEN]: NearbyDegen.Stages.ACTIVE,
+			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE
+		});
 		this.nearbyDegen.config(.33, .002, this);
 		this.moduleManager.addModule(this.nearbyDegen);
 
 		this.shotgun = new Shotgun();
-		this.shotgun.setStagesMapping({[PRE_DEGEN_PHASE]: Shotgun.Stages.INACTIVE, [DEGEN_PHASE]: Shotgun.Stages.INACTIVE, [PROJECTILE_PHASE]: Shotgun.Stages.ACTIVE});
+		this.shotgun.setStagesMapping({
+			[Phases.PRE_DEGEN]: Shotgun.Stages.INACTIVE,
+			[Phases.DEGEN]: Shotgun.Stages.INACTIVE,
+			[Phases.PROJECTILE]: Shotgun.Stages.ACTIVE
+		});
 		this.shotgun.config(.1, 10, .015, .003, 100, .005, this);
 		this.moduleManager.addModule(this.shotgun);
 
