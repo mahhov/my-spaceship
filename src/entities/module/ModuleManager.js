@@ -27,3 +27,5 @@ class ModuleManager extends Module {
 }
 
 module.exports = ModuleManager;
+
+// todo consider merging moduleManager and module
