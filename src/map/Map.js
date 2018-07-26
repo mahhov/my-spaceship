@@ -7,6 +7,7 @@ class Map {
 		this.rocks = new LinkedList();
 		this.monsters = new LinkedList();
 		this.projectiles = new LinkedList();
+		this.uis = new LinkedList();
 	}
 
 	addRock(rock) {
@@ -17,11 +18,14 @@ class Map {
 	addPlayer(player) {
 		this.player = player;
 		player.addIntersectionBounds(this.intersectionFinder);
+		this.uis.add(player);
 	}
 
-	addMonster(monster) {
+	addMonster(monster, ui) {
 		this.monsters.add(monster);
 		monster.addIntersectionBounds(this.intersectionFinder);
+		if (ui)
+			this.uis.add(monster);
 	}
 
 	addProjectile(projectile) {
@@ -51,6 +55,10 @@ class Map {
 		this.player.paint(painter, camera);
 		this.monsters.forEach(monster => monster.paint(painter, camera));
 		this.projectiles.forEach(projectile => projectile.paint(painter, camera));
+	}
+
+	paintU(painter, camera) {
+		this.uis.forEach(ui => ui.paintUi(painter, camera));
 	}
 }
 

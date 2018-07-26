@@ -4,7 +4,7 @@ const Map = require('./map/Map');
 const Player = require('./entities/Player');
 const MapGenerator = require('./map/MapGenerator');
 
-const UI = false;
+const UI = true;
 
 class Logic {
 	constructor(controller, painter) {
@@ -30,11 +30,8 @@ class Logic {
 
 	paint() {
 		this.map.paint(this.painter, this.camera);
-
-		if (UI) { // todo x reenable paint ui support
-			this.player.paintUi(this.painter, this.camera);
-			this.boss1.paintUi(this.painter, this.camera);
-		}
+		if (UI)
+			this.map.paintU(this.painter, this.camera)
 	}
 }
 

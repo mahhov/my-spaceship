@@ -18,7 +18,7 @@ class MapGenerator {
 		for (let i = 0; i < SHOTGUN_WARRIORS; i++)
 			map.addMonster(new ShotgunWarrior(Math.random(), Math.random()))
 
-		map.addMonster(new Boss1(.5, .25));
+		map.addMonster(new Boss1(.5, .25), true);
 	}
 }
 
