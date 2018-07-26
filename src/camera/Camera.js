@@ -5,12 +5,7 @@ class Camera {
 	constructor() {
 		this.x = .5;
 		this.y = .5;
-		this.zoom(3);
-	}
-
-	zoom(z) {
-		this.z = z;
-		this.s = 1 / this.z;
+		this.endZ = this.z = 3;
 	}
 
 	move(center, adjustment) {
@@ -21,11 +16,13 @@ class Camera {
 		this.y = avg(this.y, y, FILTER_WEIGHT);
 	}
 
-	controlZoom(controller, keymapping) {
-		const ZOOM_RATE = .2, MIN_Z = 1, MAX_Z = 10;
+	zoom(controller, keymapping) {
+		const ZOOM_RATE = .2, MIN_Z = 1, MAX_Z = 10, FILTER_WEIGHT = .93;
 		let dz = keymapping.isActive(controller, Keymapping.Keys.ZOOM_OUT) - keymapping.isActive(controller, Keymapping.Keys.ZOOM_IN);
 		if (dz)
-			this.zoom(clamp(this.z + dz * ZOOM_RATE, MIN_Z, MAX_Z));
+			this.endZ = clamp(this.endZ + dz * ZOOM_RATE, MIN_Z, MAX_Z);
+		this.z = avg(this.z, this.endZ, FILTER_WEIGHT);
+		this.s = 1 / this.z;
 	}
 
 	xt(x) {

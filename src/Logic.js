@@ -24,7 +24,7 @@ class Logic {
 
 	update() {
 		this.camera.move(this.player, this.controller.getRawMouse());
-		this.camera.controlZoom(this.controller, this.keymapping);
+		this.camera.zoom(this.controller, this.keymapping);
 		this.controller.inverseTransformMouse(this.camera);
 		this.map.update(this.controller, this.keymapping);
 	}
