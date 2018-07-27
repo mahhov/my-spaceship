@@ -4,6 +4,8 @@ const Logic = require('../Logic');
 const Color = require('../util/Color');
 const {thetaToUnitVector} = require('../util/Number');
 const TestShip = require('../graphics/WShip');
+const Camera = require('../camera/Camera');
+const Starfield = require('../graphics/Starfield');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
@@ -39,5 +41,21 @@ let graphicsDemo = async () => {
 	}
 };
 
-loop();
+let starFieldDemo = async () => {
+	let camera = new Camera(0, 0, 1);
+	let starfield = new Starfield();
+
+	while (true) {
+		painter.clear();
+		let {x, y} = controller.getRawMouse();
+		camera.move({x: x - .5, y: y - .5}, {x, y});
+		starfield.paint(painter, camera);
+		painter.paint();
+		controller.expire();
+		await sleep(10);
+	}
+};
+
+// loop();
 // graphicsDemo();
+starFieldDemo();
