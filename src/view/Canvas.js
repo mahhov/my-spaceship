@@ -1,11 +1,8 @@
 const Controller = require('../control/Controller');
 const Painter = require('../painter/Painter');
-const Logic = require('../Logic');
-const Color = require('../util/Color');
-const {thetaToUnitVector} = require('../util/Number');
-const TestShip = require('../graphics/WShip');
-const Camera = require('../camera/Camera');
-const Starfield = require('../graphics/Starfield');
+const Logic = require('../logic/Game');
+const GraphicsDemo = require('../logic/GraphicsDemo');
+const StarfieldDemo = require('../logic/StarfieldDemo');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
@@ -13,7 +10,10 @@ const sleep = milli =>
 const canvas = document.getElementById('canvas');
 const controller = new Controller(canvas);
 const painter = new Painter(canvas);
+
 const logic = new Logic(controller, painter);
+// const logic = new GraphicsDemo(controller, painter);
+// const logic = new StarfieldDemo(controller, painter);
 
 let loop = async () => {
 	while (true) {
@@ -25,37 +25,4 @@ let loop = async () => {
 	}
 };
 
-let graphicsDemo = async () => {
-	let w = .03, h = .03;
-	let x = .5, y = .5;
-	let theta = 0, dtheta = .2 * Math.PI / 180;
-
-	let ship = new TestShip(w, h, {color: Color.from1(0, 0, 1)});
-
-	while (true) {
-		painter.clear();
-		let direction = thetaToUnitVector(theta += dtheta);
-		ship.paint(painter, {xt: a => a, yt: a => a}, x, y, {x: direction[0], y: direction[1]});
-		painter.paint();
-		await sleep(10);
-	}
-};
-
-let starFieldDemo = async () => {
-	let camera = new Camera(0, 0, 1);
-	let starfield = new Starfield();
-
-	while (true) {
-		painter.clear();
-		let {x, y} = controller.getRawMouse();
-		camera.move({x: x - .5, y: y - .5}, {x, y});
-		starfield.paint(painter, camera);
-		painter.paint();
-		controller.expire();
-		await sleep(10);
-	}
-};
-
-// loop();
-// graphicsDemo();
-starFieldDemo();
+loop();

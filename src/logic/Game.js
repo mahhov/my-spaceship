@@ -1,17 +1,17 @@
-const Keymapping = require('./control/Keymapping');
-const Camera = require('./camera/Camera');
-const Map = require('./map/Map');
-const Player = require('./entities/Player');
-const MapGenerator = require('./map/MapGenerator');
+const Logic = require('./Logic');
+const Keymapping = require('../control/Keymapping');
+const Camera = require('../camera/Camera');
+const Map = require('../map/Map');
+const Player = require('../entities/Player');
+const MapGenerator = require('../map/MapGenerator');
 
 const UI = false;
 
-class Logic {
+class Game extends Logic {
 	constructor(controller, painter) {
-		this.controller = controller;
-		this.painter = painter;
+		super(controller, painter);
 		this.keymapping = new Keymapping();
-		this.camera = new Camera();
+		this.camera = new Camera(.5, .5);
 		this.map = new Map();
 		this.player = new Player(.5, .5);
 		MapGenerator.generateSample(this.map, this.player);
@@ -36,7 +36,7 @@ class Logic {
 	}
 }
 
-module.exports = Logic;
+module.exports = Game;
 
 // todo graphics
 // particles
