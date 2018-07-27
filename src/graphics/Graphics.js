@@ -1,5 +1,4 @@
 const PathCreator = require('./PathCreator');
-const {booleanArray} = require('../util/Number');
 
 class Graphics {
 	constructor(width, height, points, {fill, color, thickness} = {}) {
