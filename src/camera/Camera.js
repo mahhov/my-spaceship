@@ -2,7 +2,7 @@ const {clamp, avg} = require('../util/Number');
 const Keymapping = require('../control/Keymapping');
 
 class Camera {
-	constructor(x = 0, y = 0, z = 3) { // todo remove 0 dfeault x & y once we can be smart with using player position
+	constructor(x, y, z = 3) {
 		this.x = x;
 		this.y = y;
 		this.endZ = this.z = z;
