@@ -1,6 +1,6 @@
 const Logic = require('./Logic');
 const Camera = require('../camera/Camera');
-const Starfield = require('../graphics/Starfield');
+const Starfield = require('../starfield/Starfield');
 
 class StarfieldDemo extends Logic {
 	constructor(controller, painter) {
