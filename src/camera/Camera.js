@@ -22,10 +22,15 @@ class Camera {
 		if (dz)
 			this.endZ = clamp(this.endZ + dz * ZOOM_RATE, MIN_Z, MAX_Z);
 		this.z = avg(this.z, this.endZ, FILTER_WEIGHT);
+		this.s0 = this.calcS(0);
+	}
+
+	calcS(dz) {
+		return 1 / (this.z + dz);
 	}
 
 	getS(dz) {
-		return 1 / (this.z + dz); // todo caching
+		return dz ? this.calcS(dz) : this.s0;
 	}
 
 	xt(x, dz = 0) {
