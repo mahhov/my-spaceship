@@ -38,6 +38,7 @@ class Color {
 		return this.string;
 	}
 
+	// shade should be 0 (no shading) to 1 (maximum shading)
 	getShade(shade = 1) {
 		if (shade === 1)
 			return this.shadeString || (this.shadeString = this.multiply(1 + SHADE_ADD).get());

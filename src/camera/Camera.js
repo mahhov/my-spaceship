@@ -2,10 +2,10 @@ const {clamp, avg} = require('../util/Number');
 const Keymapping = require('../control/Keymapping');
 
 class Camera {
-	constructor() {
-		this.x = .5;
-		this.y = .5;
-		this.endZ = this.z = 3;
+	constructor(x = 0, y = 0, z = 3) { // todo remove 0 dfeault x & y once we can be smart with using player position
+		this.x = x;
+		this.y = y;
+		this.endZ = this.z = z;
 	}
 
 	move(center, adjustment) {
@@ -22,19 +22,22 @@ class Camera {
 		if (dz)
 			this.endZ = clamp(this.endZ + dz * ZOOM_RATE, MIN_Z, MAX_Z);
 		this.z = avg(this.z, this.endZ, FILTER_WEIGHT);
-		this.s = 1 / this.z;
 	}
 
-	xt(x) {
-		return (x - this.x) * this.s + .5;
+	getS(dz) {
+		return 1 / (this.z + dz); // todo caching
 	}
 
-	yt(y) {
-		return (y - this.y) * this.s + .5;
+	xt(x, dz = 0) {
+		return (x - this.x) * this.getS(dz) + .5;
 	}
 
-	st(s) {
-		return s * this.s;
+	yt(y, dz = 0) {
+		return (y - this.y) * this.getS(dz) + .5;
+	}
+
+	st(size, dz = 0) {
+		return size * this.getS(dz);
 	}
 
 	xit(x) {
