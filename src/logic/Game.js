@@ -4,6 +4,7 @@ const Camera = require('../camera/Camera');
 const Map = require('../map/Map');
 const Player = require('../entities/Player');
 const MapGenerator = require('../map/MapGenerator');
+const Starfield = require('../starfield/Starfield');
 
 const UI = false;
 
@@ -15,6 +16,7 @@ class Game extends Logic {
 		this.map = new Map();
 		this.player = new Player(.5, .5);
 		MapGenerator.generateSample(this.map, this.player);
+		this.starfield = new Starfield();
 	}
 
 	iterate() {
@@ -30,6 +32,7 @@ class Game extends Logic {
 	}
 
 	paint() {
+		this.starfield.paint(this.painter, this.camera);
 		this.map.paint(this.painter, this.camera);
 		if (UI)
 			this.map.paintU(this.painter, this.camera)
