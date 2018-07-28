@@ -4,10 +4,10 @@ const {setMagnitude} = require('../util/Number');
 class Entity {
 	constructor(x, y, width, height, layer) {
 		this.bounds = new Bounds();
-		this.setPosition(x, y);
 		this.width = width;
 		this.height = height;
 		this.layer = layer;
+		this.setPosition(x, y);
 		this.moveDirection = {x: 0, y: 1};
 	}
 
@@ -55,6 +55,5 @@ class Entity {
 	paint(painter, camera) {
 	}
 }
-
 
 module.exports = Entity;
