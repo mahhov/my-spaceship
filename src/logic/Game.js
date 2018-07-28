@@ -16,7 +16,7 @@ class Game extends Logic {
 		this.map = new Map();
 		this.player = new Player(.5, .5);
 		MapGenerator.generateSample(this.map, this.player);
-		this.starfield = new Starfield();
+		this.starfield = new Starfield(MapGenerator.width, MapGenerator.height);
 	}
 
 	iterate() {

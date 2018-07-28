@@ -3,9 +3,12 @@ const Star = require('./Star');
 const RectC = require('../painter/RectC');
 
 class Starfield {
-	constructor(extra = 0) {
-		const DEPTH = 20 + extra & 20, FORWARD_DEPTH = .8;
-		const COUNT = 10 * DEPTH * DEPTH, WIDTH = DEPTH, HEIGHT = DEPTH, SIZE = .03 + extra * .03, BLUE_RATE = .05;
+	constructor(width, height, extra = 0) {
+		const DEPTH = 20 + extra & 20, FORWARD_DEPTH = .8,
+			WIDTH = width * DEPTH, HEIGHT = height * DEPTH,
+			COUNT = 10 * WIDTH * HEIGHT,
+			SIZE = .03 + extra * .03, BLUE_RATE = .05;
+
 		this.stars = [];
 		for (let i = 0; i < COUNT; i++) {
 			let x = randB(WIDTH);

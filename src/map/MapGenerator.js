@@ -4,9 +4,11 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
+const WIDTH = 5, HEIGHT = 5;
+
 class MapGenerator {
+
 	static generateSample(map, player) {
-		const WIDTH = 5, HEIGHT = 5;
 		const ROCKS = 5, TURRETS = 5, SHOTGUN_WARRIORS = 5;
 		const ROCK_MAX_SIZE = .1;
 
@@ -25,5 +27,8 @@ class MapGenerator {
 		map.addMonster(new Boss1(WIDTH / 2, HEIGHT / 4), true);
 	}
 }
+
+MapGenerator.width = WIDTH;
+MapGenerator.height = HEIGHT;
 
 module.exports = MapGenerator;
