@@ -19,7 +19,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 class Player extends LivingEntity {
 	constructor(x, y) {
 		super(x, y, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
-		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xa, 0x6, 0x1, true).get()}));
+		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
@@ -129,7 +129,7 @@ class Player extends LivingEntity {
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
 		// damage overlay
-		let damageColor = UiCs.DAMAGE_COLOR.getShade(254 * (1 - this.recentDamage.get()));
+		let damageColor = UiCs.DAMAGE_COLOR.getAlpha(this.recentDamage.get());
 		painter.add(new Rect(0, 0, 1, 1, {fill: true, color: damageColor}));
 	}
 }

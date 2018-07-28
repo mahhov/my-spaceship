@@ -1,11 +1,13 @@
+const {clamp} = require('./Number');
+
 const SHADE_ADD = 1;
 
 class Color {
 	constructor(r, g, b, a = 1) {
-		this.r = Math.min(r, 255);
-		this.g = Math.min(g, 255);
-		this.b = Math.min(b, 255);
-		this.a = a;
+		this.r = clamp(r, 0, 255);
+		this.g = clamp(g, 0, 255);
+		this.b = clamp(b, 0, 255);
+		this.a = clamp(a, 0, 1);
 		this.string = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
 	}
 
@@ -34,6 +36,10 @@ class Color {
 		return new Color(this.r * mult, this.g * mult, this.b * mult, this.a);
 	}
 
+	alphaMultiply(mult) {
+		return new Color(this.r, this.g, this.b, this.a * mult);
+	}
+
 	get() {
 		return this.string;
 	}
@@ -43,6 +49,15 @@ class Color {
 		if (shade === 1)
 			return this.shadeString || (this.shadeString = this.multiply(1 + SHADE_ADD).get());
 		return this.multiply(1 + SHADE_ADD * shade).get();
+	}
+
+	getAlpha(alphaMult = 1) {
+		const NO_COLOR = Color.from1(0, 0, 0, 0);
+		if (alphaMult === 1)
+			return this.string;
+		if (alphaMult === 0)
+			return NO_COLOR.get();
+		return this.alphaMultiply(alphaMult).get();
 	}
 
 	static hexTo255(hex, single) {

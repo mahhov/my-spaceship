@@ -6,7 +6,7 @@ const Player = require('../entities/Player');
 const MapGenerator = require('../map/MapGenerator');
 const Starfield = require('../starfield/Starfield');
 
-const UI = false;
+const UI = true;
 
 class Game extends Logic {
 	constructor(controller, painter) {
