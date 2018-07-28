@@ -6,6 +6,7 @@ class Painter {
 		this.xCoordinateTransform = x => x * this.width;
 		this.yCoordinateTransform = y => y * this.height;
 		this.context = canvas.getContext('2d');
+		this.setFontMode();
 		this.elements = [];
 	}
 
@@ -14,6 +15,12 @@ class Painter {
 		this.maskCanvas.width = this.width;
 		this.maskCanvas.height = this.height;
 		this.maskContext = this.maskCanvas.getContext('2d');
+	}
+
+	setFontMode() {
+		this.context.font = '10px monospace';
+		this.context.textAlign = 'center';
+		this.context.textBaseline = 'middle';
 	}
 
 	clear() {
