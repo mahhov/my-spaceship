@@ -49,7 +49,7 @@ class Map {
 				monster.update(this, this.intersectionFinder, this.player);
 		});
 		this.projectiles.forEach((projectile, item) => {
-			if (projectile.update(this.intersectionFinder)) {
+			if (projectile.update(this, this.intersectionFinder)) {
 				this.projectiles.remove(item);
 				projectile.removeIntersectionBounds(this.intersectionFinder);
 			}

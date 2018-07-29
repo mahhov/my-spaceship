@@ -1,4 +1,4 @@
-const EPSILON = 1e-10;
+const EPSILON = 1e-10, PI2 = Math.PI * 2;
 
 const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
 
@@ -35,8 +35,14 @@ const avg = (a, b, weight = .5) => a * weight + b * (1 - weight);
 
 const rand = (max = 1) => Math.random() * max;
 
-const randB = (max = 1) => Math.random() * max - max / 2;
+const randB = (max = 1) => rand(max) - max / 2;
 
 const randInt = max => parseInt(rand(max));
 
-module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg, rand, randB, randInt};
+// todo x use this
+const randVector = (magnitude) => {
+	let vector = setMagnitude(...thetaToUnitVector(rand(PI2)), rand(magnitude));
+	return [vector.x, vector.y];
+};
+
+module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg, rand, randB, randInt, randVector};

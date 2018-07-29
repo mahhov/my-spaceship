@@ -1,5 +1,7 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
+const {randVector} = require('../../util/Number');
+const Dust = require('../particle/Dust');
 const Color = require('../../util/Color');
 const RectC = require('../../painter/RectC');
 
@@ -13,13 +15,14 @@ class Projectile extends Entity {
 		this.damage = damage;
 	}
 
-	update(intersectionFinder) {
+	update(map, intersectionFinder) { // todo fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attcak parent class to have update iterface
 		const FRICTION = .95;
 
 		let intersection = this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
 
 		if (intersection) {
 			intersection.changeHealth(-this.damage);
+			map.addParticle(new Dust(this.x, this.y, .005, ...randVector(.001), 100));
 			return true;
 		}
 

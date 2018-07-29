@@ -13,7 +13,7 @@ class Projectile extends Entity {
 		this.damage = damage;
 	}
 
-	update(intersectionFinder) {
+	update(map, intersectionFinder) {
 		if (!this.moveX)
 			[this.moveX, this.moveY, this.intersection] = this.checkMove(intersectionFinder, this.dx, this.dy, -1, true);
 

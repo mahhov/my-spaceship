@@ -3,7 +3,6 @@ const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const Color = require('../../util/Color');
 const RectC = require('../../painter/RectC');
 
-
 class Dust extends Entity {
 	constructor(x, y, size, vx, vy, time) {
 		super(x, y, size, size, IntersectionFinder.Layers.IGNORE);
