@@ -9,6 +9,8 @@ const Decay = require('../util/Decay');
 const VShip = require('../graphics/VShip');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
+const {setMagnitude, thetaToUnitVector, booleanArray, rand} = require('../util/Number');
+const Dust = require('./particle/Dust');
 const {UiCs, UiPs} = require('../util/UiConstants');
 const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
@@ -32,6 +34,7 @@ class Player extends LivingEntity {
 		this.moveControl(controller, keymapping, intersectionFinder);
 		this.abilityControl(map, controller, keymapping, intersectionFinder);
 		this.targetLockControl(controller, keymapping, intersectionFinder);
+		this.createMovementParticle(map);
 	}
 
 	refresh() {
@@ -58,7 +61,7 @@ class Player extends LivingEntity {
 		if (down)
 			dy += 1;
 
-		if (dx !== 0 && dy !== 0) {
+		if (dx && dy) {
 			dx = Math.sign(dx) * invSqrt2;
 			dy = Math.sign(dy) * invSqrt2;
 		}
@@ -98,6 +101,18 @@ class Player extends LivingEntity {
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
+	}
+
+	createMovementParticle(map) {
+		const RATE = .4, SIZE = .005, DIRECT_VELOCITY = .003, RAND_VELOCITY = .001;
+
+		if (!booleanArray(this.currentMove) || Math.random() > RATE)
+			return;
+
+		let directv = setMagnitude(...this.currentMove, -DIRECT_VELOCITY);
+		let randv = setMagnitude(...thetaToUnitVector(rand(Math.PI * 2)), rand(RAND_VELOCITY));
+
+		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv.x, directv.y + randv.y, 100));
 	}
 
 	sufficientStamina(amount) {

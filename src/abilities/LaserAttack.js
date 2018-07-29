@@ -11,7 +11,7 @@ class LaserAttack extends Ability {
 	activate(origin, direct, map, intersectionFinder, player) {
 		const RANGE = .15, SPREAD = .05, TIME = 10, DAMAGE = .001;
 		let directv = setMagnitude(direct.x, direct.y, RANGE);
-		let randv = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * RANGE * SPREAD);
+		let randv = setMagnitude(...thetaToUnitVector(Math.random() * Math.PI * 2), Math.random() * RANGE * SPREAD); // todo x deprecate math.random() outside of util/numbers
 		let laser = new Laser(origin.x, origin.y, directv.x + randv.x, directv.y + randv.y, TIME, DAMAGE, true);
 		map.addProjectile(laser);
 		return true;

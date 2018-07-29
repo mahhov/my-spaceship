@@ -8,7 +8,8 @@ const Layers = makeEnum(
 	'FRIENDLY_PROJECTILE',  // intersects with hostile units and passives
 	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
 	'HOSTILE_PROJECTILE',   // intersects with friendly units and passives
-	'HOSTILE_UNIT');        // intersects with friendly units, hostile units, friendly projectiles, and passives
+	'HOSTILE_UNIT',         // intersects with friendly units, hostile units, friendly projectiles, and passives
+	'IGNORE');              // intersects with nothing
 
 class IntersectionFinder {
 	constructor() {

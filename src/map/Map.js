@@ -7,6 +7,7 @@ class Map {
 		this.rocks = new LinkedList();
 		this.monsters = new LinkedList();
 		this.projectiles = new LinkedList();
+		this.particles = new LinkedList();
 		this.uis = new LinkedList();
 	}
 
@@ -33,6 +34,11 @@ class Map {
 		projectile.addIntersectionBounds(this.intersectionFinder);
 	}
 
+	addParticle(particle) {
+		this.particles.add(particle);
+		particle.addIntersectionBounds(this.intersectionFinder);
+	}
+
 	update(controller, keymapping) {
 		this.player.update(this, controller, keymapping, this.intersectionFinder);
 		this.monsters.forEach((monster, item) => {
@@ -48,6 +54,12 @@ class Map {
 				projectile.removeIntersectionBounds(this.intersectionFinder);
 			}
 		});
+		this.particles.forEach((particle, item) => {
+			if (particle.update()) {
+				this.particles.remove(item);
+				particle.removeIntersectionBounds(this.intersectionFinder);
+			}
+		});
 	}
 
 	paint(painter, camera) {
@@ -55,6 +67,7 @@ class Map {
 		this.player.paint(painter, camera);
 		this.monsters.forEach(monster => monster.paint(painter, camera));
 		this.projectiles.forEach(projectile => projectile.paint(painter, camera));
+		this.particles.forEach(particle => particle.paint(painter, camera));
 	}
 
 	paintU(painter, camera) {

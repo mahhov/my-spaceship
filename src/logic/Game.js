@@ -61,8 +61,7 @@ module.exports = Game;
 // save
 
 // todo x ordered
-// add map background
-// particles
+// more particles
 // refactor health, stamina, cooldown to share utility. maybe converge with decay and phase as well
 // refactor coordinate system to support coordintaes, centered coordintaes, and camera coordintaes to replace current constructor overloading
 // reset target lock if target expires
