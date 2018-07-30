@@ -1,6 +1,6 @@
 const makeEnum = require('../../util/Enum');
 const ModuleManager = require('./ModuleManager');
-const {getMagnitude, setMagnitude} = require('../../util/Number');
+const {setMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('NEAR', 'MIDDLE', 'FAR');
