@@ -1,7 +1,7 @@
 const {randInt} = require('./Number');
 
 class Phase {
-	// durations should be > 0
+	// durations should be >= 0
 	constructor(...durations) {
 		this.durations = durations;
 		this.setPhase(0);
@@ -20,17 +20,22 @@ class Phase {
 		this.setPhase(++this.phase < this.durations.length ? this.phase : 0);
 	}
 
-	// return true if phase ends
+	// return true if phase ends (e.g., phase equaled 1)
 	tick() {
 		return this.duration && !--this.duration;
 	}
 
 	// return true if phase ends
+	// if tick = 0, will remain 0 and phase will not iterate
 	sequentialTick() {
 		if (this.tick()) {
 			this.nextPhase();
 			return true;
 		}
+	}
+
+	isNew() {
+		return this.duration === this.durations[phsae];
 	}
 
 	get() {
