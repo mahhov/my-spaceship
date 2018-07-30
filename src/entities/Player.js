@@ -9,7 +9,7 @@ const Decay = require('../util/Decay');
 const VShip = require('../graphics/VShip');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
-const {setMagnitude, thetaToUnitVector, booleanArray, rand} = require('../util/Number');
+const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
 const Dust = require('./particle/Dust');
 const {UiCs, UiPs} = require('../util/UiConstants');
 const RectC = require('../painter/RectC');
@@ -110,9 +110,9 @@ class Player extends LivingEntity {
 			return;
 
 		let directv = setMagnitude(...this.currentMove, -DIRECT_VELOCITY);
-		let randv = setMagnitude(...thetaToUnitVector(rand(Math.PI * 2)), rand(RAND_VELOCITY));
+		let randv = randVector(RAND_VELOCITY);
 
-		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv.x, directv.y + randv.y, 100));
+		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv[0], directv.y + randv[1], 100));
 	}
 
 	sufficientStamina(amount) {

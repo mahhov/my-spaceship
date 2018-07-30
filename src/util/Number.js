@@ -39,7 +39,6 @@ const randB = (max = 1) => rand(max) - max / 2;
 
 const randInt = max => parseInt(rand(max));
 
-// todo x use this
 const randVector = (magnitude) => {
 	let vector = setMagnitude(...thetaToUnitVector(rand(PI2)), rand(magnitude));
 	return [vector.x, vector.y];
