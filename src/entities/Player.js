@@ -23,6 +23,7 @@ class Player extends LivingEntity {
 		super(x, y, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
+		// todo refactor health, stamina, cooldown to share utility. maybe converge with decay and phase as well
 		this.maxStamina = this.stamina = 100;
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
