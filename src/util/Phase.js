@@ -20,12 +20,12 @@ class Phase {
 		this.setPhase(++this.phase < this.durations.length ? this.phase : 0);
 	}
 
-	// return true if phase ends (e.g., phase equaled 1)
+	// return true if phase ends (e.g., duration equaled 1)
 	tick() {
 		return this.duration && !--this.duration;
 	}
 
-	// return true if phase ends
+	// return true if phase ends (see tick())
 	// if tick = 0, will remain 0 and phase will not iterate
 	sequentialTick() {
 		if (this.tick()) {
