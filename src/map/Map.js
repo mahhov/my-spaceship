@@ -42,7 +42,7 @@ class Map {
 	update(controller, keymapping) {
 		this.player.update(this, controller, keymapping, this.intersectionFinder);
 		this.monsters.forEach((monster, item) => {
-			if (monster.isEmptyHealth()) {
+			if (monster.health.isEmpty()) {
 				this.monsters.remove(item);
 				monster.removeIntersectionBounds(this.intersectionFinder);
 			} else

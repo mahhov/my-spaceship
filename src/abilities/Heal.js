@@ -8,7 +8,7 @@ class Dash extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
-		if (player.isFullHealth())
+		if (player.health.isFull())
 			return false;
 		player.changeHealth(.1);
 		return true;

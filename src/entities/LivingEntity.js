@@ -3,30 +3,20 @@ const {clamp} = require('../util/Number');
 const RectC = require('../painter/RectC');
 const {UiCs} = require('../util/UiConstants');
 
+const Charge = require('../util/Charge');
+
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {
 		super(x, y, width, height, layer);
-		this.health = this.maxHealth = health;
+		this.health = new Charge(health);
 	}
 
 	setGraphics(graphics) {
 		this.graphics = graphics;
 	}
 
-	getHealthRatio() {
-		return this.health / this.maxHealth;
-	}
-
-	isFullHealth() {
-		return this.health === this.maxHealth;
-	}
-
-	isEmptyHealth() {
-		return !this.health;
-	}
-
 	changeHealth(amount) {
-		this.health = clamp(this.health + amount, 0, this.maxHealth);
+		this.health.change(amount);
 	}
 
 	paint(painter, camera) {

@@ -16,6 +16,8 @@ const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
 
+const Charge = require('../util/Charge'); // todo x move
+
 const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends LivingEntity {
@@ -23,8 +25,8 @@ class Player extends LivingEntity {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
-		// todo refactor health, stamina, cooldown to share utility. maybe converge with decay and phase as well
-		this.maxStamina = this.stamina = 100;
+		// todo x finish charge-refactor for ability cooldown/charges
+		this.stamina = new Charge(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
 		this.recentDamage = new Decay(.1, .001);
@@ -39,8 +41,7 @@ class Player extends LivingEntity {
 	}
 
 	refresh() {
-		if (this.stamina < this.maxStamina)
-			this.stamina = Math.min(this.stamina + .13, this.maxStamina);
+		this.stamina.generate();
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
@@ -87,7 +88,7 @@ class Player extends LivingEntity {
 	}
 
 	targetLockControl(controller, keymapping, intersectionFinder) {
-		if (this.targetLock && this.targetLock.isEmptyHealth())
+		if (this.targetLock && this.targetLock.health.isEmpty())
 			this.targetLock = null;
 
 		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
@@ -120,11 +121,11 @@ class Player extends LivingEntity {
 	}
 
 	sufficientStamina(amount) {
-		return amount <= this.stamina;
+		return amount <= this.stamina.get();
 	}
 
 	consumeStamina(amount) {
-		this.stamina -= amount;
+		this.stamina.change(-amount);
 	}
 
 	changeHealth(amount) {
@@ -142,8 +143,8 @@ class Player extends LivingEntity {
 
 		// life & stamina bar
 		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
-		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina / this.maxStamina, UiCs.STAMINA_COLOR.getShade(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.getShade()));
-		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.getHealthRatio(), UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
+		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina.getRatio(), UiCs.STAMINA_COLOR.getShade(), UiCs.STAMINA_COLOR.get(), UiCs.STAMINA_COLOR.getShade()));
+		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.health.getRatio(), UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
