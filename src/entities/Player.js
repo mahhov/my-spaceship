@@ -87,6 +87,9 @@ class Player extends LivingEntity {
 	}
 
 	targetLockControl(controller, keymapping, intersectionFinder) {
+		if (this.targetLock && this.targetLock.isEmptyHealth())
+			this.targetLock = null;
+
 		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
 			return;
 

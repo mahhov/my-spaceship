@@ -61,5 +61,4 @@ module.exports = Game;
 // save
 
 // todo x ordered
-// reset target lock if target expires
 // boss ui + enrage timer + attacks to only trigger when player comes near
