@@ -61,4 +61,4 @@ module.exports = Game;
 // save
 
 // todo x ordered
-// boss ui + enrage timer + attacks to only trigger when player comes near
+// [verify] boss ui + enrage timer + attacks to only trigger when player comes near
