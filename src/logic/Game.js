@@ -1,9 +1,9 @@
 const Logic = require('./Logic');
 const Keymapping = require('../control/Keymapping');
-const Camera = require('../camera/Camera');
 const Map = require('../map/Map');
 const Player = require('../entities/Player');
 const MapGenerator = require('../map/MapGenerator');
+const Camera = require('../camera/Camera');
 const Starfield = require('../starfield/Starfield');
 
 const UI = true;
@@ -12,10 +12,10 @@ class Game extends Logic {
 	constructor(controller, painter) {
 		super(controller, painter);
 		this.keymapping = new Keymapping();
-		this.camera = new Camera(.5, .5);
 		this.map = new Map();
-		this.player = new Player(.5, .5);
+		this.player = new Player();
 		MapGenerator.generateSample(this.map, this.player);
+		this.camera = new Camera(this.player.x, this.player.y);
 		this.starfield = new Starfield(MapGenerator.width, MapGenerator.height);
 	}
 
