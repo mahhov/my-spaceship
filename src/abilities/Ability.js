@@ -1,9 +1,11 @@
 const {UiCs, UiPs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
 
+const Charge = require('../util/Charge');
+
 class Ability {
 	constructor(cooldown, charges, stamina, repeatable, uiIndex, paintUiColor) {
-		this.maxCooldown = this.cooldown = cooldown;
+		this.cooldown = new Charge(cooldown, -1);
 		this.maxCharges = this.charges = charges;
 		this.stamina = stamina;
 		this.repeatable = repeatable;
@@ -24,9 +26,9 @@ class Ability {
 	}
 
 	refresh(player) {
-		if (this.charges < this.maxCharges && !--this.cooldown) {
+		if (this.charges < this.maxCharges && this.cooldown.generate()) {
 			this.charges++;
-			this.cooldown = this.maxCooldown;
+			this.cooldown.restore();
 		}
 		this.repeating && this.repeating--;
 		this.ready = this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating)
@@ -44,8 +46,8 @@ class Ability {
 		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, {fill: true, color: this.paintUiColor.get()}));
 
 		// hybrid for current cooldown
-		if (this.cooldown < this.maxCooldown) {
-			let shade = 1 - (this.maxCooldown - this.cooldown) / this.maxCooldown;
+		if (!this.cooldown.isFull()) {
+			let shade = this.cooldown.getRatio();
 			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.paintUiColor.getShade(shade)}));
 		}
 
