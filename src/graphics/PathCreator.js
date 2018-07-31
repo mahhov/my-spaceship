@@ -16,7 +16,6 @@ class PathCreator {
 
 	setCamera(camera) {
 		this.camera = camera;
-		this.pathChanged = true; // todo remove pathChanged caching or make it smarter about camera changes, otherwise it's useless as is
 	}
 
 	setFill(fill) {
@@ -36,7 +35,6 @@ class PathCreator {
 			return;
 		this.cx = x;
 		this.cy = y;
-		this.pathChanged = true;
 	}
 
 	setForward(x, y) {
@@ -44,7 +42,6 @@ class PathCreator {
 			return;
 		this.fx = x;
 		this.fy = y;
-		this.pathChanged = true;
 	}
 
 	setScale(x, y, s) {
@@ -52,7 +49,6 @@ class PathCreator {
 			return;
 		this.sx = x * s;
 		this.sy = y * s;
-		this.pathChanged = true;
 	}
 
 	moveTo(x, y, skipAdd) {
@@ -69,17 +65,15 @@ class PathCreator {
 
 	add() {
 		this.xys.push([this.x, this.y]);
-		this.pathChanged = true;
 	}
 
 	create() {
-		if (this.pathChanged)
-			this.computePathPoints();
+		this.computePathPoints();
 		return new Path(this.pathPoints, {fill: this.fill, color: this.color, thickness: this.thickness});
 	}
 
 	computePathPoints() {
-		// 0, 1 maps to center + forward
+		// [0, 1] maps to center + forward
 		this.pathPoints = [];
 		this.xys.forEach(([x, y]) => {
 			x *= this.sx;
@@ -88,7 +82,6 @@ class PathCreator {
 			let pathY = this.cy + this.fy * y + this.fx * x;
 			this.pathPoints.push([this.camera.xt(pathX), this.camera.yt(pathY)]);
 		});
-		this.pathChanged = false;
 	}
 }
 
