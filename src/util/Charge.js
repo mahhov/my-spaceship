@@ -10,6 +10,10 @@ class Charge {
 		this.change(this.generateRate);
 	}
 
+	restore() {
+		this.value = this.max;
+	}
+
 	change(amount) {
 		this.value = clamp(this.value + amount, 0, this.max);
 	}

@@ -19,10 +19,12 @@ class Boss1 extends Monster {
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
+		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
 		this.enragePhase = new Phase(6000);
 		this.enragePhase.setPhase(0);
 
 		let engage = new Engage();
+		this.engage = engage;
 		engage.setStagesMapping({
 			[Phases.INACTIVE]: Engage.Stages.ACTIVE,
 			[Phases.PRE_DEGEN]: Engage.Stages.ACTIVE,
@@ -32,26 +34,34 @@ class Boss1 extends Monster {
 		engage.config(.5, 1, this);
 		this.moduleManager.addModule(engage);
 
-		let phaseSetterEngage = new PhaseSetter();
-		phaseSetterEngage.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.ACTIVE,
+		let phaseSetterEngageAttack = new PhaseSetter();
+		phaseSetterEngageAttack.setStagesMapping(({
+			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
 			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
 		}));
-		phaseSetterEngage.config(this.attackPhase, Phases.PRE_DEGEN);
-		engage.addModule(phaseSetterEngage);
+		phaseSetterEngageAttack.config(this.attackPhase, Phases.PRE_DEGEN);
+		engage.addModule(phaseSetterEngageAttack);
 
-		let phaseSetterDisengage = new PhaseSetter();
-		phaseSetterDisengage.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.ACTIVE
+		let phaseSetterEngageEnrage = new PhaseSetter();
+		phaseSetterEngageEnrage.setStagesMapping(({
+			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
+			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
 		}));
-		phaseSetterDisengage.config(this.attackPhase, Phases.INACTIVE);
-		engage.addModule(phaseSetterDisengage);
+		phaseSetterEngageEnrage.config(this.enragePhase, 0);
+		engage.addModule(phaseSetterEngageEnrage);
+
+		let phaseSetterDisengageAttack = new PhaseSetter();
+		phaseSetterDisengageAttack.setStagesMapping(({
+			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
+			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.TRIGGER
+		}));
+		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
+		engage.addModule(phaseSetterDisengageAttack);
 
 		let restore = new Restore();
 		restore.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.ACTIVE
+			[Engage.Phases.ENGAGED]: Restore.Stages.INACTIVE,
+			[Engage.Phases.DISENGAGED]: Restore.Stages.TRIGGER
 		}));
 		restore.config(this);
 		engage.addModule(restore);
@@ -91,9 +101,11 @@ class Boss1 extends Monster {
 				this.nearbyDegen.config(.33, .01, this);
 				this.shotgun.config(.1, 30, .018, .006, 100, .005, this);
 			}
-
-			this.moduleManager.modulesApply(map, intersectionFinder, player);
 		}
+
+		if (this.attackPhase.isNew())
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.modulesApply(map, intersectionFinder, player);
 	}
 
 	paintUi(painter, camera) {

@@ -4,7 +4,12 @@ class Phase {
 	// durations should be >= 0
 	constructor(...durations) {
 		this.durations = durations;
+		this.setSequentialStartPhase(0);
 		this.setPhase(0);
+	}
+
+	setSequentialStartPhase(phase) {
+		this.sequentialStartPhase = phase;
 	}
 
 	setPhase(phase) {
@@ -17,7 +22,7 @@ class Phase {
 	}
 
 	nextPhase() {
-		this.setPhase(++this.phase < this.durations.length ? this.phase : 0);
+		this.setPhase(++this.phase < this.durations.length ? this.phase : this.sequentialStartPhase);
 	}
 
 	// return true if phase ends (e.g., duration equaled 1)
@@ -35,7 +40,7 @@ class Phase {
 	}
 
 	isNew() {
-		return this.duration === this.durations[phsae];
+		return this.duration === this.durations[this.phase];
 	}
 
 	get() {

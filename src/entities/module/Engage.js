@@ -10,6 +10,7 @@ class Engage extends ModuleManager {
 		this.nearDistance = nearDistance;
 		this.farDistance = farDistance;
 		this.origin = origin;
+		this.phase = -1;
 	}
 
 	apply(map, intersectionFinder, target) {
@@ -19,12 +20,17 @@ class Engage extends ModuleManager {
 		let targetDistance = getMagnitude(target.x - this.origin.x, target.y - this.origin.y);
 
 		if (targetDistance < this.nearDistance)
-			this.modulesSetStage(Phases.ENGAGED);
+			this.setPhase(Phases.ENGAGED);
 		else if (targetDistance > this.farDistance)
-			this.modulesSetStage(Phases.DISENGAGED);
+			this.setPhase(Phases.DISENGAGED);
 
 		this.modulesApply(map, intersectionFinder, target);
 	}
+
+	setPhase(phase) {
+		if (phase !== this.phase)
+			this.modulesSetStage(this.phase = phase);
+	} // todo move to module manager and reuuse for chase.
 }
 
 Engage.Stages = Stages;
