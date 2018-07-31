@@ -11,6 +11,7 @@ const Colors = {
 	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
 	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
 	HEAL_COLOR: Color.fromHex(0x4, 0x4, 0xa, true),
+	NOT_READY_COLOR: Color.fromHex(0xf, 0xf, 0xf, true),
 };
 
 const Positions = {

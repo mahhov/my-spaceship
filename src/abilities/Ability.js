@@ -12,7 +12,7 @@ class Ability {
 	}
 
 	safeActivate(origin, direct, map, intersectionFinder, player) {
-		if (this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating))
+		if (this.ready)
 			if (this.activate(origin, direct, map, intersectionFinder, player)) {
 				this.charges--;
 				player.consumeStamina(this.stamina);
@@ -23,12 +23,13 @@ class Ability {
 	activate(origin, direct, map, intersectionFinder, player) {
 	}
 
-	refresh() {
+	refresh(player) {
 		if (this.charges < this.maxCharges && !--this.cooldown) {
 			this.charges++;
 			this.cooldown = this.maxCooldown;
 		}
 		this.repeating && this.repeating--;
+		this.ready = this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating)
 	}
 
 	paintUi(painter, camera) {
@@ -48,7 +49,8 @@ class Ability {
 			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.paintUiColor.getShade(shade)}));
 		}
 
-		// todo paint stamina sufficient or stamina cost
+		if (!this.ready)
+			painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, {color: UiCs.NOT_READY_COLOR.get(), thickness: 4}));
 	}
 }
 
