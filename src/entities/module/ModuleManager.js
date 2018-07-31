@@ -10,9 +10,9 @@ class ModuleManager extends Module {
 		this.modules.push(module);
 	}
 
-	modulesSetStage(stage) {
+	modulesSetStage(phase) {
 		this.modules.forEach(module =>
-			module.setStage(stage));
+			module.setStage(phase));
 	}
 
 	modulesApply(map, intersectionFinder, player) {

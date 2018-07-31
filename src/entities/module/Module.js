@@ -10,8 +10,8 @@ class Module {
 		this.stagesMap = stagesMaps;
 	}
 
-	setStage(stage) {
-		this.stage = this.stagesMap[stage];
+	setStage(phase) {
+		this.stage = this.stagesMap[phase];
 	}
 
 	apply(map, intersectionFinder, origin, target) {
