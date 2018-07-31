@@ -1,22 +1,21 @@
 const LivingEntity = require('./LivingEntity');
-const Color = require('../util/Color');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
+const Color = require('../util/Color');
+const VShip = require('../graphics/VShip');
+const Charge = require('../util/Charge');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
 const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Decay = require('../util/Decay');
-const VShip = require('../graphics/VShip');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
 const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
 const Dust = require('./particle/Dust');
-const {UiCs, UiPs} = require('../util/UiConstants');
 const RectC = require('../painter/RectC');
+const {UiCs, UiPs} = require('../util/UiConstants');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
-
-const Charge = require('../util/Charge'); // todo [high] move
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
