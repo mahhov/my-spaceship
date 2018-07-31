@@ -25,8 +25,8 @@ class Ability {
 	}
 
 	refresh(player) {
-		if (!this.charges.isFull() && this.cooldown.generate()) {
-			this.charges.generate();
+		if (!this.charges.isFull() && this.cooldown.increment()) {
+			this.charges.increment();
 			this.cooldown.restore();
 		}
 		this.repeating && this.repeating--;

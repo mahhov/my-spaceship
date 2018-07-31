@@ -1,14 +1,14 @@
 const {clamp} = require('./Number');
 
 class Charge {
-	constructor(max, generateRate = 0) {
+	constructor(max, incrementRate = 0) {
 		this.value = this.max = max;
-		this.generateRate = generateRate;
+		this.incrementRate = incrementRate;
 	}
 
 	// return true if reached 0 or max
-	generate() { // todo [high] rename increment
-		return this.change(this.generateRate);
+	increment() {
+		return this.change(this.incrementRate);
 	}
 
 	restore() {
@@ -51,3 +51,5 @@ class Charge {
 }
 
 module.exports = Charge;
+
+// todo [medium] rename this class

@@ -39,7 +39,7 @@ class Player extends LivingEntity {
 	}
 
 	refresh() {
-		this.stamina.generate();
+		this.stamina.increment();
 	}
 
 	moveControl(controller, keymapping, intersectionFinder) {
