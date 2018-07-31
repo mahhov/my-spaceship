@@ -24,7 +24,6 @@ class Player extends LivingEntity {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
-		// todo [high] finish charge-refactor for ability cooldown/charges
 		this.stamina = new Charge(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 

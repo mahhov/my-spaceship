@@ -1,12 +1,11 @@
+const Charge = require('../util/Charge');
 const {UiCs, UiPs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
-
-const Charge = require('../util/Charge');
 
 class Ability {
 	constructor(cooldown, charges, stamina, repeatable, uiIndex, paintUiColor) {
 		this.cooldown = new Charge(cooldown, -1);
-		this.maxCharges = this.charges = charges;
+		this.charges = new Charge(charges, 1);
 		this.stamina = stamina;
 		this.repeatable = repeatable;
 		this.uiIndex = uiIndex;
@@ -16,7 +15,7 @@ class Ability {
 	safeActivate(origin, direct, map, intersectionFinder, player) {
 		if (this.ready)
 			if (this.activate(origin, direct, map, intersectionFinder, player)) {
-				this.charges--;
+				this.charges.change(-1);
 				player.consumeStamina(this.stamina);
 			}
 		this.repeating = 2;
@@ -26,12 +25,12 @@ class Ability {
 	}
 
 	refresh(player) {
-		if (this.charges < this.maxCharges && this.cooldown.generate()) {
-			this.charges++;
+		if (!this.charges.isFull() && this.cooldown.generate()) {
+			this.charges.generate();
 			this.cooldown.restore();
 		}
 		this.repeating && this.repeating--;
-		this.ready = this.charges && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating)
+		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating)
 	}
 
 	paintUi(painter, camera) {
@@ -41,8 +40,8 @@ class Ability {
 		painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, {fill: true, color: this.paintUiColor.getShade()}));
 
 		// foreground for current charges
-		const ROW_HEIGHT = UiPs.ABILITY_SIZE / this.maxCharges;
-		const HEIGHT = this.charges * ROW_HEIGHT;
+		const ROW_HEIGHT = UiPs.ABILITY_SIZE / this.charges.getMax();
+		const HEIGHT = this.charges.get() * ROW_HEIGHT;
 		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, {fill: true, color: this.paintUiColor.get()}));
 
 		// hybrid for current cooldown

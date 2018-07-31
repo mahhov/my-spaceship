@@ -25,6 +25,10 @@ class Charge {
 		return this.value;
 	}
 
+	getMax() {
+		return this.max;
+	}
+
 	getMissing() {
 		return this.max - this.value;
 	}
