@@ -15,7 +15,7 @@ class Projectile extends Entity {
 		this.damage = damage;
 	}
 
-	update(map, intersectionFinder) { // todo fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attcak parent class to have update iterface
+	update(map, intersectionFinder) { // todo [medium] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attcak parent class to have update iterface
 		const FRICTION = .95;
 
 		let intersection = this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
@@ -32,7 +32,7 @@ class Projectile extends Entity {
 		this.vx *= FRICTION;
 		this.vy *= FRICTION;
 
-		// todo check expire and do damage when collided with
+		// todo [low] do damage when collided with (as opposed to when colliding)
 	}
 
 	paint(painter, camera) {

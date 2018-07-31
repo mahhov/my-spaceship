@@ -97,8 +97,8 @@ class IntersectionFinder {
 		moveX += dx * move;
 		moveY += dy * move;
 
-		return [moveX, moveY, intersectionReference || reference]; // todo don't return list
-		// todo return list of all intersection references
+		return [moveX, moveY, intersectionReference || reference]; // todo [low] don't return list
+		// todo [low] return list of all intersection references
 	}
 
 	checkMoveEntitiesIntersection(layer, bounds, dx, dy, magnitude, horizontal, vertical) {
@@ -148,4 +148,4 @@ IntersectionFinder.Layers = Layers;
 
 module.exports = IntersectionFinder;
 
-// todo support rectangular mobile (rotating)entities
+// todo [low] support rectangular mobile (rotating)entities

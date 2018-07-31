@@ -16,7 +16,7 @@ const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
 
-const Charge = require('../util/Charge'); // todo x move
+const Charge = require('../util/Charge'); // todo [high] move
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
@@ -25,7 +25,7 @@ class Player extends LivingEntity {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
-		// todo x finish charge-refactor for ability cooldown/charges
+		// todo [high] finish charge-refactor for ability cooldown/charges
 		this.stamina = new Charge(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
@@ -135,7 +135,7 @@ class Player extends LivingEntity {
 
 	paintUi(painter, camera) {
 		// target lock
-		// todo target lock draws over monster healht bar
+		// todo [medium] target lock draws over monster healht bar
 		if (this.targetLock)
 			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,

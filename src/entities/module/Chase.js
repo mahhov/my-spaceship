@@ -19,7 +19,7 @@ class Chase extends ModuleManager {
 
 		let {x: dx, y: dy, prevMagnitude: targetDistance} = setMagnitude(target.x - this.origin.x, target.y - this.origin.y);
 
-		if (targetDistance < this.nearDistance) // todo do setStage only triggered if changed stage
+		if (targetDistance < this.nearDistance) // todo [high] do setStage only triggered if changed stage
 			this.modulesSetStage(Phases.NEAR);
 		else if (targetDistance > this.farDistance)
 			this.modulesSetStage(Phases.FAR);
@@ -31,7 +31,7 @@ class Chase extends ModuleManager {
 		this.modulesApply(map, intersectionFinder, target);
 	}
 }
-// todo maybe chase can be a module used in a near/far module manager
+// todo [high] maybe chase can be a module used in a near/far module manager
 
 Chase.Stages = Stages;
 Chase.Phases = Phases;

@@ -41,13 +41,12 @@ class Game extends Logic {
 
 module.exports = Game;
 
-// todo graphics
-// particles
+// todo [graphics]
 // asteroid vectors
 // textures
 // starfield background
 
-// todo content
+// todo [content]
 // map generation
 // instances
 // mobs
@@ -56,9 +55,6 @@ module.exports = Game;
 // crafting
 // skill leveling
 
-// todo other
+// todo [other]
 // chat
 // save
-
-// todo x ordered
-// [verify] boss ui + enrage timer + attacks to only trigger when player comes near

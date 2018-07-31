@@ -42,4 +42,4 @@ const localExperience = "#e6991a";
 
 // http://paletton.com/#uid=75C0F0kj+zZ9XRtfuIvo0ulsJqf
 
-// todo find prettier colors
+// todo [low] find prettier colors

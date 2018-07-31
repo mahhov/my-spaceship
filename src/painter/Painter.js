@@ -11,7 +11,7 @@ class Painter {
 	}
 
 	createMask() {
-		this.maskCanvas = document.createElement('canvas'); // todo better way of creating canvas
+		this.maskCanvas = document.createElement('canvas'); // todo [low] better way of creating canvas
 		this.maskCanvas.width = this.width;
 		this.maskCanvas.height = this.height;
 		this.maskContext = this.maskCanvas.getContext('2d');

@@ -30,7 +30,7 @@ class Engage extends ModuleManager {
 	setPhase(phase) {
 		if (phase !== this.phase)
 			this.modulesSetStage(this.phase = phase);
-	} // todo move to module manager and reuuse for chase.
+	} // todo [high] move to module manager and reuuse for chase.
 }
 
 Engage.Stages = Stages;
