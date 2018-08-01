@@ -11,6 +11,9 @@ class ModuleManager extends Module {
 	}
 
 	modulesSetStage(phase) {
+		if (phase === this.phase)
+			return;
+		this.phase = phase;
 		this.modules.forEach(module =>
 			module.setStage(phase));
 	}
