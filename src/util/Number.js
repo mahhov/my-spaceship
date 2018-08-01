@@ -1,4 +1,4 @@
-const EPSILON = 1e-10, PI2 = Math.PI * 2;
+const EPSILON = 1e-10, PI = Math.PI, PI2 = PI * 2;
 
 const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
 
@@ -23,7 +23,7 @@ const clamp = (x, min, max) => {
 	return x > max ? max : x;
 };
 
-const thetaToUnitVector = theta => [cos(theta), sin(theta)];
+const thetaToVector = (theta, magnitude = 1) => [cos(theta) * magnitude, sin(theta) * magnitude];
 
 const cos = theta => Math.cos(theta);
 
@@ -39,9 +39,7 @@ const randB = (max = 1) => rand(max) - max / 2;
 
 const randInt = max => parseInt(rand(max));
 
-const randVector = (magnitude) => {
-	let vector = setMagnitude(...thetaToUnitVector(rand(PI2)), rand(magnitude));
-	return [vector.x, vector.y];
-};
+const randVector = magnitude =>
+	thetaToVector(rand(PI2), rand(magnitude));
 
-module.exports = {EPSILON, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToUnitVector, cos, sin, booleanArray, avg, rand, randB, randInt, randVector};
+module.exports = {EPSILON, PI, PI2, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToVector, cos, sin, booleanArray, avg, rand, randB, randInt, randVector};

@@ -42,9 +42,7 @@ class Game extends Logic {
 module.exports = Game;
 
 // todo [graphics]
-// asteroid vectors
 // textures
-// starfield background
 
 // todo [content]
 // map generation

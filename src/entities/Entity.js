@@ -11,6 +11,10 @@ class Entity {
 		this.moveDirection = {x: 0, y: 1};
 	}
 
+	setGraphics(graphics) {
+		this.graphics = graphics;
+	}
+
 	setPosition(x, y) {
 		this.x = x;
 		this.y = y;
@@ -53,6 +57,7 @@ class Entity {
 	}
 
 	paint(painter, camera) {
+		this.graphics.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}
 }
 

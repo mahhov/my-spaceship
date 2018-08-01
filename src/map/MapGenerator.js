@@ -9,11 +9,11 @@ const WIDTH = 5, HEIGHT = 5;
 class MapGenerator {
 
 	static generateSample(map, player) {
-		const ROCKS = 5, TURRETS = 5, SHOTGUN_WARRIORS = 5;
+		const ROCKS = 15, TURRETS = 5, SHOTGUN_WARRIORS = 5;
 		const ROCK_MAX_SIZE = .1;
 
 		for (let i = 0; i < ROCKS; i++)
-			map.addRock(new Rock(rand(WIDTH), rand(HEIGHT), rand(ROCK_MAX_SIZE), rand(ROCK_MAX_SIZE)));
+			map.addRock(new Rock(rand(WIDTH), rand(HEIGHT), rand(ROCK_MAX_SIZE)));
 
 		player.setPosition(WIDTH / 2, HEIGHT * 3 / 4);
 		map.addPlayer(player);
