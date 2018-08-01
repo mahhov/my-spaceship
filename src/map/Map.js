@@ -36,7 +36,6 @@ class Map {
 
 	addParticle(particle) {
 		this.particles.add(particle);
-		particle.addIntersectionBounds(this.intersectionFinder);
 	}
 
 	update(controller, keymapping) {
@@ -55,10 +54,8 @@ class Map {
 			}
 		});
 		this.particles.forEach((particle, item) => {
-			if (particle.update()) {
+			if (particle.update())
 				this.particles.remove(item);
-				particle.removeIntersectionBounds(this.intersectionFinder);
-			}
 		});
 	}
 
