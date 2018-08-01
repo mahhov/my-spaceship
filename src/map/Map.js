@@ -73,3 +73,5 @@ class Map {
 }
 
 module.exports = Map;
+
+// todo [medium] consider static & dynamic entity lists in stead of individual type entity lists
