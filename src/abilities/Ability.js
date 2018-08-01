@@ -1,11 +1,11 @@
-const Charge = require('../util/Charge');
+const Pool = require('../util/Pool');
 const {UiCs, UiPs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
 
 class Ability {
 	constructor(cooldown, charges, stamina, repeatable, uiIndex, paintUiColor) {
-		this.cooldown = new Charge(cooldown, -1);
-		this.charges = new Charge(charges, 1);
+		this.cooldown = new Pool(cooldown, -1);
+		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
 		this.repeatable = repeatable;
 		this.uiIndex = uiIndex;

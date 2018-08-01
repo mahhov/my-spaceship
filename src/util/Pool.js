@@ -1,6 +1,6 @@
 const {clamp} = require('./Number');
 
-class Charge {
+class Pool {
 	constructor(max, incrementRate = 0) {
 		this.value = this.max = max;
 		this.incrementRate = incrementRate;
@@ -50,6 +50,4 @@ class Charge {
 	}
 }
 
-module.exports = Charge;
-
-// todo [medium] rename this class
+module.exports = Pool;

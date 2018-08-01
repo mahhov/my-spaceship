@@ -1,14 +1,10 @@
 const Entity = require('./Entity');
-const {clamp} = require('../util/Number');
-const RectC = require('../painter/RectC');
-const {UiCs} = require('../util/UiConstants');
-
-const Charge = require('../util/Charge');
+const Pool = require('../util/Pool');
 
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {
 		super(x, y, width, height, layer);
-		this.health = new Charge(health);
+		this.health = new Pool(health);
 	}
 
 	setGraphics(graphics) {

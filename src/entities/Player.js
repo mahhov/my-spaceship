@@ -2,7 +2,7 @@ const LivingEntity = require('./LivingEntity');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
 const Color = require('../util/Color');
 const VShip = require('../graphics/VShip');
-const Charge = require('../util/Charge');
+const Pool = require('../util/Pool');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
 const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
@@ -24,7 +24,7 @@ class Player extends LivingEntity {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
 
-		this.stamina = new Charge(100, .13);
+		this.stamina = new Pool(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];
 
 		this.recentDamage = new Decay(.1, .001);
