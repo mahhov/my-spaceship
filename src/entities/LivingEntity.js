@@ -15,6 +15,10 @@ class LivingEntity extends Entity {
 		this.health.change(amount);
 	}
 
+	restoreHealth() {
+		this.health.restore();
+	}
+
 	paint(painter, camera) {
 		this.graphics.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}

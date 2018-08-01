@@ -32,7 +32,7 @@ class Chase extends ModuleManager {
 	}
 }
 
-// todo [high] maybe chase can be a module used in a near/far module manager
+// todo [medium] maybe chase can be a module used in a near/far module manager
 
 Chase.Stages = Stages;
 Chase.Phases = Phases;

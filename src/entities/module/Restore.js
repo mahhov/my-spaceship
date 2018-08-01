@@ -17,7 +17,7 @@ class Restore extends Module {
 
 	apply(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE || this.trigger.trigger(this.stage))
-			this.origin.health.restore(); // todo [high] make function on living entity
+			this.origin.restoreHealth();
 		else if (this.stage === Stages.INACTIVE)
 			this.trigger.untrigger();
 	}
