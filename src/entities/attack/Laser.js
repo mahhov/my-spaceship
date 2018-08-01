@@ -2,7 +2,7 @@ const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const Line = require('../../painter/Line');
 
-class Projectile extends Entity {
+class Laser extends Entity {
 	constructor(x, y, dx, dy, time, damage, friendly) {
 		const THICKNESS = .001;
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
@@ -31,4 +31,4 @@ class Projectile extends Entity {
 	}
 }
 
-module.exports = Projectile;
+module.exports = Laser;
