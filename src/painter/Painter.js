@@ -18,7 +18,7 @@ class Painter {
 	}
 
 	setFontMode() {
-		this.context.font = '10px monospace';
+		this.context.font = '18px monospace';
 		this.context.textAlign = 'center';
 		this.context.textBaseline = 'middle';
 	}
