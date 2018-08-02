@@ -15,11 +15,12 @@ class GraphicsDemo extends Logic {
 		this.theta = 0;
 		this.dtheta = .2 * Math.PI / 180;
 		this.ship = new TestShip(this.w, this.h, {color: Color.from1(0, 0, 1)});
+		this.fakeCamera = {xt: idf, yt: idf};
 	}
 
 	iterate() {
 		let direction = thetaToVector(this.theta += this.dtheta);
-		this.ship.paint(this.painter, {xt: idf, yt: idf}, this.x, this.y, {x: direction[0], y: direction[1]});
+		this.ship.paint(this.painter, this.fakeCamera, this.x, this.y, {x: direction[0], y: direction[1]});
 	}
 }
 
