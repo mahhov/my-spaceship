@@ -2,7 +2,7 @@ const SimplexNoise = require('simplex-noise');
 
 const {EPSILON, getMagnitude, rand} = require('./Number');
 
-class Noise {
+class NoiseSimplex {
 	constructor(scale) {
 		this.scale = scale;
 		this.simplexNoise = new SimplexNoise(rand);
@@ -13,7 +13,7 @@ class Noise {
 	}
 }
 
-class NoiseIgnore {
+class NoiseGradient {
 	constructor() {
 		this.points = [];
 		for (let i = 0; i < 1000; i++)
@@ -33,4 +33,4 @@ class NoiseIgnore {
 	}
 }
 
-module.exports = Noise;
+module.exports = {NoiseSimplex, NoiseGradient};

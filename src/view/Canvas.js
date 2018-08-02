@@ -3,6 +3,7 @@ const Painter = require('../painter/Painter');
 const Logic = require('../logic/Game');
 const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
+const NoiseDemo = require('../logic/NoiseDemo');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
