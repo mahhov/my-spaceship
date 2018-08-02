@@ -6,6 +6,7 @@ class Camera {
 		this.x = x;
 		this.y = y;
 		this.endZ = this.z = z;
+		this.s0 = this.calcS(0);
 	}
 
 	move(center, adjustment) {
