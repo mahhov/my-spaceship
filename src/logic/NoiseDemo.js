@@ -1,6 +1,7 @@
 const Logic = require('./Logic');
 const {NoiseSimplex, NoiseGradient} = require('../util/Noise');
 const {rand} = require('../util/Number');
+const Controller = require('../control/Controller');
 const Rect = require('../painter/Rect');
 
 const THRESHOLD = .5;
@@ -11,8 +12,12 @@ const NOISE_RANGE = 20; // feature sizes, bigger NOISE_RANGE means smaller featu
 class NoiseDemo extends Logic {
 	constructor(controller, painter) {
 		super(controller, painter);
+		this.reset();
+	}
+
+	reset() {
 		this.results = [];
-		let noise = new NoiseGradient(NOISE_RANGE);
+		let noise = new NoiseSimplex(NOISE_RANGE);
 		for (let x = 0; x < N; x++) {
 			this.results[x] = [];
 			for (let y = 0; y < N; y++) {
@@ -24,6 +29,9 @@ class NoiseDemo extends Logic {
 	}
 
 	iterate() {
+		if (this.controller.getKeyState(' ') === Controller.KeyStates.PRESSED)
+			this.reset();
+
 		for (let x = 0; x < N; x++)
 			for (let y = 0; y < N; y++) {
 				if (this.results[x][y]) {
