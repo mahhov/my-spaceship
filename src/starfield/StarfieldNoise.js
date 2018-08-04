@@ -1,5 +1,5 @@
 const Starfield = require('./Starfield');
-const Noise = require('../util/Noise');
+const {NoiseSimplex} = require('../util/Noise');
 const {rand} = require('../util/Number');
 const Star = require('./Star');
 const RectC = require('../painter/RectC');
@@ -9,28 +9,22 @@ class StarfieldNoise extends Starfield {
 	constructor(width, height, extra = 0) {
 		super(0, 0, 0);
 
-		const DEPTH = 20 + extra & 20, FORWARD_DEPTH = .8,
+		const DEPTH = 20 + extra * 20, FORWARD_DEPTH = .8,
 			WIDTH = width * DEPTH, HEIGHT = height * DEPTH,
 			COUNT = 10 * WIDTH * HEIGHT,
 			SIZE = .03 + extra * .03, BLUE_RATE = .05;
 
-		let noise = new Noise();
-		let countSqrt = Math.sqrt(COUNT);
+		let noise = new NoiseSimplex(8);
 
-		this.stars = [];
-		for (let xi = 0; xi < countSqrt; xi++)
-			for (let yi = 0; yi < countSqrt; yi++) {
-				let x = (xi / countSqrt - .5) * WIDTH;
-				let y = (yi / countSqrt - .5) * HEIGHT;
-				let n = noise.get(xi / countSqrt, yi / countSqrt);
-				if (n < rand() / 2)
-					continue;
-				let z = rand(DEPTH);
-				if (x > z || x < -z || y > z || y < -z)
-					continue;
-				let size = rand(SIZE);
-				this.stars.push(new Star(x, y, z, size, rand() < BLUE_RATE));
-			}
+		this.stars = noise.positions(COUNT, WIDTH, HEIGHT).map(([x, y]) => {
+			x -= WIDTH / 2;
+			y -= HEIGHT / 2;
+			let z = rand(DEPTH);
+			if (x > z || x < -z || y > z || y < -z)
+				return null;
+			let size = rand(SIZE);
+			return new Star(x, y, z, size, rand() < BLUE_RATE);
+		}).filter(star => star);
 	}
 }
 
