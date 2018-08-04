@@ -4,6 +4,7 @@ const Logic = require('../logic/Game');
 const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
 const NoiseDemo = require('../logic/NoiseDemo');
+const MapDemo = require('../logic/MapDemo');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
@@ -15,6 +16,8 @@ const painter = new Painter(canvas);
 const logic = new Logic(controller, painter);
 // const logic = new GraphicsDemo(controller, painter);
 // const logic = new StarfieldDemo(controller, painter);
+// const logic = new NoiseDemo(controller, painter);
+// const logic = new MapDemo(controller, painter);
 
 let loop = async () => {
 	while (true) {
