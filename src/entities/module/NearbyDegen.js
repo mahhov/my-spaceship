@@ -4,7 +4,7 @@ const {getRectDistance} = require('../../util/Number');
 const Color = require('../../util/Color');
 const RectC = require('../../painter/RectC');
 
-const Stages = makeEnum('PRE', 'ACTIVE', 'INACTIVE');
+const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 
 class NearbyDegen extends Module {
 	config(range, damage, origin) {
@@ -22,7 +22,7 @@ class NearbyDegen extends Module {
 	}
 
 	paint(painter, camera) {
-		if (this.stage === Stages.PRE)
+		if (this.stage === Stages.WARNING)
 			painter.add(RectC.withCamera(camera, this.origin.x, this.origin.y, this.range * 2, this.range * 2, {color: Color.from1(1, 0, 0).get()}));
 		else if (this.stage === Stages.ACTIVE)
 			painter.add(RectC.withCamera(camera, this.origin.x, this.origin.y, this.range * 2, this.range * 2, {fill: true, color: Color.from1(1, 0, 0, .3).get()}));

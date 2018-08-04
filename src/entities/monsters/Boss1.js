@@ -69,7 +69,7 @@ class Boss1 extends Monster {
 		this.nearbyDegen = new NearbyDegen();
 		this.nearbyDegen.setStagesMapping({
 			[Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
-			[Phases.PRE_DEGEN]: NearbyDegen.Stages.PRE,
+			[Phases.PRE_DEGEN]: NearbyDegen.Stages.WARNING,
 			[Phases.DEGEN]: NearbyDegen.Stages.ACTIVE,
 			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE
 		});

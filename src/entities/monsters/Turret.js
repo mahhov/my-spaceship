@@ -17,7 +17,7 @@ class Turret extends Monster {
 
 		let nearbyDegen = new NearbyDegen();
 		nearbyDegen.setStagesMapping({
-			[Phases.REST]: NearbyDegen.Stages.PRE,
+			[Phases.REST]: NearbyDegen.Stages.INACTIVE,
 			[Phases.ATTACK]: NearbyDegen.Stages.ACTIVE
 		});
 		nearbyDegen.config(.4, .001, this);
