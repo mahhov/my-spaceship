@@ -8,7 +8,6 @@ const {NoiseSimplex} = require('../util/Noise');
 
 const WIDTH = 10, HEIGHT = WIDTH;
 
-
 class MapGenerator {
 
 	static generateSample(map, player) {
@@ -16,6 +15,8 @@ class MapGenerator {
 		const ROCK_MAX_SIZE = .1;
 
 		let noise = new NoiseSimplex(5);
+
+		map.setSize(WIDTH, HEIGHT);
 
 		player.setPosition(WIDTH / 2, HEIGHT * 3 / 4);
 		map.addPlayer(player);
