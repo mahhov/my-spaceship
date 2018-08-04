@@ -35,7 +35,7 @@ class Game extends Logic {
 		this.starfield.paint(this.painter, this.camera);
 		this.map.paint(this.painter, this.camera);
 		if (UI)
-			this.map.paintU(this.painter, this.camera)
+			this.map.paintUi(this.painter, this.camera)
 	}
 }
 

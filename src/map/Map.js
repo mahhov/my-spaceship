@@ -67,7 +67,7 @@ class Map {
 		this.particles.forEach(particle => particle.paint(painter, camera));
 	}
 
-	paintU(painter, camera) {
+	paintUi(painter, camera) {
 		this.uis.forEach(ui => ui.paintUi(painter, camera));
 	}
 }
