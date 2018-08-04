@@ -56,3 +56,4 @@ module.exports = Game;
 // todo [other]
 // chat
 // save
+// minimap

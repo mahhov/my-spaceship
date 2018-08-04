@@ -23,6 +23,7 @@ class MapGenerator {
 		noise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => map.addRock(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		noise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => map.addMonster(new Turret(...position)));
 		noise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => map.addMonster(new ShotgunWarrior(...position)));
+		noise.positions(1, WIDTH, HEIGHT).forEach(position => map.addMonster(new Boss1(...position)));
 	}
 }
 

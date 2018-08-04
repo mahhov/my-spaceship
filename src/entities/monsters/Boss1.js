@@ -121,4 +121,6 @@ class Boss1 extends Monster {
 	}
 }
 
+// todo [high] boss ui not working
+
 module.exports = Boss1;
