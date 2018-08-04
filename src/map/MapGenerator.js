@@ -4,27 +4,25 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
-const WIDTH = 5, HEIGHT = 5;
+const {NoiseSimplex} = require('../util/Noise');
+
+const WIDTH = 10, HEIGHT = WIDTH;
+
 
 class MapGenerator {
 
 	static generateSample(map, player) {
-		const ROCKS = 15, TURRETS = 5, SHOTGUN_WARRIORS = 5;
+		const ROCKS = 100, TURRETS = 100, SHOTGUN_WARRIORS = 100;
 		const ROCK_MAX_SIZE = .1;
 
-		for (let i = 0; i < ROCKS; i++)
-			map.addRock(new Rock(rand(WIDTH), rand(HEIGHT), rand(ROCK_MAX_SIZE)));
+		let noise = new NoiseSimplex(5);
 
 		player.setPosition(WIDTH / 2, HEIGHT * 3 / 4);
 		map.addPlayer(player);
 
-		for (let i = 0; i < TURRETS; i++)
-			map.addMonster(new Turret(rand(WIDTH), rand(HEIGHT)))
-
-		for (let i = 0; i < SHOTGUN_WARRIORS; i++)
-			map.addMonster(new ShotgunWarrior(rand(WIDTH), rand(HEIGHT)))
-
-		map.addMonster(new Boss1(WIDTH / 2, HEIGHT / 4), true);
+		noise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => map.addRock(new Rock(...position, rand(ROCK_MAX_SIZE))));
+		noise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => map.addMonster(new Turret(...position)));
+		noise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => map.addMonster(new ShotgunWarrior(...position)));
 	}
 }
 
