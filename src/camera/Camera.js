@@ -9,6 +9,8 @@ class Camera {
 		this.s0 = this.calcS(0);
 	}
 
+	// center range [[0, width], [0, height]]
+	// adjustment range [[0, 1], [0, 1]]
 	move(center, adjustment) {
 		const ADJUSTMENT_WEIGHT = .5, FILTER_WEIGHT = .93;
 		let x = center.x + (adjustment.x - .5) * ADJUSTMENT_WEIGHT;
