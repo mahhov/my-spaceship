@@ -47,6 +47,7 @@ module.exports = Game;
 
 // todo [graphics]
 // textures
+// ui interface
 
 // todo [content]
 // map generation
@@ -61,3 +62,7 @@ module.exports = Game;
 // chat
 // save
 // minimap
+
+// todo [high]
+// spawn player away from enemies
+// boss to recieve special marking in minimap
