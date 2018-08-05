@@ -77,7 +77,12 @@ class Map {
 	}
 
 	paintUi(painter, camera) {
-		this.uis.forEach(ui => ui.paintUi(painter, camera));
+		this.uis.forEach(ui => {
+			if (ui.health.isEmpty())
+				this.uis.remove(ui);
+			else
+				ui.paintUi(painter, camera);
+		});
 	}
 }
 

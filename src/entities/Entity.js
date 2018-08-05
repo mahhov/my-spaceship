@@ -59,6 +59,9 @@ class Entity {
 	paint(painter, camera) {
 		this.graphics.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}
+
+	paintUi(painter, camera) {
+	}
 }
 
 module.exports = Entity;
