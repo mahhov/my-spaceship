@@ -19,7 +19,7 @@ class NoiseSimplex {
 		return this.get(x, y) > this.threshold + rand(this.thresholdRandWeight);
 	}
 
-	// retun count number of points within range [[0 - width], [0 - height]], structured as 2d array
+	// return count number of positions within range [[0 - width], [0 - height]], structured as 2d array
 	// not consistent, calling it multiple times with same paramters can yield different results
 	positions(count, width, height) {
 		let positions = [];
@@ -31,6 +31,24 @@ class NoiseSimplex {
 		}
 		return positions;
 	}
+
+	// return position with lowest noise value of count random positions, within range [[0 - width], [0 - height]]
+	// not consistent, calling it multiple times with same paramters can yield different results
+	positionsLowest(count, width, height) {
+		let position = [];
+		let minNoise = 1;
+		for (let i = 0; i < count; i++) {
+			let x = rand();
+			let y = rand();
+			let noise = this.get(x, y);
+			if (noise < minNoise) {
+				minNoise = noise;
+				position = [x * width, y * height];
+			}
+		}
+		return position;
+	}
+
 }
 
 class NoiseGradient {

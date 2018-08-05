@@ -62,6 +62,3 @@ module.exports = Game;
 // chat
 // save
 // minimap
-
-// todo [high]
-// spawn player away from enemies

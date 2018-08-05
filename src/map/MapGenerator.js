@@ -18,7 +18,7 @@ class MapGenerator {
 
 		map.setSize(WIDTH, HEIGHT);
 
-		player.setPosition(WIDTH / 2, HEIGHT * 3 / 4);
+		player.setPosition(...noise.positionsLowest(100, WIDTH, HEIGHT));
 		map.addPlayer(player);
 
 		noise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => map.addRock(new Rock(...position, rand(ROCK_MAX_SIZE))));
