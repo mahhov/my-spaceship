@@ -1,4 +1,5 @@
 const Keymapping = require('../control/Keymapping');
+const Color = require('../util/Color');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
@@ -27,10 +28,10 @@ class Minimap {
 	}
 
 	paint(painter) {
-		const BACKGROUND_COLOR = 'rgba(255, 255, 255, .2)'; // todo [high] use real color
-		const ROCK_COLOR = '#000';
-		const PLAYER_COLOR = '#00f';
-		const MONSTER_COLOR = '#f00';
+		const BACKGROUND_COLOR = Color.from1(1, 1, 1, .2).get();
+		const ROCK_COLOR = Color.from1(0, 0, 0).get();
+		const PLAYER_COLOR = Color.from1(0, 0, 1).get();
+		const MONSTER_COLOR = Color.from1(1, 0, 0).get();
 
 		let camera = this.createCamera();
 		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: true, color: BACKGROUND_COLOR}));
