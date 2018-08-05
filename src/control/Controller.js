@@ -8,7 +8,7 @@ class Controller {
 		this.mouseTargetHeight = mouseTarget.height;
 
 		this.keys = {};
-		this.mouse = {x: .5, y: .5};
+		this.mouse = {x: null, y: null};
 		this.transformedMouse = {};
 
 		document.addEventListener('keydown', event =>
@@ -47,8 +47,8 @@ class Controller {
 		return this.keys[key] || KeyStates.UP;
 	}
 
-	getRawMouse() {
-		return this.mouse;
+	getRawMouse(defaultX = 0, defaultY = 0) {
+		return this.mouse.x ? this.mouse : {x: defaultX, y: defaultY};
 	}
 
 	inverseTransformMouse(inverseTransformer) {
