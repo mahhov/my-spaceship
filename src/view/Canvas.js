@@ -19,6 +19,7 @@ const logic = new Logic(controller, painter);
 // const logic = new StarfieldDemo(controller, painter);
 // const logic = new NoiseDemo(controller, painter);
 // const logic = new MapDemo(controller, painter);
+// const logic = new InterfaceDemo(controller, painter);
 
 let loop = async () => {
 	while (true) {

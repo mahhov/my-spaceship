@@ -24,7 +24,7 @@ class Dust extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Color.from1(1, 1, 1)}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Color.WHITE.get()}));
 	}
 
 }

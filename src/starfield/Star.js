@@ -2,7 +2,7 @@ const Color = require('../util/Color');
 const {rand, randInt} = require('../util/Number');
 const RectC = require('../painter/RectC');
 
-const STAR_COLOR = Color.from1(1, 1, 1), STAR_FLICKER_COLOR = STAR_COLOR.multiply(.7);
+const STAR_COLOR = Color.WHITE, STAR_FLICKER_COLOR = STAR_COLOR.multiply(.7);
 const STAR_BLUE_COLOR = Color.from1(.8, .8, 1), STAR_FLICKER_BLUE_COLOR = STAR_BLUE_COLOR.multiply(.7);
 const STAR_COLOR_ARRAY = [[STAR_COLOR, STAR_FLICKER_COLOR], [STAR_BLUE_COLOR, STAR_FLICKER_BLUE_COLOR]];
 

@@ -22,7 +22,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 class Player extends LivingEntity {
 	constructor() {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
-		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
+		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Color.WHITE.get()}));
 
 		this.stamina = new Pool(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2)];

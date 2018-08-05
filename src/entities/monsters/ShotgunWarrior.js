@@ -11,7 +11,7 @@ const Phases = makeEnum('ONE');
 class ShotgunWarrior extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .04);
-		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Color.fromHex(0xf, 0xf, 0xf, true).get()}));
+		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Color.WHITE.get()}));
 
 		this.attackPhase = new Phase(0);
 

@@ -29,8 +29,8 @@ module.exports = {UiCs: Colors, UiPs: Positions};
 // RESERVE_COLOR: Color.from1(.2, .6, .6),
 // EXPERIENCE_COLOR: Color.from1(.9, .6, .1),
 
-// LIFE_EMPTY_COLOR: Color.fromHex(0x4, 0xB, 0xC, true),
-// LIFE_FILL_COLOR: Color.fromHex(0x5, 0xD, 0xF, true),
+// LIFE_EMPTY_COLOR: Color.fromHex(0x4, 0xb, 0xc, true),
+// LIFE_FILL_COLOR: Color.fromHex(0x5, 0xd, 0xf, true),
 // STAMINA_EMPTY_COLOR: Color.fromHex(0xc, 0xc, 0x4, true),
 // STAMINA_FILL_COLOR: Color.fromHex(0xf, 0xf, 0x5, true),
 
