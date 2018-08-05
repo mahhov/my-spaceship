@@ -15,7 +15,7 @@ class StarfieldDemo extends Logic {
 		let {x, y} = this.controller.getRawMouse();
 		this.camera.move({x: x - .5, y: y - .5}, {x, y});
 		this.starfield.paint(this.painter, this.camera);
-		this.painter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: '#fff'}));
+		this.painter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: '#fff'})); // todo [high] use actual color
 	}
 
 	periodicallySwapStarfield() {

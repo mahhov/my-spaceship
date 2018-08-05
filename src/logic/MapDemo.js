@@ -60,7 +60,7 @@ class MapDemo extends Logic {
 		this.updateCamera();
 
 		this.painter.add(new Rect(0, 0, 1, 1, {fill: true}));
-		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: '#fff', thickness: 2}));
+		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: '#fff', thickness: 2})); // todo [high] use actual color
 		this.map.paint(this.painter, this.camera);
 	}
 
