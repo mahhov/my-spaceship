@@ -55,7 +55,7 @@ class MapDemo extends Logic {
 	}
 
 	iterate() {
-		if (this.controller.getKeyState(' ') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState(' ') === Controller.States.PRESSED)
 			this.reset();
 
 		this.updateCamera();

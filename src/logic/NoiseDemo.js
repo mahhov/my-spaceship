@@ -38,15 +38,15 @@ class NoiseDemo extends Logic {
 	}
 
 	control() {
-		if (this.controller.getKeyState('arrowdown') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState('arrowdown') === Controller.States.PRESSED)
 			this.noiseRange -= 5;
-		if (this.controller.getKeyState('arrowup') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState('arrowup') === Controller.States.PRESSED)
 			this.noiseRange += 5;
-		if (this.controller.getKeyState('arrowleft') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState('arrowleft') === Controller.States.PRESSED)
 			this.noiseRange--;
-		if (this.controller.getKeyState('arrowright') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState('arrowright') === Controller.States.PRESSED)
 			this.noiseRange++;
-		if (this.controller.getKeyState(' ') === Controller.KeyStates.PRESSED)
+		if (this.controller.getKeyState(' ') === Controller.States.PRESSED)
 			this.reset();
 	}
 

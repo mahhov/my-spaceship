@@ -1,6 +1,6 @@
 const makeEnum = require('../util/Enum');
 
-const KeyStates = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED'); // todo [high] rename to States
+const States = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED');
 
 class Controller {
 	constructor(mouseTarget) {
@@ -31,11 +31,11 @@ class Controller {
 	}
 
 	handleKeyPress(key) {
-		this.keys[key] = KeyStates.PRESSED;
+		this.keys[key] = States.PRESSED;
 	}
 
 	handleKeyRelease(key) {
-		this.keys[key] = KeyStates.RELEASED;
+		this.keys[key] = States.RELEASED;
 	}
 
 	handleMouseMove(x, y) {
@@ -44,21 +44,21 @@ class Controller {
 	}
 
 	handleMousePress() {
-		this.mouseState = KeyStates.PRESSED;
+		this.mouseState = States.PRESSED;
 	}
 
 	handleMouseRelease() {
-		this.mouseState = KeyStates.RELEASED;
+		this.mouseState = States.RELEASED;
 	}
 
 	handleBlur() {
 		Object.entries(this.keys)
-			.filter(([, value]) => value === KeyStates.DOWN || value === KeyStates.PRESSED)
-			.forEach(([key]) => this.keys[key] = KeyStates.RELEASED);
+			.filter(([, value]) => value === States.DOWN || value === States.PRESSED)
+			.forEach(([key]) => this.keys[key] = States.RELEASED);
 	}
 
 	getKeyState(key) {
-		return this.keys[key] || KeyStates.UP;
+		return this.keys[key] || States.UP;
 	}
 
 	getRawMouse(defaultX = 0, defaultY = 0) {
@@ -86,25 +86,25 @@ class Controller {
 
 	static expireKey(key) {
 		switch (key) {
-			case KeyStates.RELEASED:
-				return KeyStates.UP;
-			case KeyStates.PRESSED:
-				return KeyStates.DOWN;
+			case States.RELEASED:
+				return States.UP;
+			case States.PRESSED:
+				return States.DOWN;
 			default:
 				return key;
 		}
 	}
 
 	static isActive(state) {
-		return state === KeyStates.PRESSED || state === KeyStates.DOWN;
+		return state === States.PRESSED || state === States.DOWN;
 	}
 
 	static isPressed(state) {
-		return state === KeyStates.PRESSED;
+		return state === States.PRESSED;
 	}
 }
 
-Controller.KeyStates = KeyStates;
+Controller.States = States;
 
 module.exports = Controller;
 
