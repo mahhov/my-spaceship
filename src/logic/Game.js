@@ -65,4 +65,3 @@ module.exports = Game;
 
 // todo [high]
 // spawn player away from enemies
-// boss to recieve special marking in minimap
