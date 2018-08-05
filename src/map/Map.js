@@ -1,11 +1,9 @@
 const IntersectionFinder = require('../intersection/IntersectionFinder');
-const Minimap = require('./Minimap');
 const LinkedList = require('../util/LinkedList');
 
 class Map {
 	constructor() {
 		this.intersectionFinder = new IntersectionFinder();
-		this.minimap = new Minimap(this); // todo [high] map really shouldnt' be owner of minmap. move to Game class instead
 		this.rocks = new LinkedList();
 		this.monsters = new LinkedList();
 		this.projectiles = new LinkedList();
@@ -76,7 +74,6 @@ class Map {
 
 	paintUi(painter, camera) {
 		this.uis.forEach(ui => ui.paintUi(painter, camera));
-		this.minimap.paint(painter);
 	}
 }
 

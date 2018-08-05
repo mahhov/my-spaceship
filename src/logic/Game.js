@@ -3,6 +3,7 @@ const Keymapping = require('../control/Keymapping');
 const Map = require('../map/Map');
 const Player = require('../entities/Player');
 const MapGenerator = require('../map/MapGenerator');
+const Minimap = require('../map/Minimap');
 const Camera = require('../camera/Camera');
 const Starfield = require('../starfield/Starfield');
 
@@ -15,6 +16,7 @@ class Game extends Logic {
 		this.map = new Map();
 		this.player = new Player();
 		MapGenerator.generateSample(this.map, this.player);
+		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
 		this.starfield = new Starfield(MapGenerator.width, MapGenerator.height); // todo [high] use map.width/height in all places where MapGenerator.width/height is used
 	}
@@ -29,11 +31,13 @@ class Game extends Logic {
 		this.camera.zoom(this.controller, this.keymapping);
 		this.controller.inverseTransformMouse(this.camera);
 		this.map.update(this.controller, this.keymapping);
+		this.minimap.update(this.controller, this.keymapping);
 	}
 
 	paint() {
 		this.starfield.paint(this.painter, this.camera);
 		this.map.paint(this.painter, this.camera);
+		this.minimap.paint(this.painter);
 		if (UI)
 			this.map.paintUi(this.painter, this.camera)
 	}
