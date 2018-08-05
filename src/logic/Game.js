@@ -18,7 +18,7 @@ class Game extends Logic {
 		MapGenerator.generateSample(this.map, this.player);
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
-		this.starfield = new Starfield(MapGenerator.width, MapGenerator.height); // todo [high] use map.width/height in all places where MapGenerator.width/height is used
+		this.starfield = new Starfield(...this.map.getSize());
 	}
 
 	iterate() {

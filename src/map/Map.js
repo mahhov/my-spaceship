@@ -16,6 +16,10 @@ class Map {
 		this.height = height;
 	}
 
+	getSize() {
+		return [this.width, this.height];
+	}
+
 	addRock(rock) {
 		this.rocks.add(rock);
 		rock.addIntersectionBounds(this.intersectionFinder);

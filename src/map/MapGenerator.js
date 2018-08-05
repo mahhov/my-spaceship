@@ -28,7 +28,4 @@ class MapGenerator {
 	}
 }
 
-MapGenerator.width = WIDTH;
-MapGenerator.height = HEIGHT;
-
 module.exports = MapGenerator;

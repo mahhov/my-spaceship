@@ -18,6 +18,11 @@ class FakeMap {
 		this.monsters = new LinkedList();
 	}
 
+	setSize(width, height) {
+		this.width = width;
+		this.height = height;
+	}
+
 	addRock(rock) {
 		this.rocks.add(rock);
 	}
@@ -38,8 +43,8 @@ class FakeMap {
 class MapDemo extends Logic {
 	constructor(controller, painter) {
 		super(controller, painter);
-		this.camera = new Camera(MapGenerator.width / 2, MapGenerator.height / 2, (MapGenerator.width + MapGenerator.height) / 2);
 		this.reset();
+		this.camera = new Camera(this.map.width / 2, this.map.height / 2, (this.map.width + this.map.height) / 2);
 	}
 
 	reset() {
@@ -55,13 +60,13 @@ class MapDemo extends Logic {
 		this.updateCamera();
 
 		this.painter.add(new Rect(0, 0, 1, 1, {fill: true}));
-		this.painter.add(RectC.withCamera(this.camera, MapGenerator.width / 2, MapGenerator.height / 2, MapGenerator.width, MapGenerator.height, {color: '#fff', thickness: 2}));
+		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: '#fff', thickness: 2}));
 		this.map.paint(this.painter, this.camera);
 	}
 
 	updateCamera() {
 		let {x, y} = this.controller.getRawMouse();
-		this.camera.move({x: x * MapGenerator.width, y: y * MapGenerator.height}, {x, y});
+		this.camera.move({x: x * this.map.width, y: y * this.map.height}, {x, y});
 	}
 }
 
