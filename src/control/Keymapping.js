@@ -15,7 +15,8 @@ const Keys = makeEnum(
 	'ABILITY_7',
 	'TARGET_LOCK',
 	'ZOOM_IN',
-	'ZOOM_OUT');
+	'ZOOM_OUT',
+	'MINIMAP_ZOOM');
 
 Keys.ABILITY_I = [
 	Keys.ABILITY_1,
@@ -44,6 +45,7 @@ class Keymapping {
 		this.map[Keys.TARGET_LOCK] = 'capslock';
 		this.map[Keys.ZOOM_IN] = 'x';
 		this.map[Keys.ZOOM_OUT] = 'z';
+		this.map[Keys.MINIMAP_ZOOM] = 'q';
 	}
 
 	getKey(control) {

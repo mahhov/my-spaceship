@@ -1,3 +1,4 @@
+const Keymapping = require('../control/Keymapping');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
@@ -8,6 +9,11 @@ class Minimap {
 
 	toggleZoom() {
 		this.zoom = !this.zoom;
+	}
+
+	update(controller, keymapping) {
+		if (keymapping.isPressed(controller, Keymapping.Keys.MINIMAP_ZOOM))
+			this.toggleZoom();
 	}
 
 	createCamera() {
