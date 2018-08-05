@@ -5,6 +5,7 @@ const MapGenerator = require('../map/MapGenerator');
 const Camera = require('../camera/Camera');
 const Controller = require('../control/Controller');
 const Rect = require('../painter/Rect');
+const Color = require('../util/Color');
 const RectC = require('../painter/RectC');
 
 class FakePlayer {
@@ -60,7 +61,7 @@ class MapDemo extends Logic {
 		this.updateCamera();
 
 		this.painter.add(new Rect(0, 0, 1, 1, {fill: true}));
-		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: '#fff', thickness: 2})); // todo [high] use actual color
+		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
 		this.map.paint(this.painter, this.camera);
 	}
 

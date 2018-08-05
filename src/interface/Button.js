@@ -1,6 +1,7 @@
 const makeEnum = require('../util/Enum');
 const Interface = require('./Interface');
 const Controller = require('../control/Controller');
+const Color = require('../util/Color');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
@@ -23,9 +24,9 @@ class Button extends Interface {
 	}
 
 	paint(painter) {
-		const INACTIVE_COLOR = '#fff'; // tood [high] use actual color and ui constants
-		const HOVER_COLOR = '#f3f3f3';
-		const ACTIVE_COLOR = '#e7e7e7';
+		const INACTIVE_COLOR = Color.WHITE.get(); // tood [high] use ui constants
+		const HOVER_COLOR = Color.from1(.95, .95, .95).get();
+		const ACTIVE_COLOR = Color.from1(.9, .9, .9).get();
 		let color = [INACTIVE_COLOR, ACTIVE_COLOR, HOVER_COLOR][this.state];
 
 		painter.add(new Rect(this.left, this.top, this.width, this.height, {fill: true, color}));

@@ -2,6 +2,7 @@ const Logic = require('./Logic');
 const {NoiseSimplex, NoiseGradient} = require('../util/Noise');
 const {rand} = require('../util/Number');
 const Controller = require('../control/Controller');
+const Color = require('../util/Color');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 const Text = require('../painter/Text');
@@ -53,8 +54,7 @@ class NoiseDemo extends Logic {
 		for (let x = 0; x < N; x++)
 			for (let y = 0; y < N; y++) {
 				if (this.results[x][y]) {
-					let c = 0;
-					this.painter.add(new Rect(x * NTH, y * NTH, 1 / N, 1 / N, {fill: true, color: `rgb(${c}, ${c}, ${c})`})); // todo [high] use actual color
+					this.painter.add(new Rect(x * NTH, y * NTH, 1 / N, 1 / N, {fill: true, color: Color.BLACK.get()}));
 					this.painter.add(new RectC(.1, .1, .03, .03, {fill: true, color: `#fff`}));
 					this.painter.add(new Text(.1, .1, this.noiseRange));
 				}
