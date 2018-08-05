@@ -1,6 +1,6 @@
 const makeEnum = require('../util/Enum');
 
-const KeyStates = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED');
+const KeyStates = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED'); // todo [high] rename to States
 
 class Controller {
 	constructor(mouseTarget) {
@@ -20,6 +20,12 @@ class Controller {
 		document.addEventListener('mousemove', event =>
 			this.handleMouseMove(event.x - mouseTarget.offsetLeft, event.y - mouseTarget.offsetTop));
 
+		document.addEventListener('mousedown', () =>
+			this.handleMousePress());
+
+		document.addEventListener('mouseup', () =>
+			this.handleMouseRelease());
+
 		window.addEventListener('blur', () =>
 			this.handleBlur());
 	}
@@ -35,6 +41,14 @@ class Controller {
 	handleMouseMove(x, y) {
 		this.mouse.x = x / this.mouseTargetWidth;
 		this.mouse.y = y / this.mouseTargetHeight;
+	}
+
+	handleMousePress() {
+		this.mouseState = KeyStates.PRESSED;
+	}
+
+	handleMouseRelease() {
+		this.mouseState = KeyStates.RELEASED;
 	}
 
 	handleBlur() {
@@ -60,9 +74,14 @@ class Controller {
 		return this.transformedMouse;
 	}
 
+	getMouseState() {
+		return this.mouseState;
+	}
+
 	expire() {
 		Object.entries(this.keys)
 			.forEach(([key, value]) => this.keys[key] = Controller.expireKey(value));
+		this.mouseState = Controller.expireKey(this.mouseState);
 	}
 
 	static expireKey(key) {
@@ -75,8 +94,18 @@ class Controller {
 				return key;
 		}
 	}
+
+	static isActive(state) {
+		return state === KeyStates.PRESSED || state === KeyStates.DOWN;
+	}
+
+	static isPressed(state) {
+		return state === KeyStates.PRESSED;
+	}
 }
 
 Controller.KeyStates = KeyStates;
 
 module.exports = Controller;
+
+// todo [high] replace isActive and isPressed with state class with getters

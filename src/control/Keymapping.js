@@ -53,12 +53,11 @@ class Keymapping {
 	}
 
 	isActive(controller, control) {
-		let state = controller.getKeyState(this.getKey(control));
-		return state === Controller.KeyStates.PRESSED || state === Controller.KeyStates.DOWN;
+		return Controller.isActive(controller.getKeyState(this.getKey(control)));
 	}
 
 	isPressed(controller, control) {
-		return controller.getKeyState(this.getKey(control)) === Controller.KeyStates.PRESSED;
+		return Controller.isPressed(controller.getKeyState(this.getKey(control)));
 	}
 }
 
