@@ -30,6 +30,10 @@ class Bounds {
 			value * signs[direction] > bounds.getOpposite(direction) * signs[direction]);
 	}
 
+	inside(x, y){
+		return this.intersects(new Bounds(x, y, x, y));
+	}
+
 	static oppositeDirection(direction) {
 		switch (direction) {
 			case Directions.LEFT:

@@ -5,6 +5,7 @@ const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
 const NoiseDemo = require('../logic/NoiseDemo');
 const MapDemo = require('../logic/MapDemo');
+const InterfaceDemo = require('../logic/InterfaceDemo');
 
 const sleep = milli =>
 	new Promise(resolve => setTimeout(resolve, milli));
