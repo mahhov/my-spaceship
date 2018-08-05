@@ -1,4 +1,5 @@
 const Keymapping = require('../control/Keymapping');
+const Camera = require('../camera/Camera');
 const Color = require('../util/Color');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
@@ -19,12 +20,8 @@ class Minimap {
 
 	createCamera() {
 		const OFFSET = .01, SCALE_BASE_SMALL = .15, SCALE_BASE_LARGE = .4;
-		let scale = (this.zoom ? SCALE_BASE_LARGE : SCALE_BASE_SMALL) / this.map.width;
-		return { // todo [high] use real camera
-			xt: x => OFFSET + x * scale,
-			yt: y => OFFSET + y * scale,
-			st: size => size * scale
-		};
+		let scale = (this.zoom ? SCALE_BASE_LARGE : SCALE_BASE_SMALL);
+		return Camera.createForRegion(this.map.width, OFFSET, OFFSET, scale);
 	}
 
 	paint(painter) {

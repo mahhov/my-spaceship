@@ -9,6 +9,11 @@ class Camera {
 		this.s0 = this.calcS(0);
 	}
 
+	static createForRegion(fromScale, toLeft, toTop, toScale) {
+		let invScale = fromScale / toScale;
+		return new Camera((.5 - toLeft) * invScale, (.5 - toTop) * invScale, invScale);
+	}
+
 	// center range [[0, width], [0, height]]
 	// adjustment range [[0, 1], [0, 1]]
 	move(center, adjustment) {
