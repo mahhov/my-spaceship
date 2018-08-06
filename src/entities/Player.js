@@ -45,10 +45,10 @@ class Player extends LivingEntity {
 	moveControl(controller, keymapping, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
-		let left = keymapping.isActive(controller, Keymapping.Keys.MOVE_LEFT);
-		let up = keymapping.isActive(controller, Keymapping.Keys.MOVE_UP);
-		let right = keymapping.isActive(controller, Keymapping.Keys.MOVE_RIGHT);
-		let down = keymapping.isActive(controller, Keymapping.Keys.MOVE_DOWN);
+		let left = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_LEFT).active;
+		let up = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_UP).active;
+		let right = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_RIGHT).active;
+		let down = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_DOWN).active;
 
 		let dx = 0, dy = 0;
 
@@ -80,7 +80,7 @@ class Player extends LivingEntity {
 		this.abilities
 			.forEach((ability, index) => {
 				ability.refresh(this);
-				if (keymapping.isActive(controller, Keymapping.Keys.ABILITY_I[index]))
+				if (keymapping.getKeyState(controller, Keymapping.Keys.ABILITY_I[index]).active)
 					ability.safeActivate(this, direct, map, intersectionFinder, this);
 			});
 	}
@@ -89,7 +89,7 @@ class Player extends LivingEntity {
 		if (this.targetLock && this.targetLock.health.isEmpty())
 			this.targetLock = null;
 
-		if (!keymapping.isPressed(controller, Keymapping.Keys.TARGET_LOCK))
+		if (!keymapping.getKeyState(controller, Keymapping.Keys.TARGET_LOCK).pressed)
 			return;
 
 		if (this.targetLock) {

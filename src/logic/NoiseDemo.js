@@ -1,7 +1,6 @@
 const Logic = require('./Logic');
 const {NoiseSimplex, NoiseGradient} = require('../util/Noise');
 const {rand} = require('../util/Number');
-const Controller = require('../control/Controller');
 const Color = require('../util/Color');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
@@ -38,15 +37,15 @@ class NoiseDemo extends Logic {
 	}
 
 	control() {
-		if (this.controller.getKeyState('arrowdown') === Controller.States.PRESSED)
+		if (this.controller.getKeyState('arrowdown').pressed)
 			this.noiseRange -= 5;
-		if (this.controller.getKeyState('arrowup') === Controller.States.PRESSED)
+		if (this.controller.getKeyState('arrowup').pressed)
 			this.noiseRange += 5;
-		if (this.controller.getKeyState('arrowleft') === Controller.States.PRESSED)
+		if (this.controller.getKeyState('arrowleft').pressed)
 			this.noiseRange--;
-		if (this.controller.getKeyState('arrowright') === Controller.States.PRESSED)
+		if (this.controller.getKeyState('arrowright').pressed)
 			this.noiseRange++;
-		if (this.controller.getKeyState(' ') === Controller.States.PRESSED)
+		if (this.controller.getKeyState(' ').pressed)
 			this.reset();
 	}
 

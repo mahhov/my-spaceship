@@ -14,7 +14,7 @@ class Minimap {
 	}
 
 	update(controller, keymapping) {
-		if (keymapping.isPressed(controller, Keymapping.Keys.MINIMAP_ZOOM))
+		if (keymapping.getKeyState(controller, Keymapping.Keys.MINIMAP_ZOOM).pressed)
 			this.toggleZoom();
 	}
 

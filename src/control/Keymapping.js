@@ -48,16 +48,14 @@ class Keymapping {
 		this.map[Keys.MINIMAP_ZOOM] = 'q';
 	}
 
+	// map control (e.g. ZOOM_OUT) to key (e.g. 'z')
 	getKey(control) {
 		return this.map[control];
 	}
 
-	isActive(controller, control) {
-		return Controller.isActive(controller.getKeyState(this.getKey(control)));
-	}
-
-	isPressed(controller, control) {
-		return Controller.isPressed(controller.getKeyState(this.getKey(control)));
+	// map control (e.g. ZOOM_OUT) to state
+	getKeyState(controller, control) {
+		return controller.getKeyState(this.getKey(control));
 	}
 }
 

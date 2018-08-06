@@ -3,7 +3,6 @@ const Entity = require('../entities/Entity');
 const Logic = require('./Logic');
 const MapGenerator = require('../map/MapGenerator');
 const Camera = require('../camera/Camera');
-const Controller = require('../control/Controller');
 const Rect = require('../painter/Rect');
 const Color = require('../util/Color');
 const RectC = require('../painter/RectC');
@@ -55,7 +54,7 @@ class MapDemo extends Logic {
 	}
 
 	iterate() {
-		if (this.controller.getKeyState(' ') === Controller.States.PRESSED)
+		if (this.controller.getKeyState(' ').pressed)
 			this.reset();
 
 		this.updateCamera();
