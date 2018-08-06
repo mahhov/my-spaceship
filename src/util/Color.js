@@ -77,7 +77,7 @@ class Color {
 	}
 }
 
-Color.WHITE = Color.from1(1, 1, 1);
+Color.WHITE = Color.from1(0, 0, 0);
 Color.BLACK = Color.from1(0, 0, 0);
 
 module.exports = Color;

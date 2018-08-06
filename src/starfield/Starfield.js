@@ -22,7 +22,7 @@ class Starfield {
 	}
 
 	paint(painter, camera) {
-		painter.add(new RectC(.5, .5, 1, 1, {fill: true}));
+		// painter.add(new RectC(.5, .5, 1, 1, {fill: true}));
 		this.stars.forEach(star => star.paint(painter, camera));
 	}
 }
