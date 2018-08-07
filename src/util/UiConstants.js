@@ -22,11 +22,11 @@ const Colors = {
 	},
 
 	Entity: {
-		ROCK: Color.fromHexString('#ddd'),
-		PLAYER: Color.fromHexString('#ddd'),
-		MONSTER: Color.fromHexString('#ddd'),
-		PROJECTILE: Color.fromHexString('#ddd'),
-		DUST: Color.fromHexString('#ddd')
+		ROCK: Color.fromHexString('#888'),
+		PLAYER: Color.fromHexString('#888'),
+		MONSTER: Color.fromHexString('#888'),
+		PROJECTILE: Color.fromHexString('#888'),
+		DUST: Color.fromHexString('#888')
 	},
 
 	Ability: {
