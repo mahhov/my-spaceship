@@ -16,21 +16,27 @@ class Color {
 	}
 
 	static from1(r1, g1, b1, a) {
-		return new Color(...Color.onesTo255([r1, g1, b1]), a);
+		return new Color(...[r1, g1, b1].map(Color.oneTo255), a);
 	}
 
-	static fromHex(rh, gh, bh, single, a) {
-		return new Color(...Color.hexesTo255([rh, gh, bh], single), a);
+	static fromHex(rh, gh, bh, a) {
+		return new Color(...[rh, gh, bh].map(Color.hexTo255), a)
 	}
 
 	static fromHexString(hex) {
 		if (hex[0] === '#')
 			hex = hex.substr(1);
-		let d = hex.length === 3 ? 1 : 2;
+
+		if (hex.length === 3)
+			return Color.from255(
+				Color.hexTo255(parseInt(hex[0], 16)),
+				Color.hexTo255(parseInt(hex[1], 16)),
+				Color.hexTo255(parseInt(hex[2], 16)));
+
 		return Color.from255(
-			parseInt(hex.substr(0, d), 16),
-			parseInt(hex.substr(d, d), 16),
-			parseInt(hex.substr(d * 2, d), 16));
+			parseInt(hex.substr(0, 2), 16),
+			parseInt(hex.substr(2, 2), 16),
+			parseInt(hex.substr(4, 2), 16));
 	}
 
 	multiply(mult) {
@@ -61,20 +67,12 @@ class Color {
 		return this.alphaMultiply(alphaMult).get();
 	}
 
-	static hexTo255(hex, single) {
-		return hex / (single ? 0xf : 0xff) * 255;
-	}
-
-	static hexesTo255(hexes, single) {
-		return hexes.map(hex => Color.hexTo255(hex, single));
+	static hexTo255(hex) {
+		return hex * 17
 	}
 
 	static oneTo255(one) {
 		return parseInt(one * 255);
-	}
-
-	static onesTo255(ones) {
-		return ones.map(Color.oneTo255);
 	}
 }
 
