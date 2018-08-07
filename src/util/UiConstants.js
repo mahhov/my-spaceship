@@ -1,7 +1,10 @@
 const Color = require('./Color');
 
 const Colors = {
+	// todo [medium] structure these constants
+
 	// bars
+	BAR_SHADING: .25,
 	LIFE: Color.fromHexString('#fab9b1'),
 	STAMINA: Color.fromHexString('#98d494'),
 	ENRAGE: Color.fromHexString('#616600'),
