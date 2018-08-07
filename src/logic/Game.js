@@ -62,3 +62,11 @@ module.exports = Game;
 // chat
 // save
 // minimap
+
+// todo [monster]
+// skirmersher
+// laser, short range raiders
+// latchers that reduce max health
+// linkers that reduce speed and drain health
+// traps
+// dots
