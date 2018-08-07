@@ -1,7 +1,6 @@
 const makeEnum = require('../util/Enum');
 const Interface = require('./Interface');
-const Controller = require('../control/Controller');
-const Color = require('../util/Color');
+const {UiCs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
@@ -20,14 +19,11 @@ class Button extends Interface {
 		if (!this.bounds.inside(x, y))
 			this.state = States.INACTIVE;
 		else
-			this.state = Controller.isActive(controller.getMouseState()) ? States.ACTIVE : States.HOVER;
+			this.state = controller.getMouseState().active ? States.ACTIVE : States.HOVER;
 	}
 
 	paint(painter) {
-		const INACTIVE_COLOR = Color.WHITE.get(); // tood [high] use ui constants
-		const HOVER_COLOR = Color.from1(.95, .95, .95).get();
-		const ACTIVE_COLOR = Color.from1(.9, .9, .9).get();
-		let color = [INACTIVE_COLOR, ACTIVE_COLOR, HOVER_COLOR][this.state];
+		let color = [UiCs.Interface.INACTIVE_COLOR, UiCs.Interface.ACTIVE_COLOR, UiCs.Interface.HOVER_COLOR][this.state].get();
 
 		painter.add(new Rect(this.left, this.top, this.width, this.height, {fill: true, color}));
 		painter.add(new Rect(this.left, this.top, this.width, this.height));
