@@ -11,7 +11,7 @@ const WIDTH = 10, HEIGHT = WIDTH;
 class MapGenerator {
 
 	static generateSample(map, player) {
-		const ROCKS = 100, TURRETS = 100, SHOTGUN_WARRIORS = 100;
+		const ROCKS = 100, TURRETS = 0, SHOTGUN_WARRIORS = 100;
 		const ROCK_MAX_SIZE = .1;
 
 		let noise = new NoiseSimplex(5);

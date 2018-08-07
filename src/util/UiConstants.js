@@ -1,22 +1,52 @@
 const Color = require('./Color');
 
 const Colors = {
-	LIFE_COLOR: Color.fromHexString('#FD5F63'),
-	STAMINA_COLOR: Color.fromHexString('#57D550'),
-	ENRAGE_COLOR: Color.fromHexString('#616600'),
+	// bars
+	LIFE: Color.fromHexString('#fab9b1'),
+	STAMINA: Color.fromHexString('#98d494'),
+	ENRAGE: Color.fromHexString('#616600'),
 
-	DAMAGE_COLOR: Color.from255(255, 0, 0, .4),
+	TARGET_LOCK: Color.from1(.5, .5, .5),
+	DAMAGE: Color.from255(255, 0, 0, .4),
 
 	// abilities
-	BASIC_ATTACK_COLOR: Color.fromHex(0xa, 0x4, 0x4, true),
-	DASH_COLOR: Color.fromHex(0x4, 0xa, 0x4, true),
-	HEAL_COLOR: Color.fromHex(0x4, 0x4, 0xa, true),
-	NOT_READY_COLOR: Color.fromHex(0xf, 0xf, 0xf, true),
+	BASIC_ATTACK: Color.fromHexString('#a87676'),
+	DASH: Color.fromHexString('#76a876'),
+	HEAL: Color.fromHexString('#7676a8'),
+	NOT_READY: Color.fromHex(0xf, 0xf, 0xf, true),
 
 	Interface: {
-		INACTIVE_COLOR: Color.from1(1, 1, 1),
-		HOVER_COLOR: Color.from1(.95, .95, .95),
-		ACTIVE_COLOR: Color.from1(1, 1, 1)
+		INACTIVE: Color.from1(1, 1, 1),
+		HOVER: Color.from1(.95, .95, .95),
+		ACTIVE: Color.from1(1, 1, 1)
+	},
+
+	Entity: {
+		ROCK: Color.fromHexString('#ddd'),
+		PLAYER: Color.fromHexString('#ddd'),
+		MONSTER: Color.fromHexString('#ddd'),
+		PROJECTILE: Color.fromHexString('#ddd'),
+		DUST: Color.fromHexString('#ddd')
+	},
+
+	Ability: {
+		NearybyDegen: {
+			WARNING_BORDER: Color.from1(1, 0, 0),
+			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
+		}
+	},
+
+	Star: {
+		WHITE: Color.WHITE,
+		BLUE: Color.from1(.8, .8, 1)
+	},
+
+	Minimap: {
+		BACKGROUND: Color.from1(1, 1, 1, .5),
+		ROCK: Color.from1(0, 0, 0),
+		MONSTER: Color.from1(1, 0, 0),
+		BOSS: Color.from1(0, 1, 0),
+		PLAYER: Color.from1(0, 0, 1)
 	}
 };
 
@@ -40,11 +70,11 @@ module.exports = {UiCs: Colors, UiPs: Positions};
 // STAMINA_EMPTY_COLOR: Color.fromHex(0xc, 0xc, 0x4, true),
 // STAMINA_FILL_COLOR: Color.fromHex(0xf, 0xf, 0x5, true),
 
-const localLife = "#cc4e4e";
-const localStamina = "#ffcc99";
-const localShield = "#6680b3";
-const localReserve = "#339999";
-const localExperience = "#e6991a";
+// const localLife = "#cc4e4e";
+// const localStamina = "#ffcc99";
+// const localShield = "#6680b3";
+// const localReserve = "#339999";
+// const localExperience = "#e6991a";
 
 // http://paletton.com/#uid=75C0F0kj+zZ9XRtfuIvo0ulsJqf
 

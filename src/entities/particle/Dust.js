@@ -1,6 +1,6 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const Color = require('../../util/Color');
+const {UiCs} = require('../../util/UiConstants');
 const RectC = require('../../painter/RectC');
 
 class Dust extends Entity {
@@ -24,7 +24,7 @@ class Dust extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Color.WHITE.get()}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: UiCs.Entity.DUST.get()}));
 	}
 
 }

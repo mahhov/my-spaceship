@@ -1,10 +1,11 @@
-const Color = require('../util/Color');
+const {UiCs} = require('../util/UiConstants');
 const {rand, randInt} = require('../util/Number');
 const RectC = require('../painter/RectC');
 
-const STAR_COLOR = Color.WHITE, STAR_FLICKER_COLOR = STAR_COLOR.multiply(.7);
-const STAR_BLUE_COLOR = Color.from1(.8, .8, 1), STAR_FLICKER_BLUE_COLOR = STAR_BLUE_COLOR.multiply(.7);
-const STAR_COLOR_ARRAY = [[STAR_COLOR, STAR_FLICKER_COLOR], [STAR_BLUE_COLOR, STAR_FLICKER_BLUE_COLOR]];
+const FLICKER_COLOR_MULT = .7;
+const STAR_COLOR_ARRAY = [
+	[UiCs.Star.WHITE, UiCs.Star.WHITE.multiply(FLICKER_COLOR_MULT)],
+	[UiCs.Star.BLUE, UiCs.Star.BLUE.multiply(FLICKER_COLOR_MULT)]];
 
 class Star {
 	constructor(x, y, z, size, blue) {
@@ -16,7 +17,7 @@ class Star {
 	}
 
 	paint(painter, camera) {
-		const FLICKER_RATE = .003, FLICKER_COLOR = .7;
+		const FLICKER_RATE = .003;
 
 		let x = camera.xt(this.x, this.z);
 		let y = camera.yt(this.y, this.z);

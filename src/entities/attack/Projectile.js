@@ -2,7 +2,7 @@ const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {randVector} = require('../../util/Number');
 const Dust = require('../particle/Dust');
-const Color = require('../../util/Color');
+const {UiCs} = require('../../util/UiConstants');
 const RectC = require('../../painter/RectC');
 
 class Projectile extends Entity {
@@ -36,7 +36,7 @@ class Projectile extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Color.WHITE.get()}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: UiCs.PROJECTILE.get()}));
 	}
 }
 

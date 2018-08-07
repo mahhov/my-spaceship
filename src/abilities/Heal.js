@@ -4,7 +4,7 @@ const {setMagnitude} = require('../util/Number');
 
 class Dash extends Ability {
 	constructor(paintUiColumn) {
-		super(720, 1, 30, false, paintUiColumn, UiCs.HEAL_COLOR);
+		super(720, 1, 30, false, paintUiColumn, UiCs.HEAL);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

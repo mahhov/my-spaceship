@@ -1,6 +1,6 @@
 const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
-const Color = require('../../util/Color');
+const {UiCs, UiPs} = require('../../util/UiConstants');
 const Phase = require('../../util/Phase');
 const Engage = require('../module/Engage');
 const PhaseSetter = require('../module/PhaseSetter');
@@ -8,7 +8,6 @@ const Restore = require('../module/Restore');
 const NearbyDegen = require('../module/NearbyDegen');
 const Shotgun = require('../module/Shotgun');
 const StarShip = require('../../graphics/StarShip');
-const {UiCs, UiPs} = require('../../util/UiConstants');
 const Bar = require('../../painter/Bar');
 
 const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
@@ -16,7 +15,7 @@ const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .5);
-		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Color.WHITE.get()}));
+		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: UiCs.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
 		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
@@ -114,10 +113,10 @@ class Boss1 extends Monster {
 
 		painter.add(new Bar(
 			UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.health.getRatio(),
-			UiCs.LIFE_COLOR.getShade(), UiCs.LIFE_COLOR.get(), UiCs.LIFE_COLOR.getShade()));
+			UiCs.LIFE.getShade(), UiCs.LIFE.get(), UiCs.LIFE.getShade()));
 		painter.add(new Bar(
 			UiPs.MARGIN, UiPs.MARGIN * 2.5, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT * .5, this.enragePhase.getRatio(),
-			UiCs.ENRAGE_COLOR.getShade(), UiCs.ENRAGE_COLOR.get(), UiCs.ENRAGE_COLOR.getShade()));
+			UiCs.ENRAGE.getShade(), UiCs.ENRAGE.get(), UiCs.ENRAGE.getShade()));
 	}
 }
 

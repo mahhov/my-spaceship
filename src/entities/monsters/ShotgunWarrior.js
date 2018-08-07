@@ -1,6 +1,6 @@
 const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
-const Color = require('../../util/Color');
+const {UiCs} = require('../../util/UiConstants');
 const Phase = require('../../util/Phase');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
@@ -11,7 +11,7 @@ const Phases = makeEnum('ONE');
 class ShotgunWarrior extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .04);
-		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Color.WHITE.get()}));
+		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: UiCs.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
 

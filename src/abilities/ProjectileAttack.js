@@ -5,7 +5,7 @@ const Projectile = require('../entities/attack/Projectile');
 
 class ProjectileAttack extends Ability {
 	constructor(paintUiColumn) {
-		super(3, 15, .6, true, paintUiColumn, UiCs.BASIC_ATTACK_COLOR);
+		super(3, 15, .6, true, paintUiColumn, UiCs.BASIC_ATTACK);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

@@ -23,7 +23,7 @@ class Button extends Interface {
 	}
 
 	paint(painter) {
-		let color = [UiCs.Interface.INACTIVE_COLOR, UiCs.Interface.ACTIVE_COLOR, UiCs.Interface.HOVER_COLOR][this.state].get();
+		let color = [UiCs.Interface.INACTIVE, UiCs.Interface.ACTIVE, UiCs.Interface.HOVER][this.state].get();
 
 		painter.add(new Rect(this.left, this.top, this.width, this.height, {fill: true, color}));
 		painter.add(new Rect(this.left, this.top, this.width, this.height));
