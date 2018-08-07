@@ -3,13 +3,13 @@ const ModuleManager = require('./ModuleManager');
 const {getMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
-const Phases = makeEnum('ENGAGED', 'DISENGAGED');
 
-class Engage extends ModuleManager {
-	config(nearDistance, farDistance, origin) {
-		this.nearDistance = nearDistance;
-		this.farDistance = farDistance;
+class Distance extends ModuleManager {
+	// distances should be in increasing order
+	// if this.distances = [10, 20], then phase 1 = [10, 20)
+	config(origin, ...distances) {
 		this.origin = origin;
+		this.distances = distances;
 	}
 
 	apply(map, intersectionFinder, target) {
@@ -18,16 +18,15 @@ class Engage extends ModuleManager {
 
 		let targetDistance = getMagnitude(target.x - this.origin.x, target.y - this.origin.y);
 
-		if (targetDistance < this.nearDistance)
-			this.modulesSetStage(Phases.ENGAGED);
-		else if (targetDistance > this.farDistance)
-			this.modulesSetStage(Phases.DISENGAGED);
+		let phase = this.distances.findIndex(distance => targetDistance < distance);
+		if (phase === -1)
+			phase = this.distances.length;
+		this.modulesSetStage(phase);
 
 		this.modulesApply(map, intersectionFinder, target);
 	}
 }
 
-Engage.Stages = Stages;
-Engage.Phases = Phases;
+Distance.Stages = Stages;
 
-module.exports = Engage;
+module.exports = Distance;

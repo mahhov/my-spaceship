@@ -2,6 +2,7 @@ const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const {UiCs} = require('../../util/UiConstants');
 const Phase = require('../../util/Phase');
+const Distance = require('../module/Distance');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
 const WShip = require('../../graphics/WShip');
@@ -15,21 +16,30 @@ class ShotgunWarrior extends Monster {
 
 		this.attackPhase = new Phase(0);
 
+		let distance = new Distance();
+		distance.setStagesMapping({[Phases.ONE]: Distance.Stages.ACTIVE});
+		distance.config(this, .25, .55);
+		this.moduleManager.addModule(distance);
+
 		let chase = new Chase();
-		chase.setStagesMapping({[Phases.ONE]: Chase.Stages.ACTIVE});
-		chase.config(.25, .55, .003, this);
-		this.moduleManager.addModule(chase);
+		chase.setStagesMapping({
+			0: Chase.Stages.INACTIVE,
+			1: Chase.Stages.ACTIVE,
+			2: Chase.Stages.INACTIVE
+		});
+		chase.config(this, .003);
+		distance.addModule(chase);
 
 		let shotgun = new Shotgun();
 		shotgun.setStagesMapping({
-			[Chase.Phases.NEAR]: Shotgun.Stages.ACTIVE,
-			[Chase.Phases.MIDDLE]: Shotgun.Stages.INACTIVE,
-			[Chase.Phases.FAR]: Shotgun.Stages.INACTIVE
+			0: Shotgun.Stages.ACTIVE,
+			1: Shotgun.Stages.INACTIVE,
+			2: Shotgun.Stages.INACTIVE
 		});
 		shotgun.config(.05, 3, .015, .003, 100, .005, this);
-		chase.addModule(shotgun);
+		distance.addModule(shotgun);
 
-		chase.modulesSetStage(0);
+		distance.modulesSetStage(0);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 

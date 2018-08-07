@@ -23,7 +23,6 @@ class Boss1 extends Monster {
 		this.enragePhase.setPhase(0);
 
 		let engage = new Engage();
-		this.engage = engage;
 		engage.setStagesMapping({
 			[Phases.INACTIVE]: Engage.Stages.ACTIVE,
 			[Phases.PRE_DEGEN]: Engage.Stages.ACTIVE,

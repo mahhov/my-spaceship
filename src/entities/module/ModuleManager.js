@@ -4,6 +4,7 @@ class ModuleManager extends Module {
 	constructor() {
 		super();
 		this.modules = [];
+		this.phase = -1;
 	}
 
 	addModule(module) {
