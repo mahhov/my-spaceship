@@ -26,10 +26,11 @@ class Color {
 	static fromHexString(hex) {
 		if (hex[0] === '#')
 			hex = hex.substr(1);
+		let d = hex.length === 3 ? 1 : 2;
 		return Color.from255(
-			parseInt(hex.substr(0, 2), 16),
-			parseInt(hex.substr(2, 2), 16),
-			parseInt(hex.substr(4, 2), 16));
+			parseInt(hex.substr(0, d), 16),
+			parseInt(hex.substr(d, d), 16),
+			parseInt(hex.substr(d * 2, d), 16));
 	}
 
 	multiply(mult) {
