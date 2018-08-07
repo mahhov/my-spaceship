@@ -6,14 +6,14 @@ const Projectile = require('../attack/Projectile');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Shotgun extends Module {
-	config(rate, count, velocity, spread, duration, damage, origin) {
+	config(origin, rate, count, velocity, spread, duration, damage) {
+		this.origin = origin;
 		this.rate = rate;
 		this.count = count;
 		this.velicity = velocity;
 		this.spread = spread;
 		this.duration = duration;
 		this.damage = damage;
-		this.origin = origin;
 	}
 
 	apply(map, intersectionFinder, target) {

@@ -36,7 +36,7 @@ class ShotgunWarrior extends Monster {
 			1: Shotgun.Stages.INACTIVE,
 			2: Shotgun.Stages.INACTIVE
 		});
-		shotgun.config(.05, 3, .015, .003, 100, .005, this);
+		shotgun.config(this, .05, 3, .015, .003, 100, .005);
 		distance.addModule(shotgun);
 
 		distance.modulesSetStage(0);

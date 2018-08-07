@@ -29,7 +29,7 @@ class Boss1 extends Monster {
 			[Phases.DEGEN]: Engage.Stages.ACTIVE,
 			[Phases.PROJECTILE]: Engage.Stages.ACTIVE
 		});
-		engage.config(.5, 1, this);
+		engage.config(this, .5, 1);
 		this.moduleManager.addModule(engage);
 
 		let phaseSetterEngageAttack = new PhaseSetter();
@@ -91,13 +91,13 @@ class Boss1 extends Monster {
 				this.moduleManager.modulesSetStage(this.attackPhase.get());
 
 			if (this.enragePhase.isNew()) {
-				this.nearbyDegen.config(.33, .002, this);
-				this.shotgun.config(.1, 10, .015, .003, 100, .005, this);
+				this.nearbyDegen.config(this, .33, .002);
+				this.shotgun.config(this, .1, 10, .015, .003, 100, .005);
 			}
 
 			if (this.enragePhase.tick()) {
-				this.nearbyDegen.config(.33, .01, this);
-				this.shotgun.config(.1, 30, .018, .006, 100, .005, this);
+				this.nearbyDegen.config(this, .33, .01);
+				this.shotgun.config(this, .1, 30, .018, .006, 100, .005);
 			}
 		}
 

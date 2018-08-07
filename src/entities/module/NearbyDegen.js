@@ -7,10 +7,10 @@ const RectC = require('../../painter/RectC');
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 
 class NearbyDegen extends Module {
-	config(range, damage, origin) {
+	config(origin, range, damage) {
+		this.origin = origin;
 		this.range = range;
 		this.damage = damage;
-		this.origin = origin;
 	}
 
 	apply(map, intersectionFinder, target) {

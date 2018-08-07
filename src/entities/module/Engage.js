@@ -6,10 +6,10 @@ const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('ENGAGED', 'DISENGAGED');
 
 class Engage extends ModuleManager {
-	config(nearDistance, farDistance, origin) {
+	config(origin, nearDistance, farDistance) {
+		this.origin = origin;
 		this.nearDistance = nearDistance;
 		this.farDistance = farDistance;
-		this.origin = origin;
 	}
 
 	apply(map, intersectionFinder, target) {

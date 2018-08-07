@@ -5,7 +5,7 @@ const {setMagnitude} = require('../../util/Number');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Chase extends Module {
-	config(origin, speed) { // todo [high] order origin consistentiy between all module config methods
+	config(origin, speed) {
 		this.origin = origin;
 		this.speed = speed;
 	}
