@@ -43,6 +43,7 @@ class Player extends LivingEntity {
 
 	moveControl(controller, keymapping, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
+		const SPEED = .005;
 
 		let left = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_LEFT).active;
 		let up = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_UP).active;
@@ -66,7 +67,7 @@ class Player extends LivingEntity {
 		}
 
 		this.currentMove = [dx, dy];
-		this.safeMove(intersectionFinder, dx, dy, .005);
+		this.safeMove(intersectionFinder, dx, dy, SPEED);
 	}
 
 	abilityControl(map, controller, keymapping, intersectionFinder) {
