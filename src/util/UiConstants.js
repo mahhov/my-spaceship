@@ -16,7 +16,7 @@ const Colors = {
 	BASIC_ATTACK: Color.fromHexString('#a87676'),
 	DASH: Color.fromHexString('#76a876'),
 	HEAL: Color.fromHexString('#7676a8'),
-	NOT_READY: Color.fromHex(0xf, 0xf, 0xf),
+	NOT_READY: Color.fromHex('#888'), // todo [high] make visible color on white bg
 
 	Interface: {
 		INACTIVE: Color.from1(1, 1, 1),
@@ -40,7 +40,7 @@ const Colors = {
 	},
 
 	Star: {
-		WHITE: Color.WHITE,
+		WHITE: Color.WHITE, // todo [high] white shouldn't be working, & is blue working?
 		BLUE: Color.from1(.8, .8, 1)
 	},
 
