@@ -27,11 +27,17 @@ class Game extends Logic {
 	}
 
 	update() {
-		this.camera.move(this.player, this.controller.getRawMouse(.5, .5));
-		this.camera.zoom(this.controller, this.keymapping);
+		this.updateCamera();
 		this.controller.inverseTransformMouse(this.camera);
 		this.map.update(this.controller, this.keymapping);
 		this.minimap.update(this.controller, this.keymapping);
+	}
+
+	updateCamera() {
+		this.camera.move(this.player, this.controller.getRawMouse(.5, .5));
+		this.camera.zoom(
+			this.keymapping.getKeyState(this.controller, Keymapping.Keys.ZOOM_OUT).active,
+			this.keymapping.getKeyState(this.controller, Keymapping.Keys.ZOOM_IN).active);
 	}
 
 	paint() {

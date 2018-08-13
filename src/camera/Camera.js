@@ -24,9 +24,9 @@ class Camera {
 		this.y = avg(this.y, y, FILTER_WEIGHT);
 	}
 
-	zoom(controller, keymapping) {
+	zoom(zoomOut, zoomIn) {
 		const ZOOM_RATE = .2, MIN_Z = 1, MAX_Z = 10, FILTER_WEIGHT = .93;
-		let dz = keymapping.getKeyState(controller, Keymapping.Keys.ZOOM_OUT).active - keymapping.getKeyState(controller, Keymapping.Keys.ZOOM_IN).active;
+		let dz = zoomOut - zoomIn;
 		if (dz)
 			this.endZ = clamp(this.endZ + dz * ZOOM_RATE, MIN_Z, MAX_Z);
 		this.z = avg(this.z, this.endZ, FILTER_WEIGHT);
