@@ -14,7 +14,7 @@ class Button extends Interface {
 	}
 
 	update(controller) {
-		let {x, y} = controller.getRawMouse(0, 0);
+		let {x, y} = controller.getRawMouse();
 
 		if (!this.bounds.inside(x, y))
 			this.state = States.INACTIVE;

@@ -59,14 +59,14 @@ class MapDemo extends Logic {
 
 		this.updateCamera();
 
-		this.painter.add(new Rect(0, 0, 1, 1, {fill: true}));
 		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
 		this.map.paint(this.painter, this.camera);
 	}
 
 	updateCamera() {
-		let {x, y} = this.controller.getRawMouse();
+		let {x, y} = this.controller.getRawMouse(.5, .5);
 		this.camera.move({x: x * this.map.width, y: y * this.map.height}, {x, y});
+		this.camera.zoom(this.controller.getKeyState('z').active, this.controller.getKeyState('x').active);
 	}
 }
 
