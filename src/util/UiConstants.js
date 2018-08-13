@@ -16,7 +16,7 @@ const Colors = {
 	BASIC_ATTACK: Color.fromHexString('#a87676'),
 	DASH: Color.fromHexString('#76a876'),
 	HEAL: Color.fromHexString('#7676a8'),
-	NOT_READY: Color.fromHex('#888'), // todo [high] make visible color on white bg
+	NOT_READY: Color.fromHexString('#444'),
 
 	Interface: {
 		INACTIVE: Color.from1(1, 1, 1),
@@ -40,8 +40,8 @@ const Colors = {
 	},
 
 	Star: {
-		WHITE: Color.WHITE, // todo [high] white shouldn't be working, & is blue working?
-		BLUE: Color.from1(.8, .8, 1)
+		WHITE: Color.from1(0, 0, 0),
+		BLUE: Color.from1(0, 0, .5)
 	},
 
 	Minimap: {
