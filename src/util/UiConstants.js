@@ -26,6 +26,7 @@ const Colors = {
 
 	Entity: {
 		ROCK: Color.fromHexString('#888'),
+		ROCK_MINERAL: Color.fromHexString('#8b8'),
 		PLAYER: Color.fromHexString('#888'),
 		MONSTER: Color.fromHexString('#888'),
 		PROJECTILE: Color.fromHexString('#888'),

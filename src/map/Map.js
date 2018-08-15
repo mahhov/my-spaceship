@@ -4,7 +4,7 @@ const LinkedList = require('../util/LinkedList');
 class Map {
 	constructor() {
 		this.intersectionFinder = new IntersectionFinder();
-		this.rocks = new LinkedList();
+		this.stills = new LinkedList();
 		this.monsters = new LinkedList();
 		this.projectiles = new LinkedList();
 		this.particles = new LinkedList();
@@ -20,9 +20,9 @@ class Map {
 		return [this.width, this.height];
 	}
 
-	addRock(rock) {
-		this.rocks.add(rock);
-		rock.addIntersectionBounds(this.intersectionFinder);
+	addStill(still) {
+		this.stills.add(still);
+		still.addIntersectionBounds(this.intersectionFinder);
 	}
 
 	addPlayer(player) {
@@ -69,7 +69,7 @@ class Map {
 	}
 
 	paint(painter, camera) {
-		this.rocks.forEach(rock => rock.paint(painter, camera));
+		this.stills.forEach(still => still.paint(painter, camera));
 		this.player.paint(painter, camera);
 		this.monsters.forEach(monster => monster.paint(painter, camera));
 		this.projectiles.forEach(projectile => projectile.paint(painter, camera));

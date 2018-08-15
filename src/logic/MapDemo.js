@@ -14,7 +14,7 @@ class FakePlayer {
 
 class FakeMap {
 	constructor() {
-		this.rocks = new LinkedList();
+		this.stills = new LinkedList();
 		this.monsters = new LinkedList();
 	}
 
@@ -23,8 +23,8 @@ class FakeMap {
 		this.height = height;
 	}
 
-	addRock(rock) {
-		this.rocks.add(rock);
+	addStill(still) {
+		this.stills.add(still);
 	}
 
 	addPlayer(player) {
@@ -35,7 +35,7 @@ class FakeMap {
 	}
 
 	paint(painter, camera) {
-		this.rocks.forEach(rock => rock.paint(painter, camera));
+		this.stills.forEach(still => still.paint(painter, camera));
 		this.monsters.forEach(monster => Entity.prototype.paint.call(monster, painter, camera)); // to avoid painting modules
 	}
 }
