@@ -47,8 +47,8 @@ class Map {
 		this.particles.add(particle);
 	}
 
-	update(controller, keymapping) {
-		this.player.update(this, controller, keymapping, this.intersectionFinder);
+	update(controller, keymapping, monsterKnowledge) {
+		this.player.update(this, controller, keymapping, this.intersectionFinder, monsterKnowledge);
 		this.monsters.forEach((monster, item) => {
 			if (monster.health.isEmpty()) {
 				this.monsters.remove(item);

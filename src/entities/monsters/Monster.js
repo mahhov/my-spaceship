@@ -10,7 +10,7 @@ class Monster extends LivingEntity {
 		this.moduleManager = new ModuleManager();
 	}
 
-	update(map, intersectionFinder, player) {
+	update(map, intersectionFinder, monsterKnowledge) {
 	}
 
 	paint(painter, camera) {

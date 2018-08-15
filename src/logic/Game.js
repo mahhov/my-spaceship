@@ -2,6 +2,7 @@ const Logic = require('./Logic');
 const Keymapping = require('../control/Keymapping');
 const Map = require('../map/Map');
 const Player = require('../entities/Player');
+const MonsterKnowledge = require('../entities/monsters/MonsterKnowledge');
 const MapGenerator = require('../map/MapGenerator');
 const Minimap = require('../map/Minimap');
 const Camera = require('../camera/Camera');
@@ -15,6 +16,8 @@ class Game extends Logic {
 		this.keymapping = new Keymapping();
 		this.map = new Map();
 		this.player = new Player();
+		this.monsterKnowledge = new MonsterKnowledge();
+		this.monsterKnowledge.setPlayer(this.player);
 		MapGenerator.generateSample(this.map, this.player);
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
@@ -29,7 +32,7 @@ class Game extends Logic {
 	update() {
 		this.updateCamera();
 		this.controller.inverseTransformMouse(this.camera);
-		this.map.update(this.controller, this.keymapping);
+		this.map.update(this.controller, this.keymapping, this.monsterKnowledge);
 		this.minimap.update(this.controller, this.keymapping);
 	}
 
@@ -68,6 +71,7 @@ module.exports = Game;
 // chat
 // save
 // minimap
+// consider restructuring packages. src>abilities & src>entities>module r symmetric
 
 // todo [monster]
 // skirmersher

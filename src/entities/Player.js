@@ -29,7 +29,7 @@ class Player extends LivingEntity {
 		this.recentDamage = new Decay(.1, .001);
 	}
 
-	update(map, controller, keymapping, intersectionFinder) {
+	update(map, controller, keymapping, intersectionFinder, monsterKnowledge) {
 		this.refresh();
 		this.moveControl(controller, keymapping, intersectionFinder);
 		this.abilityControl(map, controller, keymapping, intersectionFinder);
