@@ -8,13 +8,13 @@ const idf = a => a;
 class GraphicsDemo extends Logic {
 	constructor(controller, painter) {
 		super(controller, painter);
-		this.w = .3;
-		this.h = .3;
+		this.w = .02;
+		this.h = .02;
 		this.x = .5;
 		this.y = .5;
 		this.theta = 0;
 		this.dtheta = .2 * Math.PI / 180;
-		this.ship = new TestShip(this.w, this.h, {color: Color.from1(0, 0, 1)});
+		this.ship = new TestShip(this.w, this.h);
 		this.fakeCamera = {xt: idf, yt: idf};
 	}
 
