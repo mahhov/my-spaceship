@@ -9,7 +9,8 @@ class RockGraphic extends Graphics {
 		let points = [];
 		for (let i = 0; i < POINTS; i++)
 			points.push(thetaToVector(i * PI2 / POINTS, rand() + MIN_MAGNITUDE));
-		super(width, height, points, {fill, color, thickness});
+		super();
+		this.addPath(width, height, points, {fill, color, thickness});
 	}
 }
 

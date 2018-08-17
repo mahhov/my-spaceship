@@ -1,20 +1,27 @@
 const PathCreator = require('./PathCreator');
 
 class Graphics {
-	constructor(width, height, points, {fill, color, thickness} = {}) {
-		this.pathCreator = new PathCreator();
-		this.pathCreator.setFill(fill);
-		this.pathCreator.setColor(color);
-		this.pathCreator.setThickness(thickness);
-		this.pathCreator.setScale(width, height, Graphics.calculateScale(points));
-		points.forEach(point => this.pathCreator.moveTo(...point));
+	constructor() {
+		this.pathCreators = [];
+	}
+
+	addPath(width, height, points, {fill, color, thickness} = {}) {
+		let pathCreator = new PathCreator();
+		pathCreator.setFill(fill);
+		pathCreator.setColor(color);
+		pathCreator.setThickness(thickness);
+		pathCreator.setScale(width, height, Graphics.calculateScale(points));
+		points.forEach(point => pathCreator.moveTo(...point));
+		this.pathCreators.push(pathCreator);
 	}
 
 	paint(painter, camera, x, y, moveDirection) {
-		this.pathCreator.setCamera(camera);
-		this.pathCreator.setTranslation(x, y);
-		this.pathCreator.setForward(moveDirection.x, moveDirection.y);
-		painter.add(this.pathCreator.create())
+		this.pathCreators.forEach(pathCreator => {
+			pathCreator.setCamera(camera);
+			pathCreator.setTranslation(x, y);
+			pathCreator.setForward(moveDirection.x, moveDirection.y);
+			painter.add(pathCreator.create())
+		});
 	}
 
 	static calculateScale(points) {

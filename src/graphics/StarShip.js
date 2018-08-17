@@ -23,7 +23,8 @@ const POINTS = [
 
 class StarShip extends Graphics {
 	constructor(width, height, {fill, color, thickness} = {}) {
-		super(width, height, POINTS, {fill, color, thickness});
+		super();
+		this.addPath(width, height, POINTS, {fill, color, thickness});
 	}
 }
 
