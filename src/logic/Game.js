@@ -18,7 +18,7 @@ class Game extends Logic {
 		this.player = new Player();
 		this.monsterKnowledge = new MonsterKnowledge();
 		this.monsterKnowledge.setPlayer(this.player);
-		MapGenerator.generateSample(this.map, this.player);
+		new MapGenerator(this.map, this.player).generateSample();
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
 		this.starfield = new Starfield(...this.map.getSize());
