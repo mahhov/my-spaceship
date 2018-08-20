@@ -8,8 +8,8 @@ const idf = a => a;
 class GraphicsDemo extends Logic {
 	constructor(controller, painter) {
 		super(controller, painter);
-		this.w = .02;
-		this.h = .02;
+		this.w = .2;
+		this.h = .2;
 		this.x = .5;
 		this.y = .5;
 		this.theta = 0;

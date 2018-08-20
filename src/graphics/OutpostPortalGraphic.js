@@ -1,4 +1,4 @@
-const {PI2, thetaToVector, rand} = require('../util/Number');
+const {PI2, thetaToVector} = require('../util/Number');
 const Graphics = require('./Graphics');
 const Color = require('../util/Color');
 
