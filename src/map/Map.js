@@ -54,7 +54,7 @@ class Map {
 				this.monsters.remove(item);
 				monster.removeIntersectionBounds(this.intersectionFinder);
 			} else
-				monster.update(this, this.intersectionFinder, this.player);
+				monster.update(this, this.intersectionFinder, monsterKnowledge);
 		});
 		this.projectiles.forEach((projectile, item) => {
 			if (projectile.update(this, this.intersectionFinder)) {

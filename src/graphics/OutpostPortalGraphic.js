@@ -6,7 +6,7 @@ const POINTS = [];
 const N = 6;
 for (let i = 0; i < N; i++) {
 	let theta = i * PI2 / N;
-	POINTS.push(thetaToVector(theta``));
+	POINTS.push(thetaToVector(theta));
 }
 
 class OututPortalGraphic extends Graphics { // todo [high] refactor colors to ui constants
