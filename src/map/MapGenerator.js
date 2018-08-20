@@ -40,7 +40,7 @@ class MapGenerator {
 	}
 
 	generateOutputs() {
-		const OUTPOSTS = 5, TURRETS_PER = 4;
+		const OUTPOSTS = 0, TURRETS_PER = 4;
 		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
 			this.map.addMonster(new OutpostPortal(...position));
 			let turrets = TURRETS_PER + rand(TURRETS_PER);
@@ -49,7 +49,7 @@ class MapGenerator {
 	}
 
 	generateMonsters() {
-		const TURRETS = 30, SHOTGUN_WARRIORS = 30;
+		const TURRETS = 0, SHOTGUN_WARRIORS = 0;
 		this.occupiedNoise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
 		this.occupiedNoise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new ShotgunWarrior(...position)));
 		this.occupiedNoise.positions(1, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Boss1(...position), true));
