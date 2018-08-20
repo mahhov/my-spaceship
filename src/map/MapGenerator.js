@@ -33,25 +33,29 @@ class MapGenerator {
 	}
 
 	generateRocks() {
-		const ROCKS = 500, ROCK_MINERALS = 100;
+		const ROCKS = 50, ROCK_MINERALS = 15;
 		const ROCK_MAX_SIZE = .1;
 		this.rockNoise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
 	generateOutputs() {
-		const OUTPOSTS = 20;
+		const OUTPOSTS = 5, TURRETS_PER = 4;
 		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
 			this.map.addMonster(new OutpostPortal(...position));
+			let turrets = TURRETS_PER + rand(TURRETS_PER);
+			this.occupiedNoise.positions(turrets, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
 		});
 	}
 
 	generateMonsters() {
-		const TURRETS = 0, SHOTGUN_WARRIORS = 0;
-		// noise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
-		// noise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new ShotgunWarrior(...position)));
-		// noise.positions(1, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Boss1(...position), true));
+		const TURRETS = 30, SHOTGUN_WARRIORS = 30;
+		this.occupiedNoise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
+		this.occupiedNoise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new ShotgunWarrior(...position)));
+		this.occupiedNoise.positions(1, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Boss1(...position), true));
 	}
 }
 
 module.exports = MapGenerator;
+
+// todo [medium] don't spawn things intersecting other things
