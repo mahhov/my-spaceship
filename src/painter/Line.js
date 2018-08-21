@@ -12,7 +12,7 @@ class Line extends PainterElement {
 	}
 
 	static withCamera(camera, x, y, x2, y2, {color, thickness} = {}) {
-		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), {color, thickness});
+		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), {color, thickness: camera.st(thickness)});
 	}
 
 	paint(xt, yt, context) {

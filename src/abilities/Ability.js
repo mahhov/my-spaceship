@@ -57,7 +57,7 @@ class Ability {
 		}
 
 		if (!this.ready)
-			painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {color: Colors.NOT_READY.get(), thickness: 4}));
+			painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {color: Colors.NOT_READY.get(), thickness: 2}));
 	}
 }
 

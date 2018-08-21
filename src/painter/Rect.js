@@ -13,7 +13,7 @@ class Rect extends PainterElement {
 	}
 
 	static withCamera(camera, x, y, width, height, {fill, color, thickness} = {}) {
-		return new Rect(camera.xt(x), camera.yt(y), camera.st(width), camera.st(height), {fill, color, thickness});
+		return new Rect(camera.xt(x), camera.yt(y), camera.st(width), camera.st(height), {fill, color, thickness: camera.st(thickness)});
 	}
 
 	paint(xt, yt, context) {

@@ -68,20 +68,26 @@ class PathCreator {
 	}
 
 	create() {
-		this.computePathPoints();
-		return new Path(this.pathPoints, {fill: this.fill, color: this.color, thickness: this.thickness});
+		let pathPoints = this.computePathPoints();
+		let thickness = this.computeThickness();
+		return new Path(pathPoints, {fill: this.fill, color: this.color, thickness});
 	}
 
 	computePathPoints() {
 		// [0, 1] maps to center + forward
-		this.pathPoints = [];
+		let pathPoints = [];
 		this.xys.forEach(([x, y]) => {
 			x *= this.sx;
 			y *= this.sy;
 			let pathX = this.cx + this.fx * y - this.fy * x;
 			let pathY = this.cy + this.fy * y + this.fx * x;
-			this.pathPoints.push([this.camera.xt(pathX), this.camera.yt(pathY)]);
+			pathPoints.push([this.camera.xt(pathX), this.camera.yt(pathY)]);
 		});
+		return pathPoints;
+	}
+
+	computeThickness() {
+		return this.camera.st(this.thickness);
 	}
 }
 

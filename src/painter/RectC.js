@@ -7,7 +7,7 @@ class RectC extends Rect {
 	}
 
 	static withCamera(camera, centerX, centerY, width, height, {fill, color, thickness} = {}) {
-		return new RectC(camera.xt(centerX), camera.yt(centerY), camera.st(width), camera.st(height), {fill, color, thickness});
+		return new RectC(camera.xt(centerX), camera.yt(centerY), camera.st(width), camera.st(height), {fill, color, thickness: camera.st(thickness)});
 	}
 }
 
