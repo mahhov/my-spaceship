@@ -34,6 +34,14 @@ const Colors = {
 		DUST: Color.fromHexString('#888')
 	},
 
+	Monsters: {
+		OutpostPortal: {
+			FILL: Color.from1(1, .9, .9),
+			BORDER: Color.from1(1, .5, .5),
+			LINES: Color.from1(1, .95, .95),
+		}
+	},
+
 	Ability: {
 		NearybyDegen: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
