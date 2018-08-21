@@ -3,20 +3,26 @@ const {UiCs, UiPs} = require('../util/UiConstants');
 const Rect = require('../painter/Rect');
 
 class Ability {
-	constructor(cooldown, charges, stamina, repeatable, uiIndex, paintUiColor) {
+	constructor(cooldown, charges, stamina, repeatable, channeled, uiIndex, paintUiColor) {
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
 		this.repeatable = repeatable;
+		this.channeled = channeled; // todo [low] allow custom channel duration instead of just true/false
 		this.uiIndex = uiIndex;
 		this.paintUiColor = paintUiColor;
 	}
 
 	safeActivate(origin, direct, map, intersectionFinder, player) {
-		if (this.ready)
+		if (this.ready) {
 			if (this.activate(origin, direct, map, intersectionFinder, player)) {
 				this.charges.change(-1);
 				player.consumeStamina(this.stamina);
+			}
+		} else if (this.channeled && this.cooldown.value === this.cooldown.max - 1)
+			if (this.activate(origin, direct, map, intersectionFinder, player)) {
+				player.consumeStamina(this.stamina);
+				this.cooldown.value = this.cooldown.max;
 			}
 		this.repeating = 2;
 	}

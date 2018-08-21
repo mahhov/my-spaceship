@@ -4,7 +4,7 @@ const {booleanArray} = require('../util/Number');
 
 class Dash extends Ability {
 	constructor(paintUiColumn) {
-		super(120, 3, 10, false, paintUiColumn, UiCs.DASH);
+		super(120, 3, 10, false, false, paintUiColumn, UiCs.DASH);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
