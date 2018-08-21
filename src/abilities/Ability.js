@@ -1,5 +1,5 @@
 const Pool = require('../util/Pool');
-const {UiCs, UiPs} = require('../util/UiConstants');
+const {Colors, Positions} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 
 class Ability {
@@ -41,23 +41,23 @@ class Ability {
 
 	paintUi(painter, camera) {
 		// background
-		const SIZE_WITH_MARGIN = UiPs.ABILITY_SIZE + UiPs.MARGIN;
-		const LEFT = UiPs.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, {fill: true, color: this.paintUiColor.getShade()}));
+		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
+		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
+		painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {fill: true, color: this.paintUiColor.getShade()}));
 
 		// foreground for current charges
-		const ROW_HEIGHT = UiPs.ABILITY_SIZE / this.charges.getMax();
+		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
 		const HEIGHT = this.charges.get() * ROW_HEIGHT;
-		painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT, UiPs.ABILITY_SIZE, HEIGHT, {fill: true, color: this.paintUiColor.get()}));
+		painter.add(new Rect(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT, {fill: true, color: this.paintUiColor.get()}));
 
 		// hybrid for current cooldown
 		if (!this.cooldown.isFull()) {
 			let shade = this.cooldown.getRatio();
-			painter.add(new Rect(LEFT, TOP + UiPs.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, UiPs.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.paintUiColor.getShade(shade)}));
+			painter.add(new Rect(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.paintUiColor.getShade(shade)}));
 		}
 
 		if (!this.ready)
-			painter.add(new Rect(LEFT, TOP, UiPs.ABILITY_SIZE, UiPs.ABILITY_SIZE, {color: UiCs.NOT_READY.get(), thickness: 4}));
+			painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {color: Colors.NOT_READY.get(), thickness: 4}));
 	}
 }
 

@@ -1,11 +1,11 @@
 const Ability = require('./Ability');
-const {UiCs} = require('../util/UiConstants');
+const {Colors} = require('../util/Constants');
 const {setMagnitude, randVector} = require('../util/Number');
 const Projectile = require('../entities/attack/Projectile');
 
 class ProjectileAttack extends Ability {
 	constructor(paintUiColumn) {
-		super(3, 15, .6, true, false, paintUiColumn, UiCs.BASIC_ATTACK);
+		super(3, 15, .6, true, false, paintUiColumn, Colors.BASIC_ATTACK);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

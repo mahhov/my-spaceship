@@ -1,6 +1,6 @@
 const Keymapping = require('../control/Keymapping');
 const Camera = require('../camera/Camera');
-const {UiCs} = require('../util/UiConstants');
+const {Colors} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const RectC = require('../painter/RectC');
 
@@ -26,11 +26,11 @@ class Minimap {
 
 	paint(painter) {
 		let camera = this.createCamera();
-		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: true, color: UiCs.Minimap.BACKGROUND.get()}));
-		this.map.stills.forEach(rock => Minimap.paintDot(painter, camera, rock.x, rock.y, UiCs.Minimap.ROCK.get()));
-		this.map.monsters.forEach(monster => Minimap.paintDot(painter, camera, monster.x, monster.y, UiCs.Minimap.MONSTER.get()));
-		this.map.uis.forEach(ui => Minimap.paintDot(painter, camera, ui.x, ui.y, UiCs.Minimap.BOSS.get()));
-		Minimap.paintDot(painter, camera, this.map.player.x, this.map.player.y, UiCs.Minimap.PLAYER.get());
+		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: true, color: Colors.Minimap.BACKGROUND.get()}));
+		this.map.stills.forEach(rock => Minimap.paintDot(painter, camera, rock.x, rock.y, Colors.Minimap.ROCK.get()));
+		this.map.monsters.forEach(monster => Minimap.paintDot(painter, camera, monster.x, monster.y, Colors.Minimap.MONSTER.get()));
+		this.map.uis.forEach(ui => Minimap.paintDot(painter, camera, ui.x, ui.y, Colors.Minimap.BOSS.get()));
+		Minimap.paintDot(painter, camera, this.map.player.x, this.map.player.y, Colors.Minimap.PLAYER.get());
 	}
 
 	static paintDot(painter, camera, x, y, color) {

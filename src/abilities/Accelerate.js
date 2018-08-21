@@ -1,9 +1,9 @@
 const Ability = require('./Ability');
-const {UiCs} = require('../util/UiConstants');
+const {Colors} = require('../util/Constants');
 
 class Accelerate extends Ability {
 	constructor(paintUiColumn) {
-		super(200, 1, 0, true, true, paintUiColumn, UiCs.DASH); // todo [high] use unique color
+		super(200, 1, 0, true, true, paintUiColumn, Colors.DASH); // todo [high] use unique color
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

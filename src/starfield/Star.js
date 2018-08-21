@@ -1,11 +1,11 @@
-const {UiCs} = require('../util/UiConstants');
+const {Colors} = require('../util/Constants');
 const {rand, randInt} = require('../util/Number');
 const RectC = require('../painter/RectC');
 
 const FLICKER_COLOR_MULT = .7;
 const STAR_COLOR_ARRAY = [
-	[UiCs.Star.WHITE, UiCs.Star.WHITE.multiply(FLICKER_COLOR_MULT)],
-	[UiCs.Star.BLUE, UiCs.Star.BLUE.multiply(FLICKER_COLOR_MULT)]];
+	[Colors.Star.WHITE, Colors.Star.WHITE.multiply(FLICKER_COLOR_MULT)],
+	[Colors.Star.BLUE, Colors.Star.BLUE.multiply(FLICKER_COLOR_MULT)]];
 
 class Star {
 	constructor(x, y, z, size, blue) {

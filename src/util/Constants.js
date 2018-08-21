@@ -61,7 +61,7 @@ const Positions = {
 	ABILITY_SIZE: .06,
 };
 
-module.exports = {UiCs: Colors, UiPs: Positions};
+module.exports = {Colors, Positions};
 
 // Notes
 
@@ -83,4 +83,3 @@ module.exports = {UiCs: Colors, UiPs: Positions};
 // http://paletton.com/#uid=75C0F0kj+zZ9XRtfuIvo0ulsJqf
 
 // todo [low] find prettier colors
-// todo [medium] seperate into 2 files ColorConstants and PositionConstants

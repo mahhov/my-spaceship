@@ -1,7 +1,7 @@
 const LivingEntity = require('../LivingEntity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const ModuleManager = require('../module/ModuleManager');
-const {UiCs} = require('../../util/UiConstants');
+const {Colors} = require('../../util/Constants');
 const BarC = require('../../painter/BarC');
 
 class Monster extends LivingEntity {
@@ -17,7 +17,7 @@ class Monster extends LivingEntity {
 		super.paint(painter, camera);
 		this.moduleManager.modulesPaint(painter, camera);
 		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.health.getRatio(),
-			UiCs.LIFE.getShade(UiCs.BAR_SHADING), UiCs.LIFE.get(), UiCs.LIFE.getShade(UiCs.BAR_SHADING)));
+			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.getShade(Colors.BAR_SHADING)));
 	}
 }
 

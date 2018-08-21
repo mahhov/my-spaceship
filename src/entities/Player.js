@@ -1,6 +1,6 @@
 const LivingEntity = require('./LivingEntity');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
-const {UiCs, UiPs} = require('../util/UiConstants');
+const {Colors, Positions} = require('../util/Constants');
 const VShip = require('../graphics/VShip');
 const Pool = require('../util/Pool');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
@@ -22,7 +22,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 class Player extends LivingEntity {
 	constructor() {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
-		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: UiCs.Entity.PLAYER.get()}));
+		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
 
 		this.stamina = new Pool(100, .13);
 		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2), new Accelerate(3)];
@@ -138,18 +138,18 @@ class Player extends LivingEntity {
 		if (this.targetLock)
 			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
-				{color: UiCs.TARGET_LOCK.get(), thickness: 3}));
+				{color: Colors.TARGET_LOCK.get(), thickness: 3}));
 
 		// life & stamina bar
-		const HEIGHT_WITH_MARGIN = UiPs.BAR_HEIGHT + UiPs.MARGIN;
-		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.stamina.getRatio(), UiCs.STAMINA.getShade(UiCs.BAR_SHADING), UiCs.STAMINA.get(), UiCs.STAMINA.getShade(UiCs.BAR_SHADING)));
-		painter.add(new Bar(UiPs.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - UiPs.PLAYER_BAR_X - UiPs.MARGIN, UiPs.BAR_HEIGHT, this.health.getRatio(), UiCs.LIFE.getShade(UiCs.BAR_SHADING), UiCs.LIFE.get(), UiCs.LIFE.getShade(UiCs.BAR_SHADING)));
+		const HEIGHT_WITH_MARGIN = Positions.BAR_HEIGHT + Positions.MARGIN;
+		painter.add(new Bar(Positions.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - Positions.PLAYER_BAR_X - Positions.MARGIN, Positions.BAR_HEIGHT, this.stamina.getRatio(), Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.getShade(Colors.BAR_SHADING)));
+		painter.add(new Bar(Positions.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN * 2, 1 - Positions.PLAYER_BAR_X - Positions.MARGIN, Positions.BAR_HEIGHT, this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.getShade(Colors.BAR_SHADING)));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
 		// damage overlay
-		let damageColor = UiCs.DAMAGE.getAlpha(this.recentDamage.get());
+		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());
 		painter.add(new Rect(0, 0, 1, 1, {fill: true, color: damageColor}));
 	}
 }

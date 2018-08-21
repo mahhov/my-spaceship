@@ -1,6 +1,6 @@
 const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
-const {UiCs, UiPs} = require('../../util/UiConstants');
+const {Colors, Positions} = require('../../util/Constants');
 const Phase = require('../../util/Phase');
 const Engage = require('../module/Engage');
 const PhaseSetter = require('../module/PhaseSetter');
@@ -15,7 +15,7 @@ const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .5);
-		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: UiCs.Entity.MONSTER.get()}));
+		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
 		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
@@ -111,11 +111,11 @@ class Boss1 extends Monster {
 			return;
 
 		painter.add(new Bar(
-			UiPs.MARGIN, UiPs.MARGIN, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT, this.health.getRatio(),
-			UiCs.LIFE.getShade(UiCs.BAR_SHADING), UiCs.LIFE.get(), UiCs.LIFE.getShade(UiCs.BAR_SHADING)));
+			Positions.MARGIN, Positions.MARGIN, 1 - Positions.MARGIN * 2, Positions.BAR_HEIGHT, this.health.getRatio(),
+			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.getShade(Colors.BAR_SHADING)));
 		painter.add(new Bar(
-			UiPs.MARGIN, UiPs.MARGIN * 2.5, 1 - UiPs.MARGIN * 2, UiPs.BAR_HEIGHT * .5, this.enragePhase.getRatio(),
-			UiCs.ENRAGE.getShade(), UiCs.ENRAGE.get(), UiCs.ENRAGE.getShade()));
+			Positions.MARGIN, Positions.MARGIN * 2.5, 1 - Positions.MARGIN * 2, Positions.BAR_HEIGHT * .5, this.enragePhase.getRatio(),
+			Colors.ENRAGE.getShade(), Colors.ENRAGE.get(), Colors.ENRAGE.getShade()));
 	}
 }
 

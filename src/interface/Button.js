@@ -1,6 +1,6 @@
 const makeEnum = require('../util/Enum');
 const Interface = require('./Interface');
-const {UiCs} = require('../util/UiConstants');
+const {Colors} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
@@ -23,7 +23,7 @@ class Button extends Interface {
 	}
 
 	paint(painter) {
-		let color = [UiCs.Interface.INACTIVE, UiCs.Interface.ACTIVE, UiCs.Interface.HOVER][this.state].get();
+		let color = [Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 
 		painter.add(new Rect(this.left, this.top, this.width, this.height, {fill: true, color}));
 		painter.add(new Rect(this.left, this.top, this.width, this.height));
