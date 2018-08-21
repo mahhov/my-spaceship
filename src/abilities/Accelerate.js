@@ -3,7 +3,7 @@ const {Colors} = require('../util/Constants');
 
 class Accelerate extends Ability {
 	constructor(paintUiColumn) {
-		super(200, 1, 0, true, true, paintUiColumn, Colors.DASH); // todo [high] use unique color
+		super(200, 1, 0, true, true, paintUiColumn, Colors.ACCELERATE);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

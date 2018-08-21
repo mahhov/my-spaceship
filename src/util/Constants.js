@@ -16,6 +16,7 @@ const Colors = {
 	BASIC_ATTACK: Color.fromHexString('#a87676'),
 	DASH: Color.fromHexString('#76a876'),
 	HEAL: Color.fromHexString('#7676a8'),
+	ACCELERATE: Color.fromHexString('#76a6a6'),
 	NOT_READY: Color.fromHexString('#444'),
 
 	Interface: {
