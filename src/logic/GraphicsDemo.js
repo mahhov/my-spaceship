@@ -15,7 +15,7 @@ class GraphicsDemo extends Logic {
 		this.theta = 0;
 		this.dtheta = .2 * Math.PI / 180;
 		this.ship = new TestShip(this.w, this.h);
-		this.fakeCamera = {xt: idf, yt: idf};
+		this.fakeCamera = {xt: idf, yt: idf, st: idf};
 	}
 
 	iterate() {
