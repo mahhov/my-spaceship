@@ -15,6 +15,9 @@ class PainterCompositor {
 	}
 
 	paint() {
+		this.painter.paint();
+		this.uiPainter.paint();
+
 		this.context.clearRect(0, 0, this.width, this.height);
 		this.context.globalCompositeOperation = 'screen';
 		this.context.filter = `blur(5px)`;
