@@ -1,6 +1,6 @@
 const Controller = require('../control/Controller');
 const PainterCompositor = require('../painter/PainterCompositor');
-const Logic = require('../logic/Game');
+const Game = require('../logic/Game');
 const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
 const NoiseDemo = require('../logic/NoiseDemo');
@@ -14,12 +14,14 @@ const canvas = document.getElementById('canvas');
 const controller = new Controller(canvas);
 const painterSet = new PainterCompositor(canvas);
 
-const logic = new Logic(controller, painterSet);
-// const logic = new GraphicsDemo(controller, painterSet);
-// const logic = new StarfieldDemo(controller, painterSet);
-// const logic = new NoiseDemo(controller, painterSet);
-// const logic = new MapDemo(controller, painterSet);
-// const logic = new InterfaceDemo(controller, painterSet);
+const game = new Game(controller, painterSet);
+const graphicsDemo = new GraphicsDemo(controller, painterSet);
+const starfieldDemo = new StarfieldDemo(controller, painterSet);
+const noiseDemo = new NoiseDemo(controller, painterSet);
+const mapDemo = new MapDemo(controller, painterSet);
+const interfaceDemo = new InterfaceDemo(controller, painterSet);
+
+const logic = mapDemo;
 
 let loop = async () => {
 	while (true) {
