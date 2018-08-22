@@ -1,13 +1,12 @@
 const Logic = require('./Logic');
-const Color = require('../util/Color');
 const TestShip = require('../graphics/TestShip');
 const {thetaToVector} = require('../util/Number');
 
 const idf = a => a;
 
 class GraphicsDemo extends Logic {
-	constructor(controller, painter) {
-		super(controller, painter);
+	constructor(controller, painterSet) {
+		super(controller, painterSet);
 		this.w = .2;
 		this.h = .2;
 		this.x = .5;
@@ -20,7 +19,7 @@ class GraphicsDemo extends Logic {
 
 	iterate() {
 		let direction = thetaToVector(this.theta += this.dtheta);
-		this.ship.paint(this.painter, this.fakeCamera, this.x, this.y, {x: direction[0], y: direction[1]});
+		this.ship.paint(this.painterSet.painter, this.fakeCamera, this.x, this.y, {x: direction[0], y: direction[1]});
 	}
 }
 

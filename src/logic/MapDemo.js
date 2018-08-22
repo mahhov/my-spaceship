@@ -3,7 +3,6 @@ const Entity = require('../entities/Entity');
 const Logic = require('./Logic');
 const MapGenerator = require('../map/MapGenerator');
 const Camera = require('../camera/Camera');
-const Rect = require('../painter/Rect');
 const Color = require('../util/Color');
 const RectC = require('../painter/RectC');
 
@@ -41,8 +40,8 @@ class FakeMap {
 }
 
 class MapDemo extends Logic {
-	constructor(controller, painter) {
-		super(controller, painter);
+	constructor(controller, painterSet) {
+		super(controller, painterSet);
 		this.reset();
 		this.camera = new Camera(this.map.width / 2, this.map.height / 2, (this.map.width + this.map.height) / 2);
 	}
@@ -59,8 +58,8 @@ class MapDemo extends Logic {
 
 		this.updateCamera();
 
-		this.painter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
-		this.map.paint(this.painter, this.camera);
+		this.painterSet.uiPainter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
+		this.map.paint(this.painterSet.uiPainter, this.camera);
 	}
 
 	updateCamera() {

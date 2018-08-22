@@ -6,8 +6,8 @@ const Starfield = require('../starfield/Starfield');
 const StarfieldNoise = require('../starfield/StarfieldNoise');
 
 class StarfieldDemo extends Logic {
-	constructor(controller, painter) {
-		super(controller, painter);
+	constructor(controller, painterSet) {
+		super(controller, painterSet);
 		this.camera = new Camera(0, 0, 1);
 	}
 
@@ -15,8 +15,8 @@ class StarfieldDemo extends Logic {
 		this.periodicallySwapStarfield();
 		let {x, y} = this.controller.getRawMouse();
 		this.camera.move({x: x - .5, y: y - .5}, {x, y});
-		this.starfield.paint(this.painter, this.camera);
-		this.painter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
+		this.starfield.paint(this.painterSet.uiPainter, this.camera);
+		this.painterSet.uiPainter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
 	}
 
 	periodicallySwapStarfield() {

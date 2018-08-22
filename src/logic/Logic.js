@@ -1,7 +1,7 @@
 class Logic {
-	constructor(controller, painter) {
+	constructor(controller, painterSet) {
 		this.controller = controller;
-		this.painter = painter;
+		this.painterSet = painterSet;
 	}
 
 	iterate() {
