@@ -11,9 +11,9 @@ class Painter {
 	}
 
 	static createCanvas(width, height) {
-		canvas = document.createElement('canvas'); // todo [low] better way of creating context
-		canvas.width = this.width;
-		canvas.height = this.height;
+		let canvas = document.createElement('canvas'); // todo [low] better way of creating context
+		canvas.width = width;
+		canvas.height = height;
 		return canvas;
 	}
 
