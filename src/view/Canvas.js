@@ -1,5 +1,5 @@
 const Controller = require('../control/Controller');
-const Painter = require('../painter/Painter');
+const PainterCompositor = require('../painter/PainterCompositor');
 const Logic = require('../logic/Game');
 const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
@@ -12,20 +12,20 @@ const sleep = milli =>
 
 const canvas = document.getElementById('canvas');
 const controller = new Controller(canvas);
-const painter = new Painter(canvas);
+const painterSet = new PainterCompositor(canvas);
 
-const logic = new Logic(controller, painter);
-// const logic = new GraphicsDemo(controller, painter);
-// const logic = new StarfieldDemo(controller, painter);
-// const logic = new NoiseDemo(controller, painter);
-// const logic = new MapDemo(controller, painter);
-// const logic = new InterfaceDemo(controller, painter);
+const logic = new Logic(controller, painterSet);
+// const logic = new GraphicsDemo(controller, painterSet);
+// const logic = new StarfieldDemo(controller, painterSet);
+// const logic = new NoiseDemo(controller, painterSet);
+// const logic = new MapDemo(controller, painterSet);
+// const logic = new InterfaceDemo(controller, painterSet);
 
 let loop = async () => {
 	while (true) {
-		painter.clear();
+		painterSet.clear();
 		logic.iterate();
-		painter.paint();
+		painterSet.paint();
 		controller.expire();
 		await sleep(10);
 	}

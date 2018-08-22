@@ -11,8 +11,8 @@ const Starfield = require('../starfield/Starfield');
 const UI = true;
 
 class Game extends Logic {
-	constructor(controller, painter) {
-		super(controller, painter);
+	constructor(controller, painterSet) {
+		super(controller, painterSet);
 		this.keymapping = new Keymapping();
 		this.map = new Map();
 		this.player = new Player();
@@ -44,11 +44,12 @@ class Game extends Logic {
 	}
 
 	paint() {
-		this.starfield.paint(this.painter, this.camera);
-		this.map.paint(this.painter, this.camera);
-		this.minimap.paint(this.painter);
-		if (UI)
-			this.map.paintUi(this.painter, this.camera)
+		this.starfield.paint(this.painterSet.painter, this.camera);
+		this.map.paint(this.painterSet.painter, this.camera);
+		if (UI) {
+			this.minimap.paint(this.painterSet.uiPainter);
+			this.map.paintUi(this.painterSet.uiPainter, this.camera);
+		}
 	}
 }
 

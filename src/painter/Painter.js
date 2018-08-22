@@ -1,20 +1,20 @@
 class Painter {
-	constructor(canvas) {
-		this.width = canvas.width;
-		this.height = canvas.height;
-		// this.createMask();
-		this.xCoordinateTransform = x => x * this.width;
-		this.yCoordinateTransform = y => y * this.height;
-		this.context = canvas.getContext('2d');
+	constructor(width, height) {
+		this.canvas = Painter.createCanvas(width, height);
+		this.width = width;
+		this.height = height;
+		this.xCoordinateTransform = x => x * width;
+		this.yCoordinateTransform = y => y * height;
+		this.context = this.canvas.getContext('2d');
 		this.setFontMode();
-		this.elements = [];
+		this.elements = []; // todo [medium] test linked list instead of array for performance
 	}
 
-	createMask() {
-		this.maskCanvas = document.createElement('canvas'); // todo [low] better way of creating canvas
-		this.maskCanvas.width = this.width;
-		this.maskCanvas.height = this.height;
-		this.maskContext = this.maskCanvas.getContext('2d');
+	static createCanvas(width, height) {
+		canvas = document.createElement('canvas'); // todo [low] better way of creating context
+		canvas.width = this.width;
+		canvas.height = this.height;
+		return canvas;
 	}
 
 	setFontMode() {
@@ -35,13 +35,6 @@ class Painter {
 		this.context.clearRect(0, 0, this.width, this.height);
 		this.elements.forEach(element =>
 			element.paint(this.xCoordinateTransform, this.yCoordinateTransform, this.context));
-
-		// this.maskContext.globalCompositeOperation = 'source-over';
-		// this.maskContext.fillStyle = "black";
-		// this.maskContext.fillRect(0, 0, this.width, this.height);
-		// this.maskContext.globalCompositeOperation = 'xor';
-		// this.maskContext.fillRect(100, 100, 500, 500);
-		// this.context.drawImage(this.maskCanvas, 0, 0);
 	}
 }
 
