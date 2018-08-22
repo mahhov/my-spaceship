@@ -21,7 +21,7 @@ const noiseDemo = new NoiseDemo(controller, painterSet);
 const mapDemo = new MapDemo(controller, painterSet);
 const interfaceDemo = new InterfaceDemo(controller, painterSet);
 
-const logic = mapDemo;
+const logic = game;
 
 let loop = async () => {
 	while (true) {

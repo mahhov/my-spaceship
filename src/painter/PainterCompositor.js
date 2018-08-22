@@ -27,6 +27,12 @@ class PainterCompositor {
 		this.context.globalCompositeOperation = 'source-over';
 		this.context.drawImage(this.uiPainter.canvas, 0, 0);
 	}
+
+	paintx(){
+		this.painter.paint();
+		this.context.clearRect(0, 0, this.width, this.height);
+		this.context.drawImage(this.painter.canvas, 0, 0);
+	}
 }
 
 module.exports = PainterCompositor;

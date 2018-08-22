@@ -40,7 +40,7 @@ class MapGenerator {
 	}
 
 	generateOutputs() {
-		const OUTPOSTS = 0, TURRETS_PER = 4;
+		const OUTPOSTS = 20, TURRETS_PER = 0;
 		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
 			this.map.addMonster(new OutpostPortal(...position));
 			let turrets = TURRETS_PER + rand(TURRETS_PER);
