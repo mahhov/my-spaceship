@@ -1,9 +1,8 @@
 const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const OutpostPortalGraphic = require('../../graphics/OutpostPortalGraphic');
-
-const ShotgunWarrior = require('./ShotgunWarrior');
 const {rand, randVector} = require('../../util/Number');
+const MeleeDart = require('./MeleeDart');
 
 class OutpostPortal extends Monster {
 	constructor(x, y) {
@@ -18,8 +17,8 @@ class OutpostPortal extends Monster {
 		let turrets = 3 + rand(3);
 		for (let i = 0; i < turrets; i++) {
 			let spawnVector = randVector(.2);
-			let shotgunWarrior = new ShotgunWarrior(this.x + spawnVector[0], this.y + spawnVector[1]);
-			map.addMonster(shotgunWarrior);
+			let meleeDart = new MeleeDart(this.x + spawnVector[0], this.y + spawnVector[1]);
+			map.addMonster(meleeDart);
 		}
 	}
 }
