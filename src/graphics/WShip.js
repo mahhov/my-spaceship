@@ -12,7 +12,7 @@ const POINTS = [
 class WShip extends Graphics {
 	constructor(width, height, {fill, color, thickness} = {}) {
 		super();
-		this.addPath(width, height, POINTS, {fill, color, thickness});
+		this.addPath(width, height, POINTS, true, {fill, color, thickness});
 	}
 }
 

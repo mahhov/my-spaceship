@@ -1,9 +1,10 @@
 const PainterElement = require('./PainterElement');
 
 class Path extends PainterElement {
-	constructor(xys, {fill, color = '#000', thickness = 1} = {}) {
+	constructor(xys, closed, {fill, color = '#000', thickness = 1} = {}) {
 		super();
 		this.xys = xys;
+		this.closed = closed;
 		this.fill = fill;
 		this.color = color;
 		this.thickness = thickness;
@@ -27,7 +28,8 @@ class Path extends PainterElement {
 		context.moveTo(...xyt(this.xys[0]));
 		this.xys.forEach(xy =>
 			context.lineTo(...xyt(xy)));
-		context.closePath();
+		if (this.closed)
+			context.closePath();
 	}
 }
 

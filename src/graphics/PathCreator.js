@@ -31,24 +31,22 @@ class PathCreator {
 	}
 
 	setTranslation(x, y) {
-		if (this.cx === x && this.cy === y)
-			return;
 		this.cx = x;
 		this.cy = y;
 	}
 
 	setForward(x, y) {
-		if (this.fx === x && this.fy === y)
-			return;
 		this.fx = x;
 		this.fy = y;
 	}
 
 	setScale(x, y, s) {
-		if (this.sx === x * s && this.sy === y * s)
-			return;
 		this.sx = x * s;
 		this.sy = y * s;
+	}
+
+	setClosed(closed) {
+		this.closed = closed;
 	}
 
 	moveTo(x, y, skipAdd) {
@@ -70,7 +68,7 @@ class PathCreator {
 	create() {
 		let pathPoints = this.computePathPoints();
 		let thickness = this.computeThickness();
-		return new Path(pathPoints, {fill: this.fill, color: this.color, thickness});
+		return new Path(pathPoints, this.closed, {fill: this.fill, color: this.color, thickness});
 	}
 
 	computePathPoints() {

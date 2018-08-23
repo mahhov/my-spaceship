@@ -5,12 +5,13 @@ class Graphics {
 		this.pathCreators = [];
 	}
 
-	addPath(width, height, points, {fill, color, thickness} = {}) {
+	addPath(width, height, points, closed, {fill, color, thickness} = {}) {
 		let pathCreator = new PathCreator();
 		pathCreator.setFill(fill);
 		pathCreator.setColor(color);
 		pathCreator.setThickness(thickness);
 		pathCreator.setScale(width, height, Graphics.calculateScale(points));
+		pathCreator.setClosed(closed);
 		points.forEach(point => pathCreator.moveTo(...point));
 		this.pathCreators.push(pathCreator);
 	}
