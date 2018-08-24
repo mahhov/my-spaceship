@@ -43,6 +43,7 @@ class PathCreator {
 	setScale(x, y, s) {
 		this.sx = x * s;
 		this.sy = y * s;
+		this.ss = (x + y) / 2 * s;
 	}
 
 	setClosed(closed) {
@@ -85,7 +86,7 @@ class PathCreator {
 	}
 
 	computeThickness() {
-		return this.camera.st(this.thickness);
+		return this.camera.st(this.thickness * this.ss);
 	}
 }
 
