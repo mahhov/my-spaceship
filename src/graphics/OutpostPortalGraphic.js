@@ -1,21 +1,23 @@
-const {PI2, thetaToVector} = require('../util/Number');
 const Graphics = require('./Graphics');
-const {Colors} = require('../util/Constants');
+const PathCreator = require('./PathCreator');
+const Color = require('../util/Color');
 
-const POINTS = [];
-const N = 6;
-for (let i = 0; i < N; i++) {
-	let theta = i * PI2 / N;
-	POINTS.push(thetaToVector(theta));
-}
+const INSIDE_COLOR = [1, .8, .8];
+const OUTSIDE_COLOR = [.7, 0, 0];
+const OUTSIDE_RADIUS = 1.4;
+const OUTSIDE_THICKNESS = 80;
+const DOT_SCALE = .2;
+const DOT_COLOR = [1, 1, 1];
+const DOT_POINTS = PathCreator.createCirclePoints(1, 6, 2, 0);
+const CENTER_POINTS = PathCreator.createCirclePoints();
 
-class OututPortalGraphic extends Graphics {
+class OutputPortalGraphics extends Graphics { // todo [medium] rename all graphics classes with graphics suffix or none
 	constructor(width, height) {
 		super();
-		this.addPath(width, height, POINTS, true, {fill: true, color: Colors.Monsters.OutpostPortal.FILL.get()});
-		this.addPath(width, height, POINTS, true, {color: Colors.Monsters.OutpostPortal.BORDER.get(), thickness: 3});
-		this.addPath(width * .83, height * .83, POINTS, true, {color: Colors.Monsters.OutpostPortal.LINES.get(), thickness: 3});
-		this.addPath(width * .5, height * .5, POINTS, true, {fill: true, color: Colors.Monsters.OutpostPortal.LINES.get()});
+
+		this.addPath(width, height, CENTER_POINTS, true, {fill: true, color: Color.from1(...INSIDE_COLOR).get()});
+		this.addPath(width * OUTSIDE_RADIUS, height * OUTSIDE_RADIUS, CENTER_POINTS, true, {color: Color.from1(...OUTSIDE_COLOR).get(), thickness: OUTSIDE_THICKNESS});
+		this.addPath(width * DOT_SCALE, height * DOT_SCALE, DOT_POINTS, true, {fill: true, color: Color.from1(...DOT_COLOR).get()});
 	}
 }
 
