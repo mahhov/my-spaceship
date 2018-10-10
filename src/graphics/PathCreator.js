@@ -1,4 +1,5 @@
 const Path = require('../painter/Path');
+const {PI2, thetaToVector} = require('../util/Number');
 
 class PathCreator {
 	constructor() {
@@ -88,6 +89,17 @@ class PathCreator {
 	computeThickness() {
 		return this.camera.st(this.thickness * this.ss);
 	}
+
+	// todo [high] use this everywhere where useful
+	static createCirclePoints(r = 1, n = 6, x = 0, y = 0) {
+		let points = [];
+		for (let i = 0; i < n; i++) {
+			let theta = i * PI2 / n;
+			let vector = thetaToVector(theta, r);
+			points.push([x + vector[0], y + vector[1]]);
+		}
+		return points;
+	};
 }
 
 module.exports = PathCreator;

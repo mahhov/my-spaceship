@@ -21,7 +21,7 @@ class Graphics {
 			pathCreator.setCamera(camera);
 			pathCreator.setTranslation(x, y);
 			pathCreator.setForward(moveDirection.x, moveDirection.y);
-			painter.add(pathCreator.create())
+			painter.add(pathCreator.create());
 		});
 	}
 
