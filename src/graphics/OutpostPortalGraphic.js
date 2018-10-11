@@ -11,7 +11,7 @@ const DOT_COLOR = [1, 1, 1];
 const DOT_POINTS = PathCreator.createCirclePoints(1, 6, 2, 0);
 const CENTER_POINTS = PathCreator.createCirclePoints();
 
-class OutputPortalGraphics extends Graphics { // todo [medium] rename all graphics classes with graphics suffix or none
+class OutpostPortalGraphic extends Graphics { // todo [medium] rename all graphics classes with graphics suffix or none
 	constructor(width, height) {
 		super();
 
@@ -21,4 +21,4 @@ class OutputPortalGraphics extends Graphics { // todo [medium] rename all graphi
 	}
 }
 
-module.exports = OututPortalGraphic;
+module.exports = OutpostPortalGraphic;
