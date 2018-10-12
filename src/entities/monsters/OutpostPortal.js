@@ -1,16 +1,18 @@
 const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const OutpostPortalGraphic = require('../../graphics/OutpostPortalGraphic');
-const {rand, randVector} = require('../../util/Number');
+const {thetaToVector, rand, randVector} = require('../../util/Number');
 const MeleeDart = require('./MeleeDart');
 
 class OutpostPortal extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .04);
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
+		this.theta = 0;
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {
+		[this.moveDirection.x, this.moveDirection.y] = thetaToVector(this.theta++ / 50);
 		// todo [high] make this into a spawn module
 		if (Math.random() > .005)
 			return;
