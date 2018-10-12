@@ -2,12 +2,12 @@ const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const {Colors, Positions} = require('../../util/Constants');
 const Phase = require('../../util/Phase');
+const StarShip = require('../../graphics/StarShip');
 const Engage = require('../module/Engage');
 const PhaseSetter = require('../module/PhaseSetter');
 const Restore = require('../module/Restore');
 const NearbyDegen = require('../module/NearbyDegen');
 const Shotgun = require('../module/Shotgun');
-const StarShip = require('../../graphics/StarShip');
 const Bar = require('../../painter/Bar');
 
 const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');

@@ -1,9 +1,9 @@
 const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
+const StarShip = require('../../graphics/StarShip');
 const Phase = require('../../util/Phase');
 const NearbyDegen = require('../module/NearbyDegen');
-const StarShip = require('../../graphics/StarShip');
 
 const Phases = makeEnum('REST', 'ATTACK');
 
