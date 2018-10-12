@@ -14,9 +14,9 @@ const POINTS = [
 	[-LEG_SPREAD * JOINT, -LEG * JOINT]];
 
 class AShip extends Graphics {
-	constructor(width, height, color) {
+	constructor(width, height, {color} = {}) {
 		super();
-		this.addPath(width, height, POINTS, false, {color, thickness: 3});
+		this.addPath(width, height, POINTS, false, {color});
 	}
 }
 
