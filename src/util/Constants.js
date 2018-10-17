@@ -5,18 +5,18 @@ const Colors = {
 
 	// bars
 	BAR_SHADING: .25,
-	LIFE: Color.fromHexString('#fab9b1'),
-	STAMINA: Color.fromHexString('#98d494'),
+	LIFE: Color.fromHexString('#fab9b1').avgWhite(.25),
+	STAMINA: Color.fromHexString('#98d494').avgWhite(.4),
 	ENRAGE: Color.fromHexString('#616600'),
 
 	TARGET_LOCK: Color.from1(.5, .5, .5),
 	DAMAGE: Color.from255(255, 0, 0, .4),
 
 	// abilities
-	BASIC_ATTACK: Color.fromHexString('#a87676'),
-	DASH: Color.fromHexString('#76a876'),
-	HEAL: Color.fromHexString('#7676a8'),
-	ACCELERATE: Color.fromHexString('#76a6a6'),
+	BASIC_ATTACK: Color.fromHexString('#a87676').avgWhite(.4),
+	DASH: Color.fromHexString('#76a876').avgWhite(.4),
+	HEAL: Color.fromHexString('#7676a8').avgWhite(.4),
+	ACCELERATE: Color.fromHexString('#76a6a6').avgWhite(.4),
 	NOT_READY: Color.fromHexString('#444'),
 
 	Interface: {
