@@ -11,7 +11,7 @@ const Phases = makeEnum('ONE');
 
 class MeleeDart extends Monster {
 	constructor(x, y) {
-		super(x, y, .02, .02, .01);
+		super(x, y, .02, .02, .003);
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
