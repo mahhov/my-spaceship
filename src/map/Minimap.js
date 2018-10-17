@@ -27,14 +27,14 @@ class Minimap {
 	paint(painter) {
 		let camera = this.createCamera();
 		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: true, color: Colors.Minimap.BACKGROUND.get()}));
-		this.map.stills.forEach(rock => Minimap.paintDot(painter, camera, rock.x, rock.y, Colors.Minimap.ROCK.get()));
-		this.map.monsters.forEach(monster => Minimap.paintDot(painter, camera, monster.x, monster.y, Colors.Minimap.MONSTER.get()));
-		this.map.uis.forEach(ui => Minimap.paintDot(painter, camera, ui.x, ui.y, Colors.Minimap.BOSS.get()));
-		Minimap.paintDot(painter, camera, this.map.player.x, this.map.player.y, Colors.Minimap.PLAYER.get());
+		this.map.stills.forEach(rock => this.paintDot(painter, camera, rock.x, rock.y, Colors.Minimap.ROCK.get()));
+		this.map.monsters.forEach(monster => this.paintDot(painter, camera, monster.x, monster.y, Colors.Minimap.MONSTER.get()));
+		this.map.uis.forEach(ui => this.paintDot(painter, camera, ui.x, ui.y, Colors.Minimap.BOSS.get()));
+		this.paintDot(painter, camera, this.map.player.x, this.map.player.y, Colors.Minimap.PLAYER.get());
 	}
 
-	static paintDot(painter, camera, x, y, color) {
-		const DOT_SIZE = .2;
+	paintDot(painter, camera, x, y, color) {
+		const DOT_SIZE = .02 * this.map.width;
 		painter.add(RectC.withCamera(camera, x, y, DOT_SIZE, DOT_SIZE, {fill: true, color}));
 	}
 }

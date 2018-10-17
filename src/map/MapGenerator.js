@@ -7,7 +7,7 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
-const WIDTH = 10, HEIGHT = 10;
+const WIDTH = 5, HEIGHT = 5;
 
 class MapGenerator {
 	constructor(map, player) {
@@ -40,7 +40,7 @@ class MapGenerator {
 	}
 
 	generateOutputs() {
-		const OUTPOSTS = 20, TURRETS_PER = 0;
+		const OUTPOSTS = 10, TURRETS_PER = 0;
 		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
 			this.map.addMonster(new OutpostPortal(...position));
 			let turrets = TURRETS_PER + rand(TURRETS_PER);
