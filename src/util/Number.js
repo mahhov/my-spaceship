@@ -33,10 +33,12 @@ const booleanArray = array => array.some(a => a);
 
 const avg = (a, b, weight = .5) => a * weight + b * (1 - weight);
 
+// [0, int)
 const rand = (max = 1) => Math.random() * max;
 
 const randB = (max = 1) => rand(max) - max / 2;
 
+// [0, max)
 const randInt = max => parseInt(rand(max));
 
 const randVector = magnitude =>

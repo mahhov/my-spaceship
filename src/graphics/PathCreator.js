@@ -90,7 +90,7 @@ class PathCreator {
 		return this.camera.st(this.thickness * this.ss);
 	}
 
-	// todo [high] use this everywhere where useful
+	// todo [medium] use this everywhere where useful
 	static createCirclePoints(r = 1, n = 6, x = 0, y = 0) {
 		let points = [];
 		for (let i = 0; i < n; i++) {

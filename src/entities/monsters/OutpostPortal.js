@@ -23,7 +23,7 @@ class OutpostPortal extends Monster {
 
 		let spawn = new Spawn();
 		spawn.setStagesMapping({[Phases.ONE]: Spawn.Stages.ACTIVE});
-		spawn.config(this, .2, .005, 3, 6, MeleeDart);
+		spawn.config(this, .2, .005, 1, 4, MeleeDart);
 		this.moduleManager.addModule(spawn);
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
