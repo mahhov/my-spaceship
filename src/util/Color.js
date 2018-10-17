@@ -47,6 +47,15 @@ class Color {
 		return new Color(this.r, this.g, this.b, this.a * mult);
 	}
 
+	avgWhite(weight = .5) {
+		let iweight = 1 - weight;
+		return new Color(
+			this.r * iweight + weight * 255,
+			this.g * iweight + weight * 255,
+			this.b * iweight + weight * 255,
+			this.a);
+	}
+
 	get() {
 		return this.string;
 	}
