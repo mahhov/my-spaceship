@@ -6,8 +6,8 @@ class Starfield {
 	constructor(width, height, extra = 0) {
 		const DEPTH = 20 + extra * 20, FORWARD_DEPTH = .8,
 			WIDTH = width * DEPTH, HEIGHT = height * DEPTH,
-			COUNT = 10 * WIDTH * HEIGHT,
-			SIZE = .03 + extra * .03, BLUE_RATE = .05;
+			COUNT = WIDTH * HEIGHT,
+			SIZE = .05 + extra * .05, BLUE_RATE = .05;
 
 		this.stars = [];
 		for (let i = 0; i < COUNT; i++) {
