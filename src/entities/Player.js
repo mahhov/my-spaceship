@@ -108,7 +108,7 @@ class Player extends LivingEntity {
 	}
 
 	createMovementParticle(map) {
-		const RATE = .4, SIZE = .005, DIRECT_VELOCITY = .003, RAND_VELOCITY = .001;
+		const RATE = .2, SIZE = .005, DIRECT_VELOCITY = .003, RAND_VELOCITY = .001;
 
 		if (!booleanArray(this.currentMove) || rand() > RATE)
 			return;
