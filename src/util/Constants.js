@@ -50,8 +50,8 @@ const Colors = {
 	},
 
 	Star: {
-		WHITE: Color.from1(0, 0, 0),
-		BLUE: Color.from1(0, 0, .5)
+		WHITE: Color.from1(.5, .5, .5),
+		BLUE: Color.from1(.5, .5, .75)
 	},
 
 	Minimap: {
