@@ -116,6 +116,9 @@ class IntersectionFinder {
 		return intersection;
 	}
 
+	// checks for intersection between bounds + movement & ibounds
+	// returns undefined if no intersection
+	// returns {move: how much can move until intersection, side: which side the intersection occurred}
 	static checkMoveEntityIntersection(bounds, dx, dy, magnitude, horizontal, vertical, iBounds) {
 		let horizontalDelta = IntersectionFinder.getDelta(horizontal, dx, bounds, iBounds, false);
 		let verticalDelta = IntersectionFinder.getDelta(vertical, dy, bounds, iBounds, false);

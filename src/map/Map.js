@@ -38,7 +38,7 @@ class Map {
 			this.uis.add(monster);
 	}
 
-	addProjectile(projectile) {
+	addProjectile(projectile) { // todo [high] rename to addAttack or such
 		this.projectiles.add(projectile);
 		projectile.addIntersectionBounds(this.intersectionFinder);
 	}

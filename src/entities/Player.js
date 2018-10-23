@@ -8,6 +8,7 @@ const LaserAttack = require('../abilities/LaserAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Accelerate = require('../abilities/Accelerate');
+const BombAttack = require('../abilities/BombAttack');
 const Decay = require('../util/Decay');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
@@ -25,7 +26,12 @@ class Player extends LivingEntity {
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
 
 		this.stamina = new Pool(100, .13);
-		this.abilities = [new ProjectileAttack(0), new Dash(1), new Heal(2), new Accelerate(3)];
+		this.abilities = [
+			new ProjectileAttack(0),
+			new Dash(1),
+			new Heal(2),
+			new Accelerate(3),
+			new BombAttack(4)];
 
 		this.recentDamage = new Decay(.1, .001);
 	}

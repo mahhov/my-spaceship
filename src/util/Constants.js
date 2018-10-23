@@ -31,6 +31,10 @@ const Colors = {
 		PLAYER: Color.fromHexString('#888'),
 		MONSTER: Color.fromHexString('#888'),
 		PROJECTILE: Color.fromHexString('#888'),
+		Bomb: {
+			WARNING_BORDER: Color.fromHexString('#cc8f52'),
+			ENTITY: Color.fromHexString('#00c')
+		},
 		DUST: Color.fromHexString('#888')
 	},
 
