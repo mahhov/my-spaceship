@@ -1,4 +1,4 @@
-.idea/
+.idea/*
+!.idea/runConfigurations
 build/
-*.iml
 node_modules/
