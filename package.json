@@ -8,7 +8,6 @@
 	"dev": "nodemon --watch src -e html,js,css --exec npm run build build & http-server ./build -o -a localhost -c-1",
 	"gitpage": "npm run build docs GoogleAnalytics; cp src/view/googleAnalytics.js docs",
 	"build-windows": "rmdir /s/q build > nul && mkdir build && copy src\\view\\index.html build\\index.html && node node_modules\\browserify\\bin\\cmd --debug src\\view\\Canvas.js -o build\\Canvas.js",
-	"dev-windows": "START /B npm run watch-windows && npm run serve-windows",
 	"watch-windows": "node node_modules\\nodemon\\bin\\nodemon --watch src -e html,js,css --exec npm run build-windows",
 	"serve-windows": "node node_modules\\http-server\\bin\\http-server build -o -a localhost -c-1"
   },
