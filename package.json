@@ -4,21 +4,21 @@
   "description": "",
   "main": "",
   "scripts": {
-	"build": "build(){ [ -d $1 ] && rm -r $1; mkdir $1; cp src/view/index.html $1/index.html; browserify --debug src/view/Canvas.js -o $1/Canvas.js; }; build",
-	"dev": "nodemon --watch src -e html,js,css --exec npm run build build & http-server ./build -o -a localhost -c-1",
-	"gitpage": "npm run build docs GoogleAnalytics; cp src/view/googleAnalytics.js docs",
-	"build-windows": "rmdir /s/q build > nul && mkdir build && copy src\\view\\index.html build\\index.html && node node_modules\\browserify\\bin\\cmd --debug src\\view\\Canvas.js -o build\\Canvas.js",
-	"watch-windows": "node node_modules\\nodemon\\bin\\nodemon --watch src -e html,js,css --exec npm run build-windows",
-	"serve-windows": "node node_modules\\http-server\\bin\\http-server build -o -a localhost -c-1"
+    "build": "build(){ [ -d $1 ] && rm -r $1; mkdir $1; cp src/view/index.html $1/index.html; browserify --debug src/view/Canvas.js -o $1/Canvas.js; }; build",
+    "dev": "nodemon --watch src -e html,js,css --exec npm run build build & http-server ./build -o -a localhost -c-1",
+    "gitpage": "npm run build docs GoogleAnalytics; cp src/view/googleAnalytics.js docs",
+    "build-windows": "rmdir /s/q build > nul && mkdir build && copy src\\view\\index.html build\\index.html && node node_modules\\browserify\\bin\\cmd --debug src\\view\\Canvas.js -o build\\Canvas.js",
+    "watch-windows": "node node_modules\\nodemon\\bin\\nodemon --watch src -e html,js,css --exec npm run build-windows",
+    "serve-windows": "node node_modules\\http-server\\bin\\http-server build -o -a localhost -c-1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-	"simplex-noise": "^2.4.0"
+    "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
-	"browserify": "^16.2.2",
-	"http-server": "^0.11.1",
-	"nodemon": "^1.17.5"
+    "browserify": "^16.2.2",
+    "http-server": "^0.11.1",
+    "nodemon": "^1.17.5"
   }
 }
