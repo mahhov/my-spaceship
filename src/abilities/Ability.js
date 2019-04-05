@@ -28,6 +28,7 @@ class Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
+		/* override */
 	}
 
 	refresh(player) {

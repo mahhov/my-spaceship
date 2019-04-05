@@ -9,6 +9,7 @@ const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Accelerate = require('../abilities/Accelerate');
 const BombAttack = require('../abilities/BombAttack');
+const DelayedRegen = require('../abilities/DelayedRegen');
 const Decay = require('../util/Decay');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
@@ -32,6 +33,9 @@ class Player extends LivingEntity {
 			new Heal(2),
 			new Accelerate(3),
 			new BombAttack(4)];
+
+		this.passiveAbilities = [
+			new DelayedRegen()];
 
 		this.recentDamage = new Decay(.1, .001);
 	}
@@ -90,6 +94,11 @@ class Player extends LivingEntity {
 				if (keymapping.getKeyState(controller, Keymapping.Keys.ABILITY_I[index]).active)
 					ability.safeActivate(this, direct, map, intersectionFinder, this);
 			});
+
+		this.passiveAbilities.forEach((ability) => {
+			ability.refresh(this);
+			ability.safeActivate(this, direct, map, intersectionFinder, this);
+		});
 	}
 
 	targetLockControl(controller, keymapping, intersectionFinder) {
