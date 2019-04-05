@@ -24,7 +24,7 @@ class Ability {
 				player.consumeStamina(this.stamina);
 				this.cooldown.value = this.cooldown.max;
 			}
-		this.repeating = 2;
+		this.repeating = true;
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
@@ -35,8 +35,8 @@ class Ability {
 			this.charges.increment();
 			this.cooldown.restore();
 		}
-		this.repeating && this.repeating--;
-		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating)
+		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
+		this.repeating = false;
 	}
 
 	paintUi(painter, camera) {
