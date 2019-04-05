@@ -5,6 +5,9 @@ const Module = require('./Module');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'TRIGGER');
 
+// If stage is set to ACTIVE, will set this.phase to this.phaseValue
+// If stage is TRIGGER, will set this.phase to this.phaseValue once (since last INACTIVE stage)
+
 class PhaseSetter extends Module {
 	constructor() {
 		super();

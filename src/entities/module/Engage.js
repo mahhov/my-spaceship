@@ -5,6 +5,9 @@ const {getMagnitude} = require('../../util/Number');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('ENGAGED', 'DISENGAGED');
 
+// engages when target becomes closer than nearDistance
+// disengages when target becomes farther than farDistance
+// does not change phase if target is in between nearDistance and farDistance
 class Engage extends ModuleManager {
 	config(origin, nearDistance, farDistance) {
 		this.origin = origin;

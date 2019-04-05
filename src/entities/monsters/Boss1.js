@@ -20,8 +20,8 @@ class Boss1 extends Monster {
 		this.attackPhase = new Phase(0, 100, 100, 200);
 		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
 		this.enragePhase = new Phase(6000);
-		this.enragePhase.setPhase(0);
 
+		// engage will track when the boss is engaged or disengaged
 		let engage = new Engage();
 		engage.setStagesMapping({
 			[Phases.INACTIVE]: Engage.Stages.ACTIVE,
@@ -32,6 +32,7 @@ class Boss1 extends Monster {
 		engage.config(this, .5, 1);
 		this.moduleManager.addModule(engage);
 
+		// when boss is engaged after being disengaged, will reset attackPhase to PRE_DEGEN
 		let phaseSetterEngageAttack = new PhaseSetter();
 		phaseSetterEngageAttack.setStagesMapping(({
 			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
