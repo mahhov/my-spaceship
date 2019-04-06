@@ -7,7 +7,7 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
-const WIDTH = 5, HEIGHT = 5;
+const WIDTH = 3, HEIGHT = 3;
 
 class MapGenerator {
 	constructor(map, player) {
@@ -33,14 +33,14 @@ class MapGenerator {
 	}
 
 	generateRocks() {
-		const ROCKS = 50, ROCK_MINERALS = 15;
-		const ROCK_MAX_SIZE = .1;
+		const ROCKS = 17, ROCK_MINERALS = 5;
+		const ROCK_MAX_SIZE = .3;
 		this.rockNoise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
 	generateOutputs() {
-		const OUTPOSTS = 10, TURRETS_PER = 0;
+		const OUTPOSTS = 0, TURRETS_PER = 0;
 		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
 			this.map.addMonster(new OutpostPortal(...position));
 			let turrets = TURRETS_PER + rand(TURRETS_PER);
