@@ -1,7 +1,7 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {randVector} = require('../../util/Number');
-const Dust = require('../particle/Dust');
+const DamageDust = require('../particle/DamageDust');
 const {Colors} = require('../../util/Constants');
 const RectC = require('../../painter/RectC');
 
@@ -22,7 +22,7 @@ class Projectile extends Entity {
 
 		if (intersection) {
 			intersection.changeHealth(-this.damage);
-			map.addParticle(new Dust(this.x, this.y, .005, ...randVector(.001), 100));
+			map.addParticle(new DamageDust(this.x, this.y, .005, ...randVector(.001), 100));
 			return true;
 		}
 

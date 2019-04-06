@@ -35,7 +35,8 @@ const Colors = {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
 			ENTITY: Color.fromHexString('#00c')
 		},
-		DUST: Color.fromHexString('#888')
+		DUST: Color.fromHexString('#888'),
+		Damage_DUST: Color.fromHexString('#f88')
 	},
 
 	Monsters: {
