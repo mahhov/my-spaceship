@@ -14,12 +14,12 @@ const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .5);
+		super(x, y, .04, .04, .4);
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
 		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
-		this.enragePhase = new Phase(6000);
+		this.enragePhase = new Phase(4800);
 
 		// engage will track when the boss is engaged or disengaged
 		let engage = new Engage();

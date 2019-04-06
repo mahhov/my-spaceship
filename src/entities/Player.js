@@ -149,7 +149,7 @@ class Player extends LivingEntity {
 
 	paintUi(painter, camera) {
 		// target lock
-		// todo [medium] target lock draws over monster healht bar
+		// todo [medium] target lock draws over monster health bar
 		if (this.targetLock)
 			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
