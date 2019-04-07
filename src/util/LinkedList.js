@@ -1,13 +1,19 @@
 const Item = require('./Item');
 
 class LinkedList {
+	constructor() {
+		this.length = 0;
+	}
+
 	add(value) {
+		this.length++;
 		return !this.head
 			? this.tail = this.head = new Item(value)
 			: this.tail = this.tail.next = new Item(value, this.tail);
 	}
 
 	remove(item) {
+		this.length--;
 		if (item.prev)
 			item.prev.next = item.next;
 		if (item.next)
