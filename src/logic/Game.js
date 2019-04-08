@@ -18,7 +18,8 @@ class Game extends Logic {
 		this.player = new Player();
 		this.monsterKnowledge = new MonsterKnowledge();
 		this.monsterKnowledge.setPlayer(this.player);
-		new MapGenerator(this.map, this.player).generateSample();
+		this.mapGenerator = new MapGenerator(this.map, this.player);
+		this.mapGenerator.generate();
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
 		this.starfield = new Starfield(...this.map.getSize());
@@ -32,6 +33,7 @@ class Game extends Logic {
 	update() {
 		this.updateCamera();
 		this.controller.inverseTransformMouse(this.camera);
+		this.mapGenerator.update();
 		this.map.update(this.controller, this.keymapping, this.monsterKnowledge);
 		this.minimap.update(this.controller, this.keymapping);
 	}

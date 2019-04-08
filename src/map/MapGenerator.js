@@ -1,5 +1,5 @@
 const {NoiseSimplex} = require('../util/Noise');
-const {rand} = require('../util/Number');
+const {rand, randInt} = require('../util/Number');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const OutpostPortal = require('../entities/monsters/OutpostPortal');
@@ -20,32 +20,45 @@ class MapGenerator {
 		this.player = player;
 	}
 
-	generateSample() {
+	generate() {
 		this.map.setSize(WIDTH, HEIGHT);
 
 		this.generateRocks();
-		this.generateOutputs();
-		this.generateMonsters();
+
+		this.stageEntities = [];
+		this.generateStage = 0;
 
 		this.player.setPosition(...this.rockNoise.positionsLowest(100, WIDTH, HEIGHT));
 		this.map.addPlayer(this.player);
+	}
 
+	update() {
+		if (this.stageEntities.every(entity => entity.health.isEmpty()))
+			this.stageEntities = this.generateOutputs(++this.generateStage, randInt(this.generateStage / 3));
 	}
 
 	generateRocks() {
-		const ROCKS = 17, ROCK_MINERALS = 5;
+		// const ROCKS = 17, ROCK_MINERALS = 5;
+		const ROCKS = 0, ROCK_MINERALS = 0;
 		const ROCK_MAX_SIZE = .3;
 		this.rockNoise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	generateOutputs() {
-		const OUTPOSTS = 4, TURRETS_PER = 1;
-		this.occupiedNoise.positions(OUTPOSTS, WIDTH, HEIGHT).forEach(position => {
-			this.map.addMonster(new OutpostPortal(...position));
-			let turrets = TURRETS_PER + rand(TURRETS_PER);
-			this.occupiedNoise.positions(turrets, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
+	generateOutputs(outpostCount, turretsPerOutposts) {
+		let generated = [];
+		this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT).forEach(position => {
+			let outpostPortal = new OutpostPortal(...position);
+			generated.push(outpostPortal);
+			this.map.addMonster(outpostPortal);
+			let turrets = turretsPerOutposts + rand(turretsPerOutposts);
+			this.occupiedNoise.positions(turrets, WIDTH, HEIGHT).forEach(position => {
+				let turret = new Turret(...position);
+				generated.push(turret);
+				this.map.addMonster(turret);
+			});
 		});
+		return generated;
 	}
 
 	generateMonsters() {

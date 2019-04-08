@@ -49,7 +49,7 @@ class MapDemo extends Logic {
 	reset() {
 		this.map = new FakeMap();
 		this.player = new FakePlayer();
-		new MapGenerator(this.map, this.player).generateSample();
+		new MapGenerator(this.map, this.player).generate();
 	}
 
 	iterate() {
