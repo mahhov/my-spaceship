@@ -6,8 +6,10 @@ const getDiamondDistance = (x, y) => Math.abs(x) + Math.abs(y);
 
 const getRectDistance = (x, y) => Math.max(Math.abs(x), Math.abs(y));
 
-const getMagnitude = (x, y) =>
-	Math.sqrt(x * x + y * y);
+// todo replace getMagnitude uses with getMagnitudeSqr where possible
+const getMagnitudeSqr = ({x, y}) => x * x + y * y;
+
+const getMagnitude = (x, y) => Math.sqrt(getMagnitudeSqr({x, y}));
 
 const setMagnitude = (x, y, magnitude = 1) => {
 	let prevMagnitude = getMagnitude(x, y);
@@ -44,4 +46,34 @@ const randInt = max => parseInt(rand(max));
 const randVector = magnitude =>
 	thetaToVector(rand(PI2), rand(magnitude));
 
-module.exports = {EPSILON, PI, PI2, maxWhich, getDiamondDistance, getRectDistance, getMagnitude, setMagnitude, clamp, thetaToVector, cos, sin, booleanArray, avg, rand, randB, randInt, randVector};
+const vectorDelta = (a, b) => ({x: b.x - a.x, y: b.y - a.y});
+
+const vectorSum = (...vs) =>
+	vs.reduce((v, sum) => ({x: sum.x + v.x, y: sum.y + v.y}), {x: 0, y: 0});
+
+module.exports = {
+	EPSILON,
+	PI,
+	PI2,
+	maxWhich,
+	getDiamondDistance,
+	getRectDistance,
+	getMagnitudeSqr,
+	getMagnitude,
+	setMagnitude,
+	clamp,
+	thetaToVector,
+	cos,
+	sin,
+	booleanArray,
+	avg,
+	rand,
+	randB,
+	randInt,
+	randVector,
+	vectorDelta,
+	vectorSum,
+};
+
+// todo consistent return {x, y} for vectors instead of [x, y] for some
+// todo consistent input ({x, y}) for vectors instead of (x, y)
