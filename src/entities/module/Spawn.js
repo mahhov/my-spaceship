@@ -19,7 +19,7 @@ class Spawn extends Module {
 	}
 
 	apply(map, intersectionFinder, target) {
-		if (this.stage !== Stages.ACTIVE)
+		if (this.stage === Stages.INACTIVE)
 			return;
 
 		if (rand() > this.probability)
