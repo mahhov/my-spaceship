@@ -9,21 +9,25 @@ class Spawn extends Module {
 	config(origin, range, probability, minCount, maxCount, spawnLimit, monsterClass) {
 		this.origin = origin;
 		this.range = range;
-		this.probability = probability;
 		this.minCount = minCount;
 		this.maxCount = maxCount;
 		this.spawnLimit = spawnLimit;
 		this.monsterClass = monsterClass;
 
 		this.spawns = new LinkedList();
+		this.probabilityRate = 2 * probability * probability; // integral(2p^2 t dt)_0_1/p = 1
+		this.sinceLastSpawn = 0;
 	}
 
 	apply(map, intersectionFinder, target) {
 		if (this.stage === Stages.INACTIVE)
 			return;
 
-		if (rand() > this.probability)
+		if (rand() > this.sinceLastSpawn * this.probabilityRate) {
+			this.sinceLastSpawn++;
 			return;
+		}
+		this.sinceLastSpawn = 0;
 
 		this.spawns.forEach((spawn, iter) => {
 			if (spawn.health.isEmpty())
