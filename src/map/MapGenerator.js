@@ -7,7 +7,7 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
-const WIDTH = 3, HEIGHT = 3;
+const WIDTH = 2, HEIGHT = 2;
 
 class MapGenerator {
 	constructor(map, player) {
@@ -33,8 +33,9 @@ class MapGenerator {
 	}
 
 	update() {
-		if (this.stageEntities.every(entity => entity.health.isEmpty()))
-			this.stageEntities = this.generateOutputs(++this.generateStage, randInt(this.generateStage / 3));
+		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
+			this.stageEntities = this.generateOutputs(++this.generateStage, 1 / 3);
+		}
 	}
 
 	generateRocks() {
@@ -45,18 +46,18 @@ class MapGenerator {
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	generateOutputs(outpostCount, turretsPerOutposts) {
+	generateOutputs(outpostCount, turretProbability) {
 		let generated = [];
 		this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT).forEach(position => {
 			let outpostPortal = new OutpostPortal(...position);
 			generated.push(outpostPortal);
 			this.map.addMonster(outpostPortal);
-			let turrets = turretsPerOutposts + rand(turretsPerOutposts);
-			this.occupiedNoise.positions(turrets, WIDTH, HEIGHT).forEach(position => {
-				let turret = new Turret(...position);
-				generated.push(turret);
-				this.map.addMonster(turret);
-			});
+			if (rand() < turretProbability)
+				this.occupiedNoise.positions(1, WIDTH, HEIGHT).forEach(position => {
+					let turret = new Turret(...position);
+					generated.push(turret);
+					this.map.addMonster(turret);
+				});
 		});
 		return generated;
 	}
