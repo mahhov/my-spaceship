@@ -14,13 +14,13 @@ class NoiseSimplex {
 		return this.simplexNoise.noise2D(x * this.scale + 1, y * this.scale) * .5 + .5; // seems like simplexNoise implementation is bugged to always return 0 at (0, 0)
 	}
 
-	// not consistent, calling it multiple times with same paramters can yield different results
+	// not consistent, calling it multiple times with same parameters can yield different results
 	getB(x, y) {
 		return this.get(x, y) > this.threshold + rand(this.thresholdRandWeight);
 	}
 
 	// return count number of positions within range [[0 - width], [0 - height]], structured as 2d array
-	// not consistent, calling it multiple times with same paramters can yield different results
+	// not consistent, calling it multiple times with same parameters can yield different results
 	positions(count, width, height) {
 		let positions = [];
 		while (positions.length < count) {
@@ -33,7 +33,7 @@ class NoiseSimplex {
 	}
 
 	// return position with lowest noise value of count random positions, within range [[0 - width], [0 - height]]
-	// not consistent, calling it multiple times with same paramters can yield different results
+	// not consistent, calling it multiple times with same parameters can yield different results
 	positionsLowest(count, width, height) {
 		let position = [];
 		let minNoise = 1;
