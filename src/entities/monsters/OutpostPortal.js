@@ -14,7 +14,7 @@ class OutpostPortal extends Monster {
 		super(x, y, .04, .04, .04);
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		this.attackPhase = new Phase(100, 0);
+		this.attackPhase = new Phase(200, 0);
 		this.attackPhase.setSequentialStartPhase(Phases.ACTIVE);
 
 		let spawn = new Spawn();
