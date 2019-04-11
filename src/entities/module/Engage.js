@@ -15,7 +15,7 @@ class Engage extends ModuleManager {
 		this.farDistance = farDistance;
 	}
 
-	apply(map, intersectionFinder, target) {
+	managerApply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 
@@ -25,8 +25,6 @@ class Engage extends ModuleManager {
 			this.modulesSetStage(Phases.ENGAGED);
 		else if (targetDistance > this.farDistance)
 			this.modulesSetStage(Phases.DISENGAGED);
-
-		this.modulesApply(map, intersectionFinder, target);
 	}
 }
 

@@ -11,6 +11,7 @@ class ModuleManager extends Module {
 		this.modules.push(module);
 	}
 
+	// todo rename to setPhase
 	modulesSetStage(phase) {
 		if (phase === this.phase)
 			return;
@@ -19,9 +20,14 @@ class ModuleManager extends Module {
 			module.setStage(phase));
 	}
 
-	modulesApply(map, intersectionFinder, player) {
+	apply(map, intersectionFinder, origin, target) {
+		this.managerApply(map, intersectionFinder, origin, target);
+		this.modulesApply(map, intersectionFinder, origin, target);
+	}
+
+	modulesApply(map, intersectionFinder, origin, target) {
 		this.modules.forEach(module =>
-			module.apply(map, intersectionFinder, player));
+			module.apply(map, intersectionFinder, origin, target));
 	}
 
 	modulesPaint(painter, camera) {

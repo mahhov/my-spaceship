@@ -3,6 +3,7 @@ const ModuleManager = require('./ModuleManager');
 const {getMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
+// variable number of phases per number of arguments to constructor
 
 class Distance extends ModuleManager {
 	// distances should be in increasing order
@@ -12,7 +13,7 @@ class Distance extends ModuleManager {
 		this.distances = distances;
 	}
 
-	apply(map, intersectionFinder, target) {
+	managerApply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 
@@ -22,8 +23,6 @@ class Distance extends ModuleManager {
 		if (phase === -1)
 			phase = this.distances.length;
 		this.modulesSetStage(phase);
-
-		this.modulesApply(map, intersectionFinder, target);
 	}
 }
 
