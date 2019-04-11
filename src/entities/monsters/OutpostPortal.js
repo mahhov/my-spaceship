@@ -17,22 +17,24 @@ class OutpostPortal extends Monster {
 		this.attackPhase = new Phase(100, 0);
 		this.attackPhase.setSequentialStartPhase(Phases.ACTIVE);
 
-		let rotate = new Rotate();
-		rotate.setStagesMapping({
-			[Phases.DORMANT]: Rotate.Stages.INACTIVE,
-			[Phases.ACTIVE]: Rotate.Stages.ACTIVE,
-		});
-		rotate.config(this);
-		this.moduleManager.addModule(rotate);
-
 		let spawn = new Spawn();
 		spawn.setStagesMapping({
 			[Phases.DORMANT]: Spawn.Stages.INACTIVE,
 			[Phases.ACTIVE]: Spawn.Stages.ACTIVE,
 		});
-		spawn.config(this, .2, .005, 1, 4, 10, MeleeDart);
+		spawn.config(this, .2, .005, 1, 4, 10, 10, MeleeDart);
 		this.moduleManager.addModule(spawn);
 
+		let rotate = new Rotate();
+		rotate.setStagesMapping({
+			[Spawn.Phases.NOT_SPAWNING]: Rotate.Stages.INACTIVE,
+			[Spawn.Phases.SPAWNING]: Rotate.Stages.ACTIVE,
+			[Spawn.Phases.COMPLETE]: Rotate.Stages.INACTIVE,
+		});
+		rotate.config(this);
+		spawn.addModule(rotate);
+
+		spawn.modulesSetStage(Spawn.Phases.NOT_SPAWNING);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 

@@ -1,27 +1,32 @@
 const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
+const ModuleManager = require('./ModuleManager');
 const LinkedList = require('../../util/LinkedList');
 const {rand, randInt, randVector} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
+const Phases = makeEnum('NOT_SPAWNING', 'SPAWNING', 'COMPLETE');
 
-class Spawn extends Module {
-	config(origin, range, probability, minCount, maxCount, spawnLimit, monsterClass) {
+class Spawn extends ModuleManager {
+	config(origin, range, probability, minCount, maxCount, concurrentSpawnLimit, totalSpawnLimit, monsterClass) {
 		this.origin = origin;
 		this.range = range;
 		this.minCount = minCount;
 		this.maxCount = maxCount;
-		this.spawnLimit = spawnLimit;
+		this.concurrentSpawnLimit = concurrentSpawnLimit;
+		this.totalSpawnLimit = totalSpawnLimit;
 		this.monsterClass = monsterClass;
 
 		this.spawns = new LinkedList();
+		this.totalSpawnCount = 0;
 		this.probabilityRate = 2 * probability * probability; // integral(2p^2 t dt)_0_1/p = 1
 		this.sinceLastSpawn = 0;
 	}
 
-	apply(map, intersectionFinder, target) {
-		if (this.stage === Stages.INACTIVE)
+	managerApply(map, intersectionFinder, target) {
+		if (this.stage === Stages.INACTIVE || this.phase === Phases.COMPLETE)
 			return;
+		if (this.phase === Phases.NOT_SPAWNING)
+			this.modulesSetStage(Phases.SPAWNING);
 
 		if (rand() > this.sinceLastSpawn * this.probabilityRate) {
 			this.sinceLastSpawn++;
@@ -34,16 +39,29 @@ class Spawn extends Module {
 				this.spawns.remove(iter);
 		});
 
-		let count = Math.min((this.minCount + randInt(this.maxCount - this.minCount)), this.spawnLimit - this.spawns.length);
+		let count = Math.min(
+			(this.minCount + randInt(this.maxCount - this.minCount)),
+			this.concurrentSpawnLimit - this.spawns.length,
+			this.totalSpawnLimit - this.totalSpawnCount);
 		for (let i = 0; i < count; i++) {
 			let spawnVector = randVector(this.range);
 			let monster = new this.monsterClass(this.origin.x + spawnVector[0], this.origin.y + spawnVector[1]);
 			this.spawns.add(monster);
+			this.totalSpawnCount++;
 			map.addMonster(monster);
 		}
+		if (this.totalSpawnLimit === this.totalSpawnCount)
+			this.modulesSetStage(Phases.COMPLETE);
 	}
 }
 
 Spawn.Stages = Stages;
+Spawn.Phases = Phases;
 
 module.exports = Spawn;
+
+
+// todo outposts to be less tanky, more to spawn, further reduced tankyness after spawn limit reached
+// todo spawned monsters to increase damage with time
+// todo game modes defense, boss fights, kill outpost portals, and arena
+// todo ability variety

@@ -83,6 +83,7 @@ class Boss1 extends Monster {
 		});
 		this.moduleManager.addModule(this.shotgun);
 
+		engage.modulesSetStage(Engage.Phases.DISENGAGED);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 
