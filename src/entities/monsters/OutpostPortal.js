@@ -3,8 +3,9 @@ const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const OutpostPortalGraphic = require('../../graphics/OutpostPortalGraphic');
 const Phase = require('../../util/Phase');
-const Rotate = require('../module/Rotate');
 const Spawn = require('../module/Spawn');
+const StatSetter = require('../module/StatSetter');
+const Rotate = require('../module/Rotate');
 const MeleeDart = require('./MeleeDart');
 
 const Phases = makeEnum('DORMANT', 'ACTIVE');
@@ -12,6 +13,7 @@ const Phases = makeEnum('DORMANT', 'ACTIVE');
 class OutpostPortal extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .04);
+		this.setStats({armor: 2});
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(200, 0);
@@ -24,6 +26,15 @@ class OutpostPortal extends Monster {
 		});
 		spawn.config(this, .2, .005, 1, 4, 10, 10, MeleeDart);
 		this.moduleManager.addModule(spawn);
+
+		let statSetter = new StatSetter();
+		statSetter.setStagesMapping({
+			[Spawn.Phases.NOT_SPAWNING]: StatSetter.Stages.INACTIVE,
+			[Spawn.Phases.SPAWNING]: StatSetter.Stages.INACTIVE,
+			[Spawn.Phases.COMPLETE]: StatSetter.Stages.TRIGGER,
+		});
+		statSetter.config(this, {armor: .5});
+		spawn.addModule(statSetter);
 
 		let rotate = new Rotate();
 		rotate.setStagesMapping({
