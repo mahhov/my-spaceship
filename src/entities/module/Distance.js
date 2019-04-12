@@ -13,6 +13,7 @@ class Distance extends ModuleManager {
 		this.distances = distances;
 	}
 
+	// todo how is this working when target = 4th param, and origin = 3rd param
 	managerApply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
