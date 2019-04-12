@@ -1,25 +1,16 @@
 const makeEnum = require('../../util/Enum');
-const Trigger = require('../../util/Trigger');
-
 const Module = require('./Module');
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE', 'TRIGGER');
+const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Restore extends Module {
-	constructor() {
-		super();
-		this.trigger = new Trigger(Stages.TRIGGER);
-	}
-
 	config(origin) {
 		this.origin = origin;
 	}
 
 	apply(map, intersectionFinder, target) {
-		if (this.stage === Stages.ACTIVE || this.trigger.trigger(this.stage))
+		if (this.stage === Stages.ACTIVE)
 			this.origin.restoreHealth();
-		else if (this.stage === Stages.INACTIVE)
-			this.trigger.untrigger();
 	}
 }
 

@@ -31,7 +31,7 @@ class OutpostPortal extends Monster {
 		statSetter.setStagesMapping({
 			[Spawn.Phases.NOT_SPAWNING]: StatSetter.Stages.INACTIVE,
 			[Spawn.Phases.SPAWNING]: StatSetter.Stages.INACTIVE,
-			[Spawn.Phases.COMPLETE]: StatSetter.Stages.TRIGGER,
+			[Spawn.Phases.COMPLETE]: StatSetter.Stages.ACTIVE,
 		});
 		statSetter.config(this, {armor: .5});
 		spawn.addModule(statSetter);

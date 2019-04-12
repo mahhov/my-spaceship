@@ -4,6 +4,7 @@ const {Colors, Positions} = require('../../util/Constants');
 const Phase = require('../../util/Phase');
 const StarShip = require('../../graphics/StarShip');
 const Engage = require('../module/Engage');
+const Trigger = require('../module/Trigger');
 const PhaseSetter = require('../module/PhaseSetter');
 const Restore = require('../module/Restore');
 const NearbyDegen = require('../module/NearbyDegen');
@@ -32,27 +33,37 @@ class Boss1 extends Monster {
 		engage.config(this, .5, 1);
 		this.moduleManager.addModule(engage);
 
-		// when boss is engaged after being disengaged, will reset attackPhase to PRE_DEGEN
+		// triggers when boss engages
+		let engageTrigger = new Trigger();
+		engageTrigger.setStagesMapping(({
+			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
+			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
+		}));
+		engage.addModule(engageTrigger);
+
+		// when boss engages, will reset attackPhase to PRE_DEGEN
 		let phaseSetterEngageAttack = new PhaseSetter();
 		phaseSetterEngageAttack.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
+			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
+			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
 		}));
 		phaseSetterEngageAttack.config(this.attackPhase, Phases.PRE_DEGEN);
-		engage.addModule(phaseSetterEngageAttack);
+		engageTrigger.addModule(phaseSetterEngageAttack);
 
+		// when boss engages, will reset enrage
 		let phaseSetterEngageEnrage = new PhaseSetter();
 		phaseSetterEngageEnrage.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
+			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
+			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.TRIGGER
 		}));
 		phaseSetterEngageEnrage.config(this.enragePhase, 0);
-		engage.addModule(phaseSetterEngageEnrage);
+		engageTrigger.addModule(phaseSetterEngageEnrage);
 
+		// when boss disengages, will stop attacking
 		let phaseSetterDisengageAttack = new PhaseSetter();
 		phaseSetterDisengageAttack.setStagesMapping(({
 			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.TRIGGER
+			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.ACTIVE
 		}));
 		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
 		engage.addModule(phaseSetterDisengageAttack);
@@ -60,7 +71,7 @@ class Boss1 extends Monster {
 		let restore = new Restore();
 		restore.setStagesMapping(({
 			[Engage.Phases.ENGAGED]: Restore.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: Restore.Stages.TRIGGER
+			[Engage.Phases.DISENGAGED]: Restore.Stages.ACTIVE
 		}));
 		restore.config(this);
 		engage.addModule(restore);
