@@ -36,8 +36,8 @@ class Boss1 extends Monster {
 		// triggers when boss engages
 		let engageTrigger = new Trigger();
 		engageTrigger.setStagesMapping(({
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.TRIGGER,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.INACTIVE
+			[Engage.Phases.ENGAGED]: Trigger.Stages.TRIGGER,
+			[Engage.Phases.DISENGAGED]: Trigger.Stages.INACTIVE
 		}));
 		engage.addModule(engageTrigger);
 
@@ -54,7 +54,7 @@ class Boss1 extends Monster {
 		let phaseSetterEngageEnrage = new PhaseSetter();
 		phaseSetterEngageEnrage.setStagesMapping(({
 			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
-			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.TRIGGER
+			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
 		}));
 		phaseSetterEngageEnrage.config(this.enragePhase, 0);
 		engageTrigger.addModule(phaseSetterEngageEnrage);

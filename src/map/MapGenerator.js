@@ -24,6 +24,7 @@ class MapGenerator {
 		this.map.setSize(WIDTH, HEIGHT);
 
 		this.generateRocks();
+		// this.generateMonsters();
 
 		this.stageEntities = [];
 		this.generateStage = 0;
@@ -33,9 +34,8 @@ class MapGenerator {
 	}
 
 	update() {
-		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
+		if (this.stageEntities.every(entity => entity.health.isEmpty()))
 			this.stageEntities = this.generateOutputs(++this.generateStage, 1 / 3);
-		}
 	}
 
 	generateRocks() {
