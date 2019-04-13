@@ -41,7 +41,7 @@ const rand = (max = 1) => Math.random() * max;
 const randB = (max = 1) => rand(max) - max / 2;
 
 // [0, max)
-const randInt = max => parseInt(rand(max));
+const randInt = max => Math.floor(rand(max));
 
 const randVector = magnitude =>
 	thetaToVector(rand(PI2), rand(magnitude));

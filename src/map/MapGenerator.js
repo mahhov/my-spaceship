@@ -7,7 +7,7 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 
-const WIDTH = 2, HEIGHT = 2;
+const WIDTH = 1.5, HEIGHT = 1.5;
 
 class MapGenerator {
 	constructor(map, player) {
@@ -24,7 +24,6 @@ class MapGenerator {
 		this.map.setSize(WIDTH, HEIGHT);
 
 		this.generateRocks();
-		// this.generateMonsters();
 
 		this.stageEntities = [];
 		this.generateStage = 0;
@@ -34,8 +33,13 @@ class MapGenerator {
 	}
 
 	update() {
-		if (this.stageEntities.every(entity => entity.health.isEmpty()))
-			this.stageEntities = this.generateOutputs(++this.generateStage, 1 / 3);
+		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
+			let entities = [
+				...this.generateOutputs(++this.generateStage, 1 / 3),
+				...this.generateMonsters(0, 0, Math.floor(this.generateStage / 5))];
+			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
+			this.stageEntities = entities.map(([entity]) => entity);
+		}
 	}
 
 	generateRocks() {
@@ -46,27 +50,25 @@ class MapGenerator {
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	generateOutputs(outpostCount, turretProbability) {
+	* generateOutputs(outpostCount, turretProbability) {
 		let generated = [];
-		this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT).forEach(position => {
+		for (let position of this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT)) {
 			let outpostPortal = new OutpostPortal(...position);
-			generated.push(outpostPortal);
-			this.map.addMonster(outpostPortal);
+			yield [outpostPortal];
 			if (rand() < turretProbability)
-				this.occupiedNoise.positions(1, WIDTH, HEIGHT).forEach(position => {
-					let turret = new Turret(...position);
-					generated.push(turret);
-					this.map.addMonster(turret);
-				});
-		});
-		return generated;
+				for (let tPosition of this.occupiedNoise.positions(1, WIDTH, HEIGHT))
+					yield  [new Turret(...tPosition)];
+		}
 	}
 
-	generateMonsters() {
-		const TURRETS = 0, SHOTGUN_WARRIORS = 0;
-		this.occupiedNoise.positions(TURRETS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Turret(...position)));
-		this.occupiedNoise.positions(SHOTGUN_WARRIORS, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new ShotgunWarrior(...position)));
-		this.occupiedNoise.positions(1, WIDTH, HEIGHT).forEach(position => this.map.addMonster(new Boss1(...position), true));
+	* generateMonsters(turretCount, shotgunCount, bossCount) {
+		let position;
+		for (position of this.occupiedNoise.positions(turretCount, WIDTH, HEIGHT))
+			yield [new Turret(...position)];
+		for (position of this.occupiedNoise.positions(shotgunCount, WIDTH, HEIGHT))
+			yield [new ShotgunWarrior(...position)];
+		for (position of this.occupiedNoise.positions(bossCount, WIDTH, HEIGHT))
+			yield [new Boss1(...position), true];
 	}
 }
 

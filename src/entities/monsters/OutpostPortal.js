@@ -12,7 +12,7 @@ const Phases = makeEnum('DORMANT', 'ACTIVE');
 
 class OutpostPortal extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .04);
+		super(x, y, .04, .04, .02);
 		this.setStats({armor: 2});
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
@@ -24,7 +24,7 @@ class OutpostPortal extends Monster {
 			[Phases.DORMANT]: Spawn.Stages.INACTIVE,
 			[Phases.ACTIVE]: Spawn.Stages.ACTIVE,
 		});
-		spawn.config(this, .2, .005, 1, 4, 10, 10, MeleeDart);
+		spawn.config(this, .2, .005, 1, 4, 4, 4, MeleeDart);
 		this.moduleManager.addModule(spawn);
 
 		let statSetter = new StatSetter();
