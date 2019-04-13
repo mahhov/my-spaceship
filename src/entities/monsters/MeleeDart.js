@@ -10,7 +10,7 @@ const AShip = require('../../graphics/AShip');
 const Phases = makeEnum('ONE');
 
 class MeleeDart extends Monster {
-	constructor(x, y) {
+	constructor(x, y, damageMultiplier) {
 		super(x, y, .02, .02, .003);
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));
 
@@ -38,7 +38,7 @@ class MeleeDart extends Monster {
 			2: Shotgun.Stages.INACTIVE,
 			3: Shotgun.Stages.INACTIVE
 		});
-		shotgun.config(this, .15, 1, .018, .005, 100, .005);
+		shotgun.config(this, .15, 1, .018, .005, 100, damageMultiplier * .005);
 		distance.addModule(shotgun);
 
 		distance.modulesSetStage(0);

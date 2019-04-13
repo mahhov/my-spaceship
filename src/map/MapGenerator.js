@@ -27,15 +27,17 @@ class MapGenerator {
 
 		this.stageEntities = [];
 		this.generateStage = 0;
+		this.timer = 0;
 
 		this.player.setPosition(...this.rockNoise.positionsLowest(100, WIDTH, HEIGHT));
 		this.map.addPlayer(this.player);
 	}
 
 	update() {
+		this.timer++;
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			let entities = [
-				...this.generateOutputs(++this.generateStage, 1 / 3),
+				...this.generateOutputs(++this.generateStage, 1 / 3, this.timer),
 				...this.generateMonsters(0, 0, Math.floor(this.generateStage / 5))];
 			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
 			this.stageEntities = entities.map(([entity]) => entity);
@@ -50,10 +52,10 @@ class MapGenerator {
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	* generateOutputs(outpostCount, turretProbability) {
+	* generateOutputs(outpostCount, turretProbability, timer) {
 		let generated = [];
 		for (let position of this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT)) {
-			let outpostPortal = new OutpostPortal(...position);
+			let outpostPortal = new OutpostPortal(...position, (timer / 5000 + 1));
 			yield [outpostPortal];
 			if (rand() < turretProbability)
 				for (let tPosition of this.occupiedNoise.positions(1, WIDTH, HEIGHT))

@@ -2,7 +2,6 @@ const makeEnum = require('../../util/Enum');
 
 const Module = require('./Module');
 
-// todo create common parent class for StatSetter, PhaseSetter, and Restore; e.g., TriggerModule. Delete Trigger class.
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class StatSetter extends Module {

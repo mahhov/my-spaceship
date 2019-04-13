@@ -7,13 +7,14 @@ const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('NOT_SPAWNING', 'SPAWNING', 'COMPLETE');
 
 class Spawn extends ModuleManager {
-	config(origin, range, probability, minCount, maxCount, concurrentSpawnLimit, totalSpawnLimit, monsterClass) {
+	config(origin, range, probability, minCount, maxCount, concurrentSpawnLimit, totalSpawnLimit, monsterClass, ...monsterConstructorParams) {
 		this.origin = origin;
 		this.range = range;
 		this.minCount = minCount;
 		this.maxCount = maxCount;
 		this.concurrentSpawnLimit = concurrentSpawnLimit;
 		this.totalSpawnLimit = totalSpawnLimit;
+		this.monsterConstructorParams = monsterConstructorParams;
 		this.monsterClass = monsterClass;
 
 		this.spawns = new LinkedList();
@@ -47,7 +48,7 @@ class Spawn extends ModuleManager {
 			this.totalSpawnLimit - this.totalSpawnCount);
 		for (let i = 0; i < count; i++) {
 			let spawnVector = randVector(this.range);
-			let monster = new this.monsterClass(this.origin.x + spawnVector[0], this.origin.y + spawnVector[1]);
+			let monster = new this.monsterClass(this.origin.x + spawnVector[0], this.origin.y + spawnVector[1], ...this.monsterConstructorParams);
 			this.spawns.add(monster);
 			this.totalSpawnCount++;
 			map.addMonster(monster);
