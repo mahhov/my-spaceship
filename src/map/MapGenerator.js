@@ -38,7 +38,7 @@ class MapGenerator {
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			let entities = [
 				...this.generateOutputs(++this.generateStage, 1 / 3, this.timer),
-				...this.generateMonsters(0, 0, Math.floor(this.generateStage / 5))];
+				...this.generateMonsters(0, 0, this.generateStage && this.generateStage % 5 === 0)]; // every 5 stages, starting at stage 5
 			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
 			this.stageEntities = entities.map(([entity]) => entity);
 		}

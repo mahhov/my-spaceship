@@ -63,8 +63,6 @@ Spawn.Phases = Phases;
 
 module.exports = Spawn;
 
-
-// todo outposts to be less tanky, more to spawn, further reduced tankyness after spawn limit reached
-// todo spawned monsters to increase damage with time
+// todo indicator for: spawned monsters to increase damage with time
 // todo game modes defense, boss fights, kill outpost portals, and arena
 // todo ability variety
