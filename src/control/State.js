@@ -1,14 +1,15 @@
 const makeEnum = require('../util/Enum');
 
-const States = makeEnum('UP', 'DOWN', 'PRESSED', 'RELEASED');
+// larger values have priority when multiple keys are mapped to the same control
+const States = makeEnum('UP', 'RELEASED', 'PRESSED', 'DOWN');
 
 class State {
-	constructor() {
-		this.set(State.UP);
+	constructor(state = States.UP) {
+		this.state = state;
 	}
 
-	set(state) {
-		this.state = state;
+	static merge(states) {
+		return new State(Math.max(...states.map(state => state.state)));
 	}
 
 	press() {

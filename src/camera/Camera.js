@@ -1,5 +1,4 @@
 const {clamp, avg} = require('../util/Number');
-const Keymapping = require('../control/Keymapping');
 
 class Camera {
 	constructor(x, y, z = 3) {
