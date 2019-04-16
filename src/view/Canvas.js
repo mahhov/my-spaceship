@@ -18,11 +18,11 @@ const painterSet = new PainterCompositor(canvas);
 const fpsTracker = new FpsTracker();
 
 const game = new Game(controller, painterSet);
-const graphicsDemo = new GraphicsDemo(controller, painterSet);
-const starfieldDemo = new StarfieldDemo(controller, painterSet);
-const noiseDemo = new NoiseDemo(controller, painterSet);
-const mapDemo = new MapDemo(controller, painterSet);
-const interfaceDemo = new InterfaceDemo(controller, painterSet);
+// const graphicsDemo = new GraphicsDemo(controller, painterSet);
+// const starfieldDemo = new StarfieldDemo(controller, painterSet);
+// const noiseDemo = new NoiseDemo(controller, painterSet);
+// const mapDemo = new MapDemo(controller, painterSet);
+// const interfaceDemo = new InterfaceDemo(controller, painterSet);
 
 const logic = game;
 
