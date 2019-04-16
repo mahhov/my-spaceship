@@ -73,6 +73,7 @@ const Positions = {
 	BAR_HEIGHT: .02,
 	PLAYER_BAR_X: .5,
 	ABILITY_SIZE: .06,
+	STAGE_TEXT_HEIGHT: .03,
 };
 
 module.exports = {Colors, Positions};

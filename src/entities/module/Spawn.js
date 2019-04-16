@@ -63,6 +63,5 @@ Spawn.Phases = Phases;
 
 module.exports = Spawn;
 
-// todo indicator for: spawned monsters to increase damage with time
 // todo game modes defense, boss fights, kill outpost portals, and arena
 // todo ability variety
