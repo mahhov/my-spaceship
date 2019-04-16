@@ -38,6 +38,10 @@ class Map {
 			this.uis.add(monster);
 	}
 
+	addUi(ui) {
+		this.uis.add(ui);
+	}
+
 	addProjectile(projectile) { // todo [high] rename to addAttack or such
 		this.projectiles.add(projectile);
 		projectile.addIntersectionBounds(this.intersectionFinder);
@@ -78,7 +82,7 @@ class Map {
 
 	paintUi(painter, camera) {
 		this.uis.forEach((ui, iter) => {
-			if (ui.health.isEmpty())
+			if (ui.removeUi())
 				this.uis.remove(iter);
 			else
 				ui.paintUi(painter, camera);

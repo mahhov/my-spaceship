@@ -19,6 +19,10 @@ class LivingEntity extends Entity {
 	restoreHealth() {
 		this.health.restore();
 	}
+
+	removeUi() {
+		return this.health.isEmpty();
+	}
 }
 
 module.exports = LivingEntity;

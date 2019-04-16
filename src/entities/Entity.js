@@ -56,6 +56,10 @@ class Entity {
 	changeHealth(amount) {
 	}
 
+	removeUi() {
+		/* override, return true if ui is not longer relevant and should be removed from the ui queue */
+	}
+
 	paint(painter, camera) {
 		this.graphics.paint(painter, camera, this.x, this.y, this.moveDirection);
 	}

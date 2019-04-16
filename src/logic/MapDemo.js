@@ -33,6 +33,9 @@ class FakeMap {
 		this.monsters.add(monster);
 	}
 
+	addUi(ui) {
+	}
+
 	paint(painter, camera) {
 		this.stills.forEach(still => still.paint(painter, camera));
 		this.monsters.forEach(monster => Entity.prototype.paint.call(monster, painter, camera)); // to avoid painting modules
