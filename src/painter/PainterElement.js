@@ -8,6 +8,11 @@ class PainterElement {
 		context.lineWidth = this.thickness;
 	}
 
+	setFont(context) {
+		context.textAlign = this.align;
+		context.font = `${this.size} monospace`;
+	}
+
 	paint(painter) {
 	}
 }
