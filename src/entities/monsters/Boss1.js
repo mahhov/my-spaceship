@@ -124,10 +124,20 @@ class Boss1 extends Monster {
 			return;
 
 		painter.add(new Bar(
-			Positions.MARGIN, Positions.MARGIN, 1 - Positions.MARGIN * 2, Positions.BAR_HEIGHT, this.health.getRatio(),
-			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.getShade(Colors.BAR_SHADING)));
+			Positions.MARGIN,
+			Positions.MARGIN,
+			1 - Positions.MARGIN * 2,
+			Positions.BAR_HEIGHT,
+			this.health.getRatio(),
+			Colors.LIFE.getShade(Colors.BAR_SHADING),
+			Colors.LIFE.get(),
+			Colors.LIFE.getShade(Colors.BAR_SHADING)));
 		painter.add(new Bar(
-			Positions.MARGIN, Positions.MARGIN * 2.5, 1 - Positions.MARGIN * 2, Positions.BAR_HEIGHT * .5, this.enragePhase.getRatio(),
+			Positions.MARGIN,
+			Positions.MARGIN * 1.5 + Positions.BAR_HEIGHT,
+			1 - Positions.MARGIN * 2,
+			Positions.BAR_HEIGHT * .5,
+			this.enragePhase.getRatio(),
 			Colors.ENRAGE.getShade(), Colors.ENRAGE.get(), Colors.ENRAGE.getShade()));
 	}
 }
