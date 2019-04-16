@@ -1,3 +1,5 @@
+const {round} = require('./Number');
+
 class FpsTracker {
 	constructor() {
 		this.fps = 0;
@@ -16,7 +18,7 @@ class FpsTracker {
 
 	getFps() {
 		this.tick();
-		return Math.round(this.fps);
+		return round(this.fps);
 	}
 }
 

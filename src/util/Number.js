@@ -51,6 +51,11 @@ const vectorDelta = (a, b) => ({x: b.x - a.x, y: b.y - a.y});
 const vectorSum = (...vs) =>
 	vs.reduce((v, sum) => ({x: sum.x + v.x, y: sum.y + v.y}), {x: 0, y: 0});
 
+const round = (number, precision = 0) => {
+	let ten = 10 ** precision;
+	return Math.round(number * ten) / ten;
+};
+
 module.exports = {
 	EPSILON,
 	PI,
@@ -73,6 +78,7 @@ module.exports = {
 	randVector,
 	vectorDelta,
 	vectorSum,
+	round,
 };
 
 // todo consistent return {x, y} for vectors instead of [x, y] for some
