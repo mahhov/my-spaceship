@@ -40,8 +40,8 @@ class Game extends Logic {
 	updateCamera() {
 		this.camera.move(this.player, this.controller.getRawMouse(.5, .5));
 		this.camera.zoom(
-			Keymapping.getControlState(this.controller, Keymapping.Keys.ZOOM_OUT).active,
-			Keymapping.getControlState(this.controller, Keymapping.Keys.ZOOM_IN).active);
+			Keymapping.getControlState(this.controller, Keymapping.Controls.ZOOM_OUT).active,
+			Keymapping.getControlState(this.controller, Keymapping.Controls.ZOOM_IN).active);
 	}
 
 	paint() {

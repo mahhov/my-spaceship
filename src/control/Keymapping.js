@@ -58,8 +58,7 @@ class Keymapping {
 	}
 }
 
-// todo [high] rename to Controls
-Keymapping.Keys = Controls;
+Keymapping.Controls = Controls;
 Keymapping.ControlToKeyMap = ControlToKeyMap;
 
 module.exports = Keymapping;

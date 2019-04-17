@@ -17,7 +17,7 @@ class Ability {
 	setUi(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiText = Keymapping.getKeys(Keymapping.Keys.ABILITY_I[uiIndex]).join('/');
+		this.uiText = Keymapping.getKeys(Keymapping.Controls.ABILITY_I[uiIndex]).join('/');
 	}
 
 	safeActivate(origin, direct, map, intersectionFinder, player) {
