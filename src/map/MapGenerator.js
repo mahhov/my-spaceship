@@ -89,7 +89,7 @@ class MapGenerator {
 			`Stage: ${this.stage}`, font));
 		painter.add(new Text(
 			1 - Positions.MARGIN,
-			Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.TEXT_HEIGHT,
+			Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.STAGE_TEXT_HEIGHT,
 			`Difficulty ${round(this.timerDamageMultiplier, 2)}`, font));
 	}
 }
