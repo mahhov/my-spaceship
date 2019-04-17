@@ -28,11 +28,12 @@ class Player extends LivingEntity {
 
 		this.stamina = new Pool(100, .13);
 		this.abilities = [
-			new ProjectileAttack(0),
-			new Dash(1),
-			new Heal(2),
-			new Accelerate(3),
-			new BombAttack(4)];
+			new ProjectileAttack(),
+			new Dash(),
+			new Heal(),
+			new Accelerate(),
+			new BombAttack()];
+		this.abilities.forEach((ability, i) => ability.setUi(i));
 
 		this.passiveAbilities = [
 			new DelayedRegen()];
@@ -40,11 +41,11 @@ class Player extends LivingEntity {
 		this.recentDamage = new Decay(.1, .001);
 	}
 
-	update(map, controller, keymapping, intersectionFinder, monsterKnowledge) {
+	update(map, controller, intersectionFinder, monsterKnowledge) {
 		this.refresh();
-		this.moveControl(controller, keymapping, intersectionFinder);
-		this.abilityControl(map, controller, keymapping, intersectionFinder);
-		this.targetLockControl(controller, keymapping, intersectionFinder);
+		this.moveControl(controller, intersectionFinder);
+		this.abilityControl(map, controller, intersectionFinder);
+		this.targetLockControl(controller, intersectionFinder);
 		this.createMovementParticle(map);
 	}
 
@@ -52,14 +53,14 @@ class Player extends LivingEntity {
 		this.stamina.increment();
 	}
 
-	moveControl(controller, keymapping, intersectionFinder) {
+	moveControl(controller, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 		const SPEED = .005;
 
-		let left = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_LEFT).active;
-		let up = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_UP).active;
-		let right = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_RIGHT).active;
-		let down = keymapping.getKeyState(controller, Keymapping.Keys.MOVE_DOWN).active;
+		let left = Keymapping.getControlState(controller, Keymapping.Keys.MOVE_LEFT).active;
+		let up = Keymapping.getControlState(controller, Keymapping.Keys.MOVE_UP).active;
+		let right = Keymapping.getControlState(controller, Keymapping.Keys.MOVE_RIGHT).active;
+		let down = Keymapping.getControlState(controller, Keymapping.Keys.MOVE_DOWN).active;
 
 		let dx = 0, dy = 0;
 
@@ -81,7 +82,7 @@ class Player extends LivingEntity {
 		this.safeMove(intersectionFinder, dx, dy, SPEED);
 	}
 
-	abilityControl(map, controller, keymapping, intersectionFinder) {
+	abilityControl(map, controller, intersectionFinder) {
 		let directTarget = this.targetLock || controller.getMouse();
 		let direct = {
 			x: directTarget.x - this.x,
@@ -91,7 +92,7 @@ class Player extends LivingEntity {
 		this.abilities
 			.forEach((ability, index) => {
 				ability.refresh(this);
-				if (keymapping.getKeyState(controller, Keymapping.Keys.ABILITY_I[index]).active)
+				if (Keymapping.getControlState(controller, Keymapping.Keys.ABILITY_I[index]).active)
 					ability.safeActivate(this, direct, map, intersectionFinder, this);
 			});
 
@@ -101,11 +102,11 @@ class Player extends LivingEntity {
 		});
 	}
 
-	targetLockControl(controller, keymapping, intersectionFinder) {
+	targetLockControl(controller, intersectionFinder) {
 		if (this.targetLock && this.targetLock.health.isEmpty())
 			this.targetLock = null;
 
-		if (!keymapping.getKeyState(controller, Keymapping.Keys.TARGET_LOCK).pressed)
+		if (!Keymapping.getControlState(controller, Keymapping.Keys.TARGET_LOCK).pressed)
 			return;
 
 		if (this.targetLock) {

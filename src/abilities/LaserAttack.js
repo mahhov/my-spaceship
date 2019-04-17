@@ -1,11 +1,10 @@
 const Ability = require('./Ability');
-const {Colors} = require('../util/Constants');
 const {setMagnitude, randVector} = require('../util/Number');
 const Laser = require('../entities/attack/Laser');
 
 class LaserAttack extends Ability {
-	constructor(paintUiColumn) {
-		super(3, 15, .6, true, false, paintUiColumn, Colors.BASIC_ATTACK);
+	constructor() {
+		super(3, 15, .6, true, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

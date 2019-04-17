@@ -1,10 +1,9 @@
 const Ability = require('./Ability');
-const {Colors} = require('../util/Constants');
 const {setMagnitude} = require('../util/Number');
 
 class Dash extends Ability {
-	constructor(paintUiColumn) {
-		super(720, 1, 30, false, false, paintUiColumn, Colors.HEAL);
+	constructor() {
+		super(720, 1, 30, false, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

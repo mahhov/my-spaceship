@@ -13,11 +13,15 @@ const Colors = {
 	DAMAGE: Color.from255(255, 0, 0, .4),
 
 	// abilities
-	BASIC_ATTACK: Color.fromHexString('#a87676').avgWhite(.4),
-	DASH: Color.fromHexString('#76a876').avgWhite(.4),
-	HEAL: Color.fromHexString('#7676a8').avgWhite(.4),
-	ACCELERATE: Color.fromHexString('#76a6a6').avgWhite(.4),
-	NOT_READY: Color.fromHexString('#444'),
+	PLAYER_ABILITIES: [
+		Color.fromHexString('#a87676').avgWhite(.4),
+		Color.fromHexString('#76a876').avgWhite(.4),
+		Color.fromHexString('#7676a8').avgWhite(.4),
+		Color.fromHexString('#76a6a6').avgWhite(.4),
+		Color.fromHexString('#a676a6').avgWhite(.4),
+		Color.fromHexString('#a6a676').avgWhite(.4),
+	],
+	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#444'),
 
 	Interface: {
 		INACTIVE: Color.from1(1, 1, 1),

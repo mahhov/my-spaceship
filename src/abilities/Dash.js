@@ -1,10 +1,9 @@
 const Ability = require('./Ability');
-const {Colors} = require('../util/Constants');
 const {booleanArray} = require('../util/Number');
 
 class Dash extends Ability {
-	constructor(paintUiColumn) {
-		super(120, 3, 10, false, false, paintUiColumn, Colors.DASH);
+	constructor() {
+		super(120, 3, 10, false, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

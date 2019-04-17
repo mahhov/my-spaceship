@@ -13,7 +13,6 @@ const UI = true;
 class Game extends Logic {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
-		this.keymapping = new Keymapping();
 		this.map = new Map();
 		this.player = new Player();
 		this.monsterKnowledge = new MonsterKnowledge();
@@ -34,15 +33,15 @@ class Game extends Logic {
 		this.updateCamera();
 		this.controller.inverseTransformMouse(this.camera);
 		this.mapGenerator.update();
-		this.map.update(this.controller, this.keymapping, this.monsterKnowledge);
-		this.minimap.update(this.controller, this.keymapping);
+		this.map.update(this.controller, this.monsterKnowledge);
+		this.minimap.update(this.controller);
 	}
 
 	updateCamera() {
 		this.camera.move(this.player, this.controller.getRawMouse(.5, .5));
 		this.camera.zoom(
-			this.keymapping.getKeyState(this.controller, Keymapping.Keys.ZOOM_OUT).active,
-			this.keymapping.getKeyState(this.controller, Keymapping.Keys.ZOOM_IN).active);
+			Keymapping.getControlState(this.controller, Keymapping.Keys.ZOOM_OUT).active,
+			Keymapping.getControlState(this.controller, Keymapping.Keys.ZOOM_IN).active);
 	}
 
 	paint() {
