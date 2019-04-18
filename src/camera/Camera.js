@@ -1,7 +1,7 @@
 const {clamp, avg} = require('../util/Number');
 
 class Camera {
-	constructor(x, y, z = 3) {
+	constructor(x, y, z = 2) {
 		this.x = x;
 		this.y = y;
 		this.endZ = this.z = z;

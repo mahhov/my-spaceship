@@ -65,9 +65,10 @@ const Colors = {
 
 	Minimap: {
 		BACKGROUND: Color.from1(1, 1, 1, .5),
+		BORDER: Color.from1(0, 0, 0, .5),
 		ROCK: Color.from1(0, 0, 0),
 		MONSTER: Color.from1(1, 0, 0),
-		BOSS: Color.from1(0, 1, 0),
+		BOSS: Color.from1(1, 0, .6),
 		PLAYER: Color.from1(0, 0, 1)
 	}
 };
