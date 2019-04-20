@@ -9,6 +9,7 @@ const PhaseSetter = require('../module/PhaseSetter');
 const Restore = require('../module/Restore');
 const NearbyDegen = require('../module/NearbyDegen');
 const Shotgun = require('../module/Shotgun');
+const LookTowards = require('../module/LookTowards');
 const Bar = require('../../painter/Bar');
 
 const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
@@ -16,6 +17,7 @@ const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .4);
+		// todo rotate to look at player when shotgun phase
 		this.setGraphics(new RotatingTurretShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
@@ -71,7 +73,7 @@ class Boss1 extends Monster {
 		let restore = new Restore();
 		restore.setStagesMapping(({
 			[Engage.Phases.ENGAGED]: Restore.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: Restore.Stages.ACTIVE
+			[Engage.Phases.DISENGAGED]: Restore.Stages.ACTIVE,
 		}));
 		restore.config(this);
 		engage.addModule(restore);
@@ -87,12 +89,22 @@ class Boss1 extends Monster {
 
 		this.shotgun = new Shotgun();
 		this.shotgun.setStagesMapping({
-			[Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
+			[Phases.INACTIVE]: Shotgun.Stages.INACTIVE,
 			[Phases.PRE_DEGEN]: Shotgun.Stages.INACTIVE,
 			[Phases.DEGEN]: Shotgun.Stages.INACTIVE,
-			[Phases.PROJECTILE]: Shotgun.Stages.ACTIVE
+			[Phases.PROJECTILE]: Shotgun.Stages.ACTIVE,
 		});
 		this.moduleManager.addModule(this.shotgun);
+
+		this.lookTowards = new LookTowards();
+		this.lookTowards.setStagesMapping({
+			[Phases.INACTIVE]: LookTowards.Stages.INACTIVE,
+			[Phases.PRE_DEGEN]: LookTowards.Stages.INACTIVE,
+			[Phases.DEGEN]: LookTowards.Stages.INACTIVE,
+			[Phases.PROJECTILE]: LookTowards.Stages.ACTIVE,
+		});
+		this.lookTowards.config(this);
+		this.moduleManager.addModule(this.lookTowards);
 
 		engage.modulesSetStage(Engage.Phases.DISENGAGED);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());

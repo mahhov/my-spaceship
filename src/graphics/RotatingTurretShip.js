@@ -40,7 +40,7 @@ class RotatingTurretShip extends Graphics {
 			rect,
 			true,
 			{fill, color, thickness});
-		// back
+		// front
 		this.addPathXY(
 			0,
 			middleS + smallS / 2,
@@ -49,7 +49,7 @@ class RotatingTurretShip extends Graphics {
 			rect,
 			true,
 			{fill, color, thickness});
-		// front
+		// back
 		this.addPathXY(
 			0,
 			-middleS - largeHeightS / 2,

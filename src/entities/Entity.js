@@ -34,9 +34,13 @@ class Entity {
 	move(dx, dy) {
 		this.x += dx;
 		this.y += dy;
+		this.setMoveDirection(dx, dy);
+		this.setBounds();
+	}
+
+	setMoveDirection(dx, dy) {
 		if (dx || dy)
 			this.moveDirection = setMagnitude(dx, dy);
-		this.setBounds();
 	}
 
 	addIntersectionBounds(intersectionFinder) {
