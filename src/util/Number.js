@@ -6,7 +6,7 @@ const getDiamondDistance = (x, y) => Math.abs(x) + Math.abs(y);
 
 const getRectDistance = (x, y) => Math.max(Math.abs(x), Math.abs(y));
 
-// todo replace getMagnitude uses with getMagnitudeSqr where possible
+// todo [medium] replace getMagnitude uses with getMagnitudeSqr where possible
 const getMagnitudeSqr = ({x, y}) => x * x + y * y;
 
 const getMagnitude = (x, y) => Math.sqrt(getMagnitudeSqr({x, y}));
@@ -81,5 +81,5 @@ module.exports = {
 	round,
 };
 
-// todo consistent return {x, y} for vectors instead of [x, y] for some
-// todo consistent input ({x, y}) for vectors instead of (x, y)
+// todo [medium] consistent return {x, y} for vectors instead of [x, y] for some
+// todo [medium] consistent input ({x, y}) for vectors instead of (x, y)

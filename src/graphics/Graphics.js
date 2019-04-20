@@ -5,7 +5,7 @@ class Graphics {
 		this.pathCreators = [];
 	}
 
-	// todo deprecated and replace with addPathXY
+	// todo [medium] deprecated and replace with addPathXY
 	addPath(width, height, points, closed, {fill, color, thickness} = {}) {
 		let pathCreator = new PathCreator();
 		pathCreator.setFill(fill);

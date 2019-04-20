@@ -3,7 +3,7 @@ const {PI2, thetaToVector} = require('../util/Number');
 
 class PathCreator {
 	constructor() {
-		this.sx = .1; // todo necessary or guaranteed to be overwritten?
+		this.sx = .1; // todo [low] necessary or guaranteed to be overwritten?
 		this.sy = .1;
 		this.tx = 0;
 		this.ty = 0;

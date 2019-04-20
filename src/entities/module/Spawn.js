@@ -63,5 +63,5 @@ Spawn.Phases = Phases;
 
 module.exports = Spawn;
 
-// todo game modes defense, boss fights, kill outpost portals, and arena
-// todo ability variety
+// todo [high] game modes defense, boss fights, kill outpost portals, and arena
+// todo [high] ability variety

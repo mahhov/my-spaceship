@@ -17,7 +17,6 @@ const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 class Boss1 extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, .4);
-		// todo rotate to look at player when shotgun phase
 		this.setGraphics(new RotatingTurretShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);
