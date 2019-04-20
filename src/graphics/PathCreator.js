@@ -3,16 +3,18 @@ const {PI2, thetaToVector} = require('../util/Number');
 
 class PathCreator {
 	constructor() {
-		this.xys = [];
-		this.cx = .5;
-		this.cy = .5;
+		this.sx = .1; // todo necessary or guaranteed to be overwritten?
+		this.sy = .1;
+		this.tx = 0;
+		this.ty = 0;
 		this.fx = 0;
 		this.fy = -1;
-		this.sx = .1;
-		this.sy = .1;
+		this.cx = 0;
+		this.cy = 0;
+
+		this.xys = [];
 		this.x = 0;
 		this.y = 0;
-		this.pathPoints = [];
 	}
 
 	setCamera(camera) {
@@ -31,9 +33,15 @@ class PathCreator {
 		this.thickness = thickness;
 	}
 
+	setScale(x, y, s) {
+		this.sx = x * s;
+		this.sy = y * s;
+		this.ss = (x + y) / 2 * s;
+	}
+
 	setTranslation(x, y) {
-		this.cx = x;
-		this.cy = y;
+		this.tx = x;
+		this.ty = y;
 	}
 
 	setForward(x, y) {
@@ -41,10 +49,9 @@ class PathCreator {
 		this.fy = y;
 	}
 
-	setScale(x, y, s) {
-		this.sx = x * s;
-		this.sy = y * s;
-		this.ss = (x + y) / 2 * s;
+	setCenter(x, y) {
+		this.cx = x;
+		this.cy = y;
 	}
 
 	setClosed(closed) {
@@ -77,8 +84,8 @@ class PathCreator {
 		// [0, 1] maps to center + forward
 		let pathPoints = [];
 		this.xys.forEach(([x, y]) => {
-			x *= this.sx;
-			y *= this.sy;
+			x = x * this.sx + this.tx;
+			y = y * this.sy + this.ty;
 			let pathX = this.cx + this.fx * y - this.fy * x;
 			let pathY = this.cy + this.fy * y + this.fx * x;
 			pathPoints.push([this.camera.xt(pathX), this.camera.yt(pathY)]);

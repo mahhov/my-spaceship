@@ -5,6 +5,7 @@ class Graphics {
 		this.pathCreators = [];
 	}
 
+	// todo deprecated and replace with addPathXY
 	addPath(width, height, points, closed, {fill, color, thickness} = {}) {
 		let pathCreator = new PathCreator();
 		pathCreator.setFill(fill);
@@ -16,10 +17,22 @@ class Graphics {
 		this.pathCreators.push(pathCreator);
 	}
 
+	addPathXY(x, y, width, height, points, closed, {fill, color, thickness} = {}) {
+		let pathCreator = new PathCreator();
+		pathCreator.setFill(fill);
+		pathCreator.setColor(color);
+		pathCreator.setThickness(thickness);
+		pathCreator.setTranslation(x, y);
+		pathCreator.setScale(width, height, Graphics.calculateScale(points));
+		pathCreator.setClosed(closed);
+		points.forEach(point => pathCreator.moveTo(...point));
+		this.pathCreators.push(pathCreator);
+	}
+
 	paint(painter, camera, x, y, moveDirection) {
 		this.pathCreators.forEach(pathCreator => {
 			pathCreator.setCamera(camera);
-			pathCreator.setTranslation(x, y);
+			pathCreator.setCenter(x, y);
 			pathCreator.setForward(moveDirection.x, moveDirection.y);
 			painter.add(pathCreator.create());
 		});
