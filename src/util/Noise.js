@@ -48,7 +48,6 @@ class NoiseSimplex {
 		}
 		return position;
 	}
-
 }
 
 class NoiseGradient {

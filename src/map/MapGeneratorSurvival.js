@@ -11,7 +11,7 @@ const Text = require('../painter/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 
-class MapGenerator {
+class MapGeneratorSurvival {
 	constructor(map, player) {
 		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
 
@@ -94,6 +94,6 @@ class MapGenerator {
 	}
 }
 
-module.exports = MapGenerator;
+module.exports = MapGeneratorSurvival;
 
 // todo [medium] don't spawn things intersecting other things
