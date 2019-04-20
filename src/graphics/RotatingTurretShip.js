@@ -1,6 +1,6 @@
 const Graphics = require('./Graphics');
 
-class TestShip extends Graphics {
+class RotatingTurretShip extends Graphics {
 	constructor(width, height, {fill, color, thickness} = {}) {
 		super();
 
@@ -61,4 +61,4 @@ class TestShip extends Graphics {
 	}
 }
 
-module.exports = TestShip;
+module.exports = RotatingTurretShip;

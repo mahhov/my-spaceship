@@ -18,6 +18,7 @@ class GraphicsDemo extends Logic {
 	}
 
 	iterate() {
+		this.ship = new TestShip(this.w, this.h); // makes it easy to plug in window variables in constructor to edit live
 		let direction = thetaToVector(this.theta += this.dtheta);
 		this.ship.paint(this.painterSet.painter, this.fakeCamera, this.x, this.y, {x: direction[0], y: direction[1]});
 	}
