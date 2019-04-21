@@ -1,5 +1,5 @@
 const {NoiseSimplex} = require('../util/Noise');
-const {rand} = require('../util/Number');
+const {rand, round} = require('../util/Number');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
@@ -63,7 +63,7 @@ class MapGeneratorArena {
 		painter.add(new Text(
 			1 - Positions.MARGIN,
 			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
-			`${this.timer / 100}`, font));
+			`${round(this.timer / 100)}`, font));
 	}
 }
 
