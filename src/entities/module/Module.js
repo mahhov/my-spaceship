@@ -14,7 +14,7 @@ class Module {
 		this.stage = this.stagesMap[phase];
 	}
 
-	apply(map, intersectionFinder, origin, target) {
+	apply(map, intersectionFinder, target) {
 	}
 
 	paint(painter, canvas) {

@@ -20,14 +20,14 @@ class ModuleManager extends Module {
 			module.setStage(phase));
 	}
 
-	apply(map, intersectionFinder, origin, target) {
-		this.managerApply(map, intersectionFinder, origin, target);
-		this.modulesApply(map, intersectionFinder, origin, target);
+	apply(map, intersectionFinder, target) {
+		this.managerApply(map, intersectionFinder, target);
+		this.modulesApply(map, intersectionFinder, target);
 	}
 
-	modulesApply(map, intersectionFinder, origin, target) {
+	modulesApply(map, intersectionFinder, target) {
 		this.modules.forEach(module =>
-			module.apply(map, intersectionFinder, origin, target));
+			module.apply(map, intersectionFinder, target));
 	}
 
 	modulesPaint(painter, camera) {
