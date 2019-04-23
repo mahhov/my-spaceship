@@ -26,6 +26,28 @@ class Champion extends Monster {
 		dash.config(this, 25, .2, 25, 10, .03);
 		this.moduleManager.addModule(dash);
 
+		let dashAttackOrigin = new NearbyDegen();
+		dashAttackOrigin.setStagesMapping({
+			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.DASHING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.COMPLETED]: NearbyDegen.Stages.ACTIVE,
+			[Dash.Phases.COLLIDED]: NearbyDegen.Stages.ACTIVE,
+		});
+		dash.addModule(dashAttackOrigin);
+		dashAttackOrigin.config(this, .1, .1);
+
+		let dashAttackTarget = new NearbyDegen();
+		dashAttackTarget.setStagesMapping({
+			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.DASHING]: NearbyDegen.Stages.WARNING,
+			[Dash.Phases.COMPLETED]: NearbyDegen.Stages.ACTIVE,
+			[Dash.Phases.COLLIDED]: NearbyDegen.Stages.ACTIVE,
+		});
+		dash.addModule(dashAttackTarget);
+		dashAttackTarget.config(dash.target, .1, .1);
+
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 

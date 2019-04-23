@@ -16,9 +16,10 @@ class Dash extends ModuleManager {
 		this.timing = new Phase(aimDuration, warningDuration, dashDuration, 0);
 		this.modulesSetStage(0);
 		this.paintRange = paintRange;
+		this.target = {};
 	}
 
-	apply(map, intersectionFinder, target) {
+	managerApply(map, intersectionFinder, target) {
 		if (this.stage === Stages.INACTIVE) {
 			this.modulesSetStage(Phases.COMPLETED);
 			this.timing.setPhase(0);
@@ -37,7 +38,8 @@ class Dash extends ModuleManager {
 
 		} else if (this.phase === Phases.AIMING) {
 			let delta = setMagnitude(target.x - this.origin.x, target.y - this.origin.y, this.distance);
-			this.target = {x: this.origin.x + delta.x, y: this.origin.y + delta.y};
+			this.target.x = this.origin.x + delta.x;
+			this.target.y = this.origin.y + delta.y;
 			this.dir = setMagnitude(delta.x, delta.y);
 
 		} else if (this.phase === Phases.DASHING) {
@@ -46,27 +48,9 @@ class Dash extends ModuleManager {
 				this.modulesSetStage(Phases.COLLIDED)
 		}
 	}
-
-	paint(painter, camera) {
-		if (this.phase !== Phases.AIMING && this.phase !== Phases.WARNING && this.phase !== Phases.DASHING)
-			return;
-		painter.add(RectC.withCamera(
-			camera,
-			this.target.x,
-			this.target.y,
-			this.paintRange * 2,
-			this.paintRange * 2,
-			{color: Colors.Ability.WARNING_BORDER.get()}));
-		painter.add(RectC.withCamera(
-			camera,
-			this.target.x,
-			this.target.y,
-			this.paintRange * 2,
-			this.paintRange * 2,
-			{fill: true, color: Colors.Ability.WARNING_FILL.get()}));
-	}
 }
 
 Dash.Stages = Stages;
+Dash.Phases = Phases;
 
 module.exports = Dash;
