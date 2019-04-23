@@ -1,11 +1,11 @@
 const makeEnum = require('../../util/Enum');
 const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
+const AShip = require('../../graphics/AShip');
 const Phase = require('../../util/Phase');
 const Distance = require('../module/Distance');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
-const AShip = require('../../graphics/AShip');
 
 const Phases = makeEnum('ONE');
 

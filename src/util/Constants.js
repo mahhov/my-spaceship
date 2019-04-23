@@ -55,7 +55,10 @@ const Colors = {
 		NearybyDegen: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
 			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
-		}
+		},
+
+		WARNING_BORDER: Color.from1(1, 0, 0),
+		WARNING_FILL: Color.from1(.8, 0, 0, .1),
 	},
 
 	Star: {
