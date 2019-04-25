@@ -3,7 +3,7 @@ const ModuleManager = require('./ModuleManager');
 const {getMagnitude} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
-// variable number of phases per number of arguments to constructor
+// variable number of phases per number of arguments to config
 
 class Distance extends ModuleManager {
 	// distances should be in increasing order
@@ -13,7 +13,6 @@ class Distance extends ModuleManager {
 		this.distances = distances;
 	}
 
-	// todo [medium] how is this working when target = 4th param, and origin = 3rd param
 	managerApply(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;

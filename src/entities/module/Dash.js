@@ -6,7 +6,7 @@ const {Colors} = require('../../util/Constants');
 const RectC = require('../../painter/RectC');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'FINISH');
-const Phases = makeEnum('AIMING', 'WARNING', 'DASHING', 'COMPLETED', 'COLLIDED');
+const Phases = makeEnum('AIMING', 'WARNING', 'DASHING', 'COMPLETED');
 
 class Dash extends ModuleManager {
 	config(origin, aimDuration, distance, warningDuration, dashDuration, paintRange) {
@@ -26,13 +26,10 @@ class Dash extends ModuleManager {
 			return;
 		}
 
-		if (this.phase === Phases.COLLIDED)
-			this.modulesSetStage(Phases.COMPLETED);
-
 		if (this.timing.sequentialTick())
 			this.modulesSetStage(this.timing.get());
 
-		if (this.stage === Stages.ACTIVE && (this.phase === Phases.COMPLETED || this.phase === Phases.COLLIDED)) {
+		if (this.stage === Stages.ACTIVE && this.phase === Phases.COMPLETED) {
 			this.timing.setPhase(Phases.AIMING);
 			this.modulesSetStage(Phases.AIMING);
 
@@ -45,7 +42,7 @@ class Dash extends ModuleManager {
 		} else if (this.phase === Phases.DASHING) {
 			let collided = this.origin.safeMove(intersectionFinder, this.dir.x, this.dir.y, this.distance / this.dashDuration);
 			if (collided)
-				this.modulesSetStage(Phases.COLLIDED)
+				this.modulesSetStage(Phases.COMPLETED)
 		}
 	}
 }

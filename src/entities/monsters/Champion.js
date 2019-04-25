@@ -3,11 +3,10 @@ const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const WShip = require('../../graphics/WShip');
 const Phase = require('../../util/Phase');
-const Distance = require('../module/Distance');
-const Chase = require('../module/Chase');
-const Shotgun = require('../module/Shotgun');
-const NearbyDegen = require('../module/NearbyDegen');
+const Cooldown = require('../module/Cooldown');
 const Dash = require('../module/Dash');
+const Trigger = require('../module/Trigger');
+const NearbyDegen = require('../module/NearbyDegen');
 // const Boomerang = require('../module/Boomerang');
 
 const Phases = makeEnum('ONE');
@@ -19,34 +18,46 @@ class Champion extends Monster {
 
 		this.attackPhase = new Phase(0);
 
+		let cooldown = new Cooldown();
+		cooldown.setStagesMapping({
+			[Phases.ONE]: Cooldown.Stages.ACTIVE,
+		});
+		cooldown.config(300);
+		this.moduleManager.addModule(cooldown);
+
 		let dash = new Dash();
 		dash.setStagesMapping({
-			[Phases.ONE]: Dash.Stages.ACTIVE,
+			[Cooldown.Phases.UNTRIGGERED]: Dash.Stages.FINISH,
+			[Cooldown.Phases.TRIGGERED]: Dash.Stages.ACTIVE,
 		});
 		dash.config(this, 25, .2, 25, 10, .03);
-		this.moduleManager.addModule(dash);
+		cooldown.addModule(dash);
+
+		let trigger = new Trigger();
+		trigger.setStagesMapping({
+			[Dash.Phases.AIMING]: Trigger.Stages.INACTIVE,
+			[Dash.Phases.WARNING]: Trigger.Stages.INACTIVE,
+			[Dash.Phases.DASHING]: Trigger.Stages.INACTIVE,
+			[Dash.Phases.COMPLETED]: Trigger.Stages.TRIGGER,
+		});
+		trigger.config();
+		dash.addModule(trigger);
 
 		let dashAttackOrigin = new NearbyDegen();
 		dashAttackOrigin.setStagesMapping({
-			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.DASHING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.COMPLETED]: NearbyDegen.Stages.ACTIVE,
-			[Dash.Phases.COLLIDED]: NearbyDegen.Stages.ACTIVE,
+			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
+			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
 		});
-		dash.addModule(dashAttackOrigin);
-		dashAttackOrigin.config(this, .1, .1);
+		dashAttackOrigin.config(this, .1, .05);
+		trigger.addModule(dashAttackOrigin);
 
 		let dashAttackTarget = new NearbyDegen();
 		dashAttackTarget.setStagesMapping({
-			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.DASHING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.COMPLETED]: NearbyDegen.Stages.ACTIVE,
-			[Dash.Phases.COLLIDED]: NearbyDegen.Stages.ACTIVE,
+			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
+			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
 		});
-		dash.addModule(dashAttackTarget);
-		dashAttackTarget.config(dash.target, .1, .1);
+		dashAttackTarget.config(dash.target, .1, .05);
+		trigger.addModule(dashAttackTarget);
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
