@@ -17,7 +17,7 @@ class Period extends ModuleManager {
 
 		else if (this.stage !== Stages.PAUSE) {
 			this.periods.sequentialTick();
-			if (this.periods.get() === this.periodCount && this.stage === 'LOOP')
+			if (this.periods.get() === this.periodCount && this.stage === Stages.LOOP)
 				this.periods.setPhase(0);
 		}
 

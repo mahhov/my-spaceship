@@ -14,7 +14,7 @@ class Dash extends ModuleManager {
 	}
 
 	managerApply(map, intersectionFinder, target) {
-		if (this.stages !== Stages.DASHING)
+		if (this.stage !== Stages.DASHING)
 			this.collided = false;
 
 		// stage should be equivalent to phase unless we've collided while dashing
