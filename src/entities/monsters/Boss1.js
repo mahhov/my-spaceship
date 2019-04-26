@@ -25,85 +25,76 @@ class Boss1 extends Monster {
 
 		// engage will track when the boss is engaged or disengaged
 		let engage = new Engage();
-		engage.setStagesMapping({
+		engage.config(this, .5, 1);
+		this.moduleManager.addModule(engage, {
 			[Phases.INACTIVE]: Engage.Stages.ACTIVE,
 			[Phases.PRE_DEGEN]: Engage.Stages.ACTIVE,
 			[Phases.DEGEN]: Engage.Stages.ACTIVE,
 			[Phases.PROJECTILE]: Engage.Stages.ACTIVE
 		});
-		engage.config(this, .5, 1);
-		this.moduleManager.addModule(engage);
 
 		// triggers when boss engages
 		let engageTrigger = new Trigger();
-		engageTrigger.setStagesMapping(({
+		engage.addModule(engageTrigger, {
 			[Engage.Phases.ENGAGED]: Trigger.Stages.TRIGGER,
 			[Engage.Phases.DISENGAGED]: Trigger.Stages.INACTIVE
-		}));
-		engage.addModule(engageTrigger);
+		});
 
 		// when boss engages, will reset attackPhase to PRE_DEGEN
 		let phaseSetterEngageAttack = new PhaseSetter();
-		phaseSetterEngageAttack.setStagesMapping(({
+		phaseSetterEngageAttack.config(this.attackPhase, Phases.PRE_DEGEN);
+		engageTrigger.addModule(phaseSetterEngageAttack, {
 			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
 			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
-		}));
-		phaseSetterEngageAttack.config(this.attackPhase, Phases.PRE_DEGEN);
-		engageTrigger.addModule(phaseSetterEngageAttack);
+		});
 
 		// when boss engages, will reset enrage
 		let phaseSetterEngageEnrage = new PhaseSetter();
-		phaseSetterEngageEnrage.setStagesMapping(({
+		phaseSetterEngageEnrage.config(this.enragePhase, 0);
+		engageTrigger.addModule(phaseSetterEngageEnrage, {
 			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
 			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
-		}));
-		phaseSetterEngageEnrage.config(this.enragePhase, 0);
-		engageTrigger.addModule(phaseSetterEngageEnrage);
+		});
 
 		// when boss disengages, will stop attacking
 		let phaseSetterDisengageAttack = new PhaseSetter();
-		phaseSetterDisengageAttack.setStagesMapping(({
+		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
+		engage.addModule(phaseSetterDisengageAttack, {
 			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
 			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.ACTIVE
-		}));
-		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
-		engage.addModule(phaseSetterDisengageAttack);
+		});
 
 		let restore = new Restore();
-		restore.setStagesMapping(({
+		restore.config(this);
+		engage.addModule(restore, {
 			[Engage.Phases.ENGAGED]: Restore.Stages.INACTIVE,
 			[Engage.Phases.DISENGAGED]: Restore.Stages.ACTIVE,
-		}));
-		restore.config(this);
-		engage.addModule(restore);
+		});
 
 		this.nearbyDegen = new NearbyDegen();
-		this.nearbyDegen.setStagesMapping({
+		this.moduleManager.addModule(this.nearbyDegen, {
 			[Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
 			[Phases.PRE_DEGEN]: NearbyDegen.Stages.WARNING,
 			[Phases.DEGEN]: NearbyDegen.Stages.ACTIVE,
 			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE
 		});
-		this.moduleManager.addModule(this.nearbyDegen);
 
 		this.shotgun = new Shotgun();
-		this.shotgun.setStagesMapping({
+		this.moduleManager.addModule(this.shotgun, {
 			[Phases.INACTIVE]: Shotgun.Stages.INACTIVE,
 			[Phases.PRE_DEGEN]: Shotgun.Stages.INACTIVE,
 			[Phases.DEGEN]: Shotgun.Stages.INACTIVE,
 			[Phases.PROJECTILE]: Shotgun.Stages.ACTIVE,
 		});
-		this.moduleManager.addModule(this.shotgun);
 
 		this.lookTowards = new LookTowards();
-		this.lookTowards.setStagesMapping({
+		this.lookTowards.config(this);
+		this.moduleManager.addModule(this.lookTowards, {
 			[Phases.INACTIVE]: LookTowards.Stages.INACTIVE,
 			[Phases.PRE_DEGEN]: LookTowards.Stages.INACTIVE,
 			[Phases.DEGEN]: LookTowards.Stages.INACTIVE,
 			[Phases.PROJECTILE]: LookTowards.Stages.ACTIVE,
 		});
-		this.lookTowards.config(this);
-		this.moduleManager.addModule(this.lookTowards);
 
 		engage.modulesSetStage(Engage.Phases.DISENGAGED);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());

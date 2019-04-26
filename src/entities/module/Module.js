@@ -6,12 +6,8 @@ class Module {
 	config() {
 	}
 
-	setStagesMapping(stagesMaps) {
-		this.stagesMap = stagesMaps;
-	}
-
-	setStage(phase) {
-		this.stage = this.stagesMap[phase];
+	setStage(stage) {
+		this.stage = stage
 	}
 
 	apply(map, intersectionFinder, target) {

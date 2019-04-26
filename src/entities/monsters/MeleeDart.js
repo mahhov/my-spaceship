@@ -17,29 +17,26 @@ class MeleeDart extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let distance = new Distance();
-		distance.setStagesMapping({[Phases.ONE]: Distance.Stages.ACTIVE});
 		distance.config(this, .07, .15, 1);
-		this.moduleManager.addModule(distance);
+		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
 		let chase = new Chase();
-		chase.setStagesMapping({
+		chase.config(this, .005);
+		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
 			2: Chase.Stages.ACTIVE,
 			3: Chase.Stages.INACTIVE
 		});
-		chase.config(this, .005);
-		distance.addModule(chase);
 
 		let shotgun = new Shotgun();
-		shotgun.setStagesMapping({
+		shotgun.config(this, .15, 1, .018, .005, 100, damageMultiplier * .005);
+		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,
 			2: Shotgun.Stages.INACTIVE,
 			3: Shotgun.Stages.INACTIVE
 		});
-		shotgun.config(this, .15, 1, .018, .005, 100, damageMultiplier * .005);
-		distance.addModule(shotgun);
 
 		distance.modulesSetStage(0);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());

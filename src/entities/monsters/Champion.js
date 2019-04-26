@@ -18,39 +18,35 @@ class Champion extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let period = new Period();
-		period.setStagesMapping({
+		period.config(250, 25, 25, 10);
+		this.moduleManager.addModule(period, {
 			[Phases.ONE]: Period.Stages.PLAY,
 		});
-		period.config(250, 25, 25, 10);
-		this.moduleManager.addModule(period);
 
 		let dash = new Dash();
-		dash.setStagesMapping({
+		dash.config(this, 25, .2, 25, 10, .03);
+		period.addModule(dash, {
 			[0]: Dash.Stages.INACTIVE,
 			[1]: Dash.Stages.AIMING,
 			[2]: Dash.Stages.WARNING,
 			[3]: Dash.Stages.DASHING,
 		});
-		dash.config(this, 25, .2, 25, 10, .03);
-		period.addModule(dash);
 
 		let dashAttackOrigin = new NearbyDegen();
-		dashAttackOrigin.setStagesMapping({
+		dashAttackOrigin.config(this, .1, .05);
+		dash.addModule(dashAttackOrigin, {
 			[Dash.Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
 			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
 			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
 			[Dash.Phases.DASHING]: NearbyDegen.Stages.WARNING,
 		});
-		dashAttackOrigin.config(this, .1, .05);
-		dash.addModule(dashAttackOrigin);
 
-		let dashAttackTarget = new NearbyDegen();
-		dashAttackTarget.setStagesMapping({
-			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
-			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
-		});
-		dashAttackTarget.config(dash.target, .1, .05);
-		dash.addModule(dashAttackTarget);
+		// let dashAttackTarget = new NearbyDegen();
+		// dashAttackTarget.config(dash.target, .1, .05);
+		// dash.addModule(dashAttackTarget, {
+		// 	[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
+		// 	[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
+		// });
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}

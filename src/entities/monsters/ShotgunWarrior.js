@@ -17,27 +17,24 @@ class ShotgunWarrior extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let distance = new Distance();
-		distance.setStagesMapping({[Phases.ONE]: Distance.Stages.ACTIVE});
 		distance.config(this, .25, .55);
-		this.moduleManager.addModule(distance);
+		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
 		let chase = new Chase();
-		chase.setStagesMapping({
+		chase.config(this, .003);
+		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
 			2: Chase.Stages.INACTIVE
 		});
-		chase.config(this, .003);
-		distance.addModule(chase);
 
 		let shotgun = new Shotgun();
-		shotgun.setStagesMapping({
+		shotgun.config(this, .05, 3, .015, .003, 100, .005);
+		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.INACTIVE,
 			2: Shotgun.Stages.INACTIVE
 		});
-		shotgun.config(this, .05, 3, .015, .003, 100, .005);
-		distance.addModule(shotgun);
 
 		distance.modulesSetStage(0);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());

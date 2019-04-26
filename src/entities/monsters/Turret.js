@@ -16,12 +16,11 @@ class Turret extends Monster {
 		this.attackPhase.setRandomTick();
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.setStagesMapping({
+		nearbyDegen.config(this, .4, .001);
+		this.moduleManager.addModule(nearbyDegen, {
 			[Phases.REST]: NearbyDegen.Stages.INACTIVE,
 			[Phases.ATTACK]: NearbyDegen.Stages.ACTIVE
 		});
-		nearbyDegen.config(this, .4, .001);
-		this.moduleManager.addModule(nearbyDegen);
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}

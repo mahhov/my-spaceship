@@ -20,30 +20,27 @@ class OutpostPortal extends Monster {
 		this.attackPhase.setSequentialStartPhase(Phases.ACTIVE);
 
 		let spawn = new Spawn();
-		spawn.setStagesMapping({
+		spawn.config(this, .2, .005, 1, 4, 4, 4, MeleeDart, spawnDamageMultiplier);
+		this.moduleManager.addModule(spawn, {
 			[Phases.DORMANT]: Spawn.Stages.INACTIVE,
 			[Phases.ACTIVE]: Spawn.Stages.ACTIVE,
 		});
-		spawn.config(this, .2, .005, 1, 4, 4, 4, MeleeDart, spawnDamageMultiplier);
-		this.moduleManager.addModule(spawn);
 
 		let statSetter = new StatSetter();
-		statSetter.setStagesMapping({
+		statSetter.config(this, {armor: .5});
+		spawn.addModule(statSetter, {
 			[Spawn.Phases.NOT_SPAWNING]: StatSetter.Stages.INACTIVE,
 			[Spawn.Phases.SPAWNING]: StatSetter.Stages.INACTIVE,
 			[Spawn.Phases.COMPLETE]: StatSetter.Stages.ACTIVE,
 		});
-		statSetter.config(this, {armor: .5});
-		spawn.addModule(statSetter);
 
 		let rotate = new Rotate();
-		rotate.setStagesMapping({
+		rotate.config(this);
+		spawn.addModule(rotate, {
 			[Spawn.Phases.NOT_SPAWNING]: Rotate.Stages.INACTIVE,
 			[Spawn.Phases.SPAWNING]: Rotate.Stages.ACTIVE,
 			[Spawn.Phases.COMPLETE]: Rotate.Stages.INACTIVE,
 		});
-		rotate.config(this);
-		spawn.addModule(rotate);
 
 		spawn.modulesSetStage(Spawn.Phases.NOT_SPAWNING);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());

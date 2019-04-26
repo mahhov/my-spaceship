@@ -7,8 +7,8 @@ class ModuleManager extends Module {
 		this.phase = -1;
 	}
 
-	addModule(module) {
-		this.modules.push(module);
+	addModule(module, stagesMap) {
+		this.modules.push({module, stagesMap});
 	}
 
 	// todo [high] rename to setPhase
@@ -16,8 +16,8 @@ class ModuleManager extends Module {
 		if (phase === this.phase)
 			return;
 		this.phase = phase;
-		this.modules.forEach(module =>
-			module.setStage(phase));
+		this.modules.forEach(({module, stagesMap}) =>
+			module.setStage(stagesMap[phase]));
 	}
 
 	apply(map, intersectionFinder, target) {
@@ -30,12 +30,12 @@ class ModuleManager extends Module {
 	}
 
 	modulesApply(map, intersectionFinder, target) {
-		this.modules.forEach(module =>
+		this.modules.forEach(({module}) =>
 			module.apply(map, intersectionFinder, target));
 	}
 
 	paint(painter, camera) {
-		this.modules.forEach(module =>
+		this.modules.forEach(({module}) =>
 			module.paint(painter, camera));
 	}
 }
