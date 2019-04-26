@@ -8,20 +8,20 @@ const Stages = makeEnum('PLAY', 'LOOP', 'PAUSE', 'STOP');
 class Period extends ModuleManager {
 	config(...periods) {
 		this.periodCount = periods.length;
-		this.phase = new Phase(...periods, 0);
+		this.periods = new Phase(...periods, 0);
 	}
 
 	managerApply(map, intersectionFinder, target) {
 		if (this.stage === Stages.STOP)
-			this.phase.setPhase(0);
+			this.periods.setPhase(0);
 
-		else if (this.stage !== PAUSE) {
-			this.phase.sequentialTick();
-			if (this.phase.get() === this.periodCount && this.stage === 'LOOP')
-				this.phase.setPhase(0);
+		else if (this.stage !== Stages.PAUSE) {
+			this.periods.sequentialTick();
+			if (this.periods.get() === this.periodCount && this.stage === 'LOOP')
+				this.periods.setPhase(0);
 		}
 
-		this.modulesSetStage(this.phase.get());
+		this.modulesSetStage(this.periods.get());
 	}
 }
 
