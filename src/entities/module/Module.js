@@ -7,7 +7,8 @@ class Module {
 	}
 
 	setStage(stage) {
-		this.stage = stage
+		if (stage !== undefined)
+			this.stage = stage
 	}
 
 	apply(map, intersectionFinder, target) {
