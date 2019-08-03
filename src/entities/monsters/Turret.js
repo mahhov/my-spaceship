@@ -28,7 +28,7 @@ class Turret extends Monster {
 	update(map, intersectionFinder, monsterKnowledge) {
 		if (this.attackPhase.sequentialTick())
 			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.modulesApply(map, intersectionFinder, monsterKnowledge.getPlayer());
+		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
 	}
 }
 

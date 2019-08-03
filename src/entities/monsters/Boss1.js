@@ -118,7 +118,7 @@ class Boss1 extends Monster {
 
 		if (this.attackPhase.isNew())
 			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.modulesApply(map, intersectionFinder, monsterKnowledge.getPlayer());
+		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
 	}
 
 	paintUi(painter, camera) {

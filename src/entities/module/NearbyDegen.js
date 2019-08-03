@@ -13,7 +13,7 @@ class NearbyDegen extends Module {
 		this.damage = damage;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 		let targetDistance = getRectDistance(target.x - this.origin.x, target.y - this.origin.y);

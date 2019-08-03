@@ -9,7 +9,7 @@ class Trigger extends ModuleManager {
 		this.duration = duration;
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE && this.lastStage !== this.stage) {
 			this.modulesSetStage(Phases.TRIGGERED);
 			this.currentDuration = this.duration;
@@ -20,7 +20,7 @@ class Trigger extends ModuleManager {
 		else if (this.lastStage === this.stage)
 			this.modulesSetStage(Phases.UNTRIGGERED);
 		else
-			console.assert(false);
+			console.error('impossible branch reached.');
 		this.lastStage = this.stage;
 	}
 }

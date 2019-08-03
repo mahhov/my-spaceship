@@ -13,7 +13,7 @@ class Dash extends ModuleManager {
 		this.target = {};
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.DASHING)
 			this.collided = false;
 

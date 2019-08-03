@@ -12,6 +12,11 @@ class Module {
 	}
 
 	apply(map, intersectionFinder, target) {
+		this.apply_(map, intersectionFinder, target);
+	}
+
+	apply_(map, intersectionFinder, target) {
+		console.error('Module.apply_ has not been overwritten.');
 	}
 
 	paint(painter, canvas) {

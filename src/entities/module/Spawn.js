@@ -23,7 +23,7 @@ class Spawn extends ModuleManager {
 		this.sinceLastSpawn = 0;
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.INACTIVE || this.phase === Phases.COMPLETE) {
 			if (this.phase === Phases.SPAWNING)
 				this.modulesSetStage(Phases.NOT_SPAWNING);

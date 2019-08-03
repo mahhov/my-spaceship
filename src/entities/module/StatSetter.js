@@ -10,7 +10,7 @@ class StatSetter extends Module {
 		this.stats = stats;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE)
 			this.monster.setStats(this.stats);
 	}

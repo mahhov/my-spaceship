@@ -21,15 +21,7 @@ class ModuleManager extends Module {
 	}
 
 	apply(map, intersectionFinder, target) {
-		this.managerApply(map, intersectionFinder, target);
-		this.modulesApply(map, intersectionFinder, target);
-	}
-
-	managerApply(map, intersectionFinder, target) {
-		console.error('ModuleManager.managerApply has not been overwritten.')
-	}
-
-	modulesApply(map, intersectionFinder, target) {
+		this.apply_(map, intersectionFinder, target);
 		this.modules.forEach(({module}) =>
 			module.apply(map, intersectionFinder, target));
 	}

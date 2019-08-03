@@ -13,7 +13,7 @@ class Distance extends ModuleManager {
 		this.distances = distances;
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 

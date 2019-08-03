@@ -11,7 +11,7 @@ class Period extends ModuleManager {
 		this.periods = new Phase(...periods, 0);
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.STOP)
 			this.periods.setPhase(0);
 

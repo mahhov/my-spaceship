@@ -10,7 +10,7 @@ class PhaseSetter extends Module {
 		this.phaseValue = phaseValue;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE)
 			this.phase.setPhase(this.phaseValue);
 	}

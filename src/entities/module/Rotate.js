@@ -11,7 +11,7 @@ class Rotate extends Module {
 		this.theta = theta;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE)
 			this.theta += this.rate;
 		[this.origin.moveDirection.x, this.origin.moveDirection.y] = thetaToVector(this.theta);

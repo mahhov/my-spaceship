@@ -8,7 +8,7 @@ class Restore extends Module {
 		this.origin = origin;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.ACTIVE)
 			this.origin.restoreHealth();
 	}

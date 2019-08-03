@@ -1,7 +1,7 @@
 const Ability = require('./Ability');
 const {setMagnitude} = require('../util/Number');
 
-class Dash extends Ability {
+class Heal extends Ability {
 	constructor() {
 		super(720, 1, 30, false, false);
 	}
@@ -14,4 +14,4 @@ class Dash extends Ability {
 	}
 }
 
-module.exports = Dash;
+module.exports = Heal;

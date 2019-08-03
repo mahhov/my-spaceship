@@ -10,7 +10,7 @@ class Cooldown extends ModuleManager {
 		this.cooldown = new Phase(duration, 0);
 	}
 
-	managerApply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.INACTIVE)
 			this.cooldown.sequentialTick();
 		if (this.cooldown.get() === 1 && this.stage === Stages.ACTIVE) {

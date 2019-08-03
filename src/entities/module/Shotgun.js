@@ -16,7 +16,7 @@ class Shotgun extends Module {
 		this.damage = damage;
 	}
 
-	apply(map, intersectionFinder, target) {
+	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE || Math.random() > this.rate)
 			return;
 
