@@ -3,7 +3,7 @@ const Monster = require('./Monster');
 const {Colors, Positions} = require('../../util/Constants');
 const Phase = require('../../util/Phase');
 const RotatingTurretShip = require('../../graphics/RotatingTurretShip');
-const Engage = require('../module/Engage');
+const Distance = require('../module/Distance');
 const Trigger = require('../module/Trigger');
 const PhaseSetter = require('../module/PhaseSetter');
 const Restore = require('../module/Restore');
@@ -23,21 +23,21 @@ class Boss1 extends Monster {
 		this.attackPhase.setSequentialStartPhase(Phases.PRE_DEGEN);
 		this.enragePhase = new Phase(4800);
 
-		// engage will track when the boss is engaged or disengaged
-		let engage = new Engage();
-		engage.config(this, .5, 1);
-		this.moduleManager.addModule(engage, {
-			[Phases.INACTIVE]: Engage.Stages.ACTIVE,
-			[Phases.PRE_DEGEN]: Engage.Stages.ACTIVE,
-			[Phases.DEGEN]: Engage.Stages.ACTIVE,
-			[Phases.PROJECTILE]: Engage.Stages.ACTIVE
+		// distance will track when the boss is engaged or disengaged
+		let distance = new Distance();
+		distance.config(this, .5, 1);
+		this.moduleManager.addModule(distance, {
+			[Phases.INACTIVE]: Distance.Stages.ACTIVE,
+			[Phases.PRE_DEGEN]: Distance.Stages.ACTIVE,
+			[Phases.DEGEN]: Distance.Stages.ACTIVE,
+			[Phases.PROJECTILE]: Distance.Stages.ACTIVE
 		});
 
 		// triggers when boss engages
 		let engageTrigger = new Trigger();
-		engage.addModule(engageTrigger, {
-			[Engage.Phases.ENGAGED]: Trigger.Stages.TRIGGER,
-			[Engage.Phases.DISENGAGED]: Trigger.Stages.INACTIVE
+		distance.addModule(engageTrigger, {
+			0: Trigger.Stages.TRIGGER,
+			2: Trigger.Stages.INACTIVE
 		});
 
 		// when boss engages, will reset attackPhase to PRE_DEGEN
@@ -59,16 +59,16 @@ class Boss1 extends Monster {
 		// when boss disengages, will stop attacking
 		let phaseSetterDisengageAttack = new PhaseSetter();
 		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
-		engage.addModule(phaseSetterDisengageAttack, {
-			[Engage.Phases.ENGAGED]: PhaseSetter.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: PhaseSetter.Stages.ACTIVE
+		distance.addModule(phaseSetterDisengageAttack, {
+			0: PhaseSetter.Stages.INACTIVE,
+			2: PhaseSetter.Stages.ACTIVE
 		});
 
 		let restore = new Restore();
 		restore.config(this);
-		engage.addModule(restore, {
-			[Engage.Phases.ENGAGED]: Restore.Stages.INACTIVE,
-			[Engage.Phases.DISENGAGED]: Restore.Stages.ACTIVE,
+		distance.addModule(restore, {
+			0: Restore.Stages.INACTIVE,
+			2: Restore.Stages.ACTIVE,
 		});
 
 		this.nearbyDegen = new NearbyDegen();
@@ -96,7 +96,7 @@ class Boss1 extends Monster {
 			[Phases.PROJECTILE]: LookTowards.Stages.ACTIVE,
 		});
 
-		engage.modulesSetStage(Engage.Phases.DISENGAGED);
+		distance.modulesSetStage(2);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
 
