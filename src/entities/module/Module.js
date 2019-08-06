@@ -16,7 +16,6 @@ class Module {
 	}
 
 	apply_(map, intersectionFinder, target) {
-		console.error('Module.apply_ has not been overwritten.');
 	}
 
 	paint(painter, canvas) {

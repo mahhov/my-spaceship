@@ -91,15 +91,12 @@ class Player extends LivingEntity {
 
 		this.abilities
 			.forEach((ability, index) => {
-				ability.refresh(this);
-				if (Keymapping.getControlState(controller, Keymapping.Controls.ABILITY_I[index]).active)
-					ability.safeActivate(this, direct, map, intersectionFinder, this);
+				let wantActive = Keymapping.getControlState(controller, Keymapping.Controls.ABILITY_I[index]).active;
+				ability.update(this, direct, map, intersectionFinder, this, wantActive);
 			});
 
-		this.passiveAbilities.forEach((ability) => {
-			ability.refresh(this);
-			ability.safeActivate(this, direct, map, intersectionFinder, this);
-		});
+		this.passiveAbilities.forEach((ability) =>
+			ability.update(this, direct, map, intersectionFinder, this, true));
 	}
 
 	targetLockControl(controller, intersectionFinder) {

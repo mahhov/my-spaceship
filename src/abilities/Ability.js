@@ -4,7 +4,6 @@ const {Colors, Positions} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
-
 class Ability {
 	constructor(cooldown, charges, stamina, repeatable, channeled) {
 		this.cooldown = new Pool(cooldown, -1);
@@ -12,6 +11,7 @@ class Ability {
 		this.stamina = stamina;
 		this.repeatable = repeatable;
 		this.channeled = channeled; // todo [low] allow custom channel duration instead of just true/false
+		this.activeDuration = 0; // activeDuration 0 on start, 1... on subsequent calls, -1 on end
 	}
 
 	setUi(uiIndex) {
@@ -20,22 +20,15 @@ class Ability {
 		this.uiText = Keymapping.getKeys(Keymapping.Controls.ABILITY_I[uiIndex]).join('/');
 	}
 
-	safeActivate(origin, direct, map, intersectionFinder, player) {
-		if (this.ready) {
-			if (this.activate(origin, direct, map, intersectionFinder, player)) {
-				this.charges.change(-1);
-				player.consumeStamina(this.stamina);
-			}
-		} else if (this.channeled && this.cooldown.value === this.cooldown.max - 1)
-			if (this.activate(origin, direct, map, intersectionFinder, player)) {
-				player.consumeStamina(this.stamina);
-				this.cooldown.value = this.cooldown.max;
-			}
-		this.repeating = true;
-	}
-
-	activate(origin, direct, map, intersectionFinder, player) {
-		/* override */
+	update(origin, direct, map, intersectionFinder, player, wantActive) {
+		this.refresh(player);
+		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, player))
+			this.activeDuration++;
+		else if (this.activeDuration !== 0) {
+			this.activeDuration *= -1;
+			this.activate(origin, direct, map, intersectionFinder, player);
+			this.activeDuration = 0;
+		}
 	}
 
 	refresh(player) {
@@ -43,8 +36,29 @@ class Ability {
 			this.charges.increment();
 			this.cooldown.restore();
 		}
+
 		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
 		this.repeating = false;
+	}
+
+	safeActivate(origin, direct, map, intersectionFinder, player) {
+		let activated = false;
+		if (this.ready) {
+			if (activated = this.activate(origin, direct, map, intersectionFinder, player)) {
+				this.charges.change(-1);
+				player.consumeStamina(this.stamina);
+			}
+		} else if (this.channeled && this.cooldown.value === this.cooldown.max - 1)
+			if (activated = this.activate(origin, direct, map, intersectionFinder, player)) {
+				player.consumeStamina(this.stamina);
+				this.cooldown.value = this.cooldown.max;
+			}
+		this.repeating = true;
+		return activated;
+	}
+
+	activate(origin, direct, map, intersectionFinder, player) {
+		/* override */
 	}
 
 	paintUi(painter, camera) {
