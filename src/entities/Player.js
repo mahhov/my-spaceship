@@ -11,6 +11,7 @@ const Accelerate = require('../abilities/Accelerate');
 const BombAttack = require('../abilities/BombAttack');
 const DelayedRegen = require('../abilities/DelayedRegen');
 const Decay = require('../util/Decay');
+const Buff = require('./Buff');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
 const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
@@ -38,6 +39,8 @@ class Player extends LivingEntity {
 		this.passiveAbilities = [
 			new DelayedRegen()];
 
+		this.buffs = [];
+
 		this.recentDamage = new Decay(.1, .001);
 	}
 
@@ -55,7 +58,6 @@ class Player extends LivingEntity {
 
 	moveControl(controller, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
-		const SPEED = .005;
 
 		let left = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_LEFT).active;
 		let up = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_UP).active;
@@ -79,7 +81,7 @@ class Player extends LivingEntity {
 		}
 
 		this.currentMove = [dx, dy];
-		this.safeMove(intersectionFinder, dx, dy, SPEED);
+		this.safeMove(intersectionFinder, dx, dy, Buff.moveSpeed(this.buffs));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {
@@ -143,6 +145,12 @@ class Player extends LivingEntity {
 	changeHealth(amount) {
 		super.changeHealth(amount);
 		this.recentDamage.add(-amount);
+	}
+
+	addBuff() {
+		let buff = new Buff();
+		this.buffs.push(buff);
+		return buff;
 	}
 
 	paintUi(painter, camera) {
