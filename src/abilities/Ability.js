@@ -5,13 +5,15 @@ const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
 class Ability {
-	constructor(cooldown, charges, stamina, repeatable, channeled) {
+	constructor(cooldown, charges, stamina, /*channelStamina,*/ repeatable, channeled) {
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
+		// this.channelStamina = channelStamina;
+		// todo[high] use channelStamina when channeling, and stop channeling if insufficient
 		this.repeatable = repeatable;
 		this.channeled = channeled; // todo [low] allow custom channel duration instead of just true/false
-		this.activeDuration = 0; // activeDuration 0 on start, 1... on subsequent calls, -1 on end
+		this.activeDuration = 0; // activeDuration 0 on start, 1... on subsequent calls
 	}
 
 	setUi(uiIndex) {
@@ -25,8 +27,7 @@ class Ability {
 		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, player))
 			this.activeDuration++;
 		else if (this.activeDuration !== 0) {
-			this.activeDuration *= -1;
-			this.activate(origin, direct, map, intersectionFinder, player);
+			this.endActivate(origin, direct, map, intersectionFinder, player);
 			this.activeDuration = 0;
 		}
 	}
@@ -58,6 +59,10 @@ class Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
+		/* override */
+	}
+
+	endActivate(origin, direct, map, intersectionFinder, player) {
 		/* override */
 	}
 
