@@ -81,7 +81,7 @@ class Player extends LivingEntity {
 		}
 
 		this.currentMove = [dx, dy];
-		this.safeMove(intersectionFinder, dx, dy, Buff.moveSpeed(this.buffs));
+		this.safeMove(intersectionFinder, dx, dy, .005 * Buff.moveSpeed(this.buffs));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {

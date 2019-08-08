@@ -4,7 +4,7 @@ class Buff {
 	}
 
 	static moveSpeed(buffs) {
-		return .005 * Buff.get_(buffs, 'moveSpeed_');
+		return Buff.get_(buffs, 'moveSpeed_');
 	}
 
 	set moveSpeed(value) {
