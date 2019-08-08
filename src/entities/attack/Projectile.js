@@ -36,7 +36,7 @@ class Projectile extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Colors.Entity.PROJECTILE.get()}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.PROJECTILE.get()}));
 	}
 }
 

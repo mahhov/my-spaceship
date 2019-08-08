@@ -5,6 +5,7 @@ const VShip = require('../graphics/VShip');
 const Pool = require('../util/Pool');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
 const LaserAttack = require('../abilities/LaserAttack');
+const ChargedProjectileAttack = require('../abilities/ChargedProjectileAttack');
 const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Accelerate = require('../abilities/Accelerate');
@@ -29,7 +30,7 @@ class Player extends LivingEntity {
 
 		this.stamina = new Pool(100, .13);
 		this.abilities = [
-			new ProjectileAttack(),
+			new ChargedProjectileAttack(),
 			new Dash(),
 			new Heal(),
 			new Accelerate(),
