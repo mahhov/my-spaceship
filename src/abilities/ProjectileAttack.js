@@ -4,7 +4,7 @@ const Projectile = require('../entities/attack/Projectile');
 
 class ProjectileAttack extends Ability {
 	constructor() {
-		super(3, 15, .6, true, false);
+		super(3, 15, .6, 0, true, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

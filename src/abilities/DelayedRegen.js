@@ -3,7 +3,7 @@ const {Colors} = require('../util/Constants');
 
 class DelayedRegen extends Ability {
 	constructor() {
-		super(0, 1, 0, true, false);
+		super(0, 1, 0, 0, true, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

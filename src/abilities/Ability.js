@@ -5,12 +5,11 @@ const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
 class Ability {
-	constructor(cooldown, charges, stamina, /*channelStamina,*/ repeatable, channeled) {
+	constructor(cooldown, charges, stamina, channelStamina, repeatable, channeled) {
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
-		// this.channelStamina = channelStamina;
-		// todo[high] use channelStamina when channeling, and stop channeling if insufficient
+		this.channelStamina = channelStamina;
 		this.repeatable = repeatable;
 		this.channeled = channeled; // todo [low] allow custom channel duration instead of just true/false
 		this.activeDuration = 0; // activeDuration 0 on start, 1... on subsequent calls
@@ -39,23 +38,25 @@ class Ability {
 		}
 
 		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
+		this.readyChannelContinue = this.channeled && this.cooldown.value === this.cooldown.max - 1 && player.sufficientStamina(this.channelStamina);
 		this.repeating = false;
 	}
 
 	safeActivate(origin, direct, map, intersectionFinder, player) {
-		let activated = false;
-		if (this.ready) {
-			if (activated = this.activate(origin, direct, map, intersectionFinder, player)) {
-				this.charges.change(-1);
-				player.consumeStamina(this.stamina);
-			}
-		} else if (this.channeled && this.cooldown.value === this.cooldown.max - 1)
-			if (activated = this.activate(origin, direct, map, intersectionFinder, player)) {
-				player.consumeStamina(this.stamina);
-				this.cooldown.value = this.cooldown.max;
-			}
 		this.repeating = true;
-		return activated;
+		if (!this.ready && !this.readyChannelContinue)
+			return false;
+		if (!this.activate(origin, direct, map, intersectionFinder, player))
+			return false;
+
+		if (this.ready) {
+			this.charges.change(-1);
+			player.consumeStamina(this.stamina);
+		} else {
+			player.consumeStamina(this.channelStamina);
+			this.cooldown.value = this.cooldown.max;
+		}
+		return true;
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

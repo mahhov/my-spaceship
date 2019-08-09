@@ -3,7 +3,7 @@ const {setMagnitude} = require('../util/Number');
 
 class Heal extends Ability {
 	constructor() {
-		super(720, 1, 30, false, false);
+		super(720, 1, 30, 0, false, false);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
