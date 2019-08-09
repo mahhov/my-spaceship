@@ -34,6 +34,10 @@ class ChargedProjectileAttack extends Ability {
 	get chargeScale() {
 		return Math.min(this.activeDuration / 40, 1.5);
 	}
+
+	tempGetChannelBarFill() {
+		return this.chargeScale / 1.5;
+	}
 }
 
 module.exports = ChargedProjectileAttack;

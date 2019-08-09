@@ -3,6 +3,7 @@ const Keymapping = require('../control/Keymapping');
 const {Colors, Positions} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
+const Bar = require('../painter/Bar');
 
 class Ability {
 	constructor(cooldown, charges, stamina, channelStamina, repeatable, channeled) {
@@ -90,6 +91,19 @@ class Ability {
 
 		// letter
 		painter.add(new Text(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2, this.uiText));
+
+		// channel bar
+		let x = this.tempGetChannelBarFill();
+		if (x !== 0)
+			// todo[high] dont hardcode .1
+			// todo[high] get good colors
+			painter.add(new Bar(LEFT, TOP - .1, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, x, Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.getShade(Colors.BAR_SHADING)))
+	}
+
+	tempGetChannelBarFill() {
+		// todo [high] replace this with non-overriden method based on constructor param for channel length and then use ability computed channel ratio to pass in to child classes for endActivate
+		/* override */
+		return 0;
 	}
 }
 
