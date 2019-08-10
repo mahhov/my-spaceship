@@ -17,7 +17,7 @@ class Monster extends LivingEntity {
 		super.paint(painter, camera);
 		this.moduleManager.paint(painter, camera);
 		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .1, .01, this.health.getRatio(),
-			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.getShade(Colors.BAR_SHADING)));
+			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get()));
 	}
 }
 
