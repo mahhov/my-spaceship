@@ -6,14 +6,15 @@ const Text = require('../painter/Text');
 const Bar = require('../painter/Bar');
 
 class Ability {
-	constructor(cooldown, charges, stamina, channelStamina, repeatable, channeled) {
+	constructor(cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
 		this.channelStamina = channelStamina;
 		this.repeatable = repeatable;
-		this.channeled = channeled; // todo [low] allow custom channel duration instead of just true/false
-		this.activeDuration = 0; // activeDuration 0 on start, 1... on subsequent calls
+		// todo[low] allow indicating whether channel will force stop upon reaching max or will allow to continue
+		this.maxChannelDuration = channelDuration; // -1 indicates infinite
+		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
 
 	setUi(uiIndex) {
@@ -25,10 +26,10 @@ class Ability {
 	update(origin, direct, map, intersectionFinder, player, wantActive) {
 		this.refresh(player);
 		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, player))
-			this.activeDuration++;
-		else if (this.activeDuration !== 0) {
+			this.channelDuration++;
+		else if (this.channelDuration !== 0) {
 			this.endActivate(origin, direct, map, intersectionFinder, player);
-			this.activeDuration = 0;
+			this.channelDuration = 0;
 		}
 	}
 
@@ -39,7 +40,7 @@ class Ability {
 		}
 
 		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
-		this.readyChannelContinue = this.channeled && this.cooldown.value === this.cooldown.max - 1 && player.sufficientStamina(this.channelStamina);
+		this.readyChannelContinue = this.maxChannelDuration && this.cooldown.value === this.cooldown.max - 1 && player.sufficientStamina(this.channelStamina);
 		this.repeating = false;
 	}
 
@@ -68,6 +69,11 @@ class Ability {
 		/* override */
 	}
 
+	get channelRatio() {
+		if (this.maxChannelDuration > 0 && this.channelDuration > 0)
+			return Math.min(this.channelDuration / this.maxChannelDuration, 1);
+	}
+
 	paintUi(painter, camera) {
 		// background
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
@@ -93,17 +99,11 @@ class Ability {
 		painter.add(new Text(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2, this.uiText));
 
 		// channel bar
-		let x = this.tempGetChannelBarFill();
-		if (x !== 0)
-			// todo[high] dont hardcode .1
-			// todo[high] get good colors
-			painter.add(new Bar(LEFT, TOP - .1, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, x, Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.getShade(Colors.BAR_SHADING)))
-	}
-
-	tempGetChannelBarFill() {
-		// todo [high] replace this with non-overriden method based on constructor param for channel length and then use ability computed channel ratio to pass in to child classes for endActivate
-		/* override */
-		return 0;
+		let channelRatio = this.channelRatio;
+		if (channelRatio)
+		// todo[high] dont hardcode .1
+		// todo[high] get good colors
+			painter.add(new Bar(LEFT, TOP - .1, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, channelRatio, Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.getShade(Colors.BAR_SHADING)))
 	}
 }
 

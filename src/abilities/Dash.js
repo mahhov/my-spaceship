@@ -3,7 +3,7 @@ const {booleanArray} = require('../util/Number');
 
 class Dash extends Ability {
 	constructor() {
-		super(120, 3, 10, 0, false, false);
+		super(120, 3, 10, 0, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

@@ -4,7 +4,7 @@ const Laser = require('../entities/attack/Laser');
 
 class LaserAttack extends Ability {
 	constructor() {
-		super(3, 15, .6, 0, true, false);
+		super(3, 15, .6, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

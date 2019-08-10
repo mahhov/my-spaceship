@@ -2,7 +2,7 @@ const Ability = require('./Ability');
 
 class Accelerate extends Ability {
 	constructor() {
-		super(200, 1, 0, 0, true, true);
+		super(200, 1, 0, 0, true, -1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
