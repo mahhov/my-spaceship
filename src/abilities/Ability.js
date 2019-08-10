@@ -101,9 +101,9 @@ class Ability {
 		// channel bar
 		let channelRatio = this.channelRatio;
 		if (channelRatio)
-		// todo[high] dont hardcode .1
-		// todo[high] get good colors
-			painter.add(new Bar(LEFT, TOP - .1, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, channelRatio, Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.getShade(Colors.BAR_SHADING)))
+			painter.add(new Bar(LEFT, TOP - Positions.ABILITY_CHANNEL_BAR_SIZE - Positions.MARGIN / 2,
+				Positions.ABILITY_SIZE, Positions.ABILITY_CHANNEL_BAR_SIZE, channelRatio,
+				this.uiColor.getShade(Colors.BAR_SHADING), this.uiColor.get(), this.uiColor.get()))
 	}
 }
 
