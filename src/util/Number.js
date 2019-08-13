@@ -6,11 +6,14 @@ const getDiamondDistance = (x, y) => Math.abs(x) + Math.abs(y);
 
 const getRectDistance = (x, y) => Math.max(Math.abs(x), Math.abs(y));
 
+// todo[med] deprecated
 // todo [medium] replace getMagnitude uses with getMagnitudeSqr where possible
 const getMagnitudeSqr = ({x, y}) => x * x + y * y;
 
+// todo[med] deprecated
 const getMagnitude = (x, y) => Math.sqrt(getMagnitudeSqr({x, y}));
 
+// todo[med] deprecated
 const setMagnitude = (x, y, magnitude = 1) => {
 	let prevMagnitude = getMagnitude(x, y);
 	if (!prevMagnitude)
@@ -25,6 +28,7 @@ const clamp = (x, min, max) => {
 	return x > max ? max : x;
 };
 
+// todo[med] deprecated
 const thetaToVector = (theta, magnitude = 1) => [cos(theta) * magnitude, sin(theta) * magnitude];
 
 const cos = theta => Math.cos(theta);
@@ -43,11 +47,14 @@ const randB = (max = 1) => rand(max) - max / 2;
 // [0, max)
 const randInt = max => Math.floor(rand(max));
 
+// todo[med] deprecated
 const randVector = magnitude =>
 	thetaToVector(rand(PI2), rand(magnitude));
 
+// todo[med] deprecated
 const vectorDelta = (a, b) => ({x: b.x - a.x, y: b.y - a.y});
 
+// todo[med] deprecated
 const vectorSum = (...vs) =>
 	vs.reduce((v, sum) => ({x: sum.x + v.x, y: sum.y + v.y}), {x: 0, y: 0});
 
