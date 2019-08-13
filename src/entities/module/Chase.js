@@ -1,22 +1,36 @@
 const makeEnum = require('../../util/Enum');
 const Module = require('./Module');
-const {setMagnitude} = require('../../util/Number');
+const Vector = require('../../util/Vector');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Chase extends Module {
-	config(origin, speed) {
+	config(origin, speed, skirmishTime, skirmishDistance) {
 		this.origin = origin;
 		this.speed = speed;
+		this.skirmishTime = skirmishTime;
+		this.skirmishDistance = skirmishDistance;
 	}
 
 	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
 
-		let {x: dx, y: dy} = setMagnitude(target.x - this.origin.x, target.y - this.origin.y);
+		let delta = Vector.fromObj(target).subtract(Vector.fromObj(this.origin));
+		delta.magnitude = 1;
 
-		this.origin.safeMove(intersectionFinder, dx, dy, this.speed);
+		if (this.skirmishTime) {
+			if (!this.skirmishTick) {
+				this.skirmishTick = this.skirmishTime;
+				this.skirmishVec = Vector.fromRand(this.skirmishDistance);
+				if (this.skirmishVec.dot(delta) > 0)
+					this.skirmishVec.negate();
+			}
+			this.skirmishTick--;
+			delta.add(this.skirmishVec);
+		}
+
+		this.origin.safeMove(intersectionFinder, delta.x, delta.y, this.speed);
 	}
 }
 
