@@ -29,16 +29,8 @@ class Pool {
 		return this.max;
 	}
 
-	getMissing() {
-		return this.max - this.value;
-	}
-
 	getRatio() {
 		return this.value / this.max;
-	}
-
-	getMissingRatio() {
-		return this.getMissing() / this.max;
 	}
 
 	isFull() {
