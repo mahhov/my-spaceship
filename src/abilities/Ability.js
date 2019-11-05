@@ -40,7 +40,7 @@ class Ability {
 		}
 
 		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
-		this.readyChannelContinue = this.maxChannelDuration && this.cooldown.value === this.cooldown.max - 1 && player.sufficientStamina(this.channelStamina);
+		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && player.sufficientStamina(this.channelStamina);
 		this.repeating = false;
 	}
 
