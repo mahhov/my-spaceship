@@ -33,7 +33,6 @@ class Player extends LivingEntity {
 			new ChargedProjectileAttack(),
 			new Dash(),
 			new Heal(),
-			new Accelerate(),
 			new BombAttack()];
 		this.abilities.forEach((ability, i) => ability.setUi(i));
 
