@@ -6,8 +6,15 @@ class Accelerate extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
-		player.safeMove(intersectionFinder, ...player.currentMove, .01);
+		if (!this.channelDuration) {
+			this.buff = this.buff || player.addBuff();
+			this.buff.moveSpeed = 3;j
+		}
 		return true;
+	}
+
+	endActivate(origin, direct, map, intersectionFinder, player) {
+		this.buff.moveSpeed = 0;
 	}
 }
 
