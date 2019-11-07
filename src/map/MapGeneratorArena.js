@@ -3,6 +3,7 @@ const {rand, round} = require('../util/Number');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
+const Dueler = require('../entities/monsters/Dueler');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
@@ -50,7 +51,7 @@ class MapGeneratorArena {
 	}
 
 	createEnemyChampion() {
-		return [new Champion(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
+		return [new Dueler(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
 	}
 
 	removeUi() {
