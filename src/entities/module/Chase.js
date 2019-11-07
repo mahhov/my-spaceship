@@ -17,7 +17,6 @@ class Chase extends Module {
 			return;
 
 		let delta = Vector.fromObj(target).subtract(Vector.fromObj(this.origin));
-		delta.magnitude = 1;
 
 		if (this.skirmishTime) {
 			if (!this.skirmishTick) {
