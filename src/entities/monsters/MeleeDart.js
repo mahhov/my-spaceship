@@ -30,7 +30,7 @@ class MeleeDart extends Monster {
 		});
 
 		let shotgun = new Shotgun();
-		shotgun.config(this, .15, 1, .018, .005, 100, damageMultiplier * .005);
+		shotgun.config(this, .15, 1, .01, .005, 50, damageMultiplier * .005);
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,
