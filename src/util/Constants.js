@@ -52,7 +52,7 @@ const Colors = {
 	},
 
 	Ability: {
-		NearybyDegen: {
+		NearbyDegen: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
 			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
 		},
