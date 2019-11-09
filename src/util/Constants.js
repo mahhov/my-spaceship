@@ -30,6 +30,7 @@ const Colors = {
 	},
 
 	Entity: {
+		MAP_BOUNDARY: Color.fromHexString('#ccc'),
 		ROCK: Color.fromHexString('#888'),
 		ROCK_MINERAL: Color.fromHexString('#8b8'),
 		PLAYER: Color.fromHexString('#888'),

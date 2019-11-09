@@ -6,10 +6,10 @@ const POINTS = 5, MIN_MAGNITUDE = 1;
 
 class RockGraphic extends Graphics {
 	constructor(width, height, {fill, color, thickness} = {}) {
+		super();
 		let points = [];
 		for (let i = 0; i < POINTS; i++)
 			points.push(thetaToVector(i * PI2 / POINTS, rand() + MIN_MAGNITUDE));
-		super();
 		this.addPath(width, height, points, true, {fill, color, thickness});
 	}
 }

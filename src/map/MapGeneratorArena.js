@@ -1,5 +1,6 @@
 const {NoiseSimplex} = require('../util/Noise');
 const {rand, round} = require('../util/Number');
+const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
@@ -23,6 +24,7 @@ class MapGeneratorArena {
 	generate() {
 		this.map.setSize(WIDTH, HEIGHT);
 
+		this.generateBoundaries();
 		this.generateRocks();
 
 		this.stageEntities = [];
@@ -41,6 +43,10 @@ class MapGeneratorArena {
 			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
 			this.stageEntities = entities.map(([entity]) => entity);
 		}
+	}
+
+	generateBoundaries() {
+		MapBoundary.createBoxBoundaries(WIDTH, HEIGHT).forEach(mapBoundary => this.map.addStill(mapBoundary));
 	}
 
 	generateRocks() {
