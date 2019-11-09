@@ -124,16 +124,7 @@ class Boss1 extends Monster {
 	paintUi(painter, camera) {
 		if (this.attackPhase.get() === Phases.INACTIVE)
 			return;
-
-		painter.add(new Bar(
-			Positions.MARGIN,
-			Positions.MARGIN,
-			1 - Positions.MARGIN * 2,
-			Positions.BAR_HEIGHT,
-			this.health.getRatio(),
-			Colors.LIFE.getShade(Colors.BAR_SHADING),
-			Colors.LIFE.get(),
-			Colors.LIFE.getShade(Colors.BAR_SHADING)));
+		super.paintUi(painter, camera);
 		painter.add(new Bar(
 			Positions.MARGIN,
 			Positions.MARGIN * 1.5 + Positions.BAR_HEIGHT,
