@@ -34,7 +34,7 @@ class Champion extends Monster {
 		});
 
 		let shotgun = new Shotgun();
-		shotgun.config(this, .03, 1, .03, .001, 200, .02);
+		shotgun.config(this, .03, 1, .02, .001, 100, .02);
 		period.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,

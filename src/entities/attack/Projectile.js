@@ -15,8 +15,8 @@ class Projectile extends Entity {
 		this.damage = damage;
 	}
 
-	update(map, intersectionFinder) { // todo [medium] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attcak parent class to have update iterface
-		const FRICTION = .98;
+	update(map, intersectionFinder) { // todo [medium] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attack parent class to have update interface
+		const FRICTION = 1;
 
 		let intersection = this.safeMove(intersectionFinder, this.vx, this.vy, -1, true);
 

@@ -107,12 +107,12 @@ class Boss1 extends Monster {
 
 			if (this.enragePhase.isNew()) {
 				this.nearbyDegen.config(this, .33, .002);
-				this.shotgun.config(this, .1, 10, .015, .003, 100, .005);
+				this.shotgun.config(this, .1, 10, .01, .003, 50, .005);
 			}
 
 			if (this.enragePhase.tick()) {
 				this.nearbyDegen.config(this, .33, .01);
-				this.shotgun.config(this, .1, 30, .018, .006, 100, .005);
+				this.shotgun.config(this, .1, 30, .012, .006, 50, .005);
 			}
 		}
 

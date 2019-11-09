@@ -29,7 +29,7 @@ class ShotgunWarrior extends Monster {
 		});
 
 		let shotgun = new Shotgun();
-		shotgun.config(this, .05, 3, .015, .003, 100, .005);
+		shotgun.config(this, .05, 3, .01, .003, 50, .005);
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.INACTIVE,
