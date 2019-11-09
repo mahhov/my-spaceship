@@ -13,6 +13,7 @@ class Projectile extends Entity {
 		this.vy = vy;
 		this.time = time;
 		this.damage = damage;
+		this.color = friendly ? Colors.Entity.FRIENDLY_PROJECTILE.get() : Colors.Entity.HOSTILE_PROJECTILE.get()
 	}
 
 	update(map, intersectionFinder) { // todo [medium] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attack parent class to have update interface
@@ -36,7 +37,7 @@ class Projectile extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.PROJECTILE.get()}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: this.color}));
 	}
 }
 

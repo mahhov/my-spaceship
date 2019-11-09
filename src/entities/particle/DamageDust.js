@@ -24,7 +24,7 @@ class DamageDust extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.Damage_DUST.get()}));
+		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.DAMAGE_DUST.get()}));
 	}
 
 }
