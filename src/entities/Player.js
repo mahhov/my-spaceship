@@ -54,6 +54,7 @@ class Player extends LivingEntity {
 
 	refresh() {
 		this.stamina.increment();
+		this.recentDamage.decay();
 	}
 
 	moveControl(controller, intersectionFinder) {
