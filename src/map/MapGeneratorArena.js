@@ -39,7 +39,8 @@ class MapGeneratorArena {
 	update() {
 		this.timer++;
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
-			let entities = [this.createEnemyChampion()];
+			this.stage++;
+			let entities = [this.createMonsters()];
 			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
 			this.stageEntities = entities.map(([entity]) => entity);
 		}
@@ -56,7 +57,7 @@ class MapGeneratorArena {
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	createEnemyChampion() {
+	createMonsters() {
 		return [new Dueler(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
 	}
 
@@ -69,7 +70,7 @@ class MapGeneratorArena {
 		painter.add(new Text(
 			1 - Positions.MARGIN,
 			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
-			`${round(this.timer / 100)}`, font));
+			`${this.stage} : ${round(this.timer / 100)}`, font));
 	}
 }
 
