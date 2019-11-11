@@ -17,7 +17,7 @@ class ChargedProjectileAttack extends Ability {
 
 	endActivate(origin, direct, map, intersectionFinder, player) {
 		const VELOCITY = .01, SPREAD = .1, SIZE = .02, TIME = 50, DAMAGE = .1;
-		let damage = (1 + this.channelRatio * 1.5) * DAMAGE;
+		let damage = (1 + this.channelRatio * 3) * DAMAGE;
 
 		let directv = setMagnitude(direct.x, direct.y, VELOCITY);
 		let randv = randVector(VELOCITY * SPREAD);
