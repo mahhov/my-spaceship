@@ -4,7 +4,7 @@ const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
-const Dueler = require('../entities/monsters/Dueler');
+const ExplodingTick = require('../entities/monsters/ExplodingTick');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
@@ -58,7 +58,7 @@ class MapGeneratorArena {
 	}
 
 	createMonsters() {
-		return [new Dueler(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
+		return [new ExplodingTick(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
 	}
 
 	removeUi() {
