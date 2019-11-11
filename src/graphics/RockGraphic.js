@@ -5,12 +5,12 @@ const {PI2, thetaToVector, rand} = require('../util/Number');
 const POINTS = 5, MIN_MAGNITUDE = 1;
 
 class RockGraphic extends Graphics {
-	constructor(width, height, {fill, color, thickness} = {}) {
+	constructor(width, height, graphicOptions = {}) {
 		super();
 		let points = [];
 		for (let i = 0; i < POINTS; i++)
 			points.push(thetaToVector(i * PI2 / POINTS, rand() + MIN_MAGNITUDE));
-		this.addPath(width, height, points, true, {fill, color, thickness});
+		this.addPath(width, height, points, true, graphicOptions);
 	}
 }
 

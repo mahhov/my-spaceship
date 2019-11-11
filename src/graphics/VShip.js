@@ -7,9 +7,9 @@ const POINTS = [
 	[-2, -1]]; // left
 
 class VShip extends Graphics {
-	constructor(width, height, {fill, color, thickness} = {}) {
+	constructor(width, height, graphicOptions = {}) {
 		super();
-		this.addPath(width, height, POINTS, true, {fill, color, thickness});
+		this.addPath(width, height, POINTS, true, graphicOptions);
 	}
 }
 

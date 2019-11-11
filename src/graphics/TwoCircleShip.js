@@ -29,11 +29,11 @@ for (let i = 0; i < N; i++) {
 }
 
 class TwoCircleShip extends Graphics {
-	constructor(width, height, {fillColor, lineColor, thickness} = {}) {
+	constructor(width, height, graphicOptions = {}) {
 		super();
-		this.addPath(width, height, FRAME_POINTS, true, {fillColor, lineColor, thickness});
-		this.addPath(width * WIDTH, height * WIDTH, FRONT_CIRCLE_POINTS, true, {fillColor, lineColor, thickness});
-		this.addPath(width * WIDTH, height * WIDTH, BACK_CIRCLE_POINTS, true, {fillColor, lineColor, thickness});
+		this.addPath(width, height, FRAME_POINTS, true, graphicOptions);
+		this.addPath(width * WIDTH, height * WIDTH, FRONT_CIRCLE_POINTS, true, graphicOptions);
+		this.addPath(width * WIDTH, height * WIDTH, BACK_CIRCLE_POINTS, true, graphicOptions);
 	}
 }
 

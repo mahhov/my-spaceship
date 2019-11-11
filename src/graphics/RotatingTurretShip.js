@@ -1,7 +1,7 @@
 const Graphics = require('./Graphics');
 
 class RotatingTurretShip extends Graphics {
-	constructor(width, height, {fill, color, thickness} = {}) {
+	constructor(width, height, graphicOptions = {}) {
 		super();
 
 		const MIDDLE = 8;
@@ -30,7 +30,7 @@ class RotatingTurretShip extends Graphics {
 			smallS,
 			rect,
 			true,
-			{fill, color, thickness});
+			graphicOptions);
 		// right
 		this.addPathXY(
 			middleS + smallS / 2,
@@ -39,7 +39,7 @@ class RotatingTurretShip extends Graphics {
 			smallS,
 			rect,
 			true,
-			{fill, color, thickness});
+			graphicOptions);
 		// front
 		this.addPathXY(
 			0,
@@ -48,7 +48,7 @@ class RotatingTurretShip extends Graphics {
 			smallS,
 			rect,
 			true,
-			{fill, color, thickness});
+			graphicOptions);
 		// back
 		this.addPathXY(
 			0,
@@ -57,7 +57,7 @@ class RotatingTurretShip extends Graphics {
 			largeHeightS,
 			rect,
 			true,
-			{fill, color, thickness});
+			graphicOptions);
 	}
 }
 

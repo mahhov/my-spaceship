@@ -2,8 +2,8 @@ const Rect = require('./Rect');
 
 class RectC extends Rect {
 	// todo [low] refactor coordinate system to support coordintaes, centered coordintaes, and camera coordintaes to replace current constructor overloading
-	constructor(centerX, centerY, width, height, {fill, color, thickness} = {}) {
-		super(centerX - width / 2, centerY - height / 2, width, height, {fill, color, thickness});
+	constructor(centerX, centerY, width, height, graphicOptions = {}) {
+		super(centerX - width / 2, centerY - height / 2, width, height, graphicOptions);
 	}
 
 	static withCamera(camera, centerX, centerY, width, height, {fill, color, thickness} = {}) {
