@@ -19,11 +19,11 @@ class ExplodingTick extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let distance = new Distance();
-		distance.config(this, .25, .55); // todo config distances
+		distance.config(this, .1, 1);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
 		let patternedPeriod = new PatternedPeriod();
-		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [4]], [false, false, true]); // todo config durations
+		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true]);
 		distance.addModule(patternedPeriod, {
 			0: [PatternedPeriod.PrimaryStages.LOOP, 1],
 			1: [PatternedPeriod.PrimaryStages.PLAY, 2],
@@ -40,7 +40,7 @@ class ExplodingTick extends Monster {
 		});
 
 		let degen = new NearbyDegen();
-		degen.config(this, .05, 3, .01, .003, 50, .005); // todo config degen
+		degen.config(this, .1, .003);
 		patternedPeriod.addModule(degen, {
 			0: NearbyDegen.Stages.INACTIVE,
 			1: NearbyDegen.Stages.WARNING,
