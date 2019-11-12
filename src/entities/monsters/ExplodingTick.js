@@ -6,6 +6,7 @@ const Phase = require('../../util/Phase');
 const Distance = require('../module/Distance');
 const Chase = require('../module/Chase');
 const Period = require('../module/Period');
+const PatternedPeriod = require('../module/PatternedPeriod');
 const NearbyDegen = require('../module/NearbyDegen');
 
 const Phases = makeEnum('ONE');
@@ -21,32 +22,30 @@ class ExplodingTick extends Monster {
 		distance.config(this, .25, .55); // todo config distances
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let period = new Period();
-		period.config(1, 60, 60, 60, 1); // todo config periods
-		distance.addModule(period, {
-			0: Period.Stages.LOOP,
-			1: Period.Stages.PLAY,
-			2: Period.Stages.STOP, // todo, don't chase move when too far away
+		let patternedPeriod = new PatternedPeriod();
+		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [4]], [false, false, true]); // todo config durations
+		distance.addModule(patternedPeriod, {
+			0: [PatternedPeriod.PrimaryStages.LOOP, 1],
+			1: [PatternedPeriod.PrimaryStages.PLAY, 2],
+			2: [PatternedPeriod.PrimaryStages.STOP],
 		});
 
 		let chase = new Chase();
 		chase.config(this, .003);
-		period.addModule(chase, {
+		patternedPeriod.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.INACTIVE,
 			2: Chase.Stages.INACTIVE,
-			3: Chase.Stages.INACTIVE,
-			4: Chase.Stages.ACTIVE,
+			3: Chase.Stages.ACTIVE,
 		});
 
 		let degen = new NearbyDegen();
 		degen.config(this, .05, 3, .01, .003, 50, .005); // todo config degen
-		period.addModule(degen, {
+		patternedPeriod.addModule(degen, {
 			0: NearbyDegen.Stages.INACTIVE,
 			1: NearbyDegen.Stages.WARNING,
 			2: NearbyDegen.Stages.ACTIVE,
 			3: NearbyDegen.Stages.INACTIVE,
-			4: NearbyDegen.Stages.INACTIVE,
 		});
 
 		distance.modulesSetStage(0);
