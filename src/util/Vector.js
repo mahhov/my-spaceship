@@ -40,6 +40,10 @@ class Vector {
 		return this.x * v.x + this.y * v.y;
 	}
 
+	cross(v) {
+		return this.x * v.y - this.y * v.x;
+	}
+
 	get magnitudeSqr() {
 		return this.x * this.x + this.y * this.y;
 	}
@@ -59,6 +63,33 @@ class Vector {
 			this.y *= mult;
 		}
 		return prevMagnitude;
+	}
+
+	// rotates clockwise
+	rotateByCosSin(cos, sin) {
+		let tempX = this.x;
+		this.x = this.x * cos - this.y * sin;
+		this.y = tempX * sin + this.y * cos;
+		return this;
+	}
+
+	// assumes (cos, sin) represents a rotation (0, PI).
+	rotateByCosSinTowards(cos, sin, towards) {
+		let clockwise = this.cross(towards) > 0;
+		if (clockwise)
+			this.rotateByCosSin(cos, sin);
+		else
+			this.rotateByCosSin(cos, -sin);
+
+		let afterClockwise = this.cross(towards) > 0;
+		if (clockwise !== afterClockwise) {
+			let magnitude = this.magnitude;
+			this.x = towards.x;
+			this.y = towards.y;
+			this.magnitude = magnitude;
+		}
+
+		return this;
 	}
 }
 
