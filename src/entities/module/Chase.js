@@ -5,11 +5,12 @@ const Vector = require('../../util/Vector');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Chase extends Module {
-	config(origin, speed, skirmishTime, skirmishDistance) {
+	config(origin, speed, skirmishTime, skirmishDistance, rotationSpeed) {
 		this.origin = origin;
 		this.speed = speed;
 		this.skirmishTime = skirmishTime;
 		this.skirmishDistance = skirmishDistance;
+		this.rotationSpeed = rotationSpeed; // 0 means instant rotation
 	}
 
 	apply_(map, intersectionFinder, target) {
@@ -29,7 +30,14 @@ class Chase extends Module {
 			delta.add(this.skirmishVec);
 		}
 
-		this.origin.safeMove(intersectionFinder, delta.x, delta.y, this.speed);
+		if (!this.rotation)
+			this.rotation = Vector.fromObj(delta);
+		else if (this.rotationSpeed)
+			this.rotation.rotateByCosSinTowards(Math.cos(this.rotationSpeed), Math.sin(this.rotationSpeed), delta);
+		else
+			this.rotation = delta;
+
+		this.origin.safeMove(intersectionFinder, this.rotation.x, this.rotation.y, this.speed);
 	}
 }
 
