@@ -11,7 +11,7 @@ const Phases = makeEnum('ONE');
 
 class MeleeDart extends Monster {
 	constructor(x, y, damageMultiplier) {
-		super(x, y, .02, .02, .003);
+		super(x, y, .02, .02, .3);
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
@@ -30,7 +30,7 @@ class MeleeDart extends Monster {
 		});
 
 		let shotgun = new Shotgun();
-		shotgun.config(this, .15, 1, .01, .005, 50, damageMultiplier * .005);
+		shotgun.config(this, .07, 1, .005, .005, 50, damageMultiplier * .005);
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,

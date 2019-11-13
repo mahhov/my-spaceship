@@ -30,7 +30,7 @@ class Player extends LivingEntity {
 
 		this.stamina = new Pool(100, .13);
 		this.abilities = [
-			new ChargedProjectileAttack(),
+			new ProjectileAttack(),
 			new Dash(),
 			new Heal(),
 			new BombAttack()];
