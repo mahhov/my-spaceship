@@ -22,7 +22,7 @@ class SniperTick extends Monster {
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
 		let chase = new Chase();
-		chase.config(this, .005, 100, 1, Math.PI / 20);
+		chase.config(this, .003, 100, 1, Math.PI / 20);
 		distance.addModule(chase, {
 			0: Chase.Stages.REVERSE,
 			1: Chase.Stages.INACTIVE,
@@ -31,7 +31,7 @@ class SniperTick extends Monster {
 		});
 
 		let cooldown = new Cooldown();
-		cooldown.config(100);
+		cooldown.config(200);
 		distance.addModule(cooldown, {
 			0: Cooldown.Stages.ACTIVE,
 			1: Cooldown.Stages.ACTIVE,
@@ -40,7 +40,7 @@ class SniperTick extends Monster {
 		});
 
 		let shotgun = new Shotgun();
-		shotgun.config(this, 1, 1, .02, .001, 100, .04);
+		shotgun.config(this, 1, 1, .01, .001, 100, .04);
 		cooldown.addModule(shotgun, {
 			[Cooldown.Phases.UNTRIGGERED]: Shotgun.Stages.INACTIVE,
 			[Cooldown.Phases.TRIGGERED]: Shotgun.Stages.ACTIVE,

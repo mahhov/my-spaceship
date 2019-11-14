@@ -30,7 +30,7 @@ class ExplodingTick extends Monster {
 		});
 
 		let chase = new Chase();
-		chase.config(this, .003, 0, 0, Math.PI / 20);
+		chase.config(this, .003, 50, .1, Math.PI / 20);
 		patternedPeriod.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.INACTIVE,
