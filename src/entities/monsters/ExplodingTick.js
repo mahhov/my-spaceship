@@ -4,9 +4,8 @@ const {Colors} = require('../../util/Constants');
 const DiamondShip = require('../../graphics/DiamondShip');
 const Phase = require('../../util/Phase');
 const Distance = require('../module/Distance');
-const Chase = require('../module/Chase');
-const Period = require('../module/Period');
 const PatternedPeriod = require('../module/PatternedPeriod');
+const Chase = require('../module/Chase');
 const NearbyDegen = require('../module/NearbyDegen');
 
 const Phases = makeEnum('ONE');
