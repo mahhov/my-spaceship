@@ -5,16 +5,32 @@ const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
 const ExplodingTick = require('../entities/monsters/ExplodingTick');
+const SniperTick = require('../entities/monsters/SniperTick');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
 
+const STAGE_SPAWNS = [
+	[
+		[ExplodingTick, 3],
+	],
+	[
+		[ExplodingTick, 2],
+		[SniperTick, 2],
+	],
+	[
+		[ExplodingTick, 5],
+		[SniperTick, 4],
+	],
+];
+
 class MapGeneratorArena {
 	constructor(map, player) {
 		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
 
+		this.occupiedNoise = new NoiseSimplex(OCCUPIED_NOISE);
 		this.rockNoise = new NoiseSimplex(ROCK_NOISE);
 
 		this.map = map;
@@ -39,8 +55,7 @@ class MapGeneratorArena {
 	update() {
 		this.timer++;
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
-			this.stage++;
-			let entities = [this.createMonsters()];
+			let entities = this.createMonsters(this.stage++);
 			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
 			this.stageEntities = entities.map(([entity]) => entity);
 		}
@@ -57,8 +72,13 @@ class MapGeneratorArena {
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
-	createMonsters() {
-		return [new ExplodingTick(WIDTH * (1 - SPAWN_DIST), HEIGHT * (1 - SPAWN_DIST)), true];
+	createMonsters(stage) {
+		let spawns = STAGE_SPAWNS[Math.min(stage, STAGE_SPAWNS.length - 1)];
+		let multiplier = Math.max(stage - STAGE_SPAWNS.length + 2, 1);
+		return spawns.map(([MonsterClass, count]) =>
+			this.occupiedNoise.positions(count * multiplier, WIDTH, HEIGHT)
+				.map(position => [new MonsterClass(...position), false]))
+			.flat();
 	}
 
 	removeUi() {
