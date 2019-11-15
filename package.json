@@ -4,8 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build": "build(){ cp src/view/index.html $1/index.html; browserify --debug src/view/Canvas.js -o $1/Canvas.js; }; build",
-    "dev": "nodemon --watch src -e html,js,css --exec npm run build build & http-server ./build -o -a localhost -c-1",
+    "build": "build(){ cp src/view/index.html $1/index.html; browserify --debug --detect-globals false --no-builtins src/view/Canvas.js -o $1/Canvas.js; }; build",
+    "dev": "node devServer",
     "build-once": "npm run build build",
     "serve": "http-server ./build -o -a localhost -c-1",
     "gitpage": "npm run build docs GoogleAnalytics; cp src/view/googleAnalytics.js docs"
@@ -16,8 +16,6 @@
     "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
-    "browserify": "^16.2.2",
-    "http-server": "^0.11.1",
-    "nodemon": "^1.17.5"
+    "browserify": "^16.2.2"
   }
 }
