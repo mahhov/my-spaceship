@@ -20,6 +20,11 @@ class Path extends PainterElement {
 			this.paintPath(xt, yt, context);
 			context.stroke();
 		}
+		if (this.fill === 'double') {
+			this.setDoubleMode(context);
+			this.paintPath(xt, yt, context);
+			context.stroke();
+		}
 	}
 
 	paintPath(xt, yt, context) {
