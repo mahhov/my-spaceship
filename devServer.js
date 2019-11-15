@@ -3,39 +3,40 @@ const http = require('http');
 const promisify = require('util').promisify;
 const browserify = require('browserify');
 
-const PORT = 8089;
+const PORT = 8086;
 const BUILD_DIR = 'build';
-const HTML_INPUT = './src/view/index.html';
-const HTML_OUTPUT = `./${BUILD_DIR}/index.html`;
-const SCRIPT_INPUT = './src/view/Canvas.js';
-const SCRIPT_OUTPUT = `./${BUILD_DIR}/Canvas.js`;
+const FILES = {
+	'/': {input: './src/view/index.html', output: `./${BUILD_DIR}/index.html`, step: 'copy'},
+	'/Canvas.js': {input: './src/view/Canvas.js', output: `./${BUILD_DIR}/Canvas.js`, step: 'bundle'},
+	'/exit': {step: 'exit'},
+};
 const BROWSERIFY_OPTIONS = {debug: true, detectGlobals: false, builtins: []};
 
-console.log(HTML_OUTPUT, SCRIPT_OUTPUT);
-
-let build = async () => {
-	let htmlCopyPromise = fs.promises.copyFile(HTML_INPUT, HTML_OUTPUT)
-		.catch(e => console.log('unable to copy HTML', e));
-	let scriptBundleStream = browserify(SCRIPT_INPUT, BROWSERIFY_OPTIONS)
-		.bundle()
-		.pipe(fs.createWriteStream(SCRIPT_OUTPUT));
-	await htmlCopyPromise;
-	await new Promise(resolve => scriptBundleStream.on('close', resolve));
+let processFileConfig = fileConfig => {
+	switch (fileConfig.step) {
+		case 'copy':
+			return fs.promises.copyFile(fileConfig.input, fileConfig.output);
+		case 'bundle':
+			let bundleStream = browserify(fileConfig.input, BROWSERIFY_OPTIONS)
+				.bundle()
+				.pipe(fs.createWriteStream(fileConfig.output));
+			return new Promise(resolve => bundleStream.on('close', resolve));
+		case 'exit':
+			process.exit();
+	}
 };
 
-http.createServer(async (req, res) => {
-	console.log(req.url);
-	try {
-		switch (req.url) {
-			case
-			'/Canvas.js':
-				res.end(await fs.promises.readFile(SCRIPT_OUTPUT));
-				break;
-			default:
-				await build();
-				res.end(await fs.promises.readFile(HTML_OUTPUT));
-		}
-	} catch (e) {
-		console.log('error', e);
-	}
-}).listen(PORT);
+let main = async () => {
+	// Because intellij doesn't clean up nicely
+	await new Promise(resolve => http.get(`http://localhost:${PORT}/exit`).on('response', resolve).on('error', resolve)); // todo avoid double 'on'
+
+	http.createServer(async (req, res) => {
+		let fileConfig = FILES[req.url] || FILES['/'];
+		console.log(req.url, fileConfig);
+		await processFileConfig(fileConfig);
+		res.end(await fs.promises.readFile(fileConfig.output));
+	}).listen(PORT);
+	console.log('Listening', PORT)
+};
+
+main();
