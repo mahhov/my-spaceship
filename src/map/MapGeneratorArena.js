@@ -95,3 +95,32 @@ class MapGeneratorArena {
 }
 
 module.exports = MapGeneratorArena;
+
+/*
+123456
+
+1
+12
+34
+123
+
+56
+456
+23456 - 1
+124356
+
+
+exploding tick
+sniper tick
+fixed 4-way turret
+aiming 1-way turret
+bomb layer
+charger
+
+melee dart
+melee dart spawner ship
+degen turret or turret with spinnning degeen tiny mobs
+turret with static & inactive tiny mobs, that periodically charge the player with slow rotation
+wall of projectiles
+frontal degen rectangle
+*/
