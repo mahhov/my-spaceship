@@ -10,14 +10,20 @@ let canvas = document.querySelector('#canvas');
 let logicButtonsRow = document.querySelector('#logic-buttons-row');
 let looper = new Looper(canvas);
 
-[
+let logicCLasses = [
 	Game,
 	GraphicsDemo,
-].forEach(LogicClass => {
+];
+
+logicCLasses.forEach(LogicClass => {
 	let button = document.createElement('button');
 	button.textContent = LogicClass.name;
-	button.addEventListener('click', () => looper.setLogicClass(LogicClass));
+	button.addEventListener('click', () => {
+		looper.setLogicClass(LogicClass);
+		history.replaceState(null, '', `/${LogicClass.name}`);
+	});
 	logicButtonsRow.append(button);
 });
 
-looper.setLogicClass(Game);
+let StartLogicClass = logicCLasses.find(LogicClass => `/${LogicClass.name}` === location.pathname) || logicCLasses[0];
+looper.setLogicClass(StartLogicClass);
