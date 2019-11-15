@@ -22,7 +22,7 @@ let processFileConfig = fileConfig => {
 				.pipe(fs.createWriteStream(fileConfig.output));
 			return new Promise(resolve => bundleStream.on('close', resolve));
 		case 'exit':
-			process.exit();
+			process.exit(); // todo send response before exit
 	}
 };
 
