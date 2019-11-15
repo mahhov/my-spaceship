@@ -33,7 +33,7 @@ let main = async () => {
 	http.createServer(async (req, res) => {
 		let fileConfig = FILES[req.url] || FILES['/'];
 		console.log(req.url, fileConfig);
-		await processFileConfig(fileConfig);
+		await processFileConfig(fileConfig).catch(e => console.log(e));
 		res.end(await fs.promises.readFile(fileConfig.output));
 	}).listen(PORT);
 	console.log('Listening', PORT)
