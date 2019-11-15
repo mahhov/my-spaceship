@@ -14,7 +14,7 @@ const DOT_POS = .2;
 const DOT_POINTS = PathCreator.createCirclePoints(1, 6, 0, 0);
 const DOT_COLOR = Color.from1(1, 1, 1).get();
 
-class TestShip extends Graphics {
+class Rect4DotsShip extends Graphics {
 	constructor(width, height) {
 		super();
 		this.addPath(width, height, RECT_POINTS, true,
@@ -26,4 +26,4 @@ class TestShip extends Graphics {
 	}
 }
 
-module.exports = TestShip;
+module.exports = Rect4DotsShip;
