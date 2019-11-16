@@ -6,7 +6,7 @@ const Projectile = require('../attack/Projectile');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Shotgun extends Module {
-	config(origin, rate, count, velocity, spread, duration, damage, size = .02, dir = null) {
+	config(origin, rate, count, velocity, spread, duration, damage, predictableRate = false, size = .02, dir = null) {
 		this.origin = origin;
 		this.rate = rate;
 		this.count = count;
@@ -14,13 +14,20 @@ class Shotgun extends Module {
 		this.spread = spread;
 		this.duration = duration;
 		this.damage = damage;
+		this.predictableRate = predictableRate;
 		this.size = size;
 		this.dir = dir && setMagnitude(dir.x, dir.y, velocity); // if null, directs towards target
+		this.rateCurrent = 0;
 	}
 
 	apply_(map, intersectionFinder, target) {
-		if (this.stage !== Stages.ACTIVE || Math.random() > this.rate)
+		if (this.stage !== Stages.ACTIVE)
 			return;
+		if (!this.predictableRate && Math.random() > this.rate)
+			return;
+		if (this.predictableRate && (this.rateCurrent += this.rate) < 1)
+			return;
+		this.rateCurrent--;
 
 		for (let i = 0; i < this.count; i++) {
 			let directv = this.dir || setMagnitude(target.x - this.origin.x, target.y - this.origin.y, this.velicity);
