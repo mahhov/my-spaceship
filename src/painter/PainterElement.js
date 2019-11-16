@@ -11,8 +11,8 @@ class PainterElement {
 	}
 
 	setDoubleMode(context) {
-		context.strokeStyle = Color.from1(0, 0, 0);
-		context.lineWidth = 3;
+		context.strokeStyle = Color.from1(0, 0, 0).get();
+		context.lineWidth = 1;
 	}
 
 	setFont(context) {
