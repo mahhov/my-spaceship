@@ -17,10 +17,12 @@ let processFileConfig = fileConfig => {
 		case 'copy':
 			return fs.promises.copyFile(fileConfig.input, fileConfig.output);
 		case 'bundle':
-			let bundleStream = browserify(fileConfig.input, BROWSERIFY_OPTIONS)
-				.bundle()
-				.pipe(fs.createWriteStream(fileConfig.output));
-			return new Promise(resolve => bundleStream.on('close', resolve));
+			return new Promise((resolve, reject) =>
+				browserify(fileConfig.input, BROWSERIFY_OPTIONS)
+					.bundle()
+					.on('error', e => reject('FAILED TO BUNDLE', e))
+					.pipe(fs.createWriteStream(fileConfig.output))
+					.on('close', resolve));
 		case 'exit':
 			process.exit(); // todo send response before exit
 	}
