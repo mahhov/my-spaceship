@@ -4,8 +4,8 @@ const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
-const ExplodingTick = require('../entities/monsters/ExplodingTick');
-const SniperTick = require('../entities/monsters/SniperTick');
+const ExplodingTick = require('../entities/monsters/mechanicalFaction/ExplodingTick');
+const SniperTick = require('../entities/monsters/mechanicalFaction/SniperTick');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 

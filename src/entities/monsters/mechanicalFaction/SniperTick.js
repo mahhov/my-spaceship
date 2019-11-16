@@ -1,12 +1,12 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors} = require('../../util/Constants');
-const SplitDiamondShip = require('../../graphics/SplitDiamondShip');
-const Phase = require('../../util/Phase');
-const Distance = require('../module/Distance');
-const Chase = require('../module/Chase');
-const Cooldown = require('../module/Cooldown');
-const Shotgun = require('../module/Shotgun');
+const makeEnum = require('../../../util/Enum');
+const Monster = require('.././Monster');
+const {Colors} = require('../../../util/Constants');
+const SplitDiamondShip = require('../../../graphics/SplitDiamondShip');
+const Phase = require('../../../util/Phase');
+const Distance = require('../../module/Distance');
+const Chase = require('../../module/Chase');
+const Cooldown = require('../../module/Cooldown');
+const Shotgun = require('../../module/Shotgun');
 
 const Phases = makeEnum('ONE');
 
