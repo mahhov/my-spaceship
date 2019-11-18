@@ -34,7 +34,7 @@ const Colors = {
 		ROCK: Color.fromHexString('#888'),
 		ROCK_MINERAL: Color.fromHexString('#8b8'),
 		PLAYER: Color.fromHexString('#888'),
-		MONSTER: Color.fromHexString('#888'),
+		MONSTER: Color.fromHexString('#bd6359'),
 		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),
 		FRIENDLY_PROJECTILE: Color.fromHexString('#6c6'),
 		Bomb: {
@@ -64,7 +64,7 @@ const Colors = {
 	},
 
 	Star: {
-		WHITE: Color.from1(.5, .5, .5),
+		WHITE: Color.from1(.7, .7, .7),
 		BLUE: Color.from1(.5, .5, .75)
 	},
 
