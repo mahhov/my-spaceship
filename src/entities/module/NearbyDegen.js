@@ -22,10 +22,15 @@ class NearbyDegen extends Module {
 	}
 
 	paint(painter, camera) {
-		if (this.stage === Stages.WARNING)
-			painter.add(RectC.withCamera(camera, this.origin.x, this.origin.y, this.range * 2, this.range * 2, {color: Colors.Ability.NearbyDegen.WARNING_BORDER.get()}));
-		else if (this.stage === Stages.ACTIVE)
-			painter.add(RectC.withCamera(camera, this.origin.x, this.origin.y, this.range * 2, this.range * 2, {fill: true, color: Colors.Ability.NearbyDegen.ACTIVE_FILL.get()}));
+		if (this.stage === Stages.INACTIVE)
+			return;
+		let graphicOptions = this.stage === Stages.WARNING ?
+			{color: Colors.Ability.NearbyDegen.WARNING_BORDER.get()} :
+			{fill: true, color: Colors.Ability.NearbyDegen.ACTIVE_FILL.get()};
+		painter.add(RectC.withCamera(camera,
+			this.origin.x, this.origin.y,
+			this.range * 2, this.range * 2,
+			graphicOptions));
 	}
 }
 
