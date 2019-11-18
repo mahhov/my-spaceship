@@ -1,4 +1,4 @@
-const {PI2, cos, sin, rand} = require('./Number');
+const {PI2, clamp, cos, sin, rand} = require('./Number');
 
 class Vector {
 	constructor(x, y) {
@@ -36,6 +36,12 @@ class Vector {
 		return this;
 	}
 
+	multiply(scale) {
+		this.x *= scale;
+		this.y *= scale;
+		return this;
+	}
+
 	dot(v) {
 		return this.x * v.x + this.y * v.y;
 	}
@@ -59,8 +65,7 @@ class Vector {
 			this.y = 0;
 		} else {
 			let mult = magnitude / prevMagnitude;
-			this.x *= mult;
-			this.y *= mult;
+			this.multiply(mult);
 		}
 		return prevMagnitude;
 	}
@@ -90,6 +95,15 @@ class Vector {
 		}
 
 		return this;
+	}
+
+	static distanceFromSegmentToPoint(segmentStart, segmentEnd, point) {
+		point.subtract(segmentStart);
+		segmentEnd.subtract(segmentStart);
+		let t = point.dot(segmentEnd) / segmentEnd.magnitudeSqr;
+		t = clamp(t, 0, 1);
+		segmentEnd.multiply(t);
+		return point.subtract(segmentEnd).magnitude;
 	}
 }
 
