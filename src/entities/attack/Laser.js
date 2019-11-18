@@ -3,10 +3,9 @@ const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const Line = require('../../painter/Line');
 
 class Laser extends Entity {
-	constructor(x, y, dx, dy, time, damage, friendly) {
-		const THICKNESS = .001;
+	constructor(x, y, dx, dy, width, time, damage, friendly) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
-		super(x, y, THICKNESS, THICKNESS, layer);
+		super(x, y, width, width, layer);
 		this.dx = dx;
 		this.dy = dy;
 		this.time = time;
@@ -14,19 +13,16 @@ class Laser extends Entity {
 	}
 
 	update(map, intersectionFinder) {
-		if (!this.moveX)
-			[this.moveX, this.moveY, this.intersection] = this.checkMove(intersectionFinder, this.dx, this.dy, -1, true);
-
-		if (this.time--)
-			return;
+		[this.moveX, this.moveY, this.intersection] = this.checkMove(intersectionFinder, this.dx, this.dy, -1, true);
 
 		if (this.intersection)
 			this.intersection.changeHealth(-this.damage);
 
-		return true;
+		return !this.time--;
 	}
 
 	paint(painter, camera) {
+		// todo[med] draw width
 		painter.add(Line.withCamera(camera, this.x, this.y, this.x + this.moveX, this.y + this.moveY));
 	}
 }
