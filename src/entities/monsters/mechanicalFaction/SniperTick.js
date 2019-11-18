@@ -3,7 +3,9 @@ const Monster = require('.././Monster');
 const {Colors} = require('../../../util/Constants');
 const SplitDiamondShip = require('../../../graphics/SplitDiamondShip');
 const Phase = require('../../../util/Phase');
+const {PI} = require('../../../util/Number');
 const Distance = require('../../module/Distance');
+const Aim = require('../../module/Aim');
 const Chase = require('../../module/Chase');
 const Cooldown = require('../../module/Cooldown');
 const Shotgun = require('../../module/Shotgun');
@@ -21,10 +23,19 @@ class SniperTick extends Monster {
 		distance.config(this, .5, .7, 1);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let chase = new Chase();
-		chase.config(this, .003, 100, 1, Math.PI / 20);
-		distance.addModule(chase, {
+		let aim = new Aim();
+		aim.config(this, PI / 20, 100, 1);
+		distance.addModule(aim, {
 			0: Chase.Stages.REVERSE,
+			1: Chase.Stages.INACTIVE,
+			2: Chase.Stages.ACTIVE,
+			3: Chase.Stages.INACTIVE,
+		});
+
+		let chase = new Chase();
+		chase.config(this, .003, aim);
+		distance.addModule(chase, {
+			0: Chase.Stages.ACTIVE,
 			1: Chase.Stages.INACTIVE,
 			2: Chase.Stages.ACTIVE,
 			3: Chase.Stages.INACTIVE,

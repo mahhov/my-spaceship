@@ -5,14 +5,18 @@ const {thetaToVector, cos, sin} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'REVERSE');
 
-// todo[high] use Aim in chase and shotgun
+// todo[high] use Aim in shotgun module
 class Aim extends Module {
-	config(origin, rotationSpeed, initialDirVector = new Vector(1, 0)) {
+	config(origin, rotationSpeed = 0, skirmishTime = 0, skirmishDistance = 0, initialDirVector = null) {
 		this.origin = origin;
 		this.rotationSpeedCos = cos(rotationSpeed); // 0 rotationSpeed means instant rotation
 		this.rotationSpeedSin = sin(rotationSpeed);
-		this.dir = initialDirVector;
-		this.dir.magnitude = 1;
+		this.skirmishTime = skirmishTime;
+		this.skirmishDistance = skirmishDistance;
+		if (initialDirVector) {
+			this.dir = initialDirVector;
+			this.dir.magnitude = 1;
+		}
 	}
 
 	apply_(map, intersectionFinder, target) {
@@ -23,7 +27,21 @@ class Aim extends Module {
 		if (this.stage === Stages.REVERSE)
 			delta.negate();
 
-		if (this.rotationSpeed)
+		if (this.skirmishTime) {
+			if (!this.skirmishTick) {
+				this.skirmishTick = this.skirmishTime;
+				this.skirmishVec = Vector.fromRand(this.skirmishDistance);
+				if (this.skirmishVec.dot(delta) > 0)
+					this.skirmishVec.negate();
+			}
+			this.skirmishTick--;
+			delta.add(this.skirmishVec);
+		}
+
+		if (!this.dir) {
+			this.dir = Vector.fromObj(delta);
+			this.dir.magnitude = 1;
+		} else if (this.rotationSpeed)
 			this.dir.rotateByCosSinTowards(this.rotationSpeedCos, this.rotationSpeedSin, delta);
 		else {
 			this.dir = delta;

@@ -4,6 +4,7 @@ const {Colors} = require('../../util/Constants');
 const WShip = require('../../graphics/WShip');
 const Phase = require('../../util/Phase');
 const Distance = require('../module/Distance');
+const Aim = require('../module/Aim');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
 
@@ -20,8 +21,16 @@ class ShotgunWarrior extends Monster {
 		distance.config(this, .25, .55);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
+		let aim = new Aim();
+		aim.config(this);
+		distance.addModule(aim, {
+			0: Chase.Stages.INACTIVE,
+			1: Chase.Stages.ACTIVE,
+			2: Chase.Stages.INACTIVE
+		});
+
 		let chase = new Chase();
-		chase.config(this, .003);
+		chase.config(this, .003, aim);
 		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,

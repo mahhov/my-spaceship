@@ -3,7 +3,9 @@ const Monster = require('.././Monster');
 const {Colors} = require('../../../util/Constants');
 const DiamondShip = require('../../../graphics/DiamondShip');
 const Phase = require('../../../util/Phase');
+const {PI} = require('../../../util/Number');
 const Distance = require('../../module/Distance');
+const Aim = require('../../module/Aim');
 const PatternedPeriod = require('../../module/PatternedPeriod');
 const Chase = require('../../module/Chase');
 const NearbyDegen = require('../../module/NearbyDegen');
@@ -29,8 +31,17 @@ class ExplodingTick extends Monster {
 			2: [PatternedPeriod.PrimaryStages.STOP],
 		});
 
+		let aim = new Aim();
+		aim.config(this, PI / 20, 50, .1);
+		patternedPeriod.addModule(aim, {
+			0: Chase.Stages.INACTIVE,
+			1: Chase.Stages.INACTIVE,
+			2: Chase.Stages.INACTIVE,
+			3: Chase.Stages.ACTIVE,
+		});
+
 		let chase = new Chase();
-		chase.config(this, .003, 50, .1, Math.PI / 20);
+		chase.config(this, .003, aim);
 		patternedPeriod.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.INACTIVE,

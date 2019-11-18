@@ -4,6 +4,7 @@ const {Colors} = require('../../util/Constants');
 const AShip = require('../../graphics/AShip');
 const Phase = require('../../util/Phase');
 const Distance = require('../module/Distance');
+const Aim = require('../module/Aim');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
 
@@ -20,8 +21,17 @@ class MeleeDart extends Monster {
 		distance.config(this, .07, .15, 1);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
+		let aim = new Aim();
+		aim.config(this);
+		distance.addModule(aim, {
+			0: Aim.Stages.INACTIVE,
+			1: Aim.Stages.ACTIVE,
+			2: Aim.Stages.ACTIVE,
+			3: Aim.Stages.INACTIVE
+		});
+
 		let chase = new Chase();
-		chase.config(this, .005);
+		chase.config(this, .005, aim);
 		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,

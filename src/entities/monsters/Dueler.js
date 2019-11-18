@@ -4,6 +4,7 @@ const {Colors} = require('../../util/Constants');
 const WShip = require('../../graphics/WShip');
 const Phase = require('../../util/Phase');
 const Period = require('../module/Period');
+const Aim = require('../module/Aim');
 const Chase = require('../module/Chase');
 const Shotgun = require('../module/Shotgun');
 const Dash = require('../module/Dash');
@@ -25,8 +26,17 @@ class Dueler extends Monster {
 			[Phases.ONE]: Period.Stages.LOOP,
 		});
 
+		let aim = new Aim();
+		aim.config(this, 0, 30, 1);
+		period.addModule(aim, {
+			0: Chase.Stages.ACTIVE,
+			1: Chase.Stages.ACTIVE,
+			2: Chase.Stages.INACTIVE,
+			3: Chase.Stages.INACTIVE,
+		});
+
 		let chase = new Chase();
-		chase.config(this, .005, 30, 1);
+		chase.config(this, .005, aim);
 		period.addModule(chase, {
 			0: Chase.Stages.ACTIVE,
 			1: Chase.Stages.ACTIVE,
