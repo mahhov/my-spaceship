@@ -20,7 +20,7 @@ let processFileConfig = fileConfig => {
 			return new Promise((resolve, reject) =>
 				browserify(fileConfig.input, BROWSERIFY_OPTIONS)
 					.bundle()
-					.on('error', e => reject('FAILED TO BUNDLE', e))
+					.on('error', e => reject('FAILED TO BUNDLE ' + e))
 					.pipe(fs.createWriteStream(fileConfig.output))
 					.on('close', resolve));
 		case 'exit':
