@@ -1,7 +1,7 @@
 const makeEnum = require('../../util/Enum');
 const Module = require('./Module');
 const Vector = require('../../util/Vector');
-const {thetaToVector, cos, sin} = require('../../util/Number');
+const {cos, sin} = require('../../util/Number');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'REVERSE');
 
@@ -9,6 +9,7 @@ const Stages = makeEnum('ACTIVE', 'INACTIVE', 'REVERSE');
 class Aim extends Module {
 	config(origin, rotationSpeed = 0, skirmishTime = 0, skirmishDistance = 0, initialDirVector = null) {
 		this.origin = origin;
+		this.rotationSpeed = rotationSpeed;
 		this.rotationSpeedCos = cos(rotationSpeed); // 0 rotationSpeed means instant rotation
 		this.rotationSpeedSin = sin(rotationSpeed);
 		this.skirmishTime = skirmishTime;
