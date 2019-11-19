@@ -8,6 +8,7 @@ const Trigger = require('../module/Trigger');
 const PhaseSetter = require('../module/PhaseSetter');
 const Restore = require('../module/Restore');
 const NearbyDegen = require('../module/NearbyDegen');
+const Aim = require('../module/Aim');
 const Shotgun = require('../module/Shotgun');
 const LookTowards = require('../module/LookTowards');
 const Bar = require('../../painter/Bar');
@@ -79,6 +80,15 @@ class Boss1 extends Monster {
 			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE
 		});
 
+		this.aim = new Aim();
+		this.aim.config(this);
+		distance.addModule(this.aim, {
+			[Phases.INACTIVE]: Aim.Stages.INACTIVE,
+			[Phases.PRE_DEGEN]: Aim.Stages.INACTIVE,
+			[Phases.DEGEN]: Aim.Stages.INACTIVE,
+			[Phases.PROJECTILE]: Aim.Stages.ACTIVE,
+		});
+
 		this.shotgun = new Shotgun();
 		this.moduleManager.addModule(this.shotgun, {
 			[Phases.INACTIVE]: Shotgun.Stages.INACTIVE,
@@ -107,12 +117,12 @@ class Boss1 extends Monster {
 
 			if (this.enragePhase.isNew()) {
 				this.nearbyDegen.config(this, .33, .002);
-				this.shotgun.config(this, .1, 10, .01, .003, 50, .005);
+				this.shotgun.config(this, .1, 10, .01, .003, 50, .005, this.aim);
 			}
 
 			if (this.enragePhase.tick()) {
 				this.nearbyDegen.config(this, .33, .01);
-				this.shotgun.config(this, .1, 30, .012, .006, 50, .005);
+				this.shotgun.config(this, .1, 30, .012, .006, 50, .005, this.aim);
 			}
 		}
 

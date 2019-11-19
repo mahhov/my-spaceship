@@ -21,24 +21,32 @@ class ShotgunWarrior extends Monster {
 		distance.config(this, .25, .55);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let aim = new Aim();
-		aim.config(this);
-		distance.addModule(aim, {
-			0: Chase.Stages.INACTIVE,
-			1: Chase.Stages.ACTIVE,
-			2: Chase.Stages.INACTIVE
+		let chaseAim = new Aim();
+		chaseAim.config(this);
+		distance.addModule(chaseAim, {
+			0: Aim.Stages.INACTIVE,
+			1: Aim.Stages.ACTIVE,
+			2: Aim.Stages.INACTIVE
 		});
 
 		let chase = new Chase();
-		chase.config(this, .003, aim);
+		chase.config(this, .003, chaseAim);
 		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
 			2: Chase.Stages.INACTIVE
 		});
 
+		let shotgunAim = new Aim();
+		shotgunAim.config(this);
+		distance.addModule(shotgunAim, {
+			0: Aim.Stages.ACTIVE,
+			1: Aim.Stages.INACTIVE,
+			2: Aim.Stages.INACTIVE
+		});
+
 		let shotgun = new Shotgun();
-		shotgun.config(this, .05, 3, .01, .003, 50, .005);
+		shotgun.config(this, .05, 3, .01, .003, 50, .005, shotgunAim);
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.INACTIVE,

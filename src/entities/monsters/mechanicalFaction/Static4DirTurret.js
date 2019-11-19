@@ -3,7 +3,9 @@ const Monster = require('.././Monster');
 const {Colors} = require('../../../util/Constants');
 const Rect4DotsShip = require('../../../graphics/Rect4DotsShip');
 const Phase = require('../../../util/Phase');
+const Vector = require('../../../util/Vector');
 const Period = require('../../module/Period');
+const Aim = require('../../module/Aim');
 const Shotgun = require('../../module/Shotgun');
 
 const Phases = makeEnum('ONE');
@@ -25,8 +27,15 @@ class Static4DirTurret extends Monster {
 			{x: -1, y: 0},
 			{x: 0, y: -1},
 		].forEach(dir => {
+			let aim = new Aim();
+			aim.config(this, 0, 0, 0, Vector.fromObj(dir));
+			period.addModule(aim, {
+				0: Aim.Stages.INACTIVE,
+				1: Aim.Stages.INACTIVE,
+			});
+
 			let shotgun = new Shotgun();
-			shotgun.config(this, .05, 1, .003, .0001, 100, .02, true, 0.02, dir);
+			shotgun.config(this, .05, 1, .003, .0001, 100, .02, aim, true);
 			period.addModule(shotgun, {
 				0: Shotgun.Stages.INACTIVE,
 				1: Shotgun.Stages.ACTIVE,

@@ -23,17 +23,17 @@ class SniperTick extends Monster {
 		distance.config(this, .5, .7, 1);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let aim = new Aim();
-		aim.config(this, PI / 20, 100, 1);
-		distance.addModule(aim, {
-			0: Chase.Stages.REVERSE,
-			1: Chase.Stages.INACTIVE,
-			2: Chase.Stages.ACTIVE,
-			3: Chase.Stages.INACTIVE,
+		let chaseAim = new Aim();
+		chaseAim.config(this, PI / 20, 100, 1);
+		distance.addModule(chaseAim, {
+			0: Aim.Stages.REVERSE,
+			1: Aim.Stages.INACTIVE,
+			2: Aim.Stages.ACTIVE,
+			3: Aim.Stages.INACTIVE,
 		});
 
 		let chase = new Chase();
-		chase.config(this, .003, aim);
+		chase.config(this, .003, chaseAim);
 		distance.addModule(chase, {
 			0: Chase.Stages.ACTIVE,
 			1: Chase.Stages.INACTIVE,
@@ -50,8 +50,15 @@ class SniperTick extends Monster {
 			3: Cooldown.Stages.COOLDOWN,
 		});
 
+		let shotgunAim = new Aim();
+		shotgunAim.config(this);
+		cooldown.addModule(shotgunAim, {
+			[Cooldown.Phases.UNTRIGGERED]: Shotgun.Stages.INACTIVE,
+			[Cooldown.Phases.TRIGGERED]: Shotgun.Stages.ACTIVE,
+		});
+
 		let shotgun = new Shotgun();
-		shotgun.config(this, 1, 1, .01, .001, 100, .04);
+		shotgun.config(this, 1, 1, .01, .001, 100, .04, shotgunAim);
 		cooldown.addModule(shotgun, {
 			[Cooldown.Phases.UNTRIGGERED]: Shotgun.Stages.INACTIVE,
 			[Cooldown.Phases.TRIGGERED]: Shotgun.Stages.ACTIVE,

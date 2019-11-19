@@ -6,7 +6,7 @@ const Projectile = require('../attack/Projectile');
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
 class Shotgun extends Module {
-	config(origin, rate, count, velocity, spread, duration, damage, predictableRate = false, size = .02, dir = null) {
+	config(origin, rate, count, velocity, spread, duration, damage, dirModule, predictableRate = false, size = .02) {
 		this.origin = origin;
 		this.rate = rate;
 		this.count = count;
@@ -14,9 +14,9 @@ class Shotgun extends Module {
 		this.spread = spread;
 		this.duration = duration;
 		this.damage = damage;
+		this.dirModule = dirModule;
 		this.predictableRate = predictableRate;
 		this.size = size;
-		this.dir = dir && setMagnitude(dir.x, dir.y, velocity); // if null, directs towards target
 		this.rateCurrent = 0;
 	}
 
@@ -30,7 +30,8 @@ class Shotgun extends Module {
 		this.rateCurrent--;
 
 		for (let i = 0; i < this.count; i++) {
-			let directv = this.dir || setMagnitude(target.x - this.origin.x, target.y - this.origin.y, this.velocity);
+			let directv = this.dirModule.dir.copy;
+			directv.magnitude = this.velocity;
 			let randv = randVector(this.spread);
 
 			let projectile = new Projectile(

@@ -18,6 +18,10 @@ class Vector {
 		return Vector.fromTheta(rand(PI2), rand(maxMagnitude))
 	}
 
+	get copy() {
+		return Vector.fromObj(this);
+	}
+
 	add(v) {
 		this.x += v.x;
 		this.y += v.y;

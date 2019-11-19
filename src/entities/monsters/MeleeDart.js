@@ -21,9 +21,9 @@ class MeleeDart extends Monster {
 		distance.config(this, .07, .15, 1);
 		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let aim = new Aim();
-		aim.config(this);
-		distance.addModule(aim, {
+		let chaseAim = new Aim();
+		chaseAim.config(this);
+		distance.addModule(chaseAim, {
 			0: Aim.Stages.INACTIVE,
 			1: Aim.Stages.ACTIVE,
 			2: Aim.Stages.ACTIVE,
@@ -31,7 +31,7 @@ class MeleeDart extends Monster {
 		});
 
 		let chase = new Chase();
-		chase.config(this, .005, aim);
+		chase.config(this, .005, chaseAim);
 		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
@@ -39,8 +39,17 @@ class MeleeDart extends Monster {
 			3: Chase.Stages.INACTIVE
 		});
 
+		let shotgunAim = new Aim();
+		chaseAim.config(this);
+		distance.addModule(chaseAim, {
+			0: Aim.Stages.ACTIVE,
+			1: Aim.Stages.ACTIVE,
+			2: Aim.Stages.INACTIVE,
+			3: Aim.Stages.INACTIVE
+		});
+
 		let shotgun = new Shotgun();
-		shotgun.config(this, .07, 1, .005, .005, 50, damageMultiplier * .005);
+		shotgun.config(this, .07, 1, .005, .005, 50, damageMultiplier * .005, chaseAim);
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,

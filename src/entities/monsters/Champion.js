@@ -25,13 +25,13 @@ class Champion extends Monster {
 		period.config(100, 25, 25, 30);
 		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP,});
 
-		let aim = new Aim();
-		aim.config(this);
-		period.addModule(aim, {
-			0: Chase.Stages.ACTIVE,
-			1: Chase.Stages.ACTIVE,
-			2: Chase.Stages.INACTIVE,
-			3: Chase.Stages.INACTIVE,
+		let chaseAim = new Aim();
+		chaseAim.config(this);
+		period.addModule(chaseAim, {
+			0: Aim.Stages.ACTIVE,
+			1: Aim.Stages.ACTIVE,
+			2: Aim.Stages.INACTIVE,
+			3: Aim.Stages.INACTIVE,
 		});
 
 		let chase = new Chase();
@@ -43,8 +43,17 @@ class Champion extends Monster {
 			3: Chase.Stages.INACTIVE,
 		});
 
+		let shotgunAim = new Aim();
+		shotgunAim.config(this);
+		period.addModule(shotgunAim, {
+			0: Aim.Stages.ACTIVE,
+			1: Aim.Stages.ACTIVE,
+			2: Aim.Stages.INACTIVE,
+			3: Aim.Stages.INACTIVE,
+		});
+
 		let shotgun = new Shotgun();
-		shotgun.config(this, .03, 1, .01, .001, 50, .02);
+		shotgun.config(this, .03, 1, .01, .001, 50, .02, shotgunAim);
 		period.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,
