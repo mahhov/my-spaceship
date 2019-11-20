@@ -32,6 +32,17 @@ class LinkedList {
 		}
 	}
 
+	filter(handler) {
+		let output = [];
+		let iter = this.head;
+		while (iter) {
+			if (handler(iter.value, iter))
+				output.push(iter);
+			iter = iter.next;
+		}
+		return output;
+	}
+
 	find(handler) {
 		let iter = this.head;
 		while (iter) {

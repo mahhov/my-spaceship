@@ -53,10 +53,17 @@ class IntersectionFinder {
 		return this.boundsGroups[layer].remove(item);
 	}
 
-	hasIntersection(layer, bounds) {
-		let item = this.boundsGroups[layer].find(({bounds: iBounds}) =>
-			iBounds.intersects(bounds));
+	hasIntersection(searchLayer, bounds) {
+		let item = this.boundsGroups[searchLayer]
+			.find(({bounds: iBounds}) => iBounds.intersects(bounds));
 		return item && item.value.reference;
+	}
+
+	intersections(layer, bounds) {
+		return this.collisions[layer].flatMap((_, iLayer) =>
+			this.boundsGroups[iLayer]
+				.filter(({bounds: iBounds}) => iBounds.intersects(bounds))
+				.map(item => item.value.reference));
 	}
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {

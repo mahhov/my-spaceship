@@ -41,6 +41,10 @@ const Colors = {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
 			ENTITY: Color.fromHexString('#00c')
 		},
+		AREA_DEGEN: {
+			WARNING_BORDER: Color.from1(1, 0, 0),
+			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
+		},
 		DUST: Color.fromHexString('#ccc'),
 		DAMAGE_DUST: Color.fromHexString('#f88')
 	},
@@ -51,16 +55,6 @@ const Colors = {
 			BORDER: Color.from1(1, .5, .5),
 			LINES: Color.from1(1, .95, .95),
 		}
-	},
-
-	Ability: {
-		NearbyDegen: {
-			WARNING_BORDER: Color.from1(1, 0, 0),
-			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
-		},
-
-		WARNING_BORDER: Color.from1(1, 0, 0),
-		WARNING_FILL: Color.from1(.8, 0, 0, .1),
 	},
 
 	Star: {
