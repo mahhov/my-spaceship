@@ -1,26 +1,21 @@
-const PainterElement = require('./PainterElement');
+const Path = require('./Path');
+const Vector = require('../util/Vector');
 
-class Line extends PainterElement {
-	constructor(x, y, x2, y2, {color = '#000', thickness = 1} = {}) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.x2 = x2;
-		this.y2 = y2;
-		this.color = color;
-		this.thickness = thickness
+class Line extends Path {
+	constructor(x, y, x2, y2, width, graphicOptions) {
+		let w = new Vector(x2 - x, y2 - y).rotateByCosSin(0, 1);
+		w.magnitude = width;
+		let xys = [
+			[x - w.x, y - w.y],
+			[x + w.x, y + w.y],
+			[x2 + w.x, y2 + w.y],
+			[x2 - w.x, y2 - w.y],
+		];
+		super(xys, true, graphicOptions);
 	}
 
-	static withCamera(camera, x, y, x2, y2, {color, thickness} = {}) {
-		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), {color, thickness: camera.st(thickness)});
-	}
-
-	paint(xt, yt, context) {
-		this.setLineMode(context);
-		context.beginPath();
-		context.moveTo(xt(this.x), yt(this.y));
-		context.lineTo(xt(this.x2), yt(this.y2));
-		context.stroke();
+	static withCamera(camera, x, y, x2, y2, width, {fill, color, thickness} = {}) {
+		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), camera.st(width), {fill, color, thickness: camera.st(thickness)});
 	}
 }
 

@@ -1,10 +1,9 @@
 const makeEnum = require('../../util/Enum');
 const Module = require('./Module');
-const {setMagnitude, randVector} = require('../../util/Number');
 const Vector = require('../../util/Vector');
-const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/RectC');
 const Laser = require('../attack/Laser');
+const {Colors} = require('../../util/Constants');
+const Line = require('../../painter/Line');
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 
@@ -35,8 +34,13 @@ class StaticLaser extends Module {
 	paint(painter, camera) {
 		if (this.stage !== Stages.WARNING)
 			return;
-	  let warning = Vector.fromObj(this.origin).add(this.dirModule.dir);
-		painter.add(RectC.withCamera(camera, warning.x, warning.y, .01, .01, {color: Colors.Ability.NearbyDegen.WARNING_BORDER.get()}));
+		let warning = Vector.fromObj(this.origin).add(this.dirModule.dir);
+		painter.add(Line.withCamera(
+			camera,
+			this.origin.x, this.origin.y,
+			warning.x, warning.y,
+			this.size,
+			{color: Colors.Entity.AREA_DEGEN.WARNING_BORDER.get()}));
 	}
 }
 

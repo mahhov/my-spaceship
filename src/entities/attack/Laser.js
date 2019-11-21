@@ -1,5 +1,6 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
+const {Colors} = require('../../util/Constants');
 const Line = require('../../painter/Line');
 
 class Laser extends Entity {
@@ -22,8 +23,12 @@ class Laser extends Entity {
 	}
 
 	paint(painter, camera) {
-		// todo[med] draw width
-		painter.add(Line.withCamera(camera, this.x, this.y, this.x + this.moveX, this.y + this.moveY));
+		painter.add(Line.withCamera(
+			camera,
+			this.x, this.y,
+			this.x + this.moveX, this.y + this.moveY,
+			this.width,
+			{fill: true, color: Colors.Entity.HOSTILE_PROJECTILE.get()}));
 	}
 }
 
