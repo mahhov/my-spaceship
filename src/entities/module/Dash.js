@@ -27,7 +27,7 @@ class Dash extends ModuleManager {
 			this.target.y = this.origin.y + delta.y;
 			this.dir = setMagnitude(delta.x, delta.y);
 
-		} else if (this.stage === Stages.DASHING) {
+		} else if (this.stage === Stages.DASHING && !this.collided) {
 			this.collided = this.origin.safeMove(intersectionFinder, this.dir.x, this.dir.y, this.distance / this.dashDuration, true);
 			if (this.collided) {
 				this.modulesSetStage(Phases.INACTIVE);
