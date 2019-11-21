@@ -7,7 +7,7 @@ class PainterElement {
 
 	setLineMode(context) {
 		context.strokeStyle = this.color;
-		context.lineWidth = this.thickness;
+		context.lineWidth = this.thickness || 1;
 	}
 
 	setDoubleMode(context) {
