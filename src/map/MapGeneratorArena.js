@@ -6,6 +6,10 @@ const RockMineral = require('../entities/RockMineral');
 const Champion = require('../entities/monsters/Champion');
 const ExplodingTick = require('../entities/monsters/mechanicalFaction/ExplodingTick');
 const SniperTick = require('../entities/monsters/mechanicalFaction/SniperTick');
+const Static4DirTurret = require('../entities/monsters/mechanicalFaction/Static4DirTurret');
+const AimingLaserTurret = require('../entities/monsters/mechanicalFaction/AimingLaserTurret');
+const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
+const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
@@ -13,6 +17,9 @@ const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
+	// [
+	// 	[AimingLaserTurret, 1],
+	// ],
 	[
 		[ExplodingTick, 3],
 	],
@@ -21,9 +28,41 @@ const STAGE_SPAWNS = [
 		[SniperTick, 2],
 	],
 	[
-		[ExplodingTick, 5],
-		[SniperTick, 4],
+		[Static4DirTurret, 3],
+		[AimingLaserTurret, 2],
 	],
+	[
+		[ExplodingTick, 4],
+		[SniperTick, 4],
+		[Static4DirTurret, 2],
+	],
+	// boss 1
+	[
+		[BombLayer, 3],
+		[DashChaser, 4],
+	],
+	[
+		[AimingLaserTurret, 2],
+		[BombLayer, 4],
+		[DashChaser, 3],
+	],
+	[
+		[SniperTick, 3],
+		[Static4DirTurret, 3],
+		[AimingLaserTurret, 3],
+		[BombLayer, 3],
+		[DashChaser, 3],
+	],
+	[
+		[ExplodingTick, 4],
+		[SniperTick, 4],
+		[Static4DirTurret, 4],
+		[AimingLaserTurret, 4],
+		[BombLayer, 4],
+		[DashChaser, 4],
+	],
+
+	// boss 2
 ];
 
 class MapGeneratorArena {
@@ -110,17 +149,24 @@ module.exports = MapGeneratorArena;
 124356
 
 
-exploding tick
-sniper tick
-fixed 4-way turret
-aiming 1-way turret
+exploding tick          degen while moving
+sniper tick             shot leaves temporary spheres in trail
+fixed 4-way turret      alternates to diagonal
+aiming 1-way turret     triple laser
 bomb layer
 charger
 
 melee dart
 melee dart spawner ship
-degen turret or turret with spinnning degeen tiny mobs
+degen turret or turret with spinning degen tiny mobs
 turret with static & inactive tiny mobs, that periodically charge the player with slow rotation
 wall of projectiles
 frontal degen rectangle
+
+melee slow debuff
+ranged heal allies debuff
+spinning turret
+delayed missile turret
+encircling circle fo bombs
+rapid firing, slow moving, short range projectile machine gun
 */
