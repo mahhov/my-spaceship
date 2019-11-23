@@ -9,6 +9,7 @@ class AreaDegen extends Entity {
 	constructor(x, y, range, time, damage, friendly) {
 		super(x, y, range, range, IntersectionFinder.Layers.IGNORE);
 		// We use Layers.IGNORE for calling super() in order to avoid blocking unit moving.
+		// Todo [high] the layer_ hack won't be needed once intersection finder implements un-symmetric collisions
 		this.layer_ = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
 		this.range = range;
 		this.time = time; // -1 will be infinite, 0 will be 1 tick

@@ -26,9 +26,9 @@ class Entity {
 	}
 
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		let moveXY = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
-		this.move(...moveXY);
-		return moveXY[2];
+		let intersectionMove = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
+		this.move(intersectionMove.x, intersectionMove.y);
+		return intersectionMove;
 	}
 
 	move(dx, dy) {
