@@ -11,7 +11,7 @@ class ModuleManager extends Module {
 		this.modules.push({module, stagesMap});
 	}
 
-	// todo [high] rename to setPhase
+	// todo [med] rename to setPhase
 	modulesSetStage(phase) {
 		if (phase === this.phase)
 			return;

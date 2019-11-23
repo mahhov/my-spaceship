@@ -169,4 +169,6 @@ spinning turret
 delayed missile turret
 encircling circle fo bombs
 rapid firing, slow moving, short range projectile machine gun
+
+game modes: defense, boss fights, kill outpost portals, and arena
 */

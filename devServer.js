@@ -24,13 +24,13 @@ let processFileConfig = fileConfig => {
 					.pipe(fs.createWriteStream(fileConfig.output))
 					.on('close', resolve));
 		case 'exit':
-			process.exit(); // todo send response before exit
+			process.exit(); // todo [low] send response before exit
 	}
 };
 
 let main = async () => {
 	// Because intellij doesn't clean up nicely
-	await new Promise(resolve => http.get(`http://localhost:${PORT}/exit`).on('response', resolve).on('error', resolve)); // todo avoid double 'on'
+	await new Promise(resolve => http.get(`http://localhost:${PORT}/exit`).on('response', resolve).on('error', resolve)); // todo [low] avoid double 'on'
 
 	http.createServer(async (req, res) => {
 		let fileConfig = FILES[req.url] || FILES['/'];

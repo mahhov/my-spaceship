@@ -44,7 +44,7 @@ class Map {
 		this.uis.add(ui);
 	}
 
-	addProjectile(projectile) { // todo [high] rename to addAttack or such
+	addProjectile(projectile) { // todo [med] rename to addAttack or such
 		this.projectiles.add(projectile);
 		projectile.addIntersectionBounds(this.intersectionFinder);
 	}
