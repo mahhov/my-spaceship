@@ -92,9 +92,10 @@ class IntersectionFinder {
 			moveY += dy * move;
 			magnitude -= move;
 
-			if (!side || noSlide)
-				return {x: moveX, y: moveY, reference};
-			else if (side === 1) {
+			if (!side || noSlide) {
+				trackedOnlyReferences = trackedOnlyReferences.filter(([_, move]) => move <= magnitude).map(([reference]) => reference);
+				return {x: moveX, y: moveY, reference, trackedOnlyReferences};
+			} else if (side === 1) {
 				horizontal = Bounds.Directions.LEFT;
 				dx = 0;
 			} else {
