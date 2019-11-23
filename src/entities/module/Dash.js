@@ -29,7 +29,6 @@ class Dash extends ModuleManager {
 
 		} else if (this.stage === Stages.DASHING && !this.collided) {
 			this.collided = this.origin.safeMove(intersectionFinder, this.dir.x, this.dir.y, this.distance / this.dashDuration, true).reference;
-			// todo [high] consider trackedOnlyReferences as well
 			if (this.collided) {
 				this.modulesSetStage(Phases.INACTIVE);
 				this.target.x = this.origin.x;

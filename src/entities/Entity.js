@@ -9,6 +9,7 @@ class Entity {
 		this.layer = layer;
 		this.setPosition(x, y);
 		this.moveDirection = {x: 0, y: 1};
+		this.queuedTrackedIntersections = [];
 	}
 
 	setGraphics(graphics) {
@@ -28,6 +29,7 @@ class Entity {
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		let intersectionMove = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 		this.move(intersectionMove.x, intersectionMove.y);
+		intersectionMove.trackedOnlyReferences.forEach(reference => reference.queueTrackedIntersection(this));
 		return intersectionMove;
 	}
 
@@ -55,6 +57,10 @@ class Entity {
 		let halfWidth = this.width / 2;
 		let halfHeight = this.height / 2;
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
+	}
+
+	queueTrackedIntersection(reference) {
+		this.queuedTrackedIntersections.push(reference);
 	}
 
 	changeHealth(amount) {
