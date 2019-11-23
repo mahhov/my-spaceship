@@ -14,7 +14,7 @@ class Laser extends Entity {
 	}
 
 	update(map, intersectionFinder) {
-		({moveX: this.moveX, moveY: this.moveY, reference: this.intersection} =
+		({x: this.moveX, y: this.moveY, reference: this.intersection} =
 			this.checkMove(intersectionFinder, this.dx, this.dy, -1, true));
 
 		if (this.intersection)

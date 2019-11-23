@@ -19,6 +19,7 @@ class AimingLaserTurret extends Monster {
 
 		let period = new Period();
 		period.config(120, 80, 1);
+		period.periods.setRandomTick();
 		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP});
 
 		let rotate = new Rotate();
