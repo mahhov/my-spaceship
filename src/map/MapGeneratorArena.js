@@ -17,9 +17,9 @@ const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
-	// [
-	// 	[AimingLaserTurret, 1],
-	// ],
+	[
+		[DashChaser, 1],
+	],
 	[
 		[ExplodingTick, 3],
 	],
