@@ -7,17 +7,15 @@ const RectC = require('../../painter/RectC');
 class AreaDegen extends Entity {
 	// if maxTargets <= 0, will be treated as infinite
 	constructor(x, y, range, time, damage, friendly) {
-		super(x, y, range, range, IntersectionFinder.Layers.IGNORE);
-		// We use Layers.IGNORE for calling super() in order to avoid blocking unit moving.
-		// Todo [high] the layer_ hack won't be needed once intersection finder implements un-symmetric collisions
-		this.layer_ = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
+		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
+		super(x, y, range, range, layer);
 		this.range = range;
 		this.time = time; // -1 will be infinite, 0 will be 1 tick
 		this.damage = damage;
 	}
 
 	update(map, intersectionFinder) {
-		intersectionFinder.intersections(this.layer_, this.bounds)
+		intersectionFinder.intersections(this.layer, this.bounds)
 			.forEach(monster => monster.changeHealth(-this.damage));
 		return !this.time--;
 	}

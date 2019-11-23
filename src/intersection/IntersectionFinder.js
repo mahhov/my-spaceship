@@ -77,7 +77,7 @@ class IntersectionFinder {
 			({x: dx, y: dy, prevMagnitude: magnitude} = setMagnitude(dx, dy));
 
 		if (!dx && !dy || magnitude <= 0)
-			return {x: 0, y: 0, intersections: []};
+			return {x: 0, y: 0, reference: [], trackedOnlyReferences: []};
 
 		let moveX = 0, moveY = 0;
 
