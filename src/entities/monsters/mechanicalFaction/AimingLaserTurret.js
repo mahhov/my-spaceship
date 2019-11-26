@@ -18,32 +18,35 @@ class AimingLaserTurret extends Monster {
 		this.attackPhase = new Phase(0);
 
 		let period = new Period();
-		period.config(120, 80, 1);
+		period.config(50, 70, 80, 1);
 		period.periods.setRandomTick();
 		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP});
 
 		let rotate = new Rotate();
 		rotate.config(this, 0, 0, true);
 		period.addModule(rotate, {
-			0: Rotate.Stages.ACTIVE,
-			1: Rotate.Stages.INACTIVE,
+			0: Rotate.Stages.INACTIVE,
+			1: Rotate.Stages.ACTIVE,
 			2: Rotate.Stages.INACTIVE,
+			3: Rotate.Stages.INACTIVE,
 		});
 
 		let aim = new Aim();
 		aim.config(this, 0);
 		period.addModule(aim, {
-			0: Aim.Stages.ACTIVE,
-			1: Aim.Stages.INACTIVE,
+			0: Aim.Stages.INACTIVE,
+			1: Aim.Stages.ACTIVE,
 			2: Aim.Stages.INACTIVE,
+			3: Aim.Stages.INACTIVE,
 		});
 
 		let staticLaser = new StaticLaser();
 		staticLaser.config(this, .005, .5, aim, 50, .005);
 		period.addModule(staticLaser, {
 			0: StaticLaser.Stages.INACTIVE,
-			1: StaticLaser.Stages.WARNING,
-			2: StaticLaser.Stages.ACTIVE,
+			1: StaticLaser.Stages.INACTIVE,
+			2: StaticLaser.Stages.WARNING,
+			3: StaticLaser.Stages.ACTIVE,
 		});
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
