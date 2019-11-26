@@ -95,7 +95,13 @@ class MapGeneratorArena {
 		this.timer++;
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			let entities = this.createMonsters(this.stage++);
-			entities.forEach(([entity, ui]) => this.map.addMonster(entity, ui));
+			entities.forEach(([entity, ui]) => {
+				while (!entity.checkPosition(this.map.intersectionFinder)) {
+					let position = this.occupiedNoise.positions(1, WIDTH, HEIGHT)[0];
+					entity.setPosition(...position);
+				}
+				this.map.addMonster(entity, ui);
+			});
 			this.stageEntities = entities.map(([entity]) => entity);
 		}
 	}
@@ -115,8 +121,8 @@ class MapGeneratorArena {
 		let spawns = STAGE_SPAWNS[Math.min(stage, STAGE_SPAWNS.length - 1)];
 		let multiplier = Math.max(stage - STAGE_SPAWNS.length + 2, 1);
 		return spawns.map(([MonsterClass, count]) =>
-			this.occupiedNoise.positions(count * multiplier, WIDTH, HEIGHT)
-				.map(position => [new MonsterClass(...position), false]))
+			[...Array(count * multiplier)]
+				.map(() => [new MonsterClass(), false]))
 			.flat();
 	}
 
@@ -148,6 +154,21 @@ module.exports = MapGeneratorArena;
 23456 - 1
 124356
 
+OR
+123456
+123456
+123456
+123456
+
+1
+12
+34
+123
+
+456
+2356
+2456
+13456
 
 exploding tick          degen while moving
 sniper tick             shot leaves temporary spheres in trail

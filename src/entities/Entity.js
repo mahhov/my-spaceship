@@ -22,6 +22,11 @@ class Entity {
 		this.setBounds();
 	}
 
+	checkPosition(intersectionFinder) {
+		return this.x !== undefined &&
+			!intersectionFinder.intersections(this.layer, this.bounds).length
+	}
+
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		return intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 	}
