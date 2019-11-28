@@ -1,17 +1,33 @@
-<html>
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-	<canvas id="canvas" width="800" height="800"></canvas>
+	#logic-buttons-row > button:not(:last-child) {
+		margin-right: 20px;
+	}
 
-	<script src="Canvas.js"></script>
+	button {
+		background: none;
+		border: 1px solid;
+		cursor: pointer;
+	}
 
-	<script src="googleAnalytics.js" async></script>
+	button:hover {
+		background: #eee;
+	}
 
-	<style>
-		canvas {
-			margin: 50px auto;
-			display: block;
-			border: solid 1px #eee;
-		}
-	</style>
+	canvas {
+		margin: 50px auto;
+		display: block;
+		border: solid 1px #eee;
+	}
+</style>
 
-</html>
+<div id="logic-buttons-row"></div>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+<script src="Canvas.js"></script>
