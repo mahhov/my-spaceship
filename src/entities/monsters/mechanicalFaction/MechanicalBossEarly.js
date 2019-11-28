@@ -53,7 +53,7 @@ class MechanicalBossEarly extends Monster {
 		});
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.config(this, .24, .002);
+		nearbyDegen.config(this, .5, .002);
 		nearbyDegenPeriod.addModule(nearbyDegen, {
 			0: NearbyDegen.Stages.WARNING,
 			1: NearbyDegen.Stages.ACTIVE,
@@ -122,7 +122,7 @@ class MechanicalBossEarly extends Monster {
 			});
 
 			let shotgun = new Shotgun();
-			shotgun.config(this, .1, 1, .005, .002, 100, .01, shotgunAim, true);
+			shotgun.config(this, .1, 1, .005, .002, 100, .04, shotgunAim, true);
 			this.period.addModule(shotgun, {
 				0: Shotgun.Stages.INACTIVE,
 				1: Shotgun.Stages.INACTIVE,

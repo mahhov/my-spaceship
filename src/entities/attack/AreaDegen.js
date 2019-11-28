@@ -26,7 +26,7 @@ class AreaDegen extends Entity {
 			{fill: true, color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()};
 		painter.add(RectC.withCamera(camera,
 			this.x, this.y,
-			this.range * 2, this.range * 2,
+			this.range, this.range,
 			graphicOptions));
 	}
 }

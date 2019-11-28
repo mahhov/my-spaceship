@@ -22,9 +22,9 @@ const STAGE_SPAWNS = [
 	// [
 	// 	[MechanicalBossEarly, 1],
 	// ],
-	[
-		[MechanicalBoss, 1],
-	],
+	// [
+	// 	[MechanicalBoss, 1],
+	// ],
 	[
 		[ExplodingTick, 3],
 	],
@@ -69,7 +69,7 @@ const STAGE_SPAWNS = [
 		[DashChaser, 4],
 	],
 	[
-		MechanicalBoss, 1
+		[MechanicalBoss, 1],
 	],
 	[
 		[ExplodingTick, 4],

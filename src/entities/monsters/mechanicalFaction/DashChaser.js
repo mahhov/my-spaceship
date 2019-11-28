@@ -16,7 +16,7 @@ const Phases = makeEnum('ONE');
 
 class DashChaser extends Monster {
 	constructor(x, y) {
-		super(x, y, .06, .06, 1.6);
+		super(x, y, .06, .06, 1.2);
 		this.setGraphics(new HexagonShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
@@ -73,7 +73,7 @@ class DashChaser extends Monster {
 		});
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.config(dash.target, .1, .03);
+		nearbyDegen.config(dash.target, .15, .06);
 		triggerDashEnd.addModule(nearbyDegen, {
 			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
 			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,

@@ -14,7 +14,7 @@ const Phases = makeEnum('ONE');
 
 class BombLayer extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 1.6);
+		super(x, y, .04, .04, 1.2);
 		this.setGraphics(new DoubleHorizDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
@@ -48,7 +48,7 @@ class BombLayer extends Monster {
 		});
 
 		let areaDegen = new AreaDegenLayer();
-		areaDegen.config(this, .075, 200, .003);
+		areaDegen.config(this, .1, 200, .003);
 		cooldown.addModule(areaDegen, {
 			[Cooldown.Phases.UNTRIGGERED]: AreaDegenLayer.Stages.INACTIVE,
 			[Cooldown.Phases.TRIGGERED]: AreaDegenLayer.Stages.ACTIVE,
