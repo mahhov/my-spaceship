@@ -8,6 +8,7 @@ const ExplodingTick = require('../entities/monsters/mechanicalFaction/ExplodingT
 const SniperTick = require('../entities/monsters/mechanicalFaction/SniperTick');
 const Static4DirTurret = require('../entities/monsters/mechanicalFaction/Static4DirTurret');
 const AimingLaserTurret = require('../entities/monsters/mechanicalFaction/AimingLaserTurret');
+const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
 const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
 const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
 const {Positions} = require('../util/Constants');
@@ -17,9 +18,9 @@ const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
-	[
-		[DashChaser, 1],
-	],
+	// [
+	// [MechanicalBoss, 1],
+	// ],
 	[
 		[ExplodingTick, 3],
 	],
@@ -61,8 +62,17 @@ const STAGE_SPAWNS = [
 		[BombLayer, 4],
 		[DashChaser, 4],
 	],
-
-	// boss 2
+	[
+		MechanicalBoss, 1
+	],
+	[
+		[ExplodingTick, 4],
+		[SniperTick, 4],
+		[Static4DirTurret, 4],
+		[AimingLaserTurret, 4],
+		[BombLayer, 4],
+		[DashChaser, 4],
+	],
 ];
 
 class MapGeneratorArena {
