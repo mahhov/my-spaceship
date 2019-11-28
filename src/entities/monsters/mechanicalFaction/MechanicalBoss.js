@@ -26,7 +26,7 @@ class MechanicalBoss extends MechanicalBossEarly {
 
 		for (let i = 0; i < 1; i++) {
 			let surroundDegenTarget = new Position();
-			surroundDegenTarget.config(this, .3);
+			surroundDegenTarget.config(this, .2, .5);
 			surroundDegenPeriod.addModule(surroundDegenTarget, {
 				0: Position.Stages.ACTIVE,
 				1: Position.Stages.INACTIVE,
@@ -53,23 +53,21 @@ class MechanicalBoss extends MechanicalBossEarly {
 			3: Period.Stages.LOOP,
 		});
 
-		for (let i = 0; i < 1; i++) {
-			let chaseDegenTarget = new Position();
-			chaseDegenTarget.config(null, i * .3);
-			chaseDegenPeriod.addModule(chaseDegenTarget, {
-				0: Position.Stages.ACTIVE,
-				1: Position.Stages.INACTIVE,
-				2: Position.Stages.INACTIVE,
-			});
+		let chaseDegenTarget = new Position();
+		chaseDegenTarget.config();
+		chaseDegenPeriod.addModule(chaseDegenTarget, {
+			0: Position.Stages.ACTIVE,
+			1: Position.Stages.INACTIVE,
+			2: Position.Stages.INACTIVE,
+		});
 
-			let chaseDegen = new AreaDegenLayer();
-			chaseDegen.config(chaseDegenTarget, .06, 200, .002);
-			chaseDegenPeriod.addModule(chaseDegen, {
-				0: AreaDegenLayer.Stages.INACTIVE,
-				1: AreaDegenLayer.Stages.WARNING,
-				2: AreaDegenLayer.Stages.ACTIVE,
-			});
-		}
+		let chaseDegen = new AreaDegenLayer();
+		chaseDegen.config(chaseDegenTarget, .06, 200, .002);
+		chaseDegenPeriod.addModule(chaseDegen, {
+			0: AreaDegenLayer.Stages.INACTIVE,
+			1: AreaDegenLayer.Stages.WARNING,
+			2: AreaDegenLayer.Stages.ACTIVE,
+		});
 	}
 }
 

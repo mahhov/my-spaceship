@@ -14,8 +14,8 @@ class Vector {
 		return new Vector(cos(theta) * magnitude, sin(theta) * magnitude);
 	}
 
-	static fromRand(maxMagnitude = 1) {
-		return Vector.fromTheta(rand(PI2), rand(maxMagnitude))
+	static fromRand(maxMagnitude = 1, minMagnitude = 0) {
+		return Vector.fromTheta(rand(PI2), minMagnitude + rand(maxMagnitude - minMagnitude))
 	}
 
 	get copy() {

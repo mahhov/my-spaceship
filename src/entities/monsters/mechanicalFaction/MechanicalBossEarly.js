@@ -44,7 +44,7 @@ class MechanicalBossEarly extends Monster {
 
 	addNearbyDegenModule() {
 		let nearbyDegenPeriod = new Period();
-		nearbyDegenPeriod.config(50, 50, 1);
+		nearbyDegenPeriod.config(50, 150, 1);
 		nearbyDegenPeriod.periods.setPhase(2);
 		this.distance.addModule(nearbyDegenPeriod, {
 			0: Period.Stages.LOOP,
