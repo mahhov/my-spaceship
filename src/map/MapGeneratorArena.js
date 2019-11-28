@@ -8,9 +8,10 @@ const ExplodingTick = require('../entities/monsters/mechanicalFaction/ExplodingT
 const SniperTick = require('../entities/monsters/mechanicalFaction/SniperTick');
 const Static4DirTurret = require('../entities/monsters/mechanicalFaction/Static4DirTurret');
 const AimingLaserTurret = require('../entities/monsters/mechanicalFaction/AimingLaserTurret');
-const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
+const MechanicalBossEarly = require('../entities/monsters/mechanicalFaction/MechanicalBossEarly');
 const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
 const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
+const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
 const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
@@ -19,8 +20,11 @@ const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
 	// [
-	// [MechanicalBoss, 1],
+	// 	[MechanicalBossEarly, 1],
 	// ],
+	[
+		[MechanicalBoss, 1],
+	],
 	[
 		[ExplodingTick, 3],
 	],
@@ -37,7 +41,9 @@ const STAGE_SPAWNS = [
 		[SniperTick, 4],
 		[Static4DirTurret, 2],
 	],
-	// boss 1
+	[
+		[MechanicalBossEarly, 1],
+	],
 	[
 		[BombLayer, 3],
 		[DashChaser, 4],
