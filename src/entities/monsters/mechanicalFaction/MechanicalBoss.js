@@ -5,12 +5,14 @@ const Rect1DotsShip = require('../../../graphics/Rect1DotsShip');
 const Phase = require('../../../util/Phase');
 const {PI} = require('../../../util/Number');
 const Vector = require('../../../util/Vector');
+const Distance = require('../../module/Distance');
 const Period = require('../../module/Period');
+const NearbyDegen = require('../../module/NearbyDegen');
 const Aim = require('../../module/Aim');
+const Shotgun = require('../../module/Shotgun');
 const StaticLaser = require('../../module/StaticLaser');
 const Position = require('../../module/Position');
 const AreaDegenLayer = require('../../module/AreaDegenLayer');
-const Shotgun = require('../../module/Shotgun');
 
 const Phases = makeEnum('ONE');
 
@@ -21,9 +23,53 @@ class MechanicalBoss extends Monster {
 
 		this.attackPhase = new Phase(0);
 
+		// parents
+
+		let distance = new Distance();
+		distance.config(this, .25, .75);
+		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
+
 		let period = new Period();
 		period.config(100, 200, 100, 200);
 		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP});
+
+		// nearby degen
+
+		let nearbyDegenPeriod = new Period();
+		nearbyDegenPeriod.config(50, 50, 1);
+		nearbyDegenPeriod.periods.setPhase(2);
+		distance.addModule(nearbyDegenPeriod, {
+			0: Period.Stages.LOOP,
+			1: Period.Stages.PLAY,
+			2: Period.Stages.PLAY,
+		});
+
+		let nearbyDegen = new NearbyDegen();
+		nearbyDegen.config(this, .24, .002);
+		nearbyDegenPeriod.addModule(nearbyDegen, {
+			0: NearbyDegen.Stages.WARNING,
+			1: NearbyDegen.Stages.ACTIVE,
+			2: NearbyDegen.Stages.INACTIVE,
+			3: NearbyDegen.Stages.INACTIVE,
+		});
+
+		// far away shotgun
+
+		let farAwayShotgunAim = new Aim();
+		farAwayShotgunAim.config(this, 0);
+		distance.addModule(farAwayShotgunAim, {
+			0: Aim.Stages.INACTIVE,
+			1: Aim.Stages.INACTIVE,
+			2: Aim.Stages.ACTIVE,
+		});
+
+		let farAwayShotgun = new Shotgun();
+		farAwayShotgun.config(this, .1, 1, .01, 0, 200, .01, farAwayShotgunAim, true);
+		distance.addModule(farAwayShotgun, {
+			0: Shotgun.Stages.INACTIVE,
+			1: Shotgun.Stages.INACTIVE,
+			2: Shotgun.Stages.ACTIVE,
+		});
 
 		// laser
 
@@ -146,3 +192,5 @@ class MechanicalBoss extends Monster {
 }
 
 module.exports = MechanicalBoss;
+
+// todo [high] rotation
