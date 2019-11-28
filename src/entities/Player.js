@@ -28,12 +28,13 @@ class Player extends LivingEntity {
 		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
 
-		this.stamina = new Pool(100, .13);
+		this.stamina = new Pool(80, .1);
 		this.abilities = [
 			new ProjectileAttack(),
 			new Dash(),
-			new Heal(),
-			new BombAttack()];
+			// new Heal(),
+			// new BombAttack(),
+		];
 		this.abilities.forEach((ability, i) => ability.setUi(i));
 
 		this.passiveAbilities = [
