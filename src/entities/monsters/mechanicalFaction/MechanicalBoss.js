@@ -21,24 +21,33 @@ class MechanicalBoss extends Monster {
 		super(x, y, .2, .2, 22);
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
+		this.addParentsModule();
+		this.addNearbyDegenModule();
+		this.addFarAwayShotgunModule();
+		this.addLaserModule();
+		this.addSurroundDegenModule();
+		this.addShotgunFireModule();
+		this.addChaseDegenModule();
+
 		this.attackPhase = new Phase(0);
+		this.moduleManager.modulesSetStage(this.attackPhase.get());
+	}
 
-		// parents
+	addParentsModule() {
+		this.distance = new Distance();
+		this.distance.config(this, .25, .75);
+		this.moduleManager.addModule(this.distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
 
-		let distance = new Distance();
-		distance.config(this, .25, .75);
-		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
+		this.period = new Period();
+		this.period.config(100, 200, 100, 200);
+		this.moduleManager.addModule(this.period, {[Phases.ONE]: Period.Stages.LOOP});
+	}
 
-		let period = new Period();
-		period.config(100, 200, 100, 200);
-		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP});
-
-		// nearby degen
-
+	addNearbyDegenModule() {
 		let nearbyDegenPeriod = new Period();
 		nearbyDegenPeriod.config(50, 50, 1);
 		nearbyDegenPeriod.periods.setPhase(2);
-		distance.addModule(nearbyDegenPeriod, {
+		this.distance.addModule(nearbyDegenPeriod, {
 			0: Period.Stages.LOOP,
 			1: Period.Stages.PLAY,
 			2: Period.Stages.PLAY,
@@ -52,12 +61,12 @@ class MechanicalBoss extends Monster {
 			2: NearbyDegen.Stages.INACTIVE,
 			3: NearbyDegen.Stages.INACTIVE,
 		});
+	}
 
-		// far away shotgun
-
+	addFarAwayShotgunModule() {
 		let farAwayShotgunAim = new Aim();
 		farAwayShotgunAim.config(this, 0);
-		distance.addModule(farAwayShotgunAim, {
+		this.distance.addModule(farAwayShotgunAim, {
 			0: Aim.Stages.INACTIVE,
 			1: Aim.Stages.INACTIVE,
 			2: Aim.Stages.ACTIVE,
@@ -65,17 +74,17 @@ class MechanicalBoss extends Monster {
 
 		let farAwayShotgun = new Shotgun();
 		farAwayShotgun.config(this, .1, 1, .01, 0, 200, .01, farAwayShotgunAim, true);
-		distance.addModule(farAwayShotgun, {
+		this.distance.addModule(farAwayShotgun, {
 			0: Shotgun.Stages.INACTIVE,
 			1: Shotgun.Stages.INACTIVE,
 			2: Shotgun.Stages.ACTIVE,
 		});
+	}
 
-		// laser
-
+	addLaserModule() {
 		let laserPeriod = new Period();
 		laserPeriod.config(1, 38, 1);
-		period.addModule(laserPeriod, {
+		this.period.addModule(laserPeriod, {
 			0: Period.Stages.STOP,
 			1: Period.Stages.LOOP,
 			2: Period.Stages.STOP,
@@ -100,11 +109,12 @@ class MechanicalBoss extends Monster {
 			});
 		}
 
-		// surround degen
+	}
 
+	addSurroundDegenModule() {
 		let surroundDegenPeriod = new Period();
 		surroundDegenPeriod.config(1, 38, 1);
-		period.addModule(surroundDegenPeriod, {
+		this.period.addModule(surroundDegenPeriod, {
 			0: Period.Stages.STOP,
 			1: Period.Stages.LOOP,
 			2: Period.Stages.STOP,
@@ -128,13 +138,13 @@ class MechanicalBoss extends Monster {
 				2: AreaDegenLayer.Stages.ACTIVE,
 			});
 		}
+	}
 
-		// shotgun fire
-
+	addShotgunFireModule() {
 		[[-1, -1], [-1, 1], [1, -1], [1, 1]].forEach(xy => {
 			let shotgunAim = new Aim();
 			shotgunAim.config(this, 0, 0, 0, new Vector(...xy));
-			period.addModule(shotgunAim, {
+			this.period.addModule(shotgunAim, {
 				0: Aim.Stages.INACTIVE,
 				1: Aim.Stages.INACTIVE,
 				2: Aim.Stages.INACTIVE,
@@ -143,19 +153,19 @@ class MechanicalBoss extends Monster {
 
 			let shotgun = new Shotgun();
 			shotgun.config(this, .1, 1, .005, .002, 100, .01, shotgunAim, true);
-			period.addModule(shotgun, {
+			this.period.addModule(shotgun, {
 				0: Shotgun.Stages.INACTIVE,
 				1: Shotgun.Stages.INACTIVE,
 				2: Shotgun.Stages.INACTIVE,
 				3: Shotgun.Stages.ACTIVE,
 			});
 		});
+	}
 
-		// chase degen
-
+	addChaseDegenModule() {
 		let chaseDegenPeriod = new Period();
 		chaseDegenPeriod.config(1, 38, 1);
-		period.addModule(chaseDegenPeriod, {
+		this.period.addModule(chaseDegenPeriod, {
 			0: Period.Stages.STOP,
 			1: Period.Stages.STOP,
 			2: Period.Stages.STOP,
@@ -179,10 +189,7 @@ class MechanicalBoss extends Monster {
 				2: AreaDegenLayer.Stages.ACTIVE,
 			});
 		}
-
-		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
-
 
 	update(map, intersectionFinder, monsterKnowledge) {
 		if (this.attackPhase.sequentialTick())
