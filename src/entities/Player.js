@@ -17,6 +17,7 @@ const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
 const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
 const Dust = require('./particle/Dust');
+const BarC = require('../painter/BarC');
 const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
@@ -156,6 +157,10 @@ class Player extends LivingEntity {
 	}
 
 	paintUi(painter, camera) {
+		// nameplate life bar
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .15, .02, this.health.getRatio(),
+			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
+
 		// target lock
 		// todo [medium] target lock draws over monster health bar
 		if (this.targetLock)
