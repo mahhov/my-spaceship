@@ -162,9 +162,11 @@ class Player extends LivingEntity {
 	}
 
 	paintUi(painter, camera) {
-		// nameplate life bar
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .15, .02, this.health.getRatio(),
+		// nameplate life & stamina bar
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height - .02, .15, .02, this.health.getRatio(),
 			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .15, .01, this.stamina.getRatio(),
+			Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.get(Colors.BAR_SHADING)));
 
 		// target lock
 		// todo [medium] target lock draws over monster health bar
