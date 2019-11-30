@@ -150,6 +150,11 @@ class Player extends LivingEntity {
 		this.recentDamage.add(-amount);
 	}
 
+	restoreHealth() {
+		super.restoreHealth();
+		this.stamina.restore();
+	}
+
 	addBuff() {
 		let buff = new Buff();
 		this.buffs.push(buff);

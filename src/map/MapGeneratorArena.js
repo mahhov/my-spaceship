@@ -118,6 +118,7 @@ class MapGeneratorArena {
 				}
 				this.map.addMonster(entity, ui);
 			});
+			this.player.restoreHealth();
 			this.stageEntities = entities.map(([entity]) => entity);
 		}
 	}
