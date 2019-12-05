@@ -1,5 +1,6 @@
 const Ability = require('./Ability');
 const {booleanArray} = require('../util/Number');
+const Buff = require('../entities/Buff');
 
 class Dash extends Ability {
 	constructor() {
@@ -10,16 +11,17 @@ class Dash extends Ability {
 		if (!booleanArray(player.currentMove))
 			return false;
 
-		if (!this.channelDuration)   {
-			this.buff = this.buff || player.addBuff();
+		if (!this.channelDuration) {
+			this.buff = new Buff(this.uiColor, 'Speed');
 			this.buff.moveSpeed = 1;
+			player.addBuff(this.buff);
 			player.safeMove(intersectionFinder, ...player.currentMove, .1, true);
 		}
 		return true;
 	}
 
 	endActivate(origin, direct, map, intersectionFinder, player) {
-		this.buff.moveSpeed = 0;
+		this.buff.expire();
 	}
 
 }

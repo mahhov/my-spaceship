@@ -13,7 +13,7 @@ class Ability {
 		this.channelStamina = channelStamina;
 		this.repeatable = repeatable;
 		// todo [low] allow indicating whether channel will force stop upon reaching max or will allow to continue
-		this.maxChannelDuration = channelDuration; // -1 indicates infinite
+		this.maxChannelDuration = channelDuration; // -1 indicates infinite, 0 indicates 1 tick (i.e. not channeled)
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
 

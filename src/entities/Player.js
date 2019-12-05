@@ -57,6 +57,7 @@ class Player extends LivingEntity {
 	refresh() {
 		this.stamina.increment();
 		this.recentDamage.decay();
+		this.buffs = this.buffs.filter(buff => !buff.tick());
 	}
 
 	moveControl(controller, intersectionFinder) {
@@ -145,6 +146,10 @@ class Player extends LivingEntity {
 		this.stamina.change(-amount);
 	}
 
+	getArmor() {
+		return Buff.armor(this.buffs);
+	}
+
 	changeHealth(amount) {
 		super.changeHealth(amount);
 		this.recentDamage.add(-amount);
@@ -155,10 +160,9 @@ class Player extends LivingEntity {
 		this.stamina.restore();
 	}
 
-	addBuff() {
-		let buff = new Buff();
+	addBuff(buff) {
+		buff.setUiIndex(this.buffs.length);
 		this.buffs.push(buff);
-		return buff;
 	}
 
 	paintUi(painter, camera) {
@@ -182,6 +186,9 @@ class Player extends LivingEntity {
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
+
+		// buffs
+		this.buffs.forEach(buff => buff.paintUi(painter, camera));
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());

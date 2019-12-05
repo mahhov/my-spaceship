@@ -1,4 +1,5 @@
 const Ability = require('./Ability');
+const Buff = require('../entities/Buff');
 
 class Accelerate extends Ability {
 	constructor() {
@@ -7,14 +8,15 @@ class Accelerate extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, player) {
 		if (!this.channelDuration) {
-			this.buff = this.buff || player.addBuff();
-			this.buff.moveSpeed = 3;j
+			this.buff = new Buff(this.uiColor, 'Speed');
+			this.buff.moveSpeed = 3;
+			player.addBuff(this.buff);
 		}
 		return true;
 	}
 
 	endActivate(origin, direct, map, intersectionFinder, player) {
-		this.buff.moveSpeed = 0;
+		this.buff.expire();
 	}
 }
 

@@ -5,15 +5,20 @@ class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {
 		super(x, y, width, height, layer);
 		this.health = new Pool(health);
-		this.stats = {armor: 1};
+		this.stats = {armor: 1}; // todo [high] deprecated
 	}
 
 	setStats(stats) {
 		this.stats = {...this.stats, ...stats};
 	}
 
+	// todo [high] deprecated
+	getArmor() {
+		return this.stats.armor;
+	}
+
 	changeHealth(amount) {
-		this.health.change(amount / this.stats.armor);
+		this.health.change(amount / this.getArmor());
 	}
 
 	restoreHealth() {

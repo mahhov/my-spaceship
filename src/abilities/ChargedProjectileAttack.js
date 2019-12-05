@@ -9,6 +9,7 @@ class ChargedProjectileAttack extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, player) {
 		if (this.channelDuration === 0) {
+			// todo [high] update to new addBuff api
 			this.chargeBuff = this.chargeBuff || player.addBuff();
 			this.chargeBuff.moveSpeed = -.5;
 		}

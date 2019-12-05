@@ -78,6 +78,7 @@ const Positions = {
 	PLAYER_BAR_X: .5,
 	ABILITY_SIZE: .06,
 	ABILITY_CHANNEL_BAR_SIZE: .01,
+	BUFF_SIZE: .04,
 	STAGE_TEXT_HEIGHT: .03,
 };
 
