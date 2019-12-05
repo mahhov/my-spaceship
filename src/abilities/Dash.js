@@ -12,7 +12,7 @@ class Dash extends Ability {
 			return false;
 
 		if (!this.channelDuration) {
-			this.buff = new Buff(this.uiColor, 'Speed');
+			this.buff = new Buff(0, this.uiColor, 'Speed');
 			this.buff.moveSpeed = 1;
 			player.addBuff(this.buff);
 			player.safeMove(intersectionFinder, ...player.currentMove, .1, true);

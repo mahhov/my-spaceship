@@ -8,7 +8,7 @@ class Accelerate extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, player) {
 		if (!this.channelDuration) {
-			this.buff = new Buff(this.uiColor, 'Speed');
+			this.buff = new Buff(0, this.uiColor, 'Speed');
 			this.buff.moveSpeed = 3;
 			player.addBuff(this.buff);
 		}

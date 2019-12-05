@@ -1,9 +1,13 @@
+const Pool = require('../util/Pool');
 const {Positions} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
 
 class Buff {
-	constructor(uiColor, uiText) {
+	constructor(duration, uiColor, uiText) {
+		// duration param of 0 will be infinite, 1 will be active for 1 tick
+		this.durationUnlimited = !duration;
+		this.duration = new Pool(duration + 1, -1);
 		this.uiColor = uiColor;
 		this.uiText = uiText;
 	}
@@ -35,20 +39,24 @@ class Buff {
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.
 	tick() {
-		return this.duration && !--this.duration;
+		return !this.durationUnlimited && this.duration.increment();
 	}
 
 	expire() {
-		this.duration = 1;
+		this.duration.value = 0;
+		this.durationUnlimited = false;
 	}
 
 	paintUi(painter, camera) {
-		// todo [high] paint fill to represent duration and max duration
 		// background
 		const SIZE_WITH_MARGIN = Positions.BUFF_SIZE + Positions.MARGIN;
 		const LEFT = 1 - (this.uiIndex + 1) * SIZE_WITH_MARGIN;
 		const TOP = 1 - Positions.MARGIN * 3 - Positions.BAR_HEIGHT * 2 - Positions.BUFF_SIZE;
-		painter.add(new Rect(LEFT, TOP, Positions.BUFF_SIZE, Positions.BUFF_SIZE, {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(LEFT, TOP, Positions.BUFF_SIZE, Positions.BUFF_SIZE, {fill: true, color: this.uiColor.getShade()}));
+
+		// foreground for current charges
+		const HEIGHT = Positions.BUFF_SIZE * this.duration.getRatio();
+		painter.add(new Rect(LEFT, TOP + Positions.BUFF_SIZE - HEIGHT, Positions.BUFF_SIZE, HEIGHT, {fill: true, color: this.uiColor.get()}));
 
 		// letter
 		painter.add(new Text(LEFT + Positions.BUFF_SIZE / 2, TOP + Positions.BUFF_SIZE / 2, this.uiText));
