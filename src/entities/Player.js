@@ -10,6 +10,7 @@ const Dash = require('../abilities/Dash');
 const Heal = require('../abilities/Heal');
 const Accelerate = require('../abilities/Accelerate');
 const BombAttack = require('../abilities/BombAttack');
+const IncDefense = require('../abilities/IncDefense');
 const DelayedRegen = require('../abilities/DelayedRegen');
 const Decay = require('../util/Decay');
 const Buff = require('./Buff');
@@ -35,6 +36,7 @@ class Player extends LivingEntity {
 			new Dash(),
 			// new Heal(),
 			// new BombAttack(),
+			new IncDefense(),
 		];
 		this.abilities.forEach((ability, i) => ability.setUi(i));
 
