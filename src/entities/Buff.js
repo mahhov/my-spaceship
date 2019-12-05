@@ -43,11 +43,11 @@ class Buff {
 	}
 
 	paintUi(painter, camera) {
-		// todo [high] paint on left side of canvas and avoid overlap with minimap
 		// todo [high] paint fill to represent duration and max duration
 		// background
 		const SIZE_WITH_MARGIN = Positions.BUFF_SIZE + Positions.MARGIN;
-		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = Positions.MARGIN;
+		const LEFT = 1 - (this.uiIndex + 1) * SIZE_WITH_MARGIN;
+		const TOP = 1 - Positions.MARGIN * 3 - Positions.BAR_HEIGHT * 2 - Positions.BUFF_SIZE;
 		painter.add(new Rect(LEFT, TOP, Positions.BUFF_SIZE, Positions.BUFF_SIZE, {fill: true, color: this.uiColor.get()}));
 
 		// letter

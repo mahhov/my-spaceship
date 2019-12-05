@@ -60,6 +60,7 @@ class Player extends LivingEntity {
 		this.stamina.increment();
 		this.recentDamage.decay();
 		this.buffs = this.buffs.filter(buff => !buff.tick());
+		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
 	}
 
 	moveControl(controller, intersectionFinder) {

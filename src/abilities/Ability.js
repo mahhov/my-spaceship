@@ -77,7 +77,8 @@ class Ability {
 	paintUi(painter, camera) {
 		// background
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
-		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN, TOP = 1 - SIZE_WITH_MARGIN;
+		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
+		const TOP = 1 - SIZE_WITH_MARGIN;
 		painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
