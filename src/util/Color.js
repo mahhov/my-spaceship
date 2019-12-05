@@ -1,6 +1,6 @@
 const {clamp} = require('./Number');
 
-const SHADE_ADD = 1;
+const SHADE_ADD = .2;
 
 class Color {
 	constructor(r, g, b, a = 1) {
@@ -41,6 +41,14 @@ class Color {
 
 	multiply(mult) {
 		return new Color(this.r * mult, this.g * mult, this.b * mult, this.a);
+	}
+
+	multiplyFromWhite(mult) {
+		return new Color(
+			255 - (255 - this.r) * mult,
+			255 - (255 - this.g) * mult,
+			255 - (255 - this.b) * mult,
+			this.a);
 	}
 
 	alphaMultiply(mult) {

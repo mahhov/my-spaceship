@@ -4,7 +4,7 @@ const Colors = {
 	// todo [medium] structure these constants
 
 	// bars
-	BAR_SHADING: .25,
+	BAR_SHADING: 1,
 	LIFE: Color.fromHexString('#fab9b1').avgWhite(.25),
 	STAMINA: Color.fromHexString('#98d494').avgWhite(.4),
 	ENRAGE: Color.fromHexString('#616600'),
