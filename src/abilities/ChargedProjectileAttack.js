@@ -1,4 +1,5 @@
 const Ability = require('./Ability');
+const Buff = require('../entities/Buff');
 const {setMagnitude, randVector} = require('../util/Number');
 const Projectile = require('../entities/attack/Projectile');
 
@@ -9,9 +10,9 @@ class ChargedProjectileAttack extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, player) {
 		if (this.channelDuration === 0) {
-			// todo [high] update to new addBuff api
-			this.chargeBuff = this.chargeBuff || player.addBuff();
+			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
 			this.chargeBuff.moveSpeed = -.5;
+			player.addBuff(this.chargeBuff);
 		}
 		return true;
 	}
@@ -27,7 +28,7 @@ class ChargedProjectileAttack extends Ability {
 			directv.x + randv[0], directv.y + randv[1],
 			TIME, damage, true);
 		map.addProjectile(projectile);
-		this.chargeBuff.moveSpeed = 0;
+		this.chargeBuff.expire();
 	}
 }
 
