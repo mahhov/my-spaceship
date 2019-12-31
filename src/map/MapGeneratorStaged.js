@@ -81,7 +81,7 @@ const STAGE_SPAWNS = [
 	],
 ];
 
-class MapGeneratorArena {
+class MapGeneratorStaged {
 	constructor(map, player) {
 		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
 
@@ -156,7 +156,7 @@ class MapGeneratorArena {
 	}
 }
 
-module.exports = MapGeneratorArena;
+module.exports = MapGeneratorStaged;
 
 /*
 123456

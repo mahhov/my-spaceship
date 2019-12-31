@@ -1,5 +1,6 @@
 const {NoiseSimplex} = require('../util/Noise');
-const {rand, randInt, round} = require('../util/Number');
+const {rand, round} = require('../util/Number');
+const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
 const OutpostPortal = require('../entities/monsters/OutpostPortal');
@@ -25,6 +26,7 @@ class MapGeneratorSurvival {
 	generate() {
 		this.map.setSize(WIDTH, HEIGHT);
 
+		this.generateBoundaries();
 		this.generateRocks();
 
 		this.stageEntities = [];
@@ -48,16 +50,18 @@ class MapGeneratorSurvival {
 		}
 	}
 
+	generateBoundaries() {
+		MapBoundary.createBoxBoundaries(WIDTH, HEIGHT).forEach(mapBoundary => this.map.addStill(mapBoundary));
+	}
+
 	generateRocks() {
-		// const ROCKS = 17, ROCK_MINERALS = 5;
-		const ROCKS = 0, ROCK_MINERALS = 0;
+		const ROCKS = 3, ROCK_MINERALS = 1;
 		const ROCK_MAX_SIZE = .3;
 		this.rockNoise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
 	}
 
 	* generateOutputs(outpostCount, turretProbability, damageMultiplier) {
-		let generated = [];
 		for (let position of this.occupiedNoise.positions(outpostCount, WIDTH, HEIGHT)) {
 			let outpostPortal = new OutpostPortal(...position, this.timerDamageMultiplier);
 			yield [outpostPortal];
@@ -97,3 +101,4 @@ class MapGeneratorSurvival {
 module.exports = MapGeneratorSurvival;
 
 // todo [medium] don't spawn things intersecting other things
+// todo [medium] don't spawn close to player
