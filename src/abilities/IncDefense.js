@@ -3,7 +3,7 @@ const Buff = require('../entities/Buff');
 
 class IncDefense extends Ability {
 	constructor() {
-		super(200, 1, 0, false, false, 0);
+		super(600, 1, 0, false, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {
