@@ -21,8 +21,8 @@ const SPAWN_DIST = 3 / 4;
 const SPAWNS = [
 	{
 		monsterClass: ExplodingTick,
-		rampStart: 0,
-		rampEnd: 1,
+		rampStart: 2,
+		rampEnd: 3,
 		weight: 30,
 	},
 	{
