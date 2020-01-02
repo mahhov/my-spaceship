@@ -6,16 +6,16 @@ class Accelerate extends Ability {
 		super(200, 1, 0, 0, true, -1);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		if (!this.channelDuration) {
 			this.buff = new Buff(0, this.uiColor, 'Speed');
 			this.buff.moveSpeed = 3;
-			player.addBuff(this.buff);
+			hero.addBuff(this.buff);
 		}
 		return true;
 	}
 
-	endActivate(origin, direct, map, intersectionFinder, player) {
+	endActivate(origin, direct, map, intersectionFinder, hero) {
 		this.buff.expire();
 	}
 }

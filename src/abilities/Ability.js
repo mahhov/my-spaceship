@@ -23,49 +23,49 @@ class Ability {
 		this.uiText = Keymapping.getKeys(Keymapping.Controls.ABILITY_I[uiIndex]).join('/');
 	}
 
-	update(origin, direct, map, intersectionFinder, player, wantActive) {
-		this.refresh(player);
-		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, player))
+	update(origin, direct, map, intersectionFinder, hero, wantActive) {
+		this.refresh(hero);
+		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, hero))
 			this.channelDuration++;
 		else if (this.channelDuration !== 0) {
-			this.endActivate(origin, direct, map, intersectionFinder, player);
+			this.endActivate(origin, direct, map, intersectionFinder, hero);
 			this.channelDuration = 0;
 		}
 	}
 
-	refresh(player) {
+	refresh(hero) {
 		if (!this.charges.isFull() && this.cooldown.increment()) {
 			this.charges.increment();
 			this.cooldown.restore();
 		}
 
-		this.ready = !this.charges.isEmpty() && player.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
-		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && player.sufficientStamina(this.channelStamina);
+		this.ready = !this.charges.isEmpty() && hero.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
+		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && hero.sufficientStamina(this.channelStamina);
 		this.repeating = false;
 	}
 
-	safeActivate(origin, direct, map, intersectionFinder, player) {
+	safeActivate(origin, direct, map, intersectionFinder, hero) {
 		this.repeating = true;
 		if (!this.ready && !this.readyChannelContinue)
 			return false;
-		if (!this.activate(origin, direct, map, intersectionFinder, player))
+		if (!this.activate(origin, direct, map, intersectionFinder, hero))
 			return false;
 
 		if (this.ready) {
 			this.charges.change(-1);
-			player.consumeStamina(this.stamina);
+			hero.consumeStamina(this.stamina);
 		} else {
-			player.consumeStamina(this.channelStamina);
+			hero.consumeStamina(this.channelStamina);
 			this.cooldown.value = this.cooldown.max;
 		}
 		return true;
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		/* override */
 	}
 
-	endActivate(origin, direct, map, intersectionFinder, player) {
+	endActivate(origin, direct, map, intersectionFinder, hero) {
 		/* override */
 	}
 

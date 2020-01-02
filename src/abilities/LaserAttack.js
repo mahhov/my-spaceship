@@ -7,7 +7,7 @@ class LaserAttack extends Ability {
 		super(3, 15, .6, 0, true, 0);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		const RANGE = .15, SPREAD = .05, TIME = 10, DAMAGE = .001;
 		let directv = setMagnitude(direct.x, direct.y, RANGE);
 		let randv = randVector(RANGE * SPREAD);

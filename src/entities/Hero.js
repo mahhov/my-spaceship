@@ -1,25 +1,31 @@
 const LivingEntity = require('./LivingEntity');
+const Decay = require('../util/Decay');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
 const {Colors} = require('../util/Constants');
 const Pool = require('../util/Pool');
 const BarC = require('../painter/BarC');
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
-		super(x, y, width, height, health,
-			friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT);
+	constructor(x, y, width, height, health, stamina, staminaRefresh, layer, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+		super(x, y, width, height, health, layer);
 		this.stamina = new Pool(stamina, staminaRefresh); // todo [high] consider replacing staminaRefresh with passive ability
 		this.abilities = abilities;
 		this.passiveAbilities = passiveAbilities;
 		this.nameplateLifeColor = nameplateLifeColor;
 		this.nameplateStaminaColor = nameplateStaminaColor;
+		this.recentDamage = new Decay(.1, .001);
 	}
 
 	refresh() {
 		super.refresh();
 		this.stamina.increment();
-		this.recentDamage.decay();
-		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
+	}
+
+	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
+		this.abilities.forEach((ability, i) =>
+			ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
+		this.passiveAbilities.forEach(ability =>
+			ability.update(this, direct, map, intersectionFinder, this, true));
 	}
 
 	sufficientStamina(amount) {

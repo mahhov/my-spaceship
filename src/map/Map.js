@@ -7,6 +7,8 @@ class Map {
 	constructor() {
 		this.intersectionFinder = new IntersectionFinder();
 		this.stills = new LinkedList();
+		this.bots = new LinkedList();
+		this.botHeroes = new LinkedList();
 		this.monsters = new LinkedList();
 		this.projectiles = new LinkedList();
 		this.particles = new LinkedList();
@@ -33,6 +35,16 @@ class Map {
 		this.uis.add(player);
 	}
 
+	addBot(bot) {
+		this.bots.add(bot);
+		bot.botHeroes.forEach(botHero => this.addBotHero(botHero));
+	}
+
+	addBotHero(botHero) {
+		this.botHeroes.add(botHero);
+		botHero.addIntersectionBounds(this.intersectionFinder);
+	}
+
 	addMonster(monster, ui) {
 		this.monsters.add(monster);
 		monster.addIntersectionBounds(this.intersectionFinder);
@@ -55,6 +67,7 @@ class Map {
 
 	update(controller, monsterKnowledge) {
 		this.player.update(this, controller, this.intersectionFinder, monsterKnowledge);
+		this.bots.forEach(bot => bot.update(this, this.intersectionFinder, monsterKnowledge));
 		this.monsters.forEach((monster, item) => {
 			if (monster.health.isEmpty()) {
 				this.monsters.remove(item);
@@ -77,6 +90,7 @@ class Map {
 	paint(painter, camera) {
 		this.stills.forEach(still => still.paint(painter, camera));
 		this.player.paint(painter, camera);
+		this.botHeroes.forEach(botHero => botHero.paint(painter, camera));
 		this.monsters.forEach(monster => monster.paint(painter, camera));
 		this.projectiles.forEach(projectile => projectile.paint(painter, camera));
 		this.particles.forEach(particle => particle.paint(painter, camera));

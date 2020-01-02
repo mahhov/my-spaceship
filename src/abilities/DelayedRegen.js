@@ -7,12 +7,12 @@ class DelayedRegen extends Ability {
 		this.delay = new Pool(60, -1);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
-		if (player.recentDamage.get())
+	activate(origin, direct, map, intersectionFinder, hero) {
+		if (hero.recentDamage.get())
 			this.delay.restore();
-		if (!this.delay.increment() || player.health.isFull())
+		if (!this.delay.increment() || hero.health.isFull())
 			return false;
-		player.changeHealth(.0003);
+		hero.changeHealth(.0003);
 		return true;
 	}
 }

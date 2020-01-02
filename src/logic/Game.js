@@ -11,13 +11,13 @@ const Starfield = require('../starfield/Starfield');
 const UI = true;
 
 class Game extends Logic {
-	constructor(controller, painterSet) {
+	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {
 		super(controller, painterSet);
 		this.map = new Map();
 		this.player = new Player();
 		this.monsterKnowledge = new MonsterKnowledge();
 		this.monsterKnowledge.setPlayer(this.player);
-		this.mapGenerator = new MapGenerator(this.map, this.player);
+		this.mapGenerator = new MapGeneratorClass(this.map, this.player);
 		this.mapGenerator.generate();
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);

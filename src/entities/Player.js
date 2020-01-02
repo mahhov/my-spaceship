@@ -6,7 +6,6 @@ const ProjectileAttack = require('../abilities/ProjectileAttack');
 const Dash = require('../abilities/Dash');
 const IncDefense = require('../abilities/IncDefense');
 const DelayedRegen = require('../abilities/DelayedRegen');
-const Decay = require('../util/Decay');
 const Buff = require('./Buff');
 const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
@@ -27,11 +26,11 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen()];
+			new DelayedRegen()
+		];
 
-		super(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		super(0, 0, .05, .05, 1, 80, .13, IntersectionFinder.Layers.FRIENDLY_UNIT, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
-		this.recentDamage = new Decay(.1, .001);
 	}
 
 	update(map, controller, intersectionFinder, monsterKnowledge) {
@@ -76,15 +75,9 @@ class Player extends Hero {
 			x: directTarget.x - this.x,
 			y: directTarget.y - this.y
 		};
-
-		this.abilities
-			.forEach((ability, index) => {
-				let wantActive = Keymapping.getControlState(controller, Keymapping.Controls.ABILITY_I[index]).active;
-				ability.update(this, direct, map, intersectionFinder, this, wantActive);
-			});
-
-		this.passiveAbilities.forEach((ability) =>
-			ability.update(this, direct, map, intersectionFinder, this, true));
+		let activeAbilitiesWanted = this.abilities.map((_, i) =>
+			Keymapping.getControlState(controller, Keymapping.Controls.ABILITY_I[i]).active);
+		this.updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct);
 	}
 
 	targetLockControl(controller, intersectionFinder) {
@@ -118,6 +111,12 @@ class Player extends Hero {
 		let randv = randVector(RAND_VELOCITY);
 
 		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv[0], directv.y + randv[1], 100));
+	}
+
+	refresh() {
+		super.refresh();
+		this.recentDamage.decay();
+		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
 	}
 
 	changeHealth(amount) {

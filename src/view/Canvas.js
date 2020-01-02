@@ -1,5 +1,6 @@
 const Looper = require('../logic/Looper');
 const Game = require('../logic/Game');
+const GameEgg = require('../logic/GameEgg');
 const GraphicsDemo = require('../logic/GraphicsDemo');
 const StarfieldDemo = require('../logic/StarfieldDemo');
 const NoiseDemo = require('../logic/NoiseDemo');
@@ -12,6 +13,7 @@ let looper = new Looper(canvas);
 
 let logicCLasses = [
 	Game,
+	GameEgg,
 	GraphicsDemo,
 ];
 

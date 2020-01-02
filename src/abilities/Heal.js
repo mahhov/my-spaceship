@@ -6,10 +6,10 @@ class Heal extends Ability {
 		super(720, 1, 30, 0, false, 0);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
-		if (player.health.isFull())
+	activate(origin, direct, map, intersectionFinder, hero) {
+		if (hero.health.isFull())
 			return false;
-		player.changeHealth(.1);
+		hero.changeHealth(.1);
 		return true;
 	}
 }

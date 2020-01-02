@@ -6,10 +6,10 @@ class IncDefense extends Ability {
 		super(600, 1, 0, false, false, 0);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		this.buff = new Buff(200, this.uiColor, 'Armor');
 		this.buff.armor = 3;
-		player.addBuff(this.buff);
+		hero.addBuff(this.buff);
 		return true;
 	}
 }

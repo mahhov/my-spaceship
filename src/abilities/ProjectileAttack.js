@@ -7,7 +7,7 @@ class ProjectileAttack extends Ability {
 		super(6, 15, .6, 0, true, 0);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		const VELOCITY = .014, SPREAD = .08, SIZE = .02, TIME = 30, DAMAGE = .1;
 		let directv = setMagnitude(direct.x, direct.y, VELOCITY);
 		let randv = randVector(VELOCITY * SPREAD);

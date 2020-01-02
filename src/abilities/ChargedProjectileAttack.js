@@ -8,16 +8,16 @@ class ChargedProjectileAttack extends Ability {
 		super(30, 1, 6, .1, false, 60);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
+	activate(origin, direct, map, intersectionFinder, hero) {
 		if (this.channelDuration === 0) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
 			this.chargeBuff.moveSpeed = -.5;
-			player.addBuff(this.chargeBuff);
+			hero.addBuff(this.chargeBuff);
 		}
 		return true;
 	}
 
-	endActivate(origin, direct, map, intersectionFinder, player) {
+	endActivate(origin, direct, map, intersectionFinder, hero) {
 		const VELOCITY = .01, SPREAD = .1, SIZE = .02, TIME = 50, DAMAGE = .1;
 		let damage = (1 + this.channelRatio * 3) * DAMAGE;
 

@@ -7,20 +7,20 @@ class Dash extends Ability {
 		super(120, 3, 15, .1, false, -1);
 	}
 
-	activate(origin, direct, map, intersectionFinder, player) {
-		if (!booleanArray(player.currentMove))
+	activate(origin, direct, map, intersectionFinder, hero) {
+		if (!booleanArray(hero.currentMove))
 			return false;
 
 		if (!this.channelDuration) {
 			this.buff = new Buff(0, this.uiColor, 'Speed');
 			this.buff.moveSpeed = 1;
-			player.addBuff(this.buff);
-			player.safeMove(intersectionFinder, ...player.currentMove, .1, true);
+			hero.addBuff(this.buff);
+			hero.safeMove(intersectionFinder, ...hero.currentMove, .1, true);
 		}
 		return true;
 	}
 
-	endActivate(origin, direct, map, intersectionFinder, player) {
+	endActivate(origin, direct, map, intersectionFinder, hero) {
 		this.buff.expire();
 	}
 
