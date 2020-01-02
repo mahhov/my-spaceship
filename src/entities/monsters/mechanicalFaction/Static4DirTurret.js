@@ -44,12 +44,6 @@ class Static4DirTurret extends Monster {
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
-
-	update(map, intersectionFinder, monsterKnowledge) {
-		if (this.attackPhase.sequentialTick())
-			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
-	}
 }
 
 module.exports = Static4DirTurret;

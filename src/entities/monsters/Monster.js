@@ -12,6 +12,10 @@ class Monster extends LivingEntity {
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {
+		this.refresh();
+		if (this.attackPhase.sequentialTick())
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
 	}
 
 	paint(painter, camera) {

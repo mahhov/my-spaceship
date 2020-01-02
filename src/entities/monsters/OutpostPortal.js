@@ -47,12 +47,6 @@ class OutpostPortal extends Monster {
 		spawn.modulesSetStage(Spawn.Phases.NOT_SPAWNING);
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
-
-	update(map, intersectionFinder, monsterKnowledge) {
-		if (this.attackPhase.sequentialTick())
-			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
-	}
 }
 
 module.exports = OutpostPortal;

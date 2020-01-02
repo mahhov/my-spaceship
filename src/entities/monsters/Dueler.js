@@ -95,12 +95,6 @@ class Dueler extends Monster {
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
 	}
-
-	update(map, intersectionFinder, monsterKnowledge) {
-		if (this.attackPhase.sequentialTick())
-			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
-	}
 }
 
 module.exports = Dueler;

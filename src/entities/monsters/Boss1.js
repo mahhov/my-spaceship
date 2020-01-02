@@ -111,6 +111,7 @@ class Boss1 extends Monster {
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {
+		this.refresh();
 		if (this.attackPhase.get() !== Phases.INACTIVE) {
 			if (this.attackPhase.sequentialTick())
 				this.moduleManager.modulesSetStage(this.attackPhase.get());
