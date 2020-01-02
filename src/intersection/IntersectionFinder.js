@@ -26,7 +26,7 @@ class IntersectionFinder {
 	}
 
 	initCollisions() {
-		// todo [med] allow units to move through projectiles, while taking damage
+		// todo [medium] allow units to move through projectiles, while taking damage
 		// passives intersect with everything
 		this.addCollision(Layers.PASSIVE, Layers.FRIENDLY_UNIT);
 		this.addCollision(Layers.PASSIVE, Layers.FRIENDLY_PROJECTILE);

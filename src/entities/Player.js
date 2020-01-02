@@ -39,7 +39,7 @@ class Player extends Hero {
 		this.moveControl(controller, intersectionFinder);
 		this.abilityControl(map, controller, intersectionFinder);
 		this.targetLockControl(controller, intersectionFinder);
-		this.createMovementParticle(map); // todo [med] all heroes should generate movement particles
+		this.createMovementParticle(map); // todo [medium] all heroes should generate movement particles
 	}
 
 	moveControl(controller, intersectionFinder) {
