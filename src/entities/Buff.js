@@ -39,12 +39,17 @@ class Buff {
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.
 	tick() {
-		return !this.durationUnlimited && this.duration.increment();
+		return this.expired || !this.durationUnlimited && this.duration.increment();
+	}
+
+	reset() {
+		this.expired = false;
+		this.duration.restore();
 	}
 
 	expire() {
 		this.duration.value = 0;
-		this.durationUnlimited = false;
+		this.expired = true;
 	}
 
 	paintUi(painter, camera) {

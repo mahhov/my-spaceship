@@ -59,8 +59,10 @@ class Map {
 			if (monster.health.isEmpty()) {
 				this.monsters.remove(item);
 				monster.removeIntersectionBounds(this.intersectionFinder);
-			} else
+			} else {
+				monster.refresh(); // todo [high] monster.refresh should be called from monster.update. Fix this after checking whether monster.update implementations can be deduped.
 				monster.update(this, this.intersectionFinder, monsterKnowledge);
+			}
 		});
 		this.projectiles.forEach((projectile, item) => {
 			if (projectile.update(this, this.intersectionFinder)) {
