@@ -1,15 +1,9 @@
-const LivingEntity = require('./LivingEntity');
+const Hero = require('./Hero');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
 const {Colors, Positions} = require('../util/Constants');
 const VShip = require('../graphics/VShip');
-const Pool = require('../util/Pool');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
-const LaserAttack = require('../abilities/LaserAttack');
-const ChargedProjectileAttack = require('../abilities/ChargedProjectileAttack');
 const Dash = require('../abilities/Dash');
-const Heal = require('../abilities/Heal');
-const Accelerate = require('../abilities/Accelerate');
-const BombAttack = require('../abilities/BombAttack');
 const IncDefense = require('../abilities/IncDefense');
 const DelayedRegen = require('../abilities/DelayedRegen');
 const Decay = require('../util/Decay');
@@ -18,31 +12,25 @@ const Keymapping = require('../control/Keymapping');
 const Bounds = require('../intersection/Bounds');
 const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
 const Dust = require('./particle/Dust');
-const BarC = require('../painter/BarC');
 const RectC = require('../painter/RectC');
 const Bar = require('../painter/Bar');
 const Rect = require('../painter/Rect');
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
-class Player extends LivingEntity {
+class Player extends Hero {
 	constructor() {
-		super(0, 0, .05, .05, 1, IntersectionFinder.Layers.FRIENDLY_UNIT);
-		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
-
-		this.stamina = new Pool(80, .13);
-		this.abilities = [
+		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
-			// new Heal(),
-			// new BombAttack(),
 			new IncDefense(),
 		];
-		this.abilities.forEach((ability, i) => ability.setUi(i));
-
-		this.passiveAbilities = [
+		abilities.forEach((ability, i) => ability.setUi(i));
+		let passiveAbilities = [
 			new DelayedRegen()];
 
+		super(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		this.recentDamage = new Decay(.1, .001);
 	}
 
@@ -51,14 +39,7 @@ class Player extends LivingEntity {
 		this.moveControl(controller, intersectionFinder);
 		this.abilityControl(map, controller, intersectionFinder);
 		this.targetLockControl(controller, intersectionFinder);
-		this.createMovementParticle(map);
-	}
-
-	refresh() {
-		super.refresh();
-		this.stamina.increment();
-		this.recentDamage.decay();
-		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
+		this.createMovementParticle(map); // todo [med] all heroes should generate movement particles
 	}
 
 	moveControl(controller, intersectionFinder) {
@@ -139,31 +120,12 @@ class Player extends LivingEntity {
 		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv[0], directv.y + randv[1], 100));
 	}
 
-	sufficientStamina(amount) {
-		return amount <= this.stamina.get();
-	}
-
-	consumeStamina(amount) {
-		this.stamina.change(-amount);
-	}
-
 	changeHealth(amount) {
 		super.changeHealth(amount);
 		this.recentDamage.add(-amount);
 	}
 
-	restoreHealth() {
-		super.restoreHealth();
-		this.stamina.restore();
-	}
-
 	paintUi(painter, camera) {
-		// nameplate life & stamina bar
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height - .02, .15, .02, this.health.getRatio(),
-			Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .15, .01, this.stamina.getRatio(),
-			Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.get(Colors.BAR_SHADING)));
-
 		// target lock
 		// todo [medium] target lock draws over monster health bar
 		if (this.targetLock)
