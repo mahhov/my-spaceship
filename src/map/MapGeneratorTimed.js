@@ -84,7 +84,7 @@ class MapGeneratorTimed extends MapGenerator {
 		this.weightAccumulated = 0;
 		this.pendingMonsters = [];
 
-		this.player = new Player();
+		this.player = Player.defaultConstructor();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
 		map.addPlayer(this.player);
 		map.addUi(this);

@@ -98,7 +98,7 @@ class MapGeneratorStaged extends MapGenerator {
 		this.stageEntities = [];
 		this.stage = 0;
 
-		this.player = new Player();
+		this.player = Player.defaultConstructor();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
 		map.addPlayer(this.player);
 		map.addUi(this);

@@ -1,6 +1,5 @@
 const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
-const Player = require('../entities/Player');
 const {rand} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
@@ -11,7 +10,9 @@ const Dash = require('../abilities/Dash');
 const IncDefense = require('../abilities/IncDefense');
 const DelayedRegen = require('../abilities/DelayedRegen');
 const {Colors} = require('../util/Constants');
+const Player = require('../entities/Player');
 const BotHero = require('../entities/bot/BotHero');
+const VShip = require('../graphics/VShip');
 const WShip = require('../graphics/WShip');
 const EggBot = require('../entities/bot/EggBot');
 const {Positions} = require('../util/Constants');
@@ -35,9 +36,7 @@ class MapGeneratorEgg extends MapGenerator {
 		this.generateBoundaries();
 		this.generateRocks();
 
-		this.player = new Player();
-		this.player.setPosition(SPAWN_X1, SPAWN_Y1);
-
+		this.player = MapGeneratorEgg.generatePlayer(SPAWN_X1, SPAWN_Y1);
 		this.generateBot();
 		// todo [high] egg entity
 
@@ -64,16 +63,28 @@ class MapGeneratorEgg extends MapGenerator {
 		this.map.addBot(bot);
 	}
 
-	static generateBotHero(x, y, friendly) {
-		// todo [medium] dedupe with player constructor
+	static generateHeroAbilities() {
 		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
 			new IncDefense(),
 		];
 		let passiveAbilities = [
-			new DelayedRegen()
+			new DelayedRegen(),
 		];
+		return {abilities, passiveAbilities};
+	}
+
+	static generatePlayer(x, y) {
+		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities();
+		abilities.forEach((ability, i) => ability.setUi(i));
+		let payer = new Player(x, y, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		payer.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
+		return payer;
+	}
+
+	static generateBotHero(x, y, friendly) {
+		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities();
 		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		// todo [high] different colors and graphics for coop and hostile bots

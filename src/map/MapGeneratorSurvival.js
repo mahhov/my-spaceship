@@ -29,7 +29,7 @@ class MapGeneratorSurvival extends MapGenerator {
 		this.stageEntities = [];
 		this.stage = 0;
 
-		this.player = new Player();
+		this.player = Player.defaultConstructor();
 		this.player.setPosition(...this.rockNoise.positionsLowest(100, WIDTH, HEIGHT));
 		map.addPlayer(this.player);
 		map.addUi(this);

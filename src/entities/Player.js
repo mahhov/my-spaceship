@@ -18,7 +18,8 @@ const Rect = require('../painter/Rect');
 const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends Hero {
-	constructor() {
+	// todo [medium] deprecated
+	static defaultConstructor() {
 		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
@@ -26,11 +27,12 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen()
+			new DelayedRegen(),
 		];
 
-		super(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
-		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
+		let player = new Player(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		player.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
+		return player;
 	}
 
 	update(map, controller, intersectionFinder, monsterKnowledge) {
