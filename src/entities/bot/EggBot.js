@@ -1,5 +1,5 @@
 const Vector = require('../../util/Vector');
-const {minWhichA} = require('../../util/Number');
+const {minWhichA, clamp, rand} = require('../../util/Number');
 
 class EggBot {
 	constructor(player, coopBotHeroes, hostileBotHeroes) {
@@ -26,11 +26,17 @@ class EggBot {
 
 	static heroGoals(hero, allies, hostiles, target) {
 		let movement = EggBot.heroMovement(hero, allies, hostiles, target);
+		let movementMagSqr = movement.magnitudeSqr;
+		movement.magnitude = 1;
 
 		let abilitiesDirect = EggBot.closestHostileDir(hero, hostiles);
-		abilitiesDirect.add(Vector.fromRand(.1));
+		abilitiesDirect.add(Vector.fromRand(abilitiesDirect.magnitude / 5));
 
-		return {movement, activeAbilitiesWanted: [true], abilitiesDirect};
+		let activeAbilitiesWanted = [
+			rand() < 1.75 - abilitiesDirect.magnitude * 2.5,
+			movementMagSqr > 1 && movementMagSqr < 3 || rand() > .99];
+
+		return {movement, activeAbilitiesWanted, abilitiesDirect};
 	}
 
 	static heroMovement(hero, allies, hostiles, target) {
@@ -55,10 +61,19 @@ class EggBot {
 
 		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), 0, 0, alliedTarget ? 2 : 10, 10);
 
-		movement.add(alliesMovement);
-		movement.add(hostilesMovement);
-		movement.add(targetMovement);
-		movement.magnitude = 1;
+		movement
+			.add(alliesMovement)
+			.add(hostilesMovement)
+			.add(targetMovement);
+
+		let avoidLineMovement = hostiles.reduce((movement, hostile) => {
+			let delta = Vector.fromObj(hostile).subtract(pos);
+			delta.rotateByCosSin(0, movement.cross(delta) > 0 ? -1 : 1);
+			delta.magnitude = clamp(1.25 - delta.magnitude * 2.5, 0, 1);
+			return movement.add(delta);
+		}, new Vector(0, 0));
+
+		movement.add(avoidLineMovement);
 		return movement;
 
 		// * towards allies
@@ -90,7 +105,7 @@ class EggBot {
 	static closestHostileDir(hero, hostiles) {
 		let pos = Vector.fromObj(hero);
 		let deltas = hostiles.map(hostile => Vector.fromObj(hostile).subtract(pos));
-		let i = minWhichA(hostiles.map(delta => delta.magnitude));
+		let i = minWhichA(deltas.map(delta => delta.magnitude));
 		return deltas[i];
 	}
 }

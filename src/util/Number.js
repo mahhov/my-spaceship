@@ -4,7 +4,7 @@ const minWhich = (i, j) => i < j ? [i, 0] : [j, 1];
 
 const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
 
-const minWhichA = arr => arr.reduce((maxI, v, i, a) => v < a[maxI] ? i : maxI, 0);
+const minWhichA = arr => arr.reduce((minI, v, i, a) => v < a[minI] ? i : minI, 0);
 
 const maxWhichA = arr => arr.reduce((maxI, v, i, a) => v > a[maxI] ? i : maxI, 0);
 
@@ -45,9 +45,10 @@ const booleanArray = array => array.some(a => a);
 
 const avg = (a, b, weight = .5) => a * weight + b * (1 - weight);
 
-// [0, int)
+// [0, max)
 const rand = (max = 1) => Math.random() * max;
 
+// [-max/2, max/2)
 const randB = (max = 1) => rand(max) - max / 2;
 
 // [0, max)

@@ -50,6 +50,7 @@ class Vector {
 		return this.x * v.x + this.y * v.y;
 	}
 
+	// positive if v is clockwise of this
 	cross(v) {
 		return this.x * v.y - this.y * v.x;
 	}

@@ -18,6 +18,11 @@ class Hero extends LivingEntity {
 		this.recentDamage = new Decay(.1, .001);
 	}
 
+	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
+		this.currentMove = [dx, dy];
+		return super.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
+	}
+
 	refresh() {
 		super.refresh();
 		this.stamina.increment();
