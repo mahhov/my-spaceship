@@ -29,12 +29,20 @@ class Buff {
 		return Buff.get_(buffs, 'armor_');
 	}
 
+	static disabled(buffs) {
+		return Buff.get_(buffs, 'disabled_') > 1;
+	}
+
 	set moveSpeed(value) {
 		this.moveSpeed_ = value;
 	}
 
 	set armor(value) {
 		this.armor_ = value;
+	}
+
+	set disabled(value) {
+		this.disabled_ = value;
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.

@@ -9,6 +9,7 @@ const ProjectileAttack = require('../abilities/ProjectileAttack');
 const Dash = require('../abilities/Dash');
 const IncDefense = require('../abilities/IncDefense');
 const DelayedRegen = require('../abilities/DelayedRegen');
+const Respawn = require('../abilities/Respawn');
 const {Colors} = require('../util/Constants');
 const Player = require('../entities/Player');
 const BotHero = require('../entities/bot/BotHero');
@@ -63,7 +64,7 @@ class MapGeneratorEgg extends MapGenerator {
 		this.map.addBot(bot);
 	}
 
-	static generateHeroAbilities() {
+	static generateHeroAbilities(x, y) {
 		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
@@ -71,12 +72,13 @@ class MapGeneratorEgg extends MapGenerator {
 		];
 		let passiveAbilities = [
 			new DelayedRegen(),
+			new Respawn(240, x, y),
 		];
 		return {abilities, passiveAbilities};
 	}
 
 	static generatePlayer(x, y) {
-		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities();
+		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let payer = new Player(x, y, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		payer.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
@@ -84,7 +86,7 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	static generateBotHero(x, y, friendly) {
-		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities();
+		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
 		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		// todo [high] different colors and graphics for coop and hostile bots

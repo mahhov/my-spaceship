@@ -25,11 +25,14 @@ class EggBot {
 	}
 
 	static heroGoals(hero, allies, hostiles, target) {
+		allies = allies.filter(botHero => !botHero.health.isEmpty());
+		hostiles = hostiles.filter(botHero => !botHero.health.isEmpty());
+
 		let movement = EggBot.heroMovement(hero, allies, hostiles, target);
 		let movementMagSqr = movement.magnitudeSqr;
 		movement.magnitude = 1;
 
-		let abilitiesDirect = EggBot.closestHostileDir(hero, hostiles);
+		let abilitiesDirect = EggBot.closestHostileDir(hero, hostiles) || new Vector(100, 0);
 		abilitiesDirect.add(Vector.fromRand(abilitiesDirect.magnitude / 5));
 
 		let activeAbilitiesWanted = [

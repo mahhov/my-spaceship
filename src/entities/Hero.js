@@ -1,8 +1,9 @@
 const LivingEntity = require('./LivingEntity');
 const Decay = require('../util/Decay');
 const IntersectionFinder = require('../intersection/IntersectionFinder');
-const {Colors} = require('../util/Constants');
 const Pool = require('../util/Pool');
+const Buff = require('./Buff');
+const {Colors} = require('../util/Constants');
 const BarC = require('../painter/BarC');
 
 class Hero extends LivingEntity {
@@ -18,21 +19,28 @@ class Hero extends LivingEntity {
 		this.recentDamage = new Decay(.1, .001);
 	}
 
-	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		this.currentMove = [dx, dy];
-		return super.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
-	}
-
 	refresh() {
 		super.refresh();
+		this.recentDamage.decay();
 		this.stamina.increment();
 	}
 
+	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {
+		if (Buff.disabled(this.buffs))
+			return;
+		this.currentMove = [dx, dy];
+		this.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
+	}
+
 	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
-		this.abilities.forEach((ability, i) =>
-			ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
-		this.passiveAbilities.forEach(ability =>
-			ability.update(this, direct, map, intersectionFinder, this, true));
+		let disabled = Buff.disabled(this.buffs);
+		if (!disabled)
+			this.abilities.forEach((ability, i) =>
+				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
+		this.passiveAbilities.forEach(ability => {
+			if (!disabled || ability.disabledOk)
+				ability.update(this, direct, map, intersectionFinder, this, true)
+		});
 	}
 
 	sufficientStamina(amount) {
@@ -41,6 +49,11 @@ class Hero extends LivingEntity {
 
 	consumeStamina(amount) {
 		this.stamina.change(-amount);
+	}
+
+	changeHealth(amount) {
+		super.changeHealth(amount);
+		this.recentDamage.add(-amount);
 	}
 
 	restoreHealth() {

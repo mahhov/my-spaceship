@@ -23,10 +23,15 @@ const Colors = {
 	],
 	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#444'),
 
+	// buffs
+	PLAYER_BUFFS: {
+		DEAD: Color.from1(.5, .5, .5),
+	},
+
 	Interface: {
 		INACTIVE: Color.from1(1, 1, 1),
 		HOVER: Color.from1(.95, .95, .95),
-		ACTIVE: Color.from1(1, 1, 1)
+		ACTIVE: Color.from1(1, 1, 1),
 	},
 
 	Entity: {
@@ -46,7 +51,7 @@ const Colors = {
 			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
 		},
 		DUST: Color.fromHexString('#ccc'),
-		DAMAGE_DUST: Color.fromHexString('#f88')
+		DAMAGE_DUST: Color.fromHexString('#f88'),
 	},
 
 	Monsters: {
@@ -59,7 +64,7 @@ const Colors = {
 
 	Star: {
 		WHITE: Color.from1(.7, .7, .7),
-		BLUE: Color.from1(.5, .5, .75)
+		BLUE: Color.from1(.5, .5, .75),
 	},
 
 	Minimap: {
@@ -68,7 +73,7 @@ const Colors = {
 		ROCK: Color.from1(0, 0, 0),
 		MONSTER: Color.from1(1, 0, 0),
 		BOSS: Color.from1(1, 0, .6),
-		PLAYER: Color.from1(0, 0, 1)
+		PLAYER: Color.from1(0, 0, 1),
 	}
 };
 

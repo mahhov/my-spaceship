@@ -67,7 +67,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.safeMove(intersectionFinder, dx, dy, .005 * Buff.moveSpeed(this.buffs));
+		this.updateMove(intersectionFinder, dx, dy, .005 * Buff.moveSpeed(this.buffs));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {
@@ -116,13 +116,11 @@ class Player extends Hero {
 
 	refresh() {
 		super.refresh();
-		this.recentDamage.decay();
 		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
 	}
 
-	changeHealth(amount) {
-		super.changeHealth(amount);
-		this.recentDamage.add(-amount);
+	removeUi() {
+		return false;
 	}
 
 	paintUi(painter, camera) {
