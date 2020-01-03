@@ -135,4 +135,4 @@ class MechanicalBossEarly extends Monster {
 
 module.exports = MechanicalBossEarly;
 
-// todo [high] rotation
+// todo [medium] rotation

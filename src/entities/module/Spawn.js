@@ -51,7 +51,7 @@ class Spawn extends ModuleManager {
 			let monster = new this.monsterClass(this.origin.x + spawnVector[0], this.origin.y + spawnVector[1], ...this.monsterConstructorParams);
 			this.spawns.add(monster);
 			this.totalSpawnCount++;
-			map.addMonster(monster); // todo [high] check monster.checkPosition
+			map.addMonster(monster); // todo [medium] check monster.checkPosition
 		}
 		if (this.totalSpawnLimit === this.totalSpawnCount)
 			this.modulesSetStage(Phases.COMPLETE);

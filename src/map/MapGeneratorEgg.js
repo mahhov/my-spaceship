@@ -72,8 +72,7 @@ class MapGeneratorEgg {
 	}
 
 	static generateBotHero(x, y, friendly) {
-		// todo [high] dedupe with player constructor
-		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
+		// todo [medium] dedupe with player constructor
 		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
@@ -82,7 +81,7 @@ class MapGeneratorEgg {
 		let passiveAbilities = [
 			new DelayedRegen()
 		];
-		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, layer, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		// todo [high] different colors and graphics for coop and hostile bots
 		return botHero;

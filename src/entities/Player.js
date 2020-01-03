@@ -29,7 +29,7 @@ class Player extends Hero {
 			new DelayedRegen()
 		];
 
-		super(0, 0, .05, .05, 1, 80, .13, IntersectionFinder.Layers.FRIENDLY_UNIT, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		super(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		this.setGraphics(new VShip(this.width, this.height, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 

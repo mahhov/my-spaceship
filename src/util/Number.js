@@ -1,6 +1,12 @@
 const EPSILON = 1e-10, PI = Math.PI, PI2 = PI * 2;
 
+const minWhich = (i, j) => i < j ? [i, 0] : [j, 1];
+
 const maxWhich = (i, j) => i > j ? [i, 0] : [j, 1];
+
+const minWhichA = arr => arr.reduce((maxI, v, i, a) => v < a[maxI] ? i : maxI, 0);
+
+const maxWhichA = arr => arr.reduce((maxI, v, i, a) => v > a[maxI] ? i : maxI, 0);
 
 const getDiamondDistance = (x, y) => Math.abs(x) + Math.abs(y);
 
@@ -67,7 +73,10 @@ module.exports = {
 	EPSILON,
 	PI,
 	PI2,
+	minWhich,
 	maxWhich,
+	minWhichA,
+	maxWhichA,
 	getDiamondDistance,
 	getRectDistance,
 	getMagnitudeSqr,

@@ -6,9 +6,11 @@ const Pool = require('../util/Pool');
 const BarC = require('../painter/BarC');
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, health, stamina, staminaRefresh, layer, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
 		super(x, y, width, height, health, layer);
-		this.stamina = new Pool(stamina, staminaRefresh); // todo [high] consider replacing staminaRefresh with passive ability
+		this.stamina = new Pool(stamina, staminaRefresh); // todo [medium] consider replacing staminaRefresh with passive ability
+		this.friendly = friendly;
 		this.abilities = abilities;
 		this.passiveAbilities = passiveAbilities;
 		this.nameplateLifeColor = nameplateLifeColor;

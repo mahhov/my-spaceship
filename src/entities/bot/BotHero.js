@@ -9,9 +9,7 @@ class BotHero extends Hero {
 	}
 
 	moveControl(intersectionFinder, goals) {
-		let dx = goals.movement.x - this.x;
-		let dy = goals.movement.y - this.y;
-		this.safeMove(intersectionFinder, dx, dy, .005 * Buff.moveSpeed(this.buffs));
+		this.safeMove(intersectionFinder, goals.movement.x, goals.movement.y, .005 * Buff.moveSpeed(this.buffs));
 		// todo [med] speed should be parameterizable in Hero constructor.
 	}
 
