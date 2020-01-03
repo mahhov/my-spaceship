@@ -1,4 +1,6 @@
+const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
+const Player = require('../entities/Player');
 const {rand, round} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
@@ -12,34 +14,29 @@ const Text = require('../painter/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 
-class MapGeneratorSurvival {
-	constructor(map, player) {
-		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
+class MapGeneratorSurvival extends MapGenerator {
+	constructor(map) {
+		super(map);
 
-		this.occupiedNoise = new NoiseSimplex(OCCUPIED_NOISE);
-		this.rockNoise = new NoiseSimplex(ROCK_NOISE);
+		this.occupiedNoise = new NoiseSimplex(2);
+		this.rockNoise = new NoiseSimplex(5);
 
-		this.map = map;
-		this.player = player;
-	}
-
-	generate() {
-		this.map.setSize(WIDTH, HEIGHT);
+		map.setSize(WIDTH, HEIGHT);
 
 		this.generateBoundaries();
 		this.generateRocks();
 
 		this.stageEntities = [];
 		this.stage = 0;
-		this.timer = 0;
 
+		this.player = new Player();
 		this.player.setPosition(...this.rockNoise.positionsLowest(100, WIDTH, HEIGHT));
-		this.map.addPlayer(this.player);
-		this.map.addUi(this);
+		map.addPlayer(this.player);
+		map.addUi(this);
 	}
 
 	update() {
-		this.timer++;
+		super.update();
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			this.timerDamageMultiplier = this.timer / 5000 + 1;
 			let entities = [
@@ -79,10 +76,6 @@ class MapGeneratorSurvival {
 			yield [new ShotgunWarrior(...position)];
 		for (position of this.occupiedNoise.positions(bossCount, WIDTH, HEIGHT))
 			yield [new Boss1(...position), true];
-	}
-
-	removeUi() {
-		return false;
 	}
 
 	paintUi(painter, camera) {

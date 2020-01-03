@@ -1,5 +1,7 @@
+const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
-const {rand, round} = require('../util/Number');
+const Player = require('../entities/Player');
+const {rand} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
@@ -22,34 +24,25 @@ const SPAWN_X2 = WIDTH - SPAWN_X1;
 const SPAWN_Y1 = HEIGHT * .45;
 const SPAWN_Y2 = HEIGHT * .55;
 
-class MapGeneratorEgg {
-	constructor(map, player) {
-		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
+class MapGeneratorEgg extends MapGenerator {
+	constructor(map) {
+		super(map);
 
-		this.occupiedNoise = new NoiseSimplex(OCCUPIED_NOISE);
-		this.rockNoise = new NoiseSimplex(ROCK_NOISE);
+		this.rockNoise = new NoiseSimplex(5);
 
-		this.map = map;
-		this.player = player;
-	}
-
-	generate() {
-		this.map.setSize(WIDTH, HEIGHT);
+		map.setSize(WIDTH, HEIGHT);
 
 		this.generateBoundaries();
 		this.generateRocks();
+
+		this.player = new Player();
+		this.player.setPosition(SPAWN_X1, SPAWN_Y1);
+
 		this.generateBot();
 		// todo [high] egg entity
 
-		this.timer = 0;
-
-		this.player.setPosition(SPAWN_X1, SPAWN_Y1);
-		this.map.addPlayer(this.player);
-		this.map.addUi(this);
-	}
-
-	update() {
-		this.timer++;
+		map.addPlayer(this.player);
+		map.addUi(this);
 	}
 
 	generateBoundaries() {
@@ -85,18 +78,6 @@ class MapGeneratorEgg {
 		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		// todo [high] different colors and graphics for coop and hostile bots
 		return botHero;
-	}
-
-	removeUi() {
-		return false;
-	}
-
-	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
-		painter.add(new Text(
-			1 - Positions.MARGIN,
-			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
-			`${round(this.timer / 100)}`, font));
 	}
 }
 

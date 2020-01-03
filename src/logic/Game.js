@@ -1,7 +1,6 @@
 const Logic = require('./Logic');
 const Keymapping = require('../control/Keymapping');
 const Map = require('../map/Map');
-const Player = require('../entities/Player');
 const MonsterKnowledge = require('../entities/monsters/MonsterKnowledge');
 const MapGenerator = require('../map/MapGeneratorTimed');
 const Minimap = require('../map/Minimap');
@@ -14,11 +13,10 @@ class Game extends Logic {
 	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {
 		super(controller, painterSet);
 		this.map = new Map();
-		this.player = new Player();
+		this.mapGenerator = new MapGeneratorClass(this.map);
+		this.player = this.mapGenerator.player;
 		this.monsterKnowledge = new MonsterKnowledge();
 		this.monsterKnowledge.setPlayer(this.player);
-		this.mapGenerator = new MapGeneratorClass(this.map, this.player);
-		this.mapGenerator.generate();
 		this.minimap = new Minimap(this.map);
 		this.camera = new Camera(this.player.x, this.player.y);
 		this.starfield = new Starfield(...this.map.getSize());

@@ -1,5 +1,7 @@
+const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
-const {clamp, rand, round} = require('../util/Number');
+const Player = require('../entities/Player');
+const {clamp, rand} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
 const RockMineral = require('../entities/RockMineral');
@@ -12,8 +14,6 @@ const MechanicalBossEarly = require('../entities/monsters/mechanicalFaction/Mech
 const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
 const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
 const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
-const {Positions} = require('../util/Constants');
-const Text = require('../painter/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
@@ -69,34 +69,29 @@ const SPAWNS = [
 	},
 ];
 
-class MapGeneratorTimed {
-	constructor(map, player) {
-		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
+class MapGeneratorTimed extends MapGenerator {
+	constructor(map) {
+		super(map);
 
-		this.occupiedNoise = new NoiseSimplex(OCCUPIED_NOISE);
-		this.rockNoise = new NoiseSimplex(ROCK_NOISE);
+		this.occupiedNoise = new NoiseSimplex(2);
+		this.rockNoise = new NoiseSimplex(5);
 
-		this.map = map;
-		this.player = player;
-	}
-
-	generate() {
-		this.map.setSize(WIDTH, HEIGHT);
+		map.setSize(WIDTH, HEIGHT);
 
 		this.generateBoundaries();
 		this.generateRocks();
 
-		this.timer = 0;
 		this.weightAccumulated = 0;
 		this.pendingMonsters = [];
 
+		this.player = new Player();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
-		this.map.addPlayer(this.player);
-		this.map.addUi(this);
+		map.addPlayer(this.player);
+		map.addUi(this);
 	}
 
 	update() {
-		this.timer++;
+		super.update();
 		this.pendingMonsters.push(...this.createMonsters());
 		while (this.pendingMonsters.length) {
 			let [entity, ui] = this.pendingMonsters[0];
@@ -143,18 +138,6 @@ class MapGeneratorTimed {
 				spawns.push([new SPAWNS[spawnIndex].monsterClass(), false]);
 		}
 		return spawns;
-	}
-
-	removeUi() {
-		return false;
-	}
-
-	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
-		painter.add(new Text(
-			1 - Positions.MARGIN,
-			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
-			`${round(this.timer / 100)}`, font));
 	}
 }
 

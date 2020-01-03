@@ -1,4 +1,6 @@
+const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
+const Player = require('../entities/Player');
 const {rand, round} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
@@ -81,34 +83,29 @@ const STAGE_SPAWNS = [
 	],
 ];
 
-class MapGeneratorStaged {
-	constructor(map, player) {
-		const OCCUPIED_NOISE = 2, ROCK_NOISE = 5;
+class MapGeneratorStaged extends MapGenerator {
+	constructor(map) {
+		super(map);
 
-		this.occupiedNoise = new NoiseSimplex(OCCUPIED_NOISE);
-		this.rockNoise = new NoiseSimplex(ROCK_NOISE);
+		this.occupiedNoise = new NoiseSimplex(2);
+		this.rockNoise = new NoiseSimplex(5);
 
-		this.map = map;
-		this.player = player;
-	}
-
-	generate() {
-		this.map.setSize(WIDTH, HEIGHT);
+		map.setSize(WIDTH, HEIGHT);
 
 		this.generateBoundaries();
 		this.generateRocks();
 
 		this.stageEntities = [];
 		this.stage = 0;
-		this.timer = 0;
 
+		this.player = new Player();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
-		this.map.addPlayer(this.player);
-		this.map.addUi(this);
+		map.addPlayer(this.player);
+		map.addUi(this);
 	}
 
 	update() {
-		this.timer++;
+		super.udpate();
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			let entities = this.createMonsters(this.stage++);
 			entities.forEach(([entity, ui]) => {
@@ -141,10 +138,6 @@ class MapGeneratorStaged {
 			[...Array(count * multiplier)]
 				.map(() => [new MonsterClass(), false]))
 			.flat();
-	}
-
-	removeUi() {
-		return false;
 	}
 
 	paintUi(painter, camera) {
