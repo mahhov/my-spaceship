@@ -1,9 +1,9 @@
-const Ability = require('./Ability');
+const PassiveAbility = require('./PassiveAbility');
 const Pool = require('../util/Pool');
 
-class DelayedRegen extends Ability {
+class DelayedRegen extends PassiveAbility {
 	constructor() {
-		super(0, 1, 0, 0, true, 0);
+		super();
 		this.delay = new Pool(60, -1);
 	}
 
