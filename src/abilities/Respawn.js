@@ -9,7 +9,7 @@ class Respawn extends PassiveAbility {
 		this.delay = new Pool(delay, -1);
 		this.x = x;
 		this.y = y;
-		this.deadBuff = new Buff(delay, Colors.PLAYER_BUFFS.DEAD, 'Dead'); // todo [high] color
+		this.deadBuff = new Buff(delay, Colors.PLAYER_BUFFS.DEAD, 'Dead');
 		this.deadBuff.disabled = 1;
 	}
 
@@ -29,6 +29,8 @@ class Respawn extends PassiveAbility {
 		this.deadBuff.expire();
 		this.dead = false;
 		return true;
+
+		// todo [medium] armor buff on respawn
 	}
 }
 
