@@ -4,9 +4,9 @@ const {Colors} = require('../../../util/Constants');
 const Rect4DotsShip = require('../../../graphics/Rect4DotsShip');
 const Phase = require('../../../util/Phase');
 const Vector = require('../../../util/Vector');
-const Period = require('../../module/Period');
-const Aim = require('../../module/Aim');
-const Shotgun = require('../../module/Shotgun');
+const Period = require('../../modules/Period');
+const Aim = require('../../modules/Aim');
+const Shotgun = require('../../modules/Shotgun');
 
 const Phases = makeEnum('ONE');
 

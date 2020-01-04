@@ -4,12 +4,12 @@ const {Colors} = require('../../../util/Constants');
 const Rect1DotsShip = require('../../../graphics/Rect1DotsShip');
 const Phase = require('../../../util/Phase');
 const Vector = require('../../../util/Vector');
-const Distance = require('../../module/Distance');
-const Period = require('../../module/Period');
-const NearbyDegen = require('../../module/NearbyDegen');
-const Aim = require('../../module/Aim');
-const Shotgun = require('../../module/Shotgun');
-const StaticLaser = require('../../module/StaticLaser');
+const Distance = require('../../modules/Distance');
+const Period = require('../../modules/Period');
+const NearbyDegen = require('../../modules/NearbyDegen');
+const Aim = require('../../modules/Aim');
+const Shotgun = require('../../modules/Shotgun');
+const StaticLaser = require('../../modules/StaticLaser');
 
 const Phases = makeEnum('ONE');
 

@@ -4,11 +4,11 @@ const {Colors} = require('../../../util/Constants');
 const DiamondShip = require('../../../graphics/DiamondShip');
 const Phase = require('../../../util/Phase');
 const {PI} = require('../../../util/Number');
-const Distance = require('../../module/Distance');
-const Aim = require('../../module/Aim');
-const PatternedPeriod = require('../../module/PatternedPeriod');
-const Chase = require('../../module/Chase');
-const NearbyDegen = require('../../module/NearbyDegen');
+const Distance = require('../../modules/Distance');
+const Aim = require('../../modules/Aim');
+const PatternedPeriod = require('../../modules/PatternedPeriod');
+const Chase = require('../../modules/Chase');
+const NearbyDegen = require('../../modules/NearbyDegen');
 
 const Phases = makeEnum('ONE');
 

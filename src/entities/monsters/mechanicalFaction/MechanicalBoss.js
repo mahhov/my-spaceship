@@ -1,9 +1,9 @@
 const makeEnum = require('../../../util/Enum');
 const MechanicalBossEarly = require('./MechanicalBossEarly');
 const Phase = require('../../../util/Phase');
-const Period = require('../../module/Period');
-const Position = require('../../module/Position');
-const AreaDegenLayer = require('../../module/AreaDegenLayer');
+const Period = require('../../modules/Period');
+const Position = require('../../modules/Position');
+const AreaDegenLayer = require('../../modules/AreaDegenLayer');
 
 const Phases = makeEnum('ONE');
 

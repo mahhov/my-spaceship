@@ -4,13 +4,13 @@ const {Colors} = require('../../../util/Constants');
 const HexagonShip = require('../../../graphics/HexagonShip');
 const Phase = require('../../../util/Phase');
 const {PI} = require('../../../util/Number');
-const Distance = require('../../module/Distance');
-const Period = require('../../module/Period');
-const Aim = require('../../module/Aim');
-const Chase = require('../../module/Chase');
-const Dash = require('../../module/Dash');
-const Trigger = require('../../module/Trigger');
-const NearbyDegen = require('../../module/NearbyDegen');
+const Distance = require('../../modules/Distance');
+const Period = require('../../modules/Period');
+const Aim = require('../../modules/Aim');
+const Chase = require('../../modules/Chase');
+const Dash = require('../../modules/Dash');
+const Trigger = require('../../modules/Trigger');
+const NearbyDegen = require('../../modules/NearbyDegen');
 
 const Phases = makeEnum('ONE');
 

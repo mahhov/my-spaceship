@@ -3,14 +3,14 @@ const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const WShip = require('../../graphics/WShip');
 const Phase = require('../../util/Phase');
-const Period = require('../module/Period');
-const Aim = require('../module/Aim');
-const Chase = require('../module/Chase');
-const Shotgun = require('../module/Shotgun');
-const Dash = require('../module/Dash');
-const Trigger = require('../module/Trigger');
-const NearbyDegen = require('../module/NearbyDegen');
-// const Boomerang = require('../module/Boomerang');
+const Period = require('../modules/Period');
+const Aim = require('../modules/Aim');
+const Chase = require('../modules/Chase');
+const Shotgun = require('../modules/Shotgun');
+const Dash = require('../modules/Dash');
+const Trigger = require('../modules/Trigger');
+const NearbyDegen = require('../modules/NearbyDegen');
+// const Boomerang = require('../modules/Boomerang');
 
 const Phases = makeEnum('ONE');
 

@@ -3,7 +3,7 @@ const Monster = require('./Monster');
 const {Colors} = require('../../util/Constants');
 const StarShip = require('../../graphics/StarShip');
 const Phase = require('../../util/Phase');
-const NearbyDegen = require('../module/NearbyDegen');
+const NearbyDegen = require('../modules/NearbyDegen');
 
 const Phases = makeEnum('REST', 'ATTACK');
 

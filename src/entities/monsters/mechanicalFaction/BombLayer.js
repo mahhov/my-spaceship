@@ -4,11 +4,11 @@ const {Colors} = require('../../../util/Constants');
 const DoubleHorizDiamondShip = require('../../../graphics/DoubleHorizDiamondShip');
 const Phase = require('../../../util/Phase');
 const {PI} = require('../../../util/Number');
-const Distance = require('../../module/Distance');
-const Aim = require('../../module/Aim');
-const Chase = require('../../module/Chase');
-const Cooldown = require('../../module/Cooldown');
-const AreaDegenLayer = require('../../module/AreaDegenLayer');
+const Distance = require('../../modules/Distance');
+const Aim = require('../../modules/Aim');
+const Chase = require('../../modules/Chase');
+const Cooldown = require('../../modules/Cooldown');
+const AreaDegenLayer = require('../../modules/AreaDegenLayer');
 
 const Phases = makeEnum('ONE');
 

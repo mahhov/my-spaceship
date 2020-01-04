@@ -4,9 +4,9 @@ const {Colors} = require('../../util/Constants');
 const Buff = require('../buff');
 const OutpostPortalGraphic = require('../../graphics/OutpostPortalGraphic');
 const Phase = require('../../util/Phase');
-const Spawn = require('../module/Spawn');
-const BuffSetter = require('../module/BuffSetter');
-const Rotate = require('../module/Rotate');
+const Spawn = require('../modules/Spawn');
+const BuffSetter = require('../modules/BuffSetter');
+const Rotate = require('../modules/Rotate');
 const MeleeDart = require('./MeleeDart');
 
 const Phases = makeEnum('DORMANT', 'ACTIVE');

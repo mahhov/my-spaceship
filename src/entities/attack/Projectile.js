@@ -1,7 +1,7 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {randVector} = require('../../util/Number');
-const DamageDust = require('../particle/DamageDust');
+const DamageDust = require('../particles/DamageDust');
 const {Colors} = require('../../util/Constants');
 const RectC = require('../../painter/RectC');
 

@@ -3,10 +3,10 @@ const Monster = require('.././Monster');
 const {Colors} = require('../../../util/Constants');
 const Rect1DotsShip = require('../../../graphics/Rect1DotsShip');
 const Phase = require('../../../util/Phase');
-const Period = require('../../module/Period');
-const Rotate = require('../../module/Rotate');
-const Aim = require('../../module/Aim');
-const StaticLaser = require('../../module/StaticLaser');
+const Period = require('../../modules/Period');
+const Rotate = require('../../modules/Rotate');
+const Aim = require('../../modules/Aim');
+const StaticLaser = require('../../modules/StaticLaser');
 
 const Phases = makeEnum('ONE');
 

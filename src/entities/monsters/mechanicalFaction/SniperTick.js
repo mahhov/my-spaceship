@@ -4,11 +4,11 @@ const {Colors} = require('../../../util/Constants');
 const SplitDiamondShip = require('../../../graphics/SplitDiamondShip');
 const Phase = require('../../../util/Phase');
 const {PI} = require('../../../util/Number');
-const Distance = require('../../module/Distance');
-const Aim = require('../../module/Aim');
-const Chase = require('../../module/Chase');
-const Cooldown = require('../../module/Cooldown');
-const Shotgun = require('../../module/Shotgun');
+const Distance = require('../../modules/Distance');
+const Aim = require('../../modules/Aim');
+const Chase = require('../../modules/Chase');
+const Cooldown = require('../../modules/Cooldown');
+const Shotgun = require('../../modules/Shotgun');
 
 const Phases = makeEnum('ONE');
 

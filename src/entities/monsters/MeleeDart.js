@@ -4,10 +4,10 @@ const {Colors} = require('../../util/Constants');
 const AShip = require('../../graphics/AShip');
 const Phase = require('../../util/Phase');
 const Vector = require('../../util/Vector');
-const Distance = require('../module/Distance');
-const Aim = require('../module/Aim');
-const Chase = require('../module/Chase');
-const Shotgun = require('../module/Shotgun');
+const Distance = require('../modules/Distance');
+const Aim = require('../modules/Aim');
+const Chase = require('../modules/Chase');
+const Shotgun = require('../modules/Shotgun');
 
 const Phases = makeEnum('ONE');
 

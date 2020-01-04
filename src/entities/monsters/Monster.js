@@ -1,6 +1,6 @@
 const LivingEntity = require('../LivingEntity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const ModuleManager = require('../module/ModuleManager');
+const ModuleManager = require('../modules/ModuleManager');
 const {Colors, Positions} = require('../../util/Constants');
 const BarC = require('../../painter/BarC');
 const Bar = require('../../painter/Bar');
