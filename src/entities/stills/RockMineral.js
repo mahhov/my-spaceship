@@ -1,7 +1,7 @@
-const Entity = require('./Entity');
-const IntersectionFinder = require('../intersection/IntersectionFinder');
-const {Colors} = require('../util/Constants');
-const RockGraphic = require('../graphics/RockGraphic');
+const Entity = require('../Entity');
+const IntersectionFinder = require('../../intersection/IntersectionFinder');
+const {Colors} = require('../../util/Constants');
+const RockGraphic = require('../../graphics/RockGraphic');
 
 class RockMineral extends Entity {
 	constructor(x, y, size) {
