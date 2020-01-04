@@ -51,6 +51,19 @@ class LinkedList {
 			iter = iter.next;
 		}
 	}
+
+	[Symbol.iterator]() {
+		let iter = this.head;
+		return {
+			next: () => {
+				if (!iter)
+					return {done: true};
+				let value = iter.value;
+				iter = iter.next;
+				return {value, done: false};
+			}
+		};
+	}
 }
 
 module.exports = LinkedList;
