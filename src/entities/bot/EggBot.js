@@ -15,15 +15,15 @@ class EggBot {
 
 	update(map, intersectionFinder, monsterKnowledge) {
 		this.egg.update(map);
-		// todo [high] use egg to determine target and hero goals
+		let target = this.egg.ownerHero || this.egg;
 
 		this.coopBotHeroes.forEach(botHero => {
-			let goals = EggBot.heroGoals(botHero, [this.player, ...this.coopBotHeroes], this.hostileBotHeroes, this.player);
+			let goals = EggBot.heroGoals(botHero, [this.player, ...this.coopBotHeroes], this.hostileBotHeroes, target);
 			botHero.update(map, intersectionFinder, monsterKnowledge, goals);
 		});
 
 		this.hostileBotHeroes.forEach(botHero => {
-			let goals = EggBot.heroGoals(botHero, this.hostileBotHeroes, [this.player, ...this.coopBotHeroes], this.player);
+			let goals = EggBot.heroGoals(botHero, this.hostileBotHeroes, [this.player, ...this.coopBotHeroes], target);
 			botHero.update(map, intersectionFinder, monsterKnowledge, goals);
 		});
 	}
