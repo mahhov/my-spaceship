@@ -10,7 +10,7 @@ const RectC = require('../../painter/RectC');
 class Egg extends Entity {
 	constructor(possiblePositions) {
 		const size = .1;
-		super(0, 0, size, size, IntersectionFinder.Layers.PASSIVE);
+		super(0, 0, size, size, IntersectionFinder.Layers.UNIT_TRACKER);
 		this.possiblePositions = possiblePositions;
 		this.randomPosition();
 		this.setGraphics(new RockGraphic(size, size, {fill: true, color: Colors.Entity.EGG.get()}));
@@ -31,19 +31,14 @@ class Egg extends Entity {
 		}
 
 		if (!this.ownerHero) {
-			let pos = Vector.fromObj(this);
-			let heroes = map.heroes;
-			let deltaMagnitudeSqrs = heroes.map(hero => Vector.fromObj(hero).subtract(pos).magnitudeSqr);
-			let closestHeroI = minWhichA(deltaMagnitudeSqrs);
-			if (deltaMagnitudeSqrs[closestHeroI] < .01) {
-				this.ownerHero = heroes[closestHeroI];
+			if (this.queuedTrackedIntersections[0]) {
+				this.ownerHero = this.queuedTrackedIntersections[0];
+				this.queuedTrackedIntersections = [];
 				this.slowDebuff.reset();
 				this.ownerHero.addBuff(this.slowDebuff);
 			}
 		}
 
-		// todo [high] avoid collisions when picked up
-		// todo [high] consider using intersection finder instead of computing distances
 		// todo [high] update score
 	}
 
