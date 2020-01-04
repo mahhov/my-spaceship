@@ -9,6 +9,7 @@ const Layers = makeEnum(
 	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
 	'HOSTILE_PROJECTILE',   // intersects with friendly units and passives
 	'HOSTILE_UNIT',         // intersects with friendly units, hostile units, friendly projectiles, and passives
+	'UNIT_TRACKER',         // intersects with friendly and hostile units
 	'IGNORE');              // intersects with nothing
 
 const CollisionTypes = makeEnum(
@@ -43,6 +44,10 @@ class IntersectionFinder {
 
 		// hostile units intersects with hostile units
 		this.addCollision(Layers.HOSTILE_UNIT, Layers.HOSTILE_UNIT);
+
+		// units trackers intersect with friendly and hostile units un-symmetrically
+		this.addCollision(Layers.UNIT_TRACKER, Layers.FRIENDLY_UNIT, false);
+		this.addCollision(Layers.UNIT_TRACKER, Layers.HOSTILE_UNIT, false);
 	}
 
 	addCollision(layer1, layer2, symmetric = true) {
@@ -93,7 +98,7 @@ class IntersectionFinder {
 			magnitude -= move;
 
 			if (!side || noSlide) {
-				trackedOnlyReferences = trackedOnlyReferences.filter(([_, move]) => move <= magnitude).map(([reference]) => reference);
+				trackedOnlyReferences = trackedOnlyReferences.filter(([_, moveTracked]) => moveTracked <= move).map(([reference]) => reference);
 				return {x: moveX, y: moveY, reference, trackedOnlyReferences};
 			} else if (side === 1) {
 				horizontal = Bounds.Directions.LEFT;
@@ -110,7 +115,7 @@ class IntersectionFinder {
 		moveX += dx * move;
 		moveY += dy * move;
 		magnitude -= move;
-		trackedOnlyReferences = trackedOnlyReferences.filter(([_, move]) => move <= magnitude).map(([reference]) => reference);
+		trackedOnlyReferences = trackedOnlyReferences.filter(([_, moveTracked]) => moveTracked <= move).map(([reference]) => reference);
 
 		return {x: moveX, y: moveY, reference: intersectionReference || reference, trackedOnlyReferences};
 		// todo [low] return list of all intersection references
