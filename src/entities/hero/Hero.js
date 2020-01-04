@@ -1,10 +1,10 @@
-const LivingEntity = require('./LivingEntity');
-const Decay = require('../util/Decay');
-const IntersectionFinder = require('../intersection/IntersectionFinder');
-const Pool = require('../util/Pool');
-const Buff = require('./Buff');
-const {Colors} = require('../util/Constants');
-const BarC = require('../painter/BarC');
+const LivingEntity = require('../LivingEntity');
+const Decay = require('../../util/Decay');
+const IntersectionFinder = require('../../intersection/IntersectionFinder');
+const Pool = require('../../util/Pool');
+const Buff = require('../Buff');
+const {Colors} = require('../../util/Constants');
+const BarC = require('../../painter/BarC');
 
 class Hero extends LivingEntity {
 	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {

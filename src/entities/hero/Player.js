@@ -1,19 +1,19 @@
 const Hero = require('./Hero');
-const IntersectionFinder = require('../intersection/IntersectionFinder');
-const {Colors, Positions} = require('../util/Constants');
-const VShip = require('../graphics/VShip');
-const ProjectileAttack = require('../abilities/ProjectileAttack');
-const Dash = require('../abilities/Dash');
-const IncDefense = require('../abilities/IncDefense');
-const DelayedRegen = require('../abilities/DelayedRegen');
-const Buff = require('./Buff');
-const Keymapping = require('../control/Keymapping');
-const Bounds = require('../intersection/Bounds');
-const {setMagnitude, booleanArray, rand, randVector} = require('../util/Number');
-const Dust = require('./particle/Dust');
-const RectC = require('../painter/RectC');
-const Bar = require('../painter/Bar');
-const Rect = require('../painter/Rect');
+const IntersectionFinder = require('../../intersection/IntersectionFinder');
+const {Colors, Positions} = require('../../util/Constants');
+const VShip = require('../../graphics/VShip');
+const ProjectileAttack = require('../../abilities/ProjectileAttack');
+const Dash = require('../../abilities/Dash');
+const IncDefense = require('../../abilities/IncDefense');
+const DelayedRegen = require('../../abilities/DelayedRegen');
+const Buff = require('.././Buff');
+const Keymapping = require('../../control/Keymapping');
+const Bounds = require('../../intersection/Bounds');
+const {setMagnitude, booleanArray, rand, randVector} = require('../../util/Number');
+const Dust = require('.././particle/Dust');
+const RectC = require('../../painter/RectC');
+const Bar = require('../../painter/Bar');
+const Rect = require('../../painter/Rect');
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 

@@ -1,10 +1,10 @@
-const Hero = require('../Hero');
+const Hero = require('./Hero');
 const Buff = require('../Buff');
 
 class BotHero extends Hero {
 	update(map, intersectionFinder, monsterKnowledge, goals) {
 		this.refresh();
-		this.moveControl(intersectionFinder, goals); // todo [medium] inline these methods
+		this.moveControl(intersectionFinder, goals); // todo [high] inline these methods
 		this.abilityControl(map, intersectionFinder, goals);
 	}
 

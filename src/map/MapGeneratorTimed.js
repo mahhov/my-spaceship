@@ -1,6 +1,6 @@
 const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
-const Player = require('../entities/Player');
+const Player = require('../entities/hero/Player');
 const {clamp, rand} = require('../util/Number');
 const MapBoundary = require('../entities/MapBoundary');
 const Rock = require('../entities/Rock');
