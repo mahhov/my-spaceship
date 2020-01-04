@@ -4,7 +4,7 @@ const {rand} = require('../util/Number');
 const MapBoundary = require('../entities/stills/MapBoundary');
 const Rock = require('../entities/stills/Rock');
 const RockMineral = require('../entities/stills/RockMineral');
-const IntersectionFinder = require('../intersection/IntersectionFinder');
+const Egg = require('../entities/stills/Egg');
 const ProjectileAttack = require('../abilities/ProjectileAttack');
 const Dash = require('../abilities/Dash');
 const IncDefense = require('../abilities/IncDefense');
@@ -38,8 +38,8 @@ class MapGeneratorEgg extends MapGenerator {
 		this.generateRocks();
 
 		this.player = MapGeneratorEgg.generatePlayer(SPAWN_X1, SPAWN_Y1);
+		this.generateEgg();
 		this.generateBot();
-		// todo [high] egg entity
 
 		map.addPlayer(this.player);
 		map.addUi(this);
@@ -50,17 +50,23 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	generateRocks() {
-		const ROCKS = 3, ROCK_MINERALS = 1;
+		const ROCKS = 4, ROCK_MINERALS = 0;
 		const ROCK_MAX_SIZE = .3;
 		this.rockNoise.positions(ROCKS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new Rock(...position, rand(ROCK_MAX_SIZE))));
 		this.rockNoise.positions(ROCK_MINERALS, WIDTH, HEIGHT).forEach(position => this.map.addStill(new RockMineral(...position, rand(ROCK_MAX_SIZE))));
+	}
+
+	generateEgg() {
+		let n = 4;
+		this.egg = new Egg([{x: WIDTH / 2, y: HEIGHT / n}, {x: WIDTH / 2, y: HEIGHT * (1 - 1 / n)}]);
+		this.map.addStill(this.egg);
 	}
 
 	generateBot() {
 		let coopBotHero = MapGeneratorEgg.generateBotHero(SPAWN_X1, SPAWN_Y2, true);
 		let hostileBotHero1 = MapGeneratorEgg.generateBotHero(SPAWN_X2, SPAWN_Y1, false);
 		let hostileBotHero2 = MapGeneratorEgg.generateBotHero(SPAWN_X2, SPAWN_Y2, false);
-		let bot = new EggBot(this.player, [coopBotHero], [hostileBotHero1, hostileBotHero2]);
+		let bot = new EggBot(this.player, [coopBotHero], [hostileBotHero1, hostileBotHero2], this.egg);
 		this.map.addBot(bot);
 	}
 

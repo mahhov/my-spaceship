@@ -59,6 +59,7 @@ class Vector {
 		return this.x * this.x + this.y * this.y;
 	}
 
+	// todo [medium] check if any uses of magnitude can be replaced with magnitudeSqr
 	get magnitude() {
 		return Math.sqrt(this.magnitudeSqr);
 	}

@@ -38,6 +38,7 @@ const Colors = {
 		MAP_BOUNDARY: Color.fromHexString('#ccc'),
 		ROCK: Color.fromHexString('#888'),
 		ROCK_MINERAL: Color.fromHexString('#8b8'),
+		EGG: Color.fromHexString('#68b'),
 		PLAYER: Color.fromHexString('#888'),
 		MONSTER: Color.fromHexString('#bd6359'),
 		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),

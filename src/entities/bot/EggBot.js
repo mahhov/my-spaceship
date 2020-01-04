@@ -2,10 +2,11 @@ const Vector = require('../../util/Vector');
 const {minWhichA, clamp, rand} = require('../../util/Number');
 
 class EggBot {
-	constructor(player, coopBotHeroes, hostileBotHeroes) {
+	constructor(player, coopBotHeroes, hostileBotHeroes, egg) {
 		this.player = player;
 		this.coopBotHeroes = coopBotHeroes;
 		this.hostileBotHeroes = hostileBotHeroes;
+		this.egg = egg;
 	}
 
 	get botHeroes() {
@@ -13,6 +14,9 @@ class EggBot {
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {
+		this.egg.update(map);
+		// todo [high] use egg to determine target and hero goals
+
 		this.coopBotHeroes.forEach(botHero => {
 			let goals = EggBot.heroGoals(botHero, [this.player, ...this.coopBotHeroes], this.hostileBotHeroes, this.player);
 			botHero.update(map, intersectionFinder, monsterKnowledge, goals);
@@ -37,7 +41,7 @@ class EggBot {
 
 		let activeAbilitiesWanted = [
 			rand() < 1.75 - abilitiesDirect.magnitude * 2.5,
-			movementMagSqr > 1 && movementMagSqr < 3 || rand() > .99];
+			movementMagSqr > .5 && movementMagSqr < 3 && rand() > .8 || rand() > .95];
 
 		return {movement, activeAbilitiesWanted, abilitiesDirect};
 	}

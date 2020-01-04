@@ -24,6 +24,10 @@ class Map {
 		return [this.width, this.height];
 	}
 
+	get heroes() {
+		return [this.player, ...this.botHeroes];
+	}
+
 	addStill(still) {
 		this.stills.add(still);
 		still.addIntersectionBounds(this.intersectionFinder);
