@@ -90,15 +90,14 @@ class MapGeneratorEgg extends MapGenerator {
 		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let payer = new Player(x, y, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
-		payer.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
+		payer.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER_GREEN.get()}));
 		return payer;
 	}
 
 	static generateBotHero(x, y, friendly) {
 		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
 		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
-		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
-		// todo [high] different colors and graphics for coop and hostile bots
+		botHero.setGraphics(new VShip(.05, .05, {fill: true, color: friendly ? Colors.Entity.FRIENDLY.get() : Colors.Entity.MONSTER.get()}));
 		return botHero;
 	}
 
@@ -110,6 +109,7 @@ class MapGeneratorEgg extends MapGenerator {
 			this.scoreFriendly++;
 		else
 			this.scoreHostile++;
+		// todo [high] faster score increase when egg is near the center
 	}
 
 	paintUi(painter, camera) {

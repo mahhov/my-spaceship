@@ -40,9 +40,11 @@ const Colors = {
 		ROCK_MINERAL: Color.fromHexString('#8b8'),
 		EGG: Color.fromHexString('#68b'),
 		PLAYER: Color.fromHexString('#888'),
+		PLAYER_GREEN: Color.fromHexString('#638d59'),
+		FRIENDLY: Color.fromHexString('#63bd59'),
 		MONSTER: Color.fromHexString('#bd6359'),
-		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),
 		FRIENDLY_PROJECTILE: Color.fromHexString('#6c6'),
+		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),
 		Bomb: {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
 			ENTITY: Color.fromHexString('#00c')
