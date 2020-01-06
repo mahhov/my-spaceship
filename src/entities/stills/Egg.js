@@ -38,8 +38,6 @@ class Egg extends Entity {
 				this.ownerHero.addBuff(this.slowDebuff);
 			}
 		}
-
-		// todo [high] update score
 	}
 
 	paint(painter, camera) {

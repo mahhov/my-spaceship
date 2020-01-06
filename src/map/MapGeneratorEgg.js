@@ -1,6 +1,6 @@
 const MapGenerator = require('./MapGenerator');
 const {NoiseSimplex} = require('../util/Noise');
-const {rand} = require('../util/Number');
+const {rand, round} = require('../util/Number');
 const MapBoundary = require('../entities/stills/MapBoundary');
 const Rock = require('../entities/stills/Rock');
 const RockMineral = require('../entities/stills/RockMineral');
@@ -43,6 +43,9 @@ class MapGeneratorEgg extends MapGenerator {
 
 		map.addPlayer(this.player);
 		map.addUi(this);
+
+		this.scoreFriendly = 0;
+		this.scoreHostile = 0;
 	}
 
 	generateBoundaries() {
@@ -97,6 +100,26 @@ class MapGeneratorEgg extends MapGenerator {
 		botHero.setGraphics(new WShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		// todo [high] different colors and graphics for coop and hostile bots
 		return botHero;
+	}
+
+	update() {
+		this.timer++;
+		if (!this.egg.ownerHero)
+			return;
+		if (this.egg.ownerHero.friendly)
+			this.scoreFriendly++;
+		else
+			this.scoreHostile++;
+	}
+
+	paintUi(painter, camera) {
+		let font = {size: '16px', align: 'right'};
+		painter.add(new Text(
+			1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT,
+			`time: ${round(this.timer / 100)}`, font));
+		painter.add(new Text(
+			1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2,
+			`score: ${round(this.scoreFriendly / 100)} v ${round(this.scoreHostile / 100)}`, font));
 	}
 }
 

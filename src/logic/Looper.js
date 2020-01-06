@@ -1,6 +1,7 @@
 const Controller = require('../control/Controller');
 const PainterCompositor = require('../painter/PainterCompositor');
 const FpsTracker = require('../util/FpsTracker');
+const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
 class Looper {
@@ -27,7 +28,7 @@ class Looper {
 				continue;
 			this.painterSet.clear();
 			this.logic.iterate();
-			this.painterSet.uiPainter.add(new Text(.97, .03, this.fpsTracker.getFps()));
+			this.painterSet.uiPainter.add(new Text(1 - Positions.MARGIN, Positions.MARGIN, `fps: ${this.fpsTracker.getFps()}`, {align: 'right'}));
 			this.painterSet.paint();
 			this.controller.expire();
 		}
