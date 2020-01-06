@@ -9,8 +9,6 @@ const DelayedRegen = require('../../abilities/DelayedRegen');
 const Buff = require('.././Buff');
 const Keymapping = require('../../control/Keymapping');
 const Bounds = require('../../intersection/Bounds');
-const {setMagnitude, booleanArray, rand, randVector} = require('../../util/Number');
-const Dust = require('../particles/Dust');
 const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
 const Rect = require('../../painter/Rect');
@@ -40,7 +38,7 @@ class Player extends Hero {
 		this.moveControl(controller, intersectionFinder);
 		this.abilityControl(map, controller, intersectionFinder);
 		this.targetLockControl(controller, intersectionFinder);
-		this.createMovementParticle(map); // todo [medium] all heroes should generate movement particles
+		this.createMovementParticle(map);
 	}
 
 	moveControl(controller, intersectionFinder) {
@@ -100,18 +98,6 @@ class Player extends Hero {
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
-	}
-
-	createMovementParticle(map) {
-		const RATE = .2, SIZE = .005, DIRECT_VELOCITY = .003, RAND_VELOCITY = .001;
-
-		if (!booleanArray(this.currentMove) || rand() > RATE)
-			return;
-
-		let directv = setMagnitude(...this.currentMove, -DIRECT_VELOCITY);
-		let randv = randVector(RAND_VELOCITY);
-
-		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv[0], directv.y + randv[1], 100));
 	}
 
 	refresh() {

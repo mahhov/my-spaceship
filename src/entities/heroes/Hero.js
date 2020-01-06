@@ -3,6 +3,8 @@ const Decay = require('../../util/Decay');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const Pool = require('../../util/Pool');
 const Buff = require('../Buff');
+const {setMagnitude, booleanArray, rand, randVector} = require('../../util/Number');
+const Dust = require('../particles/Dust');
 const {Colors} = require('../../util/Constants');
 const BarC = require('../../painter/BarC');
 
@@ -41,6 +43,18 @@ class Hero extends LivingEntity {
 			if (!disabled || ability.disabledOk)
 				ability.update(this, direct, map, intersectionFinder, this, true)
 		});
+	}
+
+	createMovementParticle(map) {
+		const RATE = .2, SIZE = .005, DIRECT_VELOCITY = .003, RAND_VELOCITY = .001;
+
+		if (!booleanArray(this.currentMove) || rand() > RATE)
+			return;
+
+		let directv = setMagnitude(...this.currentMove, -DIRECT_VELOCITY);
+		let randv = randVector(RAND_VELOCITY);
+
+		map.addParticle(new Dust(this.x, this.y, SIZE, directv.x + randv[0], directv.y + randv[1], 100));
 	}
 
 	sufficientStamina(amount) {
