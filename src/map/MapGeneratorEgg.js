@@ -1,4 +1,5 @@
 const MapGenerator = require('./MapGenerator');
+const Vector = require('../util/Vector');
 const {NoiseSimplex} = require('../util/Noise');
 const {rand, round} = require('../util/Number');
 const MapBoundary = require('../entities/stills/MapBoundary');
@@ -25,6 +26,8 @@ const SPAWN_X1 = WIDTH * SPAWN_DIST;
 const SPAWN_X2 = WIDTH - SPAWN_X1;
 const SPAWN_Y1 = HEIGHT * .45;
 const SPAWN_Y2 = HEIGHT * .55;
+const CENTER_V = new Vector(WIDTH / 2, HEIGHT / 2);
+const CENTER_V_MAG = CENTER_V.magnitude; // todo [low] cache vector calculations and remove this pre-computation
 
 class MapGeneratorEgg extends MapGenerator {
 	constructor(map) {
@@ -105,11 +108,11 @@ class MapGeneratorEgg extends MapGenerator {
 		this.timer++;
 		if (!this.egg.ownerHero)
 			return;
+		let scoreInc = 1 - Vector.fromObj(this.egg.ownerHero).subtract(CENTER_V).magnitude / CENTER_V_MAG;
 		if (this.egg.ownerHero.friendly)
-			this.scoreFriendly++;
+			this.scoreFriendly += scoreInc;
 		else
-			this.scoreHostile++;
-		// todo [high] faster score increase when egg is near the center
+			this.scoreHostile += scoreInc;
 	}
 
 	paintUi(painter, camera) {
