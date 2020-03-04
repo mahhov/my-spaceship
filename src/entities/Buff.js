@@ -69,18 +69,28 @@ class Buff {
 	}
 
 	paintUi(painter, camera) {
+		let left = 1 - (this.uiIndex + 1) * (Positions.BUFF_SIZE + Positions.MARGIN);
+		let top = 1 - Positions.MARGIN * 3 - Positions.BAR_HEIGHT * 2 - Positions.BUFF_SIZE;
+		let size = Positions.BUFF_SIZE;
+
 		// background
-		const SIZE_WITH_MARGIN = Positions.BUFF_SIZE + Positions.MARGIN;
-		const LEFT = 1 - (this.uiIndex + 1) * SIZE_WITH_MARGIN;
-		const TOP = 1 - Positions.MARGIN * 3 - Positions.BAR_HEIGHT * 2 - Positions.BUFF_SIZE;
-		painter.add(new Rect(LEFT, TOP, Positions.BUFF_SIZE, Positions.BUFF_SIZE, {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(left, top, size, size, {fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
-		const HEIGHT = Positions.BUFF_SIZE * this.duration.getRatio();
-		painter.add(new Rect(LEFT, TOP + Positions.BUFF_SIZE - HEIGHT, Positions.BUFF_SIZE, HEIGHT, {fill: true, color: this.uiColor.get()}));
+		let fillHeight = size * this.duration.getRatio();
+		painter.add(new Rect(left, top + size - fillHeight, size, fillHeight, {fill: true, color: this.uiColor.get()}));
 
-		// letter
-		painter.add(new Text(LEFT + Positions.BUFF_SIZE / 2, TOP + Positions.BUFF_SIZE / 2, this.uiText));
+		// text
+		painter.add(new Text(left + size / 2, top + size / 2, this.uiText));
+	}
+
+	paintAt(painter, camera, left, top, size) {
+		// background
+		painter.add(Rect.withCamera(camera, left, top, size, size, {fill: true, color: this.uiColor.getShade()}));
+
+		// foreground for current charges
+		let fillHeight = size * this.duration.getRatio();
+		painter.add(Rect.withCamera(camera, left, top + size - fillHeight, size, fillHeight, {fill: true, color: this.uiColor.get()}));
 	}
 }
 
