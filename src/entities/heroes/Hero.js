@@ -76,12 +76,21 @@ class Hero extends LivingEntity {
 	}
 
 	paint(painter, camera) {
+		const BAR_WIDTH = .15, LIFE_HEIGHT = .02, STAMINA_HEIGHT = .01, MARGIN = .005;
 		super.paint(painter, camera);
-		// nameplate life & stamina bar
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height - .02, .15, .02, this.health.getRatio(),
+		// life bar
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height - (LIFE_HEIGHT + STAMINA_HEIGHT) / 2 - MARGIN, BAR_WIDTH, LIFE_HEIGHT, this.health.getRatio(),
 			this.nameplateLifeColor.getShade(Colors.BAR_SHADING), this.nameplateLifeColor.get(), this.nameplateLifeColor.get(Colors.BAR_SHADING)));
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, .15, .01, this.stamina.getRatio(),
+		// stamina bar
+		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, BAR_WIDTH, STAMINA_HEIGHT, this.stamina.getRatio(),
 			this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));
+		// buffs
+		let buffSize = LIFE_HEIGHT + STAMINA_HEIGHT + MARGIN;
+		this.buffs.forEach((buff, i) =>
+			buff.paintAt(painter, camera,
+				this.x + BAR_WIDTH / 2 + MARGIN + (buffSize + MARGIN) * i,
+				this.y - this.height - buffSize + STAMINA_HEIGHT / 2,
+				buffSize));
 	}
 }
 
