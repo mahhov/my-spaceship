@@ -1,6 +1,6 @@
 const makeEnum = require('../../util/Enum');
 const Module = require('./Module');
-const {setMagnitude, randVector} = require('../../util/Number');
+const {rand, randVector} = require('../../util/Number');
 const Projectile = require('../attack/Projectile');
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
@@ -23,7 +23,7 @@ class Shotgun extends Module {
 	apply_(map, intersectionFinder, target) {
 		if (this.stage !== Stages.ACTIVE)
 			return;
-		if (!this.predictableRate && Math.random() > this.rate)
+		if (!this.predictableRate && rand() > this.rate)
 			return;
 		if (this.predictableRate && (this.rateCurrent += this.rate) < 1)
 			return;
