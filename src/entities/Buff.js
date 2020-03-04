@@ -25,6 +25,10 @@ class Buff {
 		return Buff.get_(buffs, 'moveSpeed_');
 	}
 
+	static attackRange(buffs) {
+		return Buff.get_(buffs, 'attackRange_');
+	}
+
 	static armor(buffs) {
 		return Buff.get_(buffs, 'armor_');
 	}
@@ -35,6 +39,10 @@ class Buff {
 
 	set moveSpeed(value) {
 		this.moveSpeed_ = value;
+	}
+
+	set attackRange(value) {
+		this.attackRange_ = value;
 	}
 
 	set armor(value) {
