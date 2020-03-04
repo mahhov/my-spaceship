@@ -11,6 +11,10 @@ class Text extends PainterElement {
 		this.align = align;
 	}
 
+	static withCamera(camera, x, y, text, {color, size, align} = {}) {
+		return new Text(camera.xt(x), camera.yt(y), text, {color, size, align});
+	}
+
 	paint(xt, yt, context) {
 		this.setFillMode(context);
 		this.setFont(context);
