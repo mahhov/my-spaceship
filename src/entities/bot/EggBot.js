@@ -1,5 +1,5 @@
 const Vector = require('../../util/Vector');
-const {minWhichA, clamp, rand} = require('../../util/Number');
+const {minWhichA, clamp, rand, randInt} = require('../../util/Number');
 
 const ProjectileAttack = require('../../abilities/ProjectileAttack');
 
@@ -84,8 +84,8 @@ class EggBot {
 		let targetDist = !alliedTarget && !hostileTarget ? 0 : .3;
 		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), targetDist, 1, 4, 1, 2, 1);
 
-		if (Math.random() > .996 || !hero.avoidLineMovementDirection) // todo [high] don't use math.random or parseInt
-			hero.avoidLineMovementDirection = parseInt(Math.random() * 2) * 2 - 1;
+		if (rand() > .996 || !hero.avoidLineMovementDirection)
+			hero.avoidLineMovementDirection = randInt(2) * 2 - 1;
 		let avoidLineMovement = hostiles.reduce((movement, hostile) => {
 			let delta = Vector.fromObj(hostile).subtract(pos);
 			delta.rotateByCosSin(0, hero.avoidLineMovementDirection * movement.cross(delta) > 0 ? -1 : 1);
