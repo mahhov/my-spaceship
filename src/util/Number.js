@@ -65,6 +65,8 @@ const vectorDelta = (a, b) => ({x: b.x - a.x, y: b.y - a.y});
 const vectorSum = (...vs) =>
 	vs.reduce((v, sum) => ({x: sum.x + v.x, y: sum.y + v.y}), {x: 0, y: 0});
 
+const floor = number => Math.floor(number);
+
 const round = (number, precision = 0) => {
 	let ten = 10 ** precision;
 	return Math.round(number * ten) / ten;
@@ -95,6 +97,7 @@ module.exports = {
 	randVector,
 	vectorDelta,
 	vectorSum,
+	floor,
 	round,
 };
 

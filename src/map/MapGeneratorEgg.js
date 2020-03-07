@@ -1,7 +1,7 @@
 const MapGenerator = require('./MapGenerator');
 const Vector = require('../util/Vector');
 const {NoiseSimplex} = require('../util/Noise');
-const {rand, randInt, round} = require('../util/Number');
+const {rand, randInt, floor, round} = require('../util/Number');
 const MapBoundary = require('../entities/stills/MapBoundary');
 const Rock = require('../entities/stills/Rock');
 const RockMineral = require('../entities/stills/RockMineral');
@@ -43,8 +43,8 @@ class MapGeneratorEgg extends MapGenerator {
 		map.addPlayer(this.player);
 		map.addUi(this);
 
-		this.scoreFriendly = 0;
-		this.scoreHostile = 0;
+		this.scores = [0, 0];
+		this.win = -1;
 	}
 
 	generateBoundaries() {
@@ -105,14 +105,16 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	update() {
+		if (this.win !== -1)
+			return;
 		this.timer++;
 		if (!this.egg.ownerHero)
 			return;
+		let scoreI = this.egg.ownerHero.friendly ? 0 : 1;
 		let scoreInc = 1 - Vector.fromObj(this.egg.ownerHero).subtract(CENTER_V).magnitude / CENTER_V_MAG;
-		if (this.egg.ownerHero.friendly)
-			this.scoreFriendly += scoreInc;
-		else
-			this.scoreHostile += scoreInc;
+		this.scores[scoreI] += scoreInc;
+		if (this.scores[scoreI] >= 1000)
+			this.win = scoreI;
 	}
 
 	paintUi(painter, camera) {
@@ -122,7 +124,12 @@ class MapGeneratorEgg extends MapGenerator {
 			`time: ${round(this.timer / 100)}`, font));
 		painter.add(new Text(
 			1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2,
-			`score: ${round(this.scoreFriendly / 100)} v ${round(this.scoreHostile / 100)}`, font));
+			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`, font));
+
+		if (this.win !== -1)
+			painter.add(new Text(
+				.5, .4,
+				`${this.win ? 'Red' : 'Green'} Team Wins!`, {size: '25px', align: 'center'}));
 	}
 }
 
