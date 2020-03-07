@@ -14,8 +14,9 @@ class Egg extends Entity {
 		this.possiblePositions = possiblePositions;
 		this.randomPosition();
 		this.setGraphics(new RockGraphic(size, size, {fill: true, color: Colors.Entity.EGG.get()}));
-		this.slowDebuff = new Buff(0, Colors.Entity.EGG, 'SLOW');
-		this.slowDebuff.moveSpeed = -.2;
+		this.slowDebuff = new Buff(0, Colors.Entity.EGG, 'EGG');
+		this.slowDebuff.moveSpeed = -.3;
+		this.slowDebuff.attackRange = -.3;
 	}
 
 	randomPosition() {
@@ -24,6 +25,9 @@ class Egg extends Entity {
 	}
 
 	update(map) {
+		if (this.ownerHero && !this.ownerHero.health.isEmpty())
+			this.ownerHero.changeHealth(-.003);
+
 		if (this.ownerHero && this.ownerHero.health.isEmpty()) {
 			this.ownerHero = null;
 			this.randomPosition();
