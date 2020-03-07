@@ -1,7 +1,7 @@
 const MapGenerator = require('./MapGenerator');
 const Vector = require('../util/Vector');
 const {NoiseSimplex} = require('../util/Noise');
-const {rand, round} = require('../util/Number');
+const {rand, randInt, round} = require('../util/Number');
 const MapBoundary = require('../entities/stills/MapBoundary');
 const Rock = require('../entities/stills/Rock');
 const RockMineral = require('../entities/stills/RockMineral');
@@ -21,11 +21,8 @@ const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
 const WIDTH = 2.5, HEIGHT = 2.5;
-const SPAWN_DIST = 1 / 5;
-const SPAWN_X1 = WIDTH * SPAWN_DIST;
+const SPAWN_X1 = WIDTH / 5;
 const SPAWN_X2 = WIDTH - SPAWN_X1;
-const SPAWN_Y1 = HEIGHT * .45;
-const SPAWN_Y2 = HEIGHT * .55;
 const CENTER_V = new Vector(WIDTH / 2, HEIGHT / 2);
 const CENTER_V_MAG = CENTER_V.magnitude; // todo [low] cache vector calculations and remove this pre-computation
 
@@ -40,7 +37,6 @@ class MapGeneratorEgg extends MapGenerator {
 		this.generateBoundaries();
 		this.generateRocks();
 
-		this.player = MapGeneratorEgg.generatePlayer(SPAWN_X1, SPAWN_Y1);
 		this.generateEgg();
 		this.generateBot();
 
@@ -69,10 +65,13 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	generateBot() {
-		let coopBotHero = MapGeneratorEgg.generateBotHero(SPAWN_X1, SPAWN_Y2, true);
-		let hostileBotHero1 = MapGeneratorEgg.generateBotHero(SPAWN_X2, SPAWN_Y1, false);
-		let hostileBotHero2 = MapGeneratorEgg.generateBotHero(SPAWN_X2, SPAWN_Y2, false);
-		let bot = new EggBot(this.player, [coopBotHero], [hostileBotHero1, hostileBotHero2], this.egg);
+		let coopBots = 2;
+		let hostileBots = 3;
+		let playerIndex = randInt(coopBots + 1);
+		this.player = MapGeneratorEgg.generatePlayer(SPAWN_X1, (playerIndex + 1) / (coopBots + 2) * HEIGHT);
+		let coopBotHeroes = [...Array(coopBots)].map((_, i, a) => MapGeneratorEgg.generateBotHero(SPAWN_X1, (i + 1 + (i >= playerIndex)) / (a.length + 2) * HEIGHT, true));
+		let hostileBotHeroes = [...Array(hostileBots)].map((_, i, a) => MapGeneratorEgg.generateBotHero(SPAWN_X2, (i + 1) / (a.length + 1) * HEIGHT, false));
+		let bot = new EggBot(this.player, coopBotHeroes, hostileBotHeroes, this.egg, CENTER_V);
 		this.map.addBot(bot);
 	}
 
@@ -82,6 +81,7 @@ class MapGeneratorEgg extends MapGenerator {
 			new Dash(),
 			new IncDefense(),
 		];
+		abilities.forEach((ability, i) => ability.setUi(i)); // some abilities give buffs which require UI colors to be set
 		let passiveAbilities = [
 			new DelayedRegen(),
 			new Respawn(240, x, y),

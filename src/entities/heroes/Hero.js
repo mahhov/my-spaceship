@@ -19,6 +19,7 @@ class Hero extends LivingEntity {
 		this.nameplateLifeColor = nameplateLifeColor;
 		this.nameplateStaminaColor = nameplateStaminaColor;
 		this.recentDamage = new Decay(.1, .001);
+		this.currentMove = [0, 0];
 	}
 
 	refresh() {

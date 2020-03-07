@@ -1,12 +1,15 @@
 const Vector = require('../../util/Vector');
 const {minWhichA, clamp, rand} = require('../../util/Number');
 
+const ProjectileAttack = require('../../abilities/ProjectileAttack');
+
 class EggBot {
-	constructor(player, coopBotHeroes, hostileBotHeroes, egg) {
+	constructor(player, coopBotHeroes, hostileBotHeroes, egg, centerDir) {
 		this.player = player;
 		this.coopBotHeroes = coopBotHeroes;
 		this.hostileBotHeroes = hostileBotHeroes;
 		this.egg = egg;
+		this.centerDir = centerDir;
 	}
 
 	get botHeroes() {
@@ -16,80 +19,91 @@ class EggBot {
 	update(map, intersectionFinder, monsterKnowledge) {
 		this.egg.update(map);
 		let target = this.egg.ownerHero || this.egg;
+		let friendlies = [this.player, ...this.coopBotHeroes].filter(botHero => !botHero.health.isEmpty());
+		let hostiles = this.hostileBotHeroes.filter(botHero => !botHero.health.isEmpty());
 
 		this.coopBotHeroes.forEach(botHero => {
-			let goals = EggBot.heroGoals(botHero, [this.player, ...this.coopBotHeroes], this.hostileBotHeroes, target);
+			let goals = EggBot.heroGoals(botHero, friendlies, hostiles, target, this.centerDir);
 			botHero.update(map, intersectionFinder, monsterKnowledge, goals);
 		});
 
 		this.hostileBotHeroes.forEach(botHero => {
-			let goals = EggBot.heroGoals(botHero, this.hostileBotHeroes, [this.player, ...this.coopBotHeroes], target);
+			let goals = EggBot.heroGoals(botHero, hostiles, friendlies, target, this.centerDir);
 			botHero.update(map, intersectionFinder, monsterKnowledge, goals);
 		});
 	}
 
-	static heroGoals(hero, allies, hostiles, target) {
-		allies = allies.filter(botHero => !botHero.health.isEmpty());
-		hostiles = hostiles.filter(botHero => !botHero.health.isEmpty());
-
-		let movement = EggBot.heroMovement(hero, allies, hostiles, target);
+	static heroGoals(hero, allies, hostiles, target, centerDir) {
+		let movement = EggBot.heroMovement(hero, allies, hostiles, target, centerDir);
 		let movementMagSqr = movement.magnitudeSqr;
-		movement.magnitude = 1;
+		if (movementMagSqr)
+			movement.magnitude = 1;
 
-		let abilitiesDirect = EggBot.closestHostileDir(hero, hostiles) || new Vector(100, 0);
+		let abilitiesDirect = hostiles.length ? EggBot.closestHostileDir(hero, hostiles) : new Vector(0, 0);
 		abilitiesDirect.add(Vector.fromRand(abilitiesDirect.magnitude / 5));
 
+		// todo [high] tune
+		let projectileAttackDistance = ProjectileAttack.getTime(hero) * ProjectileAttack.velocity + .1;
+		// 0.94 0 Infinity
+		let activeProjectileAttack = rand() < (projectileAttackDistance / abilitiesDirect.magnitude - .9) * 5;
 		let activeAbilitiesWanted = [
-			rand() < 1.75 - abilitiesDirect.magnitude * 2.5,
-			movementMagSqr > .5 && movementMagSqr < 3 && rand() > .8 || rand() > .95];
+			hostiles.length && activeProjectileAttack,
+			movementMagSqr > .1 && movementMagSqr < 3 && rand() < .04, // dash
+			hero.recentDamage.get() > .8, // increase defense
+		];
 
 		return {movement, activeAbilitiesWanted, abilitiesDirect};
 	}
 
-	static heroMovement(hero, allies, hostiles, target) {
+	static heroMovement(hero, allies, hostiles, target, centerDir) {
+		// todo [high] tune
 		let movement = new Vector(0, 0);
 		let pos = Vector.fromObj(hero);
 
+		let selfTarget = hero === target;
 		let alliedTarget = false;
+		let hostileTarget = false;
+
 		let alliesMovement = allies.reduce((movement, ally) => {
 			if (ally === hero)
 				return movement;
 			alliedTarget = alliedTarget || ally === target;
-			let delta = EggBot.movementFlock(pos, Vector.fromObj(ally), .2, 1, 0, 1000, 1000000, 0); // todo [high] tune params
+			let delta = EggBot.movementFlock(pos, Vector.fromObj(ally), .2, 4, 1, .5, 1, 0);
 			return movement.add(delta);
 		}, new Vector(0, 0));
+		alliesMovement.multiply(1 / (allies.length + 1));
 
+		let idealHostileDist = selfTarget ? .9 : .4;
 		let hostilesMovement = hostiles.reduce((movement, hostile) => {
-			if (hostile === target)
-				return movement;
-			let delta = EggBot.movementFlock(pos, Vector.fromObj(hostile), alliedTarget ? .1 : .35, 1, 1);
+			hostileTarget = hostileTarget || hostile === target;
+			let delta = EggBot.movementFlock(pos, Vector.fromObj(hostile), idealHostileDist, 1, 1);
+			return movement.add(delta);
+		}, new Vector(0, 0));
+		hostilesMovement.multiply(1 / (hostiles.length + 1));
+
+		let targetDist = !alliedTarget && !hostileTarget ? 0 : .3;
+		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), targetDist, 1, 4, 1, 2, 1);
+
+		if (Math.random() > .996 || !hero.avoidLineMovementDirection) // todo [high] don't use math.random or parseInt
+			hero.avoidLineMovementDirection = parseInt(Math.random() * 2) * 2 - 1;
+		let avoidLineMovement = hostiles.reduce((movement, hostile) => {
+			let delta = Vector.fromObj(hostile).subtract(pos);
+			delta.rotateByCosSin(0, hero.avoidLineMovementDirection * movement.cross(delta) > 0 ? -1 : 1);
+			delta.magnitude = clamp(1.25 * .4 - delta.magnitude * .4, 0, 1);
 			return movement.add(delta);
 		}, new Vector(0, 0));
 
-		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), 0, 0, alliedTarget ? 2 : 10, 10);
+		// todo [high] conditional on having target
+		let centerMovement = centerDir.copy.subtract(pos);
+		centerMovement.magnitude = .1;
 
 		movement
 			.add(alliesMovement)
 			.add(hostilesMovement)
-			.add(targetMovement);
-
-		let avoidLineMovement = hostiles.reduce((movement, hostile) => {
-			let delta = Vector.fromObj(hostile).subtract(pos);
-			delta.rotateByCosSin(0, movement.cross(delta) > 0 ? -1 : 1);
-			delta.magnitude = clamp(1.25 - delta.magnitude * 2.5, 0, 1);
-			return movement.add(delta);
-		}, new Vector(0, 0));
-
-		movement.add(avoidLineMovement);
+			.add(targetMovement)
+			.add(avoidLineMovement)
+			.add(centerMovement);
 		return movement;
-
-		// * towards allies
-		// * towards enemies if has more health
-		// * away from enemies if has less health
-		// away enemies if has egg
-		// * towards from enemies if enemy has egg
-		// towards egg if egg on ground
-		// towards center if have egg
 	}
 
 	static movementFlock(origin, target,
@@ -98,14 +112,12 @@ class EggBot {
 		// origin won't be modified. target will be modified.
 		let delta = target.subtract(origin);
 		let magnitude = delta.magnitude;
-		if (magnitude < idealDist)
-			delta.magnitude = -maxRepulse * (1 - magnitude / idealDist);
-		else if (magnitude < fadeStartDist)
-			delta.magnitude = maxAttract * (magnitude - idealDist) / (fadeStartDist - idealDist);
-		else if (magnitude < fadeEndDist)
-			delta.magnitude = -maxAttract * (magnitude - fadeStartDist) / (fadeEndDist - fadeStartDist) + maxAttract;
-		else
-			delta.magnitude = fadeAttract;
+		if (!magnitude)
+			return delta;
+		let distanceToForce = [[0, -maxRepulse], [idealDist, 0], [fadeStartDist, maxAttract], [fadeEndDist, fadeAttract], [Infinity, fadeAttract]];
+		let maxForceIndex = distanceToForce.findIndex(([distance]) => magnitude < distance);
+		let blend = (magnitude - distanceToForce[maxForceIndex - 1][0]) / (distanceToForce[maxForceIndex][0] - distanceToForce[maxForceIndex - 1][0]);
+		delta.magnitude = blend * distanceToForce[maxForceIndex][1] + (1 - blend) * distanceToForce[maxForceIndex - 1][1];
 		return delta;
 	}
 
@@ -113,6 +125,12 @@ class EggBot {
 		let pos = Vector.fromObj(hero);
 		let deltas = hostiles.map(hostile => Vector.fromObj(hostile).subtract(pos));
 		let i = minWhichA(deltas.map(delta => delta.magnitude));
+
+		let projectedMovement = new Vector(...hostiles[i].currentMove);
+		if (projectedMovement.magnitude) {
+			projectedMovement.magnitude = .3 * deltas[i].magnitude; // .014 (projectile v) / .005 (hero v) = .3
+			deltas[i].add(projectedMovement);
+		}
 		return deltas[i];
 	}
 }
