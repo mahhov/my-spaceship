@@ -6,6 +6,7 @@ const StarfieldDemo = require('../logic/StarfieldDemo');
 const NoiseDemo = require('../logic/NoiseDemo');
 const MapDemo = require('../logic/MapDemo');
 const InterfaceDemo = require('../logic/InterfaceDemo');
+const RecordMp4 = require('../util/RecordMp4');
 
 let canvas = document.querySelector('#canvas');
 let logicButtonsRow = document.querySelector('#logic-buttons-row');
@@ -29,3 +30,6 @@ logicCLasses.forEach(LogicClass => {
 
 let StartLogicClass = logicCLasses.find(LogicClass => `/${LogicClass.name}` === location.pathname) || logicCLasses[0];
 looper.setLogicClass(StartLogicClass);
+
+// window.r = RecordMp4;
+// window.s = RecordMp4();
