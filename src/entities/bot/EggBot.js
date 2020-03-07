@@ -82,7 +82,7 @@ class EggBot {
 		hostilesMovement.multiply(1 / (hostiles.length + 1));
 
 		let targetDist = !alliedTarget && !hostileTarget ? 0 : .3;
-		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), targetDist, 1, 4, 1, 2, 1);
+		let targetMovement = EggBot.movementFlock(hero, Vector.fromObj(target), targetDist, 1, 4, .01, 2, 1);
 
 		if (rand() > .996 || !hero.avoidLineMovementDirection)
 			hero.avoidLineMovementDirection = randInt(2) * 2 - 1;

@@ -65,8 +65,8 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	generateBot() {
-		let coopBots = 2;
-		let hostileBots = 3;
+		let coopBots = 1;
+		let hostileBots = 2;
 		let playerIndex = randInt(coopBots + 1);
 		this.player = MapGeneratorEgg.generatePlayer(SPAWN_X1, (playerIndex + 1) / (coopBots + 2) * HEIGHT);
 		let coopBotHeroes = [...Array(coopBots)].map((_, i, a) => MapGeneratorEgg.generateBotHero(SPAWN_X1, (i + 1 + (i >= playerIndex)) / (a.length + 2) * HEIGHT, true));
