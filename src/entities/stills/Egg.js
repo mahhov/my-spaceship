@@ -32,15 +32,13 @@ class Egg extends Entity {
 			this.ownerHero = null;
 			this.randomPosition();
 			this.slowDebuff.expire();
+			this.queuedTrackedIntersections = [];
 		}
 
-		if (!this.ownerHero) {
-			if (this.queuedTrackedIntersections[0]) {
-				this.ownerHero = this.queuedTrackedIntersections[0];
-				this.queuedTrackedIntersections = [];
-				this.slowDebuff.reset();
-				this.ownerHero.addBuff(this.slowDebuff);
-			}
+		if (!this.ownerHero && this.queuedTrackedIntersections[0]) {
+			this.ownerHero = this.queuedTrackedIntersections[0];
+			this.slowDebuff.reset();
+			this.ownerHero.addBuff(this.slowDebuff);
 		}
 	}
 
