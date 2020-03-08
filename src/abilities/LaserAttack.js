@@ -4,16 +4,23 @@ const Laser = require('../entities/attack/Laser');
 
 class LaserAttack extends Ability {
 	constructor() {
-		super(3, 15, .6, 0, true, 0);
+		super(20, 1, 3, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
-		const RANGE = .15, SPREAD = .05, TIME = 10, DAMAGE = .001;
-		let directv = setMagnitude(direct.x, direct.y, RANGE);
-		let randv = randVector(RANGE * SPREAD);
-		let laser = new Laser(origin.x, origin.y, directv.x + randv[0], directv.y + randv[1], TIME, DAMAGE, true);
+		const SPREAD = .08, SIZE = .002, TIME = 50, DAMAGE = .01;
+		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.getDistance());
+		let laser = new Laser(
+			origin.x, origin.y,
+			directv.x, directv.y,
+			SIZE,
+			TIME, DAMAGE, hero.friendly);
 		map.addProjectile(laser);
 		return true;
+	}
+
+	static getDistance(hero) {
+		return .3;
 	}
 }
 

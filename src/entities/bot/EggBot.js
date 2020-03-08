@@ -40,10 +40,9 @@ class EggBot {
 			movement.magnitude = 1;
 
 		let abilitiesDirect = hostiles.length ? EggBot.closestHostileDir(hero, hostiles) : new Vector(0, 0);
-		abilitiesDirect.add(Vector.fromRand(abilitiesDirect.magnitude / 5));
 
 		// todo [high] tune
-		let projectileAttackDistance = ProjectileAttack.getTime(hero) * ProjectileAttack.velocity + .1;
+		let projectileAttackDistance = ProjectileAttack.getDistance(hero) + .1;
 		// 0.94 0 Infinity
 		let activeProjectileAttack = rand() < (projectileAttackDistance / abilitiesDirect.magnitude - .9) * 5;
 		let activeAbilitiesWanted = [
@@ -92,6 +91,7 @@ class EggBot {
 			delta.magnitude = clamp(1.25 * .4 - delta.magnitude * .4, 0, 1);
 			return movement.add(delta);
 		}, new Vector(0, 0));
+		avoidLineMovement.multiply(10);
 
 		// todo [high] conditional on having target
 		let centerMovement = centerDir.copy.subtract(pos);
@@ -128,7 +128,7 @@ class EggBot {
 
 		let projectedMovement = new Vector(...hostiles[i].currentMove);
 		if (projectedMovement.magnitude) {
-			projectedMovement.magnitude = .3 * deltas[i].magnitude; // .014 (projectile v) / .005 (hero v) = .3
+			projectedMovement.magnitude = .3 * deltas[i].magnitude; //  .005 (hero v) / .014 (projectile v) = .3
 			deltas[i].add(projectedMovement);
 		}
 		return deltas[i];

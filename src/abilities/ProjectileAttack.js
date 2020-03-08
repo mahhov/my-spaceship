@@ -9,9 +9,9 @@ class ProjectileAttack extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
-		const VELOCITY = ProjectileAttack.velocity, SPREAD = .08, SIZE = .02, DAMAGE = .1;
-		let directv = setMagnitude(direct.x, direct.y, VELOCITY);
-		let randv = randVector(VELOCITY * SPREAD);
+		const SPREAD = .08, SIZE = .02, DAMAGE = .1;
+		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
+		let randv = randVector(ProjectileAttack.velocity * SPREAD);
 		let projectile = new Projectile(
 			origin.x, origin.y,
 			SIZE, SIZE,
@@ -20,6 +20,10 @@ class ProjectileAttack extends Ability {
 			hero.friendly);
 		map.addProjectile(projectile);
 		return true;
+	}
+
+	static getDistance(hero) {
+		return ProjectileAttack.getTime(hero) * ProjectileAttack.velocity;
 	}
 
 	static getTime(hero) {
