@@ -125,13 +125,21 @@ class EggBot {
 		let pos = Vector.fromObj(hero);
 		let deltas = hostiles.map(hostile => Vector.fromObj(hostile).subtract(pos));
 		let i = minWhichA(deltas.map(delta => delta.magnitude));
+		let dir = deltas[i];
 
 		let projectedMovement = new Vector(...hostiles[i].currentMove);
 		if (projectedMovement.magnitude) {
-			projectedMovement.magnitude = .3 * deltas[i].magnitude; //  .005 (hero v) / .014 (projectile v) = .3
-			deltas[i].add(projectedMovement);
+			projectedMovement.magnitude = .3 * dir.magnitude; //  .005 (hero v) / .014 (projectile v) = .3
+			dir.add(projectedMovement);
 		}
-		return deltas[i];
+
+		let x = 1;
+		if (!hero.lastAim)
+			hero.lastAim = dir;
+		else
+			hero.lastAim.rotateByCosSinTowards(Math.cos(x / 180 * Math.PI), Math.sin(x / 180 * Math.PI), dir);
+		hero.lastAim.magnitude = dir.magnitude;
+		return hero.lastAim;
 	}
 }
 
