@@ -8,7 +8,7 @@ class State {
 		this.state = state;
 	}
 
-	static merge(states) {
+	static merge(...states) {
 		return new State(Math.max(...states.map(state => state.state)));
 	}
 

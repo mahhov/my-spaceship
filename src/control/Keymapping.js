@@ -28,37 +28,39 @@ Controls.ABILITY_I = [
 	Controls.ABILITY_6,
 	Controls.ABILITY_7];
 
-let ControlToKeyMap = {
-	[Controls.MOVE_LEFT]: ['a'],
-	[Controls.MOVE_UP]: ['w'],
-	[Controls.MOVE_RIGHT]: ['d'],
-	[Controls.MOVE_DOWN]: ['s'],
-	[Controls.ABILITY_1]: ['j', '1'],
-	[Controls.ABILITY_2]: ['k', '2'],
-	[Controls.ABILITY_3]: ['l', '3'],
-	[Controls.ABILITY_4]: ['u', '4'],
-	[Controls.ABILITY_5]: ['i', '5'],
-	[Controls.ABILITY_6]: ['o', '6'],
-	[Controls.ABILITY_7]: ['p', '7'],
-	[Controls.TARGET_LOCK]: ['capslock'],
-	[Controls.ZOOM_IN]: ['x'],
-	[Controls.ZOOM_OUT]: ['z'],
-	[Controls.MINIMAP_ZOOM]: ['q'],
+let controlMap = {
+	[Controls.MOVE_LEFT]: {keys: ['a'], mouse: []},
+	[Controls.MOVE_UP]: {keys: ['w'], mouse: []},
+	[Controls.MOVE_RIGHT]: {keys: ['d'], mouse: []},
+	[Controls.MOVE_DOWN]: {keys: ['s'], mouse: []},
+	[Controls.ABILITY_1]: {keys: [' '], mouse: [0], string: ['space', 'mb left']},
+	[Controls.ABILITY_2]: {keys: ['shift'], mouse: [2], string: ['shift', 'mb right']},
+	[Controls.ABILITY_3]: {keys: ['q'], mouse: []},
+	[Controls.ABILITY_4]: {keys: ['e'], mouse: []},
+	[Controls.ABILITY_5]: {keys: ['r'], mouse: []},
+	[Controls.ABILITY_6]: {keys: ['t'], mouse: []},
+	[Controls.ABILITY_7]: {keys: ['f'], mouse: []},
+	[Controls.TARGET_LOCK]: {keys: ['capslock'], mouse: []},
+	[Controls.ZOOM_IN]: {keys: ['x'], mouse: []},
+	[Controls.ZOOM_OUT]: {keys: ['z'], mouse: []},
+	[Controls.MINIMAP_ZOOM]: {keys: ['tab'], mouse: []},
 };
 
 class Keymapping {
 	// map control (e.g. ZOOM_OUT) to keys (e.g. ['z', 'y'])
-	static getKeys(control) {
-		return Keymapping.ControlToKeyMap[control];
+	static getString(control) {
+		return controlMap[control].string || [controlMap[control].keys[0]];
 	}
 
+	// todo [low] replace this roundabout getControlState() with a controlToStateMap.
 	// map control (e.g. ZOOM_OUT) to state
 	static getControlState(controller, control) {
-		return State.merge(Keymapping.getKeys(control).map(key => controller.getKeyState(key)));
+		return State.merge(
+			...controlMap[control].keys.map(key => controller.getKeyState(key)),
+			...controlMap[control].mouse.map(mouse => controller.getMouseState(mouse)));
 	}
 }
 
 Keymapping.Controls = Controls;
-Keymapping.ControlToKeyMap = ControlToKeyMap;
 
 module.exports = Keymapping;

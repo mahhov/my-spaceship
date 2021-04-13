@@ -19,7 +19,7 @@ class Button extends Interface {
 		if (!this.bounds.inside(x, y))
 			this.state = States.INACTIVE;
 		else
-			this.state = controller.getMouseState().active ? States.ACTIVE : States.HOVER;
+			this.state = controller.getMouseState(0).active ? States.ACTIVE : States.HOVER;
 	}
 
 	paint(painter) {

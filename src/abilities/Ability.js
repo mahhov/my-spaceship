@@ -20,7 +20,7 @@ class Ability {
 	setUi(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiText = Keymapping.getKeys(Keymapping.Controls.ABILITY_I[uiIndex]).join('/');
+		this.uiTexts = Keymapping.getString(Keymapping.Controls.ABILITY_I[uiIndex]);
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
@@ -97,7 +97,11 @@ class Ability {
 			painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
 		// letter
-		painter.add(new Text(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2, this.uiText));
+		this.uiTexts.forEach((uiText, i) =>
+			painter.add(new Text(
+				LEFT + Positions.ABILITY_SIZE / 2,
+				TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4,
+				uiText, {size: '12px'})));
 
 		// channel bar
 		let channelRatio = this.channelRatio;

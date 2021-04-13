@@ -40,7 +40,7 @@ let main = async () => {
 			res.end(await fs.promises.readFile(fileConfig.output));
 		} catch (e) {
 			console.error(e);
-			res.end(`console.error(\`${e}\`)`);
+			res.end(e);
 		}
 	}).listen(PORT);
 	console.log('Listening', PORT)

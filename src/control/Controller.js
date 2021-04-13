@@ -8,7 +8,7 @@ class Controller {
 		this.keys = {};
 		this.mouse = {x: null, y: null};
 		this.transformedMouse = {};
-		this.mouseState = new State();
+		this.mouseStates = [new State(), new State(), new State()];
 
 		document.addEventListener('keydown', event =>
 			!event.repeat && this.handleKeyPress(event.key.toLowerCase()));
@@ -19,11 +19,14 @@ class Controller {
 		document.addEventListener('mousemove', event =>
 			this.handleMouseMove(event.x - mouseTarget.offsetLeft, event.y - mouseTarget.offsetTop));
 
-		document.addEventListener('mousedown', () =>
-			this.handleMousePress());
+		document.addEventListener('mousedown', event =>
+			this.handleMousePress(event.button));
 
-		document.addEventListener('mouseup', () =>
-			this.handleMouseRelease());
+		document.addEventListener('mouseup', event =>
+			this.handleMouseRelease(event.button));
+
+		document.addEventListener('contextmenu', event =>
+			event.preventDefault());
 
 		window.addEventListener('blur', () =>
 			this.handleBlur());
@@ -46,12 +49,14 @@ class Controller {
 		this.mouse.y = y / this.mouseTargetHeight;
 	}
 
-	handleMousePress() {
-		this.mouseState.press();
+	handleMousePress(button) {
+		if (button < this.mouseStates.length)
+			this.mouseStates[button].press();
 	}
 
-	handleMouseRelease() {
-		this.mouseState.release();
+	handleMouseRelease(button) {
+		if (button < this.mouseStates.length)
+			this.mouseStates[button].release();
 	}
 
 	handleBlur() {
@@ -78,13 +83,13 @@ class Controller {
 		return this.transformedMouse;
 	}
 
-	getMouseState() {
-		return this.mouseState;
+	getMouseState(button) {
+		return this.mouseStates[button];
 	}
 
 	expire() {
 		Object.values(this.keys).forEach((state) => state.expire());
-		this.mouseState.expire();
+		this.mouseStates.forEach(state => state.expire());
 	}
 }
 
