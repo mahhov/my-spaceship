@@ -104,7 +104,7 @@ class MapGeneratorTimed extends MapGenerator {
 			if (!foundPosition)
 				return;
 			this.map.addMonster(entity, ui);
-			this.pendingMonsters.pop();
+			this.pendingMonsters.shift();
 		}
 	}
 

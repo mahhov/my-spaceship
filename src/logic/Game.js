@@ -57,15 +57,17 @@ module.exports = Game;
 // todo [graphics]
 // textures
 // ui interface
+// audio
 
 // todo [content]
-// map generation
-// instances
-// mobs
+// map generation i.e. dungeons
+// instances with difficulty, monster variety, and dungeon layout
+// mob variety
 // sector modes
 // resources
-// crafting
+// crafting & gear
 // skill leveling
+// classes & abilities
 
 // todo [other]
 // chat
