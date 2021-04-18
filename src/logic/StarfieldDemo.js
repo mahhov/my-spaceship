@@ -11,10 +11,13 @@ class StarfieldDemo extends Logic {
 		this.camera = new Camera(0, 0, 1);
 	}
 
-	iterate() {
+	update() {
 		this.periodicallySwapStarfield();
 		let {x, y} = this.controller.getRawMouse();
 		this.camera.move({x: x - .5, y: y - .5}, {x, y});
+	}
+
+	paint() {
 		this.starfield.paint(this.painterSet.uiPainter, this.camera);
 		this.painterSet.uiPainter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
 	}

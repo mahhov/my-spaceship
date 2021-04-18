@@ -31,12 +31,7 @@ class NoiseDemo extends Logic {
 		}
 	}
 
-	iterate() {
-		this.control();
-		this.paint();
-	}
-
-	control() {
+	update() {
 		if (this.controller.getKeyState('arrowdown').pressed)
 			this.noiseRange -= 5;
 		if (this.controller.getKeyState('arrowup').pressed)

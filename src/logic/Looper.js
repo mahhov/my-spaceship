@@ -5,7 +5,7 @@ const {Positions} = require('../util/Constants');
 const Text = require('../painter/Text');
 
 class Looper {
-	static sleep(milli) {
+	static sleep(milli = 0) {
 		return new Promise(resolve => setTimeout(resolve, milli))
 	}
 
@@ -13,25 +13,42 @@ class Looper {
 		this.canvas = canvas;
 		this.controller = new Controller(canvas);
 		this.painterSet = new PainterCompositor(canvas);
-		this.fpsTracker = new FpsTracker();
-		this.loop();
+		this.updateFpsTracker = new FpsTracker();
+		this.paintFpsTracker = new FpsTracker();
+		this.updateLoop();
+		this.paintLoop();
 	}
 
 	setLogicClass(LogicClass) {
 		this.logic = new LogicClass(this.controller, this.painterSet);
 	}
 
-	async loop() {
+	async updateLoop() {
+		const iterPeriod = 1000 / 60;
+		let lastIter;
 		while (true) {
+			if (this.logic) {
+				while (performance.now() - lastIter < iterPeriod)
+					await Looper.sleep();
+				this.updateFpsTracker.tick();
+				lastIter = performance.now();
+				this.logic.update();
+				this.controller.expire();
+			}
 			await Looper.sleep(10);
-			if (!this.logic)
-				continue;
-			this.painterSet.clear();
-			this.logic.iterate();
-			this.painterSet.uiPainter.add(new Text(1 - Positions.MARGIN, Positions.MARGIN, `fps: ${this.fpsTracker.getFps()}`, {align: 'right'}));
-			this.painterSet.paint();
-			this.controller.expire();
 		}
+	}
+
+	async paintLoop() {
+		if (this.logic) {
+			this.paintFpsTracker.tick();
+			this.painterSet.clear();
+			this.logic.paint();
+			this.painterSet.uiPainter.add(new Text(1 - Positions.MARGIN, Positions.MARGIN, `fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`, {align: 'right'}));
+			this.painterSet.paint();
+			await Looper.sleep(10);
+		}
+		requestAnimationFrame(() => this.paintLoop());
 	}
 }
 

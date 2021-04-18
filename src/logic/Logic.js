@@ -4,7 +4,10 @@ class Logic {
 		this.painterSet = painterSet;
 	}
 
-	iterate() {
+	update() {
+	}
+
+	paint() {
 	}
 }
 

@@ -55,12 +55,13 @@ class MapDemo extends Logic {
 		new MapGenerator(this.map);
 	}
 
-	iterate() {
+	update() {
 		if (this.controller.getKeyState(' ').pressed)
 			this.reset();
-
 		this.updateCamera();
+	}
 
+	paint() {
 		this.painterSet.uiPainter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
 		this.map.paint(this.painterSet.uiPainter, this.camera);
 	}

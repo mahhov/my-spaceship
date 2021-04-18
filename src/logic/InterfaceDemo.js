@@ -9,8 +9,11 @@ class InterfaceDemo extends Logic {
 		this.interface.setPosition(.25, .25, .2, .04);
 	}
 
-	iterate() {
+	update() {
 		this.interface.update(this.controller);
+	}
+
+	paint() {
 		this.interface.paint(this.painterSet.uiPainter);
 	}
 }

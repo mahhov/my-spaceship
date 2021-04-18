@@ -22,11 +22,6 @@ class Game extends Logic {
 		this.starfield = new Starfield(...this.map.getSize());
 	}
 
-	iterate() {
-		this.update();
-		this.paint();
-	}
-
 	update() {
 		this.updateCamera();
 		this.controller.inverseTransformMouse(this.camera);
