@@ -14,12 +14,17 @@ class Button extends Interface {
 	}
 
 	update(controller) {
-		let {x, y} = controller.getRawMouse();
+		let state = this.getState(controller);
+		if (state === States.ACTIVE && this.state !== States.ACTIVE)
+			this.emit('click');
+		this.state = state;
+	}
 
+	getState(controller) {
+		let {x, y} = controller.getRawMouse();
 		if (!this.bounds.inside(x, y))
-			this.state = States.INACTIVE;
-		else
-			this.state = controller.getMouseState(0).active ? States.ACTIVE : States.HOVER;
+			return States.INACTIVE;
+		return controller.getMouseState(0).active ? States.ACTIVE : States.HOVER;
 	}
 
 	paint(painter) {

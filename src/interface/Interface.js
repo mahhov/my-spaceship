@@ -1,6 +1,7 @@
+const Emitter = require('../util/Emitter');
 const Bounds = require('../intersection/Bounds');
 
-class Interface {
+class Interface extends Emitter {
 	setPosition(left, top, width, height) {
 		this.left = left;
 		this.top = top;
