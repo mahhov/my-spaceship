@@ -1,5 +1,6 @@
 const makeEnum = require('../util/Enum');
 const Interface = require('./Interface');
+const State = require('../control/State');
 const {Colors} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
@@ -7,10 +8,11 @@ const Text = require('../painter/Text');
 const States = makeEnum('INACTIVE', 'ACTIVE', 'HOVER');
 
 class Button extends Interface {
-	constructor(text) {
+	constructor(text, hotkey = '') {
 		super();
 		this.state = States.INACTIVE;
 		this.text = text;
+		this.hotkey = hotkey;
 	}
 
 	update(controller) {
@@ -22,9 +24,12 @@ class Button extends Interface {
 
 	getState(controller) {
 		let {x, y} = controller.getRawMouse();
-		if (!this.bounds.inside(x, y))
+		if (this.bounds.inside(x, y) && controller.getMouseState(0).active || this.hotkey && controller.getKeyState(this.hotkey).pressed)
+			return States.ACTIVE;
+		else if (this.bounds.inside(x, y))
+			return States.HOVER;
+		else
 			return States.INACTIVE;
-		return controller.getMouseState(0).active ? States.ACTIVE : States.HOVER;
 	}
 
 	paint(painter) {
