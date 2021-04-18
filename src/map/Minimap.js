@@ -1,4 +1,4 @@
-const Keymapping = require('../control/Keymapping');
+const keyMappings = require('../control/keyMappings');
 const Camera = require('../camera/Camera');
 const {Colors} = require('../util/Constants');
 const Rect = require('../painter/Rect');
@@ -14,7 +14,7 @@ class Minimap {
 	}
 
 	update(controller) {
-		if (Keymapping.getControlState(controller, Keymapping.Controls.MINIMAP_ZOOM).pressed)
+		if (keyMappings.minimapZoom.getState(controller).pressed)
 			this.toggleZoom();
 	}
 

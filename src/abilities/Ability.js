@@ -1,5 +1,5 @@
 const Pool = require('../util/Pool');
-const Keymapping = require('../control/Keymapping');
+const keyMappings = require('../control/keyMappings');
 const {Colors, Positions} = require('../util/Constants');
 const Rect = require('../painter/Rect');
 const Text = require('../painter/Text');
@@ -20,7 +20,7 @@ class Ability {
 	setUi(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiTexts = Keymapping.getString(Keymapping.Controls.ABILITY_I[uiIndex]);
+		this.uiTexts = keyMappings.ABILITY_I[uiIndex].string;
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {

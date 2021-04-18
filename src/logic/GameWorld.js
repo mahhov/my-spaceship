@@ -1,5 +1,5 @@
 const Logic = require('./Logic');
-const Keymapping = require('../control/Keymapping');
+const keyMappings = require('../control/keyMappings');
 const Map = require('../map/Map');
 const MonsterKnowledge = require('../entities/monsters/MonsterKnowledge');
 const MapGenerator = require('../map/MapGeneratorTimed');
@@ -26,15 +26,15 @@ class GameWorld extends Logic {
 		this.mapGenerator.update();
 		this.map.update(this.controller, this.monsterKnowledge);
 		this.minimap.update(this.controller);
-		if (Keymapping.getControlState(this.controller, Keymapping.Controls.PAUSE).pressed)
+		if (keyMappings.pause.getState(this.controller).pressed)
 			this.emit('pause');
 	}
 
 	updateCamera() {
 		this.camera.move(this.player, this.controller.getRawMouse(.5, .5));
 		this.camera.zoom(
-			Keymapping.getControlState(this.controller, Keymapping.Controls.ZOOM_OUT).active,
-			Keymapping.getControlState(this.controller, Keymapping.Controls.ZOOM_IN).active);
+			keyMappings.zoomOut.getState(this.controller).active,
+			keyMappings.zoomIn.getState(this.controller).active);
 	}
 
 	paint() {

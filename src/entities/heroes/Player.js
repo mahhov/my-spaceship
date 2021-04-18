@@ -7,7 +7,7 @@ const Dash = require('../../abilities/Dash');
 const IncDefense = require('../../abilities/IncDefense');
 const DelayedRegen = require('../../abilities/DelayedRegen');
 const Buff = require('.././Buff');
-const Keymapping = require('../../control/Keymapping');
+const keyMappings = require('../../control/keyMappings');
 const Bounds = require('../../intersection/Bounds');
 const RectC = require('../../painter/RectC');
 const Bar = require('../../painter/Bar');
@@ -44,10 +44,10 @@ class Player extends Hero {
 	moveControl(controller, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
-		let left = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_LEFT).active;
-		let up = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_UP).active;
-		let right = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_RIGHT).active;
-		let down = Keymapping.getControlState(controller, Keymapping.Controls.MOVE_DOWN).active;
+		let left = keyMappings.moveLeft.getState(controller).active;
+		let up = keyMappings.moveUp.getState(controller).active;
+		let right = keyMappings.moveRight.getState(controller).active;
+		let down = keyMappings.moveDown.getState(controller).active;
 
 		let dx = 0, dy = 0;
 
@@ -72,10 +72,9 @@ class Player extends Hero {
 		let directTarget = this.targetLock || controller.getMouse();
 		let direct = {
 			x: directTarget.x - this.x,
-			y: directTarget.y - this.y
+			y: directTarget.y - this.y,
 		};
-		let activeAbilitiesWanted = this.abilities.map((_, i) =>
-			Keymapping.getControlState(controller, Keymapping.Controls.ABILITY_I[i]).active);
+		let activeAbilitiesWanted = this.abilities.map((_, i) => keyMappings.ABILITY_I[i].getState(controller).active);
 		this.updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct);
 	}
 
@@ -83,7 +82,7 @@ class Player extends Hero {
 		if (this.targetLock && this.targetLock.health.isEmpty())
 			this.targetLock = null;
 
-		if (!Keymapping.getControlState(controller, Keymapping.Controls.TARGET_LOCK).pressed)
+		if (!keyMappings.targetLock.getState(controller).pressed)
 			return;
 
 		if (this.targetLock) {

@@ -1,6 +1,6 @@
 const Logic = require('./Logic');
 const Button = require('../interface/Button');
-const Keymapping = require('../control/Keymapping');
+const keyMappings = require('../control/keyMappings');
 
 class GameMenu extends Logic {
 	constructor(controller, painterSet) {
@@ -13,7 +13,7 @@ class GameMenu extends Logic {
 
 	update() {
 		this.resumeButton.update(this.controller);
-		if (Keymapping.getControlState(this.controller, Keymapping.Controls.PAUSE).pressed)
+		if (keyMappings.pause.getState(this.controller).pressed)
 			this.emit('resume');
 	}
 
