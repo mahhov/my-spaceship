@@ -17,7 +17,8 @@ const Controls = makeEnum(
 	'TARGET_LOCK',
 	'ZOOM_IN',
 	'ZOOM_OUT',
-	'MINIMAP_ZOOM');
+	'MINIMAP_ZOOM',
+	'PAUSE');
 
 Controls.ABILITY_I = [
 	Controls.ABILITY_1,
@@ -43,7 +44,8 @@ let controlMap = {
 	[Controls.TARGET_LOCK]: {keys: ['capslock'], mouse: []},
 	[Controls.ZOOM_IN]: {keys: ['x'], mouse: []},
 	[Controls.ZOOM_OUT]: {keys: ['z'], mouse: []},
-	[Controls.MINIMAP_ZOOM]: {keys: ['tab'], mouse: []},
+	[Controls.MINIMAP_ZOOM]: {keys: ['tab'], mouse: []}, // todo [medium] prevent tab from scrolling focus
+	[Controls.PAUSE]: {keys: ['p'], mouse: []},
 };
 
 class Keymapping {

@@ -9,6 +9,7 @@ class Game extends Logic {
 		this.world = new GameWorld(controller, painterSet);
 		this.activeLogic = this.menu;
 		this.menu.on('resume', () => this.activeLogic = this.world);
+		this.world.on('pause', () => this.activeLogic = this.menu);
 	}
 
 	update() {

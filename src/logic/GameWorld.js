@@ -26,6 +26,8 @@ class GameWorld extends Logic {
 		this.mapGenerator.update();
 		this.map.update(this.controller, this.monsterKnowledge);
 		this.minimap.update(this.controller);
+		if (Keymapping.getControlState(this.controller, Keymapping.Controls.PAUSE).pressed)
+			this.emit('pause');
 	}
 
 	updateCamera() {
