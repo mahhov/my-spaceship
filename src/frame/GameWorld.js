@@ -1,4 +1,4 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const keyMappings = require('../control/keyMappings');
 const Map = require('../map/Map');
 const MonsterKnowledge = require('../entities/monsters/MonsterKnowledge');
@@ -7,7 +7,7 @@ const Minimap = require('../map/Minimap');
 const Camera = require('../camera/Camera');
 const Starfield = require('../starfield/Starfield');
 
-class GameWorld extends Logic {
+class GameWorld extends Frame {
 	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {
 		super(controller, painterSet);
 		this.map = new Map();

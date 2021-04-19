@@ -1,35 +1,35 @@
-const Looper = require('../logic/Looper');
-const Game = require('../logic/Game');
-const GameEgg = require('../logic/GameEgg');
-const GraphicsDemo = require('../logic/GraphicsDemo');
-const StarfieldDemo = require('../logic/StarfieldDemo');
-const NoiseDemo = require('../logic/NoiseDemo');
-const MapDemo = require('../logic/MapDemo');
-const InterfaceDemo = require('../logic/InterfaceDemo');
+const Looper = require('../frame/Looper');
+const Game = require('../frame/Game');
+const GameEgg = require('../frame/GameEgg');
+const GraphicsDemo = require('../frame/GraphicsDemo');
+const StarfieldDemo = require('../frame/StarfieldDemo');
+const NoiseDemo = require('../frame/NoiseDemo');
+const MapDemo = require('../frame/MapDemo');
+const InterfaceDemo = require('../frame/InterfaceDemo');
 const RecordMp4 = require('../util/RecordMp4');
 
 let canvas = document.querySelector('#canvas');
-let logicButtonsRow = document.querySelector('#logic-buttons-row');
+let frameButtonsRow = document.querySelector('#frame-buttons-row');
 let looper = new Looper(canvas);
 
-let logicCLasses = [
+let frameCLasses = [
 	Game,
 	GameEgg,
 	GraphicsDemo,
 ];
 
-logicCLasses.forEach(LogicClass => {
+frameCLasses.forEach(FrameClass => {
 	let button = document.createElement('button');
-	button.textContent = LogicClass.name;
+	button.textContent = FrameClass.name;
 	button.addEventListener('click', () => {
-		looper.setLogicClass(LogicClass);
-		history.replaceState(null, '', `/${LogicClass.name}`);
+		looper.setFrameClass(FrameClass);
+		history.replaceState(null, '', `/${FrameClass.name}`);
 	});
-	logicButtonsRow.append(button);
+	frameButtonsRow.append(button);
 });
 
-let StartLogicClass = logicCLasses.find(LogicClass => `/${LogicClass.name}` === location.pathname) || logicCLasses[0];
-looper.setLogicClass(StartLogicClass);
+let StartFrameClass = frameCLasses.find(FrameClass => `/${FrameClass.name}` === location.pathname) || frameCLasses[0];
+looper.setFrameClass(StartFrameClass);
 
 // window.r = RecordMp4;
 // window.s = RecordMp4();

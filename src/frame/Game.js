@@ -1,23 +1,23 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const GameMenu = require('./GameMenu');
 const GameWorld = require('./GameWorld');
 
-class Game extends Logic {
+class Game extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 		this.menu = new GameMenu(controller, painterSet);
 		this.world = new GameWorld(controller, painterSet);
-		this.activeLogic = this.menu;
-		this.menu.on('resume', () => this.activeLogic = this.world);
-		this.world.on('pause', () => this.activeLogic = this.menu);
+		this.activeFrame = this.menu;
+		this.menu.on('resume', () => this.activeFrame = this.world);
+		this.world.on('pause', () => this.activeFrame = this.menu);
 	}
 
 	update() {
-		this.activeLogic.update();
+		this.activeFrame.update();
 	}
 
 	paint() {
-		this.activeLogic.paint();
+		this.activeFrame.paint();
 	}
 }
 

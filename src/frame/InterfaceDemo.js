@@ -1,7 +1,7 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const Button = require('../interface/Button');
 
-class InterfaceDemo extends Logic {
+class InterfaceDemo extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 

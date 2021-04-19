@@ -19,20 +19,20 @@ class Looper {
 		this.paintLoop();
 	}
 
-	setLogicClass(LogicClass) {
-		this.logic = new LogicClass(this.controller, this.painterSet);
+	setFrameClass(FrameClass) {
+		this.frame = new FrameClass(this.controller, this.painterSet);
 	}
 
 	async updateLoop() {
 		const iterPeriod = 1000 / 60;
 		let lastIter;
 		while (true) {
-			if (this.logic) {
+			if (this.frame) {
 				while (performance.now() - lastIter < iterPeriod)
 					await Looper.sleep();
 				this.updateFpsTracker.tick();
 				lastIter = performance.now();
-				this.logic.update();
+				this.frame.update();
 				this.controller.expire();
 			}
 			await Looper.sleep(10);
@@ -40,10 +40,10 @@ class Looper {
 	}
 
 	async paintLoop() {
-		if (this.logic) {
+		if (this.frame) {
 			this.paintFpsTracker.tick();
 			this.painterSet.clear();
-			this.logic.paint();
+			this.frame.paint();
 			this.painterSet.uiPainter.add(new Text(1 - Positions.MARGIN, Positions.MARGIN, `fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`, {align: 'right'}));
 			this.painterSet.paint();
 			await Looper.sleep(10);

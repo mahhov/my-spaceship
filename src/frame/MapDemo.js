@@ -1,6 +1,6 @@
 const LinkedList = require('../util/LinkedList');
 const Entity = require('../entities/Entity');
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const MapGenerator = require('../map/MapGeneratorStaged');
 const Camera = require('../camera/Camera');
 const Color = require('../util/Color');
@@ -42,7 +42,7 @@ class FakeMap {
 	}
 }
 
-class MapDemo extends Logic {
+class MapDemo extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 		this.reset();

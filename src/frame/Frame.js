@@ -1,7 +1,6 @@
 const Emitter = require('../util/Emitter');
 
-// todo [low] rename Frame
-class Logic extends Emitter {
+class Frame extends Emitter {
 	constructor(controller, painterSet) {
 		super();
 		this.controller = controller;
@@ -15,4 +14,4 @@ class Logic extends Emitter {
 	}
 }
 
-module.exports = Logic;
+module.exports = Frame;

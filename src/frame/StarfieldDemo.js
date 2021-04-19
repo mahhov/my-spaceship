@@ -1,11 +1,11 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const Camera = require('../camera/Camera');
 const Color = require('../util/Color');
 const Text = require('../painter/Text');
 const Starfield = require('../starfield/Starfield');
 const StarfieldNoise = require('../starfield/StarfieldNoise');
 
-class StarfieldDemo extends Logic {
+class StarfieldDemo extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 		this.camera = new Camera(0, 0, 1);

@@ -1,4 +1,4 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const {NoiseSimplex} = require('../util/Noise');
 const {rand} = require('../util/Number');
 const Color = require('../util/Color');
@@ -11,7 +11,7 @@ const N = 200; // resolution
 const NTH = 1 / N;
 const DEFAULT_NOISE_RANGE = 20; // feature sizes, bigger noiseRange means smaller features
 
-class NoiseDemo extends Logic {
+class NoiseDemo extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 		this.noiseRange = DEFAULT_NOISE_RANGE;

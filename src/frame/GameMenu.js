@@ -1,8 +1,8 @@
-const Logic = require('./Logic');
+const Frame = require('./Frame');
 const Button = require('../interface/Button');
 const keyMappings = require('../control/keyMappings');
 
-class GameMenu extends Logic {
+class GameMenu extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 
