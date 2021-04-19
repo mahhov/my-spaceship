@@ -18,7 +18,7 @@ const VShip = require('../graphics/VShip');
 const WShip = require('../graphics/WShip');
 const EggBot = require('../entities/bot/EggBot');
 const {Positions} = require('../util/Constants');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 
 const WIDTH = 2.5, HEIGHT = 2.5;
 const SPAWN_X1 = WIDTH / 5;

@@ -10,7 +10,7 @@ const Turret = require('../entities/monsters/Turret');
 const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
 const Boss1 = require('../entities/monsters/Boss1');
 const {Positions} = require('../util/Constants');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 

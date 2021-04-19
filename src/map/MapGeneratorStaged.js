@@ -15,7 +15,7 @@ const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
 const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
 const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
 const {Positions} = require('../util/Constants');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;

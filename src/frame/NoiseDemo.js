@@ -2,9 +2,9 @@ const Frame = require('./Frame');
 const {NoiseSimplex} = require('../util/Noise');
 const {rand} = require('../util/Number');
 const Color = require('../util/Color');
-const Rect = require('../painter/Rect');
-const RectC = require('../painter/RectC');
-const Text = require('../painter/Text');
+const Rect = require('../painter/elements/Rect');
+const RectC = require('../painter/elements/RectC');
+const Text = require('../painter/elements/Text');
 
 const THRESHOLD = .5;
 const N = 200; // resolution

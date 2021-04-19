@@ -8,7 +8,7 @@ class Text extends PainterElement {
 		this.text = text;
 		this.color = color;
 		this.size = size;
-		this.align = align;
+		this.align = align; // 'left', 'center', 'right'
 	}
 
 	static withCamera(camera, x, y, text, {color, size, align} = {}) {

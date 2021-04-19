@@ -5,7 +5,7 @@ const RockGraphic = require('../../graphics/RockGraphic');
 const Buff = require('../Buff');
 const Vector = require('../../util/Vector');
 const {minWhichA, randInt} = require('../../util/Number');
-const RectC = require('../../painter/RectC');
+const RectC = require('../../painter/elements/RectC');
 
 class Egg extends Entity {
 	constructor(possiblePositions) {

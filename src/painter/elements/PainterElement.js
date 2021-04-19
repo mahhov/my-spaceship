@@ -1,4 +1,4 @@
-const Color = require('../util/Color');
+const Color = require('../../util/Color');
 
 class PainterElement {
 	setFillMode(context) {

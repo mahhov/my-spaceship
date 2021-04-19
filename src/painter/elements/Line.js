@@ -1,5 +1,5 @@
 const Path = require('./Path');
-const Vector = require('../util/Vector');
+const Vector = require('../../util/Vector');
 
 class Line extends Path {
 	constructor(x, y, x2, y2, width, graphicOptions) {

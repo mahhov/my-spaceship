@@ -1,8 +1,8 @@
 const keyMappings = require('../control/keyMappings');
 const Camera = require('../camera/Camera');
 const {Colors} = require('../util/Constants');
-const Rect = require('../painter/Rect');
-const RectC = require('../painter/RectC');
+const Rect = require('../painter/elements/Rect');
+const RectC = require('../painter/elements/RectC');
 
 class Minimap {
 	constructor(map) {

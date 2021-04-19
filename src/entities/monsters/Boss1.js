@@ -11,7 +11,7 @@ const NearbyDegen = require('../modules/NearbyDegen');
 const Aim = require('../modules/Aim');
 const Shotgun = require('../modules/Shotgun');
 const LookTowards = require('../modules/LookTowards');
-const Bar = require('../../painter/Bar');
+const Bar = require('../../painter/elements/Bar');
 
 const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 

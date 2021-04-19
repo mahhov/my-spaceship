@@ -1,6 +1,6 @@
 const {Positions} = require('../util/Constants');
 const {round} = require('../util/Number');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 
 class MapGenerator {
 	constructor(map) {

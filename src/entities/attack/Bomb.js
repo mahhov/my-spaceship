@@ -2,7 +2,7 @@ const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {getRectDistance} = require('../../util/Number');
 const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/RectC');
+const RectC = require('../../painter/elements/RectC');
 
 class Bomb extends Entity {
 	// if maxTargets <= 0, will be treated as infinite

@@ -1,6 +1,6 @@
 const {Colors} = require('../util/Constants');
 const {rand, randInt} = require('../util/Number');
-const RectC = require('../painter/RectC');
+const RectC = require('../painter/elements/RectC');
 
 const FLICKER_COLOR_MULT = .7;
 const STAR_COLOR_ARRAY = [

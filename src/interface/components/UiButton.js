@@ -1,18 +1,23 @@
-const makeEnum = require('../util/Enum');
-const Interface = require('./Interface');
-const State = require('../control/State');
-const {Colors} = require('../util/Constants');
-const Rect = require('../painter/Rect');
-const Text = require('../painter/Text');
+const makeEnum = require('../../util/Enum');
+const UiComponent = require('./UiComponent');
+const Bounds = require('../../intersection/Bounds');
+const {Colors} = require('../../util/Constants');
+const Rect = require('../../painter/elements/Rect');
+const Text = require('../../painter/elements/Text');
 
 const States = makeEnum('INACTIVE', 'ACTIVE', 'HOVER');
 
-class Button extends Interface {
-	constructor(text, hotkey = '') {
+class UiButton extends UiComponent {
+	constructor(left, top, width, height, text, hotkey = '') {
 		super();
-		this.state = States.INACTIVE;
+		this.left = left;
+		this.top = top;
+		this.width = width;
+		this.height = height;
+		this.bounds = new Bounds(left, top, left + width, top + height);
 		this.text = text;
 		this.hotkey = hotkey;
+		this.state = States.INACTIVE;
 	}
 
 	update(controller) {
@@ -41,4 +46,4 @@ class Button extends Interface {
 	}
 }
 
-module.exports = Button;
+module.exports = UiButton;

@@ -2,7 +2,7 @@ const Starfield = require('./Starfield');
 const {NoiseSimplex} = require('../util/Noise');
 const {rand} = require('../util/Number');
 const Star = require('./Star');
-const RectC = require('../painter/RectC');
+const RectC = require('../painter/elements/RectC');
 
 // this class is only for the StarfieldDemo
 class StarfieldNoise extends Starfield {

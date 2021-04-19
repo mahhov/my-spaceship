@@ -1,7 +1,7 @@
 const IntersectionFinder = require('../intersection/IntersectionFinder');
 const LinkedList = require('../util/LinkedList');
 const Bounds = require('../intersection/Bounds');
-const Rect = require('../painter/Rect');
+const Rect = require('../painter/elements/Rect');
 
 class Map {
 	constructor() {

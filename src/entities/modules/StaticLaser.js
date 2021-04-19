@@ -3,7 +3,7 @@ const Module = require('./Module');
 const Vector = require('../../util/Vector');
 const Laser = require('../attack/Laser');
 const {Colors} = require('../../util/Constants');
-const Line = require('../../painter/Line');
+const Line = require('../../painter/elements/Line');
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 

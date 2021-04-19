@@ -1,7 +1,7 @@
 const Frame = require('./Frame');
 const Camera = require('../camera/Camera');
 const Color = require('../util/Color');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 const Starfield = require('../starfield/Starfield');
 const StarfieldNoise = require('../starfield/StarfieldNoise');
 

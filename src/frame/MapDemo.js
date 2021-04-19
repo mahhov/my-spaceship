@@ -4,7 +4,7 @@ const Frame = require('./Frame');
 const MapGenerator = require('../map/MapGeneratorStaged');
 const Camera = require('../camera/Camera');
 const Color = require('../util/Color');
-const RectC = require('../painter/RectC');
+const RectC = require('../painter/elements/RectC');
 
 class FakePlayer {
 	setPosition() {

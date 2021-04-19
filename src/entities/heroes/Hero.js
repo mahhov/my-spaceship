@@ -6,7 +6,7 @@ const Buff = require('../Buff');
 const {setMagnitude, booleanArray, rand, randVector} = require('../../util/Number');
 const Dust = require('../particles/Dust');
 const {Colors} = require('../../util/Constants');
-const BarC = require('../../painter/BarC');
+const BarC = require('../../painter/elements/BarC');
 
 class Hero extends LivingEntity {
 	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {

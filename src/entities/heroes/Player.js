@@ -9,9 +9,9 @@ const DelayedRegen = require('../../abilities/DelayedRegen');
 const Buff = require('.././Buff');
 const keyMappings = require('../../control/keyMappings');
 const Bounds = require('../../intersection/Bounds');
-const RectC = require('../../painter/RectC');
-const Bar = require('../../painter/Bar');
-const Rect = require('../../painter/Rect');
+const RectC = require('../../painter/elements/RectC');
+const Bar = require('../../painter/elements/Bar');
+const Rect = require('../../painter/elements/Rect');
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 

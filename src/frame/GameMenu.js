@@ -1,22 +1,19 @@
 const Frame = require('./Frame');
-const Button = require('../interface/Button');
-const keyMappings = require('../control/keyMappings');
+const PauseUi = require('../interface/uis/PauseUi');
 
 class GameMenu extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
-
-		this.resumeButton = new Button('Resume', 'p');
-		this.resumeButton.setPosition(.45, .45, .1, .1);
-		this.resumeButton.bubble('click', this, 'resume');
+		this.pauseUi = new PauseUi();
+		this.pauseUi.bubble('resume', this);
 	}
 
 	update() {
-		this.resumeButton.update(this.controller);
+		this.pauseUi.update(this.controller);
 	}
 
 	paint() {
-		this.resumeButton.paint(this.painterSet.painter);
+		this.pauseUi.paint(this.painterSet.uiPainter);
 	}
 }
 

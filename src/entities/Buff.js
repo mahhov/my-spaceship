@@ -1,7 +1,7 @@
 const Pool = require('../util/Pool');
 const {Positions} = require('../util/Constants');
-const Rect = require('../painter/Rect');
-const Text = require('../painter/Text');
+const Rect = require('../painter/elements/Rect');
+const Text = require('../painter/elements/Text');
 
 class Buff {
 	constructor(duration, uiColor, uiText) {

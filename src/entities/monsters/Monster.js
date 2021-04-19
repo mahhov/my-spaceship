@@ -2,8 +2,8 @@ const LivingEntity = require('../LivingEntity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const ModuleManager = require('../modules/ModuleManager');
 const {Colors, Positions} = require('../../util/Constants');
-const BarC = require('../../painter/BarC');
-const Bar = require('../../painter/Bar');
+const BarC = require('../../painter/elements/BarC');
+const Bar = require('../../painter/elements/Bar');
 
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health) {

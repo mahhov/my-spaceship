@@ -1,4 +1,4 @@
-const Path = require('../painter/Path');
+const Path = require('../painter/elements/Path');
 const {PI2, thetaToVector} = require('../util/Number');
 
 class PathCreator {

@@ -3,7 +3,7 @@ const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {randVector} = require('../../util/Number');
 const DamageDust = require('../particles/DamageDust');
 const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/RectC');
+const RectC = require('../../painter/elements/RectC');
 
 class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {

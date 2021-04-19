@@ -1,6 +1,6 @@
 const {rand, randB} = require('../util/Number');
 const Star = require('./Star');
-const RectC = require('../painter/RectC');
+const RectC = require('../painter/elements/RectC');
 
 class Starfield {
 	constructor(width, height, extra = 0) {

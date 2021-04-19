@@ -1,12 +1,11 @@
 const Frame = require('./Frame');
-const Button = require('../interface/Button');
+const UiButton = require('../interface/components/UiButton');
 
 class InterfaceDemo extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
 
-		this.interface = new Button();
-		this.interface.setPosition(.25, .25, .2, .04);
+		this.interface = new UiButton(.25, .25, .2, .04, 'x');
 	}
 
 	update() {

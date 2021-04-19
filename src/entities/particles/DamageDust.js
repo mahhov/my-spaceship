@@ -1,7 +1,7 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/RectC');
+const RectC = require('../../painter/elements/RectC');
 
 class DamageDust extends Entity {
 	constructor(x, y, size, vx, vy, time) {

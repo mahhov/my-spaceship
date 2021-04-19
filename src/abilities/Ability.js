@@ -1,9 +1,9 @@
 const Pool = require('../util/Pool');
 const keyMappings = require('../control/keyMappings');
 const {Colors, Positions} = require('../util/Constants');
-const Rect = require('../painter/Rect');
-const Text = require('../painter/Text');
-const Bar = require('../painter/Bar');
+const Rect = require('../painter/elements/Rect');
+const Text = require('../painter/elements/Text');
+const Bar = require('../painter/elements/Bar');
 
 class Ability {
 	constructor(cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {

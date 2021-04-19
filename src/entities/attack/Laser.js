@@ -1,7 +1,7 @@
 const Entity = require('../Entity');
 const IntersectionFinder = require('../../intersection/IntersectionFinder');
 const {Colors} = require('../../util/Constants');
-const Line = require('../../painter/Line');
+const Line = require('../../painter/elements/Line');
 
 class Laser extends Entity {
 	constructor(x, y, dx, dy, width, time, damage, friendly) {

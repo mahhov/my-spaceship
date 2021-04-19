@@ -2,7 +2,7 @@ const Controller = require('../control/Controller');
 const PainterCompositor = require('../painter/PainterCompositor');
 const FpsTracker = require('../util/FpsTracker');
 const {Positions} = require('../util/Constants');
-const Text = require('../painter/Text');
+const Text = require('../painter/elements/Text');
 
 class Looper {
 	static sleep(milli = 0) {
