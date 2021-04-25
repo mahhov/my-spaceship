@@ -11,4 +11,4 @@ class MonsterKnowledge {
 	}
 }
 
-module.exports = MonsterKnowledge;
+export default MonsterKnowledge;

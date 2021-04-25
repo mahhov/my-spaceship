@@ -1,14 +1,14 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const DiamondShip = require('../../../graphics/DiamondShip');
-const Phase = require('../../../util/Phase');
-const {PI} = require('../../../util/Number');
-const Distance = require('../../modules/Distance');
-const Aim = require('../../modules/Aim');
-const PatternedPeriod = require('../../modules/PatternedPeriod');
-const Chase = require('../../modules/Chase');
-const NearbyDegen = require('../../modules/NearbyDegen');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import DiamondShip from '../../../graphics/DiamondShip.js';
+import Phase from '../../../util/Phase.js';
+import {PI} from '../../../util/Number.js';
+import Distance from '../../modules/Distance.js';
+import Aim from '../../modules/Aim.js';
+import PatternedPeriod from '../../modules/PatternedPeriod.js';
+import Chase from '../../modules/Chase.js';
+import NearbyDegen from '../../modules/NearbyDegen.js';
 
 const Phases = makeEnum('ONE');
 
@@ -63,4 +63,4 @@ class ExplodingTick extends Monster {
 	}
 }
 
-module.exports = ExplodingTick;
+export default ExplodingTick;

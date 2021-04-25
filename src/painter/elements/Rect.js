@@ -1,4 +1,4 @@
-const PainterElement = require('./PainterElement');
+import PainterElement from './PainterElement.js';
 
 class Rect extends PainterElement {
 	constructor(x, y, width, height, {fill, color = '#000', thickness = 1} = {}) {
@@ -32,4 +32,4 @@ class Rect extends PainterElement {
 	}
 }
 
-module.exports = Rect;
+export default Rect;

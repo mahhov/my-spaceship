@@ -23,4 +23,4 @@ let record = (ms = 0) => {
 	return stop;
 };
 
-module.exports = record;
+export default record;

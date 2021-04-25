@@ -1,5 +1,5 @@
-const Frame = require('./Frame');
-const UiButton = require('../interface/components/UiButton');
+import Frame from './Frame.js';
+import UiButton from '../interface/components/UiButton.js';
 
 class InterfaceDemo extends Frame {
 	constructor(controller, painterSet) {
@@ -17,4 +17,4 @@ class InterfaceDemo extends Frame {
 	}
 }
 
-module.exports = InterfaceDemo;
+export default InterfaceDemo;

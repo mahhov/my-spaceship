@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
-const Phase = require('../../util/Phase');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
+import Phase from '../../util/Phase.js';
 
 const Stages = makeEnum('PLAY', 'LOOP', 'PAUSE', 'STOP');
 // variable number of phases per number of arguments to config
@@ -27,4 +27,4 @@ class Period extends ModuleManager {
 
 Period.Stages = Stages;
 
-module.exports = Period;
+export default Period;

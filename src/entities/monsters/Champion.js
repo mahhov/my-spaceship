@@ -1,16 +1,16 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors} = require('../../util/Constants');
-const WShip = require('../../graphics/WShip');
-const Phase = require('../../util/Phase');
-const Period = require('../modules/Period');
-const Aim = require('../modules/Aim');
-const Chase = require('../modules/Chase');
-const Shotgun = require('../modules/Shotgun');
-const Dash = require('../modules/Dash');
-const Trigger = require('../modules/Trigger');
-const NearbyDegen = require('../modules/NearbyDegen');
-// const Boomerang = require('../modules/Boomerang');
+import makeEnum from '../../util/Enum.js';
+import Monster from './Monster.js';
+import {Colors} from '../../util/Constants.js';
+import WShip from '../../graphics/WShip.js';
+import Phase from '../../util/Phase.js';
+import Period from '../modules/Period.js';
+import Aim from '../modules/Aim.js';
+import Chase from '../modules/Chase.js';
+import Shotgun from '../modules/Shotgun.js';
+import Dash from '../modules/Dash.js';
+import Trigger from '../modules/Trigger.js';
+import NearbyDegen from '../modules/NearbyDegen.js';
+// import Boomerang from '../modules/Boomerang.js';
 
 const Phases = makeEnum('ONE');
 
@@ -95,4 +95,4 @@ class Champion extends Monster {
 	}
 }
 
-module.exports = Champion;
+export default Champion;

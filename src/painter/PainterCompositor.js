@@ -1,4 +1,4 @@
-const Painter = require('./Painter');
+import Painter from './Painter.js';
 
 class PainterCompositor {
 	constructor(canvas) {
@@ -25,4 +25,4 @@ class PainterCompositor {
 	}
 }
 
-module.exports = PainterCompositor;
+export default PainterCompositor;

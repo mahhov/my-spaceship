@@ -1,12 +1,12 @@
-const LivingEntity = require('../LivingEntity');
-const Decay = require('../../util/Decay');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const Pool = require('../../util/Pool');
-const Buff = require('../Buff');
-const {setMagnitude, booleanArray, rand, randVector} = require('../../util/Number');
-const Dust = require('../particles/Dust');
-const {Colors} = require('../../util/Constants');
-const BarC = require('../../painter/elements/BarC');
+import LivingEntity from '../LivingEntity.js';
+import Decay from '../../util/Decay.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import Pool from '../../util/Pool.js';
+import Buff from '../Buff.js';
+import {setMagnitude, booleanArray, rand, randVector} from '../../util/Number.js';
+import Dust from '../particles/Dust.js';
+import {Colors} from '../../util/Constants.js';
+import BarC from '../../painter/elements/BarC.js';
 
 class Hero extends LivingEntity {
 	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
@@ -95,4 +95,4 @@ class Hero extends LivingEntity {
 	}
 }
 
-module.exports = Hero;
+export default Hero;

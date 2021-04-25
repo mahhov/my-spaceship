@@ -1,7 +1,7 @@
-const fs = require('fs');
-const http = require('http');
-const promisify = require('util').promisify;
-const browserify = require('browserify');
+import fs from 'fs.js';
+import http from 'http.js';
+import promisify from 'util.js'.promisify;
+import browserify from 'browserify.js';
 
 const PORT = 8086;
 const BUILD_DIR = 'build';

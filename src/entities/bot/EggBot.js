@@ -1,7 +1,7 @@
-const Vector = require('../../util/Vector');
-const {minWhichA, clamp, rand, randInt} = require('../../util/Number');
+import Vector from '../../util/Vector.js';
+import {minWhichA, clamp, rand, randInt} from '../../util/Number.js';
 
-const ProjectileAttack = require('../../abilities/ProjectileAttack');
+import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 
 class EggBot {
 	constructor(player, coopBotHeroes, hostileBotHeroes, egg, centerDir) {
@@ -143,4 +143,4 @@ class EggBot {
 	}
 }
 
-module.exports = EggBot;
+export default EggBot;

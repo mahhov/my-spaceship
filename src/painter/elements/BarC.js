@@ -1,5 +1,5 @@
-const PainterElement = require('./PainterElement');
-const Rect = require('./Rect');
+import PainterElement from './PainterElement.js';
+import Rect from './Rect.js';
 
 class BarC extends PainterElement {
 	constructor(x, y, width, height, fillRatio, emptyColor, fillColor, borderColor) {
@@ -22,4 +22,4 @@ class BarC extends PainterElement {
 	}
 }
 
-module.exports = BarC;
+export default BarC;

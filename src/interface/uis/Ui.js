@@ -1,4 +1,4 @@
-const UiComponent = require('../components/UiComponent');
+import UiComponent from '../components/UiComponent.js';
 
 class Ui extends UiComponent {
 	constructor() {
@@ -20,4 +20,4 @@ class Ui extends UiComponent {
 	}
 }
 
-module.exports = Ui;
+export default Ui;

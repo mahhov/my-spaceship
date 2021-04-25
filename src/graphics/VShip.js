@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const POINTS = [
 	[0, 3], // front
@@ -13,4 +13,4 @@ class VShip extends Graphics {
 	}
 }
 
-module.exports = VShip;
+export default VShip;

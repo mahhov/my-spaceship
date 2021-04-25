@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const POINTS = [
 	[0, 1],
@@ -14,4 +14,4 @@ class DoubleHorizDiamond extends Graphics {
 	}
 }
 
-module.exports = DoubleHorizDiamond;
+export default DoubleHorizDiamond;

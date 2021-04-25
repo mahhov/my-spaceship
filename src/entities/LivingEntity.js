@@ -1,6 +1,6 @@
-const Entity = require('./Entity');
-const Pool = require('../util/Pool');
-const Buff = require('./Buff');
+import Entity from './Entity.js';
+import Pool from '../util/Pool.js';
+import Buff from './Buff.js';
 
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {
@@ -37,4 +37,4 @@ class LivingEntity extends Entity {
 	}
 }
 
-module.exports = LivingEntity;
+export default LivingEntity;

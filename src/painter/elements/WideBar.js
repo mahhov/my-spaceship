@@ -1,4 +1,4 @@
-const Bar = require('./Bar');
+import Bar from './Bar.js';
 
 class WideBar extends Bar {
 	constructor(paintUiRow, fillRatio, emptyColor, fillColor, borderColor) {
@@ -8,4 +8,4 @@ class WideBar extends Bar {
 	}
 }
 
-module.exports = WideBar;
+export default WideBar;

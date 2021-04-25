@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const {setMagnitude} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import {setMagnitude} from '../../util/Number.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -19,4 +19,4 @@ class LookTowards extends Module {
 
 LookTowards.Stages = Stages;
 
-module.exports = LookTowards;
+export default LookTowards;

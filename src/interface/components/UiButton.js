@@ -1,9 +1,9 @@
-const makeEnum = require('../../util/Enum');
-const UiComponent = require('./UiComponent');
-const Bounds = require('../../intersection/Bounds');
-const {Colors} = require('../../util/Constants');
-const Rect = require('../../painter/elements/Rect');
-const Text = require('../../painter/elements/Text');
+import makeEnum from '../../util/Enum.js';
+import UiComponent from './UiComponent.js';
+import Bounds from '../../intersection/Bounds.js';
+import {Colors} from '../../util/Constants.js';
+import Rect from '../../painter/elements/Rect.js';
+import Text from '../../painter/elements/Text.js';
 
 const States = makeEnum('INACTIVE', 'ACTIVE', 'HOVER');
 
@@ -46,4 +46,4 @@ class UiButton extends UiComponent {
 	}
 }
 
-module.exports = UiButton;
+export default UiButton;

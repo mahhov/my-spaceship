@@ -1,6 +1,6 @@
-const Graphics = require('./Graphics');
-const PathCreator = require('./PathCreator');
-const Color = require('../util/Color');
+import Graphics from './Graphics.js';
+import PathCreator from './PathCreator.js';
+import Color from '../util/Color.js';
 
 const INSIDE_COLOR = [1, .8, .8];
 const OUTSIDE_COLOR = [.7, 0, 0];
@@ -21,4 +21,4 @@ class OutpostPortalGraphic extends Graphics { // todo [medium] rename all graphi
 	}
 }
 
-module.exports = OutpostPortalGraphic;
+export default OutpostPortalGraphic;

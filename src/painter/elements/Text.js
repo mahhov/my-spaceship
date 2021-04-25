@@ -1,4 +1,4 @@
-const PainterElement = require('./PainterElement');
+import PainterElement from './PainterElement.js';
 
 class Text extends PainterElement {
 	constructor(x, y, text, {color = '#000', size = '18px', align = 'center'} = {}) {
@@ -25,4 +25,4 @@ class Text extends PainterElement {
 	}
 }
 
-module.exports = Text;
+export default Text;

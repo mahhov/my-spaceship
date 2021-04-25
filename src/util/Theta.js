@@ -1,4 +1,4 @@
-const {cos, sin} = require('./Number');
+import {cos, sin} from './Number.js';
 
 class Theta {
 	constructor(theta) {
@@ -8,4 +8,4 @@ class Theta {
 	}
 }
 
-module.exports = Theta;
+export default Theta;

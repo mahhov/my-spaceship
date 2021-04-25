@@ -1,14 +1,14 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const DoubleHorizDiamondShip = require('../../../graphics/DoubleHorizDiamondShip');
-const Phase = require('../../../util/Phase');
-const {PI} = require('../../../util/Number');
-const Distance = require('../../modules/Distance');
-const Aim = require('../../modules/Aim');
-const Chase = require('../../modules/Chase');
-const Cooldown = require('../../modules/Cooldown');
-const AreaDegenLayer = require('../../modules/AreaDegenLayer');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import DoubleHorizDiamondShip from '../../../graphics/DoubleHorizDiamondShip.js';
+import Phase from '../../../util/Phase.js';
+import {PI} from '../../../util/Number.js';
+import Distance from '../../modules/Distance.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Cooldown from '../../modules/Cooldown.js';
+import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 
 const Phases = makeEnum('ONE');
 
@@ -58,4 +58,4 @@ class BombLayer extends Monster {
 	}
 }
 
-module.exports = BombLayer;
+export default BombLayer;

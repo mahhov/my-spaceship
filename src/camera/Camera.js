@@ -1,4 +1,4 @@
-const {clamp, avg} = require('../util/Number');
+import {clamp, avg} from '../util/Number.js';
 
 class Camera {
 	constructor(x, y, z = 2) {
@@ -61,4 +61,4 @@ class Camera {
 	}
 }
 
-module.exports = Camera;
+export default Camera;

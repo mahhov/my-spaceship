@@ -36,4 +36,4 @@ class Painter {
 	}
 }
 
-module.exports = Painter;
+export default Painter;

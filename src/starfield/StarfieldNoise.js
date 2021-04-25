@@ -1,8 +1,8 @@
-const Starfield = require('./Starfield');
-const {NoiseSimplex} = require('../util/Noise');
-const {rand} = require('../util/Number');
-const Star = require('./Star');
-const RectC = require('../painter/elements/RectC');
+import Starfield from './Starfield.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import {rand} from '../util/Number.js';
+import Star from './Star.js';
+import RectC from '../painter/elements/RectC.js';
 
 // this class is only for the StarfieldDemo
 class StarfieldNoise extends Starfield {
@@ -28,4 +28,4 @@ class StarfieldNoise extends Starfield {
 	}
 }
 
-module.exports = StarfieldNoise;
+export default StarfieldNoise;

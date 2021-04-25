@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 class RotatingTurretShip extends Graphics {
 	constructor(width, height, graphicOptions = {}) {
@@ -61,4 +61,4 @@ class RotatingTurretShip extends Graphics {
 	}
 }
 
-module.exports = RotatingTurretShip;
+export default RotatingTurretShip;

@@ -1,4 +1,4 @@
-const {clamp} = require('./Number');
+import {clamp} from './Number.js';
 
 class Pool {
 	constructor(max, incrementRate = 0) {
@@ -42,4 +42,4 @@ class Pool {
 	}
 }
 
-module.exports = Pool;
+export default Pool;

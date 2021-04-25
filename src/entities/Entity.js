@@ -1,5 +1,5 @@
-const Bounds = require('../intersection/Bounds');
-const {setMagnitude} = require('../util/Number');
+import Bounds from '../intersection/Bounds.js';
+import {setMagnitude} from '../util/Number.js';
 
 class Entity {
 	constructor(x, y, width, height, layer) {
@@ -83,4 +83,4 @@ class Entity {
 	}
 }
 
-module.exports = Entity;
+export default Entity;

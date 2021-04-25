@@ -1,5 +1,5 @@
-const Frame = require('./Frame');
-const PauseUi = require('../interface/uis/PauseUi');
+import Frame from './Frame.js';
+import PauseUi from '../interface/uis/PauseUi.js';
 
 class GameMenu extends Frame {
 	constructor(controller, painterSet) {
@@ -17,4 +17,4 @@ class GameMenu extends Frame {
 	}
 }
 
-module.exports = GameMenu;
+export default GameMenu;

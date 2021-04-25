@@ -1,5 +1,5 @@
-const Game = require('./Game');
-const MapGeneratorEgg = require('../map/MapGeneratorEgg');
+import Game from './Game.js';
+import MapGeneratorEgg from '../map/MapGeneratorEgg.js';
 
 // todo [medium] rework canvas to avoid having to subclass a frame class just to set a constructor parameter
 class GameEgg extends Game {
@@ -8,4 +8,4 @@ class GameEgg extends Game {
 	}
 }
 
-module.exports = GameEgg;
+export default GameEgg;

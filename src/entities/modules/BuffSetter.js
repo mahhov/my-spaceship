@@ -1,5 +1,5 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -19,4 +19,4 @@ class BuffSetter extends Module {
 
 BuffSetter.Stages = Stages;
 
-module.exports = BuffSetter;
+export default BuffSetter;

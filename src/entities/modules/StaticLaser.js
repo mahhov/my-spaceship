@@ -1,9 +1,9 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const Vector = require('../../util/Vector');
-const Laser = require('../attack/Laser');
-const {Colors} = require('../../util/Constants');
-const Line = require('../../painter/elements/Line');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import Vector from '../../util/Vector.js';
+import Laser from '../attack/Laser.js';
+import {Colors} from '../../util/Constants.js';
+import Line from '../../painter/elements/Line.js';
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 
@@ -46,4 +46,4 @@ class StaticLaser extends Module {
 
 StaticLaser.Stages = Stages;
 
-module.exports = StaticLaser;
+export default StaticLaser;

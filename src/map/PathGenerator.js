@@ -1,4 +1,4 @@
-const {getMagnitudeSqr, getMagnitude, setMagnitude, randVector, rand, vectorDelta, vectorSum} = require('../util/Number');
+import {getMagnitudeSqr, getMagnitude, setMagnitude, randVector, rand, vectorDelta, vectorSum} from '../util/Number.js';
 
 class PathGenerator {
 	// weightPower [0, 1)
@@ -80,4 +80,4 @@ class PathGenerator {
 	}
 }
 
-module.exports = PathGenerator;
+export default PathGenerator;

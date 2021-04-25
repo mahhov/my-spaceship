@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const AreaDegen = require('../attack/AreaDegen');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import AreaDegen from '../attack/AreaDegen.js';
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 
@@ -33,4 +33,4 @@ class AreaDegenLayer extends Module {
 
 AreaDegenLayer.Stages = Stages;
 
-module.exports = AreaDegenLayer;
+export default AreaDegenLayer;

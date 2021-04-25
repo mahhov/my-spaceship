@@ -1,5 +1,5 @@
-const PathCreator = require('./PathCreator');
-const Graphics = require('./Graphics');
+import PathCreator from './PathCreator.js';
+import Graphics from './Graphics.js';
 
 const POINTS = PathCreator.createCirclePoints();
 
@@ -10,4 +10,4 @@ class HexagonShip extends Graphics {
 	}
 }
 
-module.exports = HexagonShip;
+export default HexagonShip;

@@ -1,16 +1,16 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const HexagonShip = require('../../../graphics/HexagonShip');
-const Phase = require('../../../util/Phase');
-const {PI} = require('../../../util/Number');
-const Distance = require('../../modules/Distance');
-const Period = require('../../modules/Period');
-const Aim = require('../../modules/Aim');
-const Chase = require('../../modules/Chase');
-const Dash = require('../../modules/Dash');
-const Trigger = require('../../modules/Trigger');
-const NearbyDegen = require('../../modules/NearbyDegen');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import HexagonShip from '../../../graphics/HexagonShip.js';
+import Phase from '../../../util/Phase.js';
+import {PI} from '../../../util/Number.js';
+import Distance from '../../modules/Distance.js';
+import Period from '../../modules/Period.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Dash from '../../modules/Dash.js';
+import Trigger from '../../modules/Trigger.js';
+import NearbyDegen from '../../modules/NearbyDegen.js';
 
 const Phases = makeEnum('ONE');
 
@@ -88,4 +88,4 @@ class DashChaser extends Monster {
 	}
 }
 
-module.exports = DashChaser;
+export default DashChaser;

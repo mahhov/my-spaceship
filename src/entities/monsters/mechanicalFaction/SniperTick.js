@@ -1,14 +1,14 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const SplitDiamondShip = require('../../../graphics/SplitDiamondShip');
-const Phase = require('../../../util/Phase');
-const {PI} = require('../../../util/Number');
-const Distance = require('../../modules/Distance');
-const Aim = require('../../modules/Aim');
-const Chase = require('../../modules/Chase');
-const Cooldown = require('../../modules/Cooldown');
-const Shotgun = require('../../modules/Shotgun');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import SplitDiamondShip from '../../../graphics/SplitDiamondShip.js';
+import Phase from '../../../util/Phase.js';
+import {PI} from '../../../util/Number.js';
+import Distance from '../../modules/Distance.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Cooldown from '../../modules/Cooldown.js';
+import Shotgun from '../../modules/Shotgun.js';
 
 const Phases = makeEnum('ONE');
 
@@ -69,4 +69,4 @@ class SniperTick extends Monster {
 	}
 }
 
-module.exports = SniperTick;
+export default SniperTick;

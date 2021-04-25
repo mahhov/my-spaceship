@@ -1,9 +1,9 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors} = require('../../util/Constants');
-const StarShip = require('../../graphics/StarShip');
-const Phase = require('../../util/Phase');
-const NearbyDegen = require('../modules/NearbyDegen');
+import makeEnum from '../../util/Enum.js';
+import Monster from './Monster.js';
+import {Colors} from '../../util/Constants.js';
+import StarShip from '../../graphics/StarShip.js';
+import Phase from '../../util/Phase.js';
+import NearbyDegen from '../modules/NearbyDegen.js';
 
 const Phases = makeEnum('REST', 'ATTACK');
 
@@ -26,4 +26,4 @@ class Turret extends Monster {
 	}
 }
 
-module.exports = Turret;
+export default Turret;

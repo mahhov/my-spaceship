@@ -1,4 +1,4 @@
-const makeEnum = require('../util/Enum');
+import makeEnum from '../util/Enum.js';
 
 const Directions = makeEnum('LEFT', 'TOP', 'RIGHT', 'BOTTOM');
 
@@ -50,4 +50,4 @@ class Bounds {
 
 Bounds.Directions = Directions;
 
-module.exports = Bounds;
+export default Bounds;

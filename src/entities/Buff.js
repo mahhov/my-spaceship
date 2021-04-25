@@ -1,7 +1,7 @@
-const Pool = require('../util/Pool');
-const {Positions} = require('../util/Constants');
-const Rect = require('../painter/elements/Rect');
-const Text = require('../painter/elements/Text');
+import Pool from '../util/Pool.js';
+import {Positions} from '../util/Constants.js';
+import Rect from '../painter/elements/Rect.js';
+import Text from '../painter/elements/Text.js';
 
 class Buff {
 	constructor(duration, uiColor, uiText) {
@@ -94,4 +94,4 @@ class Buff {
 	}
 }
 
-module.exports = Buff;
+export default Buff;

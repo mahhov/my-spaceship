@@ -1,5 +1,5 @@
-const Graphics = require('./Graphics');
-const {PI2, thetaToVector, rand} = require('../util/Number');
+import Graphics from './Graphics.js';
+import {PI2, thetaToVector, rand} from '../util/Number.js';
 
 // min magnitude of all points will be MIN_MAGNITUDE / (MIN_MAGNITUDE + 1)
 const POINTS = 5, MIN_MAGNITUDE = 1;
@@ -14,4 +14,4 @@ class RockGraphic extends Graphics {
 	}
 }
 
-module.exports = RockGraphic;
+export default RockGraphic;

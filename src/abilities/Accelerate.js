@@ -1,5 +1,5 @@
-const Ability = require('./Ability');
-const Buff = require('../entities/Buff');
+import Ability from './Ability.js';
+import Buff from '../entities/Buff.js';
 
 class Accelerate extends Ability {
 	constructor() {
@@ -20,4 +20,4 @@ class Accelerate extends Ability {
 	}
 }
 
-module.exports = Accelerate;
+export default Accelerate;

@@ -1,17 +1,17 @@
-const Hero = require('./Hero');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {Colors, Positions} = require('../../util/Constants');
-const VShip = require('../../graphics/VShip');
-const ProjectileAttack = require('../../abilities/ProjectileAttack');
-const Dash = require('../../abilities/Dash');
-const IncDefense = require('../../abilities/IncDefense');
-const DelayedRegen = require('../../abilities/DelayedRegen');
-const Buff = require('.././Buff');
-const keyMappings = require('../../control/keyMappings');
-const Bounds = require('../../intersection/Bounds');
-const RectC = require('../../painter/elements/RectC');
-const Bar = require('../../painter/elements/Bar');
-const Rect = require('../../painter/elements/Rect');
+import Hero from './Hero.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {Colors, Positions} from '../../util/Constants.js';
+import VShip from '../../graphics/VShip.js';
+import ProjectileAttack from '../../abilities/ProjectileAttack.js';
+import Dash from '../../abilities/Dash.js';
+import IncDefense from '../../abilities/IncDefense.js';
+import DelayedRegen from '../../abilities/DelayedRegen.js';
+import Buff from '.././Buff.js';
+import keyMappings from '../../control/keyMappings.js';
+import Bounds from '../../intersection/Bounds.js';
+import RectC from '../../painter/elements/RectC.js';
+import Bar from '../../painter/elements/Bar.js';
+import Rect from '../../painter/elements/Rect.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
@@ -133,4 +133,4 @@ class Player extends Hero {
 	}
 }
 
-module.exports = Player;
+export default Player;

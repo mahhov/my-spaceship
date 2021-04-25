@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
+import makeEnum from '../../util/Enum.js';
 
-const Module = require('./Module');
+import Module from './Module.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -18,4 +18,4 @@ class PhaseSetter extends Module {
 
 PhaseSetter.Stages = Stages;
 
-module.exports = PhaseSetter;
+export default PhaseSetter;

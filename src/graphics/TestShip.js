@@ -1,6 +1,6 @@
-const PathCreator = require('./PathCreator');
-const Color = require('../util/Color');
-const Graphics = require('./Graphics');
+import PathCreator from './PathCreator.js';
+import Color from '../util/Color.js';
+import Graphics from './Graphics.js';
 
 const POINTS = PathCreator.createCirclePoints();
 const COLOR = Color.from255(240, 200, 230).get();
@@ -13,4 +13,4 @@ class TestShip extends Graphics {
 	}
 }
 
-module.exports = TestShip;
+export default TestShip;

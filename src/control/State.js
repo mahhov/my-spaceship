@@ -1,4 +1,4 @@
-const makeEnum = require('../util/Enum');
+import makeEnum from '../util/Enum.js';
 
 // larger values have priority when multiple keys are mapped to the same control
 const States = makeEnum('UP', 'RELEASED', 'PRESSED', 'DOWN');
@@ -38,4 +38,4 @@ class State {
 
 State.States = States;
 
-module.exports = State;
+export default State;

@@ -1,19 +1,19 @@
-const MapGenerator = require('./MapGenerator');
-const {NoiseSimplex} = require('../util/Noise');
-const Player = require('../entities/heroes/Player');
-const {clamp, rand} = require('../util/Number');
-const MapBoundary = require('../entities/stills/MapBoundary');
-const Rock = require('../entities/stills/Rock');
-const RockMineral = require('../entities/stills/RockMineral');
-const Champion = require('../entities/monsters/Champion');
-const ExplodingTick = require('../entities/monsters/mechanicalFaction/ExplodingTick');
-const SniperTick = require('../entities/monsters/mechanicalFaction/SniperTick');
-const Static4DirTurret = require('../entities/monsters/mechanicalFaction/Static4DirTurret');
-const AimingLaserTurret = require('../entities/monsters/mechanicalFaction/AimingLaserTurret');
-const MechanicalBossEarly = require('../entities/monsters/mechanicalFaction/MechanicalBossEarly');
-const BombLayer = require('../entities/monsters/mechanicalFaction/BombLayer');
-const DashChaser = require('../entities/monsters/mechanicalFaction/DashChaser');
-const MechanicalBoss = require('../entities/monsters/mechanicalFaction/MechanicalBoss');
+import MapGenerator from './MapGenerator.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import Player from '../entities/heroes/Player.js';
+import {clamp, rand} from '../util/Number.js';
+import MapBoundary from '../entities/stills/MapBoundary.js';
+import Rock from '../entities/stills/Rock.js';
+import RockMineral from '../entities/stills/RockMineral.js';
+import Champion from '../entities/monsters/Champion.js';
+import ExplodingTick from '../entities/monsters/mechanicalFaction/ExplodingTick.js';
+import SniperTick from '../entities/monsters/mechanicalFaction/SniperTick.js';
+import Static4DirTurret from '../entities/monsters/mechanicalFaction/Static4DirTurret.js';
+import AimingLaserTurret from '../entities/monsters/mechanicalFaction/AimingLaserTurret.js';
+import MechanicalBossEarly from '../entities/monsters/mechanicalFaction/MechanicalBossEarly.js';
+import BombLayer from '../entities/monsters/mechanicalFaction/BombLayer.js';
+import DashChaser from '../entities/monsters/mechanicalFaction/DashChaser.js';
+import MechanicalBoss from '../entities/monsters/mechanicalFaction/MechanicalBoss.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
@@ -141,7 +141,7 @@ class MapGeneratorTimed extends MapGenerator {
 	}
 }
 
-module.exports = MapGeneratorTimed;
+export default MapGeneratorTimed;
 
 /*
 123456

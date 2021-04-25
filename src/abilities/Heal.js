@@ -1,5 +1,5 @@
-const Ability = require('./Ability');
-const {setMagnitude} = require('../util/Number');
+import Ability from './Ability.js';
+import {setMagnitude} from '../util/Number.js';
 
 class Heal extends Ability {
 	constructor() {
@@ -14,4 +14,4 @@ class Heal extends Ability {
 	}
 }
 
-module.exports = Heal;
+export default Heal;

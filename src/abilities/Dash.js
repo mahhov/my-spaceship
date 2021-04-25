@@ -1,5 +1,5 @@
-const Ability = require('./Ability');
-const {booleanArray} = require('../util/Number');
+import Ability from './Ability.js';
+import {booleanArray} from '../util/Number.js';
 
 class Dash extends Ability {
 	constructor() {
@@ -14,4 +14,4 @@ class Dash extends Ability {
 	}
 }
 
-module.exports = Dash;
+export default Dash;

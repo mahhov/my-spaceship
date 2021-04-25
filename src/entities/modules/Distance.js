@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
-const {getMagnitude} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
+import {getMagnitude} from '../../util/Number.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 // variable number of phases per number of arguments to config
@@ -28,4 +28,4 @@ class Distance extends ModuleManager {
 
 Distance.Stages = Stages;
 
-module.exports = Distance;
+export default Distance;

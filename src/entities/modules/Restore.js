@@ -1,5 +1,5 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -16,4 +16,4 @@ class Restore extends Module {
 
 Restore.Stages = Stages;
 
-module.exports = Restore;
+export default Restore;

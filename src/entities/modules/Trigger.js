@@ -1,5 +1,5 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum('INACTIVE', 'ACTIVE');
 const Phases = makeEnum('INACTIVE', 'UNTRIGGERED', 'TRIGGERED');
@@ -28,4 +28,4 @@ class Trigger extends ModuleManager {
 Trigger.Stages = Stages;
 Trigger.Phases = Phases;
 
-module.exports = Trigger;
+export default Trigger;

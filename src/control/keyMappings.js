@@ -1,5 +1,5 @@
-const Controller = require('./Controller');
-const State = require('./State');
+import Controller from './Controller.js';
+import State from './State.js';
 
 class KeyMapping {
 	constructor(keys = [], mouse = [], string = [keys[0]]) {
@@ -50,4 +50,4 @@ class KeyMapping {
 	}
 }
 
-module.exports = KeyMapping.keyMappings;
+export default KeyMapping.keyMappings;

@@ -1,24 +1,24 @@
-const MapGenerator = require('./MapGenerator');
-const Vector = require('../util/Vector');
-const {NoiseSimplex} = require('../util/Noise');
-const {rand, randInt, floor, round} = require('../util/Number');
-const MapBoundary = require('../entities/stills/MapBoundary');
-const Rock = require('../entities/stills/Rock');
-const RockMineral = require('../entities/stills/RockMineral');
-const Egg = require('../entities/stills/Egg');
-const ProjectileAttack = require('../abilities/ProjectileAttack');
-const Dash = require('../abilities/Dash');
-const IncDefense = require('../abilities/IncDefense');
-const DelayedRegen = require('../abilities/DelayedRegen');
-const Respawn = require('../abilities/Respawn');
-const {Colors} = require('../util/Constants');
-const Player = require('../entities/heroes/Player');
-const BotHero = require('../entities/heroes/BotHero');
-const VShip = require('../graphics/VShip');
-const WShip = require('../graphics/WShip');
-const EggBot = require('../entities/bot/EggBot');
-const {Positions} = require('../util/Constants');
-const Text = require('../painter/elements/Text');
+import MapGenerator from './MapGenerator.js';
+import Vector from '../util/Vector.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import {rand, randInt, floor, round} from '../util/Number.js';
+import MapBoundary from '../entities/stills/MapBoundary.js';
+import Rock from '../entities/stills/Rock.js';
+import RockMineral from '../entities/stills/RockMineral.js';
+import Egg from '../entities/stills/Egg.js';
+import ProjectileAttack from '../abilities/ProjectileAttack.js';
+import Dash from '../abilities/Dash.js';
+import IncDefense from '../abilities/IncDefense.js';
+import DelayedRegen from '../abilities/DelayedRegen.js';
+import Respawn from '../abilities/Respawn.js';
+import {Colors} from '../util/Constants.js';
+import Player from '../entities/heroes/Player.js';
+import BotHero from '../entities/heroes/BotHero.js';
+import VShip from '../graphics/VShip.js';
+// import WShip from '../graphics/WShip.js';
+import EggBot from '../entities/bot/EggBot.js';
+import {Positions} from '../util/Constants.js';
+import Text from '../painter/elements/Text.js';
 
 const WIDTH = 2.5, HEIGHT = 2.5;
 const SPAWN_X1 = WIDTH / 5;
@@ -133,4 +133,4 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 }
 
-module.exports = MapGeneratorEgg;
+export default MapGeneratorEgg;

@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const S = 1, D = .6, M = .3; // S = 1, D < .7, M < D
 
@@ -28,4 +28,4 @@ class StarShip extends Graphics {
 	}
 }
 
-module.exports = StarShip;
+export default StarShip;

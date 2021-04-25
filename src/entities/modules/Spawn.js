@@ -1,7 +1,7 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
-const LinkedList = require('../../util/LinkedList');
-const {rand, randInt, randVector} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
+import LinkedList from '../../util/LinkedList.js';
+import {rand, randInt, randVector} from '../../util/Number.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('NOT_SPAWNING', 'SPAWNING', 'COMPLETE');
@@ -61,4 +61,4 @@ class Spawn extends ModuleManager {
 Spawn.Stages = Stages;
 Spawn.Phases = Phases;
 
-module.exports = Spawn;
+export default Spawn;

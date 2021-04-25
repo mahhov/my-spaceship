@@ -1,4 +1,4 @@
-const Rect = require('./Rect');
+import Rect from './Rect.js';
 
 class RectC extends Rect {
 	// todo [low] refactor coordinate system to support coordintaes, centered coordintaes, and camera coordintaes to replace current constructor overloading
@@ -11,4 +11,4 @@ class RectC extends Rect {
 	}
 }
 
-module.exports = RectC;
+export default RectC;

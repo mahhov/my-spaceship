@@ -1,6 +1,6 @@
-const Ability = require('./Ability');
-const {setMagnitude, randVector} = require('../util/Number');
-const Laser = require('../entities/attack/Laser');
+import Ability from './Ability.js';
+import {setMagnitude, randVector} from '../util/Number.js';
+import Laser from '../entities/attack/Laser.js';
 
 class LaserAttack extends Ability {
 	constructor() {
@@ -24,4 +24,4 @@ class LaserAttack extends Ability {
 	}
 }
 
-module.exports = LaserAttack;
+export default LaserAttack;

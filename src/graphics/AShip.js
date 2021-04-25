@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const NOSE = 6;
 const LEG = 11, LEG_SPREAD = 6;
@@ -20,4 +20,4 @@ class AShip extends Graphics {
 	}
 }
 
-module.exports = AShip;
+export default AShip;

@@ -1,12 +1,12 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const Rect4DotsShip = require('../../../graphics/Rect4DotsShip');
-const Phase = require('../../../util/Phase');
-const Vector = require('../../../util/Vector');
-const Period = require('../../modules/Period');
-const Aim = require('../../modules/Aim');
-const Shotgun = require('../../modules/Shotgun');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import Rect4DotsShip from '../../../graphics/Rect4DotsShip.js';
+import Phase from '../../../util/Phase.js';
+import Vector from '../../../util/Vector.js';
+import Period from '../../modules/Period.js';
+import Aim from '../../modules/Aim.js';
+import Shotgun from '../../modules/Shotgun.js';
 
 const Phases = makeEnum('ONE');
 
@@ -46,4 +46,4 @@ class Static4DirTurret extends Monster {
 	}
 }
 
-module.exports = Static4DirTurret;
+export default Static4DirTurret;

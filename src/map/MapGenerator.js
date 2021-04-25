@@ -1,6 +1,6 @@
-const {Positions} = require('../util/Constants');
-const {round} = require('../util/Number');
-const Text = require('../painter/elements/Text');
+import {Positions} from '../util/Constants.js';
+import {round} from '../util/Number.js';
+import Text from '../painter/elements/Text.js';
 
 class MapGenerator {
 	constructor(map) {
@@ -26,4 +26,4 @@ class MapGenerator {
 	}
 }
 
-module.exports = MapGenerator;
+export default MapGenerator;

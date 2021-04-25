@@ -1,10 +1,10 @@
-const LinkedList = require('../util/LinkedList');
-const Entity = require('../entities/Entity');
-const Frame = require('./Frame');
-const MapGenerator = require('../map/MapGeneratorStaged');
-const Camera = require('../camera/Camera');
-const Color = require('../util/Color');
-const RectC = require('../painter/elements/RectC');
+import LinkedList from '../util/LinkedList.js';
+import Entity from '../entities/Entity.js';
+import Frame from './Frame.js';
+import MapGenerator from '../map/MapGeneratorStaged.js';
+import Camera from '../camera/Camera.js';
+import Color from '../util/Color.js';
+import RectC from '../painter/elements/RectC.js';
 
 class FakePlayer {
 	setPosition() {
@@ -73,4 +73,4 @@ class MapDemo extends Frame {
 	}
 }
 
-module.exports = MapDemo;
+export default MapDemo;

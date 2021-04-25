@@ -1,5 +1,5 @@
-const PassiveAbility = require('./PassiveAbility');
-const Pool = require('../util/Pool');
+import PassiveAbility from './PassiveAbility.js';
+import Pool from '../util/Pool.js';
 
 class DelayedRegen extends PassiveAbility {
 	constructor() {
@@ -17,4 +17,4 @@ class DelayedRegen extends PassiveAbility {
 	}
 }
 
-module.exports = DelayedRegen;
+export default DelayedRegen;

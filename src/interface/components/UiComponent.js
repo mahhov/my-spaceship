@@ -1,4 +1,4 @@
-const Emitter = require('../../util/Emitter');
+import Emitter from '../../util/Emitter.js';
 
 class UiComponent extends Emitter {
 	update(controller) {
@@ -8,4 +8,4 @@ class UiComponent extends Emitter {
 	}
 }
 
-module.exports = UiComponent;
+export default UiComponent;

@@ -1,5 +1,5 @@
-const Path = require('../painter/elements/Path');
-const {PI2, thetaToVector} = require('../util/Number');
+import Path from '../painter/elements/Path.js';
+import {PI2, thetaToVector} from '../util/Number.js';
 
 class PathCreator {
 	constructor() {
@@ -109,4 +109,4 @@ class PathCreator {
 	};
 }
 
-module.exports = PathCreator;
+export default PathCreator;

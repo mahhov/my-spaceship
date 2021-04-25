@@ -22,4 +22,4 @@ class Module {
 	}
 }
 
-module.exports = Module;
+export default Module;

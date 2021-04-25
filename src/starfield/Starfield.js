@@ -1,6 +1,6 @@
-const {rand, randB} = require('../util/Number');
-const Star = require('./Star');
-const RectC = require('../painter/elements/RectC');
+import {rand, randB} from '../util/Number.js';
+import Star from './Star.js';
+import RectC from '../painter/elements/RectC.js';
 
 class Starfield {
 	constructor(width, height, extra = 0) {
@@ -27,4 +27,4 @@ class Starfield {
 	}
 }
 
-module.exports = Starfield;
+export default Starfield;

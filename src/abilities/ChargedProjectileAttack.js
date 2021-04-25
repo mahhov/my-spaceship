@@ -1,7 +1,7 @@
-const Ability = require('./Ability');
-const Buff = require('../entities/Buff');
-const {setMagnitude, randVector} = require('../util/Number');
-const Projectile = require('../entities/attack/Projectile');
+import Ability from './Ability.js';
+import Buff from '../entities/Buff.js';
+import {setMagnitude, randVector} from '../util/Number.js';
+import Projectile from '../entities/attack/Projectile.js';
 
 class ChargedProjectileAttack extends Ability {
 	constructor() {
@@ -32,4 +32,4 @@ class ChargedProjectileAttack extends Ability {
 	}
 }
 
-module.exports = ChargedProjectileAttack;
+export default ChargedProjectileAttack;

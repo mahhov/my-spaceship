@@ -20,4 +20,4 @@ class Decay {
 	}
 }
 
-module.exports = Decay;
+export default Decay;

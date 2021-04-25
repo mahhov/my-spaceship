@@ -1,4 +1,4 @@
-const State = require('./State');
+import State from './State.js';
 
 class Controller {
 	constructor(mouseTarget) {
@@ -93,4 +93,4 @@ class Controller {
 	}
 }
 
-module.exports = Controller;
+export default Controller;

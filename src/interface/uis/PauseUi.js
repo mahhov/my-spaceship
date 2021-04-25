@@ -1,6 +1,6 @@
-const Ui = require('./Ui');
-const UiText = require('../components/UiText');
-const UiButton = require('../components/UiButton');
+import Ui from './Ui.js';
+import UiText from '../components/UiText.js';
+import UiButton from '../components/UiButton.js';
 
 class PauseUi extends Ui {
 	constructor() {
@@ -13,4 +13,4 @@ class PauseUi extends Ui {
 	}
 }
 
-module.exports = PauseUi;
+export default PauseUi;

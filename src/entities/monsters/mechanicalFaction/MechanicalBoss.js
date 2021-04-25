@@ -1,9 +1,9 @@
-const makeEnum = require('../../../util/Enum');
-const MechanicalBossEarly = require('./MechanicalBossEarly');
-const Phase = require('../../../util/Phase');
-const Period = require('../../modules/Period');
-const Position = require('../../modules/Position');
-const AreaDegenLayer = require('../../modules/AreaDegenLayer');
+import makeEnum from '../../../util/Enum.js';
+import MechanicalBossEarly from './MechanicalBossEarly.js';
+import Phase from '../../../util/Phase.js';
+import Period from '../../modules/Period.js';
+import Position from '../../modules/Position.js';
+import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 
 const Phases = makeEnum('ONE');
 
@@ -71,4 +71,4 @@ class MechanicalBoss extends MechanicalBossEarly {
 	}
 }
 
-module.exports = MechanicalBoss;
+export default MechanicalBoss;

@@ -1,13 +1,13 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors} = require('../../util/Constants');
-const AShip = require('../../graphics/AShip');
-const Phase = require('../../util/Phase');
-const Vector = require('../../util/Vector');
-const Distance = require('../modules/Distance');
-const Aim = require('../modules/Aim');
-const Chase = require('../modules/Chase');
-const Shotgun = require('../modules/Shotgun');
+import makeEnum from '../../util/Enum.js';
+import Monster from './Monster.js';
+import {Colors} from '../../util/Constants.js';
+import AShip from '../../graphics/AShip.js';
+import Phase from '../../util/Phase.js';
+import Vector from '../../util/Vector.js';
+import Distance from '../modules/Distance.js';
+import Aim from '../modules/Aim.js';
+import Chase from '../modules/Chase.js';
+import Shotgun from '../modules/Shotgun.js';
 
 const Phases = makeEnum('ONE');
 
@@ -63,4 +63,4 @@ class MeleeDart extends Monster {
 	}
 }
 
-module.exports = MeleeDart;
+export default MeleeDart;

@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
-const {setMagnitude} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
+import {setMagnitude} from '../../util/Number.js';
 
 const Stages = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');
 const Phases = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');
@@ -41,4 +41,4 @@ class Dash extends ModuleManager {
 Dash.Stages = Stages;
 Dash.Phases = Phases;
 
-module.exports = Dash;
+export default Dash;

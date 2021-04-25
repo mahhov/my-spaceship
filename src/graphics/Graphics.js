@@ -1,4 +1,4 @@
-const PathCreator = require('./PathCreator');
+import PathCreator from './PathCreator.js';
 
 class Graphics {
 	constructor() {
@@ -47,4 +47,4 @@ class Graphics {
 	}
 }
 
-module.exports = Graphics;
+export default Graphics;

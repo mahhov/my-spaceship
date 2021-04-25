@@ -1,5 +1,5 @@
-const Path = require('./Path');
-const Vector = require('../../util/Vector');
+import Path from './Path.js';
+import Vector from '../../util/Vector.js';
 
 class Line extends Path {
 	constructor(x, y, x2, y2, width, graphicOptions) {
@@ -19,4 +19,4 @@ class Line extends Path {
 	}
 }
 
-module.exports = Line;
+export default Line;

@@ -1,4 +1,4 @@
-const {PI2, clamp, cos, sin, rand} = require('./Number');
+import {PI2, clamp, cos, sin, rand} from './Number.js';
 
 class Vector {
 	constructor(x, y) {
@@ -113,4 +113,4 @@ class Vector {
 	}
 }
 
-module.exports = Vector;
+export default Vector;

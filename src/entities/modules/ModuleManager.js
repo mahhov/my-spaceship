@@ -1,4 +1,4 @@
-const Module = require('./Module');
+import Module from './Module.js';
 
 class ModuleManager extends Module {
 	constructor() {
@@ -32,6 +32,6 @@ class ModuleManager extends Module {
 	}
 }
 
-module.exports = ModuleManager;
+export default ModuleManager;
 
 // todo [low] consider merging moduleManager and module

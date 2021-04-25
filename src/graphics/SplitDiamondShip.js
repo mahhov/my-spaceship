@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const DIAMOND_POINTS = [
 	[0, 1.5],
@@ -18,4 +18,4 @@ class SplitDiamondShip extends Graphics {
 	}
 }
 
-module.exports = SplitDiamondShip;
+export default SplitDiamondShip;

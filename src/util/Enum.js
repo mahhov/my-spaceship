@@ -4,4 +4,4 @@ const makeEnum = (...values) => {
 	return enumb;
 };
 
-module.exports = makeEnum;
+export default makeEnum;

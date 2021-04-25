@@ -1,6 +1,6 @@
-const Ability = require('./Ability');
-const {Colors} = require('../util/Constants');
-const Bomb = require('../entities/attack/Bomb');
+import Ability from './Ability.js';
+import {Colors} from '../util/Constants.js';
+import Bomb from '../entities/attack/Bomb.js';
 
 class BombAttack extends Ability {
 	constructor(paintUiColumn) {
@@ -15,4 +15,4 @@ class BombAttack extends Ability {
 	}
 }
 
-module.exports = BombAttack;
+export default BombAttack;

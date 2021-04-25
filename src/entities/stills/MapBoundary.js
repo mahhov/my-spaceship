@@ -1,7 +1,7 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {Colors} = require('../../util/Constants');
-const RectGraphic = require('../../graphics/RectGraphic');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {Colors} from '../../util/Constants.js';
+import RectGraphic from '../../graphics/RectGraphic.js';
 
 class MapBoundary extends Entity {
 	static createBoxBoundaries(width, height) {
@@ -21,4 +21,4 @@ class MapBoundary extends Entity {
 	}
 }
 
-module.exports = MapBoundary;
+export default MapBoundary;

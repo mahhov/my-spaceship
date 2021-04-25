@@ -1,5 +1,5 @@
-const UiComponent = require('./UiComponent');
-const Text = require('../../painter/elements/Text');
+import UiComponent from './UiComponent.js';
+import Text from '../../painter/elements/Text.js';
 
 class UiText extends UiComponent {
 	constructor(x, y, text) {
@@ -14,4 +14,4 @@ class UiText extends UiComponent {
 	}
 }
 
-module.exports = UiText;
+export default UiText;

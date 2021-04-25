@@ -1,4 +1,4 @@
-const PathGenerator = require('../src/map/PathGenerator');
+import PathGenerator from '../src/map/PathGenerator.js';
 
 let pathGenerator = new PathGenerator(300, 300, 10);
 

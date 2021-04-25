@@ -1,9 +1,9 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {randVector} = require('../../util/Number');
-const DamageDust = require('../particles/DamageDust');
-const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/elements/RectC');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {randVector} from '../../util/Number.js';
+import DamageDust from '../particles/DamageDust.js';
+import {Colors} from '../../util/Constants.js';
+import RectC from '../../painter/elements/RectC.js';
 
 class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {
@@ -41,4 +41,4 @@ class Projectile extends Entity {
 	}
 }
 
-module.exports = Projectile;
+export default Projectile;

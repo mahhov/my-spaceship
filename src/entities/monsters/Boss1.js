@@ -1,17 +1,17 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors, Positions} = require('../../util/Constants');
-const Phase = require('../../util/Phase');
-const RotatingTurretShip = require('../../graphics/RotatingTurretShip');
-const Distance = require('../modules/Distance');
-const Trigger = require('../modules/Trigger');
-const PhaseSetter = require('../modules/PhaseSetter');
-const Restore = require('../modules/Restore');
-const NearbyDegen = require('../modules/NearbyDegen');
-const Aim = require('../modules/Aim');
-const Shotgun = require('../modules/Shotgun');
-const LookTowards = require('../modules/LookTowards');
-const Bar = require('../../painter/elements/Bar');
+import makeEnum from '../../util/Enum.js';
+import Monster from './Monster.js';
+import {Colors, Positions} from '../../util/Constants.js';
+import Phase from '../../util/Phase.js';
+import RotatingTurretShip from '../../graphics/RotatingTurretShip.js';
+import Distance from '../modules/Distance.js';
+import Trigger from '../modules/Trigger.js';
+import PhaseSetter from '../modules/PhaseSetter.js';
+import Restore from '../modules/Restore.js';
+import NearbyDegen from '../modules/NearbyDegen.js';
+import Aim from '../modules/Aim.js';
+import Shotgun from '../modules/Shotgun.js';
+import LookTowards from '../modules/LookTowards.js';
+import Bar from '../../painter/elements/Bar.js';
 
 const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
 
@@ -146,4 +146,4 @@ class Boss1 extends Monster {
 	}
 }
 
-module.exports = Boss1;
+export default Boss1;

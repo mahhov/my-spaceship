@@ -1,5 +1,5 @@
-const Hero = require('./Hero');
-const Buff = require('../Buff');
+import Hero from './Hero.js';
+import Buff from '../Buff.js';
 
 class BotHero extends Hero {
 	update(map, intersectionFinder, monsterKnowledge, goals) {
@@ -11,4 +11,4 @@ class BotHero extends Hero {
 	}
 }
 
-module.exports = BotHero;
+export default BotHero;

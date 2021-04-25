@@ -1,7 +1,7 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const Vector = require('../../util/Vector');
-const {thetaToVector} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import Vector from '../../util/Vector.js';
+import {thetaToVector} from '../../util/Number.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -28,4 +28,4 @@ class Rotate extends Module {
 
 Rotate.Stages = Stages;
 
-module.exports = Rotate;
+export default Rotate;

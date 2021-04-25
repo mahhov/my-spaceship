@@ -1,6 +1,6 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
-const Phase = require('../../util/Phase');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
+import Phase from '../../util/Phase.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'COOLDOWN');
 const Phases = makeEnum('UNTRIGGERED', 'TRIGGERED');
@@ -24,4 +24,4 @@ class Cooldown extends ModuleManager {
 Cooldown.Stages = Stages;
 Cooldown.Phases = Phases;
 
-module.exports = Cooldown;
+export default Cooldown;

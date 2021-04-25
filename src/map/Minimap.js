@@ -1,8 +1,8 @@
-const keyMappings = require('../control/keyMappings');
-const Camera = require('../camera/Camera');
-const {Colors} = require('../util/Constants');
-const Rect = require('../painter/elements/Rect');
-const RectC = require('../painter/elements/RectC');
+import keyMappings from '../control/keyMappings.js';
+import Camera from '../camera/Camera.js';
+import {Colors} from '../util/Constants.js';
+import Rect from '../painter/elements/Rect.js';
+import RectC from '../painter/elements/RectC.js';
 
 class Minimap {
 	constructor(map) {
@@ -40,4 +40,4 @@ class Minimap {
 	}
 }
 
-module.exports = Minimap;
+export default Minimap;

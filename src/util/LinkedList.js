@@ -1,4 +1,4 @@
-const Item = require('./Item');
+import Item from './Item.js';
 
 class LinkedList {
 	constructor() {
@@ -66,4 +66,4 @@ class LinkedList {
 	}
 }
 
-module.exports = LinkedList;
+export default LinkedList;

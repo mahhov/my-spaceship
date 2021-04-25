@@ -1,7 +1,7 @@
-const PassiveAbility = require('./PassiveAbility');
-const Pool = require('../util/Pool');
-const {Colors} = require('../util/Constants');
-const Buff = require('../entities/Buff');
+import PassiveAbility from './PassiveAbility.js';
+import Pool from '../util/Pool.js';
+import {Colors} from '../util/Constants.js';
+import Buff from '../entities/Buff.js';
 
 class Respawn extends PassiveAbility {
 	constructor(delay, x, y) {
@@ -34,4 +34,4 @@ class Respawn extends PassiveAbility {
 	}
 }
 
-module.exports = Respawn;
+export default Respawn;

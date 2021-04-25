@@ -1,7 +1,7 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {Colors} = require('../../util/Constants');
-const Line = require('../../painter/elements/Line');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {Colors} from '../../util/Constants.js';
+import Line from '../../painter/elements/Line.js';
 
 class Laser extends Entity {
 	constructor(x, y, dx, dy, width, time, damage, friendly) {
@@ -33,4 +33,4 @@ class Laser extends Entity {
 	}
 }
 
-module.exports = Laser;
+export default Laser;

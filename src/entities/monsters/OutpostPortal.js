@@ -1,13 +1,13 @@
-const makeEnum = require('../../util/Enum');
-const Monster = require('./Monster');
-const {Colors} = require('../../util/Constants');
-const Buff = require('../buff');
-const OutpostPortalGraphic = require('../../graphics/OutpostPortalGraphic');
-const Phase = require('../../util/Phase');
-const Spawn = require('../modules/Spawn');
-const BuffSetter = require('../modules/BuffSetter');
-const Rotate = require('../modules/Rotate');
-const MeleeDart = require('./MeleeDart');
+import makeEnum from '../../util/Enum.js';
+import Monster from './Monster.js';
+import {Colors} from '../../util/Constants.js';
+import Buff from '../buff.js';
+import OutpostPortalGraphic from '../../graphics/OutpostPortalGraphic.js';
+import Phase from '../../util/Phase.js';
+import Spawn from '../modules/Spawn.js';
+import BuffSetter from '../modules/BuffSetter.js';
+import Rotate from '../modules/Rotate.js';
+import MeleeDart from './MeleeDart.js';
 
 const Phases = makeEnum('DORMANT', 'ACTIVE');
 
@@ -49,4 +49,4 @@ class OutpostPortal extends Monster {
 	}
 }
 
-module.exports = OutpostPortal;
+export default OutpostPortal;

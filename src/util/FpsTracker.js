@@ -1,4 +1,4 @@
-const {round} = require('./Number');
+import {round} from './Number.js';
 
 class FpsTracker {
 	constructor() {
@@ -22,4 +22,4 @@ class FpsTracker {
 	}
 }
 
-module.exports = FpsTracker;
+export default FpsTracker;

@@ -1,4 +1,4 @@
-const Color = require('./Color');
+import Color from './Color.js';
 
 const Colors = {
 	// todo [medium] structure these constants
@@ -90,7 +90,7 @@ const Positions = {
 	STAGE_TEXT_HEIGHT: .03,
 };
 
-module.exports = {Colors, Positions};
+export {Colors, Positions};
 
 // Notes
 

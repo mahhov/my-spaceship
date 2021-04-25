@@ -1,7 +1,7 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const Vector = require('../../util/Vector');
-const {cos, sin} = require('../../util/Number');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import Vector from '../../util/Vector.js';
+import {cos, sin} from '../../util/Number.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE', 'REVERSE');
 
@@ -52,4 +52,4 @@ class Aim extends Module {
 
 Aim.Stages = Stages;
 
-module.exports = Aim;
+export default Aim;

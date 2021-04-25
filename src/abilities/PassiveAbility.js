@@ -1,4 +1,4 @@
-const Ability = require('./Ability');
+import Ability from './Ability.js';
 
 class PassiveAbility extends Ability {
 	constructor(disabledOk = false) {
@@ -7,4 +7,4 @@ class PassiveAbility extends Ability {
 	}
 }
 
-module.exports = PassiveAbility;
+export default PassiveAbility;

@@ -1,15 +1,15 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const Rect1DotsShip = require('../../../graphics/Rect1DotsShip');
-const Phase = require('../../../util/Phase');
-const Vector = require('../../../util/Vector');
-const Distance = require('../../modules/Distance');
-const Period = require('../../modules/Period');
-const NearbyDegen = require('../../modules/NearbyDegen');
-const Aim = require('../../modules/Aim');
-const Shotgun = require('../../modules/Shotgun');
-const StaticLaser = require('../../modules/StaticLaser');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import Rect1DotsShip from '../../../graphics/Rect1DotsShip.js';
+import Phase from '../../../util/Phase.js';
+import Vector from '../../../util/Vector.js';
+import Distance from '../../modules/Distance.js';
+import Period from '../../modules/Period.js';
+import NearbyDegen from '../../modules/NearbyDegen.js';
+import Aim from '../../modules/Aim.js';
+import Shotgun from '../../modules/Shotgun.js';
+import StaticLaser from '../../modules/StaticLaser.js';
 
 const Phases = makeEnum('ONE');
 
@@ -133,6 +133,6 @@ class MechanicalBossEarly extends Monster {
 	}
 }
 
-module.exports = MechanicalBossEarly;
+export default MechanicalBossEarly;
 
 // todo [medium] rotation

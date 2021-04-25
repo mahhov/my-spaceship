@@ -1,9 +1,9 @@
-const Frame = require('./Frame');
-const Camera = require('../camera/Camera');
-const Color = require('../util/Color');
-const Text = require('../painter/elements/Text');
-const Starfield = require('../starfield/Starfield');
-const StarfieldNoise = require('../starfield/StarfieldNoise');
+import Frame from './Frame.js';
+import Camera from '../camera/Camera.js';
+import Color from '../util/Color.js';
+import Text from '../painter/elements/Text.js';
+import Starfield from '../starfield/Starfield.js';
+import StarfieldNoise from '../starfield/StarfieldNoise.js';
 
 class StarfieldDemo extends Frame {
 	constructor(controller, painterSet) {
@@ -32,4 +32,4 @@ class StarfieldDemo extends Frame {
 	}
 }
 
-module.exports = StarfieldDemo;
+export default StarfieldDemo;

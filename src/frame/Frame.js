@@ -1,4 +1,4 @@
-const Emitter = require('../util/Emitter');
+import Emitter from '../util/Emitter.js';
 
 class Frame extends Emitter {
 	constructor(controller, painterSet) {
@@ -14,4 +14,4 @@ class Frame extends Emitter {
 	}
 }
 
-module.exports = Frame;
+export default Frame;

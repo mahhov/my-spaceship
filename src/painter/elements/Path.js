@@ -1,4 +1,4 @@
-const PainterElement = require('./PainterElement');
+import PainterElement from './PainterElement.js';
 
 class Path extends PainterElement {
 	constructor(xys, closed, {fill, color = '#000', thickness = 1} = {}) {
@@ -38,4 +38,4 @@ class Path extends PainterElement {
 	}
 }
 
-module.exports = Path;
+export default Path;

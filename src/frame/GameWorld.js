@@ -1,11 +1,11 @@
-const Frame = require('./Frame');
-const keyMappings = require('../control/keyMappings');
-const Map = require('../map/Map');
-const MonsterKnowledge = require('../entities/monsters/MonsterKnowledge');
-const MapGenerator = require('../map/MapGeneratorTimed');
-const Minimap = require('../map/Minimap');
-const Camera = require('../camera/Camera');
-const Starfield = require('../starfield/Starfield');
+import Frame from './Frame.js';
+import keyMappings from '../control/keyMappings.js';
+import Map from '../map/Map.js';
+import MonsterKnowledge from '../entities/monsters/MonsterKnowledge.js';
+import MapGenerator from '../map/MapGeneratorTimed.js';
+import Minimap from '../map/Minimap.js';
+import Camera from '../camera/Camera.js';
+import Starfield from '../starfield/Starfield.js';
 
 class GameWorld extends Frame {
 	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {
@@ -45,4 +45,4 @@ class GameWorld extends Frame {
 	}
 }
 
-module.exports = GameWorld;
+export default GameWorld;

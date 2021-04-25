@@ -1,11 +1,11 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {Colors} = require('../../util/Constants');
-const RockGraphic = require('../../graphics/RockGraphic');
-const Buff = require('../Buff');
-const Vector = require('../../util/Vector');
-const {minWhichA, randInt} = require('../../util/Number');
-const RectC = require('../../painter/elements/RectC');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {Colors} from '../../util/Constants.js';
+import RockGraphic from '../../graphics/RockGraphic.js';
+import Buff from '../Buff.js';
+import Vector from '../../util/Vector.js';
+import {minWhichA, randInt} from '../../util/Number.js';
+import RectC from '../../painter/elements/RectC.js';
 
 class Egg extends Entity {
 	constructor(possiblePositions) {
@@ -50,4 +50,4 @@ class Egg extends Entity {
 	}
 }
 
-module.exports = Egg;
+export default Egg;

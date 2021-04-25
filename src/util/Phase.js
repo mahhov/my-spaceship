@@ -1,4 +1,4 @@
-const {randInt} = require('./Number');
+import {randInt} from './Number.js';
 
 class Phase {
 	// durations should be >= 0
@@ -53,4 +53,4 @@ class Phase {
 	}
 }
 
-module.exports = Phase;
+export default Phase;

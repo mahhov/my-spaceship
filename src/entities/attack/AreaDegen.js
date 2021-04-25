@@ -1,8 +1,8 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {getRectDistance} = require('../../util/Number');
-const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/elements/RectC');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {getRectDistance} from '../../util/Number.js';
+import {Colors} from '../../util/Constants.js';
+import RectC from '../../painter/elements/RectC.js';
 
 class AreaDegen extends Entity {
 	// if maxTargets <= 0, will be treated as infinite
@@ -31,4 +31,4 @@ class AreaDegen extends Entity {
 	}
 }
 
-module.exports = AreaDegen;
+export default AreaDegen;

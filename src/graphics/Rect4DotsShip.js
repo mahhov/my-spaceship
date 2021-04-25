@@ -1,6 +1,6 @@
-const PathCreator = require('./PathCreator');
-const Color = require('../util/Color');
-const Graphics = require('./Graphics');
+import PathCreator from './PathCreator.js';
+import Color from '../util/Color.js';
+import Graphics from './Graphics.js';
 
 const RECT_POINTS = [
 	[0, 1],
@@ -25,4 +25,4 @@ class Rect4DotsShip extends Graphics {
 	}
 }
 
-module.exports = Rect4DotsShip;
+export default Rect4DotsShip;

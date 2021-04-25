@@ -1,10 +1,10 @@
-const Frame = require('./Frame');
-const {NoiseSimplex} = require('../util/Noise');
-const {rand} = require('../util/Number');
-const Color = require('../util/Color');
-const Rect = require('../painter/elements/Rect');
-const RectC = require('../painter/elements/RectC');
-const Text = require('../painter/elements/Text');
+import Frame from './Frame.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import {rand} from '../util/Number.js';
+import Color from '../util/Color.js';
+import Rect from '../painter/elements/Rect.js';
+import RectC from '../painter/elements/RectC.js';
+import Text from '../painter/elements/Text.js';
 
 const THRESHOLD = .5;
 const N = 200; // resolution
@@ -56,4 +56,4 @@ class NoiseDemo extends Frame {
 	}
 }
 
-module.exports = NoiseDemo;
+export default NoiseDemo;

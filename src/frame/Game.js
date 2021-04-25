@@ -1,6 +1,6 @@
-const Frame = require('./Frame');
-const GameMenu = require('./GameMenu');
-const GameWorld = require('./GameWorld');
+import Frame from './Frame.js';
+import GameMenu from './GameMenu.js';
+import GameWorld from './GameWorld.js';
 
 class Game extends Frame {
 	constructor(controller, painterSet) {
@@ -21,7 +21,7 @@ class Game extends Frame {
 	}
 }
 
-module.exports = Game;
+export default Game;
 
 // todo [graphics]
 // textures

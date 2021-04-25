@@ -1,6 +1,6 @@
-const {Colors} = require('../util/Constants');
-const {rand, randInt} = require('../util/Number');
-const RectC = require('../painter/elements/RectC');
+import {Colors} from '../util/Constants.js';
+import {rand, randInt} from '../util/Number.js';
+import RectC from '../painter/elements/RectC.js';
 
 const FLICKER_COLOR_MULT = .7;
 const STAR_COLOR_ARRAY = [
@@ -33,4 +33,4 @@ class Star {
 	}
 }
 
-module.exports = Star;
+export default Star;

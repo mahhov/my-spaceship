@@ -1,12 +1,12 @@
-const Looper = require('../frame/Looper');
-const Game = require('../frame/Game');
-const GameEgg = require('../frame/GameEgg');
-const GraphicsDemo = require('../frame/GraphicsDemo');
-const StarfieldDemo = require('../frame/StarfieldDemo');
-const NoiseDemo = require('../frame/NoiseDemo');
-const MapDemo = require('../frame/MapDemo');
-const InterfaceDemo = require('../frame/InterfaceDemo');
-const RecordMp4 = require('../util/RecordMp4');
+import Looper from '../frame/Looper.js';
+import Game from '../frame/Game.js';
+import GameEgg from '../frame/GameEgg.js';
+import GraphicsDemo from '../frame/GraphicsDemo.js';
+// import StarfieldDemo from '../frame/StarfieldDemo.js';
+// import NoiseDemo from '../frame/NoiseDemo.js';
+// import MapDemo from '../frame/MapDemo.js';
+// import InterfaceDemo from '../frame/InterfaceDemo.js';
+// import RecordMp4 from '../util/RecordMp4.js';
 
 let canvas = document.querySelector('#canvas');
 let frameButtonsRow = document.querySelector('#frame-buttons-row');

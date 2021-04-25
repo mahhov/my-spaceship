@@ -72,7 +72,7 @@ const round = (number, precision = 0) => {
 	return Math.round(number * ten) / ten;
 };
 
-module.exports = {
+export {
 	EPSILON,
 	PI,
 	PI2,

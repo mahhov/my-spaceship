@@ -1,6 +1,6 @@
-const Frame = require('./Frame');
-const TestShip = require('../graphics/TestShip');
-const {thetaToVector} = require('../util/Number');
+import Frame from './Frame.js';
+import TestShip from '../graphics/TestShip.js';
+import {thetaToVector} from '../util/Number.js';
 
 const idf = a => a;
 
@@ -27,4 +27,4 @@ class GraphicsDemo extends Frame {
 	}
 }
 
-module.exports = GraphicsDemo;
+export default GraphicsDemo;

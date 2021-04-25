@@ -1,7 +1,7 @@
-const IntersectionFinder = require('../intersection/IntersectionFinder');
-const LinkedList = require('../util/LinkedList');
-const Bounds = require('../intersection/Bounds');
-const Rect = require('../painter/elements/Rect');
+import IntersectionFinder from '../intersection/IntersectionFinder.js';
+import LinkedList from '../util/LinkedList.js';
+import Bounds from '../intersection/Bounds.js';
+import Rect from '../painter/elements/Rect.js';
 
 class Map {
 	constructor() {
@@ -110,6 +110,6 @@ class Map {
 	}
 }
 
-module.exports = Map;
+export default Map;
 
 // todo [medium] consider static & dynamic entity lists in stead of individual type entity lists

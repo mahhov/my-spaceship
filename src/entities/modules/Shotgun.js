@@ -1,7 +1,7 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const {rand, randVector} = require('../../util/Number');
-const Projectile = require('../attack/Projectile');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import {rand, randVector} from '../../util/Number.js';
+import Projectile from '../attack/Projectile.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -46,4 +46,4 @@ class Shotgun extends Module {
 
 Shotgun.Stages = Stages;
 
-module.exports = Shotgun;
+export default Shotgun;

@@ -1,4 +1,4 @@
-const Color = require('../../util/Color');
+import Color from '../../util/Color.js';
 
 class PainterElement {
 	setFillMode(context) {
@@ -24,4 +24,4 @@ class PainterElement {
 	}
 }
 
-module.exports = PainterElement;
+export default PainterElement;

@@ -1,5 +1,5 @@
-const makeEnum = require('../../util/Enum');
-const ModuleManager = require('./ModuleManager');
+import makeEnum from '../../util/Enum.js';
+import ModuleManager from './ModuleManager.js';
 
 const PrimaryStages = makeEnum('PLAY', 'LOOP', 'PAUSE', 'STOP');
 // variable number of secondary stages depending on number of patterns defined
@@ -56,4 +56,4 @@ class patternedPeriod extends ModuleManager {
 
 patternedPeriod.PrimaryStages = PrimaryStages;
 
-module.exports = patternedPeriod;
+export default patternedPeriod;

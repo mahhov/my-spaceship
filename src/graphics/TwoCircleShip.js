@@ -1,5 +1,5 @@
-const {PI2, thetaToVector} = require('../util/Number');
-const Graphics = require('./Graphics');
+import {PI2, thetaToVector} from '../util/Number.js';
+import Graphics from './Graphics.js';
 
 let WIDTH = .3;
 let LENGTH = .5;
@@ -37,4 +37,4 @@ class TwoCircleShip extends Graphics {
 	}
 }
 
-module.exports = TwoCircleShip;
+export default TwoCircleShip;

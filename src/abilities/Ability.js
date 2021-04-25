@@ -1,9 +1,9 @@
-const Pool = require('../util/Pool');
-const keyMappings = require('../control/keyMappings');
-const {Colors, Positions} = require('../util/Constants');
-const Rect = require('../painter/elements/Rect');
-const Text = require('../painter/elements/Text');
-const Bar = require('../painter/elements/Bar');
+import Pool from '../util/Pool.js';
+import keyMappings from '../control/keyMappings.js';
+import {Colors, Positions} from '../util/Constants.js';
+import Rect from '../painter/elements/Rect.js';
+import Text from '../painter/elements/Text.js';
+import Bar from '../painter/elements/Bar.js';
 
 class Ability {
 	constructor(cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
@@ -112,4 +112,4 @@ class Ability {
 	}
 }
 
-module.exports = Ability;
+export default Ability;

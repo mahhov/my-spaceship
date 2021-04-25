@@ -1,6 +1,6 @@
-const SimplexNoise = require('simplex-noise');
+// import SimplexNoise from '../../node_modules/simplex-noise/simplex-noise.js';
 
-const {EPSILON, getMagnitude, rand} = require('./Number');
+import {EPSILON, getMagnitude, rand} from './Number.js';
 
 class NoiseSimplex {
 	constructor(scale = 10, threshold = .5, thresholdRandWeight = 1) {
@@ -70,4 +70,4 @@ class NoiseGradient {
 	}
 }
 
-module.exports = {NoiseSimplex, NoiseGradient};
+export {NoiseSimplex, NoiseGradient};

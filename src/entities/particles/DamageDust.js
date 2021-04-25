@@ -1,7 +1,7 @@
-const Entity = require('../Entity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const {Colors} = require('../../util/Constants');
-const RectC = require('../../painter/elements/RectC');
+import Entity from '../Entity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import {Colors} from '../../util/Constants.js';
+import RectC from '../../painter/elements/RectC.js';
 
 class DamageDust extends Entity {
 	constructor(x, y, size, vx, vy, time) {
@@ -29,4 +29,4 @@ class DamageDust extends Entity {
 
 }
 
-module.exports = DamageDust;
+export default DamageDust;

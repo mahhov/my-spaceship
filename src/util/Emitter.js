@@ -17,4 +17,4 @@ class Emitter {
 	}
 }
 
-module.exports = Emitter;
+export default Emitter;

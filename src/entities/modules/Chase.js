@@ -1,7 +1,7 @@
-const makeEnum = require('../../util/Enum');
-const Module = require('./Module');
-const {cos, sin} = require('../../util/Number');
-const Vector = require('../../util/Vector');
+import makeEnum from '../../util/Enum.js';
+import Module from './Module.js';
+import {cos, sin} from '../../util/Number.js';
+import Vector from '../../util/Vector.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 
@@ -22,4 +22,4 @@ class Chase extends Module {
 
 Chase.Stages = Stages;
 
-module.exports = Chase;
+export default Chase;

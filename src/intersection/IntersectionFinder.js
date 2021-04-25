@@ -1,7 +1,7 @@
-const makeEnum = require('../util/Enum');
-const LinkedList = require('../util/LinkedList');
-const {EPSILON, maxWhich, setMagnitude} = require('../util/Number');
-const Bounds = require('./Bounds');
+import makeEnum from '../util/Enum.js';
+import LinkedList from '../util/LinkedList.js';
+import {EPSILON, maxWhich, setMagnitude} from '../util/Number.js';
+import Bounds from './Bounds.js';
 
 const Layers = makeEnum(
 	'PASSIVE',              // intersects with everything
@@ -177,6 +177,6 @@ class IntersectionFinder {
 
 IntersectionFinder.Layers = Layers;
 
-module.exports = IntersectionFinder;
+export default IntersectionFinder;
 
 // todo [low] support rectangular mobile (rotating)entities

@@ -1,12 +1,12 @@
-const makeEnum = require('../../../util/Enum');
-const Monster = require('.././Monster');
-const {Colors} = require('../../../util/Constants');
-const Rect1DotsShip = require('../../../graphics/Rect1DotsShip');
-const Phase = require('../../../util/Phase');
-const Period = require('../../modules/Period');
-const Rotate = require('../../modules/Rotate');
-const Aim = require('../../modules/Aim');
-const StaticLaser = require('../../modules/StaticLaser');
+import makeEnum from '../../../util/Enum.js';
+import Monster from '.././Monster.js';
+import {Colors} from '../../../util/Constants.js';
+import Rect1DotsShip from '../../../graphics/Rect1DotsShip.js';
+import Phase from '../../../util/Phase.js';
+import Period from '../../modules/Period.js';
+import Rotate from '../../modules/Rotate.js';
+import Aim from '../../modules/Aim.js';
+import StaticLaser from '../../modules/StaticLaser.js';
 
 const Phases = makeEnum('ONE');
 
@@ -53,4 +53,4 @@ class AimingLaserTurret extends Monster {
 	}
 }
 
-module.exports = AimingLaserTurret;
+export default AimingLaserTurret;

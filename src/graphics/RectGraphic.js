@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 class RectGraphic extends Graphics {
 	constructor(width, height, graphicOptions = {}) {
@@ -12,4 +12,4 @@ class RectGraphic extends Graphics {
 	}
 }
 
-module.exports = RectGraphic;
+export default RectGraphic;

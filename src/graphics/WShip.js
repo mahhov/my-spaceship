@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const POINTS = [
 	[1, .5],
@@ -16,4 +16,4 @@ class WShip extends Graphics {
 	}
 }
 
-module.exports = WShip;
+export default WShip;

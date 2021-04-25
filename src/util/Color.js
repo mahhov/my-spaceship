@@ -1,4 +1,4 @@
-const {clamp} = require('./Number');
+import {clamp} from './Number.js';
 
 const SHADE_ADD = .2;
 
@@ -96,4 +96,4 @@ class Color {
 Color.WHITE = Color.from1(0, 0, 0);
 Color.BLACK = Color.from1(0, 0, 0);
 
-module.exports = Color;
+export default Color;

@@ -1,5 +1,5 @@
-const Ability = require('./Ability');
-const Buff = require('../entities/Buff');
+import Ability from './Ability.js';
+import Buff from '../entities/Buff.js';
 
 class IncDefense extends Ability {
 	constructor() {
@@ -14,4 +14,4 @@ class IncDefense extends Ability {
 	}
 }
 
-module.exports = IncDefense;
+export default IncDefense;

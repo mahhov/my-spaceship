@@ -1,4 +1,4 @@
-const Graphics = require('./Graphics');
+import Graphics from './Graphics.js';
 
 const POINTS = [
 	[0, 1],
@@ -13,4 +13,4 @@ class DiamondShip extends Graphics {
 	}
 }
 
-module.exports = DiamondShip;
+export default DiamondShip;

@@ -1,8 +1,8 @@
-const Controller = require('../control/Controller');
-const PainterCompositor = require('../painter/PainterCompositor');
-const FpsTracker = require('../util/FpsTracker');
-const {Positions} = require('../util/Constants');
-const Text = require('../painter/elements/Text');
+import Controller from '../control/Controller.js';
+import PainterCompositor from '../painter/PainterCompositor.js';
+import FpsTracker from '../util/FpsTracker.js';
+import {Positions} from '../util/Constants.js';
+import Text from '../painter/elements/Text.js';
 
 class Looper {
 	static sleep(milli = 0) {
@@ -52,4 +52,4 @@ class Looper {
 	}
 }
 
-module.exports = Looper;
+export default Looper;

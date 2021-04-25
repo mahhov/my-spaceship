@@ -1,9 +1,9 @@
-const LivingEntity = require('../LivingEntity');
-const IntersectionFinder = require('../../intersection/IntersectionFinder');
-const ModuleManager = require('../modules/ModuleManager');
-const {Colors, Positions} = require('../../util/Constants');
-const BarC = require('../../painter/elements/BarC');
-const Bar = require('../../painter/elements/Bar');
+import LivingEntity from '../LivingEntity.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import ModuleManager from '../modules/ModuleManager.js';
+import {Colors, Positions} from '../../util/Constants.js';
+import BarC from '../../painter/elements/BarC.js';
+import Bar from '../../painter/elements/Bar.js';
 
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health) {
@@ -38,4 +38,4 @@ class Monster extends LivingEntity {
 	}
 }
 
-module.exports = Monster;
+export default Monster;

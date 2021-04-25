@@ -1,16 +1,16 @@
-const MapGenerator = require('./MapGenerator');
-const {NoiseSimplex} = require('../util/Noise');
-const Player = require('../entities/heroes/Player');
-const {rand, round} = require('../util/Number');
-const MapBoundary = require('../entities/stills/MapBoundary');
-const Rock = require('../entities/stills/Rock');
-const RockMineral = require('../entities/stills/RockMineral');
-const OutpostPortal = require('../entities/monsters/OutpostPortal');
-const Turret = require('../entities/monsters/Turret');
-const ShotgunWarrior = require('../entities/monsters/ShotgunWarrior');
-const Boss1 = require('../entities/monsters/Boss1');
-const {Positions} = require('../util/Constants');
-const Text = require('../painter/elements/Text');
+import MapGenerator from './MapGenerator.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import Player from '../entities/heroes/Player.js';
+import {rand, round} from '../util/Number.js';
+import MapBoundary from '../entities/stills/MapBoundary.js';
+import Rock from '../entities/stills/Rock.js';
+import RockMineral from '../entities/stills/RockMineral.js';
+import OutpostPortal from '../entities/monsters/OutpostPortal.js';
+import Turret from '../entities/monsters/Turret.js';
+import ShotgunWarrior from '../entities/monsters/ShotgunWarrior.js';
+import Boss1 from '../entities/monsters/Boss1.js';
+import {Positions} from '../util/Constants.js';
+import Text from '../painter/elements/Text.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 
@@ -91,7 +91,7 @@ class MapGeneratorSurvival extends MapGenerator {
 	}
 }
 
-module.exports = MapGeneratorSurvival;
+export default MapGeneratorSurvival;
 
 // todo [medium] don't spawn things intersecting other things
 // todo [medium] don't spawn close to player
