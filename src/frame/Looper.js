@@ -2,6 +2,7 @@ import Controller from '../control/Controller.js';
 import PainterCompositor from '../painter/PainterCompositor.js';
 import FpsTracker from '../util/FpsTracker.js';
 import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import Text from '../painter/elements/Text.js';
 
 class Looper {
@@ -44,7 +45,8 @@ class Looper {
 			this.paintFpsTracker.tick();
 			this.painterSet.clear();
 			this.frame.paint();
-			this.painterSet.uiPainter.add(new Text(1 - Positions.MARGIN, Positions.MARGIN, `fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`, {align: 'right'}));
+			this.painterSet.uiPainter.add(new Text(new Coordinate(1 - Positions.MARGIN, Positions.MARGIN).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`, {align: 'right'}));
 			this.painterSet.paint();
 			await Looper.sleep(10);
 		}

@@ -1,4 +1,5 @@
 import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import {round} from '../util/Number.js';
 import Text from '../painter/elements/Text.js';
 
@@ -18,11 +19,9 @@ class MapGenerator {
 	}
 
 	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
 		painter.add(new Text(
-			1 - Positions.MARGIN,
-			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
-			`${round(this.timer / 100)}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`${round(this.timer / 100)}`, {size: '16px'}));
 	}
 }
 

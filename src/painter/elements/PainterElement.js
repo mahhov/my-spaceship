@@ -3,8 +3,8 @@ import Color from '../../util/Color.js';
 class PainterElement {
 	constructor() {
 		// overridden by children
+		this.coordinate = null;
 		this.color = null;
-		this.align = null;
 		this.size = null;
 		this.thickness = null;
 	}
@@ -24,7 +24,8 @@ class PainterElement {
 	}
 
 	setFont(context) {
-		context.textAlign = this.align;
+		context.textAlign = this.coordinate.textAlignment;
+		context.textBaseline = this.coordinate.vertTextAlignment;
 		context.font = `${this.size} monospace`;
 	}
 

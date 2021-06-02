@@ -1,5 +1,6 @@
 import Pool from '../util/Pool.js';
 import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 
@@ -74,23 +75,23 @@ class Buff {
 		let size = Positions.BUFF_SIZE;
 
 		// background
-		painter.add(new Rect(left, top, size, size, {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(new Coordinate(left, top, size), {fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
 		let fillHeight = size * this.duration.getRatio();
-		painter.add(new Rect(left, top + size - fillHeight, size, fillHeight, {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(new Coordinate(left, top + size - fillHeight, size, fillHeight), {fill: true, color: this.uiColor.get()}));
 
 		// text
-		painter.add(new Text(left + size / 2, top + size / 2, this.uiText));
+		painter.add(new Text(new Coordinate(left + size / 2, top + size / 2).align(Coordinate.Aligns.CENTER), this.uiText));
 	}
 
 	paintAt(painter, camera, left, top, size) {
 		// background
-		painter.add(Rect.withCamera(camera, left, top, size, size, {fill: true, color: this.uiColor.getShade()}));
+		painter.add(Rect.withCamera(camera, new Coordinate(left, top, size), {fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
 		let fillHeight = size * this.duration.getRatio();
-		painter.add(Rect.withCamera(camera, left, top + size - fillHeight, size, fillHeight, {fill: true, color: this.uiColor.get()}));
+		painter.add(Rect.withCamera(camera, new Coordinate(left, top + size - fillHeight, size, fillHeight), {fill: true, color: this.uiColor.get()}));
 	}
 }
 

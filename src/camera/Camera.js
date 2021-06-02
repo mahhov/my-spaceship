@@ -1,3 +1,4 @@
+import Coordinate from '../util/Coordinate.js';
 import {clamp, avg} from '../util/Number.js';
 
 class Camera {
@@ -11,6 +12,10 @@ class Camera {
 	static createForRegion(fromScale, toLeft, toTop, toScale) {
 		let invScale = fromScale / toScale;
 		return new Camera((.5 - toLeft) * invScale, (.5 - toTop) * invScale, invScale);
+	}
+
+	transformCoordinates(coordinate) {
+		return new Coordinate(this.xt(coordinate.left), this.yt(coordinate.top), this.st(coordinate.width), this.st(coordinate.height));
 	}
 
 	// center range [[0, width], [0, height]]

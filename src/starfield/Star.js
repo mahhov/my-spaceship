@@ -1,6 +1,7 @@
 import {Colors} from '../util/Constants.js';
 import {rand, randInt} from '../util/Number.js';
-import RectC from '../painter/elements/RectC.js';
+import Coordinate from '../util/Coordinate.js';
+import Rect from '../painter/elements/Rect.js';
 
 const FLICKER_COLOR_MULT = .7;
 const STAR_COLOR_ARRAY = [
@@ -28,8 +29,9 @@ class Star {
 		else if (rand() < FLICKER_RATE)
 			this.flicker = randInt(75);
 
+		let coordinate = new Coordinate(x, y, s).align(Coordinate.Aligns.CENTER);
 		let color = STAR_COLOR_ARRAY[this.blue ? 1 : 0][this.flicker ? 1 : 0];
-		painter.add(new RectC(x, y, s, s, {fill: true, color: color.get()}));
+		painter.add(new Rect(coordinate, {fill: true, color: color.get()}));
 	}
 }
 

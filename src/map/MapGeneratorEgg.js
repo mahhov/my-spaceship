@@ -18,6 +18,7 @@ import VShip from '../graphics/VShip.js';
 // import WShip from '../graphics/WShip.js';
 import EggBot from '../entities/bot/EggBot.js';
 import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import Text from '../painter/elements/Text.js';
 
 const WIDTH = 2.5, HEIGHT = 2.5;
@@ -120,15 +121,15 @@ class MapGeneratorEgg extends MapGenerator {
 	paintUi(painter, camera) {
 		let font = {size: '16px', align: 'right'};
 		painter.add(new Text(
-			1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT,
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 			`time: ${round(this.timer / 100)}`, font));
 		painter.add(new Text(
-			1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2,
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`, font));
 
 		if (this.win !== -1)
 			painter.add(new Text(
-				.5, .4,
+				new Coordinate(.5, .5).align(Coordinate.Aligns.CENTER),
 				`${this.win ? 'Red' : 'Green'} Team Wins!`, {size: '25px', align: 'center'}));
 	}
 }

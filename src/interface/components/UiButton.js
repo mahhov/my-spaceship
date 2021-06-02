@@ -1,6 +1,7 @@
 import makeEnum from '../../util/Enum.js';
 import UiComponent from './UiComponent.js';
 import Bounds from '../../intersection/Bounds.js';
+import Coordinate from '../../util/Coordinate.js';
 import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
@@ -40,9 +41,9 @@ class UiButton extends UiComponent {
 	paint(painter) {
 		let color = [Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 
-		painter.add(new Rect(this.left, this.top, this.width, this.height, {fill: true, color}));
-		painter.add(new Rect(this.left, this.top, this.width, this.height));
-		painter.add(new Text(this.left + this.width / 2, this.top + this.height / 2, this.text));
+		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height), {fill: true, color}));
+		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height)));
+		painter.add(new Text(new Coordinate(this.left + this.width / 2, this.top + this.height / 2).align(Coordinate.Aligns.CENTER), this.text));
 	}
 }
 

@@ -6,7 +6,6 @@ class Painter {
 		this.xCoordinateTransform = x => x * width;
 		this.yCoordinateTransform = y => y * height;
 		this.context = this.canvas.getContext('2d');
-		this.setFontMode();
 		this.elements = []; // todo [medium] test linked list instead of array for performance
 	}
 
@@ -15,10 +14,6 @@ class Painter {
 		canvas.width = width;
 		canvas.height = height;
 		return canvas;
-	}
-
-	setFontMode() {
-		this.context.textBaseline = 'middle';
 	}
 
 	clear() {

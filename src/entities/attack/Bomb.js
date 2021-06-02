@@ -1,6 +1,7 @@
 import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {getRectDistance} from '../../util/Number.js';
+import Coordinate from '../../util/Coordinate.js';
 import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
 
@@ -32,8 +33,10 @@ class Bomb extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.range * 2, this.range * 2, {color: Colors.Entity.Bomb.WARNING_BORDER.get()}));
-		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.width, this.height, {color: Colors.Entity.Bomb.ENTITY.get()}));
+		let coordinate = new Coordinate(this.x, this.y, this.range * 2).align(Coordinate.Aligns.CENTER);
+		painter.add(Rect.withCamera(camera, coordinate, {color: Colors.Entity.Bomb.WARNING_BORDER.get()}));
+		coordinate = new Coordinate(this.x, this.y, this.width, this.height).align(Coordinate.Aligns.CENTER);
+		painter.add(Rect.withCamera(camera, coordinate, {color: Colors.Entity.Bomb.ENTITY.get()}));
 	}
 }
 

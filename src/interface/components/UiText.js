@@ -1,4 +1,5 @@
 import UiComponent from './UiComponent.js';
+import Coordinate from '../../util/Coordinate.js';
 import Text from '../../painter/elements/Text.js';
 
 class UiText extends UiComponent {
@@ -10,7 +11,7 @@ class UiText extends UiComponent {
 	}
 
 	paint(painter) {
-		painter.add(new Text(this.x, this.y, this.text));
+		painter.add(new Text(new Coordinate(this.x, this.y).align(Coordinate.Aligns.CENTER), this.text));
 	}
 }
 

@@ -1,7 +1,7 @@
 import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {getRectDistance} from '../../util/Number.js';
 import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
 import Rect from '../../painter/elements/Rect.js';
 
 class AreaDegen extends Entity {
@@ -24,10 +24,8 @@ class AreaDegen extends Entity {
 		let graphicOptions = warning ?
 			{color: Colors.Entity.AREA_DEGEN.WARNING_BORDER.get()} :
 			{fill: true, color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()};
-		painter.add(Rect.centeredRectWithCamera(camera,
-			this.x, this.y,
-			this.range, this.range,
-			graphicOptions));
+		let coordinate = new Coordinate(this.x, this.y, this.range).align(Coordinate.Aligns.CENTER);
+		painter.add(Rect.withCamera(camera, coordinate, graphicOptions));
 	}
 }
 

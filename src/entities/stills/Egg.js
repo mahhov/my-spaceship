@@ -4,6 +4,7 @@ import {Colors} from '../../util/Constants.js';
 import RockGraphic from '../../graphics/RockGraphic.js';
 import Buff from '../Buff.js';
 import {randInt} from '../../util/Number.js';
+import Coordinate from '../../util/Coordinate.js';
 import Rect from '../../painter/elements/Rect.js';
 
 class Egg extends Entity {
@@ -44,8 +45,10 @@ class Egg extends Entity {
 	paint(painter, camera) {
 		if (!this.ownerHero)
 			super.paint(painter, camera);
-		else
-			painter.add(Rect.centeredRectWithCamera(camera, this.ownerHero.x, this.ownerHero.y, this.width, this.height, {fill: false, color: Colors.Entity.EGG.get()}));
+		else {
+			let coordinate = new Coordinate(this.ownerHero.x, this.ownerHero.y, this.width, this.height);
+			painter.add(Rect.withCamera(camera, coordinate, {fill: false, color: Colors.Entity.EGG.get()}));
+		}
 	}
 }
 

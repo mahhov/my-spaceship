@@ -2,8 +2,9 @@ import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {randVector} from '../../util/Number.js';
 import DamageDust from '../particles/DamageDust.js';
+import Coordinate from '../../util/Coordinate.js';
 import {Colors} from '../../util/Constants.js';
-import RectC from '../../painter/elements/RectC.js';
+import Rect from '../../painter/elements/Rect.js';
 
 class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {
@@ -37,7 +38,8 @@ class Projectile extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: this.color}));
+		let coordinate = new Coordinate(this.x, this.y, this.width, this.height).align(Coordinate.Aligns.CENTER);
+		painter.add(Rect.withCamera(camera, coordinate, {fill: true, color: this.color}));
 	}
 }
 

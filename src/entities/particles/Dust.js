@@ -1,5 +1,6 @@
 import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import Coordinate from '../../util/Coordinate.js';
 import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
 
@@ -24,7 +25,8 @@ class Dust extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.width, this.height, {color: Colors.Entity.DUST.get()}));
+		let coordinate = new Coordinate(this.x, this.y, this.width, this.height).align(Coordinate.Aligns.CENTER);
+		painter.add(Rect.withCamera(camera, coordinate, {color: Colors.Entity.DUST.get()}));
 	}
 
 }

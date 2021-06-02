@@ -103,11 +103,11 @@ export {Colors, Positions};
 // STAMINA_EMPTY_COLOR: Color.fromHex(0xc, 0xc, 0x4),
 // STAMINA_FILL_COLOR: Color.fromHex(0xf, 0xf, 0x5),
 
-// const localLife = "#cc4e4e";
-// const localStamina = "#ffcc99";
-// const localShield = "#6680b3";
-// const localReserve = "#339999";
-// const localExperience = "#e6991a";
+// const localLife = '#cc4e4e';
+// const localStamina = '#ffcc99';
+// const localShield = '#6680b3';
+// const localReserve = '#339999';
+// const localExperience = '#e6991a';
 
 // http://paletton.com/#uid=75C0F0kj+zZ9XRtfuIvo0ulsJqf
 

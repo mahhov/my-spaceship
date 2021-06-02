@@ -4,6 +4,7 @@ import Color from '../util/Color.js';
 import Text from '../painter/elements/Text.js';
 import Starfield from '../starfield/Starfield.js';
 import StarfieldNoise from '../starfield/StarfieldNoise.js';
+import Coordinate from '../util/Coordinate.js';
 
 class StarfieldDemo extends Frame {
 	constructor(controller, painterSet) {
@@ -19,7 +20,7 @@ class StarfieldDemo extends Frame {
 
 	paint() {
 		this.starfield.paint(this.painterSet.uiPainter, this.camera);
-		this.painterSet.uiPainter.add(new Text(.05, .05, this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
+		this.painterSet.uiPainter.add(new Text(new Coordinate(.05, .05).align(Coordinate.Aligns.CENTER), this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
 	}
 
 	periodicallySwapStarfield() {

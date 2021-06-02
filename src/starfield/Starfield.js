@@ -1,6 +1,5 @@
 import {rand, randB} from '../util/Number.js';
 import Star from './Star.js';
-import RectC from '../painter/elements/RectC.js';
 
 class Starfield {
 	constructor(width, height, extra = 0) {
@@ -22,7 +21,8 @@ class Starfield {
 	}
 
 	paint(painter, camera) {
-		// painter.add(new RectC(.5, .5, 1, 1, {fill: true}));
+		// let coordinate = new Coordinate(0, 0, 1);
+		// painter.add(new Rect(coordinate, {fill: true}));
 		this.stars.forEach(star => star.paint(painter, camera));
 	}
 }

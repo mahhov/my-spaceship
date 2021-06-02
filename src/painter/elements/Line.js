@@ -14,6 +14,7 @@ class Line extends Path {
 		super(xys, true, graphicOptions);
 	}
 
+	// todo [medium] use Coordinate and camera.transformCoordinates
 	static withCamera(camera, x, y, x2, y2, width, {fill, color, thickness} = {}) {
 		return new Line(camera.xt(x), camera.yt(y), camera.xt(x2), camera.yt(y2), camera.st(width), {fill, color, thickness: camera.st(thickness)});
 	}

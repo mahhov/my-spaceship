@@ -1,5 +1,6 @@
 import keyMappings from '../control/keyMappings.js';
 import Camera from '../camera/Camera.js';
+import Coordinate from '../util/Coordinate.js';
 import {Colors} from '../util/Constants.js';
 import Rect from '../painter/elements/Rect.js';
 
@@ -25,8 +26,8 @@ class Minimap {
 
 	paint(painter) {
 		let camera = this.createCamera();
-		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: true, color: Colors.Minimap.BACKGROUND.get()}));
-		painter.add(Rect.withCamera(camera, 0, 0, this.map.width, this.map.height, {fill: false, color: Colors.Minimap.BORDER.get()}));
+		painter.add(Rect.withCamera(camera, new Coordinate(0, 0, this.map.width, this.map.height), {fill: true, color: Colors.Minimap.BACKGROUND.get()}));
+		painter.add(Rect.withCamera(camera, new Coordinate(0, 0, this.map.width, this.map.height), {fill: false, color: Colors.Minimap.BORDER.get()}));
 		this.map.stills.forEach(rock => this.paintDot(painter, camera, rock.x, rock.y, Colors.Minimap.ROCK.get()));
 		this.map.monsters.forEach(monster => this.paintDot(painter, camera, monster.x, monster.y, Colors.Minimap.MONSTER.get()));
 		this.map.uis.forEach(ui => this.paintDot(painter, camera, ui.x, ui.y, Colors.Minimap.BOSS.get()));
@@ -35,7 +36,7 @@ class Minimap {
 
 	paintDot(painter, camera, x, y, color) {
 		const DOT_SIZE = .02 * this.map.width;
-		painter.add(Rect.centeredRectWithCamera(camera, x, y, DOT_SIZE, DOT_SIZE, {fill: true, color}));
+		painter.add(Rect.withCamera(camera, new Coordinate(x, y, DOT_SIZE), {fill: true, color}));
 	}
 }
 

@@ -9,8 +9,9 @@ import DelayedRegen from '../../abilities/DelayedRegen.js';
 import Buff from '.././Buff.js';
 import keyMappings from '../../control/keyMappings.js';
 import Bounds from '../../intersection/Bounds.js';
-import Bar from '../../painter/elements/Bar.js';
+import Coordinate from '../../util/Coordinate.js';
 import Rect from '../../painter/elements/Rect.js';
+import Bar from '../../painter/elements/Bar.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
@@ -110,10 +111,10 @@ class Player extends Hero {
 	paintUi(painter, camera) {
 		// target lock
 		// todo [medium] target lock draws over monster health bar
-		if (this.targetLock)
-			painter.add(Rect.centeredRectWithCamera(camera, this.targetLock.x, this.targetLock.y,
-				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
-				{color: Colors.TARGET_LOCK.get(), thickness: 3}));
+		if (this.targetLock) {
+			let coordinate = new Coordinate(this.targetLock.x, this.targetLock.y, this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE).align(Coordinate.Aligns.CENTER);
+			painter.add(Rect.withCamera(camera, coordinate, {color: Colors.TARGET_LOCK.get(), thickness: 3}));
+		}
 
 		// life & stamina bar
 		const HEIGHT_WITH_MARGIN = Positions.BAR_HEIGHT + Positions.MARGIN;
@@ -128,7 +129,7 @@ class Player extends Hero {
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());
-		painter.add(new Rect(0, 0, 1, 1, {fill: true, color: damageColor}));
+		painter.add(new Rect(new Coordinate(0, 0, 1), {fill: true, color: damageColor}));
 	}
 }
 

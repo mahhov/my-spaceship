@@ -1,12 +1,13 @@
 import PainterElement from './PainterElement.js';
+import Coordinate from '../../util/Coordinate.js';
 import Rect from './Rect.js';
 
 class Bar extends PainterElement {
 	constructor(x, y, width, height, fillRatio, emptyColor, fillColor, borderColor) {
 		super();
-		this.empty = new Rect(x, y, width, height, {fill: true, color: emptyColor});
-		this.fill = new Rect(x, y, width * fillRatio, height, {fill: true, color: fillColor});
-		this.border = new Rect(x, y, width, height, {color: borderColor});
+		this.empty = new Rect(new Coordinate(x, y, width, height), {fill: true, color: emptyColor});
+		this.fill = new Rect(new Coordinate(x, y, width * fillRatio, height), {fill: true, color: fillColor});
+		this.border = new Rect(new Coordinate(x, y, width, height), {color: borderColor});
 	}
 
 	static WideBar(paintUiRow, fillRatio, emptyColor, fillColor, borderColor) {

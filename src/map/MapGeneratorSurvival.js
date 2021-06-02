@@ -10,6 +10,7 @@ import Turret from '../entities/monsters/Turret.js';
 import ShotgunWarrior from '../entities/monsters/ShotgunWarrior.js';
 import Boss1 from '../entities/monsters/Boss1.js';
 import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import Text from '../painter/elements/Text.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;
@@ -81,13 +82,11 @@ class MapGeneratorSurvival extends MapGenerator {
 	paintUi(painter, camera) {
 		let font = {size: '16px', align: 'right'};
 		painter.add(new Text(
-			1 - Positions.MARGIN,
-			Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2,
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 			`Stage: ${this.stage}`, font));
 		painter.add(new Text(
-			1 - Positions.MARGIN,
-			Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.STAGE_TEXT_HEIGHT,
-			`Difficulty ${round(this.timerDamageMultiplier, 2)}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.STAGE_TEXT_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`Difficulty: ${round(this.timerDamageMultiplier, 2)}`, font));
 	}
 }
 

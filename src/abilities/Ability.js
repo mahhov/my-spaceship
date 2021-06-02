@@ -1,6 +1,7 @@
 import Pool from '../util/Pool.js';
 import keyMappings from '../control/keyMappings.js';
 import {Colors, Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import Bar from '../painter/elements/Bar.js';
@@ -79,28 +80,27 @@ class Ability {
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), {fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
 		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
 		const HEIGHT = this.charges.get() * ROW_HEIGHT;
-		painter.add(new Rect(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT, {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT), {fill: true, color: this.uiColor.get()}));
 
 		// hybrid for current cooldown
 		if (!this.cooldown.isFull()) {
 			let shade = this.cooldown.getRatio();
-			painter.add(new Rect(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT, {fill: true, color: this.uiColor.getShade(shade)}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT), {fill: true, color: this.uiColor.getShade(shade)}));
 		}
 
 		// border
 		if (!this.ready)
-			painter.add(new Rect(LEFT, TOP, Positions.ABILITY_SIZE, Positions.ABILITY_SIZE, {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
 		// letter
 		this.uiTexts.forEach((uiText, i) =>
 			painter.add(new Text(
-				LEFT + Positions.ABILITY_SIZE / 2,
-				TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4,
+				new Coordinate(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4).align(Coordinate.Aligns.CENTER),
 				uiText, {size: '12px'})));
 
 		// channel bar

@@ -3,6 +3,7 @@ import Entity from '../entities/Entity.js';
 import Frame from './Frame.js';
 import MapGenerator from '../map/MapGeneratorStaged.js';
 import Camera from '../camera/Camera.js';
+import Coordinate from '../util/Coordinate.js';
 import Color from '../util/Color.js';
 import Rect from '../painter/elements/Rect.js';
 
@@ -62,7 +63,8 @@ class MapDemo extends Frame {
 	}
 
 	paint() {
-		this.painterSet.uiPainter.add(Rect.centeredRectWithCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
+		let coordinate = new Coordinate(0, 0, this.width, this.height);
+		this.painterSet.uiPainter.add(Rect.withCamera(this.camera, coordinate, {color: Color.WHITE.get(), thickness: 2}));
 		this.map.paint(this.painterSet.uiPainter, this.camera);
 	}
 
