@@ -12,9 +12,21 @@ class Coordinate {
 		this.vertAlignment = Aligns.START;
 	}
 
+	get clone() {
+		return new Coordinate(this.x, this.y, this.width, this.height).align(this.alignment, this.vertAlignment);
+	}
+
 	align(alignment, vertAlignment = alignment) {
 		this.alignment = alignment;
 		this.vertAlignment = vertAlignment;
+		return this;
+	}
+
+	pad(padding) {
+		this.x += Coordinate.getAligned(this.alignment, padding, padding * 2);
+		this.y += Coordinate.getAligned(this.vertAlignment, padding, padding * 2);
+		this.width -= padding * 2;
+		this.height -= padding * 2;
 		return this;
 	}
 
