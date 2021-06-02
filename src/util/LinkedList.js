@@ -1,4 +1,9 @@
-import Item from './Item.js';
+class Item {
+	constructor(value, prev) {
+		this.value = value;
+		this.prev = prev;
+	}
+}
 
 class LinkedList {
 	constructor() {

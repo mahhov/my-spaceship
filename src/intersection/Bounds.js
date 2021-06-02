@@ -30,7 +30,7 @@ class Bounds {
 			value * signs[direction] > bounds.getOpposite(direction) * signs[direction]);
 	}
 
-	inside(x, y){
+	inside(x, y) {
 		return this.intersects(new Bounds(x, y, x, y));
 	}
 
