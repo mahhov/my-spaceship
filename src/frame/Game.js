@@ -9,7 +9,14 @@ class Game extends Frame {
 		this.world = new GameWorld(controller, painterSet);
 		this.activeFrame = this.menu;
 		this.menu.on('resume', () => this.activeFrame = this.world);
-		this.world.on('pause', () => this.activeFrame = this.menu);
+		this.menu.on('begin-encounter', MapGeneratorClass => {
+			this.world.reset(MapGeneratorClass);
+			this.activeFrame = this.world;
+		});
+		this.world.on('pause', () => {
+			this.menu.pause();
+			this.activeFrame = this.menu;
+		});
 	}
 
 	update() {

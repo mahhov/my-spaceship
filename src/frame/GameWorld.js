@@ -8,8 +8,11 @@ import Starfield from '../starfield/Starfield.js';
 import Frame from './Frame.js';
 
 class GameWorld extends Frame {
-	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {
+	constructor(controller, painterSet) {
 		super(controller, painterSet);
+	}
+
+	reset(MapGeneratorClass = MapGenerator) {
 		this.map = new Map();
 		this.mapGenerator = new MapGeneratorClass(this.map);
 		this.player = this.mapGenerator.player;
