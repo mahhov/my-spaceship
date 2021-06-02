@@ -1,10 +1,10 @@
-import makeEnum from '../../util/Enum.js';
-import UiComponent from './UiComponent.js';
 import Bounds from '../../intersection/Bounds.js';
-import Coordinate from '../../util/Coordinate.js';
-import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
+import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import makeEnum from '../../util/Enum.js';
+import UiComponent from './UiComponent.js';
 
 const States = makeEnum('INACTIVE', 'ACTIVE', 'HOVER');
 

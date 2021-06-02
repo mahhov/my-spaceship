@@ -1,7 +1,7 @@
+import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {round} from '../util/Number.js';
-import Text from '../painter/elements/Text.js';
 
 class MapGenerator {
 	constructor(map) {

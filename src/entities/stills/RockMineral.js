@@ -1,7 +1,7 @@
-import Entity from '../Entity.js';
+import RockGraphic from '../../graphics/RockGraphic.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {Colors} from '../../util/Constants.js';
-import RockGraphic from '../../graphics/RockGraphic.js';
+import Entity from '../Entity.js';
 
 class RockMineral extends Entity {
 	constructor(x, y, size) {

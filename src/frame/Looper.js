@@ -1,9 +1,9 @@
 import Controller from '../control/Controller.js';
+import Text from '../painter/elements/Text.js';
 import PainterCompositor from '../painter/PainterCompositor.js';
-import FpsTracker from '../util/FpsTracker.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import Text from '../painter/elements/Text.js';
+import FpsTracker from '../util/FpsTracker.js';
 
 class Looper {
 	static sleep(milli = 0) {

@@ -1,7 +1,7 @@
-import Looper from '../frame/Looper.js';
 import Game from '../frame/Game.js';
 import GameEgg from '../frame/GameEgg.js';
 import GraphicsDemo from '../frame/GraphicsDemo.js';
+import Looper from '../frame/Looper.js';
 // import StarfieldDemo from '../frame/StarfieldDemo.js';
 // import NoiseDemo from '../frame/NoiseDemo.js';
 // import MapDemo from '../frame/MapDemo.js';

@@ -1,5 +1,5 @@
-import Frame from './Frame.js';
 import PauseUi from '../interface/uis/PauseUi.js';
+import Frame from './Frame.js';
 
 class GameMenu extends Frame {
 	constructor(controller, painterSet) {

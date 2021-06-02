@@ -1,10 +1,10 @@
-import Pool from '../util/Pool.js';
 import keyMappings from '../control/keyMappings.js';
-import {Colors, Positions} from '../util/Constants.js';
-import Coordinate from '../util/Coordinate.js';
+import Bar from '../painter/elements/Bar.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
-import Bar from '../painter/elements/Bar.js';
+import {Colors, Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
+import Pool from '../util/Pool.js';
 
 class Ability {
 	constructor(cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {

@@ -1,11 +1,11 @@
-import Entity from '../Entity.js';
-import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {Colors} from '../../util/Constants.js';
 import RockGraphic from '../../graphics/RockGraphic.js';
-import Buff from '../Buff.js';
-import {randInt} from '../../util/Number.js';
-import Coordinate from '../../util/Coordinate.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
+import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import {randInt} from '../../util/Number.js';
+import Buff from '../Buff.js';
+import Entity from '../Entity.js';
 
 class Egg extends Entity {
 	constructor(possiblePositions) {

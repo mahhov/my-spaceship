@@ -1,13 +1,13 @@
-import makeEnum from '../../util/Enum.js';
-import Monster from './Monster.js';
-import {Colors} from '../../util/Constants.js';
 import AShip from '../../graphics/AShip.js';
+import {Colors} from '../../util/Constants.js';
+import makeEnum from '../../util/Enum.js';
 import Phase from '../../util/Phase.js';
 import Vector from '../../util/Vector.js';
-import Distance from '../modules/Distance.js';
 import Aim from '../modules/Aim.js';
 import Chase from '../modules/Chase.js';
+import Distance from '../modules/Distance.js';
 import Shotgun from '../modules/Shotgun.js';
+import Monster from './Monster.js';
 
 const Phases = makeEnum('ONE');
 

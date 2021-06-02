@@ -1,7 +1,6 @@
 import makeEnum from '../../util/Enum.js';
-import Module from './Module.js';
 import Vector from '../../util/Vector.js';
-import {cos, sin} from '../../util/Number.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 

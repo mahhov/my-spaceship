@@ -1,6 +1,6 @@
-import Ability from './Ability.js';
-import {Colors} from '../util/Constants.js';
 import Bomb from '../entities/attack/Bomb.js';
+import {Colors} from '../util/Constants.js';
+import Ability from './Ability.js';
 
 class BombAttack extends Ability {
 	constructor(paintUiColumn) {

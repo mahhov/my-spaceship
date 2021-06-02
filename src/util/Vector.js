@@ -1,4 +1,4 @@
-import {PI2, clamp, cos, sin, rand} from './Number.js';
+import {clamp, cos, PI2, rand, sin} from './Number.js';
 
 class Vector {
 	constructor(x, y) {

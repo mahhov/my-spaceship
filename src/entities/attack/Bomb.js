@@ -1,9 +1,9 @@
-import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {getRectDistance} from '../../util/Number.js';
-import Coordinate from '../../util/Coordinate.js';
-import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
+import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import {getRectDistance} from '../../util/Number.js';
+import Entity from '../Entity.js';
 
 class Bomb extends Entity {
 	// if maxTargets <= 0, will be treated as infinite

@@ -1,5 +1,4 @@
 import Ability from './Ability.js';
-import {setMagnitude} from '../util/Number.js';
 
 class Heal extends Ability {
 	constructor() {

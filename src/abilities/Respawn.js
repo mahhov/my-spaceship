@@ -1,7 +1,7 @@
-import PassiveAbility from './PassiveAbility.js';
-import Pool from '../util/Pool.js';
-import {Colors} from '../util/Constants.js';
 import Buff from '../entities/Buff.js';
+import {Colors} from '../util/Constants.js';
+import Pool from '../util/Pool.js';
+import PassiveAbility from './PassiveAbility.js';
 
 class Respawn extends PassiveAbility {
 	constructor(delay, x, y) {

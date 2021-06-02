@@ -1,6 +1,6 @@
 import makeEnum from '../../util/Enum.js';
-import ModuleManager from './ModuleManager.js';
 import {setMagnitude} from '../../util/Number.js';
+import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');
 const Phases = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');

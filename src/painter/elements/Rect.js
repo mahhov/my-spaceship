@@ -9,7 +9,6 @@ class Rect extends PainterElement {
 		this.thickness = thickness;
 	}
 
-	// todo [medium] refactor coordinate system to support coordinates, centered coordinates, and camera coordinates to replace current constructor overloading
 	static withCamera(camera, coordinate, {fill, color, thickness} = {}) {
 		return new Rect(camera.transformCoordinates(coordinate), {fill, color, thickness: camera.st(thickness)});
 	}

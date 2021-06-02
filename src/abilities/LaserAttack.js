@@ -1,6 +1,6 @@
-import Ability from './Ability.js';
-import {setMagnitude, randVector} from '../util/Number.js';
 import Laser from '../entities/attack/Laser.js';
+import {setMagnitude} from '../util/Number.js';
+import Ability from './Ability.js';
 
 class LaserAttack extends Ability {
 	constructor() {

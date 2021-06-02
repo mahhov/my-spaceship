@@ -1,14 +1,14 @@
-import makeEnum from '../../../util/Enum.js';
-import Monster from '.././Monster.js';
-import {Colors} from '../../../util/Constants.js';
 import DoubleHorizDiamondShip from '../../../graphics/DoubleHorizDiamondShip.js';
-import Phase from '../../../util/Phase.js';
+import {Colors} from '../../../util/Constants.js';
+import makeEnum from '../../../util/Enum.js';
 import {PI} from '../../../util/Number.js';
-import Distance from '../../modules/Distance.js';
+import Phase from '../../../util/Phase.js';
 import Aim from '../../modules/Aim.js';
+import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 import Chase from '../../modules/Chase.js';
 import Cooldown from '../../modules/Cooldown.js';
-import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
+import Distance from '../../modules/Distance.js';
+import Monster from '.././Monster.js';
 
 const Phases = makeEnum('ONE');
 

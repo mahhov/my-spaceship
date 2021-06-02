@@ -1,7 +1,6 @@
-import Vector from '../../util/Vector.js';
-import {minWhichA, clamp, rand, randInt} from '../../util/Number.js';
-
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
+import {clamp, minWhichA, rand, randInt} from '../../util/Number.js';
+import Vector from '../../util/Vector.js';
 
 class EggBot {
 	constructor(player, coopBotHeroes, hostileBotHeroes, egg, centerDir) {

@@ -1,12 +1,12 @@
-import makeEnum from '../../../util/Enum.js';
-import Monster from '.././Monster.js';
-import {Colors} from '../../../util/Constants.js';
 import Rect4DotsShip from '../../../graphics/Rect4DotsShip.js';
+import {Colors} from '../../../util/Constants.js';
+import makeEnum from '../../../util/Enum.js';
 import Phase from '../../../util/Phase.js';
 import Vector from '../../../util/Vector.js';
-import Period from '../../modules/Period.js';
 import Aim from '../../modules/Aim.js';
+import Period from '../../modules/Period.js';
 import Shotgun from '../../modules/Shotgun.js';
+import Monster from '.././Monster.js';
 
 const Phases = makeEnum('ONE');
 

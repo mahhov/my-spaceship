@@ -1,6 +1,6 @@
-import Entity from './Entity.js';
 import Pool from '../util/Pool.js';
 import Buff from './Buff.js';
+import Entity from './Entity.js';
 
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, health, layer) {

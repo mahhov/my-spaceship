@@ -1,11 +1,11 @@
-import Frame from './Frame.js';
+import Camera from '../camera/Camera.js';
 import keyMappings from '../control/keyMappings.js';
-import Map from '../map/Map.js';
 import MonsterKnowledge from '../entities/monsters/MonsterKnowledge.js';
+import Map from '../map/Map.js';
 import MapGenerator from '../map/MapGeneratorTimed.js';
 import Minimap from '../map/Minimap.js';
-import Camera from '../camera/Camera.js';
 import Starfield from '../starfield/Starfield.js';
+import Frame from './Frame.js';
 
 class GameWorld extends Frame {
 	constructor(controller, painterSet, MapGeneratorClass = MapGenerator) {

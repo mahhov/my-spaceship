@@ -1,7 +1,7 @@
 import makeEnum from '../../util/Enum.js';
-import ModuleManager from './ModuleManager.js';
 import LinkedList from '../../util/LinkedList.js';
 import {rand, randInt, randVector} from '../../util/Number.js';
+import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 const Phases = makeEnum('NOT_SPAWNING', 'SPAWNING', 'COMPLETE');

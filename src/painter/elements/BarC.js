@@ -1,5 +1,5 @@
-import PainterElement from './PainterElement.js';
 import Coordinate from '../../util/Coordinate.js';
+import PainterElement from './PainterElement.js';
 import Rect from './Rect.js';
 
 // todo [medium] merge with Bar.

@@ -1,8 +1,8 @@
-import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import Rect from '../../painter/elements/Rect.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import Rect from '../../painter/elements/Rect.js';
+import Entity from '../Entity.js';
 
 class AreaDegen extends Entity {
 	// if maxTargets <= 0, will be treated as infinite

@@ -1,7 +1,7 @@
 import makeEnum from '../../util/Enum.js';
-import Module from './Module.js';
 import {rand, randVector} from '../../util/Number.js';
 import Projectile from '../attack/Projectile.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 

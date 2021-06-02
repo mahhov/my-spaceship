@@ -1,8 +1,8 @@
-import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import Coordinate from '../../util/Coordinate.js';
-import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
+import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import Entity from '../Entity.js';
 
 class Dust extends Entity {
 	constructor(x, y, size, vx, vy, time) {

@@ -1,5 +1,5 @@
-import Path from './Path.js';
 import Vector from '../../util/Vector.js';
+import Path from './Path.js';
 
 class Line extends Path {
 	constructor(x, y, x2, y2, width, graphicOptions) {

@@ -1,5 +1,5 @@
-import Hero from './Hero.js';
 import Buff from '../Buff.js';
+import Hero from './Hero.js';
 
 class BotHero extends Hero {
 	update(map, intersectionFinder, monsterKnowledge, goals) {

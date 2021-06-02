@@ -1,9 +1,8 @@
 import makeEnum from '../../../util/Enum.js';
-import MechanicalBossEarly from './MechanicalBossEarly.js';
-import Phase from '../../../util/Phase.js';
+import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 import Period from '../../modules/Period.js';
 import Position from '../../modules/Position.js';
-import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
+import MechanicalBossEarly from './MechanicalBossEarly.js';
 
 const Phases = makeEnum('ONE');
 

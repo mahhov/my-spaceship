@@ -1,7 +1,5 @@
 import IntersectionFinder from '../intersection/IntersectionFinder.js';
 import LinkedList from '../util/LinkedList.js';
-import Bounds from '../intersection/Bounds.js';
-import Rect from '../painter/elements/Rect.js';
 
 class Map {
 	constructor() {

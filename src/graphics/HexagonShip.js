@@ -1,5 +1,5 @@
-import PathCreator from './PathCreator.js';
 import Graphics from './Graphics.js';
+import PathCreator from './PathCreator.js';
 
 const POINTS = PathCreator.createCirclePoints();
 

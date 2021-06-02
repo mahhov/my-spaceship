@@ -1,6 +1,6 @@
 import makeEnum from '../../util/Enum.js';
-import Module from './Module.js';
 import AreaDegen from '../attack/AreaDegen.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 

@@ -1,10 +1,10 @@
-import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {randVector} from '../../util/Number.js';
-import DamageDust from '../particles/DamageDust.js';
-import Coordinate from '../../util/Coordinate.js';
-import {Colors} from '../../util/Constants.js';
 import Rect from '../../painter/elements/Rect.js';
+import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import {randVector} from '../../util/Number.js';
+import Entity from '../Entity.js';
+import DamageDust from '../particles/DamageDust.js';
 
 class Projectile extends Entity {
 	constructor(x, y, width, height, vx, vy, time, damage, friendly) {

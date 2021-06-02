@@ -1,10 +1,10 @@
-import Frame from './Frame.js';
 import Camera from '../camera/Camera.js';
-import Color from '../util/Color.js';
 import Text from '../painter/elements/Text.js';
 import Starfield from '../starfield/Starfield.js';
 import StarfieldNoise from '../starfield/StarfieldNoise.js';
+import Color from '../util/Color.js';
 import Coordinate from '../util/Coordinate.js';
+import Frame from './Frame.js';
 
 class StarfieldDemo extends Frame {
 	constructor(controller, painterSet) {

@@ -1,5 +1,5 @@
-import Ability from './Ability.js';
 import {booleanArray} from '../util/Number.js';
+import Ability from './Ability.js';
 
 class Dash extends Ability {
 	constructor() {

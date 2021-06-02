@@ -1,12 +1,12 @@
-import LivingEntity from '../LivingEntity.js';
-import Decay from '../../util/Decay.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
+import BarC from '../../painter/elements/BarC.js';
+import {Colors} from '../../util/Constants.js';
+import Decay from '../../util/Decay.js';
+import {booleanArray, rand, randVector, setMagnitude} from '../../util/Number.js';
 import Pool from '../../util/Pool.js';
 import Buff from '../Buff.js';
-import {setMagnitude, booleanArray, rand, randVector} from '../../util/Number.js';
+import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
-import {Colors} from '../../util/Constants.js';
-import BarC from '../../painter/elements/BarC.js';
 
 class Hero extends LivingEntity {
 	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {

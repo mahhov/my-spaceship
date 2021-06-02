@@ -1,7 +1,7 @@
-import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {Colors} from '../../util/Constants.js';
 import Line from '../../painter/elements/Line.js';
+import {Colors} from '../../util/Constants.js';
+import Entity from '../Entity.js';
 
 class Laser extends Entity {
 	constructor(x, y, dx, dy, width, time, damage, friendly) {

@@ -1,9 +1,9 @@
+import Line from '../../painter/elements/Line.js';
+import {Colors} from '../../util/Constants.js';
 import makeEnum from '../../util/Enum.js';
-import Module from './Module.js';
 import Vector from '../../util/Vector.js';
 import Laser from '../attack/Laser.js';
-import {Colors} from '../../util/Constants.js';
-import Line from '../../painter/elements/Line.js';
+import Module from './Module.js';
 
 const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
 

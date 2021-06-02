@@ -1,8 +1,8 @@
-import Pool from '../util/Pool.js';
-import {Positions} from '../util/Constants.js';
-import Coordinate from '../util/Coordinate.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
+import {Positions} from '../util/Constants.js';
+import Coordinate from '../util/Coordinate.js';
+import Pool from '../util/Pool.js';
 
 class Buff {
 	constructor(duration, uiColor, uiText) {

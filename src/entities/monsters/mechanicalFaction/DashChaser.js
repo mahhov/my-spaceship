@@ -1,16 +1,16 @@
-import makeEnum from '../../../util/Enum.js';
-import Monster from '.././Monster.js';
-import {Colors} from '../../../util/Constants.js';
 import HexagonShip from '../../../graphics/HexagonShip.js';
-import Phase from '../../../util/Phase.js';
+import {Colors} from '../../../util/Constants.js';
+import makeEnum from '../../../util/Enum.js';
 import {PI} from '../../../util/Number.js';
-import Distance from '../../modules/Distance.js';
-import Period from '../../modules/Period.js';
+import Phase from '../../../util/Phase.js';
 import Aim from '../../modules/Aim.js';
 import Chase from '../../modules/Chase.js';
 import Dash from '../../modules/Dash.js';
-import Trigger from '../../modules/Trigger.js';
+import Distance from '../../modules/Distance.js';
 import NearbyDegen from '../../modules/NearbyDegen.js';
+import Period from '../../modules/Period.js';
+import Trigger from '../../modules/Trigger.js';
+import Monster from '.././Monster.js';
 
 const Phases = makeEnum('ONE');
 

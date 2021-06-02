@@ -1,17 +1,17 @@
-import Hero from './Hero.js';
-import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {Colors, Positions} from '../../util/Constants.js';
-import VShip from '../../graphics/VShip.js';
-import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 import Dash from '../../abilities/Dash.js';
-import IncDefense from '../../abilities/IncDefense.js';
 import DelayedRegen from '../../abilities/DelayedRegen.js';
-import Buff from '.././Buff.js';
+import IncDefense from '../../abilities/IncDefense.js';
+import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 import keyMappings from '../../control/keyMappings.js';
+import VShip from '../../graphics/VShip.js';
 import Bounds from '../../intersection/Bounds.js';
-import Coordinate from '../../util/Coordinate.js';
-import Rect from '../../painter/elements/Rect.js';
+import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
+import Rect from '../../painter/elements/Rect.js';
+import {Colors, Positions} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
+import Buff from '.././Buff.js';
+import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 

@@ -1,6 +1,6 @@
-import UiComponent from './UiComponent.js';
-import Coordinate from '../../util/Coordinate.js';
 import Text from '../../painter/elements/Text.js';
+import Coordinate from '../../util/Coordinate.js';
+import UiComponent from './UiComponent.js';
 
 class UiText extends UiComponent {
 	constructor(x, y, text) {

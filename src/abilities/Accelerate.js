@@ -1,5 +1,5 @@
-import Ability from './Ability.js';
 import Buff from '../entities/Buff.js';
+import Ability from './Ability.js';
 
 class Accelerate extends Ability {
 	constructor() {

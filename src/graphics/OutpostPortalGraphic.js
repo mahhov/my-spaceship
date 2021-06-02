@@ -1,6 +1,6 @@
+import Color from '../util/Color.js';
 import Graphics from './Graphics.js';
 import PathCreator from './PathCreator.js';
-import Color from '../util/Color.js';
 
 const INSIDE_COLOR = [1, .8, .8];
 const OUTSIDE_COLOR = [.7, 0, 0];

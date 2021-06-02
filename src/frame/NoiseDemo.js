@@ -1,10 +1,10 @@
-import Frame from './Frame.js';
-import {NoiseSimplex} from '../util/Noise.js';
-import {rand} from '../util/Number.js';
-import Coordinate from '../util/Coordinate.js';
-import Color from '../util/Color.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
+import Color from '../util/Color.js';
+import Coordinate from '../util/Coordinate.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import {rand} from '../util/Number.js';
+import Frame from './Frame.js';
 
 const THRESHOLD = .5;
 const N = 200; // resolution

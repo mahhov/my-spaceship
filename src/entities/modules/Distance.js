@@ -1,6 +1,6 @@
 import makeEnum from '../../util/Enum.js';
-import ModuleManager from './ModuleManager.js';
 import {getMagnitude} from '../../util/Number.js';
+import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum('ACTIVE', 'INACTIVE');
 // variable number of phases per number of arguments to config

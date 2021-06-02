@@ -1,9 +1,9 @@
-import LivingEntity from '../LivingEntity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import ModuleManager from '../modules/ModuleManager.js';
-import {Colors, Positions} from '../../util/Constants.js';
-import BarC from '../../painter/elements/BarC.js';
 import Bar from '../../painter/elements/Bar.js';
+import BarC from '../../painter/elements/BarC.js';
+import {Colors, Positions} from '../../util/Constants.js';
+import LivingEntity from '../LivingEntity.js';
+import ModuleManager from '../modules/ModuleManager.js';
 
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health) {

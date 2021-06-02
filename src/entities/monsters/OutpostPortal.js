@@ -1,13 +1,13 @@
-import makeEnum from '../../util/Enum.js';
-import Monster from './Monster.js';
-import {Colors} from '../../util/Constants.js';
-import Buff from '../buff.js';
 import OutpostPortalGraphic from '../../graphics/OutpostPortalGraphic.js';
+import {Colors} from '../../util/Constants.js';
+import makeEnum from '../../util/Enum.js';
 import Phase from '../../util/Phase.js';
-import Spawn from '../modules/Spawn.js';
+import Buff from '../buff.js';
 import BuffSetter from '../modules/BuffSetter.js';
 import Rotate from '../modules/Rotate.js';
+import Spawn from '../modules/Spawn.js';
 import MeleeDart from './MeleeDart.js';
+import Monster from './Monster.js';
 
 const Phases = makeEnum('DORMANT', 'ACTIVE');
 

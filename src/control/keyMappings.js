@@ -1,4 +1,3 @@
-import Controller from './Controller.js';
 import State from './State.js';
 
 class KeyMapping {

@@ -1,17 +1,17 @@
-import MapGenerator from './MapGenerator.js';
-import {NoiseSimplex} from '../util/Noise.js';
 import Player from '../entities/heroes/Player.js';
-import {rand, round} from '../util/Number.js';
+import Boss1 from '../entities/monsters/Boss1.js';
+import OutpostPortal from '../entities/monsters/OutpostPortal.js';
+import ShotgunWarrior from '../entities/monsters/ShotgunWarrior.js';
+import Turret from '../entities/monsters/Turret.js';
 import MapBoundary from '../entities/stills/MapBoundary.js';
 import Rock from '../entities/stills/Rock.js';
 import RockMineral from '../entities/stills/RockMineral.js';
-import OutpostPortal from '../entities/monsters/OutpostPortal.js';
-import Turret from '../entities/monsters/Turret.js';
-import ShotgunWarrior from '../entities/monsters/ShotgunWarrior.js';
-import Boss1 from '../entities/monsters/Boss1.js';
+import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import Text from '../painter/elements/Text.js';
+import {NoiseSimplex} from '../util/Noise.js';
+import {rand, round} from '../util/Number.js';
+import MapGenerator from './MapGenerator.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;
 

@@ -1,15 +1,15 @@
-import makeEnum from '../../util/Enum.js';
-import Monster from './Monster.js';
-import {Colors} from '../../util/Constants.js';
 import WShip from '../../graphics/WShip.js';
+import {Colors} from '../../util/Constants.js';
+import makeEnum from '../../util/Enum.js';
 import Phase from '../../util/Phase.js';
-import Period from '../modules/Period.js';
 import Aim from '../modules/Aim.js';
 import Chase from '../modules/Chase.js';
-import Shotgun from '../modules/Shotgun.js';
 import Dash from '../modules/Dash.js';
-import Trigger from '../modules/Trigger.js';
 import NearbyDegen from '../modules/NearbyDegen.js';
+import Period from '../modules/Period.js';
+import Shotgun from '../modules/Shotgun.js';
+import Trigger from '../modules/Trigger.js';
+import Monster from './Monster.js';
 // import Boomerang from '../modules/Boomerang.js';
 
 const Phases = makeEnum('ONE');

@@ -1,5 +1,5 @@
-import PassiveAbility from './PassiveAbility.js';
 import Pool from '../util/Pool.js';
+import PassiveAbility from './PassiveAbility.js';
 
 class DelayedRegen extends PassiveAbility {
 	constructor() {

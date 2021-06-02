@@ -1,5 +1,5 @@
 import Coordinate from '../util/Coordinate.js';
-import {clamp, avg} from '../util/Number.js';
+import {avg, clamp} from '../util/Number.js';
 
 class Camera {
 	constructor(x, y, z = 2) {

@@ -1,6 +1,6 @@
-import Frame from './Frame.js';
 import TestShip from '../graphics/TestShip.js';
 import {thetaToVector} from '../util/Number.js';
+import Frame from './Frame.js';
 
 const idf = a => a;
 

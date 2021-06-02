@@ -1,5 +1,5 @@
-import PainterElement from './PainterElement.js';
 import Coordinate from '../../util/Coordinate.js';
+import PainterElement from './PainterElement.js';
 import Rect from './Rect.js';
 
 class Bar extends PainterElement {

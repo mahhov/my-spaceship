@@ -1,6 +1,6 @@
-import Ui from './Ui.js';
-import UiText from '../components/UiText.js';
 import UiButton from '../components/UiButton.js';
+import UiText from '../components/UiText.js';
+import Ui from './Ui.js';
 
 class PauseUi extends Ui {
 	constructor() {

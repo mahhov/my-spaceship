@@ -1,5 +1,5 @@
-import Frame from './Frame.js';
 import UiButton from '../interface/components/UiButton.js';
+import Frame from './Frame.js';
 
 class InterfaceDemo extends Frame {
 	constructor(controller, painterSet) {

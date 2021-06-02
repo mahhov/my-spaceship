@@ -1,11 +1,11 @@
-import LinkedList from '../util/LinkedList.js';
-import Entity from '../entities/Entity.js';
-import Frame from './Frame.js';
-import MapGenerator from '../map/MapGeneratorStaged.js';
 import Camera from '../camera/Camera.js';
-import Coordinate from '../util/Coordinate.js';
-import Color from '../util/Color.js';
+import Entity from '../entities/Entity.js';
+import MapGenerator from '../map/MapGeneratorStaged.js';
 import Rect from '../painter/elements/Rect.js';
+import Color from '../util/Color.js';
+import Coordinate from '../util/Coordinate.js';
+import LinkedList from '../util/LinkedList.js';
+import Frame from './Frame.js';
 
 class FakePlayer {
 	setPosition() {
