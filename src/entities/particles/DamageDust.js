@@ -1,7 +1,7 @@
 import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {Colors} from '../../util/Constants.js';
-import RectC from '../../painter/elements/RectC.js';
+import Rect from '../../painter/elements/Rect.js';
 
 class DamageDust extends Entity {
 	constructor(x, y, size, vx, vy, time) {
@@ -24,7 +24,7 @@ class DamageDust extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.DAMAGE_DUST.get()}));
+		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.width, this.height, {fill: true, color: Colors.Entity.DAMAGE_DUST.get()}));
 	}
 
 }

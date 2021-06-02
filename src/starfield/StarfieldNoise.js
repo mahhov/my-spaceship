@@ -2,7 +2,6 @@ import Starfield from './Starfield.js';
 import {NoiseSimplex} from '../util/Noise.js';
 import {rand} from '../util/Number.js';
 import Star from './Star.js';
-import RectC from '../painter/elements/RectC.js';
 
 // this class is only for the StarfieldDemo
 class StarfieldNoise extends Starfield {

@@ -2,7 +2,7 @@ import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {getRectDistance} from '../../util/Number.js';
 import {Colors} from '../../util/Constants.js';
-import RectC from '../../painter/elements/RectC.js';
+import Rect from '../../painter/elements/Rect.js';
 
 class AreaDegen extends Entity {
 	// if maxTargets <= 0, will be treated as infinite
@@ -24,7 +24,7 @@ class AreaDegen extends Entity {
 		let graphicOptions = warning ?
 			{color: Colors.Entity.AREA_DEGEN.WARNING_BORDER.get()} :
 			{fill: true, color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()};
-		painter.add(RectC.withCamera(camera,
+		painter.add(Rect.centeredRectWithCamera(camera,
 			this.x, this.y,
 			this.range, this.range,
 			graphicOptions));

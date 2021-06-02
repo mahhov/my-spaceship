@@ -9,7 +9,6 @@ import DelayedRegen from '../../abilities/DelayedRegen.js';
 import Buff from '.././Buff.js';
 import keyMappings from '../../control/keyMappings.js';
 import Bounds from '../../intersection/Bounds.js';
-import RectC from '../../painter/elements/RectC.js';
 import Bar from '../../painter/elements/Bar.js';
 import Rect from '../../painter/elements/Rect.js';
 
@@ -112,7 +111,7 @@ class Player extends Hero {
 		// target lock
 		// todo [medium] target lock draws over monster health bar
 		if (this.targetLock)
-			painter.add(RectC.withCamera(camera, this.targetLock.x, this.targetLock.y,
+			painter.add(Rect.centeredRectWithCamera(camera, this.targetLock.x, this.targetLock.y,
 				this.targetLock.width + TARGET_LOCK_BORDER_SIZE, this.targetLock.height + TARGET_LOCK_BORDER_SIZE,
 				{color: Colors.TARGET_LOCK.get(), thickness: 3}));
 

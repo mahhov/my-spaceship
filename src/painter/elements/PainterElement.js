@@ -1,6 +1,14 @@
 import Color from '../../util/Color.js';
 
 class PainterElement {
+	constructor() {
+		// overridden by children
+		this.color = null;
+		this.align = null;
+		this.size = null;
+		this.thickness = null;
+	}
+
 	setFillMode(context) {
 		context.fillStyle = this.color;
 	}
@@ -20,7 +28,7 @@ class PainterElement {
 		context.font = `${this.size} monospace`;
 	}
 
-	paint(painter) {
+	paint(xt, yt, context) {
 	}
 }
 

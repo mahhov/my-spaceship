@@ -4,7 +4,7 @@ import Frame from './Frame.js';
 import MapGenerator from '../map/MapGeneratorStaged.js';
 import Camera from '../camera/Camera.js';
 import Color from '../util/Color.js';
-import RectC from '../painter/elements/RectC.js';
+import Rect from '../painter/elements/Rect.js';
 
 class FakePlayer {
 	setPosition() {
@@ -62,7 +62,7 @@ class MapDemo extends Frame {
 	}
 
 	paint() {
-		this.painterSet.uiPainter.add(RectC.withCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
+		this.painterSet.uiPainter.add(Rect.centeredRectWithCamera(this.camera, this.map.width / 2, this.map.height / 2, this.map.width, this.map.height, {color: Color.WHITE.get(), thickness: 2}));
 		this.map.paint(this.painterSet.uiPainter, this.camera);
 	}
 

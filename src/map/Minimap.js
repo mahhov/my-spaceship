@@ -2,7 +2,6 @@ import keyMappings from '../control/keyMappings.js';
 import Camera from '../camera/Camera.js';
 import {Colors} from '../util/Constants.js';
 import Rect from '../painter/elements/Rect.js';
-import RectC from '../painter/elements/RectC.js';
 
 class Minimap {
 	constructor(map) {
@@ -36,7 +35,7 @@ class Minimap {
 
 	paintDot(painter, camera, x, y, color) {
 		const DOT_SIZE = .02 * this.map.width;
-		painter.add(RectC.withCamera(camera, x, y, DOT_SIZE, DOT_SIZE, {fill: true, color}));
+		painter.add(Rect.centeredRectWithCamera(camera, x, y, DOT_SIZE, DOT_SIZE, {fill: true, color}));
 	}
 }
 

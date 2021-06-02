@@ -3,7 +3,6 @@ import {NoiseSimplex} from '../util/Noise.js';
 import {rand} from '../util/Number.js';
 import Color from '../util/Color.js';
 import Rect from '../painter/elements/Rect.js';
-import RectC from '../painter/elements/RectC.js';
 import Text from '../painter/elements/Text.js';
 
 const THRESHOLD = .5;
@@ -49,7 +48,7 @@ class NoiseDemo extends Frame {
 			for (let y = 0; y < N; y++) {
 				if (this.results[x][y]) {
 					this.painterSet.uiPainter.add(new Rect(x * NTH, y * NTH, 1 / N, 1 / N, {fill: true, color: Color.BLACK.get()}));
-					this.painterSet.uiPainter.add(new RectC(.1, .1, .03, .03, {fill: true, color: `#fff`}));
+					this.painterSet.uiPainter.add(Rect.centeredRect(.1, .1, .03, .03, {fill: true, color: `#fff`}));
 					this.painterSet.uiPainter.add(new Text(.1, .1, this.noiseRange));
 				}
 			}

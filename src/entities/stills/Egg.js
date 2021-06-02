@@ -3,9 +3,8 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {Colors} from '../../util/Constants.js';
 import RockGraphic from '../../graphics/RockGraphic.js';
 import Buff from '../Buff.js';
-import Vector from '../../util/Vector.js';
-import {minWhichA, randInt} from '../../util/Number.js';
-import RectC from '../../painter/elements/RectC.js';
+import {randInt} from '../../util/Number.js';
+import Rect from '../../painter/elements/Rect.js';
 
 class Egg extends Entity {
 	constructor(possiblePositions) {
@@ -46,7 +45,7 @@ class Egg extends Entity {
 		if (!this.ownerHero)
 			super.paint(painter, camera);
 		else
-			painter.add(RectC.withCamera(camera, this.ownerHero.x, this.ownerHero.y, this.width, this.height, {fill: false, color: Colors.Entity.EGG.get()}));
+			painter.add(Rect.centeredRectWithCamera(camera, this.ownerHero.x, this.ownerHero.y, this.width, this.height, {fill: false, color: Colors.Entity.EGG.get()}));
 	}
 }
 

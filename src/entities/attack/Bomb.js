@@ -2,7 +2,7 @@ import Entity from '../Entity.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import {getRectDistance} from '../../util/Number.js';
 import {Colors} from '../../util/Constants.js';
-import RectC from '../../painter/elements/RectC.js';
+import Rect from '../../painter/elements/Rect.js';
 
 class Bomb extends Entity {
 	// if maxTargets <= 0, will be treated as infinite
@@ -32,8 +32,8 @@ class Bomb extends Entity {
 	}
 
 	paint(painter, camera) {
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.range * 2, this.range * 2, {color: Colors.Entity.Bomb.WARNING_BORDER.get()}));
-		painter.add(RectC.withCamera(camera, this.x, this.y, this.width, this.height, {color: Colors.Entity.Bomb.ENTITY.get()}));
+		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.range * 2, this.range * 2, {color: Colors.Entity.Bomb.WARNING_BORDER.get()}));
+		painter.add(Rect.centeredRectWithCamera(camera, this.x, this.y, this.width, this.height, {color: Colors.Entity.Bomb.ENTITY.get()}));
 	}
 }
 
