@@ -9,6 +9,12 @@ class Bar extends PainterElement {
 		this.border = new Rect(x, y, width, height, {color: borderColor});
 	}
 
+	static WideBar(paintUiRow, fillRatio, emptyColor, fillColor, borderColor) {
+		const MARGIN = .02, WIDTH = 1 - MARGIN * 2;
+		let top = MARGIN * (1 + paintUiRow * 2);
+		return new Bar(MARGIN, top, WIDTH, MARGIN, fillRatio, emptyColor, fillColor, borderColor);
+	}
+
 	paint(xt, yt, context) {
 		this.empty.paint(xt, yt, context);
 		this.fill.paint(xt, yt, context);
