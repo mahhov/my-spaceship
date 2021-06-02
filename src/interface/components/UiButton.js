@@ -23,14 +23,18 @@ class UiButton extends UiComponent {
 
 	update(controller) {
 		let state = this.getState(controller);
-		if (state === States.ACTIVE && this.state !== States.ACTIVE)
+		if (this.state === state)
+			return;
+		if (state === States.ACTIVE)
 			this.emit('click');
+		else if (state === States.HOVER)
+			this.emit('hover');
 		this.state = state;
 	}
 
 	getState(controller) {
 		let {x, y} = controller.getRawMouse();
-		if (this.bounds.inside(x, y) && controller.getMouseState(0).active || this.hotkey && controller.getKeyState(this.hotkey).pressed)
+		if (this.bounds.inside(x, y) && controller.getMouseState(0).pressed || this.hotkey && controller.getKeyState(this.hotkey).pressed)
 			return States.ACTIVE;
 		else if (this.bounds.inside(x, y))
 			return States.HOVER;
