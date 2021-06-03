@@ -8,7 +8,7 @@ import Period from '../../modules/Period.js';
 import Shotgun from '../../modules/Shotgun.js';
 import Monster from '.././Monster.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class Static4DirTurret extends Monster {
 	constructor(x, y) {

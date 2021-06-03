@@ -4,7 +4,7 @@ import Period from '../../modules/Period.js';
 import Position from '../../modules/Position.js';
 import MechanicalBossEarly from './MechanicalBossEarly.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class MechanicalBoss extends MechanicalBossEarly {
 	addModules() {

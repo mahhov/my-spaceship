@@ -3,7 +3,7 @@ import {thetaToVector} from '../../util/Number.js';
 import Vector from '../../util/Vector.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
 class Rotate extends Module {
 	config(origin, rate = 1 / 50, theta = 0, atTarget = false) {

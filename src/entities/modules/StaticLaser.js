@@ -5,7 +5,7 @@ import Vector from '../../util/Vector.js';
 import Laser from '../attack/Laser.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
+const Stages = makeEnum({WARNING: 0, ACTIVE: 0, INACTIVE: 0});
 
 class StaticLaser extends Module {
 	config(origin, spread, range, dirModule, duration, damage, size = .02) {

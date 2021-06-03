@@ -1,7 +1,7 @@
 import makeEnum from '../../util/Enum.js';
 import ModuleManager from './ModuleManager.js';
 
-const PrimaryStages = makeEnum('PLAY', 'LOOP', 'PAUSE', 'STOP');
+const PrimaryStages = makeEnum({PLAY: 0, LOOP: 0, PAUSE: 0, STOP: 0});
 // variable number of secondary stages depending on number of patterns defined
 // variable number of phases depending on number of periods defined
 

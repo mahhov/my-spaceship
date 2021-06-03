@@ -3,8 +3,8 @@ import LinkedList from '../../util/LinkedList.js';
 import {rand, randInt, randVector} from '../../util/Number.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE');
-const Phases = makeEnum('NOT_SPAWNING', 'SPAWNING', 'COMPLETE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
+const Phases = makeEnum({NOT_SPAWNING: 0, SPAWNING: 0, COMPLETE: 0});
 
 class Spawn extends ModuleManager {
 	config(origin, range, probability, minCount, maxCount, concurrentSpawnLimit, totalSpawnLimit, monsterClass, ...monsterConstructorParams) {

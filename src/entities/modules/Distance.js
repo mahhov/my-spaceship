@@ -2,7 +2,7 @@ import makeEnum from '../../util/Enum.js';
 import {getMagnitude} from '../../util/Number.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 // variable number of phases per number of arguments to config
 
 class Distance extends ModuleManager {

@@ -2,8 +2,8 @@ import makeEnum from '../../util/Enum.js';
 import {setMagnitude} from '../../util/Number.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');
-const Phases = makeEnum('INACTIVE', 'AIMING', 'WARNING', 'DASHING');
+const Stages = makeEnum({INACTIVE: 0, AIMING: 0, WARNING: 0, DASHING: 0});
+const Phases = makeEnum({INACTIVE: 0, AIMING: 0, WARNING: 0, DASHING: 0});
 
 class Dash extends ModuleManager {
 	config(origin, distance, dashDuration) {

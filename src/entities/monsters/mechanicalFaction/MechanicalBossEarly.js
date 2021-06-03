@@ -11,7 +11,7 @@ import Shotgun from '../../modules/Shotgun.js';
 import StaticLaser from '../../modules/StaticLaser.js';
 import Monster from '.././Monster.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class MechanicalBossEarly extends Monster {
 	constructor(x, y) {

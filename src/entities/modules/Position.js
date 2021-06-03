@@ -2,7 +2,7 @@ import makeEnum from '../../util/Enum.js';
 import Vector from '../../util/Vector.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
 class Position extends Module {
 	config(origin = null, randMinMag = 0, randMaxMag = 0) {

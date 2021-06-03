@@ -2,7 +2,7 @@ import makeEnum from '../../util/Enum.js';
 import Phase from '../../util/Phase.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('PLAY', 'LOOP', 'PAUSE', 'STOP');
+const Stages = makeEnum({PLAY: 0, LOOP: 0, PAUSE: 0, STOP: 0});
 // variable number of phases per number of arguments to config
 
 class Period extends ModuleManager {

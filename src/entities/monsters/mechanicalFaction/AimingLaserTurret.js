@@ -8,7 +8,7 @@ import Rotate from '../../modules/Rotate.js';
 import StaticLaser from '../../modules/StaticLaser.js';
 import Monster from '.././Monster.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class AimingLaserTurret extends Monster {
 	constructor(x, y) {

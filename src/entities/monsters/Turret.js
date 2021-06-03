@@ -5,7 +5,7 @@ import Phase from '../../util/Phase.js';
 import NearbyDegen from '../modules/NearbyDegen.js';
 import Monster from './Monster.js';
 
-const Phases = makeEnum('REST', 'ATTACK');
+const Phases = makeEnum({REST: 0, ATTACK: 0});
 
 class Turret extends Monster {
 	constructor(x, y) {

@@ -2,8 +2,8 @@ import makeEnum from '../../util/Enum.js';
 import Phase from '../../util/Phase.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE', 'COOLDOWN');
-const Phases = makeEnum('UNTRIGGERED', 'TRIGGERED');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0, COOLDOWN: 0});
+const Phases = makeEnum({UNTRIGGERED: 0, TRIGGERED: 0});
 
 class Cooldown extends ModuleManager {
 	config(duration) {

@@ -1,6 +1,6 @@
 import makeEnum from './Enum.js';
 
-const Aligns = makeEnum('START', 'CENTER', 'END');
+const Aligns = makeEnum({START: 0, CENTER: 0, END: 0});
 
 class Coordinate {
 	constructor(x, y, width = 0, height = width) {

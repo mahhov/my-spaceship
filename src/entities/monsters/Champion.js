@@ -12,7 +12,7 @@ import Trigger from '../modules/Trigger.js';
 import Monster from './Monster.js';
 // import Boomerang from '../modules/Boomerang.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class Champion extends Monster {
 	constructor(x, y) {

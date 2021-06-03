@@ -6,7 +6,7 @@ import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/Enum.js';
 import UiComponent from './UiComponent.js';
 
-const States = makeEnum('DISABLED', 'INACTIVE', 'ACTIVE', 'HOVER');
+const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, HOVER: 0});
 
 class UiButton extends UiComponent {
 	constructor(left, top, width, height, text, hotkey = '') {

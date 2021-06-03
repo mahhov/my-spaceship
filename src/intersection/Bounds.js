@@ -1,6 +1,6 @@
 import makeEnum from '../util/Enum.js';
 
-const Directions = makeEnum('LEFT', 'TOP', 'RIGHT', 'BOTTOM');
+const Directions = makeEnum({LEFT: 0, TOP: 0, RIGHT: 0, BOTTOM: 0});
 
 class Bounds {
 	constructor(...leftTopRightBottom) {

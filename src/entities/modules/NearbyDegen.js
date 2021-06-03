@@ -2,7 +2,7 @@ import makeEnum from '../../util/Enum.js';
 import AreaDegen from '../attack/AreaDegen.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('WARNING', 'ACTIVE', 'INACTIVE');
+const Stages = makeEnum({WARNING: 0, ACTIVE: 0, INACTIVE: 0});
 
 class NearbyDegen extends Module {
 	config(origin, range, damage) {

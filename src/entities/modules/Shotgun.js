@@ -3,7 +3,7 @@ import {rand, randVector} from '../../util/Number.js';
 import Projectile from '../attack/Projectile.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
 class Shotgun extends Module {
 	config(origin, rate, count, velocity, spread, duration, damage, dirModule, predictableRate = false, size = .02) {

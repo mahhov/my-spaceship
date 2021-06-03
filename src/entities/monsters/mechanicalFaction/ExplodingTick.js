@@ -10,7 +10,7 @@ import NearbyDegen from '../../modules/NearbyDegen.js';
 import PatternedPeriod from '../../modules/PatternedPeriod.js';
 import Monster from '.././Monster.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class ExplodingTick extends Monster {
 	constructor(x, y) {

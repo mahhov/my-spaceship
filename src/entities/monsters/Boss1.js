@@ -13,7 +13,7 @@ import Shotgun from '../modules/Shotgun.js';
 import Trigger from '../modules/Trigger.js';
 import Monster from './Monster.js';
 
-const Phases = makeEnum('INACTIVE', 'PRE_DEGEN', 'DEGEN', 'PROJECTILE');
+const Phases = makeEnum({INACTIVE: 0, PRE_DEGEN: 0, DEGEN: 0, PROJECTILE: 0});
 
 class Boss1 extends Monster {
 	constructor(x, y) {

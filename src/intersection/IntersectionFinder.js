@@ -3,20 +3,21 @@ import LinkedList from '../util/LinkedList.js';
 import {EPSILON, maxWhich, setMagnitude} from '../util/Number.js';
 import Bounds from './Bounds.js';
 
-const Layers = makeEnum(
-	'PASSIVE',              // intersects with everything
-	'FRIENDLY_PROJECTILE',  // intersects with hostile units and passives
-	'FRIENDLY_UNIT',        // intersects with hostile units, hostile projectiles, and passives
-	'HOSTILE_PROJECTILE',   // intersects with friendly units and passives
-	'HOSTILE_UNIT',         // intersects with friendly units, hostile units, friendly projectiles, and passives
-	'UNIT_TRACKER',         // intersects with friendly and hostile units
-	'IGNORE');              // intersects with nothing
+const Layers = makeEnum({
+	PASSIVE: 0,             // intersects with everything
+	FRIENDLY_PROJECTILE: 0, // intersects with hostile units and passives
+	FRIENDLY_UNIT: 0,       // intersects with hostile units, hostile projectiles, and passives
+	HOSTILE_PROJECTILE: 0,  // intersects with friendly units and passives
+	HOSTILE_UNIT: 0,        // intersects with friendly units, hostile units, friendly projectiles, and passives
+	UNIT_TRACKER: 0,        // intersects with friendly and hostile units
+	IGNORE: 0,              // intersects with nothing
+});
 
-const CollisionTypes = makeEnum(
-	'OFF', // unused, unset/undefined instead
-	'ON',
-	'TRACK_ONLY', // tracks collisions but does not prevent movement
-);
+const CollisionTypes = makeEnum({
+	OFF: 0,         // unused, unset/undefined instead
+	ON: 0,
+	TRACK_ONLY: 0,  // tracks collisions but does not prevent movement
+});
 
 class IntersectionFinder {
 	constructor() {

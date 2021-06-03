@@ -12,7 +12,7 @@ import Period from '../../modules/Period.js';
 import Trigger from '../../modules/Trigger.js';
 import Monster from '.././Monster.js';
 
-const Phases = makeEnum('ONE');
+const Phases = makeEnum({ONE: 0});
 
 class DashChaser extends Monster {
 	constructor(x, y) {

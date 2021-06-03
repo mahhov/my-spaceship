@@ -1,8 +1,8 @@
 import makeEnum from '../../util/Enum.js';
 import ModuleManager from './ModuleManager.js';
 
-const Stages = makeEnum('INACTIVE', 'ACTIVE');
-const Phases = makeEnum('INACTIVE', 'UNTRIGGERED', 'TRIGGERED');
+const Stages = makeEnum({INACTIVE: 0, ACTIVE: 0});
+const Phases = makeEnum({INACTIVE: 0, UNTRIGGERED: 0, TRIGGERED: 0});
 
 class Trigger extends ModuleManager {
 	config(duration) {

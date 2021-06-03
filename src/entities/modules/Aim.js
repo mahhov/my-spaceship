@@ -3,7 +3,7 @@ import {cos, sin} from '../../util/Number.js';
 import Vector from '../../util/Vector.js';
 import Module from './Module.js';
 
-const Stages = makeEnum('ACTIVE', 'INACTIVE', 'REVERSE');
+const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0, REVERSE: 0});
 
 class Aim extends Module {
 	config(origin, rotationSpeed = 0, skirmishTime = 0, skirmishDistance = 0, initialDirVector = null) {

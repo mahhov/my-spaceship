@@ -9,7 +9,7 @@ import Spawn from '../modules/Spawn.js';
 import MeleeDart from './MeleeDart.js';
 import Monster from './Monster.js';
 
-const Phases = makeEnum('DORMANT', 'ACTIVE');
+const Phases = makeEnum({DORMANT: 0, ACTIVE: 0});
 
 class OutpostPortal extends Monster {
 	constructor(x, y, spawnDamageMultiplier) {
