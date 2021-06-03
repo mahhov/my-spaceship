@@ -3,6 +3,7 @@ import PainterElement from './PainterElement.js';
 import Rect from './Rect.js';
 
 class Bar extends PainterElement {
+	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(x, y, width, height, fillRatio, emptyColor, fillColor, borderColor) {
 		super();
 		this.empty = new Rect(new Coordinate(x, y, width, height), {fill: true, color: emptyColor});

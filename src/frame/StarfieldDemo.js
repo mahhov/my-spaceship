@@ -20,7 +20,10 @@ class StarfieldDemo extends Frame {
 
 	paint() {
 		this.starfield.paint(this.painterSet.uiPainter, this.camera);
-		this.painterSet.uiPainter.add(new Text(new Coordinate(.05, .05).align(Coordinate.Aligns.CENTER), this.noise ? 'noise' : 'rand', {color: Color.WHITE.get()}));
+		this.painterSet.uiPainter.add(new Text(
+			new Coordinate(.05, .05)
+				.align(Coordinate.Aligns.CENTER), this.noise ? 'noise' : 'rand')
+			.setOptions({color: Color.WHITE.get()}));
 	}
 
 	periodicallySwapStarfield() {

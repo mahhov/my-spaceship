@@ -141,10 +141,12 @@ class MapGeneratorStaged extends MapGenerator {
 	}
 
 	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
+		let textOptions = {size: '16px'};
 		painter.add(new Text(
-			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`${this.stage} : ${round(this.timer / 100)}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2)
+				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`${this.stage} : ${round(this.timer / 100)}`)
+			.setOptions(textOptions));
 	}
 }
 

@@ -1,6 +1,7 @@
 import PainterElement from './PainterElement.js';
 
 class Rect extends PainterElement {
+	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(coordinate, {fill, color = '#000', thickness = 1} = {}) {
 		super();
 		this.coordinate = coordinate;

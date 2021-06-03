@@ -1,6 +1,7 @@
 import PainterElement from './PainterElement.js';
 
 class MultilineText extends PainterElement {
+	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(coordinate, text, {color = '#000', size = '18px'} = {}) {
 		super();
 		this.coordinate = coordinate;

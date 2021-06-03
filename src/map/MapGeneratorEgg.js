@@ -118,18 +118,24 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
+		let textOptions = {size: '16px'};
 		painter.add(new Text(
-			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`time: ${round(this.timer / 100)}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT)
+				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`time: ${round(this.timer / 100)}`)
+			.setOptions(textOptions));
 		painter.add(new Text(
-			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2)
+				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`)
+			.setOptions(textOptions));
 
 		if (this.win !== -1)
 			painter.add(new Text(
-				new Coordinate(.5, .5).align(Coordinate.Aligns.CENTER),
-				`${this.win ? 'Red' : 'Green'} Team Wins!`, {size: '25px', align: 'center'}));
+				new Coordinate(.5, .5)
+					.align(Coordinate.Aligns.CENTER),
+				`${this.win ? 'Red' : 'Green'} Team Wins!`)
+				.setOptions({size: '25px'}));
 	}
 }
 

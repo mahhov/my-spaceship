@@ -100,8 +100,10 @@ class Ability {
 		// letter
 		this.uiTexts.forEach((uiText, i) =>
 			painter.add(new Text(
-				new Coordinate(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4).align(Coordinate.Aligns.CENTER),
-				uiText, {size: '12px'})));
+				new Coordinate(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4)
+					.align(Coordinate.Aligns.CENTER),
+				uiText)
+				.setOptions({size: '12px'})));
 
 		// channel bar
 		let channelRatio = this.channelRatio;

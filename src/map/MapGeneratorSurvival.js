@@ -80,13 +80,17 @@ class MapGeneratorSurvival extends MapGenerator {
 	}
 
 	paintUi(painter, camera) {
-		let font = {size: '16px', align: 'right'};
+		let textOptions = {size: '16px'};
 		painter.add(new Text(
-			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`Stage: ${this.stage}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT * 2)
+				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`Stage: ${this.stage}`)
+			.setOptions(textOptions));
 		painter.add(new Text(
-			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.STAGE_TEXT_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`Difficulty: ${round(this.timerDamageMultiplier, 2)}`, font));
+			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2.5 + Positions.BAR_HEIGHT * 2 + Positions.STAGE_TEXT_HEIGHT)
+				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+			`Difficulty: ${round(this.timerDamageMultiplier, 2)}`)
+			.setOptions(textOptions));
 	}
 }
 

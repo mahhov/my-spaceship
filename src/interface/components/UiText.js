@@ -8,10 +8,18 @@ class UiText extends UiComponent {
 		this.x = x;
 		this.y = y;
 		this.text = text;
+		this.textOptions = undefined;
+	}
+
+	setTextOptions(textOptions) {
+		this.textOptions = textOptions;
 	}
 
 	paint(painter) {
-		painter.add(new Text(new Coordinate(this.x, this.y).align(Coordinate.Aligns.CENTER), this.text));
+		painter.add(new Text(
+			new Coordinate(this.x, this.y)
+				.align(Coordinate.Aligns.CENTER), this.text)
+			.setOptions(this.textOptions));
 	}
 }
 

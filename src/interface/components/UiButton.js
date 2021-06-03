@@ -50,7 +50,10 @@ class UiButton extends UiComponent {
 
 		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height), {fill: true, color}));
 		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height)));
-		painter.add(new Text(new Coordinate(this.left + this.width / 2, this.top + this.height / 2).align(Coordinate.Aligns.CENTER), this.text));
+		painter.add(new Text(
+			new Coordinate(this.left + this.width / 2, this.top + this.height / 2)
+				.align(Coordinate.Aligns.CENTER), this.text)
+			.setOptions({size: '14px'}));
 	}
 }
 

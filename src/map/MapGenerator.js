@@ -21,7 +21,8 @@ class MapGenerator {
 	paintUi(painter, camera) {
 		painter.add(new Text(
 			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`${round(this.timer / 100)}`, {size: '16px'}));
+			`${round(this.timer / 100)}`)
+			.setOptions({size: '16px'}));
 	}
 }
 

@@ -1,12 +1,17 @@
 import PainterElement from './PainterElement.js';
 
 class Text extends PainterElement {
-	constructor(coordinate, text, {color = '#000', size = '18px'} = {}) {
+	constructor(coordinate, text) {
 		super();
 		this.coordinate = coordinate;
 		this.text = text;
+		this.setOptions();
+	}
+
+	setOptions({color = '#000', size = '18px'} = {}) {
 		this.color = color;
 		this.size = size;
+		return this;
 	}
 
 	paint(xt, yt, context) {

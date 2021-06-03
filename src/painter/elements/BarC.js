@@ -4,6 +4,7 @@ import Rect from './Rect.js';
 
 // todo [medium] merge with Bar.
 class BarC extends PainterElement {
+	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(x, y, width, height, fillRatio, emptyColor, fillColor, borderColor) {
 		super();
 		x -= width / 2;

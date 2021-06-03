@@ -2,6 +2,7 @@ import Vector from '../../util/Vector.js';
 import Path from './Path.js';
 
 class Line extends Path {
+	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(x, y, x2, y2, width, graphicOptions) {
 		let w = new Vector(x2 - x, y2 - y).rotateByCosSin(0, 1);
 		w.magnitude = width;

@@ -45,8 +45,10 @@ class Looper {
 			this.paintFpsTracker.tick();
 			this.painterSet.clear();
 			this.frame.paint();
-			this.painterSet.uiPainter.add(new Text(new Coordinate(1 - Positions.MARGIN, Positions.MARGIN).align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`, {align: 'right'}));
+			this.painterSet.uiPainter.add(new Text(
+				new Coordinate(1 - Positions.MARGIN, Positions.MARGIN)
+					.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
+				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`));
 			this.painterSet.paint();
 			await Looper.sleep(10);
 		}
