@@ -24,8 +24,8 @@ class PainterElement {
 	}
 
 	setFont(context) {
-		context.textAlign = this.coordinate.textAlignment;
-		context.textBaseline = this.coordinate.vertTextAlignment;
+		context.textAlign = ['left', 'center', 'right'][this.coordinate.alignment];
+		context.textBaseline = ['top', 'middle', 'bottom'][this.coordinate.vertAlignment];
 		context.font = `${this.size} monospace`;
 	}
 

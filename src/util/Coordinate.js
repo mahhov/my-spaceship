@@ -48,15 +48,6 @@ class Coordinate {
 	get top() {
 		return Coordinate.getAligned(this.vertAlignment, this.y, this.height);
 	}
-
-	get textAlignment() {
-		return ['left', 'center', 'right'][this.alignment];
-	}
-
-	get vertTextAlignment() {
-		return ['top', 'middle', 'bottom'][this.vertAlignment];
-		// return ['hanging', 'middle', 'alphabetic'][this.vertAlignment];
-	}
 }
 
 Coordinate.Aligns = Aligns;
