@@ -1,3 +1,4 @@
+import {Positions} from '../../util/Constants.js';
 import UiButton from '../components/UiButton.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
@@ -8,7 +9,8 @@ import Ui from './Ui.js';
 
 class UiSet {
 	constructor(title, uis, index) {
-		this.button = new UiButton(.02 + index * .1, .02, .1 - .003, .03, title);
+		let width = .1;
+		this.button = new UiButton(Positions.MARGIN + (width + Positions.MARGIN) * index, Positions.MARGIN, width, .03, title);
 		this.uis = uis;
 	}
 
@@ -38,10 +40,14 @@ class HubUi extends Ui {
 
 		this.uiSets.forEach(uiSet => {
 			this.add(uiSet.button);
-			uiSet.button.on('click', () => this.uiSets.forEach(uiSetI => uiSetI.setActive(uiSetI === uiSet)));
+			uiSet.button.on('click', () => this.setActiveUiSet(uiSet));
 		});
 
-		this.uiSets[0].setActive(true);
+		this.setActiveUiSet(this.uiSets[0]);
+	}
+
+	setActiveUiSet(uiSet) {
+		this.uiSets.forEach(uiSetI => uiSetI.setActive(uiSetI === uiSet));
 	}
 }
 
