@@ -6,7 +6,7 @@ import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/Enum.js';
 import UiComponent from './UiComponent.js';
 
-const States = makeEnum('INACTIVE', 'ACTIVE', 'HOVER');
+const States = makeEnum('DISABLED', 'INACTIVE', 'ACTIVE', 'HOVER');
 
 class UiButton extends UiComponent {
 	constructor(left, top, width, height, text, hotkey = '') {
@@ -19,6 +19,7 @@ class UiButton extends UiComponent {
 		this.text = text;
 		this.hotkey = hotkey;
 		this.state = States.INACTIVE;
+		this.disabled = false;
 	}
 
 	update(controller) {
@@ -33,6 +34,8 @@ class UiButton extends UiComponent {
 	}
 
 	getState(controller) {
+		if (this.disabled)
+			return States.DISABLED;
 		let {x, y} = controller.getRawMouse();
 		if (this.bounds.inside(x, y) && controller.getMouseState(0).pressed || this.hotkey && controller.getKeyState(this.hotkey).pressed)
 			return States.ACTIVE;
@@ -43,7 +46,7 @@ class UiButton extends UiComponent {
 	}
 
 	paint(painter) {
-		let color = [Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
+		let color = [Colors.Interface.DISABLED, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 
 		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height), {fill: true, color}));
 		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height)));

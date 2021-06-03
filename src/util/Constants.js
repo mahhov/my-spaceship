@@ -29,6 +29,7 @@ const Colors = {
 	},
 
 	Interface: {
+		DISABLED: Color.from1(.8, .8, .8),
 		INACTIVE: Color.from1(1, 1, 1),
 		HOVER: Color.from1(.95, .95, .95),
 		ACTIVE: Color.from1(1, 1, 1),

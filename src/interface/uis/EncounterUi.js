@@ -7,6 +7,7 @@ import Ui from './Ui.js';
 
 class EncounterUi extends Ui {
 	constructor() {
+		// todo [high] takes up (0, .1) to (1, 1)
 		super();
 		this.add(new UiText(.5, .15, 'Select Encounter'));
 		let descriptionText = this.add(new UiTextArea(.11, .51, .78, .32, ''));

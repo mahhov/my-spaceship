@@ -11,12 +11,16 @@ class Ui extends UiComponent {
 		return component;
 	}
 
+	get visibleComponents() {
+		return this.components.filter(component => component.visible);
+	}
+
 	update(controller) {
-		this.components.forEach(component => component.update(controller));
+		this.visibleComponents.forEach(component => component.update(controller));
 	}
 
 	paint(painter) {
-		this.components.forEach(component => component.paint(painter));
+		this.visibleComponents.forEach(component => component.paint(painter));
 	}
 }
 
