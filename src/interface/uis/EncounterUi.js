@@ -8,7 +8,6 @@ import Ui from './Ui.js';
 
 class EncounterUi extends Ui {
 	constructor() {
-		// todo [high] takes up (0, .1) to (1, 1)
 		super();
 		this.add(new UiText(new Coordinate(.5, .15).align(Coordinate.Aligns.CENTER), 'Select Encounter').setTextOptions({size: '18px'}));
 		let descriptionText = this.add(new UiTextArea(new Coordinate(.11, .51, .78, .32), ''));

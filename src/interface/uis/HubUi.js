@@ -48,7 +48,10 @@ class HubUi extends Ui {
 	}
 
 	setActiveUiSet(uiSet) {
-		this.uiSets.forEach(uiSetI => uiSetI.setActive(uiSetI === uiSet));
+		this.uiSets
+			.filter(uiSetI => uiSetI !== uiSet)
+			.forEach(uiSetI => uiSetI.setActive(false));
+		uiSet.setActive(true);
 	}
 }
 
