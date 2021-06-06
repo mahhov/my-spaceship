@@ -5,10 +5,9 @@ class Text extends PainterElement {
 		super();
 		this.coordinate = coordinate;
 		this.text = text;
-		this.setOptions();
 	}
 
-	setOptions({color = '#000', size = '18px'} = {}) {
+	setOptions({color = '#000', size = '14px'} = {}) {
 		this.color = color;
 		this.size = size;
 		return this;
@@ -18,8 +17,8 @@ class Text extends PainterElement {
 		this.setFillMode(context);
 		this.setFont(context);
 
-		let tx = xt(this.coordinate.left);
-		let ty = yt(this.coordinate.top);
+		let tx = xt(this.coordinate.x);
+		let ty = yt(this.coordinate.y);
 		context.fillText(this.text, tx, ty);
 	}
 }

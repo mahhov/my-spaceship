@@ -9,13 +9,9 @@ import UiComponent from './UiComponent.js';
 const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, HOVER: 0});
 
 class UiButton extends UiComponent {
-	constructor(left, top, width, height, text, hotkey = '') {
-		super();
-		this.left = left;
-		this.top = top;
-		this.width = width;
-		this.height = height;
-		this.bounds = new Bounds(left, top, left + width, top + height);
+	constructor(coordinate, text, hotkey = '') {
+		super(coordinate);
+		this.bounds = new Bounds(coordinate.left, coordinate.top, coordinate.right, coordinate.bottom);
 		this.text = text;
 		this.hotkey = hotkey;
 		this.state = States.INACTIVE;
@@ -48,12 +44,9 @@ class UiButton extends UiComponent {
 	paint(painter) {
 		let color = [Colors.Interface.DISABLED, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 
-		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height), {fill: true, color}));
-		painter.add(new Rect(new Coordinate(this.left, this.top, this.width, this.height)));
-		painter.add(new Text(
-			new Coordinate(this.left + this.width / 2, this.top + this.height / 2)
-				.align(Coordinate.Aligns.CENTER), this.text)
-			.setOptions({size: '14px'}));
+		painter.add(new Rect(this.coordinate, {fill: true, color}));
+		painter.add(new Rect(this.coordinate));
+		painter.add(new Text(this.coordinate.clone.alignWithoutMove(Coordinate.Aligns.CENTER), this.text).setOptions(this.textOptions));
 	}
 }
 

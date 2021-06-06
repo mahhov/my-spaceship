@@ -2,7 +2,7 @@ import UiComponent from '../components/UiComponent.js';
 
 class Ui extends UiComponent {
 	constructor() {
-		super();
+		super(null); // Uis aren't relocatable, so set coordinate to null
 		this.components = [];
 	}
 

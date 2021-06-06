@@ -118,17 +118,14 @@ class MapGeneratorEgg extends MapGenerator {
 	}
 
 	paintUi(painter, camera) {
-		let textOptions = {size: '16px'};
 		painter.add(new Text(
 			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 2 + Positions.BAR_HEIGHT)
 				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`time: ${round(this.timer / 100)}`)
-			.setOptions(textOptions));
+			`time: ${round(this.timer / 100)}`));
 		painter.add(new Text(
 			new Coordinate(1 - Positions.MARGIN, Positions.MARGIN * 3 + Positions.BAR_HEIGHT * 2)
 				.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
-			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`)
-			.setOptions(textOptions));
+			`score: ${this.scores.map(s => floor(s / 100)).join(' v ')}`));
 
 		if (this.win !== -1)
 			painter.add(new Text(

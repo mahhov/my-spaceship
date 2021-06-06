@@ -1,14 +1,9 @@
-import PainterElement from './PainterElement.js';
+import Text from './Text.js';
 
-class MultilineText extends PainterElement {
+class MultilineText extends Text {
 	// todo [medium] replace constructor param with setOptions() like Text
-	constructor(coordinate, text, {color = '#000', size = '18px'} = {}) {
-		super();
-		this.coordinate = coordinate;
-		this.text = text;
-		this.color = color;
-		this.size = size;
-		this.align = 'left';
+	constructor(coordinate, text) {
+		super(coordinate, text);
 		this.wrappedLines = null;
 	}
 

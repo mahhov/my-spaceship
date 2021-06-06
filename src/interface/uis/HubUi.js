@@ -1,4 +1,5 @@
 import {Positions} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
@@ -10,7 +11,7 @@ import Ui from './Ui.js';
 class UiSet {
 	constructor(title, uis, index) {
 		let width = .1;
-		this.button = new UiButton(Positions.MARGIN + (width + Positions.MARGIN) * index, Positions.MARGIN, width, .03, title);
+		this.button = new UiButton(new Coordinate(Positions.MARGIN + (width + Positions.MARGIN) * index, Positions.MARGIN, width, .03), title);
 		this.uis = uis;
 	}
 

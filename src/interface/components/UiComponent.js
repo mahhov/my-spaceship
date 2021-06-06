@@ -1,12 +1,16 @@
 import Emitter from '../../util/Emitter.js';
 
 class UiComponent extends Emitter {
-	constructor() {
+	constructor(coordinate) {
 		super();
-		// Checked in Ui iterations.
-		this.visible = true;
+		this.coordinate = coordinate;
+		this.visible = true; // Checked in Ui iterations.
 	}
 
+	setTextOptions(textOptions) {
+		this.textOptions = textOptions;
+		return this;
+	}
 
 	update(controller) {
 	}

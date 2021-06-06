@@ -3,10 +3,15 @@ import Color from '../../util/Color.js';
 class PainterElement {
 	constructor() {
 		// overridden by children
+		// todo [medium] once all subclasses use coordinate, replace null with a constructor parameter
 		this.coordinate = null;
 		this.color = null;
 		this.size = null;
 		this.thickness = null;
+		this.setOptions();
+	}
+
+	setOptions() {
 	}
 
 	setFillMode(context) {

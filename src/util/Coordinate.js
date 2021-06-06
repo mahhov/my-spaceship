@@ -22,6 +22,12 @@ class Coordinate {
 		return this;
 	}
 
+	alignWithoutMove(alignment, vertAlignment = alignment) {
+		this.x = Coordinate.getAligned(alignment, this.left, -this.width);
+		this.y = Coordinate.getAligned(vertAlignment, this.top, -this.height);
+		return this.align(alignment, vertAlignment);
+	}
+
 	pad(padding) {
 		this.x += Coordinate.getAligned(this.alignment, padding, padding * 2);
 		this.y += Coordinate.getAligned(this.vertAlignment, padding, padding * 2);
@@ -47,6 +53,14 @@ class Coordinate {
 
 	get top() {
 		return Coordinate.getAligned(this.vertAlignment, this.y, this.height);
+	}
+
+	get right() {
+		return this.left + this.width;
+	}
+
+	get bottom() {
+		return this.top + this.height;
 	}
 }
 

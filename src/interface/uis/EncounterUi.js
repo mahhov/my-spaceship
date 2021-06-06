@@ -1,5 +1,6 @@
 import MapGeneratorSurvival from '../../map/MapGeneratorSurvival.js';
 import MapGeneratorTimed from '../../map/MapGeneratorTimed.js';
+import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import UiText from '../components/UiText.js';
 import UiTextArea from '../components/UiTextArea.js';
@@ -9,10 +10,10 @@ class EncounterUi extends Ui {
 	constructor() {
 		// todo [high] takes up (0, .1) to (1, 1)
 		super();
-		this.add(new UiText(.5, .15, 'Select Encounter'));
-		let descriptionText = this.add(new UiTextArea(.11, .51, .78, .32, ''));
+		this.add(new UiText(new Coordinate(.5, .15).align(Coordinate.Aligns.CENTER), 'Select Encounter').setTextOptions({size: '18px'}));
+		let descriptionText = this.add(new UiTextArea(new Coordinate(.11, .51, .78, .32), ''));
 		EncounterUi.Encounters.forEach(({name, description, MapGeneratorClass}, i) => {
-			let button = this.add(new UiButton(.42, .2 + .05 * i, .16, .02, name));
+			let button = this.add(new UiButton(new Coordinate(.42, .2 + .05 * i, .16, .02), name));
 			button.on('hover', () => descriptionText.text = description);
 			button.on('click', () => this.emit('begin-encounter', MapGeneratorClass));
 		});
