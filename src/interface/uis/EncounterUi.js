@@ -2,14 +2,14 @@ import MapGeneratorSurvival from '../../map/MapGeneratorSurvival.js';
 import MapGeneratorTimed from '../../map/MapGeneratorTimed.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
-import UiText from '../components/UiText.js';
 import UiTextArea from '../components/UiTextArea.js';
+import HubUi from './HubUi.js';
 import Ui from './Ui.js';
 
 class EncounterUi extends Ui {
 	constructor() {
 		super();
-		this.add(new UiText(new Coordinate(.5, .15).align(Coordinate.Aligns.CENTER), 'Select Encounter').setTextOptions({size: '18px'}));
+		this.add(HubUi.createSection('Encounter'));
 		let descriptionText = this.add(new UiTextArea(new Coordinate(.11, .51, .78, .32), ''));
 		EncounterUi.Encounters.forEach(({name, description, MapGeneratorClass}, i) => {
 			let button = this.add(new UiButton(new Coordinate(.42, .2 + .05 * i, .16, .02), name));
@@ -35,7 +35,7 @@ class EncounterUi extends Ui {
 			name: 'Hunt',
 			MapGeneratorClass: MapGeneratorSurvival,
 			description: 'Hunt a powerful monster for crafting orbs.',
-		}]
+]		}];
 	}
 }
 

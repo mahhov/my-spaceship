@@ -28,6 +28,12 @@ class Coordinate {
 		return this.align(alignment, vertAlignment);
 	}
 
+	move(widths, heights) {
+		this.x += widths * this.width;
+		this.y += heights * this.height;
+		return this;
+	}
+
 	pad(padding) {
 		this.x += Coordinate.getAligned(this.alignment, padding, padding * 2);
 		this.y += Coordinate.getAligned(this.vertAlignment, padding, padding * 2);

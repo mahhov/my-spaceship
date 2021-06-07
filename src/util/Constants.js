@@ -48,11 +48,11 @@ const Colors = {
 		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),
 		Bomb: {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
-			ENTITY: Color.fromHexString('#00c')
+			ENTITY: Color.fromHexString('#00c'),
 		},
 		AREA_DEGEN: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
-			ACTIVE_FILL: Color.from1(.8, 0, 0, .1)
+			ACTIVE_FILL: Color.from1(.8, 0, 0, .1),
 		},
 		DUST: Color.fromHexString('#ccc'),
 		DAMAGE_DUST: Color.fromHexString('#f88'),
@@ -63,7 +63,7 @@ const Colors = {
 			FILL: Color.from1(1, .9, .9),
 			BORDER: Color.from1(1, .5, .5),
 			LINES: Color.from1(1, .95, .95),
-		}
+		},
 	},
 
 	Star: {
@@ -78,7 +78,7 @@ const Colors = {
 		MONSTER: Color.from1(1, 0, 0),
 		BOSS: Color.from1(1, 0, .6),
 		PLAYER: Color.from1(0, 0, 1),
-	}
+	},
 };
 
 const Positions = {
@@ -89,6 +89,7 @@ const Positions = {
 	ABILITY_CHANNEL_BAR_SIZE: .01,
 	BUFF_SIZE: .05,
 	STAGE_TEXT_HEIGHT: .03,
+	UI_INSET: .05,
 };
 
 export {Colors, Positions};
