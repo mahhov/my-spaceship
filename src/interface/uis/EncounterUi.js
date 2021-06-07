@@ -35,7 +35,7 @@ class EncounterUi extends Ui {
 			name: 'Hunt',
 			MapGeneratorClass: MapGeneratorSurvival,
 			description: 'Hunt a powerful monster for crafting orbs.',
-]		}];
+		}];
 	}
 }
 
