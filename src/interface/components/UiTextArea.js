@@ -1,5 +1,5 @@
 import MultilineText from '../../painter/elements/MultilineText.js';
-import Rect from '../../painter/elements/Rect.js';
+import RoundedRect from '../../painter/elements/RoundedRect.js';
 import UiComponent from './UiComponent.js';
 
 class UiTextArea extends UiComponent {
@@ -9,7 +9,7 @@ class UiTextArea extends UiComponent {
 	}
 
 	paint(painter) {
-		painter.add(new Rect(this.coordinate));
+		painter.add(new RoundedRect(this.coordinate));
 		painter.add(new MultilineText(this.coordinate.clone.pad(.01), this.text).setOptions(this.textOptions));
 	}
 }

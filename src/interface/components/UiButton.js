@@ -45,8 +45,8 @@ class UiButton extends UiComponent {
 	paint(painter) {
 		let color = [Colors.Interface.DISABLED, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 
-		painter.add(new Rect(this.coordinate).setOptions( {fill: true, color}));
-		painter.add(new Rect(this.coordinate));
+		painter.add(new Rect(this.coordinate).setOptions({fill: true, color}));
+		painter.add(new RoundedRect(this.coordinate).setOptions({thickness: 2}));
 		painter.add(new Text(this.coordinate.clone.alignWithoutMove(Coordinate.Aligns.CENTER), this.text).setOptions(this.textOptions));
 	}
 }

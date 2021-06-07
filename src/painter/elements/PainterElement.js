@@ -7,20 +7,20 @@ class PainterElement {
 		this.coordinate = null;
 		this.color = null;
 		this.size = null;
-		this.thickness = null;
+		this.thickness = 1;
 		this.setOptions();
 	}
 
 	setOptions() {
 	}
 
-	setFillMode(context) {
-		context.fillStyle = this.color;
+	setFillMode(context, color = this.color) {
+		context.fillStyle = color;
 	}
 
-	setLineMode(context) {
-		context.strokeStyle = this.color;
-		context.lineWidth = this.thickness || 1;
+	setLineMode(context, color = this.color, thickness = this.thickness) {
+		context.strokeStyle = color;
+		context.lineWidth = thickness;
 	}
 
 	setDoubleMode(context) {
@@ -28,10 +28,10 @@ class PainterElement {
 		context.lineWidth = 1;
 	}
 
-	setFont(context) {
-		context.textAlign = ['left', 'center', 'right'][this.coordinate.alignment];
-		context.textBaseline = ['top', 'middle', 'bottom'][this.coordinate.vertAlignment];
-		context.font = `${this.size} monospace`;
+	setFont(context, size = this.size, alignment = this.coordinate.alignment, vertAlignment = this.coordinate.vertAlignment) {
+		context.font = `${size} monospace`;
+		context.textAlign = ['left', 'center', 'right'][alignment];
+		context.textBaseline = ['top', 'middle', 'bottom'][vertAlignment];
 	}
 
 	paint(xt, yt, context) {
