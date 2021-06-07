@@ -1,4 +1,5 @@
 import Dash from '../../abilities/Dash.js';
+import Death from '../../abilities/Death.js';
 import DelayedRegen from '../../abilities/DelayedRegen.js';
 import IncDefense from '../../abilities/IncDefense.js';
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
@@ -26,6 +27,7 @@ class Player extends Hero {
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
 			new DelayedRegen(),
+			new Death(),
 		];
 
 		let player = new Player(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
