@@ -33,6 +33,7 @@ const Colors = {
 		INACTIVE: Color.from1(0, 0, 0),
 		HOVER: Color.from1(.1, .1, .1),
 		ACTIVE: Color.from1(.4, .4, .4),
+		DULL_BORDER: Color.fromHexString('#aaa'),
 	},
 
 	Entity: {

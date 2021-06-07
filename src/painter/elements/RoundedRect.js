@@ -6,7 +6,7 @@ class RoundedRect extends PainterElement {
 		this.coordinate = coordinate;
 	}
 
-	setOptions({color = '#fff', thickness = 1} = {}) {
+	setOptions({color = '#fff', thickness = 2} = {}) {
 		this.color = color;
 		this.thickness = thickness;
 		return this;
