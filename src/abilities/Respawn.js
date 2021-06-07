@@ -10,7 +10,7 @@ class Respawn extends PassiveAbility {
 		this.x = x;
 		this.y = y;
 		this.deadBuff = new Buff(delay, Colors.PLAYER_BUFFS.DEAD, 'Dead');
-		this.deadBuff.disabled = 1;
+		this.deadBuff.setEffect(Buff.Keys.DISABLED, 1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

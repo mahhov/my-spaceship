@@ -8,7 +8,7 @@ class IncDefense extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, hero) {
 		this.buff = new Buff(200, this.uiColor, 'Armor');
-		this.buff.armor = 3;
+		this.buff.setEffect(Buff.Keys.ARMOR, 3);
 		hero.addBuff(this.buff);
 		return true;
 	}

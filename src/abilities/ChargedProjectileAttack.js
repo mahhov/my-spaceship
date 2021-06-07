@@ -11,7 +11,7 @@ class ChargedProjectileAttack extends Ability {
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (this.channelDuration === 0) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
-			this.chargeBuff.moveSpeed = -.5;
+			this.chargeBuff.setEffect(Buff.Keys.MOVE_SPEED, -.5);
 			hero.addBuff(this.chargeBuff);
 		}
 		return true;

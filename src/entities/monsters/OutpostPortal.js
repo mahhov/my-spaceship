@@ -28,7 +28,7 @@ class OutpostPortal extends Monster {
 
 		let statSetter = new BuffSetter();
 		let armorBuff = new Buff(0);
-		armorBuff.armor = 3;
+		armorBuff.setEffect(Buff.Keys.ARMOR, 3);
 		statSetter.config(this, armorBuff);
 		spawn.addModule(statSetter, {
 			[Spawn.Phases.NOT_SPAWNING]: BuffSetter.Stages.ACTIVE,

@@ -2,7 +2,10 @@ import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
+import makeEnum from '../util/Enum.js';
 import Pool from '../util/Pool.js';
+
+const Keys = makeEnum({MOVE_SPEED: 0, ATTACK_RANGE: 0, ARMOR: 0, DISABLED: 0});
 
 class Buff {
 	constructor(duration, uiColor, uiText) {
@@ -11,6 +14,7 @@ class Buff {
 		this.duration = new Pool(duration + 1, -1);
 		this.uiColor = uiColor;
 		this.uiText = uiText;
+		this.effects = {};
 	}
 
 	setUiIndex(uiIndex) {
@@ -18,40 +22,30 @@ class Buff {
 	}
 
 	// returns 1 if unmodified
-	static get_(buffs, key) {
-		return buffs.reduce((acc, {[key]: value = 0}) => acc + value, 1);
+	static sum(buffs, key) {
+		return buffs
+			.map(buff => buff.effects[key] || 0)
+			.reduce((a, b) => a + b, 1);
 	}
 
 	static moveSpeed(buffs) {
-		return Buff.get_(buffs, 'moveSpeed_');
+		return Buff.sum(buffs, Keys.MOVE_SPEED);
 	}
 
 	static attackRange(buffs) {
-		return Buff.get_(buffs, 'attackRange_');
+		return Buff.sum(buffs, Keys.ATTACK_RANGE);
 	}
 
 	static armor(buffs) {
-		return Buff.get_(buffs, 'armor_');
+		return Buff.sum(buffs, Keys.ARMOR);
 	}
 
 	static disabled(buffs) {
-		return Buff.get_(buffs, 'disabled_') > 1;
+		return Buff.sum(buffs, Keys.DISABLED) > 1;
 	}
 
-	set moveSpeed(value) {
-		this.moveSpeed_ = value;
-	}
-
-	set attackRange(value) {
-		this.attackRange_ = value;
-	}
-
-	set armor(value) {
-		this.armor_ = value;
-	}
-
-	set disabled(value) {
-		this.disabled_ = value;
+	setEffect(key, value) {
+		this.effects[key] = value;
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.
@@ -96,5 +90,7 @@ class Buff {
 		painter.add(Rect.withCamera(camera, new Coordinate(left, top + size - fillHeight, size, fillHeight), {fill: true, color: this.uiColor.get()}));
 	}
 }
+
+Buff.Keys = Keys;
 
 export default Buff;
