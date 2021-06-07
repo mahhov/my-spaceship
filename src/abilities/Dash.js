@@ -3,7 +3,7 @@ import Ability from './Ability.js';
 
 class Dash extends Ability {
 	constructor() {
-		super(120, 3, 15, .1, false, 0);
+		super('Dash', 120, 3, 15, .1, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

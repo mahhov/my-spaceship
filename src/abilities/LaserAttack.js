@@ -4,7 +4,7 @@ import Ability from './Ability.js';
 
 class LaserAttack extends Ability {
 	constructor() {
-		super(20, 1, 3, 0, true, 0);
+		super('Laser', 20, 1, 3, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

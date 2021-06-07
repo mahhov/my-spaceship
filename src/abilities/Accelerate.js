@@ -3,7 +3,7 @@ import Ability from './Ability.js';
 
 class Accelerate extends Ability {
 	constructor() {
-		super(200, 1, 0, 0, true, -1);
+		super('Haste', 200, 1, 0, 0, true, -1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

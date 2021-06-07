@@ -1,6 +1,6 @@
 import {clamp} from './Number.js';
 
-const SHADE_ADD = .2;
+const MAX_SHADE_MAGNITUDE = 1;
 
 class Color {
 	constructor(r, g, b, a = 1) {
@@ -71,8 +71,8 @@ class Color {
 	// shade should be 0 (no shading) to 1 (maximum shading)
 	getShade(shade = 1) {
 		if (shade === 1)
-			return this.shadeString || (this.shadeString = this.multiply(1 + SHADE_ADD).get());
-		return this.multiply(1 + SHADE_ADD * shade).get();
+			return this.shadeString || (this.shadeString = this.multiply(1 + MAX_SHADE_MAGNITUDE).get());
+		return this.multiply(1 + MAX_SHADE_MAGNITUDE * shade).get();
 	}
 
 	getAlpha(alphaMult = 1) {

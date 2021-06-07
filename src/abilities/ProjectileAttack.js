@@ -5,7 +5,7 @@ import Ability from './Ability.js';
 
 class ProjectileAttack extends Ability {
 	constructor() {
-		super(6, 15, .6, 0, true, 0);
+		super('Projectile', 6, 15, .6, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

@@ -4,7 +4,7 @@ import Ability from './Ability.js';
 
 class BombAttack extends Ability {
 	constructor(paintUiColumn) {
-		super(200, 2, 20, false, false, paintUiColumn, Colors.BASIC_ATTACK);
+		super('Mine', 200, 2, 20, false, false, paintUiColumn, Colors.BASIC_ATTACK);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

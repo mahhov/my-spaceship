@@ -5,8 +5,8 @@ const Colors = {
 
 	// bars
 	BAR_SHADING: 1,
-	LIFE: Color.fromHexString('#fab9b1').avgWhite(.25),
-	STAMINA: Color.fromHexString('#98d494').avgWhite(.4),
+	LIFE: Color.fromHexString('#cb584a'),
+	STAMINA: Color.fromHexString('#68cd61'),
 	ENRAGE: Color.fromHexString('#616600'),
 
 	TARGET_LOCK: Color.from1(.5, .5, .5),
@@ -14,14 +14,14 @@ const Colors = {
 
 	// abilities
 	PLAYER_ABILITIES: [
-		Color.fromHexString('#a87676').avgWhite(.4),
-		Color.fromHexString('#76a876').avgWhite(.4),
-		Color.fromHexString('#7676a8').avgWhite(.4),
-		Color.fromHexString('#76a6a6').avgWhite(.4),
-		Color.fromHexString('#a676a6').avgWhite(.4),
-		Color.fromHexString('#a6a676').avgWhite(.4),
+		Color.fromHexString('#525050'),
+		Color.fromHexString('#525050'),
+		Color.fromHexString('#525050'),
+		Color.fromHexString('#525050'),
+		Color.fromHexString('#525050'),
+		Color.fromHexString('#525050'),
 	],
-	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#444'),
+	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#aaa'),
 
 	// buffs
 	PLAYER_BUFFS: {
@@ -36,23 +36,23 @@ const Colors = {
 	},
 
 	Entity: {
-		MAP_BOUNDARY: Color.fromHexString('#ccc'),
-		ROCK: Color.fromHexString('#888'),
-		ROCK_MINERAL: Color.fromHexString('#8b8'),
+		MAP_BOUNDARY: Color.fromHexString('#0a0a0a'),
+		ROCK: Color.fromHexString('#333'),
+		ROCK_MINERAL: Color.fromHexString('#353'),
 		EGG: Color.fromHexString('#68b'),
 		PLAYER: Color.fromHexString('#888'),
 		PLAYER_GREEN: Color.fromHexString('#638d59'),
 		FRIENDLY: Color.fromHexString('#63bd59'),
-		MONSTER: Color.fromHexString('#bd6359'),
+		MONSTER: Color.fromHexString('#d5584b'),
 		FRIENDLY_PROJECTILE: Color.fromHexString('#6c6'),
-		HOSTILE_PROJECTILE: Color.fromHexString('#c66'),
+		HOSTILE_PROJECTILE: Color.fromHexString('#ef240e'),
 		Bomb: {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
 			ENTITY: Color.fromHexString('#00c'),
 		},
 		AREA_DEGEN: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
-			ACTIVE_FILL: Color.from1(.8, 0, 0, .1),
+			ACTIVE_FILL: Color.from1(.8, 0, 0, .4),
 		},
 		DUST: Color.fromHexString('#ccc'),
 		DAMAGE_DUST: Color.fromHexString('#f88'),
@@ -72,7 +72,7 @@ const Colors = {
 	},
 
 	Minimap: {
-		BACKGROUND: Color.from1(1, 1, 1, .5),
+		BACKGROUND: Color.from1(.2, .2, .2, .5),
 		BORDER: Color.from1(0, 0, 0, .5),
 		ROCK: Color.from1(0, 0, 0),
 		MONSTER: Color.from1(1, 0, 0),

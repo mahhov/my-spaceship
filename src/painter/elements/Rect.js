@@ -13,8 +13,8 @@ class Rect extends PainterElement {
 		return this;
 	}
 
-	static withCamera(camera, coordinate, {fillColor, color, thickness} = {}) {
-		return new Rect(camera.transformCoordinates(coordinate)).setOptions({fillColor, color, thickness: camera.st(thickness)});
+	static withCamera(camera, coordinate, {fill, color, thickness} = {}) {
+		return new Rect(camera.transformCoordinates(coordinate)).setOptions({fill, color, thickness: camera.st(thickness)});
 	}
 
 	paint(xt, yt, context) {

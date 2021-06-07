@@ -7,7 +7,8 @@ import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
 class Ability {
-	constructor(cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
+	constructor(name, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
+		this.name = name;
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
@@ -21,7 +22,7 @@ class Ability {
 	setUi(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiTexts = keyMappings.ABILITY_I[uiIndex].string;
+		this.uiTexts = [this.name, keyMappings.ABILITY_I[uiIndex].string[0]];
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
@@ -80,7 +81,7 @@ class Ability {
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade(.5)}));
 
 		// foreground for current charges
 		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
@@ -100,11 +101,10 @@ class Ability {
 			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE))
 				.setOptions({color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
-		// letter
+		// text
 		this.uiTexts.forEach((uiText, i) =>
 			painter.add(new Text(
-				new Coordinate(LEFT + Positions.ABILITY_SIZE / 2, TOP + Positions.ABILITY_SIZE / 2 + i * Positions.ABILITY_SIZE / 4)
-					.align(Coordinate.Aligns.CENTER),
+				new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE).alignWithoutMove(Coordinate.Aligns.CENTER, Coordinate.Aligns.CENTER).move(0, (i - .5) / 4),
 				uiText)
 				.setOptions({size: '12px'})));
 

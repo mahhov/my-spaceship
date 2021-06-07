@@ -3,7 +3,7 @@ import Ability from './Ability.js';
 
 class IncDefense extends Ability {
 	constructor() {
-		super(600, 1, 0, false, false, 0);
+		super('Armor', 600, 1, 0, false, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

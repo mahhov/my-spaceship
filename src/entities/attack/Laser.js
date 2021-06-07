@@ -29,7 +29,7 @@ class Laser extends Entity {
 			this.x, this.y,
 			this.x + this.moveX, this.y + this.moveY,
 			this.width,
-			{fill: true, color: Colors.Entity.HOSTILE_PROJECTILE.get()}));
+			{fill: true, color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()}));
 	}
 }
 
