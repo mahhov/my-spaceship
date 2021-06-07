@@ -31,14 +31,14 @@ class Boss1 extends Monster {
 			[Phases.INACTIVE]: Distance.Stages.ACTIVE,
 			[Phases.PRE_DEGEN]: Distance.Stages.ACTIVE,
 			[Phases.DEGEN]: Distance.Stages.ACTIVE,
-			[Phases.PROJECTILE]: Distance.Stages.ACTIVE
+			[Phases.PROJECTILE]: Distance.Stages.ACTIVE,
 		});
 
 		// triggers when boss engages
 		let engageTrigger = new Trigger();
 		distance.addModule(engageTrigger, {
 			0: Trigger.Stages.TRIGGER,
-			2: Trigger.Stages.INACTIVE
+			2: Trigger.Stages.INACTIVE,
 		});
 
 		// when boss engages, will reset attackPhase to PRE_DEGEN
@@ -46,7 +46,7 @@ class Boss1 extends Monster {
 		phaseSetterEngageAttack.config(this.attackPhase, Phases.PRE_DEGEN);
 		engageTrigger.addModule(phaseSetterEngageAttack, {
 			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
-			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
+			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE,
 		});
 
 		// when boss engages, will reset enrage
@@ -54,7 +54,7 @@ class Boss1 extends Monster {
 		phaseSetterEngageEnrage.config(this.enragePhase, 0);
 		engageTrigger.addModule(phaseSetterEngageEnrage, {
 			[Trigger.Phases.UNTRIGGERED]: PhaseSetter.Stages.INACTIVE,
-			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE
+			[Trigger.Phases.TRIGGERED]: PhaseSetter.Stages.ACTIVE,
 		});
 
 		// when boss disengages, will stop attacking
@@ -62,7 +62,7 @@ class Boss1 extends Monster {
 		phaseSetterDisengageAttack.config(this.attackPhase, Phases.INACTIVE);
 		distance.addModule(phaseSetterDisengageAttack, {
 			0: PhaseSetter.Stages.INACTIVE,
-			2: PhaseSetter.Stages.ACTIVE
+			2: PhaseSetter.Stages.ACTIVE,
 		});
 
 		let restore = new Restore();
@@ -77,7 +77,7 @@ class Boss1 extends Monster {
 			[Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
 			[Phases.PRE_DEGEN]: NearbyDegen.Stages.WARNING,
 			[Phases.DEGEN]: NearbyDegen.Stages.ACTIVE,
-			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE
+			[Phases.PROJECTILE]: NearbyDegen.Stages.INACTIVE,
 		});
 
 		this.aim = new Aim();

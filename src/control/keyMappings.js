@@ -32,7 +32,7 @@ class KeyMapping {
 				zoomOut: new KeyMapping(['z']),
 				minimapZoom: new KeyMapping(['tab']), // todo [medium] prevent tab from scrolling focus
 				pause: new KeyMapping(['p']),
-			}
+			};
 
 			this.keyMappings_.ABILITY_I = [
 				this.keyMappings_.ability1,

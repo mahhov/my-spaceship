@@ -6,9 +6,9 @@ class Bar extends PainterElement {
 	// todo [medium] replace constructor param with setOptions() like Text
 	constructor(x, y, width, height, fillRatio, emptyColor, fillColor, borderColor) {
 		super();
-		this.empty = new Rect(new Coordinate(x, y, width, height)).setOptions( {fill: true, color: emptyColor});
-		this.fill = new Rect(new Coordinate(x, y, width * fillRatio, height)).setOptions( {fill: true, color: fillColor});
-		this.border = new Rect(new Coordinate(x, y, width, height)).setOptions( {color: borderColor});
+		this.empty = new Rect(new Coordinate(x, y, width, height)).setOptions({fill: true, color: emptyColor});
+		this.fill = new Rect(new Coordinate(x, y, width * fillRatio, height)).setOptions({fill: true, color: fillColor});
+		this.border = new Rect(new Coordinate(x, y, width, height)).setOptions({color: borderColor});
 	}
 
 	static WideBar(paintUiRow, fillRatio, emptyColor, fillColor, borderColor) {

@@ -23,7 +23,7 @@ class Champion extends Monster {
 
 		let period = new Period();
 		period.config(100, 25, 25, 30);
-		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP,});
+		this.moduleManager.addModule(period, {[Phases.ONE]: Period.Stages.LOOP});
 
 		let chaseAim = new Aim();
 		chaseAim.config(this);

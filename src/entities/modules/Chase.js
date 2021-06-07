@@ -7,7 +7,7 @@ class Chase extends Module {
 	config(origin, speed, dirModule) {
 		this.origin = origin;
 		this.speed = speed;
-		this.dirModule = dirModule
+		this.dirModule = dirModule;
 	}
 
 	apply_(map, intersectionFinder, target) {

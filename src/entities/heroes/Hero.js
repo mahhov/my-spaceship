@@ -42,7 +42,7 @@ class Hero extends LivingEntity {
 				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
 		this.passiveAbilities.forEach(ability => {
 			if (!disabled || ability.disabledOk)
-				ability.update(this, direct, map, intersectionFinder, this, true)
+				ability.update(this, direct, map, intersectionFinder, this, true);
 		});
 	}
 

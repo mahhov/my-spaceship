@@ -20,7 +20,7 @@ class Color {
 	}
 
 	static fromHex(rh, gh, bh, a) {
-		return new Color(...[rh, gh, bh].map(Color.hexTo255), a)
+		return new Color(...[rh, gh, bh].map(Color.hexTo255), a);
 	}
 
 	static fromHexString(hex) {
@@ -85,7 +85,7 @@ class Color {
 	}
 
 	static hexTo255(hex) {
-		return hex * 17
+		return hex * 17;
 	}
 
 	static oneTo255(one) {

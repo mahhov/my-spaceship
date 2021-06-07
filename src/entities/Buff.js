@@ -75,11 +75,13 @@ class Buff {
 		let size = Positions.BUFF_SIZE;
 
 		// background
-		painter.add(new Rect(new Coordinate(left, top, size)).setOptions( {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(new Coordinate(left, top, size))
+			.setOptions({fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
 		let fillHeight = size * this.duration.getRatio();
-		painter.add(new Rect(new Coordinate(left, top + size - fillHeight, size, fillHeight)).setOptions({fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(new Coordinate(left, top + size - fillHeight, size, fillHeight))
+			.setOptions({fill: true, color: this.uiColor.get()}));
 
 		// text
 		painter.add(new Text(new Coordinate(left + size / 2, top + size / 2).align(Coordinate.Aligns.CENTER), this.uiText));

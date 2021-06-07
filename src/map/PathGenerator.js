@@ -25,7 +25,7 @@ class PathGenerator {
 			if (index < sideLength)
 				return true;
 			side++;
-			index -= sideLength
+			index -= sideLength;
 		};
 		incrementSide(this.width) &&
 		incrementSide(this.height) &&

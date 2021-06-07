@@ -28,7 +28,7 @@ class MeleeDart extends Monster {
 			0: Aim.Stages.INACTIVE,
 			1: Aim.Stages.ACTIVE,
 			2: Aim.Stages.ACTIVE,
-			3: Aim.Stages.INACTIVE
+			3: Aim.Stages.INACTIVE,
 		});
 
 		let chase = new Chase();
@@ -37,7 +37,7 @@ class MeleeDart extends Monster {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
 			2: Chase.Stages.ACTIVE,
-			3: Chase.Stages.INACTIVE
+			3: Chase.Stages.INACTIVE,
 		});
 
 		let shotgunAim = new Aim();
@@ -46,7 +46,7 @@ class MeleeDart extends Monster {
 			0: Aim.Stages.ACTIVE,
 			1: Aim.Stages.ACTIVE,
 			2: Aim.Stages.INACTIVE,
-			3: Aim.Stages.INACTIVE
+			3: Aim.Stages.INACTIVE,
 		});
 
 		let shotgun = new Shotgun();
@@ -55,7 +55,7 @@ class MeleeDart extends Monster {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.ACTIVE,
 			2: Shotgun.Stages.INACTIVE,
-			3: Shotgun.Stages.INACTIVE
+			3: Shotgun.Stages.INACTIVE,
 		});
 
 		distance.modulesSetStage(0);

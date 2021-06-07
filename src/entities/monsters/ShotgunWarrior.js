@@ -26,7 +26,7 @@ class ShotgunWarrior extends Monster {
 		distance.addModule(chaseAim, {
 			0: Aim.Stages.INACTIVE,
 			1: Aim.Stages.ACTIVE,
-			2: Aim.Stages.INACTIVE
+			2: Aim.Stages.INACTIVE,
 		});
 
 		let chase = new Chase();
@@ -34,7 +34,7 @@ class ShotgunWarrior extends Monster {
 		distance.addModule(chase, {
 			0: Chase.Stages.INACTIVE,
 			1: Chase.Stages.ACTIVE,
-			2: Chase.Stages.INACTIVE
+			2: Chase.Stages.INACTIVE,
 		});
 
 		let shotgunAim = new Aim();
@@ -42,7 +42,7 @@ class ShotgunWarrior extends Monster {
 		distance.addModule(shotgunAim, {
 			0: Aim.Stages.ACTIVE,
 			1: Aim.Stages.INACTIVE,
-			2: Aim.Stages.INACTIVE
+			2: Aim.Stages.INACTIVE,
 		});
 
 		let shotgun = new Shotgun();
@@ -50,7 +50,7 @@ class ShotgunWarrior extends Monster {
 		distance.addModule(shotgun, {
 			0: Shotgun.Stages.ACTIVE,
 			1: Shotgun.Stages.INACTIVE,
-			2: Shotgun.Stages.INACTIVE
+			2: Shotgun.Stages.INACTIVE,
 		});
 
 		distance.modulesSetStage(0);

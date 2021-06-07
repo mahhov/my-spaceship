@@ -24,7 +24,7 @@ class Entity {
 
 	checkPosition(intersectionFinder) {
 		return this.x !== undefined &&
-			!intersectionFinder.intersections(this.layer, this.bounds).length
+			!intersectionFinder.intersections(this.layer, this.bounds).length;
 	}
 
 	checkMove(intersectionFinder, dx, dy, magnitude, noSlide) {

@@ -85,17 +85,20 @@ class Ability {
 		// foreground for current charges
 		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
 		const HEIGHT = this.charges.get() * ROW_HEIGHT;
-		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT)).setOptions( {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT))
+			.setOptions({fill: true, color: this.uiColor.get()}));
 
 		// hybrid for current cooldown
 		if (!this.cooldown.isFull()) {
 			let shade = this.cooldown.getRatio();
-			painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT)).setOptions( {fill: true, color: this.uiColor.getShade(shade)}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT))
+				.setOptions({fill: true, color: this.uiColor.getShade(shade)}));
 		}
 
 		// border
 		if (!this.ready)
-			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions( {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE))
+				.setOptions({color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
 		// letter
 		this.uiTexts.forEach((uiText, i) =>

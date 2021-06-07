@@ -57,7 +57,7 @@ class IntersectionFinder {
 	}
 
 	addBounds(layer, bounds, reference) {
-		return this.boundsGroups[layer].add({bounds, reference})
+		return this.boundsGroups[layer].add({bounds, reference});
 	}
 
 	removeBounds(layer, item) {
@@ -139,7 +139,7 @@ class IntersectionFinder {
 						({move: magnitude, side} = iIntersection);
 						reference = iReference;
 					} else
-						trackOnlyReferencesSuperset.push([iReference, iIntersection.move])
+						trackOnlyReferencesSuperset.push([iReference, iIntersection.move]);
 			}));
 
 		return {move: magnitude, side, reference};

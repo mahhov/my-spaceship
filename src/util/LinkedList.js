@@ -66,7 +66,7 @@ class LinkedList {
 				let value = iter.value;
 				iter = iter.next;
 				return {value, done: false};
-			}
+			},
 		};
 	}
 }

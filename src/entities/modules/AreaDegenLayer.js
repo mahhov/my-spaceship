@@ -14,7 +14,7 @@ class AreaDegenLayer extends Module {
 	}
 
 	get areaDegen() {
-		return new AreaDegen(this.origin.x, this.origin.y, this.range, this.duration, this.damage, false)
+		return new AreaDegen(this.origin.x, this.origin.y, this.range, this.duration, this.damage, false);
 	}
 
 	apply_(map, intersectionFinder, target) {

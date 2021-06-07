@@ -7,7 +7,7 @@ import FpsTracker from '../util/FpsTracker.js';
 
 class Looper {
 	static sleep(milli = 0) {
-		return new Promise(resolve => setTimeout(resolve, milli))
+		return new Promise(resolve => setTimeout(resolve, milli));
 	}
 
 	constructor(canvas) {

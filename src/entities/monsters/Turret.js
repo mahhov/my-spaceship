@@ -19,7 +19,7 @@ class Turret extends Monster {
 		nearbyDegen.config(this, .4, .001);
 		this.moduleManager.addModule(nearbyDegen, {
 			[Phases.REST]: NearbyDegen.Stages.INACTIVE,
-			[Phases.ATTACK]: NearbyDegen.Stages.ACTIVE
+			[Phases.ATTACK]: NearbyDegen.Stages.ACTIVE,
 		});
 
 		this.moduleManager.modulesSetStage(this.attackPhase.get());
