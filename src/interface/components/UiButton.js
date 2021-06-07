@@ -1,5 +1,6 @@
 import Bounds from '../../intersection/Bounds.js';
 import Rect from '../../painter/elements/Rect.js';
+import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';

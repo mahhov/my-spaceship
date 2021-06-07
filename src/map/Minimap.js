@@ -27,7 +27,7 @@ class Minimap {
 	paint(painter) {
 		let camera = this.createCamera();
 		painter.add(Rect.withCamera(camera, new Coordinate(0, 0, this.map.width, this.map.height), {fill: true, color: Colors.Minimap.BACKGROUND.get()}));
-		painter.add(Rect.withCamera(camera, new Coordinate(0, 0, this.map.width, this.map.height), {fill: false, color: Colors.Minimap.BORDER.get()}));
+		painter.add(Rect.withCamera(camera, new Coordinate(0, 0, this.map.width, this.map.height), {color: Colors.Minimap.BORDER.get()}));
 		this.map.stills.forEach(rock => this.paintDot(painter, camera, rock.x, rock.y, Colors.Minimap.ROCK.get()));
 		this.map.monsters.forEach(monster => this.paintDot(painter, camera, monster.x, monster.y, Colors.Minimap.MONSTER.get()));
 		this.map.uis.forEach(ui => this.paintDot(painter, camera, ui.x, ui.y, Colors.Minimap.BOSS.get()));

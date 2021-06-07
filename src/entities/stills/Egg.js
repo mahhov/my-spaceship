@@ -47,7 +47,7 @@ class Egg extends Entity {
 			super.paint(painter, camera);
 		else {
 			let coordinate = new Coordinate(this.ownerHero.x, this.ownerHero.y, this.width, this.height);
-			painter.add(Rect.withCamera(camera, coordinate, {fill: false, color: Colors.Entity.EGG.get()}));
+			painter.add(Rect.withCamera(camera, coordinate, {color: Colors.Entity.EGG.get()}));
 		}
 	}
 }

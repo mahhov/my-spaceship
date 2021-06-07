@@ -18,7 +18,7 @@ class PainterCompositor {
 		this.painter.paint();
 		this.uiPainter.paint();
 
-		this.context.fillStyle = 'white';
+		this.context.fillStyle = 'black';
 		this.context.fillRect(0, 0, this.width, this.height);
 		this.context.drawImage(this.painter.canvas, 0, 0);
 		this.context.drawImage(this.uiPainter.canvas, 0, 0);

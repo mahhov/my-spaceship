@@ -15,7 +15,7 @@ const UI_PLACEMENT = makeEnum({FULL: 0, LEFT: 0, RIGHT: 0});
 class UiSet {
 	constructor(title, uis, index) {
 		let width = .1;
-		this.button = new UiButton(new Coordinate(Positions.MARGIN + (width + Positions.MARGIN) * index, Positions.MARGIN, width, .03), title);
+		this.button = new UiButton(new Coordinate(Positions.MARGIN + (width + Positions.MARGIN / 2) * index, Positions.MARGIN, width, .03), title);
 		this.uis = uis;
 	}
 
@@ -54,11 +54,10 @@ class HubUi extends Ui {
 	static createSection(text, placement = UI_PLACEMENT.FULL) {
 		const OUTER_MARGIN = Positions.MARGIN;
 		const COLUMN_MARGIN = .05;
-		const TOP_SHIFT = .08;
 		let left = placement === UI_PLACEMENT.RIGHT ? .5 + COLUMN_MARGIN / 2 : OUTER_MARGIN;
-		let top = Positions.MARGIN + .03 + TOP_SHIFT;
+		let top = .18;
 		let width = placement === UI_PLACEMENT.FULL ? 1 - OUTER_MARGIN * 2 : .5 - OUTER_MARGIN - COLUMN_MARGIN / 2;
-		return new UiSection(new Coordinate(left, top, width, 1 - top - OUTER_MARGIN), text,  placement !== UI_PLACEMENT.FULL).setTextOptions({size: '18px'});
+		return new UiSection(new Coordinate(left, top, width, 1 - top - OUTER_MARGIN), text, placement !== UI_PLACEMENT.FULL).setTextOptions({size: '22px'});
 	}
 
 	setActiveUiSet(uiSet) {

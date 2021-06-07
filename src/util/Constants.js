@@ -29,10 +29,10 @@ const Colors = {
 	},
 
 	Interface: {
-		DISABLED: Color.from1(.8, .8, .8),
-		INACTIVE: Color.from1(1, 1, 1),
-		HOVER: Color.from1(.95, .95, .95),
-		ACTIVE: Color.from1(1, 1, 1),
+		DISABLED: Color.from1(.2, .2, .2),
+		INACTIVE: Color.from1(0, 0, 0),
+		HOVER: Color.from1(.1, .1, .1),
+		ACTIVE: Color.from1(.4, .4, .4),
 	},
 
 	Entity: {
@@ -89,7 +89,8 @@ const Positions = {
 	ABILITY_CHANNEL_BAR_SIZE: .01,
 	BUFF_SIZE: .05,
 	STAGE_TEXT_HEIGHT: .03,
-	UI_INSET: .05,
+	UI_FIRST_ROW: .22,
+	UI_ROW_HEIGHT: .05,
 };
 
 export {Colors, Positions};

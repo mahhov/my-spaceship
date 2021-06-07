@@ -7,7 +7,7 @@ class Text extends PainterElement {
 		this.text = text;
 	}
 
-	setOptions({color = '#000', size = '14px'} = {}) {
+	setOptions({color = '#fff', size = '14px'} = {}) {
 		this.color = color;
 		this.size = size;
 		return this;

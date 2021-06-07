@@ -1,5 +1,6 @@
 import MapGeneratorSurvival from '../../map/MapGeneratorSurvival.js';
 import MapGeneratorTimed from '../../map/MapGeneratorTimed.js';
+import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import UiTextArea from '../components/UiTextArea.js';
@@ -9,10 +10,10 @@ import Ui from './Ui.js';
 class EncounterUi extends Ui {
 	constructor() {
 		super();
-		this.add(HubUi.createSection('Encounter'));
+		this.add(HubUi.createSection('Select Encounter'));
 		let descriptionText = this.add(new UiTextArea(new Coordinate(.11, .51, .78, .32), ''));
 		EncounterUi.Encounters.forEach(({name, description, MapGeneratorClass}, i) => {
-			let button = this.add(new UiButton(new Coordinate(.42, .2 + .05 * i, .16, .02), name));
+			let button = this.add(new UiButton(new Coordinate(.42, Positions.UI_FIRST_ROW + Positions.UI_ROW_HEIGHT * i, .16, .02), name));
 			button.on('hover', () => descriptionText.text = description);
 			button.on('click', () => this.emit('begin-encounter', MapGeneratorClass));
 		});
