@@ -20,8 +20,8 @@ class KeyMapping {
 				moveUp: new KeyMapping(['w']),
 				moveRight: new KeyMapping(['d']),
 				moveDown: new KeyMapping(['s']),
-				ability1: new KeyMapping([' '], [0], ['space', 'mb left']),
-				ability2: new KeyMapping(['shift'], [2], ['shift', 'mb right']),
+				ability1: new KeyMapping([' '], [0], ['space']),
+				ability2: new KeyMapping(['shift'], [2]),
 				ability3: new KeyMapping(['q']),
 				ability4: new KeyMapping(['e']),
 				ability5: new KeyMapping(['r']),
@@ -31,7 +31,7 @@ class KeyMapping {
 				zoomIn: new KeyMapping(['x']),
 				zoomOut: new KeyMapping(['z']),
 				minimapZoom: new KeyMapping(['tab']), // todo [medium] prevent tab from scrolling focus
-				pause: new KeyMapping(['p']),
+				pause: new KeyMapping(['p', 'escape']),
 			};
 
 			this.keyMappings_.ABILITY_I = [
