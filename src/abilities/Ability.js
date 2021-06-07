@@ -80,22 +80,22 @@ class Ability {
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
 		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
 		const HEIGHT = this.charges.get() * ROW_HEIGHT;
-		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT), {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT)).setOptions( {fill: true, color: this.uiColor.get()}));
 
 		// hybrid for current cooldown
 		if (!this.cooldown.isFull()) {
 			let shade = this.cooldown.getRatio();
-			painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT), {fill: true, color: this.uiColor.getShade(shade)}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT - ROW_HEIGHT, Positions.ABILITY_SIZE, ROW_HEIGHT)).setOptions( {fill: true, color: this.uiColor.getShade(shade)}));
 		}
 
 		// border
 		if (!this.ready)
-			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
+			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions( {color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
 		// letter
 		this.uiTexts.forEach((uiText, i) =>
@@ -110,7 +110,7 @@ class Ability {
 		if (channelRatio)
 			painter.add(new Bar(LEFT, TOP - Positions.ABILITY_CHANNEL_BAR_SIZE - Positions.MARGIN / 2,
 				Positions.ABILITY_SIZE, Positions.ABILITY_CHANNEL_BAR_SIZE, channelRatio,
-				this.uiColor.getShade(Colors.BAR_SHADING), this.uiColor.get(), this.uiColor.get()))
+				this.uiColor.getShade(Colors.BAR_SHADING), this.uiColor.get(), this.uiColor.get()));
 	}
 }
 

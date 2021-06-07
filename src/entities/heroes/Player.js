@@ -129,7 +129,7 @@ class Player extends Hero {
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());
-		painter.add(new Rect(new Coordinate(0, 0, 1), {fill: true, color: damageColor}));
+		painter.add(new Rect(new Coordinate(0, 0, 1)).setOptions( {fill: true, color: damageColor}));
 	}
 }
 

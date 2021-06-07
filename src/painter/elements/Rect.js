@@ -1,17 +1,20 @@
 import PainterElement from './PainterElement.js';
 
 class Rect extends PainterElement {
-	// todo [medium] replace constructor param with setOptions() like Text
-	constructor(coordinate, {fill, color = '#000', thickness = 1} = {}) {
+	constructor(coordinate) {
 		super();
 		this.coordinate = coordinate;
+	}
+
+	setOptions({fill = false, color = '#000', thickness = 1} = {}) {
 		this.fill = fill;
 		this.color = color;
 		this.thickness = thickness;
+		return this;
 	}
 
 	static withCamera(camera, coordinate, {fill, color, thickness} = {}) {
-		return new Rect(camera.transformCoordinates(coordinate), {fill, color, thickness: camera.st(thickness)});
+		return new Rect(camera.transformCoordinates(coordinate)).setOptions({fill, color, thickness: camera.st(thickness)});
 	}
 
 	paint(xt, yt, context) {

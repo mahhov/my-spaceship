@@ -9,9 +9,9 @@ class BarC extends PainterElement {
 		super();
 		x -= width / 2;
 		y -= height / 2;
-		this.empty = new Rect(new Coordinate(x, y, width, height), {fill: true, color: emptyColor});
-		this.fill = new Rect(new Coordinate(x, y, width * fillRatio, height), {fill: true, color: fillColor});
-		this.border = new Rect(new Coordinate(x, y, width, height), {color: borderColor});
+		this.empty = new Rect(new Coordinate(x, y, width, height)).setOptions( {fill: true, color: emptyColor});
+		this.fill = new Rect(new Coordinate(x, y, width * fillRatio, height)).setOptions( {fill: true, color: fillColor});
+		this.border = new Rect(new Coordinate(x, y, width, height)).setOptions( {color: borderColor});
 	}
 
 	// todo [medium] use Coordinate and camera.transformCoordinates

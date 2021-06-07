@@ -22,7 +22,7 @@ class Starfield {
 
 	paint(painter, camera) {
 		// let coordinate = new Coordinate(0, 0, 1);
-		// painter.add(new Rect(coordinate, {fill: true}));
+		// painter.add(new Rect(coordinate).setOptions( {fill: true}));
 		this.stars.forEach(star => star.paint(painter, camera));
 	}
 }

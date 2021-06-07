@@ -48,8 +48,8 @@ class NoiseDemo extends Frame {
 		for (let x = 0; x < N; x++)
 			for (let y = 0; y < N; y++) {
 				if (this.results[x][y]) {
-					this.painterSet.uiPainter.add(new Rect(new Coordinate(x * NTH, y * NTH, 1 / N), {fill: true, color: Color.BLACK.get()}));
-					this.painterSet.uiPainter.add(new Rect(new Coordinate(.1, .1, .03).align(Coordinate.Aligns.CENTER), {fill: true, color: `#fff`}));
+					this.painterSet.uiPainter.add(new Rect(new Coordinate(x * NTH, y * NTH, 1 / N)).setOptions({fill: true, color: Color.BLACK.get()}));
+					this.painterSet.uiPainter.add(new Rect(new Coordinate(.1, .1, .03).align(Coordinate.Aligns.CENTER)).setOptions({fill: true, color: `#fff`}));
 					this.painterSet.uiPainter.add(new Text(new Coordinate(.1, .1), this.noiseRange).align(Coordinate.Aligns.CENTER));
 				}
 			}

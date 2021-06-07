@@ -31,7 +31,7 @@ class Star {
 
 		let coordinate = new Coordinate(x, y, s).align(Coordinate.Aligns.CENTER);
 		let color = STAR_COLOR_ARRAY[this.blue ? 1 : 0][this.flicker ? 1 : 0];
-		painter.add(new Rect(coordinate, {fill: true, color: color.get()}));
+		painter.add(new Rect(coordinate).setOptions({fill: true, color: color.get()}));
 	}
 }
 
