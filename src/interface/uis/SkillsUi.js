@@ -47,22 +47,21 @@ class SkillsUi extends Ui {
 		let layout = new Layout(this.add(HubUi.createSection('Skills', HubUi.UI_PLACEMENT.RIGHT)).coordinate, 4);
 		skillsData.skillItems.forEach((skillItem, i) => {
 			let coordinates = layout.getCoordinates(i);
+
 			this.add(new UiButton(coordinates.container, '', '', true))
 				.on('hover', () => descriptionText.text = skillItem.description);
 			this.add(new UiText(coordinates.topLine, skillItem.name));
 			let valueText = this.add(new UiText(coordinates.bottomLine, skillItem.valueText));
+
+			let allocate = value => {
+				skillsData.allocate(skillItem, value);
+				valueText.text = skillItem.valueText;
+				availableText.text = skillsData.availableText;
+			};
 			this.add(new UiButton(coordinates.buttonLeft, '-'))
-				.on('click', () => {
-					skillsData.decrease(skillItem);
-					valueText.text = skillItem.valueText;
-					availableText.text = skillsData.availableText;
-				});
+				.on('click', () => allocate(-1));
 			this.add(new UiButton(coordinates.buttonRight, '+'))
-				.on('click', () => {
-					skillsData.increase(skillItem);
-					valueText.text = skillItem.valueText;
-					availableText.text = skillsData.availableText;
-				});
+				.on('click', () => allocate(1));
 		});
 
 		let coordinates = layout.getCoordinates(layout.getRow(skillsData.skillItems.length - 1) * layout.columns);

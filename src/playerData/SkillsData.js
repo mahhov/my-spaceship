@@ -1,8 +1,10 @@
+import Emitter from '../util/Emitter.js';
 import SkillItem from './SkillsItem.js';
 import Stat from './Stat.js';
 
-class SkillsData {
+class SkillsData extends Emitter {
 	constructor() {
+		super();
 		this.skillItems = [
 			new SkillItem('Life', [
 				new Stat(Stat.Ids.LIFE, 5),
@@ -28,17 +30,11 @@ class SkillsData {
 		return `Available Skill Points: ${this.availablePoints}`;
 	}
 
-	increase(skill) {
-		if (this.availablePoints && skill.value < skill.maxValue) {
-			skill.value++;
-			this.availablePoints--;
-		}
-	}
-
-	decrease(skill) {
-		if (skill.value) {
-			skill.value--;
-			this.availablePoints++;
+	allocate(skill, value) {
+		if (skill.value + value >= 0 && this.availablePoints - value >= 0 && skill.value + value <= skill.maxValue) {
+			skill.value += value;
+			this.availablePoints -= value;
+			this.emit('change');
 		}
 	}
 
