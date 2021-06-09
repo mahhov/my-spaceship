@@ -4,15 +4,15 @@ import Stat from './Stat.js';
 class SkillsData {
 	constructor() {
 		this.skillItems = [
-			new SkillItem('life', [
+			new SkillItem('Life', [
 				new Stat(Stat.Ids.LIFE, 5),
 			], 0, 4, '+5% max life'),
-			new SkillItem('heavy armor', [
+			new SkillItem('Heavy armor', [
 				new Stat(Stat.Ids.ARMOR, 5),
 				new Stat(Stat.Ids.MOVE_SPEED, -5),
 			], 0, 4, '+10% armor; -5% move speed'),
 
-			//life
+			// life
 			// lifeRegen
 			// armour
 			// shield
@@ -28,9 +28,9 @@ class SkillsData {
 			// farShot
 			// lifeLeech
 			// shieldLeech
-
-
 		];
+
+		// todo [high] accumulate skill points
 	}
 }
 
