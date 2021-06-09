@@ -111,9 +111,13 @@ class Ability {
 		// channel bar
 		let channelRatio = this.channelRatio;
 		if (channelRatio)
-			painter.add(new Bar(LEFT, TOP - Positions.ABILITY_CHANNEL_BAR_SIZE - Positions.MARGIN / 2,
-				Positions.ABILITY_SIZE, Positions.ABILITY_CHANNEL_BAR_SIZE, channelRatio,
-				this.uiColor.getShade(Colors.BAR_SHADING), this.uiColor.get(), this.uiColor.get()));
+			painter.add(new Bar(
+				new Coordinate(
+					LEFT,
+					TOP - Positions.ABILITY_CHANNEL_BAR_SIZE - Positions.MARGIN / 2,
+					Positions.ABILITY_SIZE,
+					Positions.ABILITY_CHANNEL_BAR_SIZE),
+				channelRatio, this.uiColor.getShade(Colors.BAR_SHADING), this.uiColor.get(), this.uiColor.get()));
 	}
 }
 

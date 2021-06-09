@@ -2,6 +2,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import BarC from '../../painter/elements/BarC.js';
 import {Colors, Positions} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
 import ModuleManager from '../modules/ModuleManager.js';
 
@@ -27,10 +28,11 @@ class Monster extends LivingEntity {
 
 	paintUi(painter, camera) {
 		painter.add(new Bar(
-			Positions.MARGIN,
-			Positions.MARGIN,
-			1 - Positions.MARGIN * 2,
-			Positions.BAR_HEIGHT,
+			new Coordinate(
+				Positions.MARGIN,
+				Positions.MARGIN,
+				1 - Positions.MARGIN * 2,
+				Positions.BAR_HEIGHT),
 			this.health.getRatio(),
 			Colors.LIFE.getShade(Colors.BAR_SHADING),
 			Colors.LIFE.get(),

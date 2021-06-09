@@ -1,6 +1,7 @@
 import RotatingTurretShip from '../../graphics/RotatingTurretShip.js';
 import Bar from '../../painter/elements/Bar.js';
 import {Colors, Positions} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import Aim from '../modules/Aim.js';
@@ -137,10 +138,11 @@ class Boss1 extends Monster {
 			return;
 		super.paintUi(painter, camera);
 		painter.add(new Bar(
-			Positions.MARGIN,
-			Positions.MARGIN * 1.5 + Positions.BAR_HEIGHT,
-			1 - Positions.MARGIN * 2,
-			Positions.BAR_HEIGHT * .5,
+			new Coordinate(
+				Positions.MARGIN,
+				Positions.MARGIN * 1.5 + Positions.BAR_HEIGHT,
+				1 - Positions.MARGIN * 2,
+				Positions.BAR_HEIGHT * .5),
 			this.enragePhase.getRatio(),
 			Colors.ENRAGE.getShade(), Colors.ENRAGE.get(), Colors.ENRAGE.getShade()));
 	}
