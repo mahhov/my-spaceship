@@ -19,15 +19,17 @@ class Layout {
 	}
 
 	getCoordinates(i) {
-		const buttonSize = 0.015;
-		let topLine = this.innerCoordinate.clone
+		const buttonSize = 0.015, bottomLineSpacing = 1.2;
+		let container = this.innerCoordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.START)
-			.size(this.width - this.horizMargin, Positions.UI_LINE_HEIGHT)
+			.size(this.width - this.horizMargin, Positions.UI_LINE_HEIGHT * (1 + bottomLineSpacing))
 			.move(
 				this.width * (i % this.columns),
-				(Positions.UI_LINE_HEIGHT * 2 + this.vertMargin) * this.getRow(i))
+				(Positions.UI_LINE_HEIGHT * (1 + bottomLineSpacing) + this.vertMargin) * this.getRow(i));
+		let topLine = container.clone
+			.size(this.width - this.horizMargin, Positions.UI_LINE_HEIGHT)
 			.alignWithoutMove(Coordinate.Aligns.CENTER);
-		let bottomLine = topLine.clone.shift(0, 1.2);
+		let bottomLine = topLine.clone.shift(0, bottomLineSpacing);
 		let buttonLine = bottomLine.clone.pad(.01, 0);
 		let buttonLeft = buttonLine.clone
 			.alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.CENTER)
@@ -35,7 +37,7 @@ class Layout {
 		let buttonRight = buttonLine.clone
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER)
 			.size(buttonSize);
-		return {topLine, bottomLine, buttonLeft, buttonRight};
+		return {container, topLine, bottomLine, buttonLeft, buttonRight};
 	}
 }
 
@@ -45,6 +47,8 @@ class SkillsUi extends Ui {
 		let layout = new Layout(this.add(HubUi.createSection('Skills', HubUi.UI_PLACEMENT.RIGHT)).coordinate, 4);
 		skillsData.skillItems.forEach((skillItem, i) => {
 			let coordinates = layout.getCoordinates(i);
+			this.add(new UiButton(coordinates.container, '', '', true))
+				.on('hover', () => this.descriptionText.text = skillItem.description);
 			this.add(new UiText(coordinates.topLine, skillItem.name));
 			this.add(new UiText(coordinates.bottomLine, skillItem.valueText));
 			this.add(new UiButton(coordinates.buttonLeft, '-'));
@@ -54,7 +58,7 @@ class SkillsUi extends Ui {
 		let coordinates = layout.getCoordinates(layout.getRow(skillsData.skillItems.length - 1) * layout.columns);
 		let bottomTextCoordinate = coordinates.bottomLine.clone.alignWithoutMove(Coordinate.Aligns.START).move(0, 0.015 + Positions.UI_ROW_HEIGHT);
 		this.add(new UiText(bottomTextCoordinate, 'Available skill points: 4'));
-		this.add(new UiText(bottomTextCoordinate.clone.move(0, Positions.UI_ROW_HEIGHT), skillsData.skillItems[0].description));
+		this.descriptionText = this.add(new UiText(bottomTextCoordinate.clone.move(0, Positions.UI_ROW_HEIGHT), ''));
 
 		// todo [high] allocate skills on click
 	}

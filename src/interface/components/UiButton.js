@@ -10,13 +10,14 @@ import UiComponent from './UiComponent.js';
 const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, HOVER: 0});
 
 class UiButton extends UiComponent {
-	constructor(coordinate, text, hotkey = '') {
+	constructor(coordinate, text, hotkey = '', hidden = false) {
 		super(coordinate);
 		this.bounds = new Bounds(coordinate.left, coordinate.top, coordinate.right, coordinate.bottom);
 		this.text = text;
 		this.hotkey = hotkey;
 		this.state = States.INACTIVE;
-		this.disabled = false;
+		this.hidden = hidden; // prevents painting
+		this.disabled = false; // prevents updating
 	}
 
 	update(controller) {
@@ -43,6 +44,9 @@ class UiButton extends UiComponent {
 	}
 
 	paint(painter) {
+		if (this.hidden)
+			return;
+
 		let backColor = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 		let color = this.state === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : '#fff';
 
