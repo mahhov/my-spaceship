@@ -48,19 +48,27 @@ class SkillsUi extends Ui {
 		skillsData.skillItems.forEach((skillItem, i) => {
 			let coordinates = layout.getCoordinates(i);
 			this.add(new UiButton(coordinates.container, '', '', true))
-				.on('hover', () => this.descriptionText.text = skillItem.description);
+				.on('hover', () => descriptionText.text = skillItem.description);
 			this.add(new UiText(coordinates.topLine, skillItem.name));
-			this.add(new UiText(coordinates.bottomLine, skillItem.valueText));
-			this.add(new UiButton(coordinates.buttonLeft, '-'));
-			this.add(new UiButton(coordinates.buttonRight, '+'));
+			let valueText = this.add(new UiText(coordinates.bottomLine, skillItem.valueText));
+			this.add(new UiButton(coordinates.buttonLeft, '-'))
+				.on('click', () => {
+					skillsData.decrease(skillItem);
+					valueText.text = skillItem.valueText;
+					availableText.text = skillsData.availableText;
+				});
+			this.add(new UiButton(coordinates.buttonRight, '+'))
+				.on('click', () => {
+					skillsData.increase(skillItem);
+					valueText.text = skillItem.valueText;
+					availableText.text = skillsData.availableText;
+				});
 		});
 
 		let coordinates = layout.getCoordinates(layout.getRow(skillsData.skillItems.length - 1) * layout.columns);
 		let bottomTextCoordinate = coordinates.bottomLine.clone.alignWithoutMove(Coordinate.Aligns.START).move(0, 0.015 + Positions.UI_ROW_HEIGHT);
-		this.add(new UiText(bottomTextCoordinate, 'Available skill points: 4'));
-		this.descriptionText = this.add(new UiText(bottomTextCoordinate.clone.move(0, Positions.UI_ROW_HEIGHT), ''));
-
-		// todo [high] allocate skills on click
+		let availableText = this.add(new UiText(bottomTextCoordinate, 'Available skill points: 4'));
+		let descriptionText = this.add(new UiText(bottomTextCoordinate.clone.move(0, Positions.UI_ROW_HEIGHT), ''));
 	}
 }
 
