@@ -48,7 +48,7 @@ class BombLayer extends Monster {
 		});
 
 		let areaDegen = new AreaDegenLayer();
-		areaDegen.config(this, .1, 200, .003);
+		areaDegen.config(this, .1, 200, .3);
 		cooldown.addModule(areaDegen, {
 			[Cooldown.Phases.UNTRIGGERED]: AreaDegenLayer.Stages.INACTIVE,
 			[Cooldown.Phases.TRIGGERED]: AreaDegenLayer.Stages.ACTIVE,

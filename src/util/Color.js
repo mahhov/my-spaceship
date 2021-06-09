@@ -89,7 +89,7 @@ class Color {
 	}
 
 	static oneTo255(one) {
-		return parseInt(one * 255);
+		return Math.floor(one * 255);
 	}
 }
 

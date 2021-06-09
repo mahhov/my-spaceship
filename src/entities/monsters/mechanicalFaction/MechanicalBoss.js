@@ -33,7 +33,7 @@ class MechanicalBoss extends MechanicalBossEarly {
 			});
 
 			let surroundDegen = new AreaDegenLayer();
-			surroundDegen.config(surroundDegenTarget, .1, 200, .002);
+			surroundDegen.config(surroundDegenTarget, .1, 200, .2);
 			surroundDegenPeriod.addModule(surroundDegen, {
 				0: AreaDegenLayer.Stages.INACTIVE,
 				1: AreaDegenLayer.Stages.WARNING,
@@ -61,7 +61,7 @@ class MechanicalBoss extends MechanicalBossEarly {
 		});
 
 		let chaseDegen = new AreaDegenLayer();
-		chaseDegen.config(chaseDegenTarget, .1, 200, .002);
+		chaseDegen.config(chaseDegenTarget, .1, 200, .2);
 		chaseDegenPeriod.addModule(chaseDegen, {
 			0: AreaDegenLayer.Stages.INACTIVE,
 			1: AreaDegenLayer.Stages.WARNING,

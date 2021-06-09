@@ -30,7 +30,7 @@ class Player extends Hero {
 			new Death(),
 		];
 
-		let player = new Player(0, 0, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		let player = new Player(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		player.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 		return player;
 	}

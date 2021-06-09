@@ -41,7 +41,7 @@ class AimingLaserTurret extends Monster {
 		});
 
 		let staticLaser = new StaticLaser();
-		staticLaser.config(this, .005, .5, aim, 50, .005);
+		staticLaser.config(this, .005, .5, aim, 50, .5);
 		period.addModule(staticLaser, {
 			0: StaticLaser.Stages.INACTIVE,
 			1: StaticLaser.Stages.INACTIVE,

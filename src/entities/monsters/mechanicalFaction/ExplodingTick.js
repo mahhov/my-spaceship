@@ -50,7 +50,7 @@ class ExplodingTick extends Monster {
 		});
 
 		let degen = new NearbyDegen();
-		degen.config(this, .15, .003);
+		degen.config(this, .15, .3);
 		patternedPeriod.addModule(degen, {
 			0: NearbyDegen.Stages.INACTIVE,
 			1: NearbyDegen.Stages.WARNING,

@@ -35,7 +35,7 @@ class Static4DirTurret extends Monster {
 			});
 
 			let shotgun = new Shotgun();
-			shotgun.config(this, .05, 1, .003, .0001, 100, .04, aim, true);
+			shotgun.config(this, .05, 1, .003, .0001, 100, 4, aim, true);
 			period.addModule(shotgun, {
 				0: Shotgun.Stages.INACTIVE,
 				1: Shotgun.Stages.ACTIVE,

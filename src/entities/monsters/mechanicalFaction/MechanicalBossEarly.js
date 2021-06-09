@@ -53,7 +53,7 @@ class MechanicalBossEarly extends Monster {
 		});
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.config(this, .5, .002);
+		nearbyDegen.config(this, .5, .2);
 		nearbyDegenPeriod.addModule(nearbyDegen, {
 			0: NearbyDegen.Stages.WARNING,
 			1: NearbyDegen.Stages.ACTIVE,
@@ -72,7 +72,7 @@ class MechanicalBossEarly extends Monster {
 		});
 
 		let farAwayShotgun = new Shotgun();
-		farAwayShotgun.config(this, .1, 1, .01, 0, 200, .01, farAwayShotgunAim, true);
+		farAwayShotgun.config(this, .1, 1, .01, 0, 200, 1, farAwayShotgunAim, true);
 		this.distance.addModule(farAwayShotgun, {
 			0: Shotgun.Stages.INACTIVE,
 			1: Shotgun.Stages.INACTIVE,
@@ -100,7 +100,7 @@ class MechanicalBossEarly extends Monster {
 			});
 
 			let staticLaser = new StaticLaser();
-			staticLaser.config(this, .005, .5, laserAim, 40, .002, .01);
+			staticLaser.config(this, .005, .5, laserAim, 40, .2, .01);
 			laserPeriod.addModule(staticLaser, {
 				0: StaticLaser.Stages.INACTIVE,
 				1: StaticLaser.Stages.WARNING,
@@ -122,7 +122,7 @@ class MechanicalBossEarly extends Monster {
 			});
 
 			let shotgun = new Shotgun();
-			shotgun.config(this, .1, 1, .005, .002, 100, .04, shotgunAim, true);
+			shotgun.config(this, .1, 1, .005, .002, 100, 4, shotgunAim, true);
 			this.period.addModule(shotgun, {
 				0: Shotgun.Stages.INACTIVE,
 				1: Shotgun.Stages.INACTIVE,

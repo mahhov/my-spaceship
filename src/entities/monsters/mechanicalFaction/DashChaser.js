@@ -73,7 +73,7 @@ class DashChaser extends Monster {
 		});
 
 		let nearbyDegen = new NearbyDegen();
-		nearbyDegen.config(dash.target, .15, .06);
+		nearbyDegen.config(dash.target, .15, 6);
 		triggerDashEnd.addModule(nearbyDegen, {
 			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
 			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
