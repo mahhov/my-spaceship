@@ -8,7 +8,7 @@ class Emitter {
 	}
 
 	on(event, handler) {
-		this.emitHandlers[event] = this.emitHandlers[event] || [];
+		this.emitHandlers[event] ||= [];
 		this.emitHandlers[event].push(handler);
 	}
 

@@ -65,7 +65,7 @@ class EggBot {
 		let alliesMovement = allies.reduce((movement, ally) => {
 			if (ally === hero)
 				return movement;
-			alliedTarget = alliedTarget || ally === target;
+			alliedTarget ||= ally === target;
 			let delta = EggBot.movementFlock(pos, Vector.fromObj(ally), .2, 4, 1, .5, 1, 0);
 			return movement.add(delta);
 		}, new Vector(0, 0));
@@ -73,7 +73,7 @@ class EggBot {
 
 		let idealHostileDist = selfTarget ? .9 : .4;
 		let hostilesMovement = hostiles.reduce((movement, hostile) => {
-			hostileTarget = hostileTarget || hostile === target;
+			hostileTarget ||= hostile === target;
 			let delta = EggBot.movementFlock(pos, Vector.fromObj(hostile), idealHostileDist, 1, 1);
 			return movement.add(delta);
 		}, new Vector(0, 0));
