@@ -29,9 +29,8 @@ const Colors = {
 	},
 
 	Interface: {
-		DISABLED: Color.from1(.2, .2, .2),
 		INACTIVE: Color.from1(0, 0, 0),
-		HOVER: Color.from1(.1, .1, .1),
+		HOVER: Color.from1(.2, .2, .2),
 		ACTIVE: Color.from1(.4, .4, .4),
 		DULL_BORDER: Color.fromHexString('#aaa'),
 	},
@@ -92,6 +91,9 @@ const Positions = {
 	STAGE_TEXT_HEIGHT: .03,
 	UI_FIRST_ROW: .22,
 	UI_ROW_HEIGHT: .05,
+	UI_LINE_HEIGHT: .02,
+	UI_BUTTON_HEIGHT: .03,
+	BREAK: .002,
 };
 
 export {Colors, Positions};

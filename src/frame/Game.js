@@ -1,3 +1,4 @@
+import PlayerData from '../playerData/PlayerData.js';
 import Frame from './Frame.js';
 import GameMenu from './GameMenu.js';
 import GameWorld from './GameWorld.js';
@@ -5,8 +6,9 @@ import GameWorld from './GameWorld.js';
 class Game extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
-		this.menu = new GameMenu(controller, painterSet);
-		this.world = new GameWorld(controller, painterSet);
+		this.playerData = new PlayerData();
+		this.menu = new GameMenu(controller, painterSet, this.playerData);
+		this.world = new GameWorld(controller, painterSet); // todo [high] use playerData
 		this.activeFrame = this.menu;
 		this.menu.on('resume', () => this.activeFrame = this.world);
 		this.menu.on('begin-encounter', MapGeneratorClass => {

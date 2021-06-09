@@ -104,7 +104,7 @@ class Ability {
 		// text
 		this.uiTexts.forEach((uiText, i) =>
 			painter.add(new Text(
-				new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE).alignWithoutMove(Coordinate.Aligns.CENTER, Coordinate.Aligns.CENTER).move(0, (i - .5) / 4),
+				new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE).alignWithoutMove(Coordinate.Aligns.CENTER, Coordinate.Aligns.CENTER).shift(0, (i - .5) / 4),
 				uiText)
 				.setOptions({size: '12px'})));
 

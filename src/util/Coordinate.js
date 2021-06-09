@@ -6,14 +6,18 @@ class Coordinate {
 	constructor(x, y, width = 0, height = width) {
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.alignment = Aligns.START;
-		this.vertAlignment = Aligns.START;
+		this.size(width, height);
+		this.align(Aligns.START);
 	}
 
 	get clone() {
 		return new Coordinate(this.x, this.y, this.width, this.height).align(this.alignment, this.vertAlignment);
+	}
+
+	size(width, height = width) {
+		this.width = width;
+		this.height = height;
+		return this;
 	}
 
 	align(alignment, vertAlignment = alignment) {
@@ -28,17 +32,23 @@ class Coordinate {
 		return this.align(alignment, vertAlignment);
 	}
 
-	move(widths, heights) {
+	move(dx, dy = dx) {
+		this.x += dx;
+		this.y += dy;
+		return this;
+	}
+
+	shift(widths, heights = widths) {
 		this.x += widths * this.width;
 		this.y += heights * this.height;
 		return this;
 	}
 
-	pad(padding) {
-		this.x += Coordinate.getAligned(this.alignment, padding, padding * 2);
-		this.y += Coordinate.getAligned(this.vertAlignment, padding, padding * 2);
-		this.width -= padding * 2;
-		this.height -= padding * 2;
+	pad(width, height = width) {
+		this.x += Coordinate.getAligned(this.alignment, width, width * 2);
+		this.y += Coordinate.getAligned(this.vertAlignment, height, height * 2);
+		this.width -= width * 2;
+		this.height -= height * 2;
 		return this;
 	}
 

@@ -3,6 +3,7 @@ import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/Enum.js';
 import UiButton from '../components/UiButton.js';
 import UiSection from '../components/UiSection.js';
+import UiText from '../components/UiText.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
@@ -13,51 +14,60 @@ import Ui from './Ui.js';
 const UI_PLACEMENT = makeEnum({FULL: 0, LEFT: 0, RIGHT: 0});
 
 class UiSet {
-	constructor(title, uis, index) {
+	constructor(buttonText, title, uis, index) {
 		let width = .1;
-		this.button = new UiButton(new Coordinate(Positions.MARGIN + (width + Positions.MARGIN / 2) * index, Positions.MARGIN, width, .03), title);
-		this.uis = uis;
+		this.button = new UiButton(
+			new Coordinate(Positions.MARGIN + (width + Positions.MARGIN / 2) * index, Positions.MARGIN, width, Positions.UI_BUTTON_HEIGHT),
+			buttonText, index + 1);
+		this.title = HubUi.createTitle(title);
+		this.uis = [...uis];
 	}
 
 	setActive(active) {
 		this.button.disabled = active;
+		this.title.visible = active;
 		this.uis.forEach(ui => ui.visible = active);
 	}
 }
 
 class HubUi extends Ui {
-	constructor() {
+	constructor(playerData) {
 		super();
 
 		this.encounterUi = this.add(new EncounterUi());
 		this.encounterUi.bubble('begin-encounter', this);
 		this.characterUi = this.add(new CharacterUi());
-		this.skillsUi = this.add(new SkillsUi());
+		this.skillsUi = this.add(new SkillsUi(playerData.skillsData));
+		// todo [medium] tech tree and active skills
 		this.equipmentUi = this.add(new EquipmentUi());
 		this.statsUi = this.add(new StatsUi());
 
 		this.uiSets = [
-			['Encounters', [this.encounterUi]],
-			['Skills', [this.characterUi, this.skillsUi]],
-			['Equipment', [this.characterUi, this.equipmentUi]],
-			['Stats', [this.statsUi]],
-		].map(([title, uis], i) => new UiSet(title, uis, i));
+			['Encounters', 'Select encounter', [this.encounterUi]],
+			['Skills', 'Passive skills', [this.characterUi, this.skillsUi]],
+			['Equipment', 'Craft & equip gear', [this.characterUi, this.equipmentUi]],
+			['Stats', 'Stats', [this.statsUi]],
+		].map((a, i) => new UiSet(...a, i));
 
 		this.uiSets.forEach(uiSet => {
 			this.add(uiSet.button);
+			this.add(uiSet.title);
 			uiSet.button.on('click', () => this.setActiveUiSet(uiSet));
 		});
 
 		this.setActiveUiSet(this.uiSets[0]);
 	}
 
+	static createTitle(text) {
+		return new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), text).setTextOptions({size: '22px'});
+	}
+
 	static createSection(text, placement = UI_PLACEMENT.FULL) {
 		const OUTER_MARGIN = Positions.MARGIN;
 		const COLUMN_MARGIN = .05;
 		let left = placement === UI_PLACEMENT.RIGHT ? .5 + COLUMN_MARGIN / 2 : OUTER_MARGIN;
-		let top = .18;
 		let width = placement === UI_PLACEMENT.FULL ? 1 - OUTER_MARGIN * 2 : .5 - OUTER_MARGIN - COLUMN_MARGIN / 2;
-		return new UiSection(new Coordinate(left, top, width, 1 - top - OUTER_MARGIN), text, placement !== UI_PLACEMENT.FULL).setTextOptions({size: '22px'});
+		return new UiSection(new Coordinate(left, Positions.UI_FIRST_ROW, width, 1 - Positions.UI_FIRST_ROW - OUTER_MARGIN), text);
 	}
 
 	setActiveUiSet(uiSet) {
