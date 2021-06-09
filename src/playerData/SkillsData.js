@@ -16,9 +16,23 @@ class SkillsData extends Emitter {
 		];
 
 		// todo [high] accumulate skill points
-		this.availablePoints = 4;
+		this.availablePoints = 0;
 		// this.level = 0;
 		// this.exp = 0;
+	}
+
+	get stored() {
+		return {
+			availablePoints: this.availablePoints,
+			skillItems: Object.fromEntries(this.skillItems.map(skillItem =>
+				([skillItem.name, skillItem.value]))),
+		};
+	}
+
+	set stored(stored) {
+		this.availablePoints = stored?.availablePoints || 0;
+		this.skillItems.forEach(skillItem =>
+			skillItem.value = stored?.skillItems?.[skillItem.name] || 0);
 	}
 
 	// getStatValueById(id) {
@@ -27,7 +41,7 @@ class SkillsData extends Emitter {
 	// }
 
 	get availableText() {
-		return `Available Skill Points: ${this.availablePoints}`;
+		return `Available skill points: ${this.availablePoints}`;
 	}
 
 	allocate(skill, value) {

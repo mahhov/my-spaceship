@@ -66,7 +66,7 @@ class SkillsUi extends Ui {
 
 		let coordinates = layout.getCoordinates(layout.getRow(skillsData.skillItems.length - 1) * layout.columns);
 		let bottomTextCoordinate = coordinates.bottomLine.clone.alignWithoutMove(Coordinate.Aligns.START).move(0, 0.015 + Positions.UI_ROW_HEIGHT);
-		let availableText = this.add(new UiText(bottomTextCoordinate, 'Available skill points: 4'));
+		let availableText = this.add(new UiText(bottomTextCoordinate, skillsData.availableText));
 		let descriptionText = this.add(new UiText(bottomTextCoordinate.clone.move(0, Positions.UI_ROW_HEIGHT), ''));
 	}
 }
