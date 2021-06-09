@@ -15,8 +15,8 @@ import VShip from '../graphics/VShip.js';
 import Text from '../painter/elements/Text.js';
 import {Colors, Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import {NoiseSimplex} from '../util/Noise.js';
-import {floor, rand, randInt, round} from '../util/Number.js';
+import {NoiseSimplex} from '../util/noise.js';
+import {floor, rand, randInt, round} from '../util/number.js';
 import Vector from '../util/Vector.js';
 import MapGenerator from './MapGenerator.js';
 

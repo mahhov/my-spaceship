@@ -1,6 +1,6 @@
 import StarShip from '../../graphics/StarShip.js';
 import {Colors} from '../../util/Constants.js';
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import NearbyDegen from '../modules/NearbyDegen.js';
 import Monster from './Monster.js';

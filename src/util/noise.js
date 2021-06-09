@@ -1,6 +1,6 @@
 // import SimplexNoise from '../../node_modules/simplex-noise/simplex-noise.js';
 
-import {EPSILON, getMagnitude, rand} from './Number.js';
+import {EPSILON, getMagnitude, rand} from './number.js';
 
 class NoiseSimplex {
 	constructor(scale = 10, threshold = .5, thresholdRandWeight = 1) {

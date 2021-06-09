@@ -1,5 +1,5 @@
 import Bounds from '../intersection/Bounds.js';
-import {setMagnitude} from '../util/Number.js';
+import {setMagnitude} from '../util/number.js';
 
 class Entity {
 	constructor(x, y, width, height, layer) {

@@ -1,4 +1,4 @@
-import {PI2, rand, thetaToVector} from '../util/Number.js';
+import {PI2, rand, thetaToVector} from '../util/number.js';
 import Graphics from './Graphics.js';
 
 // min magnitude of all points will be MIN_MAGNITUDE / (MIN_MAGNITUDE + 1)

@@ -1,11 +1,11 @@
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import ModuleManager from './ModuleManager.js';
 
 const PrimaryStages = makeEnum({PLAY: 0, LOOP: 0, PAUSE: 0, STOP: 0});
 // variable number of secondary stages depending on number of patterns defined
 // variable number of phases depending on number of periods defined
 
-class patternedPeriod extends ModuleManager {
+class PatternedPeriod extends ModuleManager {
 	config(periods, patterns, queues) {
 		this.periods = periods;
 		this.patterns = patterns;
@@ -54,6 +54,6 @@ class patternedPeriod extends ModuleManager {
 	}
 }
 
-patternedPeriod.PrimaryStages = PrimaryStages;
+PatternedPeriod.PrimaryStages = PrimaryStages;
 
-export default patternedPeriod;
+export default PatternedPeriod;

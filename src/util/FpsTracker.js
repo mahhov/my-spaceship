@@ -1,4 +1,4 @@
-import {round} from './Number.js';
+import {round} from './number.js';
 
 class FpsTracker {
 	constructor() {

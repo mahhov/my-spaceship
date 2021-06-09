@@ -13,8 +13,8 @@ import RockMineral from '../entities/stills/RockMineral.js';
 import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import {NoiseSimplex} from '../util/Noise.js';
-import {rand, round} from '../util/Number.js';
+import {NoiseSimplex} from '../util/noise.js';
+import {rand, round} from '../util/number.js';
 import MapGenerator from './MapGenerator.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;

@@ -1,5 +1,5 @@
-import makeEnum from '../../util/Enum.js';
-import {rand, randVector} from '../../util/Number.js';
+import makeEnum from '../../util/enum.js';
+import {rand, randVector} from '../../util/number.js';
 import Projectile from '../attack/Projectile.js';
 import Module from './Module.js';
 

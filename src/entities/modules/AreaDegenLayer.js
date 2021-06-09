@@ -1,4 +1,4 @@
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import AreaDegen from '../attack/AreaDegen.js';
 import Module from './Module.js';
 

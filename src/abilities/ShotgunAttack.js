@@ -1,6 +1,6 @@
 import Projectile from '../entities/attack/Projectile.js';
 import Buff from '../entities/Buff.js';
-import {randVector, setMagnitude} from '../util/Number.js';
+import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class ShotgunAttack extends Ability {

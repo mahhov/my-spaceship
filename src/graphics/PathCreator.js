@@ -1,5 +1,5 @@
 import Path from '../painter/elements/Path.js';
-import {PI2, thetaToVector} from '../util/Number.js';
+import {PI2, thetaToVector} from '../util/number.js';
 
 class PathCreator {
 	constructor() {

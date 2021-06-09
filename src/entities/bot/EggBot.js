@@ -1,5 +1,5 @@
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
-import {clamp, minWhichA, rand, randInt} from '../../util/Number.js';
+import {clamp, minWhichA, rand, randInt} from '../../util/number.js';
 import Vector from '../../util/Vector.js';
 
 class EggBot {

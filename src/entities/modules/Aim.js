@@ -1,5 +1,5 @@
-import makeEnum from '../../util/Enum.js';
-import {cos, sin} from '../../util/Number.js';
+import makeEnum from '../../util/enum.js';
+import {cos, sin} from '../../util/number.js';
 import Vector from '../../util/Vector.js';
 import Module from './Module.js';
 

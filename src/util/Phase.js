@@ -1,4 +1,4 @@
-import {randInt} from './Number.js';
+import {randInt} from './number.js';
 
 class Phase {
 	// durations should be >= 0

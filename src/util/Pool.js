@@ -1,4 +1,4 @@
-import {clamp} from './Number.js';
+import {clamp} from './number.js';
 
 class Pool {
 	constructor(max, incrementRate = 0) {

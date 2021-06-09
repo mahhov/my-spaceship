@@ -1,4 +1,4 @@
-import makeEnum from './Enum.js';
+import makeEnum from './enum.js';
 
 const Aligns = makeEnum({START: 0, CENTER: 0, END: 0});
 

@@ -1,4 +1,4 @@
-import {booleanArray} from '../util/Number.js';
+import {booleanArray} from '../util/number.js';
 import Ability from './Ability.js';
 
 class Dash extends Ability {

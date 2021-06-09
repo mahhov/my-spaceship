@@ -1,4 +1,4 @@
-import {cos, sin} from './Number.js';
+import {cos, sin} from './number.js';
 
 class Theta {
 	constructor(theta) {

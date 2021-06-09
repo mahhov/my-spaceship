@@ -1,5 +1,5 @@
-import makeEnum from '../../util/Enum.js';
-import {thetaToVector} from '../../util/Number.js';
+import makeEnum from '../../util/enum.js';
+import {thetaToVector} from '../../util/number.js';
 import Vector from '../../util/Vector.js';
 import Module from './Module.js';
 

@@ -1,5 +1,5 @@
 import Laser from '../entities/attack/Laser.js';
-import {setMagnitude} from '../util/Number.js';
+import {setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class LaserAttack extends Ability {

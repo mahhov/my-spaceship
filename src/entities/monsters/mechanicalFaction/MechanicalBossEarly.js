@@ -1,6 +1,6 @@
 import Rect1DotsShip from '../../../graphics/Rect1DotsShip.js';
 import {Colors} from '../../../util/Constants.js';
-import makeEnum from '../../../util/Enum.js';
+import makeEnum from '../../../util/enum.js';
 import Phase from '../../../util/Phase.js';
 import Vector from '../../../util/Vector.js';
 import Aim from '../../modules/Aim.js';

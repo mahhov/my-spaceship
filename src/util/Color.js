@@ -1,4 +1,4 @@
-import {clamp} from './Number.js';
+import {clamp} from './number.js';
 
 const MAX_SHADE_MAGNITUDE = 1;
 

@@ -10,8 +10,8 @@ import Static4DirTurret from '../entities/monsters/mechanicalFaction/Static4DirT
 import MapBoundary from '../entities/stills/MapBoundary.js';
 import Rock from '../entities/stills/Rock.js';
 import RockMineral from '../entities/stills/RockMineral.js';
-import {NoiseSimplex} from '../util/Noise.js';
-import {clamp, rand} from '../util/Number.js';
+import {NoiseSimplex} from '../util/noise.js';
+import {clamp, rand} from '../util/number.js';
 import MapGenerator from './MapGenerator.js';
 
 const WIDTH = 1.5, HEIGHT = 1.5;

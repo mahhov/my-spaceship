@@ -1,4 +1,4 @@
-import makeEnum from '../../../util/Enum.js';
+import makeEnum from '../../../util/enum.js';
 import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 import Period from '../../modules/Period.js';
 import Position from '../../modules/Position.js';

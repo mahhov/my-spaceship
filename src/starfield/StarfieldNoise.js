@@ -1,5 +1,5 @@
-import {NoiseSimplex} from '../util/Noise.js';
-import {rand} from '../util/Number.js';
+import {NoiseSimplex} from '../util/noise.js';
+import {rand} from '../util/number.js';
 import Star from './Star.js';
 import Starfield from './Starfield.js';
 

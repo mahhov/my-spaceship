@@ -1,5 +1,5 @@
-import makeEnum from '../../util/Enum.js';
-import {getMagnitude} from '../../util/Number.js';
+import makeEnum from '../../util/enum.js';
+import {getMagnitude} from '../../util/number.js';
 import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});

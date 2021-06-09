@@ -1,4 +1,4 @@
-import {PI2, thetaToVector} from '../util/Number.js';
+import {PI2, thetaToVector} from '../util/number.js';
 import Graphics from './Graphics.js';
 
 let WIDTH = .3;

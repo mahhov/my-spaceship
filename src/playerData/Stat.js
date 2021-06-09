@@ -1,4 +1,4 @@
-import makeEnum from '../util/Enum.js';
+import makeEnum from '../util/enum.js';
 
 const Ids = makeEnum({
 	LIFE: 0,

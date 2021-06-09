@@ -2,7 +2,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import BarC from '../../painter/elements/BarC.js';
 import {Colors} from '../../util/Constants.js';
 import Decay from '../../util/Decay.js';
-import {booleanArray, rand, randVector, setMagnitude} from '../../util/Number.js';
+import {booleanArray, rand, randVector, setMagnitude} from '../../util/number.js';
 import Pool from '../../util/Pool.js';
 import Buff from '../Buff.js';
 import LivingEntity from '../LivingEntity.js';

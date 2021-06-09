@@ -1,4 +1,4 @@
-import makeEnum from '../util/Enum.js';
+import makeEnum from '../util/enum.js';
 
 const Directions = makeEnum({LEFT: 0, TOP: 0, RIGHT: 0, BOTTOM: 0});
 

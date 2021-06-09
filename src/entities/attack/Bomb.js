@@ -2,7 +2,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import {getRectDistance} from '../../util/Number.js';
+import {getRectDistance} from '../../util/number.js';
 import Entity from '../Entity.js';
 
 class Bomb extends Entity {

@@ -1,4 +1,4 @@
-import {rand, randB} from '../util/Number.js';
+import {rand, randB} from '../util/number.js';
 import Star from './Star.js';
 
 class Starfield {

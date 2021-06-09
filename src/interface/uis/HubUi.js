@@ -1,6 +1,6 @@
 import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import UiButton from '../components/UiButton.js';
 import UiSection from '../components/UiSection.js';
 import UiText from '../components/UiText.js';

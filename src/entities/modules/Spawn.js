@@ -1,6 +1,6 @@
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import LinkedList from '../../util/LinkedList.js';
-import {rand, randInt, randVector} from '../../util/Number.js';
+import {rand, randInt, randVector} from '../../util/number.js';
 import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});

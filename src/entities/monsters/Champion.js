@@ -1,6 +1,6 @@
 import WShip from '../../graphics/WShip.js';
 import {Colors} from '../../util/Constants.js';
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import Aim from '../modules/Aim.js';
 import Chase from '../modules/Chase.js';

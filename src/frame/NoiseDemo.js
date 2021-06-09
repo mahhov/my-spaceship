@@ -2,8 +2,8 @@ import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import Color from '../util/Color.js';
 import Coordinate from '../util/Coordinate.js';
-import {NoiseSimplex} from '../util/Noise.js';
-import {rand} from '../util/Number.js';
+import {NoiseSimplex} from '../util/noise.js';
+import {rand} from '../util/number.js';
 import Frame from './Frame.js';
 
 const THRESHOLD = .5;

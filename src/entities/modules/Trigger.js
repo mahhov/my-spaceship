@@ -1,4 +1,4 @@
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import ModuleManager from './ModuleManager.js';
 
 const Stages = makeEnum({INACTIVE: 0, ACTIVE: 0});

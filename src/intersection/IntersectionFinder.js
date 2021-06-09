@@ -1,6 +1,6 @@
-import makeEnum from '../util/Enum.js';
+import makeEnum from '../util/enum.js';
 import LinkedList from '../util/LinkedList.js';
-import {EPSILON, maxWhich, setMagnitude} from '../util/Number.js';
+import {EPSILON, maxWhich, setMagnitude} from '../util/number.js';
 import Bounds from './Bounds.js';
 
 const Layers = makeEnum({

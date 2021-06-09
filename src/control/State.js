@@ -1,4 +1,4 @@
-import makeEnum from '../util/Enum.js';
+import makeEnum from '../util/enum.js';
 
 // larger values have priority when multiple keys are mapped to the same control
 const States = makeEnum({UP: 0, RELEASED: 0, PRESSED: 0, DOWN: 0});

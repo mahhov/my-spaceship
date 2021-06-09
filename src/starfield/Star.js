@@ -1,7 +1,7 @@
 import Rect from '../painter/elements/Rect.js';
 import {Colors} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import {rand, randInt} from '../util/Number.js';
+import {rand, randInt} from '../util/number.js';
 
 const FLICKER_COLOR_MULT = .7;
 const STAR_COLOR_ARRAY = [

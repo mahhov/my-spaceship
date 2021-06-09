@@ -1,4 +1,4 @@
-import {getMagnitude, getMagnitudeSqr, rand, randVector, setMagnitude, vectorDelta, vectorSum} from '../util/Number.js';
+import {getMagnitude, getMagnitudeSqr, rand, randVector, setMagnitude, vectorDelta, vectorSum} from '../util/number.js';
 
 class PathGenerator {
 	// weightPower [0, 1)

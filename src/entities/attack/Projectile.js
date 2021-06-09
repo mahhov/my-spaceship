@@ -2,7 +2,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import {randVector} from '../../util/Number.js';
+import {randVector} from '../../util/number.js';
 import Entity from '../Entity.js';
 import DamageDust from '../particles/DamageDust.js';
 

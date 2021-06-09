@@ -1,7 +1,7 @@
 import RotatingTurretShip from '../../graphics/RotatingTurretShip.js';
 import Bar from '../../painter/elements/Bar.js';
 import {Colors, Positions} from '../../util/Constants.js';
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import Aim from '../modules/Aim.js';
 import Distance from '../modules/Distance.js';

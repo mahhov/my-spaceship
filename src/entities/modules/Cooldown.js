@@ -1,4 +1,4 @@
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import ModuleManager from './ModuleManager.js';
 

@@ -4,7 +4,7 @@ import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import makeEnum from '../../util/Enum.js';
+import makeEnum from '../../util/enum.js';
 import UiComponent from './UiComponent.js';
 
 const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, HOVER: 0});

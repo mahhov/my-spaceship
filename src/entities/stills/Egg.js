@@ -3,7 +3,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import {randInt} from '../../util/Number.js';
+import {randInt} from '../../util/number.js';
 import Buff from '../Buff.js';
 import Entity from '../Entity.js';
 

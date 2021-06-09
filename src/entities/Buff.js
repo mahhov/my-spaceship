@@ -2,7 +2,7 @@ import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import makeEnum from '../util/Enum.js';
+import makeEnum from '../util/enum.js';
 import Pool from '../util/Pool.js';
 
 const Keys = makeEnum({MOVE_SPEED: 0, ATTACK_RANGE: 0, ARMOR: 0, DISABLED: 0});
