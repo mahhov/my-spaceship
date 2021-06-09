@@ -15,7 +15,8 @@ class Camera {
 	}
 
 	transformCoordinates(coordinate) {
-		return new Coordinate(this.xt(coordinate.left), this.yt(coordinate.top), this.st(coordinate.width), this.st(coordinate.height));
+		return new Coordinate(this.xt(coordinate.x), this.yt(coordinate.y), this.st(coordinate.width), this.st(coordinate.height))
+			.align(coordinate.alignment, coordinate.vertAlignment);
 	}
 
 	// center range [[0, width], [0, height]]

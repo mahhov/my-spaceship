@@ -8,7 +8,9 @@ class Bar extends PainterElement {
 	constructor(coordinate, fillRatio, emptyColor, fillColor, borderColor) {
 		super();
 		this.empty = new Rect(coordinate).setOptions({fill: true, color: emptyColor});
-		this.fill = new Rect(coordinate.clone.size(coordinate.width * fillRatio, coordinate.height))
+		this.fill = new Rect(coordinate.clone
+			.alignWithoutMove(Coordinate.Aligns.START)
+			.scale(fillRatio, 1))
 			.setOptions({fill: true, color: fillColor});
 		this.border = new Rect(coordinate).setOptions({color: borderColor});
 	}

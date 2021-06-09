@@ -81,13 +81,13 @@ class Buff {
 		painter.add(new Text(new Coordinate(left + size / 2, top + size / 2).align(Coordinate.Aligns.CENTER), this.uiText));
 	}
 
-	paintAt(painter, camera, left, top, size) {
+	paintAt(painter, coordinate) {
 		// background
-		painter.add(Rect.withCamera(camera, new Coordinate(left, top, size), {fill: true, color: this.uiColor.getShade()}));
+		painter.add(new Rect(coordinate).setOptions({fill: true, color: this.uiColor.getShade()}));
 
 		// foreground for current charges
-		let fillHeight = size * this.duration.getRatio();
-		painter.add(Rect.withCamera(camera, new Coordinate(left, top + size - fillHeight, size, fillHeight), {fill: true, color: this.uiColor.get()}));
+		painter.add(new Rect(coordinate.clone.alignWithoutMove(Coordinate.Aligns.END).scale(1, this.duration.getRatio()))
+			.setOptions({fill: true, color: this.uiColor.get()}));
 	}
 }
 

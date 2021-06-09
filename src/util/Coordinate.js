@@ -20,6 +20,12 @@ class Coordinate {
 		return this;
 	}
 
+	scale(widthScale, heightScale = widthScale) {
+		this.width *= widthScale;
+		this.height *= heightScale;
+		return this;
+	}
+
 	align(alignment, vertAlignment = alignment) {
 		this.alignment = alignment;
 		this.vertAlignment = vertAlignment;

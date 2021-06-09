@@ -1,6 +1,7 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import BarC from '../../painter/elements/BarC.js';
+import Bar from '../../painter/elements/Bar.js';
 import {Colors} from '../../util/Constants.js';
+import Coordinate from '../../util/Coordinate.js';
 import Decay from '../../util/Decay.js';
 import {booleanArray, rand, randVector, setMagnitude} from '../../util/number.js';
 import Pool from '../../util/Pool.js';
@@ -77,21 +78,24 @@ class Hero extends LivingEntity {
 	}
 
 	paint(painter, camera) {
-		const BAR_WIDTH = .15, LIFE_HEIGHT = .02, STAMINA_HEIGHT = .01, MARGIN = .005;
+		const BAR_WIDTH = .15, LIFE_HEIGHT = .02, STAMINA_HEIGHT = .01, MARGIN = .01;
 		super.paint(painter, camera);
 		// life bar
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height - (LIFE_HEIGHT + STAMINA_HEIGHT) / 2 - MARGIN, BAR_WIDTH, LIFE_HEIGHT, this.health.getRatio(),
-			this.nameplateLifeColor.getShade(Colors.BAR_SHADING), this.nameplateLifeColor.get(), this.nameplateLifeColor.get(Colors.BAR_SHADING)));
+		let barTop = this.y - this.height / 2 - LIFE_HEIGHT - STAMINA_HEIGHT - MARGIN - .02;
+		let healthCoordinate = new Coordinate(this.x, barTop, BAR_WIDTH, LIFE_HEIGHT).align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START);
+		painter.add(new Bar(camera.transformCoordinates(healthCoordinate), this.health.getRatio(), this.nameplateLifeColor.getShade(Colors.BAR_SHADING), this.nameplateLifeColor.get(), this.nameplateLifeColor.get(Colors.BAR_SHADING)));
 		// stamina bar
-		painter.add(BarC.withCamera(camera, this.x, this.y - this.height, BAR_WIDTH, STAMINA_HEIGHT, this.stamina.getRatio(),
-			this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));
+		painter.add(new Bar(camera.transformCoordinates(healthCoordinate.clone.shift(0, 1).size(BAR_WIDTH, STAMINA_HEIGHT)),
+			this.stamina.getRatio(), this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));
 		// buffs
-		let buffSize = LIFE_HEIGHT + STAMINA_HEIGHT + MARGIN;
+		let buffSize = LIFE_HEIGHT + STAMINA_HEIGHT;
 		this.buffs.forEach((buff, i) =>
-			buff.paintAt(painter, camera,
-				this.x + BAR_WIDTH / 2 + MARGIN + (buffSize + MARGIN) * i,
-				this.y - this.height - buffSize + STAMINA_HEIGHT / 2,
-				buffSize));
+			buff.paintAt(painter,
+				camera.transformCoordinates(healthCoordinate.clone
+					.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
+					.size(buffSize)
+					.shift(1, 0)
+					.move(MARGIN + (buffSize + MARGIN) * i, 0))));
 	}
 }
 
