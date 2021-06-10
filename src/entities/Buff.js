@@ -24,7 +24,6 @@ class Buff {
 	addEffect(statId, value) {
 		this.effects[statId] ||= 0;
 		this.effects[statId] += value;
-		// todo [medium] return this
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.

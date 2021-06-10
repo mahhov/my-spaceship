@@ -31,7 +31,7 @@ class Respawn extends PassiveAbility {
 		this.dead = false;
 		return true;
 
-		// todo [medium] armor buff on respawn
+		// todo [low] armor buff on respawn
 	}
 }
 

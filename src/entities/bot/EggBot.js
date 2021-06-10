@@ -40,7 +40,7 @@ class EggBot {
 
 		let abilitiesDirect = hostiles.length ? EggBot.closestHostileDir(hero, hostiles) : new Vector(0, 0);
 
-		// todo [medium] tune
+		// todo [low] tune
 		let projectileAttackDistance = ProjectileAttack.getDistance(hero) + .1;
 		// 0.94 0 Infinity
 		let activeProjectileAttack = rand() < (projectileAttackDistance / abilitiesDirect.magnitude - .9) * 5;
@@ -54,7 +54,7 @@ class EggBot {
 	}
 
 	static heroMovement(hero, allies, hostiles, target, centerDir) {
-		// todo [medium] tune
+		// todo [low] tune
 		let movement = new Vector(0, 0);
 		let pos = Vector.fromObj(hero);
 
@@ -92,7 +92,7 @@ class EggBot {
 		}, new Vector(0, 0));
 		avoidLineMovement.multiply(10);
 
-		// todo [medium] conditional on having target
+		// todo [low] conditional on having target
 		let centerMovement = centerDir.copy.subtract(pos);
 		centerMovement.magnitude = .1;
 
