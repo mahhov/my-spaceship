@@ -2,10 +2,7 @@ import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
-import makeEnum from '../util/enum.js';
 import Pool from '../util/Pool.js';
-
-const Keys = makeEnum({MOVE_SPEED: 0, ATTACK_RANGE: 0, ARMOR: 0, DISABLED: 0});
 
 class Buff {
 	constructor(duration, uiColor, uiText) {
@@ -21,31 +18,14 @@ class Buff {
 		this.uiIndex = uiIndex;
 	}
 
-	// returns 1 if unmodified
-	static sum(buffs, key) {
+	static sum(buffs, statId) {
 		return buffs
-			.map(buff => buff.effects[key] || 0)
-			.reduce((a, b) => a + b, 1);
+			.map(buff => buff.effects[statId] || 0)
+			.reduce((a, b) => a + b, 0);
 	}
 
-	static moveSpeed(buffs) {
-		return Buff.sum(buffs, Keys.MOVE_SPEED);
-	}
-
-	static attackRange(buffs) {
-		return Buff.sum(buffs, Keys.ATTACK_RANGE);
-	}
-
-	static armor(buffs) {
-		return Buff.sum(buffs, Keys.ARMOR);
-	}
-
-	static disabled(buffs) {
-		return Buff.sum(buffs, Keys.DISABLED) > 1;
-	}
-
-	setEffect(key, value) {
-		this.effects[key] = value;
+	setEffect(statId, value) {
+		this.effects[statId] = value;
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.
@@ -90,7 +70,5 @@ class Buff {
 			.setOptions({fill: true, color: this.uiColor.get()}));
 	}
 }
-
-Buff.Keys = Keys;
 
 export default Buff;

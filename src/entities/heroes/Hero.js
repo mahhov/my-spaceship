@@ -1,5 +1,6 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
+import Stat from '../../playerData/Stat.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import Decay from '../../util/Decay.js';
@@ -30,14 +31,14 @@ class Hero extends LivingEntity {
 	}
 
 	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		if (Buff.disabled(this.buffs))
+		if (Buff.sum(this.buffs, Stat.Ids.DISABLED))
 			return;
 		this.currentMove = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
 	}
 
 	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
-		let disabled = Buff.disabled(this.buffs);
+		let disabled = Buff.sum(this.buffs, Stat.Ids.DISABLED);
 		if (!disabled)
 			this.abilities.forEach((ability, i) =>
 				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));

@@ -10,6 +10,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
+import Stat from '../../playerData/Stat.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import Buff from '.././Buff.js';
@@ -68,7 +69,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.updateMove(intersectionFinder, dx, dy, .005 * Buff.moveSpeed(this.buffs));
+		this.updateMove(intersectionFinder, dx, dy, .005 * (1 + Buff.sum(this.buffs, Stat.Ids.MOVE_SPEED)));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {

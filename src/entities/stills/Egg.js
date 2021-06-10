@@ -1,6 +1,7 @@
 import RockGraphic from '../../graphics/RockGraphic.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
+import Stat from '../../playerData/Stat.js';
 import {Colors} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {randInt} from '../../util/number.js';
@@ -15,8 +16,8 @@ class Egg extends Entity {
 		this.randomPosition();
 		this.setGraphics(new RockGraphic(size, size, {fill: true, color: Colors.Entity.EGG.get()}));
 		this.slowDebuff = new Buff(0, Colors.Entity.EGG, 'EGG');
-		this.slowDebuff.setEffect(Buff.Keys.MOVE_SPEED, -.3);
-		this.slowDebuff.setEffect(Buff.Keys.ATTACK_RANGE, -.3);
+		this.slowDebuff.setEffect(Stat.Ids.MOVE_SPEED, -.3);
+		this.slowDebuff.setEffect(Stat.Ids.ATTACK_RANGE, -.3);
 	}
 
 	randomPosition() {

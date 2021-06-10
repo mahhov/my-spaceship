@@ -1,5 +1,6 @@
 import Projectile from '../entities/attack/Projectile.js';
 import Buff from '../entities/Buff.js';
+import Stat from '../playerData/Stat.js';
 import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
@@ -11,7 +12,7 @@ class ChargedProjectileAttack extends Ability {
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (this.channelDuration === 0) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
-			this.chargeBuff.setEffect(Buff.Keys.MOVE_SPEED, -.5);
+			this.chargeBuff.setEffect(Stat.Ids.MOVE_SPEED, -.5);
 			hero.addBuff(this.chargeBuff);
 		}
 		return true;

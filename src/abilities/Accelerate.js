@@ -1,4 +1,5 @@
 import Buff from '../entities/Buff.js';
+import Stat from '../playerData/Stat.js';
 import Ability from './Ability.js';
 
 class Accelerate extends Ability {
@@ -9,7 +10,7 @@ class Accelerate extends Ability {
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (!this.channelDuration) {
 			this.buff = new Buff(0, this.uiColor, 'Haste');
-			this.buff.setEffect(Buff.Keys.MOVE_SPEED, .3);
+			this.buff.setEffect(Stat.Ids.MOVE_SPEED, .3);
 			hero.addBuff(this.buff);
 		}
 		return true;

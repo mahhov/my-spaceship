@@ -1,4 +1,5 @@
 import OutpostPortalGraphic from '../../graphics/OutpostPortalGraphic.js';
+import Stat from '../../playerData/Stat.js';
 import {Colors} from '../../util/Constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
@@ -28,7 +29,7 @@ class OutpostPortal extends Monster {
 
 		let statSetter = new BuffSetter();
 		let armorBuff = new Buff(0);
-		armorBuff.setEffect(Buff.Keys.ARMOR, 3);
+		armorBuff.setEffect(Stat.Ids.ARMOR, 3);
 		statSetter.config(this, armorBuff);
 		spawn.addModule(statSetter, {
 			[Spawn.Phases.NOT_SPAWNING]: BuffSetter.Stages.ACTIVE,

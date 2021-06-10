@@ -1,4 +1,5 @@
 import Buff from '../entities/Buff.js';
+import Stat from '../playerData/Stat.js';
 import {Colors} from '../util/Constants.js';
 import Pool from '../util/Pool.js';
 import PassiveAbility from './PassiveAbility.js';
@@ -10,7 +11,7 @@ class Respawn extends PassiveAbility {
 		this.x = x;
 		this.y = y;
 		this.deadBuff = new Buff(delay, Colors.PLAYER_BUFFS.DEAD, 'Dead');
-		this.deadBuff.setEffect(Buff.Keys.DISABLED, 1);
+		this.deadBuff.setEffect(Stat.Ids.DISABLED, 1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

@@ -1,3 +1,4 @@
+import Stat from '../playerData/Stat.js';
 import Pool from '../util/Pool.js';
 import Buff from './Buff.js';
 import Entity from './Entity.js';
@@ -14,7 +15,7 @@ class LivingEntity extends Entity {
 	}
 
 	changeHealth(amount) {
-		this.health.change(amount / Buff.armor(this.buffs));
+		this.health.change(amount / (1 + Buff.sum(this.buffs, Stat.Ids.ARMOR)));
 	}
 
 	restoreHealth() {
