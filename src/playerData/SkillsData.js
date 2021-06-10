@@ -16,6 +16,7 @@ class SkillsData extends Emitter {
 			], 0, 4, '+10% armor; -5% move speed'),
 		];
 
+		// todo [high] use Pool
 		this.level = 0;
 		this.exp = 0;
 		this.availablePoints = 0;
@@ -49,6 +50,10 @@ class SkillsData extends Emitter {
 
 	get expText() {
 		return `Experience: ${this.exp}/${this.expRequired}`;
+	}
+
+	get levelExpText() {
+		return `(${this.level + 1}) ${this.exp}/${this.expRequired}`;
 	}
 
 	allocate(skill, value) {

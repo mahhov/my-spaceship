@@ -7,6 +7,7 @@ const Colors = {
 	BAR_SHADING: 1,
 	LIFE: Color.fromHexString('#cb584a'),
 	STAMINA: Color.fromHexString('#68cd61'),
+	EXP: Color.fromHexString('#61b4cd'),
 	ENRAGE: Color.fromHexString('#616600'),
 
 	TARGET_LOCK: Color.from1(.5, .5, .5),

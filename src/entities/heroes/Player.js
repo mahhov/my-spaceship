@@ -125,17 +125,23 @@ class Player extends Hero {
 			painter.add(Rect.withCamera(camera, coordinate, {color: Colors.TARGET_LOCK.get(), thickness: 3}));
 		}
 
-		// life & stamina bar
-		const HEIGHT_WITH_MARGIN = Positions.BAR_HEIGHT + Positions.MARGIN;
-		let staminaCoordinate = new Coordinate(Positions.PLAYER_BAR_X, 1 - HEIGHT_WITH_MARGIN, 1 - Positions.PLAYER_BAR_X - Positions.MARGIN, Positions.BAR_HEIGHT);
-		painter.add(new Bar(staminaCoordinate, this.stamina.getRatio(), Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.get(Colors.BAR_SHADING)));
-		let healthCoordinate = staminaCoordinate.clone.move(0, -HEIGHT_WITH_MARGIN);
-		painter.add(new Bar(healthCoordinate, this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
+		// todo [high] smooth changes
+		let barCoordinates = [new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.END)];
+		for (let i = 0; i < 2; i++)
+			barCoordinates.push(barCoordinates[i].clone.shift(0, -1).move(0, -Positions.MARGIN));
 
-		// life & stamina numbers
+		// life, stamina, and exp bars
+		painter.add(new Bar(barCoordinates[2], this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
+		painter.add(new Bar(barCoordinates[1], this.stamina.getRatio(), Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.get(Colors.BAR_SHADING)));
+		painter.add(new Bar(barCoordinates[0], this.playerData.skillsData.exp / this.playerData.skillsData.expRequired, Colors.EXP.getShade(Colors.BAR_SHADING), Colors.EXP.get(), Colors.EXP.get(Colors.BAR_SHADING)));
+
+		// life, stamina, and exp numbers
 		let textOptions = {color: '#000'};
-		painter.add(new Text(staminaCoordinate.clone.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER).move(-Positions.BREAK, 0), Math.floor(this.stamina.get())).setOptions(textOptions));
-		painter.add(new Text(healthCoordinate.clone.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER).move(-Positions.BREAK, 0), Math.floor(this.health.get())).setOptions(textOptions));
+		let barTextCoordinates = barCoordinates.map(barCoordinate =>
+			barCoordinate.clone.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER).move(-Positions.BREAK, 0));
+		painter.add(new Text(barTextCoordinates[2], Math.floor(this.health.get())).setOptions(textOptions));
+		painter.add(new Text(barTextCoordinates[1], Math.floor(this.stamina.get())).setOptions(textOptions));
+		painter.add(new Text(barTextCoordinates[0], this.playerData.skillsData.levelExpText).setOptions(textOptions));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
