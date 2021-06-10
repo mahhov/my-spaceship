@@ -11,7 +11,7 @@ class Controller {
 		this.mouseStates = [new State(), new State(), new State()];
 
 		document.addEventListener('keydown', event =>
-			!event.repeat && this.handleKeyPress(event.key.toLowerCase()));
+			!event.repeat && this.handleKeyPress(event.key.toLowerCase(), event));
 
 		document.addEventListener('keyup', event =>
 			this.handleKeyRelease(event.key.toLowerCase()));
@@ -32,7 +32,10 @@ class Controller {
 			this.handleBlur());
 	}
 
-	handleKeyPress(key) {
+	handleKeyPress(key, event) {
+		if (key === 'tab')
+			event.preventDefault();
+
 		if (!this.keys[key])
 			this.keys[key] = new State();
 		this.keys[key].press();

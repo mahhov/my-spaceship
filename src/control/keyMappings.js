@@ -30,7 +30,7 @@ class KeyMapping {
 				targetLock: new KeyMapping(['capslock']),
 				zoomIn: new KeyMapping(['x']),
 				zoomOut: new KeyMapping(['z']),
-				minimapZoom: new KeyMapping(['tab']), // todo [medium] prevent tab from scrolling focus
+				minimapZoom: new KeyMapping(['tab']),
 				pause: new KeyMapping(['p', 'escape']),
 			};
 
