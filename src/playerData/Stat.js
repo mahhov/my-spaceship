@@ -22,7 +22,7 @@ const Ids = makeEnum({
 	// SHIELD_LEECH: 0,
 });
 
-// Generic class used by skills, equipment, and abilities.
+// Generic class used by techniques, traits, & equipment.
 class Stat {
 	constructor(id, value) {
 		this.id = id;

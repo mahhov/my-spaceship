@@ -61,11 +61,11 @@ class Player extends Hero {
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
 
-		let skillsBuff = new Buff(0, null, null, false);
-		playerData.skillsData.skillItems.forEach(skillItem =>
-			skillItem.stats.forEach(stat =>
-				skillsBuff.addEffect(stat.id, skillItem.value * stat.value)));
-		this.addBuff(skillsBuff);
+		let traitsBuff = new Buff(0, null, null, false);
+		playerData.traitsData.traitItems.forEach(traitItem =>
+			traitItem.stats.forEach(stat =>
+				traitsBuff.addEffect(stat.id, traitItem.value * stat.value)));
+		this.addBuff(traitsBuff);
 		this.applyInitialBuffs();
 
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
@@ -138,7 +138,7 @@ class Player extends Hero {
 	}
 
 	onKill(monster) {
-		this.playerData.skillsData.gainExp(monster.expValue);
+		this.playerData.traitsData.gainExp(monster.expValue);
 	}
 
 	removeUi() {
@@ -154,7 +154,7 @@ class Player extends Hero {
 		}
 
 		// life, stamina, and exp bars
-		this.bars[0].paint(painter, this.playerData.skillsData.exp / this.playerData.skillsData.expRequired, this.playerData.skillsData.levelExpText);
+		this.bars[0].paint(painter, this.playerData.traitsData.exp / this.playerData.traitsData.expRequired, this.playerData.traitsData.levelExpText);
 		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
 		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
 

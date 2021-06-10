@@ -1,11 +1,11 @@
 import storage from '../util/storage.js';
-import SkillsData from './SkillsData.js';
+import TraitsData from './TraitsData.js';
 
 class PlayerData {
 	constructor() {
-		this.skillsData = new SkillsData();
-		this.skillsData.stored = storage.getStored('skillsData');
-		this.skillsData.on('change', () => storage.setStored('skillsData', this.skillsData.stored));
+		this.traitsData = new TraitsData();
+		this.traitsData.stored = storage.getStored('traitsData');
+		this.traitsData.on('change', () => storage.setStored('traitsData', this.traitsData.stored));
 	}
 }
 

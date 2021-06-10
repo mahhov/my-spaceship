@@ -7,8 +7,8 @@ import UiText from '../components/UiText.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
-import SkillsUi from './SkillsUi.js';
 import StatsUi from './StatsUi.js';
+import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
 
 const UI_PLACEMENT = makeEnum({FULL: 0, LEFT: 0, RIGHT: 0});
@@ -36,16 +36,16 @@ class HubUi extends Ui {
 
 		this.encounterUi = this.add(new EncounterUi());
 		this.encounterUi.bubble('begin-encounter', this);
-		this.characterUi = this.add(new CharacterUi(playerData.skillsData));
-		this.skillsUi = this.add(new SkillsUi(playerData.skillsData));
-		// todo [medium] tech tree and active skills
+		// todo [medium] technique tree & allocation
+		this.characterUi = this.add(new CharacterUi(playerData.traitsData));
+		this.traitsUi = this.add(new TraitsUi(playerData.traitsData));
 		this.equipmentUi = this.add(new EquipmentUi());
 		this.statsUi = this.add(new StatsUi());
 
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
 			['Techniques', 'Evolve techniques', []],
-			['Traits', 'Allocate traits', [this.characterUi, this.skillsUi]], // todo [high] rename skills -> traits
+			['Traits', 'Allocate traits', [this.characterUi, this.traitsUi]],
 			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
 			['Stats', 'Recorded stats', [this.statsUi]],
 		].map((a, i) => new UiSet(...a, i));

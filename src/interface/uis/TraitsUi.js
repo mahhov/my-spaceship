@@ -43,41 +43,41 @@ class Layout {
 	}
 }
 
-class SkillsUi extends Ui {
-	constructor(skillsData) {
+class TraitsUi extends Ui {
+	constructor(traitsData) {
 		super();
-		let section = this.add(HubUi.createSection('Skills', HubUi.UI_PLACEMENT.RIGHT));
+		let section = this.add(HubUi.createSection('Traits', HubUi.UI_PLACEMENT.RIGHT));
 		let innerCoordinate = section.coordinate.clone.pad(Positions.MARGIN);
 
-		let availableText = this.add(new UiText(innerCoordinate, skillsData.availableText));
+		let availableText = this.add(new UiText(innerCoordinate, traitsData.availableText));
 
 		let layout = new Layout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 4);
-		let valueTexts = skillsData.skillItems.map((skillItem, i) => {
+		let valueTexts = traitsData.traitItems.map((traitItem, i) => {
 			let coordinates = layout.getCoordinates(i);
 
 			this.add(new UiButton(coordinates.container, '', '', true))
-				.on('hover', () => descriptionText.text = skillItem.description);
-			this.add(new UiText(coordinates.topLine, skillItem.name));
-			let valueText = this.add(new UiText(coordinates.bottomLine, skillItem.valueText));
+				.on('hover', () => descriptionText.text = traitItem.description);
+			this.add(new UiText(coordinates.topLine, traitItem.name));
+			let valueText = this.add(new UiText(coordinates.bottomLine, traitItem.valueText));
 
 			this.add(new UiButton(coordinates.buttonLeft, '-'))
-				.on('click', () => skillsData.allocate(skillItem, -1));
+				.on('click', () => traitsData.allocate(traitItem, -1));
 			this.add(new UiButton(coordinates.buttonRight, '+'))
-				.on('click', () => skillsData.allocate(skillItem, 1));
+				.on('click', () => traitsData.allocate(traitItem, 1));
 
-			return [valueText, skillItem];
+			return [valueText, traitItem];
 		});
 
-		let coordinate = layout.getCoordinates(layout.getRow(skillsData.skillItems.length - 1) * layout.columns).bottomLine
+		let coordinate = layout.getCoordinates(layout.getRow(traitsData.traitItems.length - 1) * layout.columns).bottomLine
 			.alignWithoutMove(Coordinate.Aligns.START).move(0, ALLOCATE_BUTTON_SIZE + Positions.UI_ROW_HEIGHT);
 		let descriptionText = this.add(new UiText(coordinate, ''));
 
-		skillsData.on('change', () => {
-			valueTexts.forEach(([valueText, skillItem]) =>
-				valueText.text = skillItem.valueText);
-			availableText.text = skillsData.availableText;
+		traitsData.on('change', () => {
+			valueTexts.forEach(([valueText, traitItem]) =>
+				valueText.text = traitItem.valueText);
+			availableText.text = traitsData.availableText;
 		});
 	}
 }
 
-export default SkillsUi;
+export default TraitsUi;

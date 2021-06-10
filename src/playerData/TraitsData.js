@@ -1,16 +1,16 @@
 import Emitter from '../util/Emitter.js';
-import SkillItem from './SkillsItem.js';
 import Stat from './Stat.js';
+import TraitItem from './TraitItem.js';
 
-class SkillsData extends Emitter {
+class TraitsData extends Emitter {
 	constructor() {
 		super();
 		// UI can fit 32 items.
-		this.skillItems = [
-			new SkillItem('Life', [
+		this.traitItems = [
+			new TraitItem('Life', [
 				new Stat(Stat.Ids.LIFE, .05),
 			], 0, 4, '+5% max life'),
-			new SkillItem('Heavy armor', [
+			new TraitItem('Heavy armor', [
 				new Stat(Stat.Ids.ARMOR, .05),
 				new Stat(Stat.Ids.MOVE_SPEED, -.05),
 			], 0, 4, '+10% armor; -5% move speed'),
@@ -26,8 +26,8 @@ class SkillsData extends Emitter {
 			level: this.level,
 			exp: this.exp,
 			availablePoints: this.availablePoints,
-			skillItems: Object.fromEntries(this.skillItems.map(skillItem =>
-				([skillItem.name, skillItem.value]))),
+			traitItems: Object.fromEntries(this.traitItems.map(traitItem =>
+				([traitItem.name, traitItem.value]))),
 		};
 	}
 
@@ -35,12 +35,12 @@ class SkillsData extends Emitter {
 		this.level = stored?.level || 0;
 		this.exp = stored?.exp || 0;
 		this.availablePoints = stored?.availablePoints || 0;
-		this.skillItems.forEach(skillItem =>
-			skillItem.value = stored?.skillItems?.[skillItem.name] || 0);
+		this.traitItems.forEach(traitItem =>
+			traitItem.value = stored?.traitItems?.[traitItem.name] || 0);
 	}
 
 	get availableText() {
-		return `Available skill points: ${this.availablePoints}`;
+		return `Available trait points: ${this.availablePoints}`;
 	}
 
 	get levelText() {
@@ -55,9 +55,9 @@ class SkillsData extends Emitter {
 		return `(${this.level + 1}) ${this.exp}/${this.expRequired}`;
 	}
 
-	allocate(skill, value) {
-		if (skill.value + value >= 0 && this.availablePoints - value >= 0 && skill.value + value <= skill.maxValue) {
-			skill.value += value;
+	allocate(traitItem, value) {
+		if (traitItem.value + value >= 0 && this.availablePoints - value >= 0 && traitItem.value + value <= traitItem.maxValue) {
+			traitItem.value += value;
 			this.availablePoints -= value;
 			this.emit('change');
 		}
@@ -78,4 +78,4 @@ class SkillsData extends Emitter {
 	}
 }
 
-export default SkillsData;
+export default TraitsData;

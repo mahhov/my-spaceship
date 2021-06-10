@@ -1,4 +1,4 @@
-class SkillItem {
+class TraitItem {
 	constructor(name, stats, value, maxValue, description) {
 		this.name = name;
 		this.stats = stats;
@@ -12,4 +12,4 @@ class SkillItem {
 	}
 }
 
-export default SkillItem;
+export default TraitItem;
