@@ -1,5 +1,4 @@
 import Projectile from '../entities/attack/Projectile.js';
-import Buff from '../entities/Buff.js';
 import Stat from '../playerData/Stat.js';
 import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
@@ -26,7 +25,7 @@ class ShotgunAttack extends Ability {
 	}
 
 	static getTime(hero) {
-		return 60 * (1 + Buff.sum(hero.buffs, Stat.Ids.ATTACK_RANGE));
+		return 60 * hero.getStat(Stat.Ids.ATTACK_RANGE);
 	}
 
 	static get velocity() {

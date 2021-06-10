@@ -36,6 +36,7 @@ class Player extends Hero {
 			skillItem.stats.forEach(stat =>
 				skillsBuff.addEffect(stat.id, skillItem.value * stat.value)));
 		this.addBuff(skillsBuff);
+		this.applyInitialBuffs();
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -71,7 +72,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.updateMove(intersectionFinder, dx, dy, .005 * (1 + Buff.sum(this.buffs, Stat.Ids.MOVE_SPEED)));
+		this.updateMove(intersectionFinder, dx, dy, .005 * this.getStat(Stat.Ids.MOVE_SPEED));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {

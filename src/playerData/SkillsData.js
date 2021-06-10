@@ -7,7 +7,7 @@ class SkillsData extends Emitter {
 		super();
 		this.skillItems = [
 			new SkillItem('Life', [
-				new Stat(Stat.Ids.LIFE, 5),
+				new Stat(Stat.Ids.LIFE, .05),
 			], 0, 4, '+5% max life'),
 			new SkillItem('Heavy armor', [
 				new Stat(Stat.Ids.ARMOR, .05),

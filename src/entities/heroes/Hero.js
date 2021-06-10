@@ -6,7 +6,6 @@ import Coordinate from '../../util/Coordinate.js';
 import Decay from '../../util/Decay.js';
 import {booleanArray, rand, randVector, setMagnitude} from '../../util/number.js';
 import Pool from '../../util/Pool.js';
-import Buff from '../Buff.js';
 import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
@@ -31,14 +30,14 @@ class Hero extends LivingEntity {
 	}
 
 	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		if (Buff.sum(this.buffs, Stat.Ids.DISABLED))
+		if (this.getStat(Stat.Ids.DISABLED))
 			return;
 		this.currentMove = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
 	}
 
 	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
-		let disabled = Buff.sum(this.buffs, Stat.Ids.DISABLED);
+		let disabled = this.getStat(Stat.Ids.DISABLED);
 		if (!disabled)
 			this.abilities.forEach((ability, i) =>
 				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));

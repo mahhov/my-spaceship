@@ -10,12 +10,18 @@ class LivingEntity extends Entity {
 		this.buffs = [];
 	}
 
+	applyInitialBuffs() {
+		// should be invoked once after buffs are set
+		this.health.max *= this.getStat(Stat.Ids.LIFE);
+		this.health.restore();
+	}
+
 	refresh() {
 		this.tickBuffs();
 	}
 
 	changeHealth(amount) {
-		this.health.change(amount / (1 + Buff.sum(this.buffs, Stat.Ids.ARMOR)));
+		this.health.change(amount / this.getStat(Stat.Ids.ARMOR));
 	}
 
 	restoreHealth() {
@@ -27,6 +33,11 @@ class LivingEntity extends Entity {
 			this.buffs.push(buff);
 			return true;
 		}
+	}
+
+	getStat(statId) {
+		let value = Buff.sum(this.buffs, statId);
+		return statId === Stat.Ids.DISABLED ? value : value + 1;
 	}
 
 	tickBuffs() {
