@@ -44,10 +44,10 @@ class HubUi extends Ui {
 
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
-			// todo [high] ability upgrade
-			['Skills', 'Passive skills', [this.characterUi, this.skillsUi]],
-			['Equipment', 'Craft & equip gear', [this.characterUi, this.equipmentUi]],
-			['Stats', 'Stats', [this.statsUi]],
+			['Techniques', 'Evolve techniques', []],
+			['Traits', 'Allocate traits', [this.characterUi, this.skillsUi]], // todo [high] rename skills -> traits
+			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
+			['Stats', 'Recorded stats', [this.statsUi]],
 		].map((a, i) => new UiSet(...a, i));
 
 		this.uiSets.forEach(uiSet => {
