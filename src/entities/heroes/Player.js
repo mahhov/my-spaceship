@@ -128,7 +128,7 @@ class Player extends Hero {
 		// todo [high] smooth changes
 		let barCoordinates = [new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.END)];
 		for (let i = 0; i < 2; i++)
-			barCoordinates.push(barCoordinates[i].clone.shift(0, -1).move(0, -Positions.MARGIN));
+			barCoordinates.push(barCoordinates[i].clone.shift(0, -1).move(0, -Positions.MARGIN / 2));
 
 		// life, stamina, and exp bars
 		painter.add(new Bar(barCoordinates[2], this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));

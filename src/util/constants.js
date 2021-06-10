@@ -84,7 +84,7 @@ const Colors = {
 
 const Positions = {
 	MARGIN: .02,
-	BAR_HEIGHT: .02,
+	BAR_HEIGHT: .015,
 	PLAYER_BAR_X: .5,
 	ABILITY_SIZE: .06,
 	ABILITY_CHANNEL_BAR_SIZE: .01,

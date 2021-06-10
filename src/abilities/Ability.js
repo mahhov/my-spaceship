@@ -78,7 +78,7 @@ class Ability {
 
 	paintUi(painter, camera) {
 		// background
-		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN;
+		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN / 2;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
 		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade(.5)}));
