@@ -1,12 +1,15 @@
+import Player from '../entities/heroes/Player.js';
 import Text from '../painter/elements/Text.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {round} from '../util/number.js';
 
 class MapGenerator {
-	constructor(map) {
+	constructor(map, playerData) {
+		// todo [medium] There is a lot of shared code in the sub class constructors, including player creation. It should be extracted to here.
 		this.map = map;
 		this.timer = 0;
+		this.player = new Player(playerData);
 		// must create player
 	}
 

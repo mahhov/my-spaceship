@@ -1,4 +1,3 @@
-import Player from '../entities/heroes/Player.js';
 import AimingLaserTurret from '../entities/monsters/mechanicalFaction/AimingLaserTurret.js';
 import BombLayer from '../entities/monsters/mechanicalFaction/BombLayer.js';
 import DashChaser from '../entities/monsters/mechanicalFaction/DashChaser.js';
@@ -69,8 +68,8 @@ const SPAWNS = [
 ];
 
 class MapGeneratorTimed extends MapGenerator {
-	constructor(map) {
-		super(map);
+	constructor(map, playerData) {
+		super(map, playerData);
 
 		this.occupiedNoise = new NoiseSimplex(2);
 		this.rockNoise = new NoiseSimplex(5);
@@ -83,7 +82,6 @@ class MapGeneratorTimed extends MapGenerator {
 		this.weightAccumulated = 0;
 		this.pendingMonsters = [];
 
-		this.player = Player.defaultConstructor();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
 		map.addPlayer(this.player);
 		map.addUi(this);

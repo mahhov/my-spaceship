@@ -19,8 +19,7 @@ import Hero from './Hero.js';
 const TARGET_LOCK_BORDER_SIZE = .04;
 
 class Player extends Hero {
-	// todo [medium] deprecated
-	static defaultConstructor() {
+	constructor(playerData) {
 		let abilities = [
 			new ProjectileAttack(),
 			new Dash(),
@@ -31,10 +30,8 @@ class Player extends Hero {
 			new DelayedRegen(),
 			new Death(),
 		];
-
-		let player = new Player(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
-		player.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
-		return player;
+		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
 	update(map, controller, intersectionFinder, monsterKnowledge) {

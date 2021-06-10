@@ -1,4 +1,3 @@
-import Player from '../entities/heroes/Player.js';
 import AimingLaserTurret from '../entities/monsters/mechanicalFaction/AimingLaserTurret.js';
 import BombLayer from '../entities/monsters/mechanicalFaction/BombLayer.js';
 import DashChaser from '../entities/monsters/mechanicalFaction/DashChaser.js';
@@ -21,12 +20,6 @@ const WIDTH = 1.5, HEIGHT = 1.5;
 const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
-	// [
-	// 	[MechanicalBossEarly, 1],
-	// ],
-	// [
-	// 	[MechanicalBoss, 1],
-	// ],
 	[
 		[ExplodingTick, 3],
 	],
@@ -84,8 +77,8 @@ const STAGE_SPAWNS = [
 ];
 
 class MapGeneratorStaged extends MapGenerator {
-	constructor(map) {
-		super(map);
+	constructor(map, playerData) {
+		super(map, playerData);
 
 		this.occupiedNoise = new NoiseSimplex(2);
 		this.rockNoise = new NoiseSimplex(5);
@@ -98,7 +91,6 @@ class MapGeneratorStaged extends MapGenerator {
 		this.stageEntities = [];
 		this.stage = 0;
 
-		this.player = Player.defaultConstructor();
 		this.player.setPosition(WIDTH * SPAWN_DIST, HEIGHT * SPAWN_DIST);
 		map.addPlayer(this.player);
 		map.addUi(this);

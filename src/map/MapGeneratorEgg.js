@@ -92,8 +92,9 @@ class MapGeneratorEgg extends MapGenerator {
 	static generatePlayer(x, y) {
 		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
 		abilities.forEach((ability, i) => ability.setUi(i));
-		let payer = new Player(x, y, .05, .05, 1, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
-		payer.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER_GREEN.get()}));
+		// todo [low] This uses Hero's constructor, which is now overridden by Player. I.e. it doesn't work
+		let payer = new Player(abilities, passiveAbilities);
+		this.player.setPosition(x, y);
 		return payer;
 	}
 

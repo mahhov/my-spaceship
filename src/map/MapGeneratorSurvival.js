@@ -1,4 +1,3 @@
-import Player from '../entities/heroes/Player.js';
 import Boss1 from '../entities/monsters/Boss1.js';
 import OutpostPortal from '../entities/monsters/OutpostPortal.js';
 import ShotgunWarrior from '../entities/monsters/ShotgunWarrior.js';
@@ -16,8 +15,8 @@ import MapGenerator from './MapGenerator.js';
 const WIDTH = 1.5, HEIGHT = 1.5;
 
 class MapGeneratorSurvival extends MapGenerator {
-	constructor(map) {
-		super(map);
+	constructor(map, playerData) {
+		super(map, playerData);
 
 		this.occupiedNoise = new NoiseSimplex(2);
 		this.rockNoise = new NoiseSimplex(5);
@@ -30,7 +29,6 @@ class MapGeneratorSurvival extends MapGenerator {
 		this.stageEntities = [];
 		this.stage = 0;
 
-		this.player = Player.defaultConstructor();
 		this.player.setPosition(...this.rockNoise.positionsLowest(100, WIDTH, HEIGHT));
 		map.addPlayer(this.player);
 		map.addUi(this);

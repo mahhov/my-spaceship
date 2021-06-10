@@ -2,19 +2,19 @@ import Camera from '../camera/Camera.js';
 import keyMappings from '../control/keyMappings.js';
 import MonsterKnowledge from '../entities/monsters/MonsterKnowledge.js';
 import Map from '../map/Map.js';
-import MapGenerator from '../map/MapGeneratorTimed.js';
 import Minimap from '../map/Minimap.js';
 import Starfield from '../starfield/Starfield.js';
 import Frame from './Frame.js';
 
 class GameWorld extends Frame {
-	constructor(controller, painterSet) {
+	constructor(controller, painterSet, playerData) {
 		super(controller, painterSet);
+		this.playerData = playerData;
 	}
 
-	reset(MapGeneratorClass = MapGenerator) {
+	reset(MapGeneratorClass) {
 		this.map = new Map();
-		this.mapGenerator = new MapGeneratorClass(this.map);
+		this.mapGenerator = new MapGeneratorClass(this.map, this.playerData);
 		this.player = this.mapGenerator.player;
 		this.monsterKnowledge = new MonsterKnowledge();
 		this.monsterKnowledge.setPlayer(this.player);
