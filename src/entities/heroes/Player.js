@@ -13,10 +13,37 @@ import Text from '../../painter/elements/Text.js';
 import Stat from '../../playerData/Stat.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
+import {avg} from '../../util/number.js';
 import Buff from '.././Buff.js';
 import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
+
+class PlayerBar {
+	constructor(barCoordinate, color) {
+		this.averagedValue = 0;
+		this.barCoordinate = barCoordinate;
+		this.textCoordinate = barCoordinate.clone.move(-Positions.BREAK, 0);
+		this.color = color;
+	}
+
+	static createAll() {
+		let coordinate = new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT)
+			.align(Coordinate.Aligns.END, Coordinate.Aligns.END)
+			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER);
+		return [
+			new PlayerBar(coordinate.clone, Colors.EXP),
+			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
+			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2), Colors.LIFE),
+		];
+	}
+
+	paint(painter, fillValue, text) {
+		this.averagedValue = avg(this.averagedValue, fillValue, .8);
+		painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
+		painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+	}
+}
 
 class Player extends Hero {
 	constructor(playerData) {
@@ -32,6 +59,7 @@ class Player extends Hero {
 		];
 		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		this.playerData = playerData;
+		this.bars = PlayerBar.createAll();
 
 		let skillsBuff = new Buff(0, null, null, false);
 		playerData.skillsData.skillItems.forEach(skillItem =>
@@ -125,23 +153,10 @@ class Player extends Hero {
 			painter.add(Rect.withCamera(camera, coordinate, {color: Colors.TARGET_LOCK.get(), thickness: 3}));
 		}
 
-		// todo [high] smooth changes
-		let barCoordinates = [new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.END)];
-		for (let i = 0; i < 2; i++)
-			barCoordinates.push(barCoordinates[i].clone.shift(0, -1).move(0, -Positions.MARGIN / 2));
-
 		// life, stamina, and exp bars
-		painter.add(new Bar(barCoordinates[2], this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get(Colors.BAR_SHADING)));
-		painter.add(new Bar(barCoordinates[1], this.stamina.getRatio(), Colors.STAMINA.getShade(Colors.BAR_SHADING), Colors.STAMINA.get(), Colors.STAMINA.get(Colors.BAR_SHADING)));
-		painter.add(new Bar(barCoordinates[0], this.playerData.skillsData.exp / this.playerData.skillsData.expRequired, Colors.EXP.getShade(Colors.BAR_SHADING), Colors.EXP.get(), Colors.EXP.get(Colors.BAR_SHADING)));
-
-		// life, stamina, and exp numbers
-		let textOptions = {color: '#000'};
-		let barTextCoordinates = barCoordinates.map(barCoordinate =>
-			barCoordinate.clone.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER).move(-Positions.BREAK, 0));
-		painter.add(new Text(barTextCoordinates[2], Math.floor(this.health.get())).setOptions(textOptions));
-		painter.add(new Text(barTextCoordinates[1], Math.floor(this.stamina.get())).setOptions(textOptions));
-		painter.add(new Text(barTextCoordinates[0], this.playerData.skillsData.levelExpText).setOptions(textOptions));
+		this.bars[0].paint(painter, this.playerData.skillsData.exp / this.playerData.skillsData.expRequired, this.playerData.skillsData.levelExpText);
+		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
+		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));

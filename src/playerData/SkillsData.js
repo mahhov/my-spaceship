@@ -16,7 +16,6 @@ class SkillsData extends Emitter {
 			], 0, 4, '+10% armor; -5% move speed'),
 		];
 
-		// todo [high] use Pool
 		this.level = 0;
 		this.exp = 0;
 		this.availablePoints = 0;
