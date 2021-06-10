@@ -10,8 +10,8 @@ class SkillsData extends Emitter {
 				new Stat(Stat.Ids.LIFE, 5),
 			], 0, 4, '+5% max life'),
 			new SkillItem('Heavy armor', [
-				new Stat(Stat.Ids.ARMOR, 5),
-				new Stat(Stat.Ids.MOVE_SPEED, -5),
+				new Stat(Stat.Ids.ARMOR, .05),
+				new Stat(Stat.Ids.MOVE_SPEED, -.05),
 			], 0, 4, '+10% armor; -5% move speed'),
 		];
 

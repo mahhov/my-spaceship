@@ -5,17 +5,14 @@ import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
 class Buff {
-	constructor(duration, uiColor, uiText) {
+	constructor(duration, uiColor, uiText, visible = true) {
 		// duration param of 0 will be infinite, 1 will be active for 1 tick
 		this.durationUnlimited = !duration;
 		this.duration = new Pool(duration + 1, -1);
 		this.uiColor = uiColor;
 		this.uiText = uiText;
+		this.visible = visible;
 		this.effects = {};
-	}
-
-	setUiIndex(uiIndex) {
-		this.uiIndex = uiIndex;
 	}
 
 	static sum(buffs, statId) {
@@ -24,8 +21,10 @@ class Buff {
 			.reduce((a, b) => a + b, 0);
 	}
 
-	setEffect(statId, value) {
-		this.effects[statId] = value;
+	addEffect(statId, value) {
+		this.effects[statId] ||= 0;
+		this.effects[statId] += value;
+		// todo [medium] return this
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.
@@ -43,8 +42,8 @@ class Buff {
 		this.expired = true;
 	}
 
-	paintUi(painter, camera) {
-		let left = 1 - (this.uiIndex + 1) * (Positions.BUFF_SIZE + Positions.MARGIN);
+	paintUi(painter, uiIndex) {
+		let left = 1 - (uiIndex + 1) * (Positions.BUFF_SIZE + Positions.MARGIN);
 		let top = 1 - Positions.MARGIN * 3 - Positions.BAR_HEIGHT * 2 - Positions.BUFF_SIZE;
 		let size = Positions.BUFF_SIZE;
 

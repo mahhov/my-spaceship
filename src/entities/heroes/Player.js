@@ -31,6 +31,11 @@ class Player extends Hero {
 			new Death(),
 		];
 		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		let skillsBuff = new Buff(0, null, null, false);
+		playerData.skillsData.skillItems.forEach(skillItem =>
+			skillItem.stats.forEach(stat =>
+				skillsBuff.addEffect(stat.id, skillItem.value * stat.value)));
+		this.addBuff(skillsBuff);
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -100,11 +105,6 @@ class Player extends Hero {
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
 	}
 
-	refresh() {
-		super.refresh();
-		this.buffs.forEach((buff, i) => buff.setUiIndex(i));
-	}
-
 	removeUi() {
 		return false;
 	}
@@ -133,7 +133,9 @@ class Player extends Hero {
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
 		// buffs
-		this.buffs.forEach(buff => buff.paintUi(painter, camera));
+		this.buffs
+			.filter(buff => buff.visible)
+			.forEach((buff, i) => buff.paintUi(painter, i));
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());

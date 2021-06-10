@@ -10,7 +10,7 @@ class Accelerate extends Ability {
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (!this.channelDuration) {
 			this.buff = new Buff(0, this.uiColor, 'Haste');
-			this.buff.setEffect(Stat.Ids.MOVE_SPEED, .3);
+			this.buff.addEffect(Stat.Ids.MOVE_SPEED, .3);
 			hero.addBuff(this.buff);
 		}
 		return true;

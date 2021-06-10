@@ -90,8 +90,9 @@ class Hero extends LivingEntity {
 			this.stamina.getRatio(), this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));
 		// buffs
 		let buffSize = LIFE_HEIGHT + STAMINA_HEIGHT;
-		this.buffs.forEach((buff, i) =>
-			buff.paintAt(painter,
+		this.buffs
+			.filter(buff => buff.visible)
+			.forEach((buff, i) => buff.paintAt(painter,
 				camera.transformCoordinates(healthCoordinate.clone
 					.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 					.size(buffSize)

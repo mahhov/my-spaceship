@@ -24,9 +24,8 @@ const Ids = makeEnum({
 
 // Generic class used by skills, equipment, and abilities.
 class Stat {
-	constructor(id, scale, value = 0) {
+	constructor(id, value) {
 		this.id = id;
-		this.scale = scale;
 		this.value = value;
 	}
 }
