@@ -8,7 +8,7 @@ import ModuleManager from '../modules/ModuleManager.js';
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health, expValue) {
 		super(x, y, width, height, health, IntersectionFinder.Layers.HOSTILE_UNIT);
-		this.expValue = expValue || health * 500; // todo [high]
+		this.expValue = expValue;
 		this.moduleManager = new ModuleManager();
 	}
 

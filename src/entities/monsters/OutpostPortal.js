@@ -14,7 +14,7 @@ const Phases = makeEnum({DORMANT: 0, ACTIVE: 0});
 
 class OutpostPortal extends Monster {
 	constructor(x, y, spawnDamageMultiplier) {
-		super(x, y, .04, .04, 1);
+		super(x, y, .04, .04, 1, 0);
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(200, 0);

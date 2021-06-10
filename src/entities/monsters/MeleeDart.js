@@ -13,7 +13,7 @@ const Phases = makeEnum({ONE: 0});
 
 class MeleeDart extends Monster {
 	constructor(x, y, damageMultiplier) {
-		super(x, y, .02, .02, .3);
+		super(x, y, .02, .02, .3, 0);
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

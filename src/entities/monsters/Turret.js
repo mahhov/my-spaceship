@@ -9,7 +9,7 @@ const Phases = makeEnum({REST: 0, ATTACK: 0});
 
 class Turret extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 4);
+		super(x, y, .04, .04, 4, 0);
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(200, 200);

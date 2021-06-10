@@ -14,7 +14,7 @@ const Phases = makeEnum({ONE: 0});
 
 class SniperTick extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .6);
+		super(x, y, .04, .04, .6, 120);
 		this.setGraphics(new SplitDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

@@ -15,7 +15,7 @@ const Phases = makeEnum({ONE: 0});
 
 class MechanicalBossEarly extends Monster {
 	constructor(x, y) {
-		super(x, y, .2, .2, 22);
+		super(x, y, .2, .2, 22, 500);
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		this.addModules();

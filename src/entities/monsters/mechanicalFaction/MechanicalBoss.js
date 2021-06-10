@@ -7,6 +7,8 @@ import MechanicalBossEarly from './MechanicalBossEarly.js';
 const Phases = makeEnum({ONE: 0});
 
 class MechanicalBoss extends MechanicalBossEarly {
+	// todo [low] set expValue higher than MechanicalBossEarly
+
 	addModules() {
 		super.addModules();
 		this.addSurroundDegenModule();

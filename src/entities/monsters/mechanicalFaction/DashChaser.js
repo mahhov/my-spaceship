@@ -16,7 +16,7 @@ const Phases = makeEnum({ONE: 0});
 
 class DashChaser extends Monster {
 	constructor(x, y) {
-		super(x, y, .06, .06, 1.2);
+		super(x, y, .06, .06, 1.2, 360);
 		this.setGraphics(new HexagonShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

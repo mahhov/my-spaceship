@@ -12,7 +12,7 @@ const Phases = makeEnum({ONE: 0});
 
 class AimingLaserTurret extends Monster {
 	constructor(x, y) {
-		super(x, y, .09, .09, 1.6);
+		super(x, y, .09, .09, 1.6, 240);
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		this.attackPhase = new Phase(0);
