@@ -8,7 +8,7 @@ class GameMenu extends Frame {
 
 		this.pauseUi = new PauseUi();
 		this.pauseUi.bubble('resume', this);
-		this.pauseUi.on('abandon-encounter', () => this.currentUi = this.hubUi);
+		this.pauseUi.on('end-encounter', () => this.currentUi = this.hubUi);
 
 		this.hubUi = new HubUi(playerData);
 		this.hubUi.bubble('begin-encounter', this);
