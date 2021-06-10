@@ -1,4 +1,4 @@
-import {clamp} from './number.js';
+import {avg, clamp} from './number.js';
 
 const MAX_SHADE_MAGNITUDE = 1;
 
@@ -56,11 +56,10 @@ class Color {
 	}
 
 	avgWhite(weight = .5) {
-		let iweight = 1 - weight;
 		return new Color(
-			this.r * iweight + weight * 255,
-			this.g * iweight + weight * 255,
-			this.b * iweight + weight * 255,
+			avg(this.r, 255, 1 - weight),
+			avg(this.g, 255, 1 - weight),
+			avg(this.b, 255, 1 - weight),
 			this.a);
 	}
 
