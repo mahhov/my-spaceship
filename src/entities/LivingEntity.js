@@ -28,6 +28,9 @@ class LivingEntity extends Entity {
 		this.health.restore();
 	}
 
+	onKill(monster) {
+	}
+
 	addBuff(buff) {
 		if (this.buffs.indexOf(buff) === -1) {
 			this.buffs.push(buff);

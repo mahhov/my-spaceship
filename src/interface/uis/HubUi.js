@@ -36,7 +36,7 @@ class HubUi extends Ui {
 
 		this.encounterUi = this.add(new EncounterUi());
 		this.encounterUi.bubble('begin-encounter', this);
-		this.characterUi = this.add(new CharacterUi());
+		this.characterUi = this.add(new CharacterUi(playerData.skillsData));
 		this.skillsUi = this.add(new SkillsUi(playerData.skillsData));
 		// todo [medium] tech tree and active skills
 		this.equipmentUi = this.add(new EquipmentUi());
@@ -44,6 +44,7 @@ class HubUi extends Ui {
 
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
+			// todo [high] ability upgrade
 			['Skills', 'Passive skills', [this.characterUi, this.skillsUi]],
 			['Equipment', 'Craft & equip gear', [this.characterUi, this.equipmentUi]],
 			['Stats', 'Stats', [this.statsUi]],

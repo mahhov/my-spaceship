@@ -31,12 +31,15 @@ class Player extends Hero {
 			new Death(),
 		];
 		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		this.playerData = playerData;
+
 		let skillsBuff = new Buff(0, null, null, false);
 		playerData.skillsData.skillItems.forEach(skillItem =>
 			skillItem.stats.forEach(stat =>
 				skillsBuff.addEffect(stat.id, skillItem.value * stat.value)));
 		this.addBuff(skillsBuff);
 		this.applyInitialBuffs();
+
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -104,6 +107,10 @@ class Player extends Hero {
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
+	}
+
+	onKill(monster) {
+		this.playerData.skillsData.gainExp(monster.expValue);
 	}
 
 	removeUi() {
