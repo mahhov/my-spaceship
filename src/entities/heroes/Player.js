@@ -139,7 +139,7 @@ class Player extends Hero {
 	}
 
 	onKill(monster) {
-		this.playerData.traitsData.gainExp(monster.expValue);
+		this.playerData.expData.gainExp(monster.expValue);
 		this.playerData.recordsData.changeRecord(RecordsData.Ids.kills, 1);
 	}
 
@@ -156,7 +156,7 @@ class Player extends Hero {
 		}
 
 		// life, stamina, and exp bars
-		this.bars[0].paint(painter, this.playerData.traitsData.exp / this.playerData.traitsData.expRequired, this.playerData.traitsData.levelExpText);
+		this.bars[0].paint(painter, this.playerData.expData.exp / this.playerData.expData.expRequired, this.playerData.expData.levelExpText);
 		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
 		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
 
