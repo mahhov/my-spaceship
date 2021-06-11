@@ -4,7 +4,7 @@ import Ui from './Ui.js';
 class EquipmentUi extends Ui {
 	constructor() {
 		super();
-		this.add(HubUi.createSection('Equipment', HubUi.UI_PLACEMENT.RIGHT));
+		this.add(HubUi.createSection('Equipment', false, .7));
 	}
 }
 

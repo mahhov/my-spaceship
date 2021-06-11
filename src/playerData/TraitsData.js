@@ -5,7 +5,6 @@ import TraitItem from './TraitItem.js';
 class TraitsData extends Emitter {
 	constructor(expData) {
 		super();
-		// UI can fit 36 items.
 		this.traitItems = [
 			new TraitItem('Life', [
 				new Stat(Stat.Ids.LIFE, .05),

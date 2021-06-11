@@ -10,12 +10,12 @@ import Ui from './Ui.js';
 class TraitsUi extends Ui {
 	constructor(traitsData) {
 		super();
-		let section = this.add(HubUi.createSection('Traits', HubUi.UI_PLACEMENT.RIGHT));
-		let innerCoordinate = section.coordinate.clone.pad(Positions.MARGIN);
+		let section = this.add(HubUi.createSection('Traits', false, .7));
+		let innerCoordinate = section.coordinate.clone.pad(Positions.MARGIN).alignWithoutMove(Coordinate.Aligns.START);
 
 		let availableText = this.add(new UiText(innerCoordinate, traitsData.availableText));
 
-		let layout = new TraitsUiLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 4);
+		let layout = new TraitsUiLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6);
 		let valueTexts = traitsData.traitItems.map((traitItem, i) => {
 			let coordinates = layout.getCoordinates(i);
 

@@ -1,6 +1,5 @@
 import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import makeEnum from '../../util/enum.js';
 import UiButton from '../components/UiButton.js';
 import UiSection from '../components/UiSection.js';
 import UiText from '../components/UiText.js';
@@ -13,13 +12,15 @@ import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
 
-const UI_PLACEMENT = makeEnum({FULL: 0, LEFT: 0, RIGHT: 0});
-
 class UiSet {
 	constructor(buttonText, title, uis, index) {
-		let width = .1;
+		let buttonWidth = .1;
 		this.button = new UiButton(
-			new Coordinate(Positions.MARGIN + (width + Positions.MARGIN / 2) * index, Positions.MARGIN, width, Positions.UI_BUTTON_HEIGHT),
+			new Coordinate(
+				Positions.MARGIN + (buttonWidth + Positions.MARGIN / 2) * index,
+				Positions.MARGIN,
+				buttonWidth,
+				Positions.UI_BUTTON_HEIGHT),
 			buttonText, index + 1);
 		this.title = HubUi.createTitle(title);
 		this.uis = [...uis];
@@ -67,12 +68,14 @@ class HubUi extends Ui {
 		return new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), text).setTextOptions({size: '22px'});
 	}
 
-	static createSection(text, placement = UI_PLACEMENT.FULL) {
-		const OUTER_MARGIN = Positions.MARGIN;
-		const COLUMN_MARGIN = .05;
-		let left = placement === UI_PLACEMENT.RIGHT ? .5 + COLUMN_MARGIN / 2 : OUTER_MARGIN;
-		let width = placement === UI_PLACEMENT.FULL ? 1 - OUTER_MARGIN * 2 : .5 - OUTER_MARGIN - COLUMN_MARGIN / 2;
-		return new UiSection(new Coordinate(left, Positions.UI_FIRST_ROW, width, 1 - Positions.UI_FIRST_ROW - OUTER_MARGIN), text);
+	static createSection(text, isLeft, widthWeight) {
+		return new UiSection(new Coordinate(
+			isLeft ? Positions.MARGIN : 1 - Positions.MARGIN,
+			Positions.UI_FIRST_ROW,
+			widthWeight * (1 - 4 * Positions.MARGIN),
+			1 - Positions.UI_FIRST_ROW - Positions.MARGIN)
+				.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START),
+			text);
 	}
 
 	setActiveUiSet(uiSet) {
@@ -82,7 +85,5 @@ class HubUi extends Ui {
 		uiSet.setActive(true);
 	}
 }
-
-HubUi.UI_PLACEMENT = UI_PLACEMENT;
 
 export default HubUi;

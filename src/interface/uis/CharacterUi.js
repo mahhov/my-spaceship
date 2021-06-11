@@ -6,7 +6,7 @@ import Ui from './Ui.js';
 class CharacterUi extends Ui {
 	constructor(expData, traitsData) {
 		super();
-		let section = this.add(HubUi.createSection('Character', HubUi.UI_PLACEMENT.LEFT));
+		let section = this.add(HubUi.createSection('Character', true, .3));
 
 		let coordinate = section.coordinate.clone.pad(Positions.MARGIN);
 		let levelText = this.add(new UiText(coordinate, expData.levelText));
