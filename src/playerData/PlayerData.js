@@ -1,7 +1,11 @@
+import makeEnum from '../util/enum.js';
 import storage from '../util/storage.js';
 import ExpData from './ExpData.js';
 import RecordsData from './RecordsData.js';
+import Stat from './Stat.js';
 import TraitsData from './TraitsData.js';
+
+const DerivedStatIds = makeEnum({LIFE: 0});
 
 class PlayerData {
 	constructor() {
@@ -17,6 +21,23 @@ class PlayerData {
 			data.stored = storage.getStored(data.constructor.name);
 			data.on('change', () => storage.setStored(data.constructor.name, data.stored));
 		});
+	}
+
+	get statValues() {
+		let statValues = [];
+		this.traitsData.traitItems.forEach(traitItem =>
+			traitItem.stats.forEach(stat => {
+				statValues[stat.id] ||= 0;
+				statValues[stat.id] += traitItem.value * stat.value;
+			}));
+		return statValues;
+	}
+
+	get derivedStatValues() {
+		let derivedStatValues = [];
+		let statValues = this.statValues;
+		derivedStatValues[DerivedStatIds.LIFE] = 80 * (1 + statValues[Stat.Ids.LIFE]);
+		return derivedStatValues;
 	}
 }
 

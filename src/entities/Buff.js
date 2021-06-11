@@ -12,18 +12,19 @@ class Buff {
 		this.uiColor = uiColor;
 		this.uiText = uiText;
 		this.visible = visible;
-		this.effects = {};
+		this.statValues = {};
 	}
 
 	static sum(buffs, statId) {
 		return buffs
-			.map(buff => buff.effects[statId] || 0)
+			.map(buff => buff.statValues[statId] || 0)
 			.reduce((a, b) => a + b, 0);
 	}
 
-	addEffect(statId, value) {
-		this.effects[statId] ||= 0;
-		this.effects[statId] += value;
+	// todo [low] this is duplicated in PlayerData.statValues.
+	addStatValue(statId, value) {
+		this.statValues[statId] ||= 0;
+		this.statValues[statId] += value;
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.

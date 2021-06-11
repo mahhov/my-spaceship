@@ -16,8 +16,8 @@ class Egg extends Entity {
 		this.randomPosition();
 		this.setGraphics(new RockGraphic(size, size, {fill: true, color: Colors.Entity.EGG.get()}));
 		this.slowDebuff = new Buff(0, Colors.Entity.EGG, 'EGG');
-		this.slowDebuff.addEffect(Stat.Ids.MOVE_SPEED, -.3);
-		this.slowDebuff.addEffect(Stat.Ids.ATTACK_RANGE, -.3);
+		this.slowDebuff.addStatValue(Stat.Ids.MOVE_SPEED, -.3);
+		this.slowDebuff.addStatValue(Stat.Ids.ATTACK_RANGE, -.3);
 	}
 
 	randomPosition() {

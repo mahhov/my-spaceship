@@ -7,7 +7,7 @@ class Death extends PassiveAbility {
 	constructor() {
 		super(true);
 		this.deadBuff = new Buff(0, Colors.PLAYER_BUFFS.DEAD, 'Dead');
-		this.deadBuff.addEffect(Stat.Ids.DISABLED, 1);
+		this.deadBuff.addStatValue(Stat.Ids.DISABLED, 1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
