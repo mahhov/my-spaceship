@@ -22,7 +22,7 @@ const Ids = makeEnum({
 	// SHIELD_LEECH: 0,
 });
 
-const DerivedStatIds = makeEnum({LIFE: 0});
+const DerivedStatIds = makeEnum({TOTAL_LIFE: 0});
 
 // Generic class used by techniques, traits, & equipment.
 class Stat {

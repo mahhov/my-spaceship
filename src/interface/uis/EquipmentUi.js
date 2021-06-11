@@ -5,6 +5,8 @@ class EquipmentUi extends Ui {
 	constructor() {
 		super();
 		this.add(HubUi.createSection('Equipment', false, .7));
+
+
 	}
 }
 

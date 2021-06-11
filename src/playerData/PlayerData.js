@@ -33,7 +33,8 @@ class PlayerData {
 	get derivedStatValues() {
 		let derivedStatValues = [];
 		let statValues = this.statValues;
-		derivedStatValues[Stat.DerivedStatIds.LIFE] = 80 * (1 + statValues[Stat.Ids.LIFE]);
+		// todo [medium] 80 should be a constant reused in Player.constructor()
+		derivedStatValues[Stat.DerivedStatIds.TOTAL_LIFE] = 80 * (1 + statValues[Stat.Ids.LIFE]);
 		return derivedStatValues;
 	}
 }
