@@ -20,15 +20,15 @@ class ExpData extends Emitter {
 	}
 
 	get levelText() {
-		return `Level: ${this.level + 1}`;
+		return this.level + 1;
 	}
 
 	get expText() {
-		return `Experience: ${this.exp}/${this.expRequired}`;
+		return `${this.exp}/${this.expRequired}`;
 	}
 
 	get levelExpText() {
-		return `(${this.level + 1}) ${this.exp}/${this.expRequired}`;
+		return `(${this.levelText}) ${this.expText}`;
 	}
 
 	gainExp(exp) {
