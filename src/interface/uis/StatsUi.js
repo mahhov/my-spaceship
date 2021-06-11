@@ -1,15 +1,18 @@
 import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiText from '../components/UiText.js';
+import ListUiLayout from './layouts/ListUiLayout.js';
 import Ui from './Ui.js';
 
 class StatsUi extends Ui {
 	constructor() {
 		super();
-		this.add(new UiText(new Coordinate(.4, Positions.UI_FIRST_ROW), 'Kills...'));
-		this.add(new UiText(new Coordinate(.6, Positions.UI_FIRST_ROW).align(Coordinate.Aligns.END, Coordinate.Aligns.START), '00000'));
-		this.add(new UiText(new Coordinate(.4, Positions.UI_FIRST_ROW + Positions.UI_ROW_HEIGHT), 'Time played...'));
-		this.add(new UiText(new Coordinate(.6, Positions.UI_FIRST_ROW + Positions.UI_ROW_HEIGHT).align(Coordinate.Aligns.END, Coordinate.Aligns.START), '0'));
+		let layout = new ListUiLayout(new Coordinate(.4, Positions.UI_FIRST_ROW, .2, 0), Positions.UI_ROW_HEIGHT);
+
+		this.add(new UiText(layout.getContainerCoordinate(0), 'Kills...'));
+		this.add(new UiText(layout.getContainerCoordinate(0).alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START), '00000'));
+		this.add(new UiText(layout.getContainerCoordinate(1), 'Time played...'));
+		this.add(new UiText(layout.getContainerCoordinate(1).alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START), '0'));
 	}
 }
 
