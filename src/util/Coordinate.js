@@ -38,6 +38,12 @@ class Coordinate {
 		return this.align(alignment, vertAlignment);
 	}
 
+	moveTo(x, y) {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
+
 	move(dx, dy = dx) {
 		this.x += dx;
 		this.y += dy;

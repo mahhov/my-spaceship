@@ -1,6 +1,7 @@
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
+import UiPopupText from '../components/UiPopupText.js';
 import UiText from '../components/UiText.js';
 import HubUi from './HubUi.js';
 import TraitsUiLayout from './layouts/TraitsUiLayout.js';
@@ -18,8 +19,11 @@ class TraitsUi extends Ui {
 		let valueTexts = traitsData.traitItems.map((traitItem, i) => {
 			let coordinates = layout.getCoordinates(i);
 
-			this.add(new UiButton(coordinates.container, '', '', true))
-				.on('hover', () => descriptionText.text = traitItem.description);
+			let containerButton = new UiButton(coordinates.container, '', '', true);
+			this.add(containerButton).on('hover', () => {
+				this.descriptionText.hoverBounds = containerButton.bounds;
+				this.descriptionText.text = traitItem.description;
+			});
 			this.add(new UiText(coordinates.topLine, traitItem.name));
 			let valueText = this.add(new UiText(coordinates.bottomLine, traitItem.valueText));
 
@@ -31,11 +35,7 @@ class TraitsUi extends Ui {
 			return [valueText, traitItem];
 		});
 
-		let coordinate = layout.getCoordinates(layout.getRow(traitsData.traitItems.length - 1) * layout.columns).container
-			.alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.END)
-			.move(0, Positions.UI_ROW_HEIGHT)
-			.align(Coordinate.Aligns.START);
-		let descriptionText = this.add(new UiText(coordinate, ''));
+		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22, Positions.UI_LINE_HEIGHT + Positions.BREAK * 2)));
 
 		traitsData.on('change', () => {
 			valueTexts.forEach(([valueText, traitItem]) =>
