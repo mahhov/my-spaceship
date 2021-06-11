@@ -7,7 +7,7 @@ import UiText from '../components/UiText.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
-import StatsUi from './StatsUi.js';
+import RecordsUi from './RecordsUi.js';
 import TechniquesTreeUi from './TechniquesTreeUi.js';
 import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
@@ -44,14 +44,14 @@ class HubUi extends Ui {
 		this.characterUi = this.add(new CharacterUi(playerData.traitsData));
 		this.traitsUi = this.add(new TraitsUi(playerData.traitsData));
 		this.equipmentUi = this.add(new EquipmentUi());
-		this.statsUi = this.add(new StatsUi());
+		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
 			['Techniques', 'Evolve techniques', [this.techniquesTreeUi, this.techniquesUi]],
 			['Traits', 'Allocate traits', [this.characterUi, this.traitsUi]],
 			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
-			['Stats', 'Recorded stats', [this.statsUi]],
+			['Records', 'Recorded stats', [this.RecordsUi]],
 		].map((a, i) => new UiSet(...a, i));
 
 		this.uiSets.forEach(uiSet => {

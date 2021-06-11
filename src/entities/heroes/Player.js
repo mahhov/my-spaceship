@@ -10,6 +10,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
+import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
@@ -139,6 +140,7 @@ class Player extends Hero {
 
 	onKill(monster) {
 		this.playerData.traitsData.gainExp(monster.expValue);
+		this.playerData.recordsData.changeRecord(RecordsData.Ids.kills, 1);
 	}
 
 	removeUi() {
