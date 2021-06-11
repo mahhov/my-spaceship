@@ -3,11 +3,13 @@ import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
+import {clamp} from '../../util/number.js';
 import UiComponent from './UiComponent.js';
 
+// todo [medium] support multiline
 class UiPopupText extends UiComponent {
 	constructor(coordinate) {
-		super(coordinate.align(Coordinate.Aligns.CENTER, Coordinate.Aligns.END));
+		super(coordinate.align(Coordinate.Aligns.START, Coordinate.Aligns.END));
 		this.hoverBounds = null;
 		this.text = '';
 	}
@@ -17,7 +19,14 @@ class UiPopupText extends UiComponent {
 		if (!this.hoverBounds?.inside(x, y))
 			this.hoverBounds = null;
 		else
-			this.coordinate.moveTo(x, y);
+			this.moveTo(x, y);
+	}
+
+	moveTo(x, y) {
+		let e = Positions.BREAK * 2;
+		x = clamp(x + Positions.BREAK, e, 1 - this.coordinate.width - e);
+		y = clamp(y - Positions.BREAK, this.coordinate.height + e, 1 - e);
+		this.coordinate.moveTo(x, y);
 	}
 
 	paint(painter) {
