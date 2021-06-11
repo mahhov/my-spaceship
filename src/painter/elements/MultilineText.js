@@ -1,4 +1,7 @@
+import Canvas from '../Painter.js';
 import Text from './Text.js';
+
+const MEASURE_TEXT_CONTEXT = Canvas.createCanvas(0, 0).getContext('2d');
 
 class MultilineText extends Text {
 	// todo [medium] replace constructor param with setOptions() like Text
@@ -7,17 +10,17 @@ class MultilineText extends Text {
 		this.wrappedLines = null;
 	}
 
-	static measureText(context, size) {
-		context.font = `${size} monospace`;
-		let tCharMeasurement = context.measureText('t');
-		let yCharMeasurement = context.measureText('y');
+	static measureText(size) {
+		MEASURE_TEXT_CONTEXT.font = `${size} monospace`;
+		let tCharMeasurement = MEASURE_TEXT_CONTEXT.measureText('t');
+		let yCharMeasurement = MEASURE_TEXT_CONTEXT.measureText('y');
 		let width = tCharMeasurement.width;
 		let height = tCharMeasurement.actualBoundingBoxAscent + yCharMeasurement.actualBoundingBoxDescent;
 		return {width, height};
 	}
 
-	wrapText(xt, yt, context) {
-		let {width, height} = MultilineText.measureText(context, this.size);
+	wrapText(xt) {
+		let {width, height} = MultilineText.measureText(this.size);
 		this.lineHeight = height + 2;
 		let charsPerLine = Math.max(Math.floor(xt(this.coordinate.width) / width), 1);
 		this.wrappedLines = [];
@@ -47,7 +50,7 @@ class MultilineText extends Text {
 
 	paint(xt, yt, context) {
 		if (!this.wrappedLines)
-			this.wrapText(xt, yt, context);
+			this.wrapText(xt);
 
 		this.setFillMode(context);
 		this.setFont(context);
