@@ -34,6 +34,7 @@ const Colors = {
 		HOVER: Color.from1(.2, .2, .2),
 		ACTIVE: Color.from1(.4, .4, .4),
 		DULL_BORDER: Color.fromHexString('#aaa'),
+		PRIMARY: Color.fromHexString('#fff'),
 	},
 
 	Entity: {

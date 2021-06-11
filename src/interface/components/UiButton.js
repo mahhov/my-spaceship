@@ -48,7 +48,7 @@ class UiButton extends UiComponent {
 			return;
 
 		let backColor = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
-		let color = this.state === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : '#fff';
+		let color = this.state === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : Colors.Interface.PRIMARY.get();
 
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: backColor}));
 		painter.add(new RoundedRect(this.coordinate).setOptions({color}));
