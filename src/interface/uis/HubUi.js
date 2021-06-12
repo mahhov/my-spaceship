@@ -72,9 +72,10 @@ class HubUi extends Ui {
 		return new UiSection(new Coordinate(
 			isLeft ? Positions.MARGIN : 1 - Positions.MARGIN,
 			Positions.UI_FIRST_ROW,
-			widthWeight * (1 - 4 * Positions.MARGIN),
+			1 - 4 * Positions.MARGIN,
 			1 - Positions.UI_FIRST_ROW - Positions.MARGIN)
-				.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START),
+				.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START)
+				.scale(widthWeight, 1),
 			text);
 	}
 

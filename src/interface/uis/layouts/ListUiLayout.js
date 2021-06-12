@@ -1,5 +1,5 @@
 import Coordinate from '../../../util/Coordinate.js';
-import UiGridLayout from './UiLayout.js';
+import UiGridLayout from './UiGridLayout.js';
 
 class ListUiLayout extends UiGridLayout {
 	constructor(coordinate, lineHeight) {

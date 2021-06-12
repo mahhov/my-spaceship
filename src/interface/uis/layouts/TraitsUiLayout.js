@@ -1,6 +1,6 @@
 import {Positions} from '../../../util/constants.js';
 import Coordinate from '../../../util/Coordinate.js';
-import UiGridLayout from './UiLayout.js';
+import UiGridLayout from './UiGridLayout.js';
 
 const BOTTOM_LINE_SPACING = 1.2, ALLOCATE_BUTTON_SIZE = 0.015;
 
