@@ -46,14 +46,16 @@ class UiButton extends UiComponent {
 	paint(painter) {
 		if (this.hidden)
 			return;
-
-		let backColor = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
+		this.paintBack(painter);
 		let color = this.state === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : Colors.Interface.PRIMARY.get();
-
-		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: backColor}));
 		painter.add(new RoundedRect(this.coordinate).setOptions({color}));
 		painter.add(new Text(this.coordinate.clone.alignWithoutMove(Coordinate.Aligns.CENTER), this.text)
 			.setOptions({...this.textOptions, color}));
+	}
+
+	paintBack(painter) {
+		let color = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
+		painter.add(new Rect(this.coordinate).setOptions({fill: true, color}));
 	}
 }
 
