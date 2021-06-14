@@ -10,11 +10,17 @@ class UiSection extends UiComponent {
 		this.text = text;
 	}
 
+	static getTextCoordinate(coordinate) {
+		return coordinate.clone
+			.shift(0, -1)
+			.move(0, -Positions.BREAK)
+			.alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.END);
+	}
+
 	paint(painter) {
 		let colorOption = {color: Colors.Interface.DULL_BORDER.get()};
 		painter.add(new RoundedRect(this.coordinate).setOptions(colorOption));
-		let textCoordinate = this.coordinate.clone.shift(0, -1).move(0, -Positions.BREAK).alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.END);
-		painter.add(new Text(textCoordinate, this.text).setOptions(colorOption));
+		painter.add(new Text(UiSection.getTextCoordinate(this.coordinate), this.text).setOptions(colorOption));
 	}
 }
 
