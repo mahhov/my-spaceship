@@ -1,4 +1,4 @@
-class RecordItem {
+class Record {
 	id;
 	name;
 	value;
@@ -10,4 +10,4 @@ class RecordItem {
 	}
 }
 
-export default RecordItem;
+export default Record;

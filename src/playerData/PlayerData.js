@@ -22,10 +22,10 @@ class PlayerData {
 
 	get statValues() {
 		let statValues = [];
-		this.traitsData.traitItems.forEach(traitItem =>
-			traitItem.stats.forEach(stat => {
+		this.traitsData.traits.forEach(trait =>
+			trait.stats.forEach(stat => {
 				statValues[stat.id] ||= 0;
-				statValues[stat.id] += traitItem.value * stat.value;
+				statValues[stat.id] += trait.value * stat.value;
 			}));
 		return statValues;
 	}

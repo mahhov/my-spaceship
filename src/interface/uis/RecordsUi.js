@@ -8,15 +8,15 @@ class RecordsUi extends Ui {
 	constructor(recordsData) {
 		super();
 		let layout = new ListUiLayout(new Coordinate(.4, Positions.UI_FIRST_ROW, .2, 0), Positions.UI_ROW_HEIGHT);
-		let valueTexts = recordsData.recordItems.map((recordItem, i) => {
+		let valueTexts = recordsData.records.map((record, i) => {
 			let coordinates = layout.getCoordinates(i);
-			this.add(new UiText(coordinates.container, `${recordItem.name}`));
-			let valueText = this.add(new UiText(coordinates.right, recordItem.value));
-			return [valueText, recordItem];
+			this.add(new UiText(coordinates.container, `${record.name}`));
+			let valueText = this.add(new UiText(coordinates.right, record.value));
+			return [valueText, record];
 		});
 		recordsData.on('change', () =>
-			valueTexts.forEach(([valueText, traitItem]) =>
-				valueText.text = traitItem.value));
+			valueTexts.forEach(([valueText, record]) =>
+				valueText.text = record.value));
 	}
 }
 

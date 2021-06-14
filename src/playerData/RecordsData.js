@@ -1,34 +1,34 @@
 import Emitter from '../util/Emitter.js';
 import makeEnum from '../util/enum.js';
-import RecordItem from './RecordItem.js';
+import Record from './Record.js';
 
-const Ids = makeEnum({kills: 0, timePlayed: 0, metalCollected: 0, itemsForged: 0});
+const Ids = makeEnum({kills: 0, timePlayed: 0, metalCollected: 0, equipmentsForged: 0});
 
 class RecordsData extends Emitter {
 	constructor() {
 		super();
-		this.recordItems = [
-			new RecordItem(Ids.kills, 'Kills', 0),
-			new RecordItem(Ids.timePlayed, 'Time played', 0),
-			new RecordItem(Ids.metalCollected, 'Metal collected', 0),
-			new RecordItem(Ids.itemsForged, 'Items forged', 0),
+		this.records = [
+			new Record(Ids.kills, 'Kills', 0),
+			new Record(Ids.timePlayed, 'Time played', 0),
+			new Record(Ids.metalCollected, 'Metal collected', 0),
+			new Record(Ids.equipmentsForged, 'Equipments forged', 0),
 		];
 	}
 
 	get stored() {
 		return {
-			recordItems: Object.fromEntries(this.recordItems.map(recordItem =>
-				([recordItem.id, recordItem.value]))),
+			records: Object.fromEntries(this.records.map(record =>
+				([record.id, record.value]))),
 		};
 	}
 
 	set stored(stored) {
-		this.recordItems.forEach(recordItem =>
-			recordItem.value = stored?.recordItems?.[recordItem.id] || 0);
+		this.records.forEach(record =>
+			record.value = stored?.records?.[record.id] || 0);
 	}
 
 	changeRecord(recordId, change) {
-		this.recordItems.find(recordItem => recordItem.id === recordId).value += change;
+		this.records.find(record => record.id === recordId).value += change;
 		this.emit('change');
 	}
 }
