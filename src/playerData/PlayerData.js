@@ -1,4 +1,5 @@
 import storage from '../util/storage.js';
+import EquipmentData from './EquipmentData.js';
 import ExpData from './ExpData.js';
 import RecordsData from './RecordsData.js';
 import Stat from './Stat.js';
@@ -8,11 +9,13 @@ class PlayerData {
 	constructor() {
 		this.expData = new ExpData();
 		this.traitsData = new TraitsData(this.expData);
-		this.recordsData = new RecordsData();
+		this.equipmentData = new EquipmentData();
+		this.recordsData = new RecordsData(this.equipmentData);
 
 		[
 			this.expData,
 			this.traitsData,
+			this.equipmentData,
 			this.recordsData,
 		].forEach(data => {
 			data.stored = storage.getStored(data.constructor.name);

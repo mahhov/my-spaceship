@@ -19,10 +19,9 @@ class CharacterUi extends Ui {
 		this.statTexts = Object.values(Stat.Ids).map(i =>
 			this.addTextPair(Stat.name(i), i + 4 + Object.values(Stat.DerivedStatIds).length));
 
-		expData.on('change', () => this.refreshExp(expData));
-		traitsData.on('change', () => this.refreshStats(playerData));
-		this.refreshExp(expData);
-		this.refreshStats(playerData);
+		expData.on('change', () => this.refresh(playerData, expData));
+		traitsData.on('change', () => this.refresh(playerData, expData));
+		this.refresh(playerData, expData);
 	}
 
 	addTextPair(label, i) {
@@ -31,12 +30,10 @@ class CharacterUi extends Ui {
 		return this.add(new UiText(coordinates.right, ''));
 	}
 
-	refreshExp(expData) {
+	refresh(playerData, expData) {
 		this.levelText.text = expData.levelText;
 		this.expText.text = expData.expText;
-	}
 
-	refreshStats(playerData) {
 		CharacterUi.getStatValuesForUi(playerData.derivedStatValues, Stat.DerivedStatIds)
 			.forEach((value, i) => this.derivedStatTexts[i].text = value);
 		CharacterUi.getStatValuesForUi(playerData.statValues, Stat.Ids)

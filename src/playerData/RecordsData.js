@@ -5,7 +5,7 @@ import Record from './Record.js';
 const Ids = makeEnum({kills: 0, timePlayed: 0, metalCollected: 0, equipmentsForged: 0});
 
 class RecordsData extends Emitter {
-	constructor() {
+	constructor(equipmentData) {
 		super();
 		this.records = [
 			new Record(Ids.kills, 'Kills', 0),
@@ -13,6 +13,7 @@ class RecordsData extends Emitter {
 			new Record(Ids.metalCollected, 'Metal collected', 0),
 			new Record(Ids.equipmentsForged, 'Equipments forged', 0),
 		];
+		equipmentData.on('forge', () => this.changeRecord(Ids.equipmentsForged, 1));
 	}
 
 	get stored() {

@@ -44,7 +44,7 @@ class HubUi extends Ui {
 		this.techniquesUi = this.add(new TechniquesUi());
 		this.characterUi = this.add(new CharacterUi(playerData, playerData.expData, playerData.traitsData));
 		this.traitsUi = this.add(new TraitsUi(playerData.traitsData));
-		this.equipmentUi = this.add(new EquipmentUi());
+		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
 		this.uiSets = [
