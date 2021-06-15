@@ -2,7 +2,15 @@ import Emitter from '../util/Emitter.js';
 import makeEnum from '../util/enum.js';
 import Record from './Record.js';
 
-const Ids = makeEnum({kills: 0, timePlayed: 0, metalCollected: 0, equipmentsForged: 0});
+// todo [high] upper case
+const Ids = makeEnum({
+	kills: 0,
+	timePlayed: 0,
+	metalCollected: 0,
+	equipmentForged: 0,
+	metalSalvaged: 0,
+	materialsUsed: 0,
+});
 
 class RecordsData extends Emitter {
 	constructor(equipmentData) {
@@ -11,9 +19,11 @@ class RecordsData extends Emitter {
 			new Record(Ids.kills, 'Kills', 0),
 			new Record(Ids.timePlayed, 'Time played', 0),
 			new Record(Ids.metalCollected, 'Metal collected', 0),
-			new Record(Ids.equipmentsForged, 'Equipments forged', 0),
+			new Record(Ids.equipmentForged, 'Equipment forged', 0),
 		];
-		equipmentData.on('forge', () => this.changeRecord(Ids.equipmentsForged, 1));
+		equipmentData.on('forge', () => this.changeRecord(Ids.equipmentForged, 1));
+		equipmentData.on('salvage', metal => this.changeRecord(Ids.metalSalvaged, metal));
+		equipmentData.on('craft', () => this.changeRecord(Ids.materialsUsed, 1));
 	}
 
 	get stored() {
