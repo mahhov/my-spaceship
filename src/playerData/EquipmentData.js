@@ -10,6 +10,7 @@ class EquipmentData extends Emitter {
 	constructor() {
 		super();
 		this.metal = 0;
+		this.equipped = [...Array(4)];
 		this.equipments = [...Array(maxEquipments)];
 		this.materials = [...Array(maxMaterials)];
 	}
@@ -17,20 +18,38 @@ class EquipmentData extends Emitter {
 	get stored() {
 		return {
 			metal: this.metal,
+			equipped: this.equipped.map(equipment => (
+				equipment && {
+					type: equipment.type,
+					name: equipment.name,
+					stats: equipment.stats,
+				})),
 			equipments: this.equipments.map(equipment => (
 				equipment && {
 					type: equipment.type,
 					name: equipment.name,
 					stats: equipment.stats,
 				})),
+			// materials: this.materials.map(material => (
+			// 	material && {
+			// 		type: material.type,
+			// 		name: material.name,
+			// 		stats: material.stats,
+			// 	})),
 		};
 	}
 
 	set stored(stored) {
 		this.metal = stored?.metal || 0;
+		this.equipped = stored?.equipped?.map(equipment =>
+			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
+			[...Array(4)];
 		this.equipments = stored?.equipments?.map(equipment =>
 			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
 			[...Array(maxEquipments)];
+		// this.materials = stored?.materials?.map(material =>
+		// 	material && new Equipment(material.type, material.name, material.stats)) ||
+		// 	[...Array(maxMaterials)];
 	}
 
 	forge(equipmentType) {

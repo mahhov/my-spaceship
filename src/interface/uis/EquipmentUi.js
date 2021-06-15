@@ -1,6 +1,7 @@
 import EquipmentData from '../../playerData/EquipmentData.js';
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
+import makeEnum from '../../util/enum.js';
 import UiButton from '../components/UiButton.js';
 import UiIconButton from '../components/UiIconButton.js';
 import UiOutline from '../components/UiOutline.js';
@@ -11,14 +12,16 @@ import HubUi from './HubUi.js';
 import UiGridLayout from './layouts/UiGridLayout.js';
 import Ui from './Ui.js';
 
-let imagePaths = {
-	equipmentTypes: {
+const ImagePaths = {
+	EquipmentTypes: {
 		[EquipmentData.EquipmentTypes.hull]: '../../images/hull.png',
 		[EquipmentData.EquipmentTypes.circuit]: '../../images/circuit.png',
 		[EquipmentData.EquipmentTypes.thruster]: '../../images/thruster.png',
 		[EquipmentData.EquipmentTypes.turret]: '../../images/turret.png',
 	},
 };
+
+const ButtonTypes = makeEnum({EQUIPPED: 0, EQUIPMENT: 0, MATERIAL: 0});
 
 class EquipmentUi extends Ui {
 	constructor(equipmentData) {
@@ -41,9 +44,9 @@ class EquipmentUi extends Ui {
 		let salvageCoordinate = coordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 			.size(.07, buttonSize);
-		let salvageButton = this.add(new UiButton(salvageCoordinate, 'Salvage'));
-		salvageButton.on('hover', () =>
-			hoverText.beginHover(salvageButton.bounds, `Salvage for ${EquipmentData.getSalvageCost(0)} metal`));
+		this.salvageButton = this.add(new UiButton(salvageCoordinate, 'Salvage'));
+		this.salvageButton.on('hover', () =>
+			hoverText.beginHover(this.salvageButton.bounds, `Salvage for ${EquipmentData.getSalvageCost(0)} metal`));
 		// todo [high] disable/enable
 		// todo [high] on click: salvage and unselect
 		// todo [high] hover
@@ -53,12 +56,12 @@ class EquipmentUi extends Ui {
 			.move(-Positions.MARGIN, 0)
 			.size(buttonSize * 4, buttonSize);
 		this.createSection(forgeCoordinate, 'Forge', 4, 1, buttonSize).forEach((button, i) => {
-			button.imagePath = imagePaths.equipmentTypes[i];
+			button.imagePath = ImagePaths.EquipmentTypes[i];
 			button.on('hover', () =>
 				hoverText.beginHover(button.bounds, `Cost: ${EquipmentData.getForgeCost(i)} metal`));
 			button.on('click', () => {
 				equipmentData.forge(i);
-				this.select();
+				this.unselect();
 			});
 		});
 		// todo [high] disable/enable
@@ -72,7 +75,8 @@ class EquipmentUi extends Ui {
 			.move(0, verticalMargin)
 			.size(coordinate.width, ROWS * buttonSize);
 		this.equippmentButtons = this.createSection(equipmentCoordinate, 'Inventory', COLUMNS, ROWS, buttonSize);
-		this.equippmentButtons.forEach(button => button.on('click', () => this.select(button)));
+		this.equippmentButtons.forEach((button, i) => button.on('click', () =>
+			this.select(ButtonTypes.EQUIPMENT, i, button)));
 		// todo [high] swap
 		// todo [high] craft
 		// todo [high] unselect
@@ -90,8 +94,10 @@ class EquipmentUi extends Ui {
 
 		let hoverText = this.add(new UiPopupText(new Coordinate(0, 0, .22, Positions.UI_LINE_HEIGHT + Positions.BREAK * 2)));
 
-		let selectedUi = null;
+		this.selectButtonType = null;
+		this.selectIndex = 0;
 		this.selectOutline = this.add(new UiOutline(new Coordinate(0, 0)));
+		this.unselect();
 
 		equipmentData.on('change', () => this.refresh(equipmentData));
 		this.refresh(equipmentData);
@@ -104,16 +110,23 @@ class EquipmentUi extends Ui {
 			this.add(new UiIconButton(layout.getContainerCoordinate(i))));
 	}
 
-	select(button = null) {
-		this.selectedUi = button;
-		this.selectOutline.visible = !!button;
-		this.selectOutline.coordinate = button?.coordinate;
+	select(buttonType, index, button) {
+		this.selectButtonType = buttonType;
+		this.selectIndex = index;
+		this.selectOutline.visible = true;
+		this.selectOutline.coordinate = button.coordinate;
+		this.salvageButton.disabled = buttonType === ButtonTypes.MATERIAL;
+	}
+
+	unselect() {
+		this.selectOutline.visible = false;
+		this.salvageButton.disabled = true;
 	}
 
 	refresh(equipmentData) {
 		this.metalText.text = equipmentData.metal;
 		this.equippmentButtons.forEach((button, i) =>
-			button.imagePath = imagePaths.equipmentTypes[equipmentData.equipments[i]?.type]);
+			button.imagePath = ImagePaths.EquipmentTypes[equipmentData.equipments[i]?.type]);
 	}
 }
 
