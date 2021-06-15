@@ -15,10 +15,10 @@ import Ui from './Ui.js';
 
 const ImagePaths = {
 	EquipmentTypes: {
-		[EquipmentData.EquipmentTypes.hull]: '../../images/hull.png',
-		[EquipmentData.EquipmentTypes.circuit]: '../../images/circuit.png',
-		[EquipmentData.EquipmentTypes.thruster]: '../../images/thruster.png',
-		[EquipmentData.EquipmentTypes.turret]: '../../images/turret.png',
+		[EquipmentData.EquipmentTypes.HULL]: '../../images/hull.png',
+		[EquipmentData.EquipmentTypes.CIRCUIT]: '../../images/circuit.png',
+		[EquipmentData.EquipmentTypes.THRUSTER]: '../../images/thruster.png',
+		[EquipmentData.EquipmentTypes.TURRET]: '../../images/turret.png',
 	},
 };
 

@@ -3,8 +3,7 @@ import makeEnum from '../util/enum.js';
 import {randInt} from '../util/number.js';
 import Equipment from './Equipment.js';
 
-// todo [high] upper case
-const EquipmentTypes = makeEnum({hull: 0, circuit: 0, thruster: 0, turret: 0});
+const EquipmentTypes = makeEnum({HULL: 0, CIRCUIT: 0, THRUSTER: 0, TURRET: 0});
 
 const maxInventory = 48, maxMaterials = 48;
 
