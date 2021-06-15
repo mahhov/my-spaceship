@@ -138,7 +138,7 @@ class Player extends Hero {
 
 	onKill(monster) {
 		this.playerData.expData.gainExp(monster.expValue);
-		this.playerData.recordsData.changeRecord(RecordsData.Ids.kills, 1);
+		this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
 	}
 
 	removeUi() {
