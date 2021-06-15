@@ -8,21 +8,24 @@ const Ids = makeEnum({
 	METAL_COLLECTED: 0,
 	EQUIPMENT_FORGED: 0,
 	METAL_SALVAGED: 0,
-	MATERIALS_USED: 0,
+	MATERIALS_CRAFTED: 0,
 });
 
 class RecordsData extends Emitter {
 	constructor(equipmentData) {
 		super();
+		// todo [high] do this in a .map loop
 		this.records = [
 			new Record(Ids.KILLS, 'Kills', 0),
 			new Record(Ids.TIME_PLAYED, 'Time played', 0),
 			new Record(Ids.METAL_COLLECTED, 'Metal collected', 0),
 			new Record(Ids.EQUIPMENT_FORGED, 'Equipment forged', 0),
+			new Record(Ids.METAL_SALVAGED, 'Metal salvaged', 0),
+			new Record(Ids.MATERIALS_CRAFTED, 'Materials crafted', 0),
 		];
 		equipmentData.on('forge', () => this.changeRecord(Ids.EQUIPMENT_FORGED, 1));
 		equipmentData.on('salvage', metal => this.changeRecord(Ids.METAL_SALVAGED, metal));
-		equipmentData.on('craft', () => this.changeRecord(Ids.MATERIALS_USED, 1));
+		equipmentData.on('craft', () => this.changeRecord(Ids.MATERIALS_CRAFTED, 1));
 	}
 
 	get stored() {
