@@ -1,17 +1,19 @@
 import Emitter from '../util/Emitter.js';
 import makeEnum from '../util/enum.js';
+import {randInt} from '../util/number.js';
 import Equipment from './Equipment.js';
 
+// todo [high] upper case
 const EquipmentTypes = makeEnum({hull: 0, circuit: 0, thruster: 0, turret: 0});
 
-const maxEquipments = 48, maxMaterials = 48;
+const maxInventory = 48, maxMaterials = 48;
 
 class EquipmentData extends Emitter {
 	constructor() {
 		super();
 		this.metal = 0;
 		this.equipped = [...Array(4)];
-		this.equipments = [...Array(maxEquipments)];
+		this.inventory = [...Array(maxInventory)];
 		this.materials = [...Array(maxMaterials)];
 	}
 
@@ -24,7 +26,7 @@ class EquipmentData extends Emitter {
 					name: equipment.name,
 					stats: equipment.stats,
 				})),
-			equipments: this.equipments.map(equipment => (
+			inventory: this.inventory.map(equipment => (
 				equipment && {
 					type: equipment.type,
 					name: equipment.name,
@@ -44,23 +46,64 @@ class EquipmentData extends Emitter {
 		this.equipped = stored?.equipped?.map(equipment =>
 			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
 			[...Array(4)];
-		this.equipments = stored?.equipments?.map(equipment =>
+		this.inventory = stored?.inventory?.map(equipment =>
 			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
-			[...Array(maxEquipments)];
+			[...Array(maxInventory)];
 		// this.materials = stored?.materials?.map(material =>
 		// 	material && new Equipment(material.type, material.name, material.stats)) ||
 		// 	[...Array(maxMaterials)];
 	}
 
+	get emptyInventoryIndex() {
+		return this.inventory.findIndex(equipment => !equipment);
+	}
+
 	forge(equipmentType) {
 		let forgeCost = EquipmentData.getForgeCost(equipmentType);
-		let index = this.equipments.findIndex(equipment => !equipment);
+		let index = this.emptyInventoryIndex;
 		if (this.metal < forgeCost || index === -1)
 			return;
 		this.metal -= forgeCost;
-		this.equipments[index] = new Equipment(equipmentType, EquipmentData.randomName, []);
+		this.inventory[index] = new Equipment(equipmentType, EquipmentData.generateName(equipmentType), []);
 		this.emit('change');
 		this.emit('forge');
+	}
+
+	salvage(inventoryIndex) {
+		let metal = EquipmentData.getSalvageCost(this.inventory[inventoryIndex].type);
+		this.metal += metal;
+		this.inventory[inventoryIndex] = null;
+		this.emit('change');
+		this.emit('salvage', metal);
+	}
+
+	swapInventory(inventoryIndex1, inventoryIndex2) {
+		[this.inventory[inventoryIndex1], this.inventory[inventoryIndex2]] =
+			[this.inventory[inventoryIndex2], this.inventory[inventoryIndex1]];
+		this.emit('change');
+	}
+
+	equip(equipmentType, inventoryIndex) {
+		[this.equipped[equipmentType], this.inventory[inventoryIndex]] =
+			[this.inventory[inventoryIndex], this.equipped[equipmentType]];
+		this.emit('change');
+	}
+
+	swapMaterial(materialIndex1, materialIndex2) {
+		[this.materials[materialIndex1], this.materials[materialIndex2]] =
+			[this.materials[materialIndex2], this.materials[materialIndex1]];
+		this.emit('change');
+	}
+
+	craft(inventoryIndex, materialIndex) {
+		// let equipment = this.inventory[inventoryIndex];
+		// let material = this.materials[materialIndex];
+		// if (material.use(equipment)) {
+		// 	this.materials[materialIndex] = null;
+		// 	return true;
+		// }
+		this.emit('change');
+		this.emit('craft');
 	}
 
 	static getForgeCost(equipmentType) {
@@ -71,8 +114,13 @@ class EquipmentData extends Emitter {
 		return EquipmentData.getForgeCost(equipmentType) / 2;
 	}
 
-	static get randomName() {
-		return 'yo';
+	static generateName(equipmentType) {
+		const prefixes = ['Magic', 'Enchanted', 'Secretive', 'Powerful', 'Robust', 'Large', 'Agile', 'Purple'];
+		const suffixes = ['of Might', 'of Magic', 'of Power', 'of Speed'];
+		let prefix = prefixes[randInt(prefixes.length)];
+		let suffix = suffixes[randInt(suffixes.length)];
+		let equipmentTypeName = ['Hull', 'Circuit', 'Thruster', 'Turret'][equipmentType];
+		return `${prefix} ${equipmentTypeName} ${suffix}`;
 	}
 }
 
