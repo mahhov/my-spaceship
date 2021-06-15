@@ -12,15 +12,19 @@ class UiDragShadow extends UiComponent {
 	}
 
 	update(controller) {
+		if (!this.dragComponent)
+			return;
 		let {x, y} = controller.getRawMouse();
-		if (this.dragComponent && controller.getMouseState(0).active) {
+		if (controller.getMouseState(0).active) {
 			this.startX ??= this.dragComponent.coordinate.x - x;
 			this.startY ??= this.dragComponent.coordinate.y - y;
 			x += this.startX;
 			y += this.startY;
 			this.coordinate = this.dragComponent.coordinate.clone.moveTo(x, y).clamp();
-		} else
+		} else {
+			this.emit('drop');
 			this.dragComponent = null;
+		}
 	}
 
 
