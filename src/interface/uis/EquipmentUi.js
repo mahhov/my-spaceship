@@ -117,15 +117,11 @@ class EquipmentUi extends Ui {
 	}
 
 	drag(buttonIndex) {
-		if (buttonIndex.buttonType === ButtonTypes.EQUIPPED && !this.equipmentData.equipped[buttonIndex.index] ||
-			buttonIndex.buttonType === ButtonTypes.INVENTORY && !this.equipmentData.inventory[buttonIndex.index] ||
-			buttonIndex.buttonType === ButtonTypes.MATERIAL && !this.equipmentData.materials[buttonIndex.index])
-			return;
 		this.dragIndex = buttonIndex;
+		this.salvageButton.disabled = buttonIndex.buttonType === ButtonTypes.MATERIAL;
+		this.enableEmptyButtons();
 		this.dragOutline.visible = true;
 		this.dragOutline.coordinate = buttonIndex.button.coordinate;
-		this.salvageButton.disabled = buttonIndex.buttonType === ButtonTypes.MATERIAL;
-		// todo [high] likewise disable empty equipped, equipment, and material buttons before drag start
 		this.dragShadow.beginDrag(buttonIndex.button);
 	}
 
@@ -151,15 +147,30 @@ class EquipmentUi extends Ui {
 		this.dragIndex = null;
 		this.dragOutline.visible = false;
 		this.salvageButton.disabled = true;
+		this.disableEmptyButtons();
 	}
 
 	refresh() {
 		this.equippedButtons.forEach((button, i) =>
 			button.imagePath = ImagePaths.EquipmentTypes[this.equipmentData.equipped[i]?.type]);
 		this.metalText.text = this.equipmentData.metal;
-		this.inventoryButtons.forEach((button, i) =>
-			button.imagePath = ImagePaths.EquipmentTypes[this.equipmentData.inventory[i]?.type]);
+		this.inventoryButtons.forEach((button, i) => {
+			button.imagePath = ImagePaths.EquipmentTypes[this.equipmentData.inventory[i]?.type];
+		});
+		this.disableEmptyButtons();
 		// todo [high] material
+	}
+
+	disableEmptyButtons() {
+		this.equippedButtons.forEach((button, i) => button.disabled = !this.equipmentData.equipped[i]);
+		this.inventoryButtons.forEach((button, i) => button.disabled = !this.equipmentData.inventory[i]);
+		this.materialButtons.forEach((button, i) => button.disabled = !this.equipmentData.materials[i]);
+	}
+
+	enableEmptyButtons() {
+		this.equippedButtons.forEach((button, i) => button.disabled = !this.equipmentData.equipped[i] && this.dragIndex.buttonType !== ButtonTypes.INVENTORY);
+		this.inventoryButtons.forEach((button, i) => button.disabled = !this.equipmentData.inventory[i] && this.dragIndex.buttonType !== ButtonTypes.EQUIPPED && this.dragIndex.buttonType !== ButtonTypes.INVENTORY);
+		this.materialButtons.forEach((button, i) => button.disabled = !this.equipmentData.materials[i] && this.dragIndex.buttonType !== ButtonTypes.MATERIAL);
 	}
 }
 
