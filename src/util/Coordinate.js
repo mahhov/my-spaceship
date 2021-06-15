@@ -1,3 +1,4 @@
+import {Positions} from './constants.js';
 import makeEnum from './enum.js';
 
 const Aligns = makeEnum({START: 0, CENTER: 0, END: 0});
@@ -62,6 +63,12 @@ class Coordinate {
 		this.width -= width * 2;
 		this.height -= height * 2;
 		return this;
+	}
+
+	clamp(left = Positions.BREAK * 2, right = 1 - left, top = left, bottom = right) {
+		let dx = Math.max(left - this.left, 0) + Math.min(right - this.right, 0);
+		let dy = Math.max(top - this.top, 0) + Math.min(bottom - this.bottom, 0);
+		return this.move(dx, dy);
 	}
 
 	static getAligned(alignment, xy, widthHeight) {

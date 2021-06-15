@@ -3,6 +3,7 @@ import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import UiButton from '../components/UiButton.js';
+import UiDragShadow from '../components/UiDragShadow.js';
 import UiIconButton from '../components/UiIconButton.js';
 import UiOutline from '../components/UiOutline.js';
 import UiPopupText from '../components/UiPopupText.js';
@@ -94,6 +95,8 @@ class EquipmentUi extends Ui {
 
 		let hoverText = this.add(new UiPopupText(new Coordinate(0, 0, .22, Positions.UI_LINE_HEIGHT + Positions.BREAK * 2)));
 
+		this.dragShadow = this.add(new UiDragShadow());
+
 		this.selectButtonType = null;
 		this.selectIndex = 0;
 		this.selectOutline = this.add(new UiOutline(new Coordinate(0, 0)));
@@ -116,6 +119,8 @@ class EquipmentUi extends Ui {
 		this.selectOutline.visible = true;
 		this.selectOutline.coordinate = button.coordinate;
 		this.salvageButton.disabled = buttonType === ButtonTypes.MATERIAL;
+
+		this.dragShadow.beginDrag(button);
 	}
 
 	unselect() {

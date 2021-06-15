@@ -3,7 +3,6 @@ import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import {clamp} from '../../util/number.js';
 import UiComponent from './UiComponent.js';
 
 // todo [medium] support multiline
@@ -21,17 +20,10 @@ class UiPopupText extends UiComponent {
 
 	update(controller) {
 		let {x, y} = controller.getRawMouse();
-		if (!this.hoverBounds?.inside(x, y))
-			this.hoverBounds = null;
+		if (this.hoverBounds?.inside(x, y))
+			this.coordinate.moveTo(x + Positions.BREAK, y - Positions.BREAK).clamp();
 		else
-			this.moveTo(x, y);
-	}
-
-	moveTo(x, y) {
-		let e = Positions.BREAK * 2;
-		x = clamp(x + Positions.BREAK, e, 1 - this.coordinate.width - e);
-		y = clamp(y - Positions.BREAK, this.coordinate.height + e, 1 - e);
-		this.coordinate.moveTo(x, y);
+			this.hoverBounds = null;
 	}
 
 	paint(painter) {
