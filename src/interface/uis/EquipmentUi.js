@@ -22,7 +22,7 @@ const ImagePaths = {
 	},
 };
 
-const ButtonTypes = makeEnum({EQUIPPED: 0, INVENTORY: 0, MATERIAL: 0});
+const ButtonTypes = makeEnum({EQUIPPED: 0, INVENTORY: 0, MATERIAL: 0, SALVAGE: 0});
 
 class ButtonIndex {
 	constructor(buttonType, index, button) {
@@ -52,8 +52,13 @@ class EquipmentUi extends Ui {
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 			.size(.07, buttonSize);
 		this.salvageButton = this.add(new UiButton(salvageCoordinate, 'Salvage'));
-		this.salvageButton.on('hover', () =>
-			hoverText.beginHover(this.salvageButton.bounds, `Salvage for ${EquipmentData.getSalvageCost(0)} metal`));
+		let salvageButtonIndex = new ButtonIndex(ButtonTypes.SALVAGE, 0, this.salvageButton);
+		this.salvageButton.on('hover', () => {
+			let equipmentType = (this.dragIndex.buttonType === ButtonTypes.EQUIPPED ?
+				this.equipmentData.equipped : this.equipmentData.inventory)[this.dragIndex.index].type;
+			hoverText.beginHover(this.salvageButton.bounds, `Salvage for ${EquipmentData.getSalvageCost(equipmentType)} metal`);
+			this.dropIndex = salvageButtonIndex;
+		});
 
 		let forgeCoordinate = salvageCoordinate.clone
 			.shift(-1, 0)
@@ -138,8 +143,10 @@ class EquipmentUi extends Ui {
 				this.equipmentData.equip(this.dragIndex.index, inventoryIndex);
 		} else if (i1.buttonType === ButtonTypes.EQUIPPED && i2.buttonType === ButtonTypes.INVENTORY)
 			this.equipmentData.equip(this.equipmentData.inventory[i2.index]?.type ?? i1.index, i2.index);
+		else if ((i1.buttonType === ButtonTypes.EQUIPPED || i1.buttonType === ButtonTypes.INVENTORY) &&
+			i2.buttonType === ButtonTypes.SALVAGE)
+			this.equipmentData.salvage(i1.index);
 
-		// todo [high] salvage
 		// todo [high] use material on inventory
 		this.dragIndex = null;
 		this.dragOutline.visible = false;
