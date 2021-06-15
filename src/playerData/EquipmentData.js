@@ -5,7 +5,7 @@ import Equipment from './Equipment.js';
 
 const EquipmentTypes = makeEnum({HULL: 0, CIRCUIT: 0, THRUSTER: 0, TURRET: 0});
 
-const maxInventory = 48, maxMaterials = 48;
+const maxInventory = 128, maxMaterials = 128;
 
 class EquipmentData extends Emitter {
 	constructor() {
