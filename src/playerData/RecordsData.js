@@ -1,5 +1,6 @@
 import Emitter from '../util/Emitter.js';
 import makeEnum from '../util/enum.js';
+import {toUiString} from '../util/string.js';
 import Record from './Record.js';
 
 const Ids = makeEnum({
@@ -14,15 +15,7 @@ const Ids = makeEnum({
 class RecordsData extends Emitter {
 	constructor(equipmentData) {
 		super();
-		// todo [high] do this in a .map loop
-		this.records = [
-			new Record(Ids.KILLS, 'Kills', 0),
-			new Record(Ids.TIME_PLAYED, 'Time played', 0),
-			new Record(Ids.METAL_COLLECTED, 'Metal collected', 0),
-			new Record(Ids.EQUIPMENT_FORGED, 'Equipment forged', 0),
-			new Record(Ids.METAL_SALVAGED, 'Metal salvaged', 0),
-			new Record(Ids.MATERIALS_CRAFTED, 'Materials crafted', 0),
-		];
+		this.records = Object.entries(Ids).map(([key, value]) => new Record(value, toUiString(key), 0));
 		equipmentData.on('forge', () => this.changeRecord(Ids.EQUIPMENT_FORGED, 1));
 		equipmentData.on('salvage', metal => this.changeRecord(Ids.METAL_SALVAGED, metal));
 		equipmentData.on('craft', () => this.changeRecord(Ids.MATERIALS_CRAFTED, 1));
