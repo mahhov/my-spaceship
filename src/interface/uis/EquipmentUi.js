@@ -69,7 +69,8 @@ class EquipmentUi extends Ui {
 			.shift(-1, 0)
 			.move(-Positions.MARGIN, 0)
 			.size(buttonSize * 4, buttonSize);
-		this.createSection(forgeCoordinate, 'Forge', 4, 1, buttonSize).forEach((button, i) => {
+		this.forgeButtons = this.createSection(forgeCoordinate, 'Forge', 4, 1, buttonSize);
+		this.forgeButtons.forEach((button, i) => {
 			button.imagePath = ImagePaths.Equipment[i];
 			button.on('hover', () =>
 				this.hoverText.beginHover(button.bounds, [`Cost: ${EquipmentData.getForgeCost(i)} metal`]));
@@ -124,6 +125,7 @@ class EquipmentUi extends Ui {
 	drag(buttonIndex) {
 		this.dragIndex = buttonIndex;
 		this.salvageButton.disabled = buttonIndex.buttonType === ButtonTypes.MATERIAL;
+		this.forgeButtons.forEach(button => button.disabled = true);
 		this.enableEmptyButtons();
 		this.dragOutline.visible = true;
 		this.dragOutline.coordinate = buttonIndex.button.coordinate;
@@ -157,6 +159,7 @@ class EquipmentUi extends Ui {
 		this.dragIndex = null;
 		this.dragOutline.visible = false;
 		this.salvageButton.disabled = true;
+		this.forgeButtons.forEach(button => button.disabled = false);
 		this.disableEmptyButtons();
 	}
 
