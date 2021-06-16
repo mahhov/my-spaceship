@@ -1,4 +1,5 @@
 import makeEnum from '../util/enum.js';
+import {toUiString} from '../util/string.js';
 
 const Ids = makeEnum({
 	DISABLED: 0,
@@ -32,15 +33,11 @@ class Stat {
 	}
 
 	static name(id) {
-		return Stat.keyToName(Object.keys(Ids)[id]);
+		return toUiString(Object.keys(Ids)[id]);
 	}
 
 	static derivedStatName(id) {
-		return Stat.keyToName(Object.keys(DerivedStatIds)[id]);
-	}
-
-	static keyToName(key) {
-		return key[0].toUpperCase() + key.slice(1).toLowerCase().replaceAll('_', ' ');
+		return toUiString(Object.keys(DerivedStatIds)[id]);
 	}
 }
 
