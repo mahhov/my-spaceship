@@ -65,7 +65,6 @@ class EquipmentData extends Emitter {
 	}
 
 	forge(equipmentType) {
-		// todo [high] make other methods similarly robust and remove checks from ui
 		let forgeCost = EquipmentData.getForgeCost(equipmentType);
 		let index = this.emptyInventoryIndex;
 		if (this.metal < forgeCost || index === -1)
@@ -76,38 +75,59 @@ class EquipmentData extends Emitter {
 		this.emit('forge');
 	}
 
-	salvage(equipped, inventoryIndex) {
-		let equipmentList = this.getList(equipped ? ListTypes.EQUIPPED : ListTypes.INVENTORY);
-		let metal = EquipmentData.getSalvageCost(equipmentList[inventoryIndex].type);
+	salvage(listType, index) {
+		let equipmentList = this.getList(listType);
+		if (!equipmentList[index])
+			return;
+		let metal = EquipmentData.getSalvageCost(equipmentList[index].type);
 		this.metal += metal;
-		equipmentList[inventoryIndex] = null;
+		equipmentList[index] = null;
 		this.emit('change');
 		this.emit('salvage', metal);
 	}
 
 	swapInventory(inventoryIndex1, inventoryIndex2) {
+		if (!this.inventory[inventoryIndex1] && !this.inventory[inventoryIndex2])
+			return;
 		[this.inventory[inventoryIndex1], this.inventory[inventoryIndex2]] =
 			[this.inventory[inventoryIndex2], this.inventory[inventoryIndex1]];
 		this.emit('change');
 	}
 
-	equip(equipmentType, inventoryIndex) {
+	equip(inventoryIndex) {
+		if (!this.inventory[inventoryIndex])
+			return;
+		let equipmentType = this.inventory[inventoryIndex].type;
+		[this.equipped[equipmentType], this.inventory[inventoryIndex]] =
+			[this.inventory[inventoryIndex], this.equipped[equipmentType]];
+		this.emit('change');
+	}
+
+	unequip(equipmentType, inventoryIndex) {
+		if (this.inventory[inventoryIndex])
+			inventoryIndex = this.emptyInventoryIndex;
+		if (!this.equipped[equipmentType] || inventoryIndex === -1)
+			return;
 		[this.equipped[equipmentType], this.inventory[inventoryIndex]] =
 			[this.inventory[inventoryIndex], this.equipped[equipmentType]];
 		this.emit('change');
 	}
 
 	swapMaterial(materialIndex1, materialIndex2) {
+		if (!this.materials[materialIndex1] && !this.materials[materialIndex2])
+			return;
 		[this.materials[materialIndex1], this.materials[materialIndex2]] =
 			[this.materials[materialIndex2], this.materials[materialIndex1]];
 		this.emit('change');
 	}
 
-	craft(equipped, inventoryIndex, materialIndex) {
-		let equipment = this.getList(equipped ? ListTypes.EQUIPPED : ListTypes.INVENTORY)[inventoryIndex];
-		if (equipment.stats.length === 8)
+	craft(listType, index, materialIndex) {
+		let equipment = this.getList(listType)[index];
+		if (!equipment || equipment.stats.length === 8)
 			return;
 		let material = this.materials[materialIndex];
+		if (!material)
+			return;
 		let stats = material.stats.filter(stat => equipment.stats.every(statI => statI.id !== stat.id));
 		if (!stats.length)
 			return;

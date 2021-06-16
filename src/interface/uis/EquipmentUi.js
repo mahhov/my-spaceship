@@ -144,17 +144,14 @@ class EquipmentUi extends Ui {
 			else if (i1.buttonType === ButtonTypes.MATERIAL && i2.buttonType === ButtonTypes.MATERIAL)
 				this.equipmentData.swapMaterial(i1.index, i2.index);
 			else if (this.dragIndex.buttonType === ButtonTypes.EQUIPPED && this.dropIndex.buttonType === ButtonTypes.INVENTORY &&
-				this.equipmentData.inventory[this.dropIndex.index] &&
-				this.equipmentData.inventory[this.dropIndex.index].type !== this.dragIndex.index) {
-				let inventoryIndex = this.equipmentData.emptyInventoryIndex;
-				if (inventoryIndex !== -1)
-					this.equipmentData.equip(this.dragIndex.index, inventoryIndex);
-			} else if (i1.buttonType === ButtonTypes.EQUIPPED && i2.buttonType === ButtonTypes.INVENTORY)
-				this.equipmentData.equip(this.equipmentData.inventory[i2.index]?.type ?? i1.index, i2.index);
+				this.equipmentData.inventory[this.dropIndex.index]?.type !== this.dragIndex.index)
+				this.equipmentData.unequip(this.dragIndex.index, this.dropIndex.index);
+			else if (i1.buttonType === ButtonTypes.EQUIPPED && i2.buttonType === ButtonTypes.INVENTORY)
+				this.equipmentData.equip(i2.index);
 			else if (i1IsEquipment && i2.buttonType === ButtonTypes.SALVAGE)
-				this.equipmentData.salvage(i1.buttonType === ButtonTypes.EQUIPPED, i1.index);
+				this.equipmentData.salvage(i1.buttonType, i1.index);
 			else if (i1IsEquipment && i2.buttonType === ButtonTypes.MATERIAL)
-				this.equipmentData.craft(i1.buttonType === ButtonTypes.EQUIPPED, i1.index, i2.index);
+				this.equipmentData.craft(i1.buttonType, i1.index, i2.index);
 		}
 
 		this.dragIndex = null;
