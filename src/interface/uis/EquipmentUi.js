@@ -163,6 +163,7 @@ class EquipmentUi extends Ui {
 	refresh() {
 		this.buttonSets.forEach(({buttons, images, listType}) => buttons.forEach((button, i) =>
 			button.imagePath = images[this.equipmentData.getList(listType)[i]?.type]));
+		this.metalText.text = this.equipmentData.metal;
 		this.disableEmptyButtons();
 		this.refreshHoverText();
 	}
