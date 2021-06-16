@@ -13,6 +13,10 @@ class EncounterUi extends Ui {
 		EncounterUi.Encounters.forEach(({name, description, MapGeneratorClass}, i) => {
 			let button = this.add(new UiButton(new Coordinate(.42, Positions.UI_FIRST_ROW + Positions.UI_ROW_HEIGHT * i, .16, Positions.UI_BUTTON_HEIGHT), name));
 			button.on('hover', () => descriptionText.text = description);
+			button.on('end-hover', () => {
+				if (descriptionText.text === description)
+					descriptionText.text = '';
+			});
 			button.on('click', () => this.emit('begin-encounter', MapGeneratorClass));
 		});
 	}

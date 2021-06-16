@@ -64,6 +64,7 @@ class EquipmentUi extends Ui {
 			hoverText.beginHover(this.salvageButton.bounds, `Salvage for ${EquipmentData.getSalvageCost(equipmentType)} metal`);
 			this.dropIndex = salvageButtonIndex;
 		});
+		this.salvageButton.on('end-hover', () => this.resetDropIndex(salvageButtonIndex));
 
 		let forgeCoordinate = salvageCoordinate.clone
 			.shift(-1, 0)
@@ -117,6 +118,7 @@ class EquipmentUi extends Ui {
 		buttons.forEach((button, i) => {
 			let buttonIndex = new ButtonIndex(buttonType, i, button);
 			button.on('hover', () => this.dropIndex = buttonIndex);
+			button.on('end-hover', () => this.resetDropIndex(buttonIndex));
 			button.on('click', () => this.drag(buttonIndex));
 		});
 	}
@@ -130,7 +132,14 @@ class EquipmentUi extends Ui {
 		this.dragShadow.beginDrag(buttonIndex.button);
 	}
 
+	resetDropIndex(buttonIndex) {
+		if (this.dropIndex === buttonIndex)
+			this.dropIndex = null;
+	}
+
 	drop() {
+		if (!this.dropIndex)
+			return;
 		let [i1, i2] = [this.dragIndex, this.dropIndex].sort((a, b) => a.buttonType - b.buttonType);
 		let i1IsEquipment = i1.buttonType === ButtonTypes.EQUIPPED || i1.buttonType === ButtonTypes.INVENTORY;
 		if (i1.buttonType === ButtonTypes.INVENTORY && i2.buttonType === ButtonTypes.INVENTORY)

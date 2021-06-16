@@ -28,6 +28,8 @@ class UiButton extends UiComponent {
 			this.emit('click');
 		else if (state === States.HOVER)
 			this.emit('hover');
+		else if (this.state === States.HOVER)
+			this.emit('end-hover');
 		this.state = state;
 	}
 
