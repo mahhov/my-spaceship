@@ -1,10 +1,13 @@
 import Emitter from '../util/Emitter.js';
+import makeEnum from '../util/enum.js';
 import {randInt} from '../util/number.js';
 import Equipment from './Equipment.js';
 import Material from './Material.js';
 import Stat from './Stat.js';
 
 const maxInventory = 128, maxMaterials = 128;
+
+const ListTypes = makeEnum({EQUIPPED: 0, INVENTORY: 0, MATERIAL: 0});
 
 class EquipmentData extends Emitter {
 	constructor() {
@@ -13,58 +16,52 @@ class EquipmentData extends Emitter {
 		this.equipped = [...Array(4)];
 		this.inventory = [...Array(maxInventory)];
 		this.materials = [...Array(maxMaterials)];
-
-		this.materials = this.materials.map(m => m ||
-			new Material(Material.Types.A, 'mat a', [
-				new Stat(Stat.Ids.LIFE, 10),
-				new Stat(Stat.Ids.ATTACK_RANGE, 10),
-				new Stat(Stat.Ids.MOVE_SPEED, 10),
-			]));
 	}
 
 	get stored() {
 		return {
 			metal: this.metal,
-			equipped: this.equipped.map(equipment => (
-				equipment && {
-					type: equipment.type,
-					name: equipment.name,
-					stats: equipment.stats,
-				})),
-			inventory: this.inventory.map(equipment => (
-				equipment && {
-					type: equipment.type,
-					name: equipment.name,
-					stats: equipment.stats,
-				})),
-			materials: this.materials.map(material => (
-				material && {
-					type: material.type,
-					name: material.name,
-					stats: material.stats,
-				})),
+			equipped: EquipmentData.getStoredStatItems(this.equipped),
+			inventory: EquipmentData.getStoredStatItems(this.inventory),
+			materials: EquipmentData.getStoredStatItems(this.materials),
 		};
 	}
 
 	set stored(stored) {
 		this.metal = stored?.metal || 0;
-		this.equipped = stored?.equipped?.map(equipment =>
-			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
-			[...Array(4)];
-		this.inventory = stored?.inventory?.map(equipment =>
-			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
-			[...Array(maxInventory)];
-		this.materials = stored?.materials?.map(material =>
-			material && new Material(material.type, material.name, material.stats)) ||
-			[...Array(maxMaterials)];
+		this.equipped = EquipmentData.setStoredStatItems(stored?.equipped, Equipment) || [...Array(4)];
+		this.inventory = EquipmentData.setStoredStatItems(stored?.inventory, Equipment) || [...Array(maxInventory)];
+		this.materials = EquipmentData.setStoredStatItems(stored?.materials, Material) || [...Array(maxMaterials)];
+	}
+
+	static getStoredStatItems(statItems) {
+		return statItems.map(statItem => (
+			statItem && {
+				type: statItem.type,
+				name: statItem.name,
+				stats: statItem.stats.map(EquipmentData.getStoredStat),
+			}));
+	}
+
+	static setStoredStatItems(stored, StatItemClass) {
+		return stored?.map(statItem =>
+			statItem && new StatItemClass(statItem.type, statItem.name, statItem.stats.map(EquipmentData.setStoredStat)));
+	}
+
+	static getStoredStat(stat) {
+		return {id: stat.id, value: stat.value};
+	}
+
+	static setStoredStat(stored) {
+		return new Stat(stored.id, stored.value);
 	}
 
 	get emptyInventoryIndex() {
 		return this.inventory.findIndex(equipment => !equipment);
 	}
 
-	getEquipmentList(equipped) {
-		return equipped ? this.equipped : this.inventory;
+	getList(listType) {
+		return [this.equipped, this.inventory, this.materials][listType];
 	}
 
 	forge(equipmentType) {
@@ -80,7 +77,7 @@ class EquipmentData extends Emitter {
 	}
 
 	salvage(equipped, inventoryIndex) {
-		let equipmentList = this.getEquipmentList(equipped);
+		let equipmentList = this.getList(equipped ? ListTypes.EQUIPPED : ListTypes.INVENTORY);
 		let metal = EquipmentData.getSalvageCost(equipmentList[inventoryIndex].type);
 		this.metal += metal;
 		equipmentList[inventoryIndex] = null;
@@ -107,7 +104,7 @@ class EquipmentData extends Emitter {
 	}
 
 	craft(equipped, inventoryIndex, materialIndex) {
-		let equipment = this.getEquipmentList(equipped)[inventoryIndex];
+		let equipment = this.getList(equipped ? ListTypes.EQUIPPED : ListTypes.INVENTORY)[inventoryIndex];
 		if (equipment.stats.length === 8)
 			return;
 		let material = this.materials[materialIndex];
@@ -138,5 +135,7 @@ class EquipmentData extends Emitter {
 		return `${prefix} ${equipmentTypeName} ${suffix}`;
 	}
 }
+
+EquipmentData.ListTypes = ListTypes;
 
 export default EquipmentData;

@@ -5,17 +5,16 @@ import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiComponent from './UiComponent.js';
 
-// todo [medium] support multiline
 class UiPopupText extends UiComponent {
 	constructor(coordinate) {
 		super(coordinate.align(Coordinate.Aligns.START, Coordinate.Aligns.END));
 		this.hoverBounds = null;
-		this.text = '';
+		this.texts = [];
 	}
 
-	beginHover(hoverBounds, text) {
+	beginHover(hoverBounds, texts) {
 		this.hoverBounds = hoverBounds;
-		this.text = text;
+		this.texts = texts;
 	}
 
 	update(controller) {
@@ -29,12 +28,15 @@ class UiPopupText extends UiComponent {
 	paint(painter) {
 		if (!this.hoverBounds)
 			return;
+		this.coordinate.size(this.coordinate.width, Positions.UI_LINE_HEIGHT * this.texts.length + Positions.BREAK * 2);
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: Colors.Interface.INACTIVE.get()}));
 		painter.add(new RoundedRect(this.coordinate).setOptions({color: Colors.Interface.PRIMARY.get()}));
 		let textCoordinate = this.coordinate.clone
-			.alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.CENTER)
-			.move(Positions.BREAK * 2, 0);
-		painter.add(new Text(textCoordinate, this.text).setOptions({...this.textOptions, color: Colors.Interface.PRIMARY.get()}));
+			.alignWithoutMove(Coordinate.Aligns.START)
+			.move(Positions.BREAK * 3) // 3 just works well
+			.size(0, Positions.UI_LINE_HEIGHT);
+		this.texts.forEach((text, i) =>
+			painter.add(new Text(textCoordinate.clone.shift(0, i), text).setOptions({...this.textOptions, color: Colors.Interface.PRIMARY.get()})));
 	}
 }
 

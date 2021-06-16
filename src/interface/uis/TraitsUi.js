@@ -21,7 +21,7 @@ class TraitsUi extends Ui {
 
 			let containerButton = new UiButton(coordinates.container, '', '', true);
 			this.add(containerButton).on('hover', () =>
-				this.descriptionText.beginHover(containerButton.bounds, trait.descriptionText));
+				this.descriptionText.beginHover(containerButton.bounds, [trait.descriptionText]));
 			this.add(new UiText(coordinates.topLine, trait.name));
 			let valueText = this.add(new UiText(coordinates.bottomLine, trait.valueText));
 
@@ -33,7 +33,7 @@ class TraitsUi extends Ui {
 			return [valueText, trait];
 		});
 
-		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22, Positions.UI_LINE_HEIGHT + Positions.BREAK * 2)));
+		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
 
 		traitsData.on('change', () => {
 			valueTexts.forEach(([valueText, trait]) =>
