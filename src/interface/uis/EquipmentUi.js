@@ -101,14 +101,14 @@ class EquipmentUi extends Ui {
 			button.on('click', () => this.drag(buttonIndex));
 		}));
 
-		this.hoverText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
-
 		this.dragIndex = null;
 		this.dropIndex = null;
 		this.dragOutline = this.add(new UiOutline(new Coordinate(0, 0)));
 		this.dragShadow = this.add(new UiDragShadow());
 		this.dragShadow.on('drop', () => this.drop());
 		this.drop();
+
+		this.hoverText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
 
 		equipmentData.on('change', () => this.refresh());
 		this.refresh();
