@@ -1,6 +1,4 @@
 import Game from '../frame/Game.js';
-import GameEgg from '../frame/GameEgg.js';
-import GraphicsDemo from '../frame/GraphicsDemo.js';
 import Looper from '../frame/Looper.js';
 // import StarfieldDemo from '../frame/StarfieldDemo.js';
 // import NoiseDemo from '../frame/NoiseDemo.js';
@@ -13,9 +11,9 @@ let frameButtonsRow = document.querySelector('#frame-buttons-row');
 let looper = new Looper(canvas);
 
 let frameCLasses = [
-	Game,
-	GameEgg,
-	GraphicsDemo,
+	// Game,
+	// GameEgg,
+	// GraphicsDemo,
 ];
 
 frameCLasses.forEach(FrameClass => {
@@ -28,7 +26,7 @@ frameCLasses.forEach(FrameClass => {
 	frameButtonsRow.append(button);
 });
 
-let StartFrameClass = frameCLasses.find(FrameClass => `/${FrameClass.name}` === location.pathname) || frameCLasses[0];
+let StartFrameClass = frameCLasses.find(FrameClass => `/${FrameClass.name}` === location.pathname) || frameCLasses[0] || Game;
 looper.setFrameClass(StartFrameClass);
 
 // window.r = RecordMp4;
