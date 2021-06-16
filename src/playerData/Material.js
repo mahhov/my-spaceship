@@ -1,13 +1,9 @@
 import makeEnum from '../util/enum.js';
+import StatItem from './StatItem.js';
 
 const Types = makeEnum({A: 0});
 
-class Material {
-	constructor(type, name, stats) {
-		this.type = type;
-		this.name = name;
-		this.stats = stats;
-	}
+class Material extends StatItem {
 }
 
 Material.Types = Types;
