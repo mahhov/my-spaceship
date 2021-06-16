@@ -67,6 +67,7 @@ const vectorSum = (...vs) =>
 
 const floor = number => Math.floor(number);
 
+// todo [low] replace Math.floor with round when used for UI
 const round = (number, precision = 0) => {
 	let ten = 10 ** precision;
 	return Math.round(number * ten) / ten;

@@ -21,7 +21,7 @@ class TraitsUi extends Ui {
 
 			let containerButton = new UiButton(coordinates.container, '', '', true);
 			this.add(containerButton).on('hover', () =>
-				this.descriptionText.beginHover(containerButton.bounds, trait.description));
+				this.descriptionText.beginHover(containerButton.bounds, trait.descriptionText));
 			this.add(new UiText(coordinates.topLine, trait.name));
 			let valueText = this.add(new UiText(coordinates.bottomLine, trait.valueText));
 

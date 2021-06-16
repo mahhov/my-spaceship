@@ -1,14 +1,19 @@
+import {toUiString} from '../util/string.js';
+
 class Trait {
-	constructor(name, stats, value, maxValue, description) {
+	constructor(name, stats, value, maxValue) {
 		this.name = name;
 		this.stats = stats;
 		this.value = value;
 		this.maxValue = maxValue;
-		this.description = description;
 	}
 
 	get valueText() {
 		return `${this.value}/${this.maxValue}`;
+	}
+
+	get descriptionText() {
+		return toUiString(this.stats.map(stat => stat.descriptionText).join('; '));
 	}
 }
 

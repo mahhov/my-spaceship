@@ -1,4 +1,5 @@
 import makeEnum from '../util/enum.js';
+import {round} from '../util/number.js';
 import {toUiString} from '../util/string.js';
 
 const Ids = makeEnum({
@@ -30,6 +31,10 @@ class Stat {
 	constructor(id, value) {
 		this.id = id;
 		this.value = value;
+	}
+
+	get descriptionText() {
+		return toUiString(`${this.value >= 0 ? '+' : ''}${round(this.value * 100)}% ${Stat.name(this.id)}`);
 	}
 
 	static name(id) {

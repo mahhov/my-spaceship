@@ -8,11 +8,11 @@ class TraitsData extends Emitter {
 		this.traits = [
 			new Trait('Life', [
 				new Stat(Stat.Ids.LIFE, .05),
-			], 0, 4, '+5% max life'),
+			], 0, 4),
 			new Trait('Heavy armor', [
 				new Stat(Stat.Ids.ARMOR, .05),
 				new Stat(Stat.Ids.MOVE_SPEED, -.05),
-			], 0, 4, '+10% armor; -5% move speed'),
+			], 0, 4),
 		];
 
 		this.availablePoints = 0;
