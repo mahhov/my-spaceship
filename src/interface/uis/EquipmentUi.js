@@ -172,10 +172,12 @@ class EquipmentUi extends Ui {
 
 	refreshHoverText() {
 		if (!this.dropIndex || this.dropIndex.buttonType === ButtonTypes.SALVAGE)
-			return;
-		let statItem = this.equipmentData.getList(this.dropIndex.buttonType)[this.dropIndex.index];
-		if (statItem)
-			this.hoverText.beginHover(this.dropIndex.button.bounds, statItem.uiLines);
+			this.hoverText.endHover();
+		else {
+			let statItem = this.equipmentData.getList(this.dropIndex.buttonType)[this.dropIndex.index];
+			if (statItem)
+				this.hoverText.beginHover(this.dropIndex.button.bounds, statItem.uiLines);
+		}
 	}
 
 	disableEmptyButtons() {

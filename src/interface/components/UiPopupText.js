@@ -17,6 +17,10 @@ class UiPopupText extends UiComponent {
 		this.texts = texts;
 	}
 
+	endHover() {
+		this.hoverBounds = null;
+	}
+
 	update(controller) {
 		let {x, y} = controller.getRawMouse();
 		if (this.hoverBounds?.inside(x, y))
