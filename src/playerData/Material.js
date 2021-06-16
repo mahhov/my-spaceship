@@ -1,8 +1,8 @@
 import makeEnum from '../util/enum.js';
 
-const Types = makeEnum({HULL: 0, CIRCUIT: 0, THRUSTER: 0, TURRET: 0});
+const Types = makeEnum({A: 0});
 
-class Equipment {
+class Material {
 	constructor(type, name, stats) {
 		this.type = type;
 		this.name = name;
@@ -10,6 +10,6 @@ class Equipment {
 	}
 }
 
-Equipment.Types = Types;
+Material.Types = Types;
 
-export default Equipment;
+export default Material;

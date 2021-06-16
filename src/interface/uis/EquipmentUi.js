@@ -1,4 +1,6 @@
+import Equipment from '../../playerData/Equipment.js';
 import EquipmentData from '../../playerData/EquipmentData.js';
+import Material from '../../playerData/Material.js';
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
@@ -14,11 +16,14 @@ import UiGridLayout from './layouts/UiGridLayout.js';
 import Ui from './Ui.js';
 
 const ImagePaths = {
-	EquipmentTypes: {
-		[EquipmentData.EquipmentTypes.HULL]: '../../images/hull.png',
-		[EquipmentData.EquipmentTypes.CIRCUIT]: '../../images/circuit.png',
-		[EquipmentData.EquipmentTypes.THRUSTER]: '../../images/thruster.png',
-		[EquipmentData.EquipmentTypes.TURRET]: '../../images/turret.png',
+	Equipment: {
+		[Equipment.Types.HULL]: '../../images/hull.png',
+		[Equipment.Types.CIRCUIT]: '../../images/circuit.png',
+		[Equipment.Types.THRUSTER]: '../../images/thruster.png',
+		[Equipment.Types.TURRET]: '../../images/turret.png',
+	},
+	Materials: {
+		[Material.Types.A]: '../../images/rune.png',
 	},
 };
 
@@ -65,7 +70,7 @@ class EquipmentUi extends Ui {
 			.move(-Positions.MARGIN, 0)
 			.size(buttonSize * 4, buttonSize);
 		this.createSection(forgeCoordinate, 'Forge', 4, 1, buttonSize).forEach((button, i) => {
-			button.imagePath = ImagePaths.EquipmentTypes[i];
+			button.imagePath = ImagePaths.Equipment[i];
 			button.on('hover', () =>
 				hoverText.beginHover(button.bounds, `Cost: ${EquipmentData.getForgeCost(i)} metal`));
 			button.on('click', () => equipmentData.forge(i));
@@ -127,6 +132,7 @@ class EquipmentUi extends Ui {
 
 	drop() {
 		let [i1, i2] = [this.dragIndex, this.dropIndex].sort((a, b) => a.buttonType - b.buttonType);
+		let i1IsEquipment = i1.buttonType === ButtonTypes.EQUIPPED || i1.buttonType === ButtonTypes.INVENTORY;
 		if (i1.buttonType === ButtonTypes.INVENTORY && i2.buttonType === ButtonTypes.INVENTORY)
 			this.equipmentData.swapInventory(i1.index, i2.index);
 		else if (i1.buttonType === ButtonTypes.MATERIAL && i2.buttonType === ButtonTypes.MATERIAL)
@@ -139,11 +145,11 @@ class EquipmentUi extends Ui {
 				this.equipmentData.equip(this.dragIndex.index, inventoryIndex);
 		} else if (i1.buttonType === ButtonTypes.EQUIPPED && i2.buttonType === ButtonTypes.INVENTORY)
 			this.equipmentData.equip(this.equipmentData.inventory[i2.index]?.type ?? i1.index, i2.index);
-		else if ((i1.buttonType === ButtonTypes.EQUIPPED || i1.buttonType === ButtonTypes.INVENTORY) &&
-			i2.buttonType === ButtonTypes.SALVAGE)
-			this.equipmentData.salvage(i1.index);
+		else if (i1IsEquipment && i2.buttonType === ButtonTypes.SALVAGE)
+			this.equipmentData.salvage(i1.buttonType === ButtonTypes.EQUIPPED, i1.index);
+		else if (i1IsEquipment && i2.buttonType === ButtonTypes.MATERIAL)
+			this.equipmentData.craft(i1.buttonType === ButtonTypes.EQUIPPED, i1.index, i2.index);
 
-		// todo [high] use material on inventory
 		this.dragIndex = null;
 		this.dragOutline.visible = false;
 		this.salvageButton.disabled = true;
@@ -152,13 +158,13 @@ class EquipmentUi extends Ui {
 
 	refresh() {
 		this.equippedButtons.forEach((button, i) =>
-			button.imagePath = ImagePaths.EquipmentTypes[this.equipmentData.equipped[i]?.type]);
+			button.imagePath = ImagePaths.Equipment[this.equipmentData.equipped[i]?.type]);
 		this.metalText.text = this.equipmentData.metal;
-		this.inventoryButtons.forEach((button, i) => {
-			button.imagePath = ImagePaths.EquipmentTypes[this.equipmentData.inventory[i]?.type];
-		});
+		this.inventoryButtons.forEach((button, i) =>
+			button.imagePath = ImagePaths.Equipment[this.equipmentData.inventory[i]?.type]);
+		this.materialButtons.forEach((button, i) =>
+			button.imagePath = ImagePaths.Materials[this.equipmentData.materials[i]?.type]);
 		this.disableEmptyButtons();
-		// todo [high] material
 	}
 
 	disableEmptyButtons() {

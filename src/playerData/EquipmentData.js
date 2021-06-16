@@ -1,9 +1,8 @@
 import Emitter from '../util/Emitter.js';
-import makeEnum from '../util/enum.js';
 import {randInt} from '../util/number.js';
 import Equipment from './Equipment.js';
-
-const EquipmentTypes = makeEnum({HULL: 0, CIRCUIT: 0, THRUSTER: 0, TURRET: 0});
+import Material from './Material.js';
+import Stat from './Stat.js';
 
 const maxInventory = 128, maxMaterials = 128;
 
@@ -14,6 +13,13 @@ class EquipmentData extends Emitter {
 		this.equipped = [...Array(4)];
 		this.inventory = [...Array(maxInventory)];
 		this.materials = [...Array(maxMaterials)];
+
+		this.materials = this.materials.map(m => m ||
+			new Material(Material.Types.A, 'mat a', [
+				new Stat(Stat.Ids.LIFE, 10),
+				new Stat(Stat.Ids.ATTACK_RANGE, 10),
+				new Stat(Stat.Ids.MOVE_SPEED, 10),
+			]));
 	}
 
 	get stored() {
@@ -31,12 +37,12 @@ class EquipmentData extends Emitter {
 					name: equipment.name,
 					stats: equipment.stats,
 				})),
-			// materials: this.materials.map(material => (
-			// 	material && {
-			// 		type: material.type,
-			// 		name: material.name,
-			// 		stats: material.stats,
-			// 	})),
+			materials: this.materials.map(material => (
+				material && {
+					type: material.type,
+					name: material.name,
+					stats: material.stats,
+				})),
 		};
 	}
 
@@ -48,16 +54,21 @@ class EquipmentData extends Emitter {
 		this.inventory = stored?.inventory?.map(equipment =>
 			equipment && new Equipment(equipment.type, equipment.name, equipment.stats)) ||
 			[...Array(maxInventory)];
-		// this.materials = stored?.materials?.map(material =>
-		// 	material && new Equipment(material.type, material.name, material.stats)) ||
-		// 	[...Array(maxMaterials)];
+		this.materials = stored?.materials?.map(material =>
+			material && new Material(material.type, material.name, material.stats)) ||
+			[...Array(maxMaterials)];
 	}
 
 	get emptyInventoryIndex() {
 		return this.inventory.findIndex(equipment => !equipment);
 	}
 
+	getEquipmentList(equipped) {
+		return equipped ? this.equipped : this.inventory;
+	}
+
 	forge(equipmentType) {
+		// todo [high] make other methods similarly robust and remove checks from ui
 		let forgeCost = EquipmentData.getForgeCost(equipmentType);
 		let index = this.emptyInventoryIndex;
 		if (this.metal < forgeCost || index === -1)
@@ -68,10 +79,11 @@ class EquipmentData extends Emitter {
 		this.emit('forge');
 	}
 
-	salvage(inventoryIndex) {
-		let metal = EquipmentData.getSalvageCost(this.inventory[inventoryIndex].type);
+	salvage(equipped, inventoryIndex) {
+		let equipmentList = this.getEquipmentList(equipped);
+		let metal = EquipmentData.getSalvageCost(equipmentList[inventoryIndex].type);
 		this.metal += metal;
-		this.inventory[inventoryIndex] = null;
+		equipmentList[inventoryIndex] = null;
 		this.emit('change');
 		this.emit('salvage', metal);
 	}
@@ -94,13 +106,17 @@ class EquipmentData extends Emitter {
 		this.emit('change');
 	}
 
-	craft(inventoryIndex, materialIndex) {
-		// let equipment = this.inventory[inventoryIndex];
-		// let material = this.materials[materialIndex];
-		// if (material.use(equipment)) {
-		// 	this.materials[materialIndex] = null;
-		// 	return true;
-		// }
+	craft(equipped, inventoryIndex, materialIndex) {
+		let equipment = this.getEquipmentList(equipped)[inventoryIndex];
+		if (equipment.stats.length === 8)
+			return;
+		let material = this.materials[materialIndex];
+		let stats = material.stats.filter(stat => equipment.stats.every(statI => statI.id !== stat.id));
+		if (!stats.length)
+			return;
+		let stat = stats[randInt(stats.length)];
+		equipment.stats.push(stat);
+		this.materials[materialIndex] = null;
 		this.emit('change');
 		this.emit('craft');
 	}
@@ -122,7 +138,5 @@ class EquipmentData extends Emitter {
 		return `${prefix} ${equipmentTypeName} ${suffix}`;
 	}
 }
-
-EquipmentData.EquipmentTypes = EquipmentTypes;
 
 export default EquipmentData;
