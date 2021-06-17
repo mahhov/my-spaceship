@@ -1,5 +1,6 @@
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
+import StatValues from '../playerData/StatValues.js';
 import {Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
@@ -12,19 +13,17 @@ class Buff {
 		this.uiColor = uiColor;
 		this.uiText = uiText;
 		this.visible = visible;
-		this.statValues = {};
+		this.statValues = new StatValues();
 	}
 
 	static sum(buffs, statId) {
 		return buffs
-			.map(buff => buff.statValues[statId] || 0)
+			.map(buff => buff.statValues.stats[statId] || 0)
 			.reduce((a, b) => a + b, 0);
 	}
 
-	// todo [low] this is duplicated in PlayerData.statValues.
 	addStatValue(statId, value) {
-		this.statValues[statId] ||= 0;
-		this.statValues[statId] += value;
+		this.statValues.add(statId, value);
 	}
 
 	// return true if expired. Leaving duration undefined or 0 will never expire.

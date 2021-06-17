@@ -7,7 +7,7 @@ import ListUiLayout from './layouts/ListUiLayout.js';
 import Ui from './Ui.js';
 
 class CharacterUi extends Ui {
-	constructor(playerData, expData, traitsData) {
+	constructor(playerData, expData, traitsData, equipmentData) {
 		super();
 		let section = this.add(HubUi.createSection('Character', true, .3));
 
@@ -21,6 +21,7 @@ class CharacterUi extends Ui {
 
 		expData.on('change', () => this.refresh(playerData, expData));
 		traitsData.on('change', () => this.refresh(playerData, expData));
+		equipmentData.on('change', () => this.refresh(playerData, expData));
 		this.refresh(playerData, expData);
 	}
 
@@ -41,7 +42,7 @@ class CharacterUi extends Ui {
 	}
 
 	static getStatValuesForUi(statValues, statIds) {
-		return Object.values(statIds).map(i => round(statValues[i], 2) || 0);
+		return Object.values(statIds).map(i => round(statValues.stats[i], 2) || 0);
 	}
 }
 

@@ -42,7 +42,7 @@ class HubUi extends Ui {
 		this.encounterUi.bubble('begin-encounter', this);
 		this.techniquesTreeUi = this.add(new TechniquesTreeUi());
 		this.techniquesUi = this.add(new TechniquesUi());
-		this.characterUi = this.add(new CharacterUi(playerData, playerData.expData, playerData.traitsData));
+		this.characterUi = this.add(new CharacterUi(playerData, playerData.expData, playerData.traitsData, playerData.equipmentData));
 		this.traitsUi = this.add(new TraitsUi(playerData.traitsData));
 		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));

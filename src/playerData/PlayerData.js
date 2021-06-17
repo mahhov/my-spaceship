@@ -3,6 +3,7 @@ import EquipmentData from './EquipmentData.js';
 import ExpData from './ExpData.js';
 import RecordsData from './RecordsData.js';
 import Stat from './Stat.js';
+import StatValues from './StatValues.js';
 import TraitsData from './TraitsData.js';
 
 class PlayerData {
@@ -24,20 +25,22 @@ class PlayerData {
 	}
 
 	get statValues() {
-		let statValues = [];
-		this.traitsData.traits.forEach(trait =>
-			trait.stats.forEach(stat => {
-				statValues[stat.id] ||= 0;
-				statValues[stat.id] += trait.value * stat.value;
-			}));
+		let statValues = new StatValues();
+		this.traitsData.traits
+			.forEach(trait => trait.stats.forEach(stat =>
+				statValues.add(stat.id, trait.value * stat.value)));
+		this.equipmentData.equipped
+			.filter(equipment => equipment)
+			.forEach(equipment => equipment.stats.forEach(stat =>
+				statValues.add(stat.id, stat.value)));
 		return statValues;
 	}
 
 	get derivedStatValues() {
-		let derivedStatValues = [];
+		let derivedStatValues = new StatValues();
 		let statValues = this.statValues;
 		// todo [medium] 80 should be a constant reused in Player.constructor()
-		derivedStatValues[Stat.DerivedStatIds.TOTAL_LIFE] = 80 * (1 + statValues[Stat.Ids.LIFE]);
+		derivedStatValues.add(Stat.DerivedStatIds.TOTAL_LIFE, 80 * (1 + statValues.stats[Stat.Ids.LIFE]));
 		return derivedStatValues;
 	}
 }

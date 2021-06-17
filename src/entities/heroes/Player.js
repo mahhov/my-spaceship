@@ -63,7 +63,7 @@ class Player extends Hero {
 		this.bars = PlayerBar.createAll();
 
 		let traitsBuff = new Buff(0, null, null, false);
-		playerData.statValues.forEach((value, i) => traitsBuff.addStatValue(i, value));
+		traitsBuff.statValues = playerData.statValues;
 		this.addBuff(traitsBuff);
 		this.applyInitialBuffs();
 
