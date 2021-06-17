@@ -1,9 +1,9 @@
 import {toUiString} from '../util/string.js';
+import StatItem from './StatItem.js';
 
-class Trait {
+class Trait extends StatItem {
 	constructor(name, stats, value, maxValue) {
-		this.name = name;
-		this.stats = stats;
+		super(null, name, stats);
 		this.value = value;
 		this.maxValue = maxValue;
 	}
