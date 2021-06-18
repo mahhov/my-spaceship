@@ -60,21 +60,21 @@ class IntersectionFinder {
 		return this.boundsGroups[layer].add({bounds, reference});
 	}
 
-	removeBounds(layer, item) {
-		return this.boundsGroups[layer].remove(item);
+	removeBounds(layer, node) {
+		return this.boundsGroups[layer].remove(node);
 	}
 
 	hasIntersection(searchLayer, bounds) {
-		let item = this.boundsGroups[searchLayer]
+		let node = this.boundsGroups[searchLayer]
 			.find(({bounds: iBounds}) => iBounds.intersects(bounds));
-		return item && item.value.reference;
+		return node && node.value.reference;
 	}
 
 	intersections(layer, bounds) {
 		return this.collisions[layer].flatMap((_, iLayer) =>
 			this.boundsGroups[iLayer]
 				.filter(({bounds: iBounds}) => iBounds.intersects(bounds))
-				.map(item => item.value.reference));
+				.map(node => node.value.reference));
 	}
 
 	canMove(layer, bounds, dx, dy, magnitude, noSlide) {

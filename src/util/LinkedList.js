@@ -1,4 +1,4 @@
-class Item {
+class Node {
 	constructor(value, prev) {
 		this.value = value;
 		this.prev = prev;
@@ -13,20 +13,20 @@ class LinkedList {
 	add(value) {
 		this.length++;
 		return !this.head
-			? this.tail = this.head = new Item(value)
-			: this.tail = this.tail.next = new Item(value, this.tail);
+			? this.tail = this.head = new Node(value)
+			: this.tail = this.tail.next = new Node(value, this.tail);
 	}
 
-	remove(item) {
+	remove(node) {
 		this.length--;
-		if (item.prev)
-			item.prev.next = item.next;
-		if (item.next)
-			item.next.prev = item.prev;
-		if (this.head === item)
-			this.head = item.next;
-		if (this.tail === item)
-			this.tail = item.prev;
+		if (node.prev)
+			node.prev.next = node.next;
+		if (node.next)
+			node.next.prev = node.prev;
+		if (this.head === node)
+			this.head = node.next;
+		if (this.tail === node)
+			this.tail = node.prev;
 	}
 
 	forEach(handler) {

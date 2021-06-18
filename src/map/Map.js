@@ -70,23 +70,23 @@ class Map {
 	update(controller, monsterKnowledge) {
 		this.player.update(this, controller, this.intersectionFinder, monsterKnowledge);
 		this.bots.forEach(bot => bot.update(this, this.intersectionFinder, monsterKnowledge));
-		this.monsters.forEach((monster, item) => {
+		this.monsters.forEach((monster, node) => {
 			if (monster.health.isEmpty()) {
-				this.monsters.remove(item);
+				this.monsters.remove(node);
 				monster.removeIntersectionBounds(this.intersectionFinder);
 				this.player.onKill(monster);
 			} else
 				monster.update(this, this.intersectionFinder, monsterKnowledge);
 		});
-		this.projectiles.forEach((projectile, item) => {
+		this.projectiles.forEach((projectile, node) => {
 			if (projectile.update(this, this.intersectionFinder)) {
-				this.projectiles.remove(item);
+				this.projectiles.remove(node);
 				projectile.removeIntersectionBounds(this.intersectionFinder);
 			}
 		});
-		this.particles.forEach((particle, item) => {
+		this.particles.forEach((particle, node) => {
 			if (particle.update())
-				this.particles.remove(item);
+				this.particles.remove(node);
 		});
 	}
 
