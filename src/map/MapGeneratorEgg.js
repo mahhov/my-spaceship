@@ -13,6 +13,7 @@ import Rock from '../entities/stills/Rock.js';
 import RockMineral from '../entities/stills/RockMineral.js';
 import VShip from '../graphics/VShip.js';
 import Text from '../painter/elements/Text.js';
+import StatValues from '../playerData/StatValues.js';
 import {Colors, Positions} from '../util/Constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {NoiseSimplex} from '../util/noise.js';
@@ -77,7 +78,7 @@ class MapGeneratorEgg extends MapGenerator {
 
 	static generateHeroAbilities(x, y) {
 		let abilities = [
-			new ProjectileAttack(),
+			new ProjectileAttack(new StatValues()),
 			new Dash(),
 			new IncDefense(),
 		];

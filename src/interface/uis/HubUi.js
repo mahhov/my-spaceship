@@ -7,7 +7,6 @@ import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
 import RecordsUi from './RecordsUi.js';
-import TechniquesTreeUi from './TechniquesTreeUi.js';
 import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
@@ -40,8 +39,7 @@ class HubUi extends Ui {
 		this.encounterUi = this.add(new EncounterUi());
 		// todo [high] flush these out
 		this.bubble(this.encounterUi, 'begin-encounter');
-		this.techniquesTreeUi = this.add(new TechniquesTreeUi());
-		this.techniquesUi = this.add(new TechniquesUi());
+		this.techniquesUi = this.add(new TechniquesUi(playerData.techniqueData));
 		this.characterUi = this.add(new CharacterUi(playerData, playerData.expData, playerData.traitsData, playerData.equipmentData));
 		this.traitsUi = this.add(new TraitsUi(playerData.traitsData));
 		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
@@ -49,7 +47,7 @@ class HubUi extends Ui {
 
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
-			['Techniques', 'Evolve techniques', [this.techniquesTreeUi, this.techniquesUi]],
+			['Techniques', 'Refine techniques', [this.techniquesUi]],
 			['Traits', 'Allocate traits', [this.characterUi, this.traitsUi]],
 			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
 			['Records', 'Recorded stats', [this.RecordsUi]],

@@ -12,6 +12,7 @@ import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
 import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
+import StatValues from '../../playerData/StatValues.js';
 import {Colors, Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
@@ -49,7 +50,7 @@ class PlayerBar {
 class Player extends Hero {
 	constructor(playerData) {
 		let abilities = [
-			new ProjectileAttack(),
+			new ProjectileAttack(new StatValues()), // todo [high] send stats
 			new Dash(),
 			new IncDefense(),
 		];
