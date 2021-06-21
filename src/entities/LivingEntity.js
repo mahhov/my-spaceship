@@ -1,6 +1,5 @@
 import Stat from '../playerData/Stat.js';
 import Pool from '../util/Pool.js';
-import Buff from './Buff.js';
 import Entity from './Entity.js';
 
 class LivingEntity extends Entity {
@@ -39,7 +38,9 @@ class LivingEntity extends Entity {
 	}
 
 	getStat(statId) {
-		let value = Buff.sum(this.buffs, statId);
+		let value = this.buffs
+			.map(buff => buff.statValues.get(statId))
+			.reduce((a, b) => a + b, 0);
 		return statId === Stat.Ids.DISABLED ? value : value + 1;
 	}
 

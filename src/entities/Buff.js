@@ -16,12 +16,6 @@ class Buff {
 		this.statValues = new StatValues();
 	}
 
-	static sum(buffs, statId) {
-		return buffs
-			.map(buff => buff.statValues.stats[statId] || 0)
-			.reduce((a, b) => a + b, 0);
-	}
-
 	addStatValue(statId, value) {
 		this.statValues.add(statId, value);
 	}
