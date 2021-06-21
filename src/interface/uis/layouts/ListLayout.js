@@ -1,10 +1,9 @@
 import Coordinate from '../../../util/Coordinate.js';
 import GridLayout from './GridLayout.js';
 
-// todo [high] make sure encounters ui, hub buttons, character ui are all using this
 class ListLayout extends GridLayout {
-	constructor(coordinate, lineHeight) {
-		super(coordinate, 1, lineHeight, 0, 0);
+	constructor(coordinate, lineHeight, vertMargin = 0) {
+		super(coordinate, 1, lineHeight, 0, vertMargin);
 	}
 
 	getCoordinates(i) {

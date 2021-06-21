@@ -6,20 +6,16 @@ import UiText from '../components/UiText.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
+import GridLayout from './layouts/GridLayout.js';
 import RecordsUi from './RecordsUi.js';
 import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
 
 class UiSet {
-	constructor(buttonText, title, uis, index) {
-		let buttonWidth = .1;
+	constructor(coordinate, index, buttonText, title, uis) {
 		this.button = new UiButton(
-			new Coordinate(
-				Positions.MARGIN + (buttonWidth + Positions.MARGIN / 2) * index,
-				Positions.MARGIN,
-				buttonWidth,
-				Positions.UI_BUTTON_HEIGHT),
+			coordinate,
 			buttonText, index + 1);
 		this.title = HubUi.createTitle(title);
 		this.uis = [...uis];
@@ -45,13 +41,14 @@ class HubUi extends Ui {
 		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
+		let layout = GridLayout.createWithFixedColumnWidth(new Coordinate(Positions.MARGIN, Positions.MARGIN), 5, .1, Positions.UI_BUTTON_HEIGHT, Positions.MARGIN / 2);
 		this.uiSets = [
 			['Encounters', 'Select encounter', [this.encounterUi]],
 			['Techniques', 'Refine techniques', [this.techniquesUi]],
 			['Traits', 'Allocate traits', [this.characterUi, this.traitsUi]],
 			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
 			['Records', 'Recorded stats', [this.RecordsUi]],
-		].map((a, i) => new UiSet(...a, i));
+		].map((a, i) => new UiSet(layout.getCoordinates(i).container, i, ...a));
 
 		this.uiSets.forEach(uiSet => {
 			this.add(uiSet.button);
