@@ -7,13 +7,13 @@ class GameMenu extends Frame {
 		super(controller, painterSet);
 
 		this.pauseUi = new PauseUi();
-		this.pauseUi.bubble('resume', this);
-		this.pauseUi.on('end-encounter', () => this.currentUi = this.hubUi);
+		this.bubble(this.pauseUi, 'resume');
+		this.pauseUi.on('end-encounter', () => this.currentUi = hubUi);
 
-		this.hubUi = new HubUi(playerData);
-		this.hubUi.bubble('begin-encounter', this);
+		let hubUi = new HubUi(playerData);
+		this.bubble(hubUi, 'begin-encounter');
 
-		this.currentUi = this.hubUi;
+		this.currentUi = hubUi;
 	}
 
 	pause() {

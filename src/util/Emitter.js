@@ -12,8 +12,8 @@ class Emitter {
 		this.emitHandlers[event].push(handler);
 	}
 
-	bubble(event, emitter, rename = event) {
-		this.on(event, (...args) => emitter.emit(rename, ...args));
+	bubble(emitter, event, rename = event) {
+		emitter.on(event, (...args) => this.emit(rename, ...args));
 	}
 }
 
