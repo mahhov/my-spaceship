@@ -1,9 +1,8 @@
 import Coordinate from '../../../util/Coordinate.js';
-import UiGridLayout from './UiGridLayout.js';
+import GridLayout from './GridLayout.js';
 
 // todo [high] make sure encounters ui, hub buttons, character ui are all using this
-// todo [high] rename ListLayout
-class ListUiLayout extends UiGridLayout {
+class ListLayout extends GridLayout {
 	constructor(coordinate, lineHeight) {
 		super(coordinate, 1, lineHeight, 0, 0);
 	}
@@ -15,4 +14,4 @@ class ListUiLayout extends UiGridLayout {
 	}
 }
 
-export default ListUiLayout;
+export default ListLayout;

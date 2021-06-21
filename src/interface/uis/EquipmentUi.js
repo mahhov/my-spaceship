@@ -12,7 +12,7 @@ import UiPopupText from '../components/UiPopupText.js';
 import UiSection from '../components/UiSection.js';
 import UiText from '../components/UiText.js';
 import HubUi from './HubUi.js';
-import UiGridLayout from './layouts/UiGridLayout.js';
+import GridLayout from './layouts/GridLayout.js';
 import Ui from './Ui.js';
 
 const ImagePaths = {
@@ -117,7 +117,7 @@ class EquipmentUi extends Ui {
 
 	createSection(coordinate, sectionTitle, columns, rows, buttonSize) {
 		this.add(new UiSection(coordinate, sectionTitle));
-		let layout = new UiGridLayout(coordinate, columns, buttonSize, 0, 0);
+		let layout = new GridLayout(coordinate, columns, buttonSize, 0, 0);
 		return [...Array(columns * rows)].map((_, i) =>
 			this.add(new UiIconButton(layout.getCoordinates(i))));
 	}

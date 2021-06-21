@@ -4,7 +4,7 @@ import UiPopupText from '../components/UiPopupText.js';
 import UiText from '../components/UiText.js';
 import AllocationUi from './AllocationUi.js';
 import HubUi from './HubUi.js';
-import UiGridLayout from './layouts/UiGridLayout.js';
+import GridLayout from './layouts/GridLayout.js';
 import Ui from './Ui.js';
 
 class TraitsUi extends Ui {
@@ -15,7 +15,7 @@ class TraitsUi extends Ui {
 
 		let availableText = this.add(new UiText(innerCoordinate, traitsData.availableText));
 
-		let layout = new UiGridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
+		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
 		let allocationButtons = traitsData.allocations.map((allocation, i) => {
 			let {container} = layout.getCoordinates(i);
 			let allocationButton = this.add(new AllocationUi(container, allocation));

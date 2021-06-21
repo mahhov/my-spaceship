@@ -3,7 +3,7 @@ import {Positions} from '../../util/constants.js';
 import {round} from '../../util/number.js';
 import UiText from '../components/UiText.js';
 import HubUi from './HubUi.js';
-import ListUiLayout from './layouts/ListUiLayout.js';
+import ListLayout from './layouts/ListLayout.js';
 import Ui from './Ui.js';
 
 class CharacterUi extends Ui {
@@ -11,7 +11,7 @@ class CharacterUi extends Ui {
 		super();
 		let section = this.add(HubUi.createSection('Character', true, .3));
 
-		this.layout = new ListUiLayout(section.coordinate.clone.pad(Positions.MARGIN), Positions.UI_LINE_HEIGHT);
+		this.layout = new ListLayout(section.coordinate.clone.pad(Positions.MARGIN), Positions.UI_LINE_HEIGHT);
 		this.levelText = this.addTextPair('Level', 0);
 		this.expText = this.addTextPair('Experience', 1);
 		this.derivedStatTexts = Object.values(Stat.DerivedStatIds).map(i =>

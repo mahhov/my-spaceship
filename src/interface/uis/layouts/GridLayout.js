@@ -1,8 +1,7 @@
 import {Positions} from '../../../util/constants.js';
 import Coordinate from '../../../util/Coordinate.js';
 
-// todo [high] rename GridLayout
-class UiGridLayout {
+class GridLayout {
 	constructor(coordinate, columns, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
 		this.width = (coordinate.width + horizMargin) / columns - horizMargin;
 		this.height = height;
@@ -30,4 +29,4 @@ class UiGridLayout {
 	}
 }
 
-export default UiGridLayout;
+export default GridLayout;
