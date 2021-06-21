@@ -1,10 +1,10 @@
 import {toUiString} from '../util/string.js';
 import StatItem from './StatItem.js';
 
-class Trait extends StatItem {
-	constructor(name, stats, value, maxValue) {
+class Allocation extends StatItem {
+	constructor(name, stats, maxValue) {
 		super(null, name, stats);
-		this.value = value;
+		this.value = 0;
 		this.maxValue = maxValue;
 	}
 
@@ -13,8 +13,9 @@ class Trait extends StatItem {
 	}
 
 	get descriptionText() {
+		// todo [high] multiline
 		return toUiString(this.stats.map(stat => stat.descriptionText).join('; '));
 	}
 }
 
-export default Trait;
+export default Allocation;

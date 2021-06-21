@@ -1,51 +1,33 @@
-import Emitter from '../util/Emitter.js';
+import Allocation from './Allocation.js';
+import AllocationsData from './AllocationsData.js';
 import Stat from './Stat.js';
-import Trait from './Trait.js';
 
-class TraitsData extends Emitter {
+class TraitsData extends AllocationsData {
 	constructor(expData) {
-		super();
-		this.traits = [
-			new Trait('Life', [
+		super(expData, 4);
+		this.allocations = [
+			new Allocation('Life', [
 				new Stat(Stat.Ids.LIFE, .05),
-			], 0, 4),
-			new Trait('Heavy armor', [
+			], 4),
+			new Allocation('Heavy armor', [
 				new Stat(Stat.Ids.ARMOR, .05),
 				new Stat(Stat.Ids.MOVE_SPEED, -.05),
-			], 0, 4),
+			], 4),
 		];
-
-		this.availablePoints = 0;
-		expData.on('change-level', change => {
-			this.availablePoints += change * 4;
-			this.emit('change');
-		});
 	}
 
 	get stored() {
 		return {
 			availablePoints: this.availablePoints,
-			traits: Object.fromEntries(this.traits.map(trait =>
-				([trait.name, trait.value]))),
+			allocations: Object.fromEntries(this.allocations.map(allocation =>
+				([allocation.name, allocation.value]))),
 		};
 	}
 
 	set stored(stored) {
 		this.availablePoints = stored?.availablePoints || 0;
-		this.traits.forEach(trait =>
-			trait.value = stored?.traits?.[trait.name] || 0);
-	}
-
-	get availableText() {
-		return `Available trait points: ${this.availablePoints}`;
-	}
-
-	allocate(trait, value) {
-		if (trait.value + value >= 0 && this.availablePoints - value >= 0 && trait.value + value <= trait.maxValue) {
-			trait.value += value;
-			this.availablePoints -= value;
-			this.emit('change');
-		}
+		this.allocations.forEach(allocation =>
+			allocation.value = stored?.allocations?.[allocation.name] || 0);
 	}
 }
 
