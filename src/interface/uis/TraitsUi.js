@@ -19,7 +19,7 @@ class TraitsUi extends Ui {
 		let allocationButtons = traitsData.allocations.map((allocation, i) => {
 			let {container} = layout.getCoordinates(i);
 			let allocationButton = this.add(new AllocationUi(container, allocation));
-			allocationButton.on('hover', () => this.descriptionText.beginHover(allocationButton.bounds, [allocation.descriptionText]));
+			allocationButton.on('hover', () => this.descriptionText.beginHover(allocationButton.bounds, allocation.descriptionText));
 			allocationButton.on('decrease', () => traitsData.allocate(allocation, -1));
 			allocationButton.on('increase', () => traitsData.allocate(allocation, 1));
 			return [allocationButton, allocation];

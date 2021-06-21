@@ -1,4 +1,3 @@
-import {toUiString} from '../util/string.js';
 import StatItem from './StatItem.js';
 
 class Allocation extends StatItem {
@@ -13,8 +12,7 @@ class Allocation extends StatItem {
 	}
 
 	get descriptionText() {
-		// todo [high] multiline
-		return toUiString(this.stats.map(stat => stat.descriptionText).join('; '));
+		return this.stats.map(stat => stat.descriptionText);
 	}
 }
 

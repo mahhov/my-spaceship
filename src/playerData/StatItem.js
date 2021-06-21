@@ -5,7 +5,7 @@ class StatItem {
 		this.stats = stats;
 	}
 
-	get uiLines() {
+	get descriptionText() {
 		return [
 			this.name,
 			...this.stats.map(stat => stat.descriptionText),

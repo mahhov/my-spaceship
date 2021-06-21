@@ -177,7 +177,7 @@ class EquipmentUi extends Ui {
 		else {
 			let statItem = this.equipmentData.getList(this.dropIndex.buttonType)[this.dropIndex.index];
 			if (statItem)
-				this.hoverText.beginHover(this.dropIndex.button.bounds, statItem.uiLines);
+				this.hoverText.beginHover(this.dropIndex.button.bounds, statItem.descriptionText);
 		}
 	}
 
