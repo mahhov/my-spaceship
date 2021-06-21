@@ -119,7 +119,7 @@ class EquipmentUi extends Ui {
 		this.add(new UiSection(coordinate, sectionTitle));
 		let layout = new UiGridLayout(coordinate, columns, buttonSize, 0, 0);
 		return [...Array(columns * rows)].map((_, i) =>
-			this.add(new UiIconButton(layout.getContainerCoordinate(i))));
+			this.add(new UiIconButton(layout.getCoordinates(i))));
 	}
 
 	drag(buttonIndex) {

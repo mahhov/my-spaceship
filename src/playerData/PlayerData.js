@@ -4,17 +4,20 @@ import ExpData from './ExpData.js';
 import RecordsData from './RecordsData.js';
 import Stat from './Stat.js';
 import StatValues from './StatValues.js';
+import TechniqueData from './TechniqueData.js';
 import TraitsData from './TraitsData.js';
 
 class PlayerData {
 	constructor() {
 		this.expData = new ExpData();
+		this.techniqueData = new TechniqueData(this.expData);
 		this.traitsData = new TraitsData(this.expData);
 		this.equipmentData = new EquipmentData();
 		this.recordsData = new RecordsData(this.equipmentData);
 
 		[
 			this.expData,
+			this.techniqueData,
 			this.traitsData,
 			this.equipmentData,
 			this.recordsData,
@@ -26,9 +29,9 @@ class PlayerData {
 
 	get statValues() {
 		let statValues = new StatValues();
-		this.traitsData.traits
-			.forEach(trait => trait.stats.forEach(stat =>
-				statValues.add(stat.id, trait.value * stat.value)));
+		this.traitsData.allocations
+			.forEach(allocation => allocation.stats.forEach(stat =>
+				statValues.add(stat.id, allocation.value * stat.value)));
 		this.equipmentData.equipped
 			.filter(equipment => equipment)
 			.forEach(equipment => equipment.stats.forEach(stat =>

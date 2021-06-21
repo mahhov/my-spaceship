@@ -1,8 +1,8 @@
 import UiComponent from '../components/UiComponent.js';
 
 class Ui extends UiComponent {
-	constructor() {
-		super(null); // Uis aren't relocatable, so set coordinate to null
+	constructor(coordinate = null) {
+		super(coordinate);
 		this.components = [];
 	}
 

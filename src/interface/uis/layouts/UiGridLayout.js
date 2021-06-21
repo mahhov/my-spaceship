@@ -1,6 +1,7 @@
 import {Positions} from '../../../util/constants.js';
 import Coordinate from '../../../util/Coordinate.js';
 
+// todo [high] rename GridLayout
 class UiGridLayout {
 	constructor(coordinate, columns, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
 		this.width = (coordinate.width + horizMargin) / columns - horizMargin;
@@ -17,13 +18,15 @@ class UiGridLayout {
 		return Math.floor(i / this.columns);
 	}
 
-	getContainerCoordinate(i) {
-		return this.coordinate.clone.move(
+	getCoordinates(i) {
+		let container = this.coordinate.clone.move(
 			(this.width + this.horizMargin) * (i % this.columns),
 			(this.height + this.vertMargin) * this.getRow(i));
+		return {container};
 	}
 
-	getCoordinates(i) {
+	getCoordinatesRowColumn(row, column) {
+		return this.getCoordinates(row * this.columns + column);
 	}
 }
 

@@ -42,7 +42,7 @@ class CharacterUi extends Ui {
 	}
 
 	static getStatValuesForUi(statValues, statIds) {
-		return Object.values(statIds).map(i => round(statValues.stats[i], 2) || 0);
+		return Object.values(statIds).map(statId => round(statValues.get(statId), 2));
 	}
 }
 
