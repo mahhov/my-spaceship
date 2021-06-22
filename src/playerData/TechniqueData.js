@@ -7,16 +7,16 @@ import TechniqueTree from './TechniqueTree.js';
 class TechniqueData extends AllocationsData {
 	constructor(expData) {
 		super(expData, 1);
+		this.trees = [
+			TechniqueData.projectileAttackTree,
+			TechniqueData.areaAttackTree,
+			TechniqueData.dashTree,
+			TechniqueData.defenseTree,
+		];
+	}
 
-		// charges, laser, charged
-		// multiple, chain, pierce
-		// damage, attack speed, stacking dot
-		// life leech %, stamina gain flat, stacking armour for duration
-		// proc chance/dmg, aoe on proc, weakness debuff on proc
-		// proc chance/dmg, slow on proc, knockback on proc
-		// size, range, spread
-
-		let tree = new TechniqueTree('Projectile attack', [
+	static get projectileAttackTree() {
+		return new TechniqueTree('Projectile attack', [
 			[
 				new Allocation('Charges', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
 				new Allocation('Laser', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
@@ -35,7 +35,7 @@ class TechniqueData extends AllocationsData {
 			[
 				new Allocation('Life leech', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
 				new Allocation('Stamina gain', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
-				new Allocation('Armour inc', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
+				new Allocation('Armor inc', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
 			],
 			[
 				new Allocation('Proc x2', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
@@ -53,8 +53,71 @@ class TechniqueData extends AllocationsData {
 				new Allocation('Spread', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
 			],
 		]);
+	}
 
-		this.trees = [tree /*tree, tree, tree*/];
+	static get areaAttackTree() {
+		return new TechniqueTree('Area attack', [
+			[
+				new Allocation('Spinning', [], 4),
+				new Allocation('Triggered', [], 4),
+				new Allocation('Lingering dot', [], 4),
+			],
+			[
+				new Allocation('Damage', [], 4),
+				new Allocation('Aoe', [], 4),
+				new Allocation('Cooldown', [], 4),
+			],
+			[
+				new Allocation('Knockback', [], 4),
+				new Allocation('Slow', [], 4),
+				new Allocation('Armor debuff', [], 4),
+			],
+		]);
+	}
+
+	static get dashTree() {
+		return new TechniqueTree('Dash', [
+			[
+				new Allocation('Dash', [], 4),
+				new Allocation('Blink to target', [], 4),
+				new Allocation('Teleport', [], 4),
+			],
+			[
+				new Allocation('Haste', [], 4),
+				new Allocation('Damage', [], 4),
+				new Allocation('Armor', [], 4),
+			],
+			[
+				new Allocation('Damage', [], 4),
+				new Allocation('Slow', [], 4),
+				new Allocation('Knockback', [], 4),
+			],
+			[
+				new Allocation('Range', [], 4),
+				new Allocation('Stamina', [], 4),
+				new Allocation('Cooldown', [], 4),
+			],
+		]);
+	}
+
+	static get defenseTree() {
+		return new TechniqueTree('Defense', [
+			[
+				new Allocation('Heal', [], 4),
+				new Allocation('Armor', [], 4),
+				new Allocation('Heal over time', [], 4),
+			],
+			[
+				new Allocation('Amount', [], 4),
+				new Allocation('Duration', [], 4),
+				new Allocation('Cooldown', [], 4),
+			],
+			[
+				new Allocation('No stamina', [], 4),
+				new Allocation('Auto cast on low health', [], 4),
+				new Allocation('Saving from killing blow', [], 4),
+			],
+		]);
 	}
 
 	get stored() {
