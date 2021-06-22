@@ -2,8 +2,7 @@ import Vector from '../../util/Vector.js';
 import Path from './Path.js';
 
 class Line extends Path {
-	// todo [medium] replace constructor param with setOptions() like Text
-	constructor(x, y, x2, y2, width, graphicOptions) {
+	constructor(x, y, x2, y2, width) {
 		let w = new Vector(x2 - x, y2 - y).rotateByCosSin(0, 1);
 		w.magnitude = width;
 		let xys = [
@@ -12,7 +11,11 @@ class Line extends Path {
 			[x2 + w.x, y2 + w.y],
 			[x2 - w.x, y2 - w.y],
 		];
-		super(xys, true, graphicOptions);
+		super(xys, true);
+	}
+
+	setOptions({color = '#000', thickness = 1} = {}) {
+		return super.setOptions({color, thickness});
 	}
 
 	// todo [medium] use Coordinate and camera.transformCoordinates

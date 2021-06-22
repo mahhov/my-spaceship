@@ -77,7 +77,7 @@ class PathCreator {
 	create() {
 		let pathPoints = this.computePathPoints();
 		let thickness = this.computeThickness();
-		return new Path(pathPoints, this.closed, {fill: this.fill, color: this.color, thickness});
+		return new Path(pathPoints, this.closed).setOptions({fill: this.fill, color: this.color, thickness});
 	}
 
 	computePathPoints() {

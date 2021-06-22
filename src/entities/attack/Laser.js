@@ -28,8 +28,8 @@ class Laser extends Entity {
 			camera,
 			this.x, this.y,
 			this.x + this.moveX, this.y + this.moveY,
-			this.width,
-			{fill: true, color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()}));
+			this.width)
+			.setOptions({color: Colors.Entity.AREA_DEGEN.ACTIVE_FILL.get()}));
 	}
 }
 

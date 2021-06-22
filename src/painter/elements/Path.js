@@ -2,13 +2,17 @@ import PainterElement from './PainterElement.js';
 
 class Path extends PainterElement {
 	// todo [medium] replace constructor param with setOptions() like Text & Rect
-	constructor(xys, closed, {fill, color = '#000', thickness = 1} = {}) {
+	constructor(xys, closed) {
 		super();
 		this.xys = xys;
 		this.closed = closed;
+	}
+
+	setOptions({fill, color = '#000', thickness = 1} = {}) {
 		this.fill = fill;
 		this.color = color;
 		this.thickness = thickness;
+		return this;
 	}
 
 	paint(xt, yt, context) {

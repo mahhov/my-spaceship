@@ -39,8 +39,8 @@ class StaticLaser extends Module {
 			camera,
 			this.origin.x, this.origin.y,
 			warning.x, warning.y,
-			this.size,
-			{color: Colors.Entity.AREA_DEGEN.WARNING_BORDER.get()}));
+			this.size)
+			.setOptions({color: Colors.Entity.AREA_DEGEN.WARNING_BORDER.get()}));
 	}
 }
 
