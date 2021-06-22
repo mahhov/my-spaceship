@@ -46,7 +46,7 @@ class HubUi extends Ui {
 
 		this.uiSets.forEach(uiSet => this.add(uiSet.title));
 
-		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, .5),
+		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, 0, Positions.UI_BUTTON_HEIGHT),
 			['Encounters', 'Techniques', 'Traits', 'Equipment', 'Records'], true))
 			.on('select', index => this.setActiveUiSet(index));
 
