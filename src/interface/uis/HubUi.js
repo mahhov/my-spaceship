@@ -1,28 +1,23 @@
 import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import UiButton from '../components/UiButton.js';
 import UiSection from '../components/UiSection.js';
 import UiText from '../components/UiText.js';
-import GridLayout from '../layouts/GridLayout.js';
 import CharacterUi from './CharacterUi.js';
 import EncounterUi from './EncounterUi.js';
 import EquipmentUi from './EquipmentUi.js';
 import RecordsUi from './RecordsUi.js';
+import TabsUi from './TabsUi.js';
 import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
 
 class UiSet {
-	constructor(coordinate, index, buttonText, title, uis) {
-		this.button = new UiButton(
-			coordinate,
-			buttonText, index + 1);
+	constructor(title, uis) {
 		this.title = HubUi.createTitle(title);
 		this.uis = [...uis];
 	}
 
 	setActive(active) {
-		this.button.disabled = active;
 		this.title.visible = active;
 		this.uis.forEach(ui => ui.visible = active);
 	}
@@ -41,22 +36,21 @@ class HubUi extends Ui {
 		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
-		let layout = GridLayout.createWithFixedColumnWidth(new Coordinate(Positions.MARGIN, Positions.MARGIN), 5, .1, Positions.UI_BUTTON_HEIGHT, Positions.MARGIN / 2);
 		this.uiSets = [
-			['Encounters', 'Select encounter', [this.encounterUi]],
-			['Techniques', 'Refine techniques', [this.techniquesUi]],
-			['Traits', 'Allocate traits', [this.characterUi, this.traitsUi]],
-			['Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]],
-			['Records', 'Recorded stats', [this.RecordsUi]],
-		].map((a, i) => new UiSet(layout.getCoordinates(i).container, i, ...a));
+			new UiSet('Select encounter', [this.encounterUi]),
+			new UiSet('Refine techniques', [this.techniquesUi]),
+			new UiSet('Allocate traits', [this.characterUi, this.traitsUi]),
+			new UiSet('Craft equipment', [this.characterUi, this.equipmentUi]),
+			new UiSet('Recorded stats', [this.RecordsUi]),
+		];
 
-		this.uiSets.forEach(uiSet => {
-			this.add(uiSet.button);
-			this.add(uiSet.title);
-			uiSet.button.on('click', () => this.setActiveUiSet(uiSet));
-		});
+		this.uiSets.forEach(uiSet => this.add(uiSet.title));
 
-		this.setActiveUiSet(this.uiSets[0]);
+		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, .5),
+			['Encounters', 'Techniques', 'Traits', 'Equipment', 'Records'], true))
+			.on('select', index => this.setActiveUiSet(index));
+
+		this.setActiveUiSet(0);
 	}
 
 	static createTitle(text) {
@@ -74,11 +68,11 @@ class HubUi extends Ui {
 			text);
 	}
 
-	setActiveUiSet(uiSet) {
+	setActiveUiSet(index) {
 		this.uiSets
-			.filter(uiSetI => uiSetI !== uiSet)
-			.forEach(uiSetI => uiSetI.setActive(false));
-		uiSet.setActive(true);
+			.filter((_, i) => i !== index)
+			.forEach(uiSet => uiSet.setActive(false));
+		this.uiSets[index].setActive(true);
 	}
 }
 
