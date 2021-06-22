@@ -13,7 +13,7 @@ import Ui from './Ui.js';
 
 class UiSet {
 	constructor(title, uis) {
-		this.title = HubUi.createTitle(title);
+		this.title = new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), title).setTextOptions({size: '22px'});
 		this.uis = [...uis];
 	}
 
@@ -51,10 +51,6 @@ class HubUi extends Ui {
 			.on('select', index => this.setActiveUiSet(index));
 
 		this.setActiveUiSet(0);
-	}
-
-	static createTitle(text) {
-		return new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), text).setTextOptions({size: '22px'});
 	}
 
 	static createSection(text, isLeft, widthWeight) {
