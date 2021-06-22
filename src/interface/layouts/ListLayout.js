@@ -1,4 +1,4 @@
-import Coordinate from '../../../util/Coordinate.js';
+import Coordinate from '../../util/Coordinate.js';
 import GridLayout from './GridLayout.js';
 
 class ListLayout extends GridLayout {

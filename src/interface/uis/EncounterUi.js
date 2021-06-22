@@ -4,7 +4,7 @@ import {Positions} from '../../util/Constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import UiTextArea from '../components/UiTextArea.js';
-import ListLayout from './layouts/ListLayout.js';
+import ListLayout from '../layouts/ListLayout.js';
 import Ui from './Ui.js';
 
 class EncounterUi extends Ui {

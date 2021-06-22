@@ -2,9 +2,9 @@ import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiPopupText from '../components/UiPopupText.js';
 import UiText from '../components/UiText.js';
+import GridLayout from '../layouts/GridLayout.js';
 import AllocationUi from './AllocationUi.js';
 import HubUi from './HubUi.js';
-import GridLayout from './layouts/GridLayout.js';
 import Ui from './Ui.js';
 
 class TraitsUi extends Ui {

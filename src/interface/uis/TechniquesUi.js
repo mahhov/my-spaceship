@@ -2,8 +2,8 @@ import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import UiText from '../components/UiText.js';
+import GridLayout from '../layouts/GridLayout.js';
 import AllocationUi from './AllocationUi.js';
-import GridLayout from './layouts/GridLayout.js';
 import Ui from './Ui.js';
 
 class TechniquesUi extends Ui {

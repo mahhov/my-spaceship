@@ -2,8 +2,8 @@ import Stat from '../../playerData/Stat.js';
 import {Positions} from '../../util/constants.js';
 import {round} from '../../util/number.js';
 import UiText from '../components/UiText.js';
+import ListLayout from '../layouts/ListLayout.js';
 import HubUi from './HubUi.js';
-import ListLayout from './layouts/ListLayout.js';
 import Ui from './Ui.js';
 
 class CharacterUi extends Ui {

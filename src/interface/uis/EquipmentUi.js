@@ -11,8 +11,8 @@ import UiOutline from '../components/UiOutline.js';
 import UiPopupText from '../components/UiPopupText.js';
 import UiSection from '../components/UiSection.js';
 import UiText from '../components/UiText.js';
+import GridLayout from '../layouts/GridLayout.js';
 import HubUi from './HubUi.js';
-import GridLayout from './layouts/GridLayout.js';
 import Ui from './Ui.js';
 
 const ImagePaths = {

@@ -1,5 +1,5 @@
-import {Positions} from '../../../util/constants.js';
-import Coordinate from '../../../util/Coordinate.js';
+import {Positions} from '../../util/constants.js';
+import Coordinate from '../../util/Coordinate.js';
 
 class GridLayout {
 	constructor(coordinate, columns, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
