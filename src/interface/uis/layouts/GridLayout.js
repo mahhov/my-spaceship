@@ -13,10 +13,6 @@ class GridLayout {
 			.size(this.width, height);
 	}
 
-	static widthForColumns(columnWidth, columns, horizMargin) {
-		return columnWidth * columns + horizMargin * (columns - 1);
-	}
-
 	static createWithFixedColumnWidth(coordinate, columns, columnWidth, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
 		coordinate.size(columnWidth * columns + horizMargin * (columns - 1));
 		return new GridLayout(coordinate, columns, height, horizMargin, vertMargin);

@@ -11,7 +11,7 @@ class AllocationsData extends Emitter {
 	}
 
 	get availableText() {
-		return `Available allocation points: ${this.availablePoints}`;
+		return `Available points: ${this.availablePoints}`;
 	}
 
 	allocate(allocation, value) {

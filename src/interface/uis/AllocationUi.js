@@ -36,6 +36,11 @@ class AllocationUi extends Ui {
 		}
 	}
 
+	static get width() {
+		// todo [low] TraitUi should use this width rather than rely on layout calculations
+		return .0834;
+	}
+
 	static get height() {
 		return Positions.UI_LINE_HEIGHT * (1 + BOTTOM_LINE_SPACING);
 	}

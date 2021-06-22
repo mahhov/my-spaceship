@@ -1,6 +1,6 @@
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import UiSection from '../components/UiSection.js';
+import UiButton from '../components/UiButton.js';
 import UiText from '../components/UiText.js';
 import AllocationUi from './AllocationUi.js';
 import GridLayout from './layouts/GridLayout.js';
@@ -10,22 +10,24 @@ class TechniquesUi extends Ui {
 	constructor(techniqueData) {
 		// todo [high] flush out and wire in
 		super();
-		let innerCoordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_LINE_HEIGHT + Positions.MARGIN)
+		let coordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_LINE_HEIGHT + Positions.MARGIN)
 			.pad(Positions.MARGIN, 0);
+		this.add(new UiText(coordinate.clone, techniqueData.availableText));
 
-		let availableText = this.add(new UiText(innerCoordinate, techniqueData.availableText));
+		coordinate.shift(0, 1);
+		let treeButtonsLayout = GridLayout.createWithFixedColumnWidth(coordinate.clone, 4, .2, Positions.UI_BUTTON_HEIGHT, Positions.MARGIN / 2);
+		techniqueData.trees.forEach((tree, i) => {
+			let {container} = treeButtonsLayout.getCoordinates(i);
+			this.add(new UiButton(container, tree.name));
+		});
 
-		let treesCoordinate = innerCoordinate.clone.shift(0, 1).pad(.3, 0);
-		let treesLayout = new GridLayout(treesCoordinate, 1, 1 - treesCoordinate.top - Positions.MARGIN);
-		techniqueData.trees.forEach((tree, treeIndex) => {
-			let {container} = treesLayout.getCoordinates(treeIndex);
-			this.add(new UiSection(container.clone, tree.name));
-			let treeLayout = new GridLayout(container.pad(Positions.MARGIN), 3, AllocationUi.height);
-			tree.allocationSets.forEach((set, setIndex) => {
-				set.forEach((allocation, allocationIndex) => {
-					let coordinates = treeLayout.getCoordinatesRowColumn(setIndex, allocationIndex);
-					this.add(new AllocationUi(coordinates.container, allocation));
-				});
+		coordinate
+			.move(0, Positions.UI_BUTTON_HEIGHT + Positions.MARGIN * 2)
+			.size(coordinate.width, 1 - coordinate.top - Positions.MARGIN);
+		let treeLayout = GridLayout.createWithFixedColumnWidth(coordinate, 4, AllocationUi.width, AllocationUi.height, Positions.MARGIN, Positions.MARGIN * 2.5);
+		techniqueData.trees[0].allocationSets.forEach((set, setIndex) => {
+			set.forEach((allocation, allocationIndex) => {
+				this.add(new AllocationUi(treeLayout.getCoordinatesRowColumn(setIndex, allocationIndex).container, allocation));
 			});
 		});
 	}
