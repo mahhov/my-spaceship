@@ -39,6 +39,14 @@ class AllocationUi extends Ui {
 		}
 	}
 
+	static createAndBindAllocationUi(coordinate, allocation, data, hoverPopup) {
+		let allocationUi = new AllocationUi(coordinate, allocation);
+		allocationUi.on('hover', () => hoverPopup.beginHover(allocationUi.bounds, allocation.descriptionText));
+		allocationUi.on('decrease', () => data.allocate(allocation, -1));
+		allocationUi.on('increase', () => data.allocate(allocation, 1));
+		return allocationUi;
+	}
+
 	static get width() {
 		// todo [low] TraitUi should use this width rather than rely on layout calculations
 		return .0834;

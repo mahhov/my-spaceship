@@ -16,17 +16,15 @@ class TraitsUi extends Ui {
 
 		this.availableText = this.add(new UiText(innerCoordinate));
 
-		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
-		this.allocationUis = traitsData.allocations.map((allocation, i) => {
-			let {container} = layout.getCoordinates(i);
-			let allocationUi = this.add(new AllocationUi(container, allocation));
-			allocationUi.on('hover', () => this.descriptionText.beginHover(allocationUi.bounds, allocation.descriptionText));
-			allocationUi.on('decrease', () => traitsData.allocate(allocation, -1));
-			allocationUi.on('increase', () => traitsData.allocate(allocation, 1));
-			return allocationUi;
-		});
+		let hoverText = new UiPopupText(new Coordinate(0, 0, .22));
 
-		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
+		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
+		this.allocationUis = traitsData.allocations.map((allocation, i) =>
+			this.add(AllocationUi.createAndBindAllocationUi(
+				layout.getCoordinates(i).container,
+				allocation, traitsData, hoverText)));
+
+		this.add(hoverText);
 
 		traitsData.on('change', () => this.refresh());
 		this.refresh();
