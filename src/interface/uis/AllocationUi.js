@@ -9,6 +9,8 @@ const BOTTOM_LINE_SPACING = 1.2, ALLOCATE_BUTTON_SIZE = 0.015;
 class AllocationUi extends Ui {
 	constructor(coordinate, allocation, singleButton = false) {
 		super(coordinate);
+		this.allocation = allocation;
+
 		let topLine = coordinate.clone
 			.size(coordinate.width, Positions.UI_LINE_HEIGHT)
 			.alignWithoutMove(Coordinate.Aligns.CENTER);
@@ -45,8 +47,8 @@ class AllocationUi extends Ui {
 		return Positions.UI_LINE_HEIGHT * (1 + BOTTOM_LINE_SPACING);
 	}
 
-	set value(value) {
-		this.valueText.text = value;
+	updateValueText() {
+		this.valueText.text = this.allocation.valueText;
 	}
 }
 

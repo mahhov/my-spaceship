@@ -22,14 +22,13 @@ class TraitsUi extends Ui {
 			allocationButton.on('hover', () => this.descriptionText.beginHover(allocationButton.bounds, allocation.descriptionText));
 			allocationButton.on('decrease', () => traitsData.allocate(allocation, -1));
 			allocationButton.on('increase', () => traitsData.allocate(allocation, 1));
-			return [allocationButton, allocation];
+			return allocationButton;
 		});
 
 		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
 
 		traitsData.on('change', () => {
-			allocationButtons.forEach(([allocationButton, allocation]) =>
-				allocationButton.value = allocation.valueText);
+			allocationButtons.forEach(allocationButton => allocationButton.updateValueText());
 			availableText.text = traitsData.availableText;
 		});
 	}
