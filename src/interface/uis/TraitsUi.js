@@ -14,7 +14,7 @@ class TraitsUi extends Ui {
 		let section = this.add(HubUi.createSection('Traits', false, .7));
 		let innerCoordinate = section.coordinate.clone.pad(Positions.MARGIN).alignWithoutMove(Coordinate.Aligns.START);
 
-		this.availableText = this.add(new UiText(innerCoordinate, ''));
+		this.availableText = this.add(new UiText(innerCoordinate));
 
 		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
 		this.allocationUis = traitsData.allocations.map((allocation, i) => {
@@ -28,11 +28,11 @@ class TraitsUi extends Ui {
 
 		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
 
-		traitsData.on('change', () => this.updateTraitsData());
-		this.updateTraitsData();
+		traitsData.on('change', () => this.refresh());
+		this.refresh();
 	}
 
-	updateTraitsData() {
+	refresh() {
 		this.allocationUis.forEach(allocationUi => allocationUi.updateValueText());
 		this.availableText.text = this.traitsData.availableText;
 	}

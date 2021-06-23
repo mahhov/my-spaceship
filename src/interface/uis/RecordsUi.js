@@ -7,16 +7,20 @@ import Ui from './Ui.js';
 class RecordsUi extends Ui {
 	constructor(recordsData) {
 		super();
+		this.recordsData = recordsData;
 		let layout = new ListLayout(new Coordinate(.4, Positions.UI_FIRST_ROW, .2, 0), Positions.UI_ROW_HEIGHT);
-		let valueTexts = recordsData.records.map((record, i) => {
+		this.valueTexts = recordsData.records.map((record, i) => {
 			let coordinates = layout.getCoordinates(i);
 			this.add(new UiText(coordinates.container, `${record.name}`));
-			let valueText = this.add(new UiText(coordinates.right, record.value));
-			return [valueText, record];
+			return this.add(new UiText(coordinates.right));
 		});
-		recordsData.on('change', () =>
-			valueTexts.forEach(([valueText, record]) =>
-				valueText.text = record.value));
+		recordsData.on('change', () => this.refresh());
+		this.refresh();
+	}
+
+	refresh() {
+		this.valueTexts.forEach((valueText, i) =>
+			valueText.text = this.recordsData.records[i].value);
 	}
 }
 

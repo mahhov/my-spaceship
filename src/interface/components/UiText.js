@@ -2,7 +2,7 @@ import Text from '../../painter/elements/Text.js';
 import UiComponent from './UiComponent.js';
 
 class UiText extends UiComponent {
-	constructor(coordinate, text) {
+	constructor(coordinate, text = '') {
 		super(coordinate);
 		this.text = text;
 	}

@@ -9,6 +9,8 @@ import Ui from './Ui.js';
 class CharacterUi extends Ui {
 	constructor(playerData, expData, traitsData, equipmentData) {
 		super();
+		this.playerData = playerData;
+		this.expData = expData;
 		let section = this.add(HubUi.createSection('Character', true, .3));
 
 		this.layout = new ListLayout(section.coordinate.clone.pad(Positions.MARGIN), Positions.UI_LINE_HEIGHT);
@@ -19,25 +21,25 @@ class CharacterUi extends Ui {
 		this.statTexts = Object.values(Stat.Ids).map(i =>
 			this.addTextPair(Stat.name(i), i + 4 + Object.values(Stat.DerivedStatIds).length));
 
-		expData.on('change', () => this.refresh(playerData, expData));
-		traitsData.on('change', () => this.refresh(playerData, expData));
-		equipmentData.on('change', () => this.refresh(playerData, expData));
-		this.refresh(playerData, expData);
+		expData.on('change', () => this.refresh());
+		traitsData.on('change', () => this.refresh());
+		equipmentData.on('change', () => this.refresh());
+		this.refresh();
 	}
 
 	addTextPair(label, i) {
 		let coordinates = this.layout.getCoordinates(i);
 		this.add(new UiText(coordinates.container, label));
-		return this.add(new UiText(coordinates.right, ''));
+		return this.add(new UiText(coordinates.right));
 	}
 
-	refresh(playerData, expData) {
-		this.levelText.text = expData.levelText;
-		this.expText.text = expData.expText;
+	refresh() {
+		this.levelText.text = this.expData.levelText;
+		this.expText.text = this.expData.expText;
 
-		CharacterUi.getStatValuesForUi(playerData.derivedStatValues, Stat.DerivedStatIds)
+		CharacterUi.getStatValuesForUi(this.playerData.derivedStatValues, Stat.DerivedStatIds)
 			.forEach((value, i) => this.derivedStatTexts[i].text = value);
-		CharacterUi.getStatValuesForUi(playerData.statValues, Stat.Ids)
+		CharacterUi.getStatValuesForUi(this.playerData.statValues, Stat.Ids)
 			.forEach((value, i) => this.statTexts[i].text = value);
 	}
 
