@@ -29,7 +29,8 @@ class AllocationUi extends Ui {
 		this.bounds = containerButton.bounds;
 		this.bubble(containerButton, 'hover');
 		this.add(new UiText(topLine, allocation.name));
-		this.valueText = this.add(new UiText(bottomLine, allocation.valueText));
+		this.valueText = this.add(new UiText(bottomLine, ''));
+		this.updateValueText();
 		if (!singleButton) {
 			let decreaseButton = this.add(new UiButton(buttonLeft, '-'));
 			this.bubble(decreaseButton, 'click', 'decrease');

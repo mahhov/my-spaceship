@@ -10,27 +10,31 @@ import Ui from './Ui.js';
 class TraitsUi extends Ui {
 	constructor(traitsData) {
 		super();
+		this.traitsData = traitsData;
 		let section = this.add(HubUi.createSection('Traits', false, .7));
 		let innerCoordinate = section.coordinate.clone.pad(Positions.MARGIN).alignWithoutMove(Coordinate.Aligns.START);
 
-		let availableText = this.add(new UiText(innerCoordinate, traitsData.availableText));
+		this.availableText = this.add(new UiText(innerCoordinate, ''));
 
 		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
-		let allocationButtons = traitsData.allocations.map((allocation, i) => {
+		this.allocationUis = traitsData.allocations.map((allocation, i) => {
 			let {container} = layout.getCoordinates(i);
-			let allocationButton = this.add(new AllocationUi(container, allocation));
-			allocationButton.on('hover', () => this.descriptionText.beginHover(allocationButton.bounds, allocation.descriptionText));
-			allocationButton.on('decrease', () => traitsData.allocate(allocation, -1));
-			allocationButton.on('increase', () => traitsData.allocate(allocation, 1));
-			return allocationButton;
+			let allocationUi = this.add(new AllocationUi(container, allocation));
+			allocationUi.on('hover', () => this.descriptionText.beginHover(allocationUi.bounds, allocation.descriptionText));
+			allocationUi.on('decrease', () => traitsData.allocate(allocation, -1));
+			allocationUi.on('increase', () => traitsData.allocate(allocation, 1));
+			return allocationUi;
 		});
 
 		this.descriptionText = this.add(new UiPopupText(new Coordinate(0, 0, .22)));
 
-		traitsData.on('change', () => {
-			allocationButtons.forEach(allocationButton => allocationButton.updateValueText());
-			availableText.text = traitsData.availableText;
-		});
+		traitsData.on('change', () => this.updateTraitsData());
+		this.updateTraitsData();
+	}
+
+	updateTraitsData() {
+		this.allocationUis.forEach(allocationUi => allocationUi.updateValueText());
+		this.availableText.text = this.traitsData.availableText;
 	}
 }
 
