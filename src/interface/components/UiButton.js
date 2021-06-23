@@ -8,7 +8,7 @@ import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import UiComponent from './UiComponent.js';
 
-const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, ACTIVE_ALT: 0, HOVER: 0});
+const States = makeEnum({DISABLED: 0, FORCED_ACTIVE: 0, INACTIVE: 0, ACTIVE: 0, ACTIVE_ALT: 0, HOVER: 0});
 
 class UiButton extends UiComponent {
 	constructor(coordinate, text, hotkey = '', hidden = false, adaptiveWidth = false) {
@@ -22,6 +22,7 @@ class UiButton extends UiComponent {
 		this.state = States.INACTIVE;
 		this.hidden = hidden; // prevents painting
 		this.disabled = false; // prevents updating
+		this.forcedActive = false; // like disabled, but painted like active
 	}
 
 	update(controller) {
@@ -42,6 +43,8 @@ class UiButton extends UiComponent {
 	getState(controller) {
 		if (this.disabled)
 			return States.DISABLED;
+		if (this.forcedActive)
+			return States.FORCED_ACTIVE;
 		let {x, y} = controller.getRawMouse();
 		if (this.hotkey && controller.getKeyState(this.hotkey).pressed)
 			return States.ACTIVE;
@@ -66,7 +69,7 @@ class UiButton extends UiComponent {
 	}
 
 	paintBack(painter) {
-		let color = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
+		let color = [Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color}));
 	}
 }

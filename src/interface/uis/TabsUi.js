@@ -8,9 +8,9 @@ class TabsUi extends Ui {
 		let buttons = texts.map((text, i) => {
 			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', false, true));
 			coordinate = coordinate.clone.shift(1, 0).move(Positions.MARGIN / 2, 0);
-			button.disabled = !i;
+			button.forcedActive = !i;
 			button.on('click', () => {
-				buttons.forEach(buttonI => buttonI.disabled = buttonI === button);
+				buttons.forEach(buttonI => buttonI.forcedActive = buttonI === button);
 				this.emit('select', i);
 			});
 			return button;
