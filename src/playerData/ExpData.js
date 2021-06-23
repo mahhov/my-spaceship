@@ -48,7 +48,8 @@ class ExpData extends Emitter {
 	}
 
 	get expRequired() {
-		return (this.level + 5) * 100;
+		// todo [medium] once we have availablePoints properly recalculated, use actual formula
+		return 600; // (this.level + 5) * 100;
 	}
 }
 
