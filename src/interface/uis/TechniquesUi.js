@@ -1,29 +1,30 @@
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
-import UiButton from '../components/UiButton.js';
+import UiOutline from '../components/UiOutline.js';
 import UiText from '../components/UiText.js';
 import GridLayout from '../layouts/GridLayout.js';
 import AllocationUi from './AllocationUi.js';
+import TabsUi from './TabsUi.js';
 import Ui from './Ui.js';
 
 class TechniquesUi extends Ui {
 	constructor(techniqueData) {
 		// todo [high] flush out and wire in
 		super();
-		let coordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_LINE_HEIGHT + Positions.MARGIN)
-			.pad(Positions.MARGIN, 0);
-		this.add(new UiText(coordinate.clone, techniqueData.availableText));
 
-		coordinate.shift(0, 1);
-		let treeButtonsLayout = GridLayout.createWithFixedColumnWidth(coordinate.clone, 4, .2, Positions.UI_BUTTON_HEIGHT, Positions.MARGIN / 2);
-		techniqueData.trees.forEach((tree, i) => {
-			let {container} = treeButtonsLayout.getCoordinates(i);
-			this.add(new UiButton(container, tree.name));
-		});
+		let coordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_BUTTON_HEIGHT)
+			.pad(Positions.MARGIN, 0);
+		this.add(new TabsUi(coordinate.clone, techniqueData.trees.map(tree => tree.name)));
+
+		this.add(new UiText(coordinate.clone.alignWithoutMove(Coordinate.Aligns.END), techniqueData.availableText));
 
 		coordinate
-			.move(0, Positions.UI_BUTTON_HEIGHT + Positions.MARGIN * 2)
+			.shift(0, 1)
+			.move(0, Positions.BREAK)
 			.size(coordinate.width, 1 - coordinate.top - Positions.MARGIN);
+		this.add(new UiOutline(coordinate.clone));
+
+		coordinate.pad(Positions.MARGIN);
 		let treeLayout = GridLayout.createWithFixedColumnWidth(coordinate, 4, AllocationUi.width, AllocationUi.height, Positions.MARGIN, Positions.MARGIN * 2.5);
 		techniqueData.trees[0].allocationSets.forEach((set, setIndex) => {
 			set.forEach((allocation, allocationIndex) => {
