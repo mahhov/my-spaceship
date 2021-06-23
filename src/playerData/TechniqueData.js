@@ -127,21 +127,18 @@ class TechniqueData extends AllocationsData {
 
 	get stored() {
 		return {
+			// todo [medium] store pointsEarned and compute availablePoints
 			availablePoints: this.availablePoints,
-			// allocations: Object.fromEntries(this.allocations.map(allocation =>
-			// 	([allocation.name, allocation.value]))),
+			trees: this.trees.map(tree => tree.allocationSets.map(allocations => allocations.map(allocation => allocation.value))),
 		};
 	}
 
 	set stored(stored) {
 		this.availablePoints = stored?.availablePoints || 0;
-		// this.allocations.forEach(allocation =>
-		// 	allocation.value = stored?.allocations?.[allocation.name] || 0);
-	}
-
-	allocateNode(node, value) {
-		if (node.value + value !== 0 || this.graph.isSubsetConnected([node]))
-			super.allocate(node.value, value);
+		this.trees.forEach((tree, treeIndex) =>
+			tree.allocationSets.forEach((allocations, setIndex) =>
+				allocations.forEach((allocation, allocationIndex) =>
+					allocation.value = stored?.trees?.[treeIndex]?.[setIndex]?.[allocationIndex] || 0)));
 	}
 }
 
