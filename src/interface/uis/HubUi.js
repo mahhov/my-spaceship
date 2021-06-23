@@ -11,15 +11,12 @@ import TechniquesUi from './TechniquesUi.js';
 import TraitsUi from './TraitsUi.js';
 import Ui from './Ui.js';
 
-class UiSet {
-	constructor(title, uis) {
-		this.title = new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), title).setTextOptions({size: '22px'});
-		this.uis = [...uis];
-	}
-
-	setActive(active) {
-		this.title.visible = active;
-		this.uis.forEach(ui => ui.visible = active);
+class Tab {
+	constructor(buttonText, titleText, uis) {
+		this.buttonText = buttonText;
+		this.title = new UiText(new Coordinate(.5, .14).align(Coordinate.Aligns.CENTER), titleText)
+			.setTextOptions({size: '22px'});
+		this.uis = [this.title, ...uis];
 	}
 }
 
@@ -36,21 +33,16 @@ class HubUi extends Ui {
 		this.equipmentUi = this.add(new EquipmentUi(playerData.equipmentData));
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
-		this.uiSets = [
-			new UiSet('Select encounter', [this.encounterUi]),
-			new UiSet('Refine techniques', [this.techniquesUi]),
-			new UiSet('Allocate traits', [this.characterUi, this.traitsUi]),
-			new UiSet('Craft equipment', [this.characterUi, this.equipmentUi]),
-			new UiSet('Recorded stats', [this.RecordsUi]),
+		let tabs = [
+			new Tab('Encounters', 'Select encounter', [this.encounterUi]),
+			new Tab('Techniques', 'Refine techniques', [this.techniquesUi]),
+			new Tab('Traits', 'Allocate traits', [this.characterUi, this.traitsUi]),
+			new Tab('Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]),
+			new Tab('Records', 'Recorded stats', [this.RecordsUi]),
 		];
-
-		this.uiSets.forEach(uiSet => this.add(uiSet.title));
-
+		tabs.forEach(tabData => this.add(tabData.title));
 		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, 0, Positions.UI_BUTTON_HEIGHT),
-			['Encounters', 'Techniques', 'Traits', 'Equipment', 'Records'], true))
-			.on('select', index => this.setActiveUiSet(index));
-
-		this.setActiveUiSet(0);
+			tabs.map(tab => tab.buttonText), tabs.map(tab => tab.uis), true));
 	}
 
 	static createSection(text, isLeft, widthWeight) {
@@ -62,13 +54,6 @@ class HubUi extends Ui {
 				.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START)
 				.scale(widthWeight, 1),
 			text);
-	}
-
-	setActiveUiSet(index) {
-		this.uiSets
-			.filter((_, i) => i !== index)
-			.forEach(uiSet => uiSet.setActive(false));
-		this.uiSets[index].setActive(true);
 	}
 }
 

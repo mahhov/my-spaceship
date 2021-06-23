@@ -58,9 +58,14 @@ class TechniqueData extends AllocationsData {
 	static get areaAttackTree() {
 		return new TechniqueTree('Area attack', [
 			[
-				new Allocation('Spinning', [], 4),
-				new Allocation('Triggered', [], 4),
+				new Allocation('Area', [], 4),
+				new Allocation('Pulsing', [], 4),
 				new Allocation('Lingering dot', [], 4),
+			],
+			[
+				new Allocation('Area', [], 4),
+				new Allocation('Ring', [], 4),
+				new Allocation('Protruding', [], 4),
 			],
 			[
 				new Allocation('Damage', [], 4),

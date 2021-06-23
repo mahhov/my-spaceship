@@ -9,7 +9,6 @@ import Ui from './Ui.js';
 
 class TechniquesUi extends Ui {
 	constructor(techniqueData) {
-		// todo [high] flush out and wire in
 		super();
 
 		let coordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_BUTTON_HEIGHT)
@@ -26,11 +25,9 @@ class TechniquesUi extends Ui {
 
 		coordinate.pad(Positions.MARGIN);
 		let treeLayout = GridLayout.createWithFixedColumnWidth(coordinate, 4, AllocationUi.width, AllocationUi.height, Positions.MARGIN, Positions.MARGIN * 2.5);
-		techniqueData.trees[0].allocationSets.forEach((set, setIndex) => {
-			set.forEach((allocation, allocationIndex) => {
-				this.add(new AllocationUi(treeLayout.getCoordinatesRowColumn(setIndex, allocationIndex).container, allocation));
-			});
-		});
+		techniqueData.trees[0].allocationSets.forEach((set, setIndex) =>
+			set.forEach((allocation, allocationIndex) =>
+				this.add(new AllocationUi(treeLayout.getCoordinatesRowColumn(setIndex, allocationIndex).container, allocation))));
 	}
 }
 
