@@ -33,16 +33,12 @@ class Stat {
 		this.value = value;
 	}
 
-	get descriptionText() {
-		return toUiString(`${this.value >= 0 ? '+' : ''}${round(this.value * 100)}% ${Stat.name(this.id)}`);
+	getDescriptionText(ids = Ids) {
+		return toUiString(`${this.value >= 0 ? '+' : ''}${round(this.value * 100)}% ${Stat.name(this.id, ids)}`);
 	}
 
-	static name(id) {
-		return toUiString(Object.keys(Ids)[id]);
-	}
-
-	static derivedStatName(id) {
-		return toUiString(Object.keys(DerivedStatIds)[id]);
+	static name(id, ids = Ids) {
+		return toUiString(Object.keys(ids)[id]);
 	}
 }
 

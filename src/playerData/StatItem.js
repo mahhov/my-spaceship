@@ -8,7 +8,7 @@ class StatItem {
 	get descriptionText() {
 		return [
 			this.name,
-			...this.stats.map(stat => stat.descriptionText),
+			...this.stats.map(stat => stat.getDescriptionText()),
 		];
 	}
 }

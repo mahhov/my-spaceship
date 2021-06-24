@@ -17,7 +17,7 @@ class CharacterUi extends Ui {
 		this.levelText = this.addTextPair('Level', 0);
 		this.expText = this.addTextPair('Experience', 1);
 		this.derivedStatTexts = Object.values(Stat.DerivedStatIds).map(i =>
-			this.addTextPair(Stat.derivedStatName(i), i + 3));
+			this.addTextPair(Stat.name(i, Stat.DerivedStatIds), i + 3));
 		this.statTexts = Object.values(Stat.Ids).map(i =>
 			this.addTextPair(Stat.name(i), i + 4 + Object.values(Stat.DerivedStatIds).length));
 

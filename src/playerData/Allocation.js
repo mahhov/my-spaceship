@@ -12,7 +12,7 @@ class Allocation extends StatItem {
 	}
 
 	get descriptionText() {
-		return this.stats.map(stat => stat.descriptionText);
+		return this.stats.map(stat => stat.getDescriptionText());
 	}
 }
 
