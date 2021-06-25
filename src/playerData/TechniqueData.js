@@ -18,7 +18,7 @@ class TechniqueData extends AllocationsData {
 	static get projectileAttackTree() {
 		return new TechniqueTree(TechniqueTree.TechniqueIds.PROJECTILE_ATTACK, [
 			[
-				new Allocation('Charges', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
+				new Allocation('Charges', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4, 'yo!, dis iz rally cul'),
 				new Allocation('Laser', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
 				new Allocation('Channel', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
 			],

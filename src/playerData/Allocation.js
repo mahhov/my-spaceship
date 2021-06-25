@@ -1,10 +1,11 @@
 import StatItem from './StatItem.js';
 
 class Allocation extends StatItem {
-	constructor(name, stats, maxValue) {
+	constructor(name, stats, maxValue, description = '') {
 		super(null, name, stats);
 		this.value = 0;
 		this.maxValue = maxValue;
+		this.description = description;
 	}
 
 	get valueText() {
@@ -12,7 +13,10 @@ class Allocation extends StatItem {
 	}
 
 	get descriptionText() {
-		return this.stats.map(stat => stat.getDescriptionText());
+		return [
+			this.description,
+			...this.stats.map(stat => stat.getDescriptionText()),
+		].filter(v => v);
 	}
 }
 
