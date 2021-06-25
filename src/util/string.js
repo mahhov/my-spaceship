@@ -6,6 +6,9 @@ const toUiString = string => string ? string
 	.join(' ')
 	.replace(/^./, m => m.toUpperCase()) : '';
 
+const enumName = (id, enumObj) => toUiString(Object.keys(enumObj)[id]);
+
 export {
 	toUiString,
+	enumName,
 };

@@ -16,7 +16,7 @@ class TechniqueData extends AllocationsData {
 	}
 
 	static get projectileAttackTree() {
-		return new TechniqueTree('Projectile attack', [
+		return new TechniqueTree(TechniqueTree.TechniqueIds.PROJECTILE_ATTACK, [
 			[
 				new Allocation('Charges', [new Stat(ProjectileAttack.StatIds.ABILITY_CHARGES, 1)], 4),
 				new Allocation('Laser', [new Stat(ProjectileAttack.StatIds.ABILITY_SIZE, 1)], 4),
@@ -56,7 +56,7 @@ class TechniqueData extends AllocationsData {
 	}
 
 	static get areaAttackTree() {
-		return new TechniqueTree('Area attack', [
+		return new TechniqueTree(TechniqueTree.TechniqueIds.AREA_ATTACK, [
 			[
 				new Allocation('Area', [], 4),
 				new Allocation('Pulsing', [], 4),
@@ -81,7 +81,7 @@ class TechniqueData extends AllocationsData {
 	}
 
 	static get dashTree() {
-		return new TechniqueTree('Dash', [
+		return new TechniqueTree(TechniqueTree.TechniqueIds.DASH, [
 			[
 				new Allocation('Dash', [], 4),
 				new Allocation('Blink to target', [], 4),
@@ -106,7 +106,7 @@ class TechniqueData extends AllocationsData {
 	}
 
 	static get defenseTree() {
-		return new TechniqueTree('Defense', [
+		return new TechniqueTree(TechniqueTree.TechniqueIds.DEFENSE, [
 			[
 				new Allocation('Heal', [], 4),
 				new Allocation('Armor', [], 4),

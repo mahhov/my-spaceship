@@ -1,6 +1,6 @@
 import makeEnum from '../util/enum.js';
 import {round} from '../util/number.js';
-import {toUiString} from '../util/string.js';
+import {enumName, toUiString} from '../util/string.js';
 
 const Ids = makeEnum({
 	DISABLED: 0,
@@ -38,7 +38,7 @@ class Stat {
 	}
 
 	static name(id, ids = Ids) {
-		return toUiString(Object.keys(ids)[id]);
+		return enumName(id, ids);
 	}
 }
 

@@ -4,6 +4,7 @@ import makeEnum from '../util/enum.js';
 import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
+// todo [medium] consider moving this to TechniqueData so that PlayerData does not depend on any other directory
 const StatIds = makeEnum({
 	...Stat.Ids,
 	ABILITY_CHARGES: 0,
