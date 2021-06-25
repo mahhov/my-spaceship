@@ -1,7 +1,7 @@
 import makeEnum from '../util/enum.js';
 import {enumName} from '../util/string.js';
 
-const TechniqueIds = makeEnum({
+const Ids = makeEnum({
 	PROJECTILE_ATTACK: 0,
 	AREA_ATTACK: 0,
 	DASH: 0,
@@ -15,10 +15,10 @@ class TechniqueTree {
 	}
 
 	get name() {
-		return enumName(this.id, TechniqueIds);
+		return enumName(this.id, Ids);
 	}
 }
 
-TechniqueTree.TechniqueIds = TechniqueIds;
+TechniqueTree.Ids = Ids;
 
 export default TechniqueTree;
