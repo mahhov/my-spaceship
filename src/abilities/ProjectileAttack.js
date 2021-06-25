@@ -1,26 +1,21 @@
 import Projectile from '../entities/attack/Projectile.js';
 import Stat from '../playerData/Stat.js';
-import makeEnum from '../util/enum.js';
+import TechniqueData from '../playerData/TechniqueData.js';
 import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
-// todo [medium] consider moving this to TechniqueData so that PlayerData does not depend on any other directory
-const StatIds = makeEnum({
-	...Stat.Ids,
-	ABILITY_CHARGES: 0,
-	ABILITY_SIZE: 0,
-});
+const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 class ProjectileAttack extends Ability {
 	constructor(statValues) {
-		super('Projectile', 6, 15 * (1 + statValues.get(StatIds.ABILITY_CHARGES)), .6, 0, true, 0);
+		super('Projectile', 6, 15 * (1 + statValues.get(statIds.ABILITY_CHARGES)), .6, 0, true, 0);
 		// todo [high] move these assignments to Ability constructor
 		this.statValues = statValues;
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
 		const SPREAD = .08, DAMAGE = .1;
-		let size = .02 * (1 + this.statValues.get(StatIds.ABILITY_SIZE));
+		let size = .02 * (1 + this.statValues.get(statIds.ABILITY_SIZE));
 		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
 		let randv = randVector(ProjectileAttack.velocity * SPREAD);
 		let projectile = new Projectile(
@@ -45,7 +40,5 @@ class ProjectileAttack extends Ability {
 		return .014;
 	}
 }
-
-ProjectileAttack.StatIds = StatIds;
 
 export default ProjectileAttack;
