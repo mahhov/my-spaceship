@@ -8,9 +8,7 @@ const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 class ProjectileAttack extends Ability {
 	constructor(statValues) {
-		super('Projectile', 6, 15 * (1 + statValues.get(statIds.ABILITY_CHARGES)), .6, 0, true, 0);
-		// todo [high] move these assignments to Ability constructor
-		this.statValues = statValues;
+		super('Projectile', statValues, 6, 15 * (1 + statValues.get(statIds.ABILITY_CHARGES)), .6, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

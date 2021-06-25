@@ -4,8 +4,8 @@ import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class ShotgunAttack extends Ability {
-	constructor() {
-		super('Shotgun', 50, 1, 12, 0, true, 0);
+	constructor(statValues) {
+		super('Shotgun', statValues, 50, 1, 12, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

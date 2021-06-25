@@ -3,8 +3,8 @@ import Stat from '../playerData/Stat.js';
 import Ability from './Ability.js';
 
 class IncDefense extends Ability {
-	constructor() {
-		super('Armor', 600, 1, 0, false, false, 0);
+	constructor(statValues) {
+		super('Armor', statValues, 600, 1, 0, false, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

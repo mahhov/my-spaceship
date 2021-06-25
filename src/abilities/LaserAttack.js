@@ -3,8 +3,8 @@ import {setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class LaserAttack extends Ability {
-	constructor() {
-		super('Laser', 20, 1, 3, 0, true, 0);
+	constructor(statValues) {
+		super('Laser', statValues, 20, 1, 3, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
