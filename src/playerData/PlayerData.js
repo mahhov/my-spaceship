@@ -30,12 +30,10 @@ class PlayerData {
 	get statValues() {
 		let statValues = new StatValues();
 		this.traitsData.allocations
-			.forEach(allocation => allocation.stats.forEach(stat =>
-				statValues.add(stat.id, allocation.value * stat.value)));
+			.forEach(allocation => statValues.addAllocation(allocation));
 		this.equipmentData.equipped
 			.filter(equipment => equipment)
-			.forEach(equipment => equipment.stats.forEach(stat =>
-				statValues.add(stat.id, stat.value)));
+			.forEach(equipment => statValues.addStatItem(equipment));
 		return statValues;
 	}
 
@@ -45,6 +43,14 @@ class PlayerData {
 		// todo [medium] 80 should be a constant reused in Player.constructor()
 		derivedStatValues.add(Stat.DerivedStatIds.TOTAL_LIFE, 80 * (1 + statValues.stats[Stat.Ids.LIFE]));
 		return derivedStatValues;
+	}
+
+	getTechniqueStatValues(techniqueId) {
+		let statValues = this.statValues;
+		this.techniqueData.trees
+			.find(tree => tree.id === techniqueId).allocationSets.flat()
+			.forEach(allocation => statValues.addAllocation(allocation));
+		return statValues;
 	}
 }
 

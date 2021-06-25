@@ -8,6 +8,14 @@ class StatValues {
 		this.stats[statId] += value;
 	}
 
+	addStatItem(statItem) {
+		statItem.stats.forEach(stat => this.add(stat.id, stat.value));
+	}
+
+	addAllocation(allocation) {
+		allocation.stats.forEach(stat => this.add(stat.id, allocation.value * stat.value));
+	}
+
 	get(statId) {
 		return this.stats[statId] || 0;
 	}
