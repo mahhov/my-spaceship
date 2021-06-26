@@ -6,6 +6,8 @@ import ListLayout from '../layouts/ListLayout.js';
 import HubUi from './HubUi.js';
 import Ui from './Ui.js';
 
+// todo [medium] display stats as '+3%' instead of '0.03'
+
 class CharacterUi extends Ui {
 	constructor(playerData, expData, traitsData, equipmentData) {
 		super();
