@@ -1,8 +1,7 @@
-import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 
 class GridLayout {
-	constructor(coordinate, columns, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
+	constructor(coordinate, columns, height, horizMargin = 0, vertMargin = 0) {
 		this.width = GridLayout.columnWidth(coordinate.width, columns, horizMargin);
 		this.height = height;
 		this.columns = columns;
@@ -14,12 +13,12 @@ class GridLayout {
 			.size(this.width, height);
 	}
 
-	static createWithFixedColumnWidth(coordinate, columns, columnWidth, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
+	static createWithFixedColumnWidth(coordinate, columns, columnWidth, height, horizMargin = 0, vertMargin = 0) {
 		coordinate.size(GridLayout.totalWidth(columns, columnWidth, horizMargin));
 		return new GridLayout(coordinate, columns, height, horizMargin, vertMargin);
 	}
 
-	static createWithSquares(coordinate, columns, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
+	static createWithSquares(coordinate, columns, horizMargin = 0, vertMargin = 0) {
 		let height = (coordinate.width + horizMargin) / columns - horizMargin;
 		return new GridLayout(coordinate, columns, height, horizMargin, vertMargin);
 	}
