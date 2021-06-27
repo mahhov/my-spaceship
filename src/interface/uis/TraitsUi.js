@@ -3,8 +3,8 @@ import Coordinate from '../../util/Coordinate.js';
 import UiPopupText from '../components/UiPopupText.js';
 import UiText from '../components/UiText.js';
 import GridLayout from '../layouts/GridLayout.js';
-import AllocationUi from './AllocationUi.js';
 import HubUi from './HubUi.js';
+import IconAllocationUi from './IconAllocationUi.js';
 import Ui from './Ui.js';
 
 class TraitsUi extends Ui {
@@ -18,11 +18,11 @@ class TraitsUi extends Ui {
 
 		let hoverText = new UiPopupText(new Coordinate(0, 0, .22));
 
-		let layout = new GridLayout(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 6, AllocationUi.height);
+		let layout = GridLayout.createWithSquares(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 5);
 		this.allocationUis = traitsData.allocations.map((allocation, i) =>
-			this.add(AllocationUi.createAndBindAllocationUi(
-				layout.getCoordinates(i).container,
-				allocation, traitsData, hoverText)));
+			this.add(
+				new IconAllocationUi(layout.getCoordinates(i).container, allocation)
+					.bind(traitsData, hoverText)));
 
 		this.add(hoverText);
 
@@ -31,7 +31,7 @@ class TraitsUi extends Ui {
 	}
 
 	refresh() {
-		this.allocationUis.forEach(allocationUi => allocationUi.updateValueText());
+		this.allocationUis.forEach(iconAllocationUi => iconAllocationUi.updateValueText());
 		this.availableText.text = this.traitsData.availableText;
 	}
 }

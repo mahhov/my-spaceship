@@ -6,6 +6,7 @@ import Ui from '../uis/Ui.js';
 
 const BOTTOM_LINE_SPACING = 1.2, ALLOCATE_BUTTON_SIZE = 0.015;
 
+// todo [medium] deprecated, replaces usages with IconAllocationUi
 class AllocationUi extends Ui {
 	constructor(coordinate, allocation, singleButton = false) {
 		super(coordinate);
@@ -39,12 +40,11 @@ class AllocationUi extends Ui {
 		}
 	}
 
-	static createAndBindAllocationUi(coordinate, allocation, data, hoverPopup) {
-		let allocationUi = new AllocationUi(coordinate, allocation);
-		allocationUi.on('hover', () => hoverPopup.beginHover(allocationUi.bounds, allocation.descriptionText));
-		allocationUi.on('decrease', () => data.allocate(allocation, -1));
-		allocationUi.on('increase', () => data.allocate(allocation, 1));
-		return allocationUi;
+	bind(data, hoverPopup) {
+		this.on('hover', () => hoverPopup.beginHover(this.bounds, this.allocation.descriptionText));
+		this.on('decrease', () => data.allocate(this.allocation, -1));
+		this.on('increase', () => data.allocate(this.allocation, 1));
+		return this;
 	}
 
 	static get width() {

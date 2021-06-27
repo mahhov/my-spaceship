@@ -10,12 +10,18 @@ class Allocation extends StatItem {
 		this.description = description;
 	}
 
+	setImageName(imageName) {
+		this.imageName = imageName;
+		return this;
+	}
+
 	get valueText() {
 		return `${this.value}/${this.maxValue}`;
 	}
 
 	get descriptionText() {
 		return [
+			this.name,
 			this.description,
 			...this.stats.map(stat => stat.getDescriptionText(this.statIds)),
 		].filter(v => v);

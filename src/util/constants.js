@@ -35,6 +35,7 @@ const Colors = {
 		ACTIVE: Color.from1(.4, .4, .4),
 		DULL_BORDER: Color.fromHexString('#aaa'),
 		PRIMARY: Color.fromHexString('#fff'),
+		TEXT_BACK: Color.fromHexString('#000'),
 	},
 
 	Entity: {

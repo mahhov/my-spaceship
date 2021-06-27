@@ -1,5 +1,4 @@
 import Bounds from '../../intersection/Bounds.js';
-import MultilineText from '../../painter/elements/MultilineText.js';
 import Rect from '../../painter/elements/Rect.js';
 import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
@@ -12,9 +11,8 @@ const States = makeEnum({DISABLED: 0, FORCED_ACTIVE: 0, INACTIVE: 0, ACTIVE: 0, 
 
 class UiButton extends UiComponent {
 	constructor(coordinate, text, hotkey = '', hidden = false, adaptiveWidth = false) {
-		// todo [low] avoid using magic number 1000
 		if (adaptiveWidth)
-			coordinate.size(text.length * MultilineText.measureText('14px').width / 1000 + Positions.MARGIN, coordinate.height);
+			coordinate.size(UiComponent.textWidth(text.length) + Positions.MARGIN, coordinate.height);
 		super(coordinate);
 		this.bounds = new Bounds(coordinate.left, coordinate.top, coordinate.right, coordinate.bottom);
 		this.text = text;

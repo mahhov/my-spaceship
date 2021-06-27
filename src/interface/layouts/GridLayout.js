@@ -3,7 +3,7 @@ import Coordinate from '../../util/Coordinate.js';
 
 class GridLayout {
 	constructor(coordinate, columns, height, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
-		this.width = (coordinate.width + horizMargin) / columns - horizMargin;
+		this.width = GridLayout.columnWidth(coordinate.width, columns, horizMargin);
 		this.height = height;
 		this.columns = columns;
 		this.horizMargin = horizMargin;
@@ -19,8 +19,17 @@ class GridLayout {
 		return new GridLayout(coordinate, columns, height, horizMargin, vertMargin);
 	}
 
+	static createWithSquares(coordinate, columns, horizMargin = Positions.MARGIN, vertMargin = Positions.MARGIN * 1.5) {
+		let height = (coordinate.width + horizMargin) / columns - horizMargin;
+		return new GridLayout(coordinate, columns, height, horizMargin, vertMargin);
+	}
+
 	static totalWidth(columns, columnWidth, horizMargin) {
 		return columnWidth * columns + horizMargin * (columns - 1);
+	}
+
+	static columnWidth(totalWidth, columns, horizMargin) {
+		return (totalWidth + horizMargin) / columns - horizMargin;
 	}
 
 	get totalWidth() {

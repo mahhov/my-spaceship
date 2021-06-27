@@ -36,9 +36,9 @@ class TechniquesUi extends Ui {
 				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width, AllocationUi.height);
 				let lineUi = setIndex && this.add(new UiLine(setCoordinate.size(allocationsLayout.totalWidth, 0).move(0, -Positions.MARGIN * vertMarginMult / 2)));
 				let allocationUis = allocations.map((allocation, allocationIndex) =>
-					this.add(AllocationUi.createAndBindAllocationUi(
-						allocationsLayout.getCoordinates(allocationIndex).container,
-						allocation, techniqueData, hoverText)));
+					this.add(
+						new AllocationUi(allocationsLayout.getCoordinates(allocationIndex).container, allocation)
+							.bind(techniqueData, hoverText)));
 				return {lineUi, allocationUis};
 			});
 		});

@@ -1,3 +1,4 @@
+import MultilineText from '../../painter/elements/MultilineText.js';
 import Emitter from '../../util/Emitter.js';
 
 class UiComponent extends Emitter {
@@ -16,6 +17,11 @@ class UiComponent extends Emitter {
 	}
 
 	paint(painter) {
+	}
+
+	static textWidth(textLength) {
+		// todo [low] avoid using magic number 1000
+		return textLength * MultilineText.measureText('14px').width / 1000;
 	}
 }
 
