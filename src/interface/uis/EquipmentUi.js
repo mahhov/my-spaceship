@@ -17,10 +17,10 @@ import Ui from './Ui.js';
 
 const ImagePaths = {
 	Equipment: {
-		[Equipment.Types.HULL]: '../../images/hull.png',
-		[Equipment.Types.CIRCUIT]: '../../images/circuit.png',
-		[Equipment.Types.THRUSTER]: '../../images/thruster.png',
-		[Equipment.Types.TURRET]: '../../images/turret.png',
+		[Equipment.Types.HULL]: '../../images/equipment/spaceship.png',
+		[Equipment.Types.CIRCUIT]: '../../images/equipment/circuitry.png',
+		[Equipment.Types.THRUSTER]: '../../images/equipment/rocket-thruster.png',
+		[Equipment.Types.TURRET]: '../../images/equipment/turret.png',
 	},
 	Materials: {
 		[Material.Types.A]: '../../images/rune.png',
