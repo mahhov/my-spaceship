@@ -17,6 +17,7 @@ import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
 import Buff from '.././Buff.js';
+import basedStats from '../basedStats.js';
 import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
@@ -59,7 +60,7 @@ class Player extends Hero {
 			new DelayedRegen(),
 			new Death(),
 		];
-		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		super(0, 0, .05, .05, basedStats.Player, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
 

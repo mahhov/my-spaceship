@@ -3,16 +3,15 @@ import Pool from '../util/Pool.js';
 import Entity from './Entity.js';
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, health, layer) {
+	constructor(x, y, width, height, baseStats, layer) {
 		super(x, y, width, height, layer);
-		this.health = new Pool(health);
+		this.baseStats = baseStats;
 		this.buffs = [];
 	}
 
 	applyInitialBuffs() {
 		// should be invoked once after buffs are set
-		this.health.max *= this.getStat(Stat.Ids.LIFE);
-		this.health.restore();
+		this.health = new Pool(this.getBasedStat(Stat.Ids.LIFE));
 	}
 
 	refresh() {
@@ -42,6 +41,10 @@ class LivingEntity extends Entity {
 			.map(buff => buff.statValues.get(statId))
 			.reduce((a, b) => a + b, 0);
 		return statId === Stat.Ids.DISABLED ? value : value + 1;
+	}
+
+	getBasedStat(statId) {
+		return this.baseStats[statId] * this.getStat(statId);
 	}
 
 	tickBuffs() {

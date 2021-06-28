@@ -25,6 +25,7 @@ const Colors = {
 	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#aaa'),
 
 	// buffs
+	// todo [low] lower case this for consistency
 	PLAYER_BUFFS: {
 		DEAD: Color.from1(.5, .5, .5),
 	},

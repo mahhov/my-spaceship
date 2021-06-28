@@ -10,10 +10,9 @@ import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, health, stamina, staminaRefresh, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+	constructor(x, y, width, height, baseStats, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
-		super(x, y, width, height, health, layer);
-		this.stamina = new Pool(stamina, staminaRefresh); // todo [medium] consider replacing staminaRefresh with passive ability
+		super(x, y, width, height, baseStats, layer);
 		this.friendly = friendly;
 		this.abilities = abilities;
 		this.passiveAbilities = passiveAbilities;
@@ -21,6 +20,12 @@ class Hero extends LivingEntity {
 		this.nameplateStaminaColor = nameplateStaminaColor;
 		this.recentDamage = new Decay(.1, .001);
 		this.currentMove = [0, 0];
+	}
+
+	applyInitialBuffs() {
+		super.applyInitialBuffs();
+		// todo [medium] consider replacing staminaRefresh with passive ability
+		this.stamina = new Pool(this.getBasedStat(Stat.Ids.STAMINA), this.getBasedStat(Stat.Ids.STAMINA_REGEN));
 	}
 
 	refresh() {

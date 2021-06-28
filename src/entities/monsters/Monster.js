@@ -1,5 +1,6 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
+import Stat from '../../playerData/Stat.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
@@ -7,9 +8,16 @@ import ModuleManager from '../modules/ModuleManager.js';
 
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health, expValue) {
-		super(x, y, width, height, health, IntersectionFinder.Layers.HOSTILE_UNIT);
+		super(x, y, width, height, Monster.createBaseStats(health), IntersectionFinder.Layers.HOSTILE_UNIT);
 		this.expValue = expValue;
 		this.moduleManager = new ModuleManager();
+		this.applyInitialBuffs();
+	}
+
+	static createBaseStats(health) {
+		return {
+			[Stat.Ids.LIFE]: health,
+		};
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {
