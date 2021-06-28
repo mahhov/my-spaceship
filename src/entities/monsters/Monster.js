@@ -17,6 +17,7 @@ class Monster extends LivingEntity {
 	static createBaseStats(health) {
 		return {
 			[Stat.Ids.LIFE]: health,
+			[Stat.Ids.ARMOR]: 1,
 		};
 	}
 

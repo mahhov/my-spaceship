@@ -104,7 +104,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.updateMove(intersectionFinder, dx, dy, .005 * this.getStat(Stat.Ids.MOVE_SPEED));
+		this.updateMove(intersectionFinder, dx, dy, this.getBasedStat(Stat.Ids.MOVE_SPEED));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {

@@ -19,7 +19,7 @@ class LivingEntity extends Entity {
 	}
 
 	changeHealth(amount) {
-		this.health.change(amount / this.getStat(Stat.Ids.ARMOR));
+		this.health.change(amount / this.getBasedStat(Stat.Ids.ARMOR));
 	}
 
 	restoreHealth() {
