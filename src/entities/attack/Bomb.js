@@ -1,6 +1,6 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {getRectDistance} from '../../util/number.js';
 import Entity from '../Entity.js';

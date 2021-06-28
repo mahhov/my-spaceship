@@ -1,5 +1,5 @@
 import StarShip from '../../graphics/StarShip.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import NearbyDegen from '../modules/NearbyDegen.js';

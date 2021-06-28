@@ -1,5 +1,5 @@
 import DiamondShip from '../../../graphics/DiamondShip.js';
-import {Colors} from '../../../util/Constants.js';
+import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
 import Phase from '../../../util/Phase.js';

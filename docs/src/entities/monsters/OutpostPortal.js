@@ -1,6 +1,6 @@
 import OutpostPortalGraphic from '../../graphics/OutpostPortalGraphic.js';
 import Stat from '../../playerData/Stat.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import Buff from '../buff.js';

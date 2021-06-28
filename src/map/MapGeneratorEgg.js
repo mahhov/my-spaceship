@@ -14,7 +14,7 @@ import RockMineral from '../entities/stills/RockMineral.js';
 import VShip from '../graphics/VShip.js';
 import Text from '../painter/elements/Text.js';
 import StatValues from '../playerData/StatValues.js';
-import {Colors, Positions} from '../util/Constants.js';
+import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {NoiseSimplex} from '../util/noise.js';
 import {floor, rand, randInt, round} from '../util/number.js';

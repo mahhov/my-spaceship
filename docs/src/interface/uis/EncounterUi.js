@@ -1,6 +1,6 @@
 import MapGeneratorSurvival from '../../map/MapGeneratorSurvival.js';
 import MapGeneratorTimed from '../../map/MapGeneratorTimed.js';
-import {Positions} from '../../util/Constants.js';
+import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiButton from '../components/UiButton.js';
 import UiTextArea from '../components/UiTextArea.js';

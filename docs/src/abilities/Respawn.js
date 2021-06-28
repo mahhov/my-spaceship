@@ -1,6 +1,6 @@
 import Buff from '../entities/Buff.js';
 import Stat from '../playerData/Stat.js';
-import {Colors} from '../util/Constants.js';
+import {Colors} from '../util/constants.js';
 import Pool from '../util/Pool.js';
 import PassiveAbility from './PassiveAbility.js';
 

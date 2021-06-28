@@ -1,6 +1,6 @@
 import RectGraphic from '../../graphics/RectGraphic.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import Entity from '../Entity.js';
 
 class MapBoundary extends Entity {

@@ -2,7 +2,7 @@ import RockGraphic from '../../graphics/RockGraphic.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Rect from '../../painter/elements/Rect.js';
 import Stat from '../../playerData/Stat.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {randInt} from '../../util/number.js';
 import Buff from '../Buff.js';

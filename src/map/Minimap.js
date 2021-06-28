@@ -1,7 +1,7 @@
 import Camera from '../camera/Camera.js';
 import keyMappings from '../control/keyMappings.js';
 import Rect from '../painter/elements/Rect.js';
-import {Colors} from '../util/Constants.js';
+import {Colors} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 
 class Minimap {

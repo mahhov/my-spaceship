@@ -1,5 +1,5 @@
 import Line from '../../painter/elements/Line.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Vector from '../../util/Vector.js';
 import Laser from '../attack/Laser.js';

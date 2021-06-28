@@ -2,7 +2,7 @@ import keyMappings from '../control/keyMappings.js';
 import Bar from '../painter/elements/Bar.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
-import {Colors, Positions} from '../util/Constants.js';
+import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 

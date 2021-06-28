@@ -1,6 +1,6 @@
 import Player from '../entities/heroes/Player.js';
 import Text from '../painter/elements/Text.js';
-import {Positions} from '../util/Constants.js';
+import {Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {round} from '../util/number.js';
 

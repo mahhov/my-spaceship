@@ -1,6 +1,6 @@
 import RotatingTurretShip from '../../graphics/RotatingTurretShip.js';
 import Bar from '../../painter/elements/Bar.js';
-import {Colors, Positions} from '../../util/Constants.js';
+import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';

@@ -13,7 +13,7 @@ import Text from '../../painter/elements/Text.js';
 import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
 import TechniqueTree from '../../playerData/TechniqueTree.js';
-import {Colors, Positions} from '../../util/Constants.js';
+import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
 import Buff from '.././Buff.js';

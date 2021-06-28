@@ -2,7 +2,7 @@ import Bounds from '../../intersection/Bounds.js';
 import Rect from '../../painter/elements/Rect.js';
 import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
-import {Colors, Positions} from '../../util/Constants.js';
+import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import UiComponent from './UiComponent.js';

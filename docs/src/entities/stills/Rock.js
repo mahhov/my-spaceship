@@ -1,6 +1,6 @@
 import RockGraphic from '../../graphics/RockGraphic.js';
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import Entity from '../Entity.js';
 
 class Rock extends Entity {

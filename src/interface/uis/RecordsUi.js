@@ -1,4 +1,4 @@
-import {Positions} from '../../util/Constants.js';
+import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import UiText from '../components/UiText.js';
 import ListLayout from '../layouts/ListLayout.js';

@@ -1,7 +1,7 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import Stat from '../../playerData/Stat.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import Decay from '../../util/Decay.js';
 import {booleanArray, rand, randVector, setMagnitude} from '../../util/number.js';

@@ -1,6 +1,6 @@
 import MultilineText from '../../painter/elements/MultilineText.js';
 import RoundedRect from '../../painter/elements/RoundedRect.js';
-import {Colors} from '../../util/Constants.js';
+import {Colors} from '../../util/constants.js';
 import UiComponent from './UiComponent.js';
 
 class UiTextArea extends UiComponent {

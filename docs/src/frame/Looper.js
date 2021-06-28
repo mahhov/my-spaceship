@@ -1,7 +1,7 @@
 import Controller from '../control/Controller.js';
 import Text from '../painter/elements/Text.js';
 import PainterCompositor from '../painter/PainterCompositor.js';
-import {Positions} from '../util/Constants.js';
+import {Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import FpsTracker from '../util/FpsTracker.js';
 

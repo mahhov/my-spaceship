@@ -1,7 +1,7 @@
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import StatValues from '../playerData/StatValues.js';
-import {Positions} from '../util/Constants.js';
+import {Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 

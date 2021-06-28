@@ -1,6 +1,6 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
-import {Colors, Positions} from '../../util/Constants.js';
+import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
 import ModuleManager from '../modules/ModuleManager.js';

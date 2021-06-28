@@ -10,7 +10,7 @@ import MapBoundary from '../entities/stills/MapBoundary.js';
 import Rock from '../entities/stills/Rock.js';
 import RockMineral from '../entities/stills/RockMineral.js';
 import Text from '../painter/elements/Text.js';
-import {Positions} from '../util/Constants.js';
+import {Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import {NoiseSimplex} from '../util/noise.js';
 import {rand, round} from '../util/number.js';
