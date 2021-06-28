@@ -7,7 +7,7 @@
     "build": "build(){ cp src/view/index.html $1/index.html; browserify --debug --detect-globals false --no-builtins src/view/Canvas.js -o $1/Canvas.js; }; build",
     "dev": "mkdir build; node devServer.js",
     "gitpage": "npm run build docs GoogleAnalytics; cp src/view/googleAnalytics.js docs",
-    "buildWindows": "rd /s /q docs && mkdir docs && xcopy /s src\\ docs\\src\\ && xcopy /s experiments\\ docs\\experiments\\"
+    "buildWindows": "rd /s /q docs && mkdir docs && xcopy /s src\\ docs\\src\\ && xcopy /s experiments\\ docs\\experiments\\ && xcopy node_modules\\simplex-noise\\simplex-noise.js docs\\node_modules\\simplex-noise\\simplex-noise.js*"
   },
   "author": "",
   "license": "ISC",
