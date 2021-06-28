@@ -17,6 +17,7 @@ import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
 import Buff from '.././Buff.js';
+import BaseStats from '../basedStats.js';
 import basedStats from '../basedStats.js';
 import Hero from './Hero.js';
 
@@ -57,7 +58,7 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen(),
+			new DelayedRegen(BaseStats.Player[Stat.Ids.LIFE_REGEN]),
 			new Death(),
 		];
 		super(0, 0, .05, .05, basedStats.Player, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
