@@ -1,11 +1,14 @@
+<!DOCTYPE html>
+
 <style>
 	body {
+		background: black;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
-	#logic-buttons-row > button:not(:last-child) {
+	#frame-buttons-row > button:not(:last-child) {
 		margin-right: 20px;
 	}
 
@@ -26,8 +29,9 @@
 	}
 </style>
 
-<div id="logic-buttons-row"></div>
+<div id="frame-buttons-row"></div>
 
-<canvas id="canvas" width="800" height="800"></canvas>
+<canvas id="canvas" width="1000" height="1000"></canvas>
 
-<script src="Canvas.js"></script>
+<script src="../../node_modules/simplex-noise/simplex-noise.js"></script>
+<script type="module" src="canvas.js"></script>
