@@ -1,0 +1,117 @@
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	input {
+		margin-left: 15px;
+	}
+
+	button {
+		background: none;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background: #eee;
+	}
+
+	canvas {
+		border: solid 1px #eee;
+	}
+</style>
+
+<div class="container">
+	<label>width: <input id="width" type="number" min="2" max="6" step="1" value="4"></label>
+	<label>height: <input id="height" type="number" min="2" max="6" step="1" value="3"></label>
+	<label>thickness: <input id="thickness" type="number" min="0" max=".15" step=".01" value=".07"></label>
+	<label>number of nodes: <input id="number-of-nodes" min="2" max="20" type="number" step="1" value="7"></label>
+	<label>min number of connections: <input id="min-number-of-connections" type="number" min="1" max="7" step="1" value="5"></label>
+	<button id="randomize-button">Randomize</button>
+	<button id="regenerate-button">Regenerate</button>
+
+	<span>
+		<canvas width="800" height="800"></canvas>
+	</span>
+</div>
+
+<script type="module">
+	import Rune from '../src/util/Rune.js';
+
+	let $ = document.querySelector.bind(document);
+	let canvas = $('canvas');
+	let ctx = canvas.getContext('2d');
+
+	let createRune = (width, height, nodeCount, minConnections) =>
+		new Rune(width, height, nodeCount, minConnections);
+
+	let drawRune = ({nodes, connections}, runeX, runeY, thickness) => {
+		let width = nodes.length, height = nodes[0].length;
+		let cw = canvas.width / runeColumns, cy = canvas.height / runeRows;
+		let xt = thickness * cw, yt = thickness * cy;
+
+		ctx.fillStyle = ctx.strokeStyle = `black`;
+		ctx.lineWidth = xt;
+
+		let getXY = (x, y) =>
+			[cw / width * (x + .5) + cw * runeX, cy / height * (y + .5) + cy * runeY];
+
+		let drawDot = (x, y) => {
+			[x, y] = getXY(x, y);
+			ctx.fillRect(x - xt / 2, y - yt / 2, xt, yt);
+		};
+
+		let drawLine = (x1, y1, x2, y2) => {
+			[x1, y1] = getXY(x1, y1);
+			[x2, y2] = getXY(x2, y2);
+			ctx.beginPath();
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.closePath();
+			ctx.stroke();
+		};
+
+		for (let x = 0; x < width; x++)
+			for (let y = 0; y < height; y++)
+				if (nodes[x][y])
+					drawDot(x, y);
+
+		connections.forEach(ps => drawLine(...ps));
+	};
+
+	let runeColumns = 9, runeRows = 9;
+
+	let update = () => {
+		ctx.fillStyle = `white`;
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		for (let x = 0; x < runeColumns; x += 2)
+			for (let y = 0; y < runeRows; y += 2) {
+				let rune = createRune(
+					parseInt($('#width').value),
+					parseInt($('#height').value),
+					parseInt($('#number-of-nodes').value),
+					parseInt($('#min-number-of-connections').value));
+				drawRune(rune, x, y, parseFloat($('#thickness').value));
+			}
+	};
+
+	let inputs = [$('#width'), $('#height'), $('#thickness'), $('#number-of-nodes'), $('#min-number-of-connections')];
+
+	let randomize = () => {
+		[$('#number-of-nodes'), $('#min-number-of-connections')].forEach(input => input.value = parseFloat(input.min) + Math.floor((parseFloat(input.max) - parseFloat(input.min)) * Math.random() / parseFloat(input.step)) * parseFloat(input.step));
+		inputs.forEach(input => input.value = parseFloat(input.min) + Math.floor((parseFloat(input.max) - parseFloat(input.min)) * Math.random() / parseFloat(input.step)) * parseFloat(input.step));
+		// $('#thickness').value = .07;
+	};
+
+	inputs.forEach(input => input.addEventListener('input', update));
+	$('#randomize-button').addEventListener('click', () => {
+		randomize();
+		update();
+	});
+	$('#regenerate-button').addEventListener('click', update);
+	update();
+</script>

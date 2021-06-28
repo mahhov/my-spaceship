@@ -1,0 +1,197 @@
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	input {
+		margin-left: 15px;
+	}
+
+	button {
+		background: none;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background: #eee;
+	}
+
+	canvas {
+		border: solid 1px #eee;
+	}
+</style>
+
+<div class="container">
+	<label>number of weights: <input id="number-of-weights-input" type="number" step="1"></label>
+	<label>number of paths: <input id="number-of-paths-input" type="number" step="1"></label>
+	<label>weight power: <input id="weight-power-input" type="number" step=".1"></label>
+	<label>dist power: <input id="dist-power-input" type="number" step=".1"></label>
+	<label>rand power: <input id="rand-power-input" type="number" step=".1"></label>
+	<button id="update-button">Regenerate</button>
+
+	<span>
+		<canvas width="800" height="800"></canvas>
+	</span>
+</div>
+
+<script>
+	let $ = document.querySelector.bind(document);
+	let canvas = $('canvas');
+	ctx = canvas.getContext('2d');
+
+	let r = max => Math.floor(Math.random() * max);
+
+	let width = 30, height = 30;
+	let weightNum = 100, pathNum = 100;
+	let weightPower = .9, distPower = 10, randPower = .1;
+
+	let randPerimeter = () => {
+		let perimeter = (width + height) * 2;
+		let index = r(perimeter);
+		let side = Math.floor(index / width); // assume width = height
+		let distance = index % width;
+		switch (side) {
+			case 0: // left
+				return {x: 0, y: distance, side};
+			case 1: // top
+				return {x: distance, y: 0, side};
+			case 2: // right
+				return {x: width - 1, y: distance, side};
+			case 3: // bottom
+				return {x: distance, y: height - 1, side};
+		}
+	};
+
+	let randV = () => ({x: Math.random() * 2 - 1, y: Math.random() * 2 - 1});
+
+	let delta = (a, b) => ({x: b.x - a.x, y: b.y - a.y});
+
+	let distSqr = v => v.x * v.x + v.y * v.y;
+
+	let dist = v => Math.sqrt(distSqr(v));
+
+	let unit = (v, magnitude = 1) => {
+		let d = dist(v);
+		if (!d)
+			return v;
+		let mult = magnitude / d;
+		return {x: v.x * mult, y: v.y * mult};
+	};
+
+	let add = (...vs) =>
+		vs.reduce((v, sum) => ({x: sum.x + v.x, y: sum.y + v.y}), {x: 0, y: 0});
+
+	let weightedVector = (point, weights) => {
+		let maxValue = 0, maxWeightD;
+		weights.forEach(weight => {
+			let d = delta(point, weight);
+			let distance = dist(d);
+			let value = weightPower * weight.value * (1 + distPower) / (distance + 1 + distPower);
+			if (value >= maxValue) {
+				maxValue = value;
+				maxWeightD = d;
+			}
+		});
+
+		return unit(maxWeightD, maxValue);
+	};
+
+	let createPathEndpoints = () => {
+		let start, end;
+		do {
+			start = randPerimeter();
+			end = randPerimeter();
+		} while (start.side === end.side);
+		return {start, end};
+	};
+
+	let createPath = (start, end, weights) => {
+		let path = [];
+		for (let i = 0; i < 100; i++) {
+			path.push(start);
+			let d = delta(start, end);
+			if (distSqr(d) < 10)
+				break;
+			let unitD = unit(d);
+			let wv = weightedVector(start, weights);
+			let rv = unit(randV(), randPower);
+			let move = unit(add(unitD, wv, rv));
+			start = {...start};
+			start = add(start, move);
+		}
+		path.push(end);
+		return path;
+	};
+
+	let update = () => {
+		// create weights
+		let weights = [];
+		for (let i = 0; i < weightNum; i++)
+			weights.push({x: r(width), y: r(height), value: Math.random()});
+
+		// create paths
+		let pathsEndpoints = [];
+		for (let i = 0; i < pathNum; i++)
+			pathsEndpoints.push(createPathEndpoints());
+		let paths = pathsEndpoints.map(({start, end}) => createPath(start, end, weights));
+
+		// setup drawing
+		ctx.fillStyle = `white`;
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		let sx = canvas.width / width, sy = canvas.height / height;
+		let drawGrid = (x, y, s) =>
+			ctx.fillRect(x * sx + (1 - s) * sx / 2, y * sy + (1 - s) * sy / 2, s * sx, s * sy);
+
+		// draw weights
+		weights.forEach(({x, y, value}) => {
+			let r = value;
+			ctx.fillStyle = `rgb(${r * 255}, ${0}, ${(1 - r) * 255})`;
+			drawGrid(x, y, r + .2);
+		});
+
+		// draw paths
+		ctx.fillStyle = `black`;
+		paths.forEach(points => {
+			ctx.beginPath();
+			points.forEach((point, i) => {
+				if (i)
+					ctx.lineTo(point.x * sx + sx / 2, point.y * sy + sy / 2);
+				else
+					ctx.moveTo(point.x * sx + sx / 2, point.y * sy + sy / 2);
+				// drawGrid(point.x, point.y, .25);
+			});
+			ctx.stroke();
+		});
+	};
+
+	$('#number-of-weights-input').value = weightNum;
+	$('#number-of-paths-input').value = pathNum;
+	$('#weight-power-input').value = weightPower;
+	$('#dist-power-input').value = distPower;
+	$('#rand-power-input').value = randPower;
+	$('#number-of-weights-input').addEventListener('input', () => {
+		weightNum = parseInt($('#number-of-weights-input').value) || 0;
+		update();
+	});
+	$('#number-of-paths-input').addEventListener('input', () => {
+		pathNum = parseInt($('#number-of-paths-input').value) || 0;
+		update();
+	});
+	$('#weight-power-input').addEventListener('input', () => {
+		weightPower = parseFloat($('#weight-power-input').value) || 0;
+		update();
+	});
+	$('#dist-power-input').addEventListener('input', () => {
+		distPower = parseFloat($('#dist-power-input').value) || 0;
+		update();
+	});
+	$('#rand-power-input').addEventListener('input', () => {
+		randPower = parseFloat($('#rand-power-input').value) || 0;
+		update();
+	});
+	$('#update-button').addEventListener('click', () => update());
+	update();
+</script>
