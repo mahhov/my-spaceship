@@ -13,7 +13,7 @@ class ChargedProjectileAttack extends Ability {
 		if (this.channelDuration === 0) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
 			this.chargeBuff.addStatValue(Stat.Ids.MOVE_SPEED, -.5);
-			hero.addBuff(this.chargeBuff);
+			hero.statManager.addBuff(this.chargeBuff);
 		}
 		return true;
 	}

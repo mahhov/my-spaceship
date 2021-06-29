@@ -1,26 +1,22 @@
 import Stat from '../playerData/Stat.js';
 import Pool from '../util/Pool.js';
 import Entity from './Entity.js';
+import StatManager from './StatManager.js';
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, baseStats, layer) {
+	constructor(x, y, width, height, baseStats, statValues, layer) {
 		super(x, y, width, height, layer);
-		this.baseStats = baseStats;
-		this.buffs = [];
-	}
-
-	applyInitialBuffs() {
-		// should be invoked once after buffs are set
-		this.health = new Pool(this.getBasedStat(Stat.Ids.LIFE));
+		this.statManager = new StatManager(baseStats, statValues);
+		this.health = new Pool(this.statManager.getBasedStat(Stat.Ids.LIFE));
 	}
 
 	refresh() {
-		this.tickBuffs();
+		this.statManager.tickBuffs();
 	}
 
 	changeHealth(amount) {
 		if (amount < 0)
-			amount /= this.getBasedStat(Stat.Ids.ARMOR);
+			amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
 		this.health.change(amount);
 	}
 
@@ -29,28 +25,6 @@ class LivingEntity extends Entity {
 	}
 
 	onKill(monster) {
-	}
-
-	addBuff(buff) {
-		if (this.buffs.indexOf(buff) === -1) {
-			this.buffs.push(buff);
-			return true;
-		}
-	}
-
-	getStat(statId) {
-		let value = this.buffs
-			.map(buff => buff.statValues.get(statId))
-			.reduce((a, b) => a + b, 0);
-		return statId === Stat.Ids.DISABLED ? value : value + 1;
-	}
-
-	getBasedStat(statId) {
-		return this.baseStats[statId] * this.getStat(statId);
-	}
-
-	tickBuffs() {
-		this.buffs = this.buffs.filter(buff => !buff.tick());
 	}
 
 	removeUi() {

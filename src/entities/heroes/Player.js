@@ -16,12 +16,30 @@ import TechniqueTree from '../../playerData/TechniqueTree.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
-import Buff from '.././Buff.js';
-import BaseStats from '../basedStats.js';
-import basedStats from '../basedStats.js';
 import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
+
+const BaseStats = {
+	[Stat.Ids.LIFE]: 80,
+	[Stat.Ids.LIFE_REGEN]: .03,
+	[Stat.Ids.LIFE_LEECH]: 0, // todo
+	[Stat.Ids.STAMINA]: 80,
+	[Stat.Ids.STAMINA_REGEN]: .13,
+	[Stat.Ids.SHIELD]: 0, // todo
+	[Stat.Ids.SHIELD_DELAY]: 0, // todo
+	[Stat.Ids.SHIELD_LEECH]: 0, // todo
+	[Stat.Ids.ARMOR]: 1,
+
+	[Stat.Ids.DAMAGE]: 0, // todo
+	[Stat.Ids.DAMAGE_OVER_TIME]: 0, // todo
+	[Stat.Ids.ATTACK_SPEED]: 0, // todo
+	[Stat.Ids.ATTACK_RANGE]: 0, // todo
+	[Stat.Ids.CRITICAL_CHANCE]: 0, // todo
+	[Stat.Ids.CRITICAL_DAMAGE]: 0, // todo
+
+	[Stat.Ids.MOVE_SPEED]: .005,
+};
 
 class PlayerBar {
 	constructor(barCoordinate, color) {
@@ -58,17 +76,12 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen(BaseStats.Player[Stat.Ids.LIFE_REGEN]),
+			new DelayedRegen(BaseStats[Stat.Ids.LIFE_REGEN]),
 			new Death(),
 		];
-		super(0, 0, .05, .05, basedStats.Player, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
-
-		let traitsBuff = new Buff(0, null, null, false);
-		traitsBuff.statValues = playerData.statValues;
-		this.addBuff(traitsBuff);
-		this.applyInitialBuffs();
 
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
@@ -105,7 +118,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.updateMove(intersectionFinder, dx, dy, this.getBasedStat(Stat.Ids.MOVE_SPEED));
+		this.updateMove(intersectionFinder, dx, dy, this.statManager.getBasedStat(Stat.Ids.MOVE_SPEED));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {
@@ -167,7 +180,7 @@ class Player extends Hero {
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
 		// buffs
-		this.buffs
+		this.statManager.buffs
 			.filter(buff => buff.visible)
 			.forEach((buff, i) => buff.paintUi(painter, i));
 

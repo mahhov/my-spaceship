@@ -31,7 +31,7 @@ class ProjectileAttack extends Ability {
 	}
 
 	static getTime(hero) {
-		return 60 * hero.getStat(Stat.Ids.ATTACK_RANGE);
+		return 60 * hero.statManager.getStat(Stat.Ids.ATTACK_RANGE);
 	}
 
 	static get velocity() {

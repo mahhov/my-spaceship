@@ -10,9 +10,9 @@ import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, baseStats, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+	constructor(x, y, width, height, baseStats, statValues, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
-		super(x, y, width, height, baseStats, layer);
+		super(x, y, width, height, baseStats, statValues, layer);
 		this.friendly = friendly;
 		this.abilities = abilities;
 		this.passiveAbilities = passiveAbilities;
@@ -20,12 +20,8 @@ class Hero extends LivingEntity {
 		this.nameplateStaminaColor = nameplateStaminaColor;
 		this.recentDamage = new Decay(.1, .001);
 		this.currentMove = [0, 0];
-	}
-
-	applyInitialBuffs() {
-		super.applyInitialBuffs();
 		// todo [medium] consider replacing staminaRefresh with passive ability
-		this.stamina = new Pool(this.getBasedStat(Stat.Ids.STAMINA), this.getBasedStat(Stat.Ids.STAMINA_REGEN));
+		this.stamina = new Pool(this.statManager.getBasedStat(Stat.Ids.STAMINA), this.statManager.getBasedStat(Stat.Ids.STAMINA_REGEN));
 	}
 
 	refresh() {
@@ -35,14 +31,14 @@ class Hero extends LivingEntity {
 	}
 
 	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		if (this.getStat(Stat.Ids.DISABLED))
+		if (this.statManager.getStat(Stat.Ids.DISABLED))
 			return;
 		this.currentMove = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
 	}
 
 	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
-		let disabled = this.getStat(Stat.Ids.DISABLED);
+		let disabled = this.statManager.getStat(Stat.Ids.DISABLED);
 		if (!disabled)
 			this.abilities.forEach((ability, i) =>
 				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
@@ -94,7 +90,7 @@ class Hero extends LivingEntity {
 			this.stamina.getRatio(), this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));
 		// buffs
 		let buffSize = LIFE_HEIGHT + STAMINA_HEIGHT;
-		this.buffs
+		this.statManager.buffs
 			.filter(buff => buff.visible)
 			.forEach((buff, i) => buff.paintAt(painter,
 				camera.transformCoordinates(healthCoordinate.clone

@@ -12,7 +12,7 @@ class Death extends PassiveAbility {
 
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (hero.health.isEmpty()) {
-			hero.addBuff(this.deadBuff);
+			hero.statManager.addBuff(this.deadBuff);
 			return true;
 		}
 		return false;

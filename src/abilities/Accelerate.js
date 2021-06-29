@@ -11,7 +11,7 @@ class Accelerate extends Ability {
 		if (!this.channelDuration) {
 			this.buff = new Buff(0, this.uiColor, 'Haste');
 			this.buff.addStatValue(Stat.Ids.MOVE_SPEED, .3);
-			hero.addBuff(this.buff);
+			hero.statManager.addBuff(this.buff);
 		}
 		return true;
 	}
