@@ -18,7 +18,7 @@ class ProjectileAttack extends Ability {
 
 	activate(origin, direct, map, intersectionFinder, hero) {
 		const SPREAD = .08, DAMAGE = .1;
-		let size = .02 * this.statManager.getStat(statIds.ABILITY_SIZE);
+		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
 		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
 		let randv = randVector(ProjectileAttack.velocity * SPREAD);
 		let projectile = new Projectile(
