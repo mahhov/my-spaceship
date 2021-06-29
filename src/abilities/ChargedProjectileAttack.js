@@ -5,8 +5,8 @@ import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class ChargedProjectileAttack extends Ability {
-	constructor(statValues) {
-		super('Charged Projectile', statValues, 30, 1, 6, .1, false, 60);
+	constructor(statManager) {
+		super('Charged Projectile', statManager, 30, 1, 6, .1, false, 60);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

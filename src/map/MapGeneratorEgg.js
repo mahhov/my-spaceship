@@ -103,7 +103,8 @@ class MapGeneratorEgg extends MapGenerator {
 
 	static generateBotHero(x, y, friendly) {
 		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
-		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		let botHero = new BotHero(x, y, .05, .05, Player.BaseStats, new StatValues(), friendly, Colors.LIFE, Colors.STAMINA);
+		botHero.initAbilities(abilities, passiveAbilities);
 		botHero.setGraphics(new VShip(.05, .05, {fill: true, color: friendly ? Colors.Entity.FRIENDLY.get() : Colors.Entity.MONSTER.get()}));
 		return botHero;
 	}

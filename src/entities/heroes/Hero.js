@@ -10,18 +10,22 @@ import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, baseStats, statValues, friendly, abilities, passiveAbilities, nameplateLifeColor, nameplateStaminaColor) {
+	constructor(x, y, width, height, baseStats, statValues, friendly, nameplateLifeColor, nameplateStaminaColor) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
 		super(x, y, width, height, baseStats, statValues, layer);
 		this.friendly = friendly;
-		this.abilities = abilities;
-		this.passiveAbilities = passiveAbilities;
 		this.nameplateLifeColor = nameplateLifeColor;
 		this.nameplateStaminaColor = nameplateStaminaColor;
 		this.recentDamage = new Decay(.1, .001);
 		this.currentMove = [0, 0];
 		// todo [medium] consider replacing staminaRefresh with passive ability
 		this.stamina = new Pool(this.statManager.getBasedStat(Stat.Ids.STAMINA), this.statManager.getBasedStat(Stat.Ids.STAMINA_REGEN));
+	}
+
+	initAbilities(abilities, passiveAbilities) {
+		// should be called during initialization
+		this.abilities = abilities;
+		this.passiveAbilities = passiveAbilities;
 	}
 
 	refresh() {

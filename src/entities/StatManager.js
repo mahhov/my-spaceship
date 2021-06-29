@@ -7,6 +7,12 @@ class StatManager {
 		this.buffs = [];
 	}
 
+	extend(statValues) {
+		let statManager = new StatManager(this.baseStats, statValues);
+		statManager.buffs = this.buffs;
+		return statManager;
+	}
+
 	addBuff(buff) {
 		if (this.buffs.indexOf(buff) === -1) {
 			this.buffs.push(buff);

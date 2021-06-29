@@ -2,8 +2,8 @@ import Pool from '../util/Pool.js';
 import PassiveAbility from './PassiveAbility.js';
 
 class DelayedRegen extends PassiveAbility {
-	constructor(regenAmount) {
-		super();
+	constructor(statManager, regenAmount) {
+		super(statManager);
 		this.regenAmount = regenAmount;
 		this.delay = new Pool(60, -1);
 	}

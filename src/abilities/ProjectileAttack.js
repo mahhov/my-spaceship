@@ -7,13 +7,13 @@ import Ability from './Ability.js';
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 class ProjectileAttack extends Ability {
-	constructor(statValues) {
-		super('Projectile', statValues, 6, 15 * (1 + statValues.get(statIds.ABILITY_CHARGES)), .6, 0, true, 0);
+	constructor(statManager) {
+		super('Projectile', statManager, 6, 15 * statManager.getStat(statIds.ABILITY_CHARGES), .6, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
 		const SPREAD = .08, DAMAGE = .1;
-		let size = .02 * (1 + this.statValues.get(statIds.ABILITY_SIZE));
+		let size = .02 * this.statManager.getStat(statIds.ABILITY_SIZE);
 		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
 		let randv = randVector(ProjectileAttack.velocity * SPREAD);
 		let projectile = new Projectile(

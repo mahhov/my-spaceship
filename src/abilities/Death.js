@@ -4,8 +4,8 @@ import {Colors} from '../util/constants.js';
 import PassiveAbility from './PassiveAbility.js';
 
 class Death extends PassiveAbility {
-	constructor() {
-		super(true);
+	constructor(statManager) {
+		super(statManager, true);
 		this.deadBuff = new Buff(0, Colors.PLAYER_BUFFS.DEAD, 'Dead');
 		this.deadBuff.addStatValue(Stat.Ids.DISABLED, 1);
 	}

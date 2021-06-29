@@ -2,8 +2,8 @@ import {booleanArray} from '../util/number.js';
 import Ability from './Ability.js';
 
 class Dash extends Ability {
-	constructor(statValues) {
-		super('Dash', statValues, 120, 3, 15, .1, false, 0);
+	constructor(statManager) {
+		super('Dash', statManager, 120, 3, 15, .1, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

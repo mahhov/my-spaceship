@@ -69,20 +69,22 @@ class PlayerBar {
 
 class Player extends Hero {
 	constructor(playerData) {
+		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.STAMINA);
+
 		let abilities = [
-			new ProjectileAttack(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK)),
-			new Dash(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH)),
-			new IncDefense(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE)),
+			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
+			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
+			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen(BaseStats[Stat.Ids.LIFE_REGEN]),
-			new Death(),
+			new DelayedRegen(null, BaseStats[Stat.Ids.LIFE_REGEN]),
+			new Death(null),
 		];
-		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		this.initAbilities(abilities, passiveAbilities);
+
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
-
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -189,5 +191,7 @@ class Player extends Hero {
 		painter.add(new Rect(new Coordinate(0, 0, 1)).setOptions({fill: true, color: damageColor}));
 	}
 }
+
+Player.BaseStats = BaseStats;
 
 export default Player;

@@ -7,9 +7,9 @@ import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
 class Ability {
-	constructor(name, statValues, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
+	constructor(name, statManager, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
 		this.name = name;
-		this.statValues = statValues;
+		this.statManager = statManager;
 		this.cooldown = new Pool(cooldown, -1);
 		this.charges = new Pool(charges, 1);
 		this.stamina = stamina;
