@@ -72,9 +72,9 @@ class Player extends Hero {
 		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.STAMINA);
 
 		let abilities = [
-			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
-			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
-			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
+			new ProjectileAttack(this.statManager.extend(ProjectileAttack.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
+			new Dash(this.statManager.extend(Dash.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
+			new IncDefense(this.statManager.extend(IncDefense.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [

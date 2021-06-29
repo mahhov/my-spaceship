@@ -7,8 +7,8 @@ class StatManager {
 		this.buffs = [];
 	}
 
-	extend(statValues) {
-		let statManager = new StatManager(this.baseStats, statValues);
+	extend(baseStats, statValues) {
+		let statManager = new StatManager({...this.baseStats, ...baseStats}, statValues);
 		statManager.buffs = this.buffs;
 		return statManager;
 	}

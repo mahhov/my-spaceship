@@ -6,9 +6,14 @@ import Ability from './Ability.js';
 
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
+const BaseStats = {
+	[statIds.ABILITY_CHARGES]: 10,
+	[statIds.ABILITY_SIZE]: .02,
+};
+
 class ProjectileAttack extends Ability {
 	constructor(statManager) {
-		super('Projectile', statManager, 6, 15 * statManager.getStat(statIds.ABILITY_CHARGES), .6, 0, true, 0);
+		super('Projectile', statManager, 6, statManager.getBasedStat(statIds.ABILITY_CHARGES), .6, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
@@ -38,5 +43,7 @@ class ProjectileAttack extends Ability {
 		return .014;
 	}
 }
+
+ProjectileAttack.BaseStats = BaseStats;
 
 export default ProjectileAttack;
