@@ -1,4 +1,6 @@
 import Dash from '../../abilities/Dash.js';
+import Death from '../../abilities/Death.js';
+import DelayedRegen from '../../abilities/DelayedRegen.js';
 import IncDefense from '../../abilities/IncDefense.js';
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 import keyMappings from '../../control/keyMappings.js';
@@ -10,6 +12,7 @@ import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
 import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
+import StatValues from '../../playerData/StatValues.js';
 import TechniqueTree from '../../playerData/TechniqueTree.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
@@ -81,9 +84,10 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			// todo [high] wire in statManager to passive abilities
-			// new DelayedRegen(null, this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
-			// new Death(null),
+			// todo [high] consider replace some player stats with abilities; e.g. leech
+			// todo [high] use statManager instead of param for LIFE_REGEN
+			new DelayedRegen(this.statManager.extend(new StatValues()), this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
+			new Death(this.statManager.extend(new StatValues())),
 		];
 		this.initAbilities(abilities, passiveAbilities);
 

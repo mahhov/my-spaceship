@@ -15,6 +15,7 @@ class Ability extends EntityObserver {
 		this.statManager = statManager;
 
 		this.cooldown = new Pool(1, 0);
+		// todo [medium] update this.charges.max if stat changes because of e.g. buffs
 		this.charges = new Pool(statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.MAX_CHARGES), 1);
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
