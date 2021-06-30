@@ -1,10 +1,23 @@
 import Buff from '../entities/Buff.js';
 import Stat from '../playerData/Stat.js';
+import TechniqueData from '../playerData/TechniqueData.js';
 import Ability from './Ability.js';
+
+const statIds = TechniqueData.StatIds.Defense;
+
+const BaseStats = {
+	[statIds.COOLDOWN_RATE]: [1 / 600, 1],
+	[statIds.MAX_CHARGES]: [1, 1],
+	[statIds.STAMINA_COST]: [0, 1],
+	[statIds.CHANNEL_STAMINA_COST]: [0, 1],
+	[statIds.CHANNEL_DURATION]: [0, 1],
+	[statIds.REPEATABLE]: [0, 1],
+};
 
 class IncDefense extends Ability {
 	constructor(statManager) {
-		super('Armor', statManager, 600, 1, 0, false, false, 0);
+		statManager.mergeBaseStats(BaseStats);
+		super('Armor', statManager);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

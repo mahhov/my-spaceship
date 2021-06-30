@@ -1,3 +1,5 @@
+import Dash from '../../abilities/Dash.js';
+import IncDefense from '../../abilities/IncDefense.js';
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 import keyMappings from '../../control/keyMappings.js';
 import VShip from '../../graphics/VShip.js';
@@ -71,11 +73,11 @@ class Player extends Hero {
 	constructor(playerData) {
 		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.STAMINA);
 
-		// todo [high[ reconnect abilities
+		// todo [high] reconnect abilities
 		let abilities = [
 			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
-			// new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
-			// new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
+			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
+			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
