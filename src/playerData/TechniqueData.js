@@ -4,20 +4,30 @@ import AllocationsData from './AllocationsData.js';
 import Stat from './Stat.js';
 import TechniqueTree from './TechniqueTree.js';
 
+const TechniqueBase = makeEnum({
+	...Stat.Ids,
+	COOLDOWN_RATE: 0,
+	MAX_CHARGES: 0,
+	STAMINA_COST: 0,
+	CHANNEL_STAMINA_COST: 0,
+	CHANNEL_DURATION: 0,
+	REPEATABLE: 0,
+});
+
 const StatIds = {
+	TechniqueBase,
 	ProjectileAttack: makeEnum({
-		...Stat.Ids,
-		ABILITY_CHARGES: 0,
+		...TechniqueBase,
 		ABILITY_SIZE: 0,
 	}),
 	AreaAttack: makeEnum({
-		...Stat.Ids,
+		...TechniqueBase,
 	}),
 	Dash: makeEnum({
-		...Stat.Ids,
+		...TechniqueBase,
 	}),
 	Defense: makeEnum({
-		...Stat.Ids,
+		...TechniqueBase,
 	}),
 };
 
@@ -38,37 +48,37 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.ProjectileAttack;
 		return new TechniqueTree(TechniqueTree.Ids.PROJECTILE_ATTACK, [
 			[
-				new Allocation('Charges', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Charges', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Laser', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Channel', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Multishot', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Multishot', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Chain', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Pierce', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Damage', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
-				new Allocation('Rate', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Damage', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Rate', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Poison', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Life leech', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
-				new Allocation('Stamina gain', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Life leech', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Stamina gain', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Armor inc', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Proc area', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Proc debuff', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
-				new Allocation('Proc slow', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Proc slow', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Proc knockback', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Size', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
+				new Allocation('Size', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Range', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 				new Allocation('Spread', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
 			],

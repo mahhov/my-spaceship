@@ -8,15 +8,22 @@ import Ability from './Ability.js';
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 const BaseStats = {
-	[Stat.Ids.DAMAGE]: [.1, 1],
+	[statIds.DAMAGE]: [.1, 1],
 
-	[statIds.ABILITY_CHARGES]: [10, 1],
+	[statIds.COOLDOWN_RATE]: [1 / 6, 1],
+	[statIds.MAX_CHARGES]: [10, 1],
+	[statIds.STAMINA_COST]: [.6, 1],
+	[statIds.CHANNEL_STAMINA_COST]: [0, 1],
+	[statIds.CHANNEL_DURATION]: [0, 1],
+	[statIds.REPEATABLE]: [1, 1],
+
 	[statIds.ABILITY_SIZE]: [.02, 1],
 };
 
 class ProjectileAttack extends Ability {
 	constructor(statManager) {
-		super('Projectile', statManager, 6, statManager.getBasedStat(statIds.ABILITY_CHARGES), .6, 0, true, 0);
+		statManager.mergeBaseStats(BaseStats);
+		super('Projectile', statManager);
 	}
 
 	observe(hero) {
@@ -54,7 +61,5 @@ class ProjectileAttack extends Ability {
 		return .014;
 	}
 }
-
-ProjectileAttack.BaseStats = BaseStats;
 
 export default ProjectileAttack;

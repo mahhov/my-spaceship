@@ -3,22 +3,19 @@ import EntityObserver from '../entities/EntityObserver.js';
 import Bar from '../painter/elements/Bar.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
+import TechniqueData from '../playerData/TechniqueData.js';
 import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
 class Ability extends EntityObserver {
-	constructor(name, statManager, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
+	constructor(name, statManager) {
 		super();
 		this.name = name;
 		this.statManager = statManager;
-		this.cooldown = new Pool(cooldown, -1);
-		this.charges = new Pool(charges, 1);
-		this.stamina = stamina;
-		this.channelStamina = channelStamina;
-		this.repeatable = repeatable;
-		// todo [low] allow indicating whether channel will force stop upon reaching max or will allow to continue
-		this.maxChannelDuration = channelDuration; // -1 indicates infinite, 0 indicates 1 tick (i.e. not channeled)
+
+		this.cooldown = new Pool(1, 0);
+		this.charges = new Pool(statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.MAX_CHARGES), 1);
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
 
@@ -44,13 +41,13 @@ class Ability extends EntityObserver {
 	}
 
 	refresh(hero) {
-		if (!this.charges.isFull() && this.cooldown.increment()) {
+		if (!this.charges.isFull() && this.cooldown.change(-this.cooldownRate)) {
 			this.charges.increment();
 			this.cooldown.restore();
 		}
 
-		this.ready = !this.charges.isEmpty() && hero.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
-		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && hero.sufficientStamina(this.channelStamina);
+		this.ready = !this.charges.isEmpty() && hero.sufficientStamina(this.staminaCost) && (this.repeatable || !this.repeating);
+		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && hero.sufficientStamina(this.channelStaminaCost);
 		this.repeating = false;
 	}
 
@@ -63,12 +60,34 @@ class Ability extends EntityObserver {
 
 		if (this.ready) {
 			this.charges.change(-1);
-			hero.consumeStamina(this.stamina);
+			hero.consumeStamina(this.staminaCost);
 		} else {
-			hero.consumeStamina(this.channelStamina);
-			this.cooldown.value = this.cooldown.max;
+			hero.consumeStamina(this.channelStaminaCost);
+			this.cooldown.restore();
 		}
 		return true;
+	}
+
+	get cooldownRate() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_RATE);
+	}
+
+	get staminaCost() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.STAMINA_COST);
+	}
+
+	get channelStaminaCost() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.CHANNEL_STAMINA_COST);
+	}
+
+	get maxChannelDuration() {
+		// todo [low] allow indicating whether channel will force stop upon reaching max or will allow to continue
+		// channel duration: -1 indicates infinite, 0 indicates 1 tick (i.e. not channeled)
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.CHANNEL_DURATION);
+	}
+
+	get repeatable() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.REPEATABLE);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

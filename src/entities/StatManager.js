@@ -5,11 +5,12 @@ class StatManager {
 		this.buffs = buffs;
 	}
 
-	extend(baseStats, statValues) {
-		return new StatManager(
-			{...this.baseStats, ...baseStats},
-			[...this.statValueSets, statValues],
-			this.buffs);
+	extend(statValues) {
+		return new StatManager(this.baseStats, [...this.statValueSets, statValues], this.buffs);
+	}
+
+	mergeBaseStats(baseStats) {
+		this.baseStats = {...this.baseStats, ...baseStats};
 	}
 
 	addBuff(buff) {

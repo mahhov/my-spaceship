@@ -1,7 +1,3 @@
-import Dash from '../../abilities/Dash.js';
-import Death from '../../abilities/Death.js';
-import DelayedRegen from '../../abilities/DelayedRegen.js';
-import IncDefense from '../../abilities/IncDefense.js';
 import ProjectileAttack from '../../abilities/ProjectileAttack.js';
 import keyMappings from '../../control/keyMappings.js';
 import VShip from '../../graphics/VShip.js';
@@ -27,7 +23,7 @@ const BaseStats = {
 
 	[Stat.Ids.LIFE]: [80, 1],
 	[Stat.Ids.LIFE_REGEN]: [.03, 1],
-	[Stat.Ids.LIFE_LEECH]: [5, 0],
+	[Stat.Ids.LIFE_LEECH]: [5, 0], // todo [high] set base to 1
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.13, 1],
 	[Stat.Ids.SHIELD]: [0, 1], // todo [high]
@@ -75,16 +71,17 @@ class Player extends Hero {
 	constructor(playerData) {
 		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.STAMINA);
 
+		// todo [high[ reconnect abilities
 		let abilities = [
-			new ProjectileAttack(this.statManager.extend(ProjectileAttack.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
-			new Dash(this.statManager.extend(Dash.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
-			new IncDefense(this.statManager.extend(IncDefense.BaseStats, playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
+			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
+			// new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
+			// new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
 			// todo [high] wire in statManager to passive abilities
-			new DelayedRegen(null, this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
-			new Death(null),
+			// new DelayedRegen(null, this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
+			// new Death(null),
 		];
 		this.initAbilities(abilities, passiveAbilities);
 
