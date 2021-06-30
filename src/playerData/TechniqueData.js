@@ -161,6 +161,15 @@ class TechniqueData extends AllocationsData {
 				allocations.forEach((allocation, allocationIndex) =>
 					allocation.value = stored?.trees?.[treeIndex]?.[setIndex]?.[allocationIndex] || 0)));
 	}
+
+	allocate(allocation, value) {
+		if (!this.trees
+			.flatMap(tree => tree.allocationSets)
+			.find(allocationSet => allocationSet.includes(allocation))
+			.filter(allocationI => allocationI !== allocation)
+			.some(allocationI => allocationI !== allocation && allocationI.value))
+			super.allocate(allocation, value);
+	}
 }
 
 TechniqueData.StatIds = StatIds;
