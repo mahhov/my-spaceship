@@ -8,7 +8,7 @@ class LaserAttack extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
-		const SPREAD = .08, SIZE = .002, TIME = 50, DAMAGE = .01;
+		const SIZE = .002, TIME = 50, DAMAGE = .01;
 		let directv = setMagnitude(direct.x, direct.y, LaserAttack.getDistance(hero));
 		let laser = new Laser(
 			origin.x, origin.y,

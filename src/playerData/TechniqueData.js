@@ -18,6 +18,7 @@ const StatIds = {
 	TechniqueBase,
 	ProjectileAttack: makeEnum({
 		...TechniqueBase,
+		ABILITY_CHANNEL: 0,
 		ABILITY_SIZE: 0,
 	}),
 	AreaAttack: makeEnum({
@@ -48,39 +49,44 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.ProjectileAttack;
 		return new TechniqueTree(TechniqueTree.Ids.PROJECTILE_ATTACK, [
 			[
-				new Allocation('Charges', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Laser', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Channel', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Charges', [new Stat(statIds.MAX_CHARGES, 5)], 4, statIds, 'Increase charge capacity.'),
+				new Allocation('Stream', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Channel', [
+					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.CHANNEL_DURATION, 60),
+					new Stat(statIds.STAMINA_COST, 10),
+					new Stat(statIds.CHANNEL_STAMINA_COST, .1),
+				], 4, statIds, ''),
 			],
 			[
-				new Allocation('Multishot', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Chain', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Pierce', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Multishot', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Chain', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Pierce', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Damage', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Rate', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Poison', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Damage', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Rate', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Poison', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Life leech', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Stamina gain', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Armor inc', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Life leech', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Stamina gain', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Armor inc', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Proc area', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Proc debuff', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc area', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc debuff', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Proc slow', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Proc knockback', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc slow', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc knockback', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
-				new Allocation('Size', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Range', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Spread', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Size', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Range', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Spread', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 		]);
 	}

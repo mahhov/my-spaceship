@@ -1,4 +1,5 @@
 import Projectile from '../entities/attack/Projectile.js';
+import Buff from '../entities/Buff.js';
 import EntityObserver from '../entities/EntityObserver.js';
 import Stat from '../playerData/Stat.js';
 import TechniqueData from '../playerData/TechniqueData.js';
@@ -11,12 +12,13 @@ const BaseStats = {
 	[statIds.DAMAGE]: [.1, 1],
 
 	[statIds.COOLDOWN_RATE]: [1 / 6, 1],
-	[statIds.MAX_CHARGES]: [10, 1],
+	[statIds.MAX_CHARGES]: [1, 1],
 	[statIds.STAMINA_COST]: [.6, 1],
-	[statIds.CHANNEL_STAMINA_COST]: [0, 1],
-	[statIds.CHANNEL_DURATION]: [0, 1],
+	[statIds.CHANNEL_STAMINA_COST]: [1, 0],
+	[statIds.CHANNEL_DURATION]: [1, 0],
 	[statIds.REPEATABLE]: [1, 1],
 
+	[statIds.ABILITY_CHANNEL]: [1, 0],
 	[statIds.ABILITY_SIZE]: [.02, 1],
 };
 
@@ -34,8 +36,28 @@ class ProjectileAttack extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
+		if (!this.statManager.getBasedStat(statIds.CHANNEL_DURATION))
+			this.fireProjectile(origin, direct, map, hero);
+
+		else if (!this.channelDuration) {
+			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
+			this.chargeBuff.addStatValue(Stat.Ids.MOVE_SPEED, -.5);
+			hero.statManager.addBuff(this.chargeBuff);
+		}
+
+		return true;
+	}
+
+	endActivate(origin, direct, map, intersectionFinder, hero) {
+		if (this.statManager.getBasedStat(statIds.CHANNEL_DURATION)) {
+			this.fireProjectile(origin, direct, map, hero, 1 + this.channelRatio * 3);
+			this.chargeBuff.expire();
+		}
+	}
+
+	fireProjectile(origin, direct, map, hero, channelDamageMultiplier = 1) {
 		const SPREAD = .08;
-		let damage = this.statManager.getBasedStat(Stat.Ids.DAMAGE);
+		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
 		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
 		let randv = randVector(ProjectileAttack.velocity * SPREAD);
@@ -46,7 +68,6 @@ class ProjectileAttack extends Ability {
 			ProjectileAttack.getTime(hero), damage,
 			hero.friendly, this);
 		map.addProjectile(projectile);
-		return true;
 	}
 
 	static getDistance(hero) {
