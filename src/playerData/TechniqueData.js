@@ -38,7 +38,7 @@ class TechniqueData extends AllocationsData {
 			[
 				new Allocation('Charges', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),
 				new Allocation('Laser', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
-				new Allocation('Channel', [new Stat(statIds.ABILITY_SIZE, 1)], 4, statIds, ''),
+				new Allocation('Channel', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
 			],
 			[
 				new Allocation('Multishot', [new Stat(statIds.ABILITY_CHARGES, 1)], 4, statIds, ''),

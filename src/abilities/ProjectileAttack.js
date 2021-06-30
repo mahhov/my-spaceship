@@ -7,6 +7,8 @@ import Ability from './Ability.js';
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 const BaseStats = {
+	[Stat.Ids.DAMAGE]: .1,
+
 	[statIds.ABILITY_CHARGES]: 10,
 	[statIds.ABILITY_SIZE]: .02,
 };
@@ -17,7 +19,8 @@ class ProjectileAttack extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
-		const SPREAD = .08, DAMAGE = .1;
+		const SPREAD = .08;
+		let damage = this.statManager.getBasedStat(Stat.Ids.DAMAGE);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
 		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
 		let randv = randVector(ProjectileAttack.velocity * SPREAD);
@@ -25,7 +28,7 @@ class ProjectileAttack extends Ability {
 			origin.x, origin.y,
 			size, size,
 			directv.x + randv[0], directv.y + randv[1],
-			ProjectileAttack.getTime(hero), DAMAGE,
+			ProjectileAttack.getTime(hero), damage,
 			hero.friendly);
 		map.addProjectile(projectile);
 		return true;

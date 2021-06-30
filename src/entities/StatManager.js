@@ -1,16 +1,17 @@
 import Stat from '../playerData/Stat.js';
 
 class StatManager {
-	constructor(baseStats, statValues) {
+	constructor(baseStats, statValuesSets, buffs = []) {
 		this.baseStats = baseStats;
-		this.statValues = statValues;
-		this.buffs = [];
+		this.statValueSets = statValuesSets;
+		this.buffs = buffs;
 	}
 
 	extend(baseStats, statValues) {
-		let statManager = new StatManager({...this.baseStats, ...baseStats}, statValues);
-		statManager.buffs = this.buffs;
-		return statManager;
+		return new StatManager(
+			{...this.baseStats, ...baseStats},
+			[...this.statValueSets, statValues],
+			this.buffs);
 	}
 
 	addBuff(buff) {
@@ -25,7 +26,7 @@ class StatManager {
 	}
 
 	getStat(statId) {
-		let value = [this.statValues, ...this.buffs.map(buff => buff.statValues)]
+		let value = [...this.statValueSets, ...this.buffs.map(buff => buff.statValues)]
 			.map(statValues => statValues.get(statId))
 			.reduce((a, b) => a + b, 0);
 		return statId === Stat.Ids.DISABLED ? value : value + 1;

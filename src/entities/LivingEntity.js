@@ -6,7 +6,7 @@ import StatManager from './StatManager.js';
 class LivingEntity extends Entity {
 	constructor(x, y, width, height, baseStats, statValues, layer) {
 		super(x, y, width, height, layer);
-		this.statManager = new StatManager(baseStats, statValues);
+		this.statManager = new StatManager(baseStats, [statValues]);
 		this.health = new Pool(this.statManager.getBasedStat(Stat.Ids.LIFE));
 	}
 
