@@ -7,6 +7,7 @@ import Coordinate from '../../util/Coordinate.js';
 import {randInt} from '../../util/number.js';
 import Buff from '../Buff.js';
 import Entity from '../Entity.js';
+import EntityObserver from '../EntityObserver.js';
 
 class Egg extends Entity {
 	constructor(possiblePositions) {
@@ -33,12 +34,11 @@ class Egg extends Entity {
 			this.ownerHero = null;
 			this.randomPosition();
 			this.slowDebuff.expire();
-			// todo [low] replace queuedTrackedIntersections with Entity.queuedEvents
-			this.clearQueuedEvents(Entity.EventIds.INTERSECTION);
+			this.clearQueuedEvents(EntityObserver.EventIds.INTERSECTION);
 		}
 
-		if (!this.ownerHero && this.getQueuedEvents(Entity.EventIds.INTERSECTION).length) {
-			this.ownerHero = this.getQueuedEvents(Entity.EventIds.INTERSECTION)[0][0];
+		if (!this.ownerHero && this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION).length) {
+			this.ownerHero = this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION)[0][0];
 			this.slowDebuff.reset();
 			this.ownerHero.statManager.addBuff(this.slowDebuff);
 		}

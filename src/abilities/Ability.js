@@ -1,4 +1,5 @@
 import keyMappings from '../control/keyMappings.js';
+import EntityObserver from '../entities/EntityObserver.js';
 import Bar from '../painter/elements/Bar.js';
 import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
@@ -6,8 +7,9 @@ import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
-class Ability {
+class Ability extends EntityObserver {
 	constructor(name, statManager, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
+		super();
 		this.name = name;
 		this.statManager = statManager;
 		this.cooldown = new Pool(cooldown, -1);
@@ -27,6 +29,8 @@ class Ability {
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
+		this.observe(hero);
+		this.clearAllQueuedEvents();
 		this.refresh(hero);
 		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, hero))
 			this.channelDuration++;
@@ -34,6 +38,9 @@ class Ability {
 			this.endActivate(origin, direct, map, intersectionFinder, hero);
 			this.channelDuration = 0;
 		}
+	}
+
+	observe(hero) {
 	}
 
 	refresh(hero) {

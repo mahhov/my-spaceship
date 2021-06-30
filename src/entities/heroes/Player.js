@@ -20,25 +20,29 @@ import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
+// Formatted: [base value, initial stat value]
+// E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
 const BaseStats = {
-	[Stat.Ids.LIFE]: 80,
-	[Stat.Ids.LIFE_REGEN]: .03,
-	[Stat.Ids.LIFE_LEECH]: 0, // todo
-	[Stat.Ids.STAMINA]: 80,
-	[Stat.Ids.STAMINA_REGEN]: .13,
-	[Stat.Ids.SHIELD]: 0, // todo
-	[Stat.Ids.SHIELD_DELAY]: 0, // todo
-	[Stat.Ids.SHIELD_LEECH]: 0, // todo
-	[Stat.Ids.ARMOR]: 1,
+	[Stat.Ids.DISABLED]: [1, 0],
 
-	[Stat.Ids.DAMAGE]: 0,
-	[Stat.Ids.DAMAGE_OVER_TIME]: 0, // todo
-	[Stat.Ids.ATTACK_SPEED]: 0, // todo
-	[Stat.Ids.ATTACK_RANGE]: 0, // todo
-	[Stat.Ids.CRITICAL_CHANCE]: 0, // todo
-	[Stat.Ids.CRITICAL_DAMAGE]: 0, // todo
+	[Stat.Ids.LIFE]: [80, 1],
+	[Stat.Ids.LIFE_REGEN]: [.03, 1],
+	[Stat.Ids.LIFE_LEECH]: [5, 0],
+	[Stat.Ids.STAMINA]: [80, 1],
+	[Stat.Ids.STAMINA_REGEN]: [.13, 1],
+	[Stat.Ids.SHIELD]: [0, 1], // todo [high]
+	[Stat.Ids.SHIELD_DELAY]: [0, 1], // todo [high]
+	[Stat.Ids.SHIELD_LEECH]: [0, 1], // todo [high]
+	[Stat.Ids.ARMOR]: [1, 1],
 
-	[Stat.Ids.MOVE_SPEED]: .005,
+	[Stat.Ids.DAMAGE]: [0, 1],
+	[Stat.Ids.DAMAGE_OVER_TIME]: [0, 1], // todo [high]
+	[Stat.Ids.ATTACK_SPEED]: [0, 1], // todo [high]
+	[Stat.Ids.ATTACK_RANGE]: [0, 1], // todo [high]
+	[Stat.Ids.CRITICAL_CHANCE]: [0, 1], // todo [high]
+	[Stat.Ids.CRITICAL_DAMAGE]: [0, 1], // todo [high]
+
+	[Stat.Ids.MOVE_SPEED]: [.005, 1],
 };
 
 class PlayerBar {
@@ -78,7 +82,8 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			new DelayedRegen(null, BaseStats[Stat.Ids.LIFE_REGEN]),
+			// todo [high] wire in statManager to passive abilities
+			new DelayedRegen(null, this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
 			new Death(null),
 		];
 		this.initAbilities(abilities, passiveAbilities);

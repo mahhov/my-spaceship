@@ -35,14 +35,14 @@ class Hero extends LivingEntity {
 	}
 
 	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {
-		if (this.statManager.getStat(Stat.Ids.DISABLED))
+		if (this.statManager.getBasedStat(Stat.Ids.DISABLED))
 			return;
 		this.currentMove = [dx, dy];
 		this.safeMove(intersectionFinder, dx, dy, magnitude, noSlide);
 	}
 
 	updateAbilities(map, intersectionFinder, activeAbilitiesWanted, direct) {
-		let disabled = this.statManager.getStat(Stat.Ids.DISABLED);
+		let disabled = this.statManager.getBasedStat(Stat.Ids.DISABLED);
 		if (!disabled)
 			this.abilities.forEach((ability, i) =>
 				ability.update(this, direct, map, intersectionFinder, this, activeAbilitiesWanted[i]));
@@ -73,8 +73,8 @@ class Hero extends LivingEntity {
 	}
 
 	changeHealth(amount) {
-		super.changeHealth(amount);
 		this.recentDamage.add(-amount / 100);
+		return super.changeHealth(amount);
 	}
 
 	restoreHealth() {

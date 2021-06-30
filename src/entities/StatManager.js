@@ -1,5 +1,3 @@
-import Stat from '../playerData/Stat.js';
-
 class StatManager {
 	constructor(baseStats, statValuesSets, buffs = []) {
 		this.baseStats = baseStats;
@@ -25,15 +23,16 @@ class StatManager {
 		this.buffs = this.buffs.filter(buff => !buff.tick());
 	}
 
+	// todo [high] deprecate and use getBasedStat everywhere
 	getStat(statId) {
-		let value = [...this.statValueSets, ...this.buffs.map(buff => buff.statValues)]
+		return [...this.statValueSets, ...this.buffs.map(buff => buff.statValues)]
 			.map(statValues => statValues.get(statId))
 			.reduce((a, b) => a + b, 0);
-		return statId === Stat.Ids.DISABLED ? value : value + 1;
 	}
 
 	getBasedStat(statId) {
-		return this.baseStats[statId] * this.getStat(statId);
+		let base = this.baseStats[statId];
+		return base[0] * (base[1] + this.getStat(statId));
 	}
 }
 

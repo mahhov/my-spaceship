@@ -1,4 +1,5 @@
 import Stat from '../playerData/Stat.js';
+import {clamp} from '../util/number.js';
 import Pool from '../util/Pool.js';
 import Entity from './Entity.js';
 import StatManager from './StatManager.js';
@@ -17,7 +18,9 @@ class LivingEntity extends Entity {
 	changeHealth(amount) {
 		if (amount < 0)
 			amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
+		let damageDealt = clamp(-amount, 0, this.health.value);
 		this.health.change(amount);
+		return damageDealt;
 	}
 
 	restoreHealth() {

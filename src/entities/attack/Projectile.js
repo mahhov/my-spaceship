@@ -4,12 +4,13 @@ import {Colors} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {randVector} from '../../util/number.js';
 import Entity from '../Entity.js';
+import EntityObserver from '../EntityObserver.js';
 import DamageDust from '../particles/DamageDust.js';
 
 class Projectile extends Entity {
-	constructor(x, y, width, height, vx, vy, time, damage, friendly) {
+	constructor(x, y, width, height, vx, vy, time, damage, friendly, observer) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_PROJECTILE : IntersectionFinder.Layers.HOSTILE_PROJECTILE;
-		super(x, y, width, height, layer);
+		super(x, y, width, height, layer, observer);
 		this.vx = vx;
 		this.vy = vy;
 		this.time = time;
@@ -20,10 +21,11 @@ class Projectile extends Entity {
 	update(map, intersectionFinder) { // todo [low] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attack parent class to have update interface
 		const FRICTION = 1;
 
-		let intersection = this.getQueuedEvents(Entity.EventIds.INTERSECTION)[0]?.[0] || this.safeMove(intersectionFinder, this.vx, this.vy, -1, true).reference;
+		let intersection = this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION)[0]?.[0] || this.safeMove(intersectionFinder, this.vx, this.vy, -1, true).reference;
 
 		if (intersection) {
-			intersection.changeHealth(-this.damage);
+			let damageDealt = intersection.changeHealth(-this.damage);
+			this.observer.queueEvent(EntityObserver.EventIds.DEALT_DAMAGE, damageDealt);
 			map.addParticle(new DamageDust(this.x, this.y, .005, ...randVector(.001), 100));
 			return true;
 		}

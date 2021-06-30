@@ -21,6 +21,8 @@ const StatIds = {
 	}),
 };
 
+// todo [high] wire in
+
 class TechniqueData extends AllocationsData {
 	constructor(expData) {
 		super(expData, 1);
