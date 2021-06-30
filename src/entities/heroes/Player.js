@@ -28,7 +28,7 @@ const BaseStats = {
 
 	[Stat.Ids.LIFE]: [80, 1],
 	[Stat.Ids.LIFE_REGEN]: [.03, 1],
-	[Stat.Ids.LIFE_LEECH]: [5, 0], // todo [high] set base to 1
+	[Stat.Ids.LIFE_LEECH]: [1, 0],
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.13, 1],
 	[Stat.Ids.SHIELD]: [0, 1], // todo [high]

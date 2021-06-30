@@ -51,7 +51,7 @@ class TraitsData extends AllocationsData {
 				new Stat(Stat.Ids.ATTACK_RANGE, -.05),
 			], 6).setImageName('pierced-heart.png'),
 			new Allocation('Cruel', [
-				new Stat(Stat.Ids.LIFE_LEECH, .1),
+				new Stat(Stat.Ids.LIFE_LEECH, .3),
 				new Stat(Stat.Ids.LIFE_REGEN, -.05),
 			], 6).setImageName('vampire-dracula.png'),
 			new Allocation('Resilient', [
