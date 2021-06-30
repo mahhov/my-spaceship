@@ -31,7 +31,7 @@ const BaseStats = {
 	[Stat.Ids.SHIELD_LEECH]: 0, // todo
 	[Stat.Ids.ARMOR]: 1,
 
-	[Stat.Ids.DAMAGE]: 0, // todo
+	[Stat.Ids.DAMAGE]: 0,
 	[Stat.Ids.DAMAGE_OVER_TIME]: 0, // todo
 	[Stat.Ids.ATTACK_SPEED]: 0, // todo
 	[Stat.Ids.ATTACK_RANGE]: 0, // todo

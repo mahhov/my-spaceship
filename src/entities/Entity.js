@@ -1,5 +1,8 @@
 import Bounds from '../intersection/Bounds.js';
+import makeEnum from '../util/enum.js';
 import {setMagnitude} from '../util/number.js';
+
+const EventIds = makeEnum({INTERSECTION: 0});
 
 class Entity {
 	constructor(x, y, width, height, layer) {
@@ -9,7 +12,7 @@ class Entity {
 		this.layer = layer;
 		this.setPosition(x, y);
 		this.moveDirection = {x: 0, y: 1};
-		this.queuedTrackedIntersections = [];
+		this.queuedEvents = [];
 	}
 
 	setGraphics(graphics) {
@@ -34,7 +37,7 @@ class Entity {
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		let intersectionMove = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 		this.move(intersectionMove.x, intersectionMove.y);
-		intersectionMove.trackedOnlyReferences.forEach(reference => reference.queueTrackedIntersection(this));
+		intersectionMove.trackedOnlyReferences.forEach(reference => reference.queueEvent(EventIds.INTERSECTION, this));
 		return intersectionMove;
 	}
 
@@ -64,8 +67,18 @@ class Entity {
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
 	}
 
-	queueTrackedIntersection(reference) {
-		this.queuedTrackedIntersections.push(reference);
+	queueEvent(eventId, ...args) {
+		this.queuedEvents.push([eventId, ...args]);
+	}
+
+	getQueuedEvents(eventId) {
+		return this.queuedEvents
+			.filter(([eventIdI]) => eventIdI === eventId)
+			.map(([_, ...args]) => args);
+	}
+
+	clearQueuedEvents(eventId) {
+		this.queuedEvents = this.queuedEvents.filter(([eventIdI]) => eventIdI !== eventId);
 	}
 
 	changeHealth(amount) {
@@ -82,5 +95,7 @@ class Entity {
 	paintUi(painter, camera) {
 	}
 }
+
+Entity.EventIds = EventIds;
 
 export default Entity;
