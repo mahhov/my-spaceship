@@ -19,7 +19,6 @@ const StatIds = {
 	TechniqueBase,
 	ProjectileAttack: makeEnum({
 		...TechniqueBase,
-		ABILITY_CHANNEL: 0,
 		ABILITY_SIZE: 0,
 	}),
 	AreaAttack: makeEnum({
@@ -50,13 +49,17 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.ProjectileAttack;
 		return new TechniqueTree(TechniqueTree.Ids.PROJECTILE_ATTACK, [
 			[
-				new Allocation('Charges', [new Stat(statIds.MAX_CHARGES, 5)], 4, statIds, 'Increase charge capacity.'),
-				new Allocation('Stream', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Capacitor', [
+					new Stat(statIds.MAX_CHARGES, 5),
+				], 4, statIds, 'Increase charge capacity.'),
+				new Allocation('Stream', [
+					new Stat(statIds.COOLDOWN_DURATION, -.1),
+				], 4, statIds, ''),
 				new Allocation('Channel', [
-					new Stat(statIds.DAMAGE, 1),
-					new Stat(statIds.CHANNEL_DURATION, 60),
-					new Stat(statIds.STAMINA_COST, 10),
-					new Stat(statIds.CHANNEL_STAMINA_COST, .1),
+					new Stat(statIds.DAMAGE, .5),
+					new Stat(statIds.CHANNEL_DURATION, 15),
+					new Stat(statIds.STAMINA_COST, 4),
+					new Stat(statIds.CHANNEL_STAMINA_COST, .08),
 				], 4, statIds, ''),
 			],
 			[

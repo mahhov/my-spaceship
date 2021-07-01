@@ -19,7 +19,6 @@ const BaseStats = {
 	[statIds.CHANNEL_DURATION]: [1, 0],
 	[statIds.REPEATABLE]: [1, 1],
 
-	[statIds.ABILITY_CHANNEL]: [1, 0],
 	[statIds.ABILITY_SIZE]: [.02, 1],
 };
 
@@ -37,10 +36,10 @@ class ProjectileAttack extends Ability {
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
-		if (!this.statManager.getBasedStat(statIds.CHANNEL_DURATION))
+		if (!this.statManager.getBasedStat(statIds.CHANNEL_DURATION)) {
 			this.fireProjectile(origin, direct, map, hero);
 
-		else if (!this.channelDuration) {
+		} else if (!this.channelDuration) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
 			this.chargeBuff.addStatValue(Stat.Ids.MOVE_SPEED, -.5);
 			hero.statManager.addBuff(this.chargeBuff);
