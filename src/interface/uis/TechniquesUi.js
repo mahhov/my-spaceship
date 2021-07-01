@@ -20,7 +20,7 @@ class TechniquesUi extends Ui {
 
 		this.availableText = this.add(new UiText(coordinate.clone.alignWithoutMove(Coordinate.Aligns.END)));
 
-		let hoverText = new UiPopupText(new Coordinate(0, 0, .22));
+		let hoverText = new UiPopupText(new Coordinate(0, 0, .3));
 
 		coordinate
 			.shift(0, 1)

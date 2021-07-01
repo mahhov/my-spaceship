@@ -51,16 +51,16 @@ class TechniqueData extends AllocationsData {
 			[
 				new Allocation('Capacitor', [
 					new Stat(statIds.MAX_CHARGES, 5),
-				], 4, statIds, 'Increase charge capacity.'),
+				], 4, statIds, 'Store charges for high burst damage.'),
 				new Allocation('Stream', [
 					new Stat(statIds.COOLDOWN_DURATION, -.1),
 				], 4, statIds, ''),
-				new Allocation('Channel', [
+				new Allocation('Charged shot', [
 					new Stat(statIds.DAMAGE, .5),
 					new Stat(statIds.CHANNEL_DURATION, 15),
-					new Stat(statIds.STAMINA_COST, 4),
-					new Stat(statIds.CHANNEL_STAMINA_COST, .08),
-				], 4, statIds, ''),
+					new Stat(statIds.STAMINA_COST, 1),
+					new Stat(statIds.CHANNEL_STAMINA_COST, .04),
+				], 4, statIds, 'Charged attacks deal 4x more damage.'),
 			],
 			[
 				new Allocation('Multishot', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
