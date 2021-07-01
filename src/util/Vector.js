@@ -81,6 +81,11 @@ class Vector {
 	}
 
 	// rotates clockwise
+	rotateByTheta(theta) {
+		return this.rotateByCosSin(cos(theta), sin(theta));
+	}
+
+	// rotates clockwise
 	rotateByCosSin(cos, sin) {
 		let tempX = this.x;
 		this.x = this.x * cos - this.y * sin;

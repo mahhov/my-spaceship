@@ -57,13 +57,16 @@ class ProjectileAttack extends Ability {
 	}
 
 	fireProjectile(origin, direct, map, hero, channelDamageMultiplier = 1) {
-		const SPREAD = .08;
+		const SPREAD = .08, MULTISHOT_THETA = 10 / 180 * Math.PI;
 		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
 		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
-		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity);
+		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity).rotateByTheta(-(multishot + 1) / 2 * MULTISHOT_THETA);
 		for (let i = 0; i < multishot; i++) {
-			let vector = Vector.fromRand(ProjectileAttack.velocity * SPREAD).add(directVector);
+			directVector.rotateByTheta(MULTISHOT_THETA);
+			let vector = Vector
+				.fromRand(ProjectileAttack.velocity * SPREAD)
+				.add(directVector);
 			let projectile = new Projectile(
 				origin.x, origin.y,
 				size, size,

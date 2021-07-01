@@ -68,7 +68,7 @@ class TechniqueData extends AllocationsData {
 					new Stat(statIds.STAMINA_COST, .4),
 					new Stat(statIds.CHANNEL_STAMINA_COST, .1),
 					new Stat(statIds.ABILITY_MULTISHOT, 3),
-				], 1, statIds, ''),
+				], 1, statIds, 'Fire a cone of projectiles.'),
 				new Allocation('Chain', [
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),
