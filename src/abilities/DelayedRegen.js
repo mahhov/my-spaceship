@@ -5,7 +5,8 @@ import PassiveAbility from './PassiveAbility.js';
 const statIds = TechniqueData.StatIds.TechniqueBase;
 
 const BaseStats = {
-	[statIds.COOLDOWN_RATE]: [1, 1],
+	[statIds.COOLDOWN_DURATION]: [0, 1],
+	[statIds.COOLDOWN_RATE]: [0, 1],
 	[statIds.MAX_CHARGES]: [1, 1],
 	[statIds.STAMINA_COST]: [0, 1],
 	[statIds.CHANNEL_STAMINA_COST]: [0, 1],

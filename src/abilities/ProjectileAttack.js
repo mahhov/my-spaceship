@@ -11,7 +11,8 @@ const statIds = TechniqueData.StatIds.ProjectileAttack;
 const BaseStats = {
 	[statIds.DAMAGE]: [.1, 1],
 
-	[statIds.COOLDOWN_RATE]: [1 / 6, 1],
+	[statIds.COOLDOWN_DURATION]: [6, 1],
+	[statIds.COOLDOWN_RATE]: [1, 1],
 	[statIds.MAX_CHARGES]: [1, 1],
 	[statIds.STAMINA_COST]: [.6, 1],
 	[statIds.CHANNEL_STAMINA_COST]: [1, 0],

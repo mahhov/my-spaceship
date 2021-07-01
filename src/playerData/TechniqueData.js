@@ -6,6 +6,7 @@ import TechniqueTree from './TechniqueTree.js';
 
 const TechniqueBase = makeEnum({
 	...Stat.Ids,
+	COOLDOWN_DURATION: 0,
 	COOLDOWN_RATE: 0,
 	MAX_CHARGES: 0,
 	STAMINA_COST: 0,
@@ -193,3 +194,8 @@ class TechniqueData extends AllocationsData {
 TechniqueData.StatIds = StatIds;
 
 export default TechniqueData;
+
+// todo [medium] some other technique ideas
+// instant damage around player, aoe debuff around player, ring around player
+// area blast at target, delayed area blast at target, channelled area blast at target
+// laser that waves out in wide but short aoe, laser that fires instantly, laser that fires in long range after channel

@@ -14,7 +14,7 @@ class Ability extends EntityObserver {
 		this.name = name;
 		this.statManager = statManager;
 
-		this.cooldown = new Pool(1, 0);
+		this.cooldown = new Pool(this.cooldownDuration, 0);
 		this.charges = new Pool(this.maxCharges, 1);
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
@@ -41,7 +41,8 @@ class Ability extends EntityObserver {
 	}
 
 	refresh(hero) {
-		this.charges.max = this.maxCharges;
+		this.cooldown.setMax(this.cooldownDuration);
+		this.charges.setMax(this.maxCharges);
 		if (!this.charges.isFull() && this.cooldown.change(-this.cooldownRate)) {
 			this.charges.increment();
 			this.cooldown.restore();
@@ -69,12 +70,16 @@ class Ability extends EntityObserver {
 		return true;
 	}
 
-	get maxCharges() {
-		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.MAX_CHARGES);
+	get cooldownDuration() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_DURATION);
 	}
 
 	get cooldownRate() {
 		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_RATE);
+	}
+
+	get maxCharges() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.MAX_CHARGES);
 	}
 
 	get staminaCost() {

@@ -5,7 +5,8 @@ import Ability from './Ability.js';
 const statIds = TechniqueData.StatIds.Dash;
 
 const BaseStats = {
-	[statIds.COOLDOWN_RATE]: [1 / 120, 1],
+	[statIds.COOLDOWN_DURATION]: [120, 1],
+	[statIds.COOLDOWN_RATE]: [1, 1],
 	[statIds.MAX_CHARGES]: [3, 1],
 	[statIds.STAMINA_COST]: [15, 1],
 	[statIds.CHANNEL_STAMINA_COST]: [0, 1],

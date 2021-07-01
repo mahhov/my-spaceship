@@ -6,6 +6,11 @@ class Pool {
 		this.incrementRate = incrementRate;
 	}
 
+	setMax(value) {
+		this.max = value;
+		return this.change(0);
+	}
+
 	// return true if reached 0 or max
 	increment() {
 		return this.change(this.incrementRate);
