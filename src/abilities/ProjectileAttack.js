@@ -3,7 +3,7 @@ import Buff from '../entities/Buff.js';
 import EntityObserver from '../entities/EntityObserver.js';
 import Stat from '../playerData/Stat.js';
 import TechniqueData from '../playerData/TechniqueData.js';
-import {randVector, setMagnitude} from '../util/number.js';
+import Vector from '../util/Vector.js';
 import Ability from './Ability.js';
 
 const statIds = TechniqueData.StatIds.ProjectileAttack;
@@ -57,17 +57,17 @@ class ProjectileAttack extends Ability {
 	}
 
 	fireProjectile(origin, direct, map, hero, channelDamageMultiplier = 1) {
+		const SPREAD = .08;
 		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
+		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
+		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
+		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity);
 		for (let i = 0; i < multishot; i++) {
-			const SPREAD = .08;
-			let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
-			let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
-			let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
-			let randv = randVector(ProjectileAttack.velocity * SPREAD);
+			let vector = Vector.fromRand(ProjectileAttack.velocity * SPREAD).add(directVector);
 			let projectile = new Projectile(
 				origin.x, origin.y,
 				size, size,
-				directv.x + randv[0], directv.y + randv[1],
+				vector.x, vector.y,
 				ProjectileAttack.getTime(hero), damage,
 				hero.friendly, this);
 			map.addProjectile(projectile);

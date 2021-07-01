@@ -73,7 +73,11 @@ class Vector {
 			let mult = magnitude / prevMagnitude;
 			this.multiply(mult);
 		}
-		return prevMagnitude;
+	}
+
+	setMagnitude(magnitude) {
+		this.magnitude = magnitude;
+		return this;
 	}
 
 	// rotates clockwise
