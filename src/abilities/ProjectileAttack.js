@@ -19,6 +19,7 @@ const BaseStats = {
 	[statIds.CHANNEL_DURATION]: [1, 0],
 	[statIds.REPEATABLE]: [1, 1],
 
+	[statIds.ABILITY_MULTISHOT]: [1, 1],
 	[statIds.ABILITY_SIZE]: [.02, 1],
 };
 
@@ -50,24 +51,27 @@ class ProjectileAttack extends Ability {
 
 	endActivate(origin, direct, map, intersectionFinder, hero) {
 		if (this.statManager.getBasedStat(statIds.CHANNEL_DURATION)) {
-			this.fireProjectile(origin, direct, map, hero, 1 + this.channelRatio * 3);
+			this.fireProjectile(origin, direct, map, hero, 1 + this.channelRatio * 19);
 			this.chargeBuff.expire();
 		}
 	}
 
 	fireProjectile(origin, direct, map, hero, channelDamageMultiplier = 1) {
-		const SPREAD = .08;
-		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
-		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
-		let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
-		let randv = randVector(ProjectileAttack.velocity * SPREAD);
-		let projectile = new Projectile(
-			origin.x, origin.y,
-			size, size,
-			directv.x + randv[0], directv.y + randv[1],
-			ProjectileAttack.getTime(hero), damage,
-			hero.friendly, this);
-		map.addProjectile(projectile);
+		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
+		for (let i = 0; i < multishot; i++) {
+			const SPREAD = .08;
+			let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
+			let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
+			let directv = setMagnitude(direct.x, direct.y, ProjectileAttack.velocity);
+			let randv = randVector(ProjectileAttack.velocity * SPREAD);
+			let projectile = new Projectile(
+				origin.x, origin.y,
+				size, size,
+				directv.x + randv[0], directv.y + randv[1],
+				ProjectileAttack.getTime(hero), damage,
+				hero.friendly, this);
+			map.addProjectile(projectile);
+		}
 	}
 
 	static getDistance(hero) {

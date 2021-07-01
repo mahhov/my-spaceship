@@ -19,6 +19,7 @@ const StatIds = {
 	TechniqueBase,
 	ProjectileAttack: makeEnum({
 		...TechniqueBase,
+		ABILITY_MULTISHOT: 0,
 		ABILITY_SIZE: 0,
 	}),
 	AreaAttack: makeEnum({
@@ -50,47 +51,85 @@ class TechniqueData extends AllocationsData {
 		return new TechniqueTree(TechniqueTree.Ids.PROJECTILE_ATTACK, [
 			[
 				new Allocation('Capacitor', [
-					new Stat(statIds.MAX_CHARGES, 5),
-				], 4, statIds, 'Store charges for high burst damage.'),
+					new Stat(statIds.MAX_CHARGES, 20),
+				], 1, statIds, 'Store charges for high burst damage.'),
 				new Allocation('Stream', [
-					new Stat(statIds.COOLDOWN_DURATION, -.1),
-				], 4, statIds, ''),
+					new Stat(statIds.COOLDOWN_DURATION, -.4),
+				], 1, statIds, ''),
 				new Allocation('Charged shot', [
-					new Stat(statIds.DAMAGE, .5),
 					new Stat(statIds.CHANNEL_DURATION, 15),
-					new Stat(statIds.STAMINA_COST, 1),
-					new Stat(statIds.CHANNEL_STAMINA_COST, .04),
-				], 4, statIds, 'Charged attacks deal 4x more damage.'),
+					new Stat(statIds.STAMINA_COST, 8),
+					new Stat(statIds.CHANNEL_STAMINA_COST, .15),
+				], 1, statIds, 'Charged attacks deal 20x more damage.'),
 			],
 			[
-				new Allocation('Multishot', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Chain', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Pierce', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Multishot', [
+					new Stat(statIds.DAMAGE, -.3),
+					new Stat(statIds.STAMINA_COST, .4),
+					new Stat(statIds.CHANNEL_STAMINA_COST, .1),
+					new Stat(statIds.ABILITY_MULTISHOT, 3),
+				], 1, statIds, ''),
+				new Allocation('Chain', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Pierce', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 			[
-				new Allocation('Damage', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Rate', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Poison', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Damage', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Rate', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Poison', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 			[
-				new Allocation('Life leech', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Stamina gain', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Armor inc', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Life leech', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Stamina gain', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Armor inc', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Proc area', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Proc debuff', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Proc area', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Proc debuff', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 			[
-				new Allocation('Proc x2', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Proc slow', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Proc knockback', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Proc x2', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Proc slow', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Proc knockback', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 			[
-				new Allocation('Size', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Range', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
-				new Allocation('Spread', [new Stat(statIds.DAMAGE, 1)], 4, statIds, ''),
+				new Allocation('Size', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Range', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
+				new Allocation('Spread', [
+					new Stat(statIds.DAMAGE, 1),
+				], 1, statIds, ''),
 			],
 		]);
 	}
@@ -99,24 +138,24 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.AreaAttack;
 		return new TechniqueTree(TechniqueTree.Ids.AREA_ATTACK, [
 			[
-				new Allocation('Area', [], 4, statIds, ''),
-				new Allocation('Pulsing', [], 4, statIds, ''),
-				new Allocation('Lingering dot', [], 4, statIds, ''),
+				new Allocation('Area', [], 1, statIds, ''),
+				new Allocation('Pulsing', [], 1, statIds, ''),
+				new Allocation('Lingering dot', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Area', [], 4, statIds, ''),
-				new Allocation('Ring', [], 4, statIds, ''),
-				new Allocation('Protruding', [], 4, statIds, ''),
+				new Allocation('Area', [], 1, statIds, ''),
+				new Allocation('Ring', [], 1, statIds, ''),
+				new Allocation('Protruding', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Damage', [], 4, statIds, ''),
-				new Allocation('Aoe', [], 4, statIds, ''),
-				new Allocation('Cooldown', [], 4, statIds, ''),
+				new Allocation('Damage', [], 1, statIds, ''),
+				new Allocation('Aoe', [], 1, statIds, ''),
+				new Allocation('Cooldown', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Knockback', [], 4, statIds, ''),
-				new Allocation('Slow', [], 4, statIds, ''),
-				new Allocation('Armor debuff', [], 4, statIds, ''),
+				new Allocation('Knockback', [], 1, statIds, ''),
+				new Allocation('Slow', [], 1, statIds, ''),
+				new Allocation('Armor debuff', [], 1, statIds, ''),
 			],
 		]);
 	}
@@ -125,24 +164,24 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.Dash;
 		return new TechniqueTree(TechniqueTree.Ids.DASH, [
 			[
-				new Allocation('Dash', [], 4, statIds, ''),
-				new Allocation('Blink to target', [], 4, statIds, ''),
-				new Allocation('Teleport', [], 4, statIds, ''),
+				new Allocation('Dash', [], 1, statIds, ''),
+				new Allocation('Blink to target', [], 1, statIds, ''),
+				new Allocation('Teleport', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Haste', [], 4, statIds, ''),
-				new Allocation('Damage', [], 4, statIds, ''),
-				new Allocation('Armor', [], 4, statIds, ''),
+				new Allocation('Haste', [], 1, statIds, ''),
+				new Allocation('Damage', [], 1, statIds, ''),
+				new Allocation('Armor', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Damage', [], 4, statIds, ''),
-				new Allocation('Slow', [], 4, statIds, ''),
-				new Allocation('Knockback', [], 4, statIds, ''),
+				new Allocation('Damage', [], 1, statIds, ''),
+				new Allocation('Slow', [], 1, statIds, ''),
+				new Allocation('Knockback', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Range', [], 4, statIds, ''),
-				new Allocation('Stamina', [], 4, statIds, ''),
-				new Allocation('Cooldown', [], 4, statIds, ''),
+				new Allocation('Range', [], 1, statIds, ''),
+				new Allocation('Stamina', [], 1, statIds, ''),
+				new Allocation('Cooldown', [], 1, statIds, ''),
 			],
 		]);
 	}
@@ -151,19 +190,19 @@ class TechniqueData extends AllocationsData {
 		let statIds = StatIds.Defense;
 		return new TechniqueTree(TechniqueTree.Ids.DEFENSE, [
 			[
-				new Allocation('Heal', [], 4, statIds, ''),
-				new Allocation('Armor', [], 4, statIds, ''),
-				new Allocation('Heal over time', [], 4, statIds, ''),
+				new Allocation('Heal', [], 1, statIds, ''),
+				new Allocation('Armor', [], 1, statIds, ''),
+				new Allocation('Heal over time', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('Amount', [], 4, statIds, ''),
-				new Allocation('Duration', [], 4, statIds, ''),
-				new Allocation('Cooldown', [], 4, statIds, ''),
+				new Allocation('Amount', [], 1, statIds, ''),
+				new Allocation('Duration', [], 1, statIds, ''),
+				new Allocation('Cooldown', [], 1, statIds, ''),
 			],
 			[
-				new Allocation('No stamina', [], 4, statIds, ''),
-				new Allocation('Auto cast on low health', [], 4, statIds, ''),
-				new Allocation('Saving from killing blow', [], 4, statIds, ''),
+				new Allocation('No stamina', [], 1, statIds, ''),
+				new Allocation('Auto cast on low health', [], 1, statIds, ''),
+				new Allocation('Saving from killing blow', [], 1, statIds, ''),
 			],
 		]);
 	}
