@@ -21,6 +21,12 @@ class AllocationsData extends Emitter {
 			this.emit('change');
 		}
 	}
+
+	clear(allocation) {
+		this.availablePoints += allocation.value;
+		allocation.value = 0;
+		this.emit('change');
+	}
 }
 
 export default AllocationsData;

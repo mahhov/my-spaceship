@@ -185,12 +185,12 @@ class TechniqueData extends AllocationsData {
 	}
 
 	allocate(allocation, value) {
-		if (!this.trees
+		this.trees
 			.flatMap(tree => tree.allocationSets)
 			.find(allocationSet => allocationSet.includes(allocation))
 			.filter(allocationI => allocationI !== allocation)
-			.some(allocationI => allocationI !== allocation && allocationI.value))
-			super.allocate(allocation, value);
+			.forEach(allocation => this.clear(allocation));
+		super.allocate(allocation, value);
 	}
 }
 
