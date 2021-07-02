@@ -28,6 +28,7 @@ const Colors = {
 	// todo [low] lower case this for consistency
 	PLAYER_BUFFS: {
 		DEAD: Color.from1(.5, .5, .5),
+		DAMAGE_OVER_TIME: Color.fromHexString('3F1358'),
 	},
 
 	Interface: {
@@ -52,7 +53,7 @@ const Colors = {
 		HOSTILE_PROJECTILE: Color.fromHexString('#ef240e'),
 		Bomb: {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
-			ENTITY: Color.fromHexString('#00c'),
+			ENTITY: Color.fromHexString('#3f1358'),
 		},
 		AREA_DEGEN: {
 			WARNING_BORDER: Color.from1(1, 0, 0),

@@ -65,7 +65,7 @@ class ProjectileAttack extends Ability {
 		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity).rotateByTheta(-(multishot + 1) / 2 * MULTISHOT_THETA);
 
 		let damageOverTimeDuration = 100, damageOverTime = damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME);
-		let damageOverTimeBuff = new Buff(damageOverTimeDuration, Colors.PLAYER_BUFFS.DEAD, 'DOT'); // todo [high] color
+		let damageOverTimeBuff = new Buff(damageOverTimeDuration, Colors.PLAYER_BUFFS.DAMAGE_OVER_TIME, 'DOT');
 		damageOverTimeBuff.addStatValue(Stat.Ids.TAKING_DAMAGE_OVER_TIME, damageOverTime / damageOverTimeDuration);
 
 		for (let i = 0; i < multishot; i++) {
