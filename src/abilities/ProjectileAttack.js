@@ -3,6 +3,7 @@ import Buff from '../entities/Buff.js';
 import EntityObserver from '../entities/EntityObserver.js';
 import Stat from '../playerData/Stat.js';
 import TechniqueData from '../playerData/TechniqueData.js';
+import {Colors} from '../util/constants.js';
 import Vector from '../util/Vector.js';
 import Ability from './Ability.js';
 
@@ -62,6 +63,11 @@ class ProjectileAttack extends Ability {
 		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
 		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity).rotateByTheta(-(multishot + 1) / 2 * MULTISHOT_THETA);
+
+		let damageOverTimeDuration = 100, damageOverTime = damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME);
+		let damageOverTimeBuff = new Buff(damageOverTimeDuration, Colors.PLAYER_BUFFS.DEAD, 'DOT'); // todo [high] color
+		damageOverTimeBuff.addStatValue(Stat.Ids.TAKING_DAMAGE_OVER_TIME, damageOverTime / damageOverTimeDuration);
+
 		for (let i = 0; i < multishot; i++) {
 			directVector.rotateByTheta(MULTISHOT_THETA);
 			let vector = Vector
@@ -73,7 +79,7 @@ class ProjectileAttack extends Ability {
 				vector.x, vector.y,
 				ProjectileAttack.getTime(hero), damage,
 				hero.friendly, this);
-			projectile.setDamageOverTime(damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME));
+			projectile.addBuff(damageOverTimeBuff.clone);
 			map.addProjectile(projectile);
 		}
 	}

@@ -16,6 +16,12 @@ class Buff {
 		this.statValues = new StatValues();
 	}
 
+	get clone() {
+		let buff = new Buff(this.duration.max - 1, this.uiColor, this.uiText, this.visible);
+		buff.statValues.addStatValues(this.statValues);
+		return buff;
+	}
+
 	addStatValue(statId, value) {
 		this.statValues.add(statId, value);
 	}

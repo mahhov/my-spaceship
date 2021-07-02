@@ -16,6 +16,11 @@ class Projectile extends Entity {
 		this.time = time;
 		this.damage = damage;
 		this.color = friendly ? Colors.Entity.FRIENDLY_PROJECTILE.get() : Colors.Entity.HOSTILE_PROJECTILE.get();
+		this.buffs = [];
+	}
+
+	addBuff(buff) {
+		this.buffs.push(buff);
 	}
 
 	update(map, intersectionFinder) { // todo [low] fix naming disconnect, map refers to lasers and projectiles as projectiles. entities refer to laser and projectile as attacks. create projectile/attack parent class to have update interface
@@ -25,6 +30,7 @@ class Projectile extends Entity {
 
 		if (intersection) {
 			let damageDealt = intersection.changeHealth(-this.damage);
+			this.buffs.forEach(buff => intersection.addBuff(buff));
 			this.observer.queueEvent(EntityObserver.EventIds.DEALT_DAMAGE, damageDealt);
 			map.addParticle(new DamageDust(this.x, this.y, .005, ...randVector(.001), 100));
 			return true;

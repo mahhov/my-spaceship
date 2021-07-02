@@ -8,6 +8,10 @@ class StatValues {
 		this.stats[statId] += value;
 	}
 
+	addStatValues(statValues) {
+		statValues.stats.forEach((value, statId) => this.add(statId, value));
+	}
+
 	addStatItem(statItem) {
 		statItem.stats.forEach(stat => this.add(stat.id, stat.value));
 	}
