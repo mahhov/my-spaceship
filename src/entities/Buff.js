@@ -43,7 +43,7 @@ class Buff {
 
 	paintUi(painter, uiIndex) {
 		let left = 1 - (uiIndex + 1) * (Positions.BUFF_SIZE + Positions.MARGIN);
-		let top = 1 - Positions.MARGIN / 2 * 4 - Positions.BAR_HEIGHT * 3 - Positions.BUFF_SIZE;
+		let top = 1 - Positions.MARGIN / 2 * 5 - Positions.BAR_HEIGHT * 3 - Positions.BUFF_SIZE;
 		let size = Positions.BUFF_SIZE;
 
 		// background

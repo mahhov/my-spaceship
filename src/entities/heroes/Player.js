@@ -59,8 +59,7 @@ class PlayerBar {
 
 	static createAll() {
 		let coordinate = new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT)
-			.align(Coordinate.Aligns.END, Coordinate.Aligns.END)
-			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER);
+			.align(Coordinate.Aligns.END, Coordinate.Aligns.END);
 		return [
 			new PlayerBar(coordinate.clone, Colors.EXP),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
