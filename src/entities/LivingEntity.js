@@ -23,6 +23,10 @@ class LivingEntity extends Entity {
 		return damageDealt;
 	}
 
+	addBuff(buff) {
+		this.statManager.addBuff(buff);
+	}
+
 	restoreHealth() {
 		this.health.restore();
 	}

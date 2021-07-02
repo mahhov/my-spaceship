@@ -71,6 +71,9 @@ class Entity extends EntityObserver {
 		return 0;
 	}
 
+	addBuff(buff) {
+	}
+
 	removeUi() {
 		/* override, return true if ui is not longer relevant and should be removed from the ui queue */
 	}

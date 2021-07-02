@@ -40,7 +40,7 @@ class Egg extends Entity {
 		if (!this.ownerHero && this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION).length) {
 			this.ownerHero = this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION)[0][0];
 			this.slowDebuff.reset();
-			this.ownerHero.statManager.addBuff(this.slowDebuff);
+			this.ownerHero.addBuff(this.slowDebuff);
 		}
 	}
 

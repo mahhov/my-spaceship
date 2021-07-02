@@ -12,7 +12,7 @@ class BuffSetter extends Module {
 	apply_(map, intersectionFinder, target) {
 		if (this.stage === Stages.INACTIVE)
 			this.buff.expire();
-		else if (this.monster.statManager.addBuff(this.buff))
+		else if (this.monster.addBuff(this.buff))
 			this.buff.reset();
 	}
 }

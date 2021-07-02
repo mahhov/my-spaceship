@@ -43,7 +43,7 @@ class ProjectileAttack extends Ability {
 		} else if (!this.channelDuration) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
 			this.chargeBuff.addStatValue(Stat.Ids.MOVE_SPEED, -.5);
-			hero.statManager.addBuff(this.chargeBuff);
+			hero.addBuff(this.chargeBuff);
 		}
 
 		return true;

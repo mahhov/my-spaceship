@@ -17,7 +17,7 @@ class Respawn extends PassiveAbility {
 	activate(origin, direct, map, intersectionFinder, hero) {
 		if (hero.health.isEmpty() && this.delay.isFull()) {
 			this.deadBuff.reset();
-			hero.statManager.addBuff(this.deadBuff);
+			hero.addBuff(this.deadBuff);
 			this.dead = true;
 		}
 
