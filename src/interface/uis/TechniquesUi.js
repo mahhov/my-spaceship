@@ -33,12 +33,12 @@ class TechniquesUi extends Ui {
 			let setsLayout = new ListLayout(coordinate.clone, AllocationUi.height, Positions.MARGIN * vertMarginMult);
 			return tree.allocationSets.map((allocations, setIndex) => {
 				let setCoordinate = setsLayout.getCoordinates(setIndex).container;
-				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width, AllocationUi.height, Positions.MARGIN);
+				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width * 1.5, AllocationUi.height, Positions.MARGIN);
 				let lineUi = setIndex && this.add(new UiLine(setCoordinate.size(allocationsLayout.totalWidth, 0).move(0, -Positions.MARGIN * vertMarginMult / 2)));
 				let allocationUis = allocations.map((allocation, allocationIndex) =>
 					// todo [high] some indication of which allocation is selected
 					this.add(
-						new AllocationUi(allocationsLayout.getCoordinates(allocationIndex).container, allocation)
+						new AllocationUi(allocationsLayout.getCoordinates(allocationIndex).container, allocation, true)
 							.bind(techniqueData, hoverText)));
 				return {lineUi, allocationUis};
 			});
@@ -53,7 +53,10 @@ class TechniquesUi extends Ui {
 	}
 
 	refresh() {
-		this.allocationUis.forEach(allocationUi => allocationUi.updateValueText());
+		this.allocationUis.forEach(allocationUi => {
+			allocationUi.updateValueText();
+			allocationUi.updateActive();
+		});
 		this.availableText.text = this.techniqueData.availableText;
 	}
 }

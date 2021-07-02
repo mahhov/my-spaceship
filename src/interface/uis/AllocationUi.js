@@ -24,11 +24,11 @@ class AllocationUi extends Ui {
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER)
 			.size(ALLOCATE_BUTTON_SIZE);
 
-		let containerButton = this.add(new UiButton(coordinate, '', '', !singleButton));
+		this.containerButton = this.add(new UiButton(coordinate, '', '', !singleButton));
 		if (singleButton)
-			containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
-		this.bounds = containerButton.bounds;
-		this.bubble(containerButton, 'hover');
+			this.containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
+		this.bounds = this.containerButton.bounds;
+		this.bubble(this.containerButton, 'hover');
 		this.add(new UiText(topLine, allocation.name));
 		this.valueText = this.add(new UiText(bottomLine));
 		this.updateValueText();
@@ -56,6 +56,10 @@ class AllocationUi extends Ui {
 
 	updateValueText() {
 		this.valueText.text = this.allocation.valueText;
+	}
+
+	updateActive() {
+		this.containerButton.forcedActive = this.allocation.value;
 	}
 }
 
