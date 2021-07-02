@@ -46,16 +46,19 @@ class Looper {
 			this.paintFpsTracker.tick();
 			this.painterSet.clear();
 			this.frame.paint();
+
+			// add fps
 			this.painterSet.uiPainter.add(new Text(
 				new Coordinate(1 - Positions.MARGIN, Positions.MARGIN)
 					.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`));
-			// todo [low] implement this without window
-			if (window.stopRecording) {
-				let mouse = this.controller.getRawMouse();
-				let coordinate = new Coordinate(mouse.x, mouse.y, .01).align(Coordinate.Aligns.CENTER);
-				this.painterSet.uiPainter.add(new Rect(coordinate));
-			}
+
+			// add cursor
+			let mouse = this.controller.getRawMouse();
+			let mouseCoordinate = new Coordinate(mouse.x, mouse.y, .008).align(Coordinate.Aligns.CENTER);
+			this.painterSet.uiPainter.add(new Rect(mouseCoordinate).setOptions({color: '#fff', thickness: 2}));
+			this.painterSet.uiPainter.add(new Rect(mouseCoordinate.clone.size(.006)).setOptions({color: '#000', thickness: 2}));
+
 			this.painterSet.paint();
 			await Looper.sleep(10);
 		}

@@ -4,7 +4,7 @@ import Looper from '../frame/Looper.js';
 // import NoiseDemo from '../frame/NoiseDemo.js';
 // import MapDemo from '../frame/MapDemo.js';
 // import InterfaceDemo from '../frame/InterfaceDemo.js';
-import RecordMp4 from '../util/recordMp4.js';
+// import RecordMp4 from '../util/recordMp4.js';
 
 let canvas = document.querySelector('#canvas');
 let frameButtonsRow = document.querySelector('#frame-buttons-row');
@@ -29,4 +29,4 @@ frameCLasses.forEach(FrameClass => {
 let StartFrameClass = frameCLasses.find(FrameClass => `/${FrameClass.name}` === location.pathname) || frameCLasses[0] || Game;
 looper.setFrameClass(StartFrameClass);
 
-RecordMp4();
+// RecordMp4();
