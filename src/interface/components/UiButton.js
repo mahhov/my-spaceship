@@ -27,10 +27,11 @@ class UiButton extends UiComponent {
 		let state = this.getState(controller);
 		if (this.state === state)
 			return;
+		let shift = controller.getKeyState('shift').active;
 		if (state === States.ACTIVE)
-			this.emit('click', false);
+			this.emit('click', false, shift);
 		else if (state === States.ACTIVE_ALT)
-			this.emit('click', true);
+			this.emit('click', true, shift);
 		else if (state === States.HOVER)
 			this.emit('hover');
 		else if (this.state === States.HOVER)

@@ -26,24 +26,22 @@ class AllocationUi extends Ui {
 
 		let containerButton = this.add(new UiButton(coordinate, '', '', !singleButton));
 		if (singleButton)
-			containerButton.on('click', alt => this.emit(alt ? 'decrease' : 'increase'));
+			containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
 		this.bounds = containerButton.bounds;
 		this.bubble(containerButton, 'hover');
 		this.add(new UiText(topLine, allocation.name));
 		this.valueText = this.add(new UiText(bottomLine));
 		this.updateValueText();
 		if (!singleButton) {
-			let decreaseButton = this.add(new UiButton(buttonLeft, '-'));
-			this.bubble(decreaseButton, 'click', 'decrease');
-			let increaseButton = this.add(new UiButton(buttonRight, '+'));
-			this.bubble(increaseButton, 'click', 'increase');
+			this.add(new UiButton(buttonLeft, '-')).on('click', (_, shift) => this.emit('decrease', shift));
+			this.add(new UiButton(buttonRight, '+')).on('click', (_, shift) => this.emit('increase', shift));
 		}
 	}
 
 	bind(data, hoverPopup) {
 		this.on('hover', () => hoverPopup.beginHover(this.bounds, this.allocation.descriptionText));
-		this.on('decrease', () => data.allocate(this.allocation, -1));
-		this.on('increase', () => data.allocate(this.allocation, 1));
+		this.on('decrease', max => data.allocate(this.allocation, max ? -this.allocation.maxValue : -1));
+		this.on('increase', max => data.allocate(this.allocation, max ? this.allocation.maxValue : 1));
 		return this;
 	}
 

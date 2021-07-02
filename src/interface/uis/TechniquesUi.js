@@ -36,6 +36,7 @@ class TechniquesUi extends Ui {
 				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width, AllocationUi.height, Positions.MARGIN);
 				let lineUi = setIndex && this.add(new UiLine(setCoordinate.size(allocationsLayout.totalWidth, 0).move(0, -Positions.MARGIN * vertMarginMult / 2)));
 				let allocationUis = allocations.map((allocation, allocationIndex) =>
+					// todo [high] some indication of which allocation is selected
 					this.add(
 						new AllocationUi(allocationsLayout.getCoordinates(allocationIndex).container, allocation)
 							.bind(techniqueData, hoverText)));

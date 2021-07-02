@@ -1,4 +1,5 @@
 import Emitter from '../util/Emitter.js';
+import {clamp} from '../util/number.js';
 
 class AllocationsData extends Emitter {
 	constructor(expData, pointsPerLevel) {
@@ -15,17 +16,12 @@ class AllocationsData extends Emitter {
 	}
 
 	allocate(allocation, value) {
-		if (allocation.value + value >= 0 && this.availablePoints - value >= 0 && allocation.value + value <= allocation.maxValue) {
+		value = clamp(value, -allocation.value, Math.min(this.availablePoints, allocation.maxValue - allocation.value));
+		if (value) {
 			allocation.value += value;
 			this.availablePoints -= value;
 			this.emit('change');
 		}
-	}
-
-	clear(allocation) {
-		this.availablePoints += allocation.value;
-		allocation.value = 0;
-		this.emit('change');
 	}
 }
 

@@ -89,12 +89,12 @@ class TechniqueData extends AllocationsData {
 			],
 			[
 				new Allocation('Life leech', [
-					new Stat(statIds.LIFE_LEECH, .05),
+					new Stat(statIds.LIFE_LEECH, .01),
 				], 1, statIds, 'Gain life proportional to hit damage.'),
 				new Allocation('Stamina gain', [
 					new Stat(statIds.STAMINA_GAIN, .15),
 				], 1, statIds, 'Gain flat stamina on hit.'),
-				new Allocation('Armor inc', [
+				new Allocation('Armor inc TODO', [
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),
 			],
@@ -228,7 +228,7 @@ class TechniqueData extends AllocationsData {
 			.flatMap(tree => tree.allocationSets)
 			.find(allocationSet => allocationSet.includes(allocation))
 			.filter(allocationI => allocationI !== allocation)
-			.forEach(allocation => this.clear(allocation));
+			.forEach(allocation => super.allocate(allocation, -allocation.maxValue));
 		super.allocate(allocation, value);
 	}
 }
