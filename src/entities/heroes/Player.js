@@ -31,7 +31,8 @@ const BaseStats = {
 	[Stat.Ids.LIFE_REGEN]: [.03, 1],
 	[Stat.Ids.LIFE_LEECH]: [1, 0],
 	[Stat.Ids.STAMINA]: [80, 1],
-	[Stat.Ids.STAMINA_REGEN]: [.13, 1],
+	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
+	[Stat.Ids.STAMINA_GAIN]: [1, 0],
 	[Stat.Ids.SHIELD]: [0, 1], // todo [high]
 	[Stat.Ids.SHIELD_DELAY]: [0, 1], // todo [high]
 	[Stat.Ids.SHIELD_LEECH]: [0, 1], // todo [high]

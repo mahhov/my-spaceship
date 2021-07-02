@@ -79,21 +79,21 @@ class TechniqueData extends AllocationsData {
 			[
 				new Allocation('Damage', [
 					new Stat(statIds.DAMAGE, 1),
-				], 1, statIds, ''),
+				], 1, statIds, 'Increase hit damage.'),
 				new Allocation('Rate', [
 					new Stat(statIds.COOLDOWN_RATE, 1),
 				], 1, statIds, ''),
 				new Allocation('Poison', [
 					new Stat(statIds.DAMAGE_OVER_TIME, 1.5),
-				], 1, statIds, ''),
+				], 1, statIds, 'Apply stacking DoT proportional to hit damage.'),
 			],
 			[
 				new Allocation('Life leech', [
-					new Stat(statIds.DAMAGE, 1),
-				], 1, statIds, ''),
+					new Stat(statIds.LIFE_LEECH, .05),
+				], 1, statIds, 'Gain life proportional to hit damage.'),
 				new Allocation('Stamina gain', [
-					new Stat(statIds.DAMAGE, 1),
-				], 1, statIds, ''),
+					new Stat(statIds.STAMINA_GAIN, .15),
+				], 1, statIds, 'Gain flat stamina on hit.'),
 				new Allocation('Armor inc', [
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),

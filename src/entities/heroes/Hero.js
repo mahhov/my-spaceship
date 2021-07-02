@@ -6,6 +6,7 @@ import Coordinate from '../../util/Coordinate.js';
 import Decay from '../../util/Decay.js';
 import {booleanArray, rand, randVector, setMagnitude} from '../../util/number.js';
 import Pool from '../../util/Pool.js';
+import EntityObserver from '../EntityObserver.js';
 import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
@@ -29,9 +30,14 @@ class Hero extends LivingEntity {
 	}
 
 	refresh() {
-		super.refresh();
 		this.recentDamage.decay();
 		this.stamina.increment();
+
+		let staminaGainAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.reduce((sum, [source, damage]) => sum + (damage && source.statManager.getBasedStat(Stat.Ids.STAMINA_GAIN)), 0);
+		this.stamina.change(staminaGainAmount);
+
+		super.refresh();
 	}
 
 	updateMove(intersectionFinder, dx, dy, magnitude, noSlide) {

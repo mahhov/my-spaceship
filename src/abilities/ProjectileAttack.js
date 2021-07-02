@@ -31,10 +31,9 @@ class ProjectileAttack extends Ability {
 	}
 
 	observe(hero) {
-		let damageDealt = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
-			.reduce((sum, [amount]) => sum + amount, 0);
-		let leechAmount = damageDealt * this.statManager.getBasedStat(statIds.LIFE_LEECH);
-		hero.changeHealth(leechAmount);
+		this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.forEach(([damage]) => hero.queueEvent(EntityObserver.EventIds.DEALT_DAMAGE, this, damage));
+		this.clearAllQueuedEvents();
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

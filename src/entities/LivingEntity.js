@@ -2,6 +2,7 @@ import Stat from '../playerData/Stat.js';
 import {clamp} from '../util/number.js';
 import Pool from '../util/Pool.js';
 import Entity from './Entity.js';
+import EntityObserver from './EntityObserver.js';
 import StatManager from './StatManager.js';
 
 class LivingEntity extends Entity {
@@ -12,9 +13,16 @@ class LivingEntity extends Entity {
 	}
 
 	refresh() {
+		// buffs
 		let takingDamageOverTime = this.statManager.getBasedStat(Stat.Ids.TAKING_DAMAGE_OVER_TIME);
 		this.changeHealth(-takingDamageOverTime);
 		this.statManager.tickBuffs();
+
+		// queued events
+		let lifeLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.LIFE_LEECH), 0);
+		this.changeHealth(lifeLeechAmount);
+		this.clearAllQueuedEvents();
 	}
 
 	changeHealth(amount) {
