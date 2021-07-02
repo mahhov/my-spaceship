@@ -12,7 +12,7 @@ const Phases = makeEnum({ONE: 0});
 
 class Static4DirTurret extends Monster {
 	constructor(x, y) {
-		super(x, y, .09, .09, 1.6, 200);
+		super(x, y, .09, .09, 160, 200);
 		this.setGraphics(new Rect4DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		this.attackPhase = new Phase(0);

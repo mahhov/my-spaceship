@@ -14,7 +14,7 @@ const Phases = makeEnum({ONE: 0});
 
 class ExplodingTick extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .6, 100);
+		super(x, y, .04, .04, 60, 100);
 		this.setGraphics(new DiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

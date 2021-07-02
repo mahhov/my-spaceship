@@ -9,7 +9,7 @@ import Ability from './Ability.js';
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 const BaseStats = {
-	[statIds.DAMAGE]: [.1, 1],
+	[statIds.DAMAGE]: [10, 1],
 
 	[statIds.COOLDOWN_DURATION]: [6, 1],
 	[statIds.COOLDOWN_RATE]: [1, 1],

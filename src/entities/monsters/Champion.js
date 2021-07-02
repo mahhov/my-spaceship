@@ -16,7 +16,7 @@ const Phases = makeEnum({ONE: 0});
 
 class Champion extends Monster {
 	constructor(x, y) {
-		super(x, y, .05, .05, 1, 0);
+		super(x, y, .05, .05, 100, 0);
 		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

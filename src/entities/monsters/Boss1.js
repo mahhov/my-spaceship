@@ -18,7 +18,7 @@ const Phases = makeEnum({INACTIVE: 0, PRE_DEGEN: 0, DEGEN: 0, PROJECTILE: 0});
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .4, 0);
+		super(x, y, .04, .04, 40, 0);
 		this.setGraphics(new RotatingTurretShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);

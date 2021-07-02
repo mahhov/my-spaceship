@@ -14,7 +14,7 @@ const Phases = makeEnum({ONE: 0});
 
 class BombLayer extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 1.2, 300);
+		super(x, y, .04, .04, 120, 300);
 		this.setGraphics(new DoubleHorizDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);
