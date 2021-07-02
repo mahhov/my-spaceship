@@ -11,7 +11,7 @@ let record = (ms = 0) => {
 		window.open(exportUrl, '_blank');
 	});
 
-	let stop = () => {
+	window.stopRecording = () => {
 		recorder.stop();
 		stream.getTracks().forEach(track => track.stop());
 	};
@@ -19,8 +19,6 @@ let record = (ms = 0) => {
 	if (ms)
 		setTimeout(() => stop, ms);
 	recorder.start();
-
-	return stop;
 };
 
 export default record;

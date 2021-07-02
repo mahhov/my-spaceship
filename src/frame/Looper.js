@@ -1,4 +1,5 @@
 import Controller from '../control/Controller.js';
+import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import PainterCompositor from '../painter/PainterCompositor.js';
 import {Positions} from '../util/constants.js';
@@ -49,6 +50,12 @@ class Looper {
 				new Coordinate(1 - Positions.MARGIN, Positions.MARGIN)
 					.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`));
+			// todo [low] implement this without window
+			if (window.stopRecording) {
+				let mouse = this.controller.getRawMouse();
+				let coordinate = new Coordinate(mouse.x, mouse.y, .01).align(Coordinate.Aligns.CENTER);
+				this.painterSet.uiPainter.add(new Rect(coordinate));
+			}
 			this.painterSet.paint();
 			await Looper.sleep(10);
 		}
