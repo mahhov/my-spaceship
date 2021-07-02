@@ -24,6 +24,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 // Formatted: [base value, initial stat value]
 // E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
 const BaseStats = {
+	// todo [high] make sure the bases here and elsewhere that are set [1,0] or [0,1] are intentional.
 	[Stat.Ids.DISABLED]: [1, 0],
 
 	[Stat.Ids.LIFE]: [80, 1],
@@ -36,14 +37,16 @@ const BaseStats = {
 	[Stat.Ids.SHIELD_LEECH]: [0, 1], // todo [high]
 	[Stat.Ids.ARMOR]: [1, 1],
 
-	[Stat.Ids.DAMAGE]: [0, 1],
-	[Stat.Ids.DAMAGE_OVER_TIME]: [0, 1], // todo [high]
-	[Stat.Ids.ATTACK_SPEED]: [0, 1], // todo [high]
-	[Stat.Ids.ATTACK_RANGE]: [0, 1], // todo [high]
-	[Stat.Ids.CRITICAL_CHANCE]: [0, 1], // todo [high]
-	[Stat.Ids.CRITICAL_DAMAGE]: [0, 1], // todo [high]
+	[Stat.Ids.DAMAGE]: [1, 0],
+	[Stat.Ids.DAMAGE_OVER_TIME]: [1, 0],
+	[Stat.Ids.ATTACK_SPEED]: [1, 0], // todo [high]
+	[Stat.Ids.ATTACK_RANGE]: [1, 0], // todo [high]
+	[Stat.Ids.CRITICAL_CHANCE]: [1, 0], // todo [high]
+	[Stat.Ids.CRITICAL_DAMAGE]: [1, 0], // todo [high]
 
 	[Stat.Ids.MOVE_SPEED]: [.005, 1],
+
+	[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
 };
 
 class PlayerBar {

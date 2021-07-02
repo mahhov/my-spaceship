@@ -23,6 +23,8 @@ const Ids = makeEnum({
 	CRITICAL_DAMAGE: 0,
 
 	MOVE_SPEED: 0,
+
+	TAKING_DAMAGE_OVER_TIME: 0,
 });
 
 const DerivedStatIds = makeEnum({TOTAL_LIFE: 0});

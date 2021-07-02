@@ -69,10 +69,10 @@ class TechniqueData extends AllocationsData {
 					new Stat(statIds.CHANNEL_STAMINA_COST, .1),
 					new Stat(statIds.ABILITY_MULTISHOT, 3),
 				], 1, statIds, 'Fire a cone of projectiles.'),
-				new Allocation('Chain', [
+				new Allocation('Chain TODO', [
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),
-				new Allocation('Pierce', [
+				new Allocation('Pierce TODO', [
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),
 			],
@@ -81,10 +81,10 @@ class TechniqueData extends AllocationsData {
 					new Stat(statIds.DAMAGE, 1),
 				], 1, statIds, ''),
 				new Allocation('Rate', [
-					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.COOLDOWN_RATE, 1),
 				], 1, statIds, ''),
 				new Allocation('Poison', [
-					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.DAMAGE_OVER_TIME, 1.5),
 				], 1, statIds, ''),
 			],
 			[

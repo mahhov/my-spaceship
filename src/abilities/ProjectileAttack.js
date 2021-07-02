@@ -73,6 +73,7 @@ class ProjectileAttack extends Ability {
 				vector.x, vector.y,
 				ProjectileAttack.getTime(hero), damage,
 				hero.friendly, this);
+			projectile.setDamageOverTime(damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME));
 			map.addProjectile(projectile);
 		}
 	}

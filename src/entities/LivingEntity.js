@@ -12,6 +12,8 @@ class LivingEntity extends Entity {
 	}
 
 	refresh() {
+		let takingDamageOverTime = this.statManager.getBasedStat(Stat.Ids.TAKING_DAMAGE_OVER_TIME);
+		this.changeHealth(-takingDamageOverTime);
 		this.statManager.tickBuffs();
 	}
 
