@@ -59,7 +59,8 @@ class AllocationUi extends Ui {
 	}
 
 	updateActive() {
-		this.containerButton.forcedActive = this.allocation.value;
+		// todo [high] visually indicate selected without stopping hover and click events
+		// this.containerButton.forcedActive = this.allocation.value;
 	}
 }
 

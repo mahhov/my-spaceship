@@ -6,9 +6,6 @@ class TraitsData extends AllocationsData {
 	constructor(expData) {
 		super(expData, 4);
 		this.allocations = [
-			new Allocation('TEST', [
-				new Stat(Stat.Ids.ARMOR, .2),
-			], 6).setImageName('health-normal.png'),
 			new Allocation('Life', [
 				new Stat(Stat.Ids.LIFE, .05),
 			], 6).setImageName('health-normal.png'),

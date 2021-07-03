@@ -9,6 +9,9 @@ import AllocationUi from './AllocationUi.js';
 import TabsUi from './TabsUi.js';
 import Ui from './Ui.js';
 
+// todo [high] re-style allocaiton uis to be similar to trait uis. e.g. n/n in bottom right
+// todo [high] distinguish technique tabs
+
 class TechniquesUi extends Ui {
 	constructor(techniqueData) {
 		super();

@@ -11,6 +11,7 @@ const statIds = TechniqueData.StatIds.ProjectileAttack;
 
 const BaseStats = {
 	[statIds.DAMAGE]: [10, 1],
+	[statIds.ATTACK_RANGE]: [60, 1],
 
 	[statIds.COOLDOWN_DURATION]: [6, 1],
 	[statIds.COOLDOWN_RATE]: [1, 1],
@@ -22,6 +23,7 @@ const BaseStats = {
 
 	[statIds.ABILITY_MULTISHOT]: [1, 1],
 	[statIds.ABILITY_SIZE]: [.02, 1],
+	[statIds.ABILITY_SPREAD]: [.08, 1],
 };
 
 class ProjectileAttack extends Ability {
@@ -57,11 +59,15 @@ class ProjectileAttack extends Ability {
 	}
 
 	fireProjectile(origin, direct, map, hero, channelDamageMultiplier = 1) {
-		const SPREAD = .08, MULTISHOT_THETA = 10 / 180 * Math.PI;
-		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
+		const MULTISHOT_THETA = 10 / 180 * Math.PI;
+		const VELOCITY = .014;
+
 		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
+		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
+		let spread = this.statManager.getBasedStat(statIds.ABILITY_SPREAD);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
-		let directVector = Vector.fromObj(direct).setMagnitude(ProjectileAttack.velocity).rotateByTheta(-(multishot + 1) / 2 * MULTISHOT_THETA);
+		let time = this.statManager.getBasedStat(statIds.ATTACK_RANGE);
+		let directVector = Vector.fromObj(direct).setMagnitude(VELOCITY).rotateByTheta(-(multishot + 1) / 2 * MULTISHOT_THETA);
 
 		let damageOverTimeDuration = 100, damageOverTime = damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME);
 		let damageOverTimeBuff = new Buff(damageOverTimeDuration, Colors.PLAYER_BUFFS.DAMAGE_OVER_TIME, 'DOT');
@@ -70,29 +76,17 @@ class ProjectileAttack extends Ability {
 		for (let i = 0; i < multishot; i++) {
 			directVector.rotateByTheta(MULTISHOT_THETA);
 			let vector = Vector
-				.fromRand(ProjectileAttack.velocity * SPREAD)
+				.fromRand(VELOCITY * spread)
 				.add(directVector);
 			let projectile = new Projectile(
 				origin.x, origin.y,
 				size, size,
 				vector.x, vector.y,
-				ProjectileAttack.getTime(hero), damage,
+				time, damage,
 				hero.friendly, this);
 			projectile.addBuff(damageOverTimeBuff.clone);
 			map.addProjectile(projectile);
 		}
-	}
-
-	static getDistance(hero) {
-		return ProjectileAttack.getTime(hero) * ProjectileAttack.velocity;
-	}
-
-	static getTime(hero) {
-		return 60 * (hero.statManager.getStat(Stat.Ids.ATTACK_RANGE) + 1);
-	}
-
-	static get velocity() {
-		return .014;
 	}
 }
 

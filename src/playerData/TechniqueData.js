@@ -21,6 +21,7 @@ const StatIds = {
 		...TechniqueBase,
 		ABILITY_MULTISHOT: 0,
 		ABILITY_SIZE: 0,
+		ABILITY_SPREAD: 0,
 	}),
 	AreaAttack: makeEnum({
 		...TechniqueBase,
@@ -122,13 +123,13 @@ class TechniqueData extends AllocationsData {
 			],
 			[
 				new Allocation('Size', [
-					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.ABILITY_SIZE, 1),
 				], 1, statIds, ''),
 				new Allocation('Range', [
-					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.ATTACK_RANGE, 1),
 				], 1, statIds, ''),
 				new Allocation('Spread', [
-					new Stat(statIds.DAMAGE, 1),
+					new Stat(statIds.ABILITY_SPREAD, -1),
 				], 1, statIds, ''),
 			],
 		]);

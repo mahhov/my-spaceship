@@ -3,6 +3,8 @@ import Frame from './Frame.js';
 import GameMenu from './GameMenu.js';
 import GameWorld from './GameWorld.js';
 
+// todo [high] menu transitions
+
 class Game extends Frame {
 	constructor(controller, painterSet) {
 		super(controller, painterSet);
