@@ -34,11 +34,11 @@ class HubUi extends Ui {
 		this.RecordsUi = this.add(new RecordsUi(playerData.recordsData));
 
 		let tabs = [
-			new Tab('Encounters', 'Select encounter', [this.encounterUi]),
-			new Tab('Techniques', 'Refine techniques', [this.techniquesUi]),
-			new Tab('Traits', 'Allocate traits', [this.characterUi, this.traitsUi]),
-			new Tab('Equipment', 'Craft equipment', [this.characterUi, this.equipmentUi]),
-			new Tab('Records', 'Recorded stats', [this.RecordsUi]),
+			new Tab('Encounters', 'Select Encounter', [this.encounterUi]),
+			new Tab('Techniques', 'Refine Techniques', [this.techniquesUi]),
+			new Tab('Traits', 'Allocate Traits', [this.characterUi, this.traitsUi]),
+			new Tab('Equipment', 'Craft Equipment', [this.characterUi, this.equipmentUi]),
+			new Tab('Records', 'Recorded Stats', [this.RecordsUi]),
 		];
 		tabs.forEach(tabData => this.add(tabData.title));
 		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, 0, Positions.UI_BUTTON_HEIGHT),
