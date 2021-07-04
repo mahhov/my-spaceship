@@ -13,6 +13,7 @@ const Ids = makeEnum({
 	STAMINA_GAIN: 0,
 	SHIELD: 0,
 	SHIELD_DELAY: 0,
+	SHIELD_REGEN: 0,
 	SHIELD_LEECH: 0,
 	ARMOR: 0,
 

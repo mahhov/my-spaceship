@@ -2,6 +2,9 @@ import Allocation from './Allocation.js';
 import AllocationsData from './AllocationsData.js';
 import Stat from './Stat.js';
 
+// todo [high] add traits for shield regen
+// todo [high] re-balance
+
 class TraitsData extends AllocationsData {
 	constructor(expData) {
 		super(expData, 4);

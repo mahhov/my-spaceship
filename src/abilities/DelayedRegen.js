@@ -15,10 +15,9 @@ const BaseStats = {
 };
 
 class DelayedRegen extends PassiveAbility {
-	constructor(statManager, regenAmount) {
+	constructor(statManager) {
 		statManager.mergeBaseStats(BaseStats);
 		super(statManager);
-		this.regenAmount = regenAmount;
 		this.delay = new Pool(60, -1);
 	}
 
@@ -27,7 +26,8 @@ class DelayedRegen extends PassiveAbility {
 			this.delay.restore();
 		if (!this.delay.increment() || hero.health.isFull())
 			return false;
-		hero.changeHealth(this.regenAmount);
+		hero.changeHealth(this.statManager.getBasedStat(statIds.LIFE_REGEN));
+		hero.changeShield(this.statManager.getBasedStat(statIds.SHIELD_REGEN));
 		return true;
 	}
 }

@@ -35,6 +35,7 @@ const BaseStats = {
 	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
 	[Stat.Ids.STAMINA_GAIN]: [1, 0],
 	[Stat.Ids.SHIELD]: [40, 1], // todo [high]
+	[Stat.Ids.SHIELD_REGEN]: [.12, 1],
 	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
 	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
 	[Stat.Ids.ARMOR]: [1, 1],
@@ -97,8 +98,7 @@ class Player extends Hero {
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
 			// todo [high] consider replace some player stats with abilities; e.g. leech
-			// todo [high] use statManager instead of param for LIFE_REGEN
-			new DelayedRegen(this.statManager.extend(new StatValues()), this.statManager.getBasedStat(Stat.Ids.LIFE_REGEN)),
+			new DelayedRegen(this.statManager.extend(new StatValues())),
 			new Death(this.statManager.extend(new StatValues())),
 		];
 		this.initAbilities(abilities, passiveAbilities);
