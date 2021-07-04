@@ -18,6 +18,7 @@ class Monster extends LivingEntity {
 		return {
 			[Stat.Ids.LIFE]: [health, 1],
 			[Stat.Ids.LIFE_LEECH]: [0, 0],
+			[Stat.Ids.SHIELD]: [0, 0],
 			[Stat.Ids.ARMOR]: [1, 1],
 			[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
 		};

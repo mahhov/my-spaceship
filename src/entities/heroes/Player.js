@@ -34,7 +34,7 @@ const BaseStats = {
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
 	[Stat.Ids.STAMINA_GAIN]: [1, 0],
-	[Stat.Ids.SHIELD]: [0, 0], // todo [high]
+	[Stat.Ids.SHIELD]: [40, 1], // todo [high]
 	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
 	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
 	[Stat.Ids.ARMOR]: [1, 1],
@@ -52,11 +52,12 @@ const BaseStats = {
 };
 
 class PlayerBar {
-	constructor(barCoordinate, color) {
+	constructor(barCoordinate, color, drawBack = true) {
 		this.averagedValue = 0;
 		this.barCoordinate = barCoordinate;
 		this.textCoordinate = barCoordinate.clone.move(-Positions.BREAK, 0);
 		this.color = color;
+		this.drawBack = drawBack;
 	}
 
 	static createAll() {
@@ -66,13 +67,20 @@ class PlayerBar {
 			new PlayerBar(coordinate.clone, Colors.EXP),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2), Colors.LIFE),
+			new PlayerBar(coordinate, Colors.SHIELD, false), // todo [high] shield color
 		];
 	}
 
 	paint(painter, fillValue, text) {
 		this.averagedValue = avg(this.averagedValue, fillValue, .8);
-		painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
-		painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+		if (this.drawBack) {
+			painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
+			painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+		} else {
+			painter.add(Bar.createFillRect(this.barCoordinate, this.averagedValue, this.color.get()));
+			// todo [high] don't overwrite shield and life texts
+			painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+		}
 	}
 }
 
@@ -192,6 +200,7 @@ class Player extends Hero {
 		this.bars[0].paint(painter, this.playerData.expData.exp / this.playerData.expData.expRequired, this.playerData.expData.levelExpText);
 		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
 		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
+		this.bars[3].paint(painter, this.shield.getRatio(), Math.floor(this.shield.value));
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));

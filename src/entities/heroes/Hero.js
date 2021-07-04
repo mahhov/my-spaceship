@@ -71,7 +71,7 @@ class Hero extends LivingEntity {
 	}
 
 	sufficientStamina(amount) {
-		return amount <= this.stamina.get();
+		return amount <= this.stamina.value;
 	}
 
 	consumeStamina(amount) {

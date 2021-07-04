@@ -26,14 +26,6 @@ class Pool {
 		return this.value === 0 || this.value === this.max;
 	}
 
-	get() {
-		return this.value;
-	}
-
-	getMax() {
-		return this.max;
-	}
-
 	getRatio() {
 		return this.value / this.max;
 	}

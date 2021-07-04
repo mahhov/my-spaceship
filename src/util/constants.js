@@ -6,6 +6,7 @@ const Colors = {
 	// bars
 	BAR_SHADING: 1,
 	LIFE: Color.fromHexString('#cb584a'),
+	SHIELD: Color.fromHexString('#e38074'),
 	STAMINA: Color.fromHexString('#68cd61'),
 	EXP: Color.fromHexString('#61b4cd'),
 	ENRAGE: Color.fromHexString('#616600'),

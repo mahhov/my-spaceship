@@ -31,11 +31,17 @@ class LivingEntity extends Entity {
 		this.health.change(amount);
 	}
 
+	changeShield(amount) {
+		this.shield.change(amount);
+	}
+
 	takeDamage(amount) {
 		amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
-		let damageDealt = clamp(amount, 0, this.health.value);
-		this.changeHealth(-amount);
-		return damageDealt;
+		amount = clamp(amount, 0, this.shield.value + this.health.value);
+		if (amount > this.shield.value)
+			this.changeHealth(this.shield.value - amount);
+		this.changeShield(-amount);
+		return amount;
 	}
 
 	isDead() {

@@ -121,8 +121,8 @@ class Ability extends EntityObserver {
 		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade(.5)}));
 
 		// foreground for current charges
-		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
-		const HEIGHT = this.charges.get() * ROW_HEIGHT;
+		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.max;
+		const HEIGHT = this.charges.value * ROW_HEIGHT;
 		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT))
 			.setOptions({fill: true, color: this.uiColor.get()}));
 
