@@ -25,7 +25,6 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 // Formatted: [base value, initial stat value]
 // E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
 const BaseStats = {
-	// todo [high] make sure the bases here and elsewhere that are set [1,0] or [0,1] are intentional.
 	[Stat.Ids.DISABLED]: [1, 0],
 
 	[Stat.Ids.LIFE]: [80, 1],
@@ -34,7 +33,7 @@ const BaseStats = {
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
 	[Stat.Ids.STAMINA_GAIN]: [1, 0],
-	[Stat.Ids.SHIELD]: [40, 1], // todo [high]
+	[Stat.Ids.SHIELD]: [40, 1],
 	[Stat.Ids.SHIELD_REGEN]: [.12, 1],
 	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
 	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
@@ -68,7 +67,7 @@ class PlayerBar {
 			new PlayerBar(coordinate.clone, Colors.EXP),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2), Colors.LIFE),
-			new PlayerBar(coordinate, Colors.SHIELD, false), // todo [high] shield color
+			new PlayerBar(coordinate, Colors.SHIELD, false),
 		];
 	}
 
@@ -86,7 +85,6 @@ class Player extends Hero {
 	constructor(playerData) {
 		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
 
-		// todo [high] reconnect abilities
 		let abilities = [
 			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
 			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
@@ -94,7 +92,6 @@ class Player extends Hero {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i));
 		let passiveAbilities = [
-			// todo [high] consider replace some player stats with abilities; e.g. leech
 			new DelayedRegen(this.statManager.extend(new StatValues())),
 			new Death(this.statManager.extend(new StatValues())),
 		];
