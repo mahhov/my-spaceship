@@ -3,6 +3,7 @@ import makeEnum from '../util/enum.js';
 const EventIds = makeEnum({
 	INTERSECTION: 0,
 	DEALT_DAMAGE: 0,
+	KILLED: 0,
 });
 
 class EntityObserver {

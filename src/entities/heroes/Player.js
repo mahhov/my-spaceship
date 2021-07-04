@@ -17,6 +17,7 @@ import TechniqueTree from '../../playerData/TechniqueTree.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
+import EntityObserver from '../EntityObserver.js';
 import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
@@ -107,6 +108,16 @@ class Player extends Hero {
 		this.createMovementParticle(map);
 	}
 
+	processQueuedEvents() {
+		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(monster => {
+			this.playerData.expData.gainExp(monster.expValue);
+			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
+			// todo [high] gain equipment on kill
+			// todo [high] display gained equipment/exp
+		});
+		super.processQueuedEvents();
+	}
+
 	moveControl(controller, intersectionFinder) {
 		const invSqrt2 = 1 / Math.sqrt(2);
 
@@ -163,13 +174,6 @@ class Player extends Hero {
 			mouse.x + TARGET_LOCK_BORDER_SIZE / 2,
 			mouse.y + TARGET_LOCK_BORDER_SIZE / 2);
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
-	}
-
-	onKill(monster) {
-		this.playerData.expData.gainExp(monster.expValue);
-		this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
-		// todo [high] gain equipment on kill
-		// todo [high] display gained equipment/exp
 	}
 
 	removeUi() {

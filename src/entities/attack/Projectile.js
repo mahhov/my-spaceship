@@ -30,7 +30,10 @@ class Projectile extends Entity {
 
 		if (intersection) {
 			let damageDealt = intersection.changeHealth(-this.damage);
-			this.buffs.forEach(buff => intersection.addBuff(buff));
+			if (intersection.health.isEmpty())
+				this.observer.queueEvent(EntityObserver.EventIds.KILLED, intersection);
+			else
+				this.buffs.forEach(buff => intersection.addBuff(buff));
 			this.observer.queueEvent(EntityObserver.EventIds.DEALT_DAMAGE, damageDealt);
 			map.addParticle(new DamageDust(this.x, this.y, .005, ...randVector(.001), 100));
 			return true;

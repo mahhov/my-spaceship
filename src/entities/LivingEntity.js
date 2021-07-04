@@ -14,12 +14,13 @@ class LivingEntity extends Entity {
 	}
 
 	refresh() {
-		// buffs
 		let takingDamageOverTime = this.statManager.getBasedStat(Stat.Ids.TAKING_DAMAGE_OVER_TIME);
 		this.changeHealth(-takingDamageOverTime);
 		this.statManager.tickBuffs();
+		this.processQueuedEvents();
+	}
 
-		// queued events
+	processQueuedEvents() {
 		let lifeLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
 			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.LIFE_LEECH), 0);
 		this.changeHealth(lifeLeechAmount);
@@ -40,9 +41,6 @@ class LivingEntity extends Entity {
 
 	restoreHealth() {
 		this.health.restore();
-	}
-
-	onKill(monster) {
 	}
 
 	removeUi() {
