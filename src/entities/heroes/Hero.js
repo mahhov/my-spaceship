@@ -78,9 +78,9 @@ class Hero extends LivingEntity {
 		this.stamina.change(-amount);
 	}
 
-	changeHealth(amount) {
-		this.recentDamage.add(-amount / 100);
-		return super.changeHealth(amount);
+	takeDamage(amount) {
+		this.recentDamage.add(amount / 100);
+		return super.takeDamage(amount);
 	}
 
 	restoreHealth() {

@@ -66,9 +66,13 @@ class Entity extends EntityObserver {
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
 	}
 
-	changeHealth(amount) {
+	takeDamage(amount) {
 		// return damage dealt
 		return 0;
+	}
+
+	isDead() {
+		return false;
 	}
 
 	addBuff(buff) {

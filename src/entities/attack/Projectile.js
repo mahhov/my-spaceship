@@ -29,8 +29,8 @@ class Projectile extends Entity {
 		let intersection = this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION)[0]?.[0] || this.safeMove(intersectionFinder, this.vx, this.vy, -1, true).reference;
 
 		if (intersection) {
-			let damageDealt = intersection.changeHealth(-this.damage);
-			if (intersection.health.isEmpty())
+			let damageDealt = intersection.takeDamage(this.damage);
+			if (intersection.isDead())
 				this.observer.queueEvent(EntityObserver.EventIds.KILLED, intersection);
 			else
 				this.buffs.forEach(buff => intersection.addBuff(buff));

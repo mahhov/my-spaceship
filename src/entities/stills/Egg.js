@@ -28,7 +28,7 @@ class Egg extends Entity {
 
 	update(map) {
 		if (this.ownerHero && !this.ownerHero.health.isEmpty())
-			this.ownerHero.changeHealth(-.001);
+			this.ownerHero.takeDamage(.001);
 
 		if (this.ownerHero && this.ownerHero.health.isEmpty()) {
 			this.ownerHero = null;

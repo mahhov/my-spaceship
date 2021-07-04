@@ -15,7 +15,7 @@ class LivingEntity extends Entity {
 
 	refresh() {
 		let takingDamageOverTime = this.statManager.getBasedStat(Stat.Ids.TAKING_DAMAGE_OVER_TIME);
-		this.changeHealth(-takingDamageOverTime);
+		this.takeDamage(takingDamageOverTime);
 		this.statManager.tickBuffs();
 		this.processQueuedEvents();
 	}
@@ -28,11 +28,18 @@ class LivingEntity extends Entity {
 	}
 
 	changeHealth(amount) {
-		if (amount < 0)
-			amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
-		let damageDealt = clamp(-amount, 0, this.health.value);
 		this.health.change(amount);
+	}
+
+	takeDamage(amount) {
+		amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
+		let damageDealt = clamp(amount, 0, this.health.value);
+		this.changeHealth(-amount);
 		return damageDealt;
+	}
+
+	isDead() {
+		return this.health.isEmpty();
 	}
 
 	addBuff(buff) {
