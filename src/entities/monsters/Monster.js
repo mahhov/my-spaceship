@@ -34,8 +34,20 @@ class Monster extends LivingEntity {
 	paint(painter, camera) {
 		super.paint(painter, camera);
 		this.moduleManager.paint(painter, camera);
-		painter.add(new Bar(camera.transformCoordinates(new Coordinate(this.x, this.y - this.height, .1, .01).align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START)),
-			this.health.getRatio(), Colors.LIFE.getShade(Colors.BAR_SHADING), Colors.LIFE.get(), Colors.LIFE.get()));
+		let transformedHealthCoordinate = camera.transformCoordinates(
+			new Coordinate(this.x, this.y - this.height, .1, .01)
+				.align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START));
+		painter.add(new Bar(
+			transformedHealthCoordinate,
+			this.health.getRatio(),
+			Colors.LIFE.getShade(Colors.BAR_SHADING),
+			Colors.LIFE.get(),
+			Colors.LIFE.get()));
+		if (this.shield.value)
+			painter.add(Bar.createFillRect(
+				transformedHealthCoordinate,
+				this.shield.getRatio(),
+				Colors.SHIELD.get()));
 	}
 
 	paintUi(painter, camera) {
@@ -49,6 +61,7 @@ class Monster extends LivingEntity {
 			Colors.LIFE.getShade(Colors.BAR_SHADING),
 			Colors.LIFE.get(),
 			Colors.LIFE.getShade(Colors.BAR_SHADING)));
+		// todo [medium] shield bar
 	}
 }
 
