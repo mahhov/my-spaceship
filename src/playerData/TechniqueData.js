@@ -35,6 +35,7 @@ const StatIds = {
 };
 
 // todo [high] wire in
+// todo [high] allow more than 1 allocation
 
 class TechniqueData extends AllocationsData {
 	constructor(expData) {
