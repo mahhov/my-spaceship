@@ -117,7 +117,7 @@ class MapGeneratorTimed extends MapGenerator {
 	}
 
 	createMonsters() {
-		let stage = this.timer / 100;
+		let stage = this.timer / 100 + 100;
 		let spawnEvery = .9 ** (stage / 10) * 20;
 		this.weightAccumulated += rand(1 / spawnEvery);
 		let weights = SPAWNS.map(spawn =>

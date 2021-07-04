@@ -9,10 +9,10 @@ const BaseStats = {
 	[statIds.COOLDOWN_DURATION]: [600, 1],
 	[statIds.COOLDOWN_RATE]: [1, 1],
 	[statIds.MAX_CHARGES]: [1, 1],
-	[statIds.STAMINA_COST]: [0, 1],
-	[statIds.CHANNEL_STAMINA_COST]: [0, 1],
-	[statIds.CHANNEL_DURATION]: [0, 1],
-	[statIds.REPEATABLE]: [0, 1],
+	[statIds.STAMINA_COST]: [0, 0],
+	[statIds.CHANNEL_STAMINA_COST]: [0, 0],
+	[statIds.CHANNEL_DURATION]: [0, 0],
+	[statIds.REPEATABLE]: [0, 0],
 };
 
 class IncDefense extends Ability {

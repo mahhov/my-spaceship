@@ -33,17 +33,17 @@ const BaseStats = {
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
 	[Stat.Ids.STAMINA_GAIN]: [1, 0],
-	[Stat.Ids.SHIELD]: [0, 1], // todo [high]
-	[Stat.Ids.SHIELD_DELAY]: [0, 1], // todo [high]
-	[Stat.Ids.SHIELD_LEECH]: [0, 1], // todo [high]
+	[Stat.Ids.SHIELD]: [0, 0], // todo [high]
+	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
+	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
 	[Stat.Ids.ARMOR]: [1, 1],
 
-	[Stat.Ids.DAMAGE]: [1, 0],
-	[Stat.Ids.DAMAGE_OVER_TIME]: [1, 0],
-	[Stat.Ids.ATTACK_SPEED]: [1, 0], // todo [high]
-	[Stat.Ids.ATTACK_RANGE]: [1, 0], // todo [high]
-	[Stat.Ids.CRITICAL_CHANCE]: [1, 0], // todo [high]
-	[Stat.Ids.CRITICAL_DAMAGE]: [1, 0], // todo [high]
+	[Stat.Ids.DAMAGE]: [0, 0],
+	[Stat.Ids.DAMAGE_OVER_TIME]: [0, 0],
+	[Stat.Ids.ATTACK_SPEED]: [0, 0], // todo [high]
+	[Stat.Ids.ATTACK_RANGE]: [0, 0], // todo [high]
+	[Stat.Ids.CRITICAL_CHANCE]: [0, 0], // todo [high]
+	[Stat.Ids.CRITICAL_DAMAGE]: [0, 0], // todo [high]
 
 	[Stat.Ids.MOVE_SPEED]: [.005, 1],
 

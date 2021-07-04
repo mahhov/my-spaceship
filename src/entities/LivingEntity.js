@@ -10,6 +10,7 @@ class LivingEntity extends Entity {
 		super(x, y, width, height, layer);
 		this.statManager = new StatManager(baseStats, [statValues]);
 		this.health = new Pool(this.statManager.getBasedStat(Stat.Ids.LIFE));
+		this.shield = new Pool(this.statManager.getBasedStat(Stat.Ids.SHIELD));
 	}
 
 	refresh() {
