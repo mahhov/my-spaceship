@@ -11,11 +11,12 @@ import LivingEntity from '../LivingEntity.js';
 import Dust from '../particles/Dust.js';
 
 class Hero extends LivingEntity {
-	constructor(x, y, width, height, baseStats, statValues, friendly, nameplateLifeColor, nameplateStaminaColor) {
+	constructor(x, y, width, height, baseStats, statValues, friendly, nameplateLifeColor, nameplateShieldColor, nameplateStaminaColor) {
 		let layer = friendly ? IntersectionFinder.Layers.FRIENDLY_UNIT : IntersectionFinder.Layers.HOSTILE_UNIT;
 		super(x, y, width, height, baseStats, statValues, layer);
 		this.friendly = friendly;
 		this.nameplateLifeColor = nameplateLifeColor;
+		this.nameplateShieldColor = nameplateShieldColor;
 		this.nameplateStaminaColor = nameplateStaminaColor;
 		this.recentDamage = new Decay(.1, .001);
 		this.currentMove = [0, 0];
@@ -95,7 +96,7 @@ class Hero extends LivingEntity {
 		let barTop = this.y - this.height / 2 - LIFE_HEIGHT - STAMINA_HEIGHT - MARGIN - .02;
 		let healthCoordinate = new Coordinate(this.x, barTop, BAR_WIDTH, LIFE_HEIGHT).align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START);
 		painter.add(new Bar(camera.transformCoordinates(healthCoordinate), this.health.getRatio(), this.nameplateLifeColor.getShade(Colors.BAR_SHADING), this.nameplateLifeColor.get(), this.nameplateLifeColor.get(Colors.BAR_SHADING)));
-		// todo [high] shield bar
+		painter.add(Bar.createFillRect(camera.transformCoordinates(healthCoordinate), this.shield.getRatio(), this.nameplateShieldColor.get()));
 		// stamina bar
 		painter.add(new Bar(camera.transformCoordinates(healthCoordinate.clone.shift(0, 1).size(BAR_WIDTH, STAMINA_HEIGHT)),
 			this.stamina.getRatio(), this.nameplateStaminaColor.getShade(Colors.BAR_SHADING), this.nameplateStaminaColor.get(), this.nameplateStaminaColor.get(Colors.BAR_SHADING)));

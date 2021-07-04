@@ -84,7 +84,7 @@ class PlayerBar {
 
 class Player extends Hero {
 	constructor(playerData) {
-		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.STAMINA);
+		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
 
 		// todo [high] reconnect abilities
 		let abilities = [
@@ -103,9 +103,6 @@ class Player extends Hero {
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
-
-		this.health.value = 40;
-		this.shield.value = 10;
 	}
 
 	update(map, controller, intersectionFinder, monsterKnowledge) {
