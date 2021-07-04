@@ -63,7 +63,7 @@ class PlayerBar {
 
 	static createAll() {
 		let coordinate = new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT)
-			.align(Coordinate.Aligns.END, Coordinate.Aligns.END);
+			.align(Coordinate.Aligns.END, Coordinate.Aligns.CENTER);
 		return [
 			new PlayerBar(coordinate.clone, Colors.EXP),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
@@ -77,11 +77,8 @@ class PlayerBar {
 		if (this.drawBack) {
 			painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
 			painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
-		} else {
+		} else
 			painter.add(Bar.createFillRect(this.barCoordinate, this.averagedValue, this.color.get()));
-			// todo [high] don't overwrite shield and life texts
-			painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
-		}
 	}
 }
 
@@ -106,6 +103,9 @@ class Player extends Hero {
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
+
+		this.health.value = 40;
+		this.shield.value = 10;
 	}
 
 	update(map, controller, intersectionFinder, monsterKnowledge) {
@@ -199,8 +199,8 @@ class Player extends Hero {
 		// life, stamina, and exp bars
 		this.bars[0].paint(painter, this.playerData.expData.exp / this.playerData.expData.expRequired, this.playerData.expData.levelExpText);
 		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
-		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
-		this.bars[3].paint(painter, this.shield.getRatio(), Math.floor(this.shield.value));
+		this.bars[2].paint(painter, this.health.getRatio(), `${Math.floor(this.shield.value)} | ${Math.floor(this.health.value)}`);
+		this.bars[3].paint(painter, this.shield.getRatio(), '');
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
