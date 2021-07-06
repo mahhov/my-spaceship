@@ -1,5 +1,6 @@
 import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
+import BaseStats from '../../playerData/BaseStats.js';
 import Stat from '../../playerData/Stat.js';
 import StatValues from '../../playerData/StatValues.js';
 import {Colors, Positions} from '../../util/constants.js';
@@ -15,13 +16,13 @@ class Monster extends LivingEntity {
 	}
 
 	static createBaseStats(health) {
-		return {
+		return new BaseStats({
 			[Stat.Ids.LIFE]: [health, 1],
 			[Stat.Ids.LIFE_LEECH]: [0, 0],
 			[Stat.Ids.SHIELD]: [0, 0],
 			[Stat.Ids.ARMOR]: [1, 1],
 			[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
-		};
+		});
 	}
 
 	update(map, intersectionFinder, monsterKnowledge) {

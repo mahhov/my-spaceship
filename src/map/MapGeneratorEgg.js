@@ -3,7 +3,6 @@ import DelayedRegen from '../abilities/DelayedRegen.js';
 import IncDefense from '../abilities/IncDefense.js';
 import ProjectileAttack from '../abilities/ProjectileAttack.js';
 import Respawn from '../abilities/Respawn.js';
-import BaseStats from '../entities/baseStats.js';
 // import WShip from '../graphics/WShip.js';
 import EggBot from '../entities/bot/EggBot.js';
 import BotHero from '../entities/heroes/BotHero.js';
@@ -86,7 +85,7 @@ class MapGeneratorEgg extends MapGenerator {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i)); // some abilities give buffs which require UI colors to be set
 		let passiveAbilities = [
-			new DelayedRegen(BaseStats.Player[Stat.Ids.LIFE_REGEN]),
+			new DelayedRegen(Player.BaseStats[Stat.Ids.LIFE_REGEN]),
 			new Respawn(240, x, y),
 		];
 		return {abilities, passiveAbilities};

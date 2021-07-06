@@ -10,6 +10,7 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
+import BaseStats from '../../playerData/BaseStats.js';
 import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
 import StatValues from '../../playerData/StatValues.js';
@@ -24,7 +25,7 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 
 // Formatted: [base value, initial stat value]
 // E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
-const BaseStats = {
+const baseStats = new BaseStats({
 	[Stat.Ids.DISABLED]: [1, 0],
 
 	[Stat.Ids.LIFE]: [80, 1],
@@ -33,7 +34,7 @@ const BaseStats = {
 	[Stat.Ids.STAMINA]: [80, 1],
 	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
 	[Stat.Ids.STAMINA_GAIN]: [1, 0],
-	[Stat.Ids.SHIELD]: [40, 1],
+	[Stat.Ids.SHIELD]: [40, 0],
 	[Stat.Ids.SHIELD_REGEN]: [.12, 1],
 	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
 	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
@@ -49,7 +50,7 @@ const BaseStats = {
 	[Stat.Ids.MOVE_SPEED]: [.005, 1],
 
 	[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
-};
+});
 
 class PlayerBar {
 	constructor(barCoordinate, color, drawBack = true) {
@@ -83,7 +84,7 @@ class PlayerBar {
 
 class Player extends Hero {
 	constructor(playerData) {
-		super(0, 0, .05, .05, BaseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
+		super(0, 0, .05, .05, baseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
 
 		let abilities = [
 			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
@@ -114,6 +115,7 @@ class Player extends Hero {
 		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(monster => {
 			this.playerData.expData.gainExp(monster.expValue);
 			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
+			this.playerData.equipmentData.gainMaterial(monster.materialDrop);
 			// todo [high] gain equipment on kill
 			// todo [high] display gained equipment/exp
 		});

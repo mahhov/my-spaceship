@@ -1,3 +1,5 @@
+import BaseStats from '../playerData/BaseStats.js';
+
 class StatManager {
 	constructor(baseStats, statValuesSets, buffs = []) {
 		this.baseStats = baseStats;
@@ -10,7 +12,7 @@ class StatManager {
 	}
 
 	mergeBaseStats(baseStats) {
-		this.baseStats = {...this.baseStats, ...baseStats};
+		this.baseStats = new BaseStats({...this.baseStats.tuples, ...baseStats.tuples});
 	}
 
 	addBuff(buff) {
@@ -32,7 +34,7 @@ class StatManager {
 	}
 
 	getBasedStat(statId) {
-		let base = this.baseStats[statId];
+		let base = this.baseStats.tuples[statId];
 		return base[0] * (base[1] + this.getStat(statId));
 	}
 }

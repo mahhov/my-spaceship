@@ -1,6 +1,7 @@
 import Projectile from '../entities/attack/Projectile.js';
 import Buff from '../entities/Buff.js';
 import EntityObserver from '../entities/EntityObserver.js';
+import BaseStats from '../playerData/BaseStats.js';
 import Stat from '../playerData/Stat.js';
 import TechniqueData from '../playerData/TechniqueData.js';
 import {Colors} from '../util/constants.js';
@@ -9,7 +10,7 @@ import Ability from './Ability.js';
 
 const statIds = TechniqueData.StatIds.ProjectileAttack;
 
-const BaseStats = {
+const baseStats = new BaseStats({
 	[statIds.DAMAGE]: [10, 1],
 	[statIds.ATTACK_RANGE]: [60, 1],
 
@@ -24,11 +25,11 @@ const BaseStats = {
 	[statIds.ABILITY_MULTISHOT]: [1, 1],
 	[statIds.ABILITY_SIZE]: [.02, 1],
 	[statIds.ABILITY_SPREAD]: [.08, 1],
-};
+});
 
 class ProjectileAttack extends Ability {
 	constructor(statManager) {
-		statManager.mergeBaseStats(BaseStats);
+		statManager.mergeBaseStats(baseStats);
 		super('Projectile', statManager);
 	}
 
