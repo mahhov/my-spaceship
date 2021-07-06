@@ -2,7 +2,6 @@ import Allocation from './Allocation.js';
 import AllocationsData from './AllocationsData.js';
 import Stat from './Stat.js';
 
-// todo [high] add traits for shield regen
 // todo [high] re-balance
 
 class TraitsData extends AllocationsData {
@@ -39,7 +38,7 @@ class TraitsData extends AllocationsData {
 				new Stat(Stat.Ids.ATTACK_SPEED, -.05),
 			], 6).setImageName('binoculars.png'),
 			new Allocation('Overdrive', [
-				new Stat(Stat.Ids.SHIELD_DELAY, .1),
+				new Stat(Stat.Ids.SHIELD_REGEN, .1),
 				new Stat(Stat.Ids.STAMINA_REGEN, -.05),
 			], 6).setImageName('slashed-shield.png'),
 			new Allocation('Assassin', [
@@ -60,7 +59,7 @@ class TraitsData extends AllocationsData {
 			], 6).setImageName('healing-shield.png'),
 			new Allocation('Envious', [
 				new Stat(Stat.Ids.SHIELD_LEECH, .1),
-				new Stat(Stat.Ids.SHIELD_DELAY, -.05),
+				new Stat(Stat.Ids.SHIELD_REGEN, -.05),
 			], 6).setImageName('healing-shield.png'),
 			new Allocation('Persistent', [
 				new Stat(Stat.Ids.STAMINA, .1),
@@ -80,7 +79,7 @@ class TraitsData extends AllocationsData {
 			], 6).setImageName('brute.png'),
 			new Allocation('The Divine', [
 				new Stat(Stat.Ids.SHIELD, .1),
-				new Stat(Stat.Ids.SHIELD_DELAY, .1),
+				new Stat(Stat.Ids.SHIELD_REGEN, .1),
 				new Stat(Stat.Ids.ATTACK_RANGE, .1),
 				new Stat(Stat.Ids.LIFE_LEECH, -.05),
 				new Stat(Stat.Ids.DAMAGE_OVER_TIME, -.05),
