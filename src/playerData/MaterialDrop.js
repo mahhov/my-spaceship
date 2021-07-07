@@ -11,7 +11,6 @@ const baseStats = new BaseStats({
 	[Stat.Ids.STAMINA_REGEN]: [.1, 10],
 	[Stat.Ids.STAMINA_GAIN]: [.1, 10],
 	[Stat.Ids.SHIELD]: [.1, 10],
-	[Stat.Ids.SHIELD_DELAY]: [.1, 10],
 	[Stat.Ids.SHIELD_REGEN]: [.1, 10],
 	[Stat.Ids.SHIELD_LEECH]: [.1, 10],
 	[Stat.Ids.ARMOR]: [.1, 10],
