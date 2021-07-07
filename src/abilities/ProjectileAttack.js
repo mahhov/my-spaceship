@@ -2,9 +2,9 @@ import Projectile from '../entities/attack/Projectile.js';
 import Buff from '../entities/Buff.js';
 import EntityObserver from '../entities/EntityObserver.js';
 import BaseStats from '../playerData/BaseStats.js';
-import Stat from '../playerData/Stat.js';
 import TechniqueData from '../playerData/TechniqueData.js';
 import {Colors} from '../util/constants.js';
+import {rand} from '../util/number.js';
 import Vector from '../util/Vector.js';
 import Ability from './Ability.js';
 
@@ -13,6 +13,8 @@ const statIds = TechniqueData.StatIds.ProjectileAttack;
 const baseStats = new BaseStats({
 	[statIds.DAMAGE]: [10, 1],
 	[statIds.ATTACK_RANGE]: [60, 1],
+	[statIds.CRITICAL_CHANCE]: [.2, 1],
+	[statIds.CRITICAL_DAMAGE]: [1, 2],
 
 	[statIds.COOLDOWN_DURATION]: [6, 1],
 	[statIds.MAX_CHARGES]: [1, 1],
@@ -45,7 +47,7 @@ class ProjectileAttack extends Ability {
 
 		} else if (!this.channelDuration) {
 			this.chargeBuff = new Buff(0, this.uiColor, 'Slow');
-			this.chargeBuff.addStatValue(Stat.Ids.MOVE_SPEED, -.5);
+			this.chargeBuff.addStatValue(statIds.MOVE_SPEED, -.5);
 			hero.addBuff(this.chargeBuff);
 		}
 
@@ -63,7 +65,9 @@ class ProjectileAttack extends Ability {
 		const MULTISHOT_THETA = 10 / 180 * Math.PI;
 		const VELOCITY = .014;
 
-		let damage = channelDamageMultiplier * this.statManager.getBasedStat(Stat.Ids.DAMAGE);
+		let damage = channelDamageMultiplier * this.statManager.getBasedStat(statIds.DAMAGE);
+		if (rand() < this.statManager.getBasedStat(statIds.CRITICAL_CHANCE))
+			damage *= this.statManager.getBasedStat(statIds.CRITICAL_DAMAGE);
 		let multishot = this.statManager.getBasedStat(statIds.ABILITY_MULTISHOT);
 		let spread = this.statManager.getBasedStat(statIds.ABILITY_SPREAD);
 		let size = this.statManager.getBasedStat(statIds.ABILITY_SIZE);
@@ -72,7 +76,7 @@ class ProjectileAttack extends Ability {
 
 		let damageOverTimeDuration = 100, damageOverTime = damage * this.statManager.getBasedStat(statIds.DAMAGE_OVER_TIME);
 		let damageOverTimeBuff = new Buff(damageOverTimeDuration, Colors.PLAYER_BUFFS.DAMAGE_OVER_TIME, 'DOT');
-		damageOverTimeBuff.addStatValue(Stat.Ids.TAKING_DAMAGE_OVER_TIME, damageOverTime / damageOverTimeDuration);
+		damageOverTimeBuff.addStatValue(statIds.TAKING_DAMAGE_OVER_TIME, damageOverTime / damageOverTimeDuration);
 
 		for (let i = 0; i < multishot; i++) {
 			directVector.rotateByTheta(MULTISHOT_THETA);
