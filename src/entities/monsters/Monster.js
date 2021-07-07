@@ -9,9 +9,10 @@ import LivingEntity from '../LivingEntity.js';
 import ModuleManager from '../modules/ModuleManager.js';
 
 class Monster extends LivingEntity {
-	constructor(x, y, width, height, health, expValue) {
+	constructor(x, y, width, height, health, expValue, materialDrop) {
 		super(x, y, width, height, Monster.createBaseStats(health), new StatValues(), IntersectionFinder.Layers.HOSTILE_UNIT);
 		this.expValue = expValue;
+		this.materialDrop = materialDrop;
 		this.moduleManager = new ModuleManager();
 	}
 

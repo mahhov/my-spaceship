@@ -1,4 +1,5 @@
 import WShip from '../../graphics/WShip.js';
+import MaterialDrop from '../../playerData/MaterialDrop.js';
 import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
@@ -12,7 +13,7 @@ const Phases = makeEnum({ONE: 0});
 
 class ShotgunWarrior extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 4, 0);
+		super(x, y, .04, .04, 4, 0, new MaterialDrop(1, false));
 		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

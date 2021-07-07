@@ -1,4 +1,5 @@
 import AShip from '../../graphics/AShip.js';
+import MaterialDrop from '../../playerData/MaterialDrop.js';
 import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
@@ -13,7 +14,7 @@ const Phases = makeEnum({ONE: 0});
 
 class MeleeDart extends Monster {
 	constructor(x, y, damageMultiplier) {
-		super(x, y, .02, .02, 30, 0);
+		super(x, y, .02, .02, 30, 0, new MaterialDrop(1, false));
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

@@ -52,6 +52,7 @@ class EquipmentUi extends Ui {
 			.size(buttonSize * 4, buttonSize);
 		this.equippedButtons = this.createSection(equippedCoordinate, 'Equipped', 4, 1, buttonSize);
 
+		// todo [medium] allow salvaging materials to avoid inventory becoming full
 		let salvageCoordinate = coordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 			.size(.07, buttonSize);

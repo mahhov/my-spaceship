@@ -21,6 +21,10 @@ class EntityObserver {
 			.map(([_, ...args]) => args);
 	}
 
+	bubbleTo(eventId, destination) {
+		this.getQueuedEvents(eventId).forEach(args => destination.queueEvent(eventId, ...args));
+	}
+
 	clearQueuedEvents(eventId) {
 		this.queuedEvents = this.queuedEvents.filter(([eventIdI]) => eventIdI !== eventId);
 	}

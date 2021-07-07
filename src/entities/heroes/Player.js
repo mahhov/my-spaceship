@@ -112,10 +112,11 @@ class Player extends Hero {
 	}
 
 	processQueuedEvents() {
-		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(monster => {
+		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(([monster]) => {
 			this.playerData.expData.gainExp(monster.expValue);
 			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
-			this.playerData.equipmentData.gainMaterial(monster.materialDrop);
+			if (monster.materialDrop.probability)
+				this.playerData.equipmentData.gainMaterial(monster.materialDrop.material);
 			// todo [high] gain equipment on kill
 			// todo [high] display gained equipment/exp
 		});

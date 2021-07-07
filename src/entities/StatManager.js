@@ -34,8 +34,7 @@ class StatManager {
 	}
 
 	getBasedStat(statId) {
-		let base = this.baseStats.tuples[statId];
-		return base[0] * (base[1] + this.getStat(statId));
+		return this.baseStats.getBasedStat(statId, this.getStat(statId));
 	}
 }
 
