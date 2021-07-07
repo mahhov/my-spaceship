@@ -12,7 +12,8 @@ class IconAllocationUi extends Ui {
 		super(coordinate);
 		this.allocation = allocation;
 
-		let containerButton = this.add(new UiIconButton(coordinate, `../../images/allocations/${allocation.imageName}`));
+		let imagePath = `../../images/allocations/${allocation.imageName}`;
+		let containerButton = this.add(new UiIconButton(coordinate, imagePath));
 		containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
 		this.bounds = containerButton.bounds;
 		this.bubble(containerButton, 'hover');

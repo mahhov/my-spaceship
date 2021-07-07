@@ -10,7 +10,7 @@ import HubUi from './HubUi.js';
 import TabsUi from './TabsUi.js';
 import Ui from './Ui.js';
 
-// todo [high] re-style allocation uis to be similar to trait uis. e.g. n/n in bottom right
+// todo [medium] re-style allocation uis to be similar to trait uis. e.g. n/n in bottom right
 
 class TechniquesUi extends Ui {
 	constructor(techniqueData) {
