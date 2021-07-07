@@ -24,6 +24,9 @@ class LivingEntity extends Entity {
 		let lifeLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
 			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.LIFE_LEECH), 0);
 		this.changeHealth(lifeLeechAmount);
+		let shieldLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.SHIELD_LEECH), 0);
+		this.changeShield(shieldLeechAmount);
 		this.clearAllQueuedEvents();
 	}
 

@@ -37,7 +37,7 @@ const baseStats = new BaseStats({
 	[Stat.Ids.SHIELD]: [40, 0],
 	[Stat.Ids.SHIELD_REGEN]: [.12, 1],
 	[Stat.Ids.SHIELD_DELAY]: [0, 0], // todo [high]
-	[Stat.Ids.SHIELD_LEECH]: [0, 0], // todo [high]
+	[Stat.Ids.SHIELD_LEECH]: [1, 0],
 	[Stat.Ids.ARMOR]: [1, 1],
 
 	[Stat.Ids.DAMAGE]: [0, 0],
