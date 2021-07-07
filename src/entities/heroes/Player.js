@@ -81,6 +81,20 @@ class PlayerBar {
 	}
 }
 
+class Notification {
+	constructor(text, duration = 100) {
+		this.text = text;
+		this.duration = duration;
+	}
+
+	paintUi(painter, uiIndex) {
+		let coordinate = new Coordinate(1 - Positions.MARGIN, .5, 0, Positions.UI_LINE_HEIGHT)
+			.alignWithoutMove(Coordinate.Aligns.END)
+			.shift(0, uiIndex);
+		painter.add(new Text(coordinate, this.text));
+	}
+}
+
 class Player extends Hero {
 	constructor(playerData) {
 		super(0, 0, .05, .05, baseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
@@ -99,6 +113,7 @@ class Player extends Hero {
 
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
+		this.notifications = [];
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -110,13 +125,20 @@ class Player extends Hero {
 		this.createMovementParticle(map);
 	}
 
+	refresh() {
+		this.notifications = this.notifications.filter(notification => notification.duration--);
+		super.refresh();
+	}
+
 	processQueuedEvents() {
 		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(([monster]) => {
 			this.playerData.expData.gainExp(monster.expValue);
 			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
-			if (monster.materialDrop.probability)
-				this.playerData.equipmentData.gainMaterial(monster.materialDrop.material);
-			// todo [high] display gained equipment/exp
+			if (monster.materialDrop.probability) {
+				let material = monster.materialDrop.material;
+				this.playerData.equipmentData.gainMaterial(material);
+				this.notifications.push(new Notification(material.name));
+			}
 		});
 		super.processQueuedEvents();
 	}
@@ -204,6 +226,9 @@ class Player extends Hero {
 		this.statManager.buffs
 			.filter(buff => buff.visible)
 			.forEach((buff, i) => buff.paintUi(painter, i));
+
+		// notifications
+		this.notifications.forEach((notification, i) => notification.paintUi(painter, i));
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());
