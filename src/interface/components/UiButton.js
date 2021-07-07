@@ -7,10 +7,16 @@ import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
 import UiComponent from './UiComponent.js';
 
-const States = makeEnum({DISABLED: 0, FORCED_ACTIVE: 0, INACTIVE: 0, ACTIVE: 0, ACTIVE_ALT: 0, HOVER: 0});
+const States = makeEnum({DISABLED: 0, INACTIVE: 0, ACTIVE: 0, ACTIVE_ALT: 0, HOVER: 0});
+const PaintModes = makeEnum({
+	...States, // paint as if in a given state
+	HIDDEN: 0, // don't paint
+	NORMAL: 0, // paint according to state
+
+});
 
 class UiButton extends UiComponent {
-	constructor(coordinate, text, hotkey = '', hidden = false, adaptiveWidth = false) {
+	constructor(coordinate, text, hotkey = '', adaptiveWidth = false) {
 		if (adaptiveWidth)
 			coordinate.size(UiComponent.textWidth(text.length) + Positions.MARGIN, coordinate.height);
 		super(coordinate);
@@ -18,9 +24,13 @@ class UiButton extends UiComponent {
 		this.text = text;
 		this.hotkey = hotkey;
 		this.state = States.INACTIVE;
-		this.hidden = hidden; // prevents painting
 		this.disabled = false; // prevents updating
-		this.forcedActive = false; // like disabled, but painted like active
+		this.paintMode = PaintModes.NORMAL;
+	}
+
+	setPaintMode(paintMode) {
+		this.paintMode = paintMode;
+		return this;
 	}
 
 	update(controller) {
@@ -42,8 +52,6 @@ class UiButton extends UiComponent {
 	getState(controller) {
 		if (this.disabled)
 			return States.DISABLED;
-		if (this.forcedActive)
-			return States.FORCED_ACTIVE;
 		let {x, y} = controller.getRawMouse();
 		if (this.hotkey && controller.getKeyState(this.hotkey).pressed)
 			return States.ACTIVE;
@@ -57,20 +65,30 @@ class UiButton extends UiComponent {
 			return States.HOVER;
 	}
 
+	get paintState() {
+		return this.paintMode === PaintModes.NORMAL ? this.state : this.paintMode;
+	}
+
 	paint(painter) {
-		if (this.hidden)
+		if (this.paintMode === PaintModes.HIDDEN)
 			return;
+
 		this.paintBack(painter);
-		let color = this.state === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : Colors.Interface.PRIMARY.get();
+		let color = this.paintState === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : Colors.Interface.PRIMARY.get();
 		painter.add(new RoundedRect(this.coordinate).setOptions({color}));
 		painter.add(new Text(this.coordinate.clone.alignWithoutMove(Coordinate.Aligns.CENTER), this.text)
 			.setOptions({...this.textOptions, color}));
 	}
 
 	paintBack(painter) {
-		let color = [Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.state].get();
+		if (this.paintMode === PaintModes.HIDDEN)
+			return;
+
+		let color = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.paintState].get();
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color}));
 	}
 }
+
+UiButton.PaintModes = PaintModes;
 
 export default UiButton;

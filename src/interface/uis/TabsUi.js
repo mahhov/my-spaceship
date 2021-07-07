@@ -6,7 +6,7 @@ class TabsUi extends Ui {
 	constructor(coordinate, texts, hotkeys = false, vertical = false) {
 		super(coordinate);
 		this.buttons = texts.map((text, i) => {
-			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', false, true));
+			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
 			coordinate = coordinate.clone.shift(!vertical, vertical);
 			if (i !== texts.length - 1)
 				coordinate.move(Positions.MARGIN / 2 * !vertical, Positions.MARGIN / 2 * vertical);
@@ -26,7 +26,8 @@ class TabsUi extends Ui {
 	}
 
 	setActiveUiSets(index) {
-		this.buttons.forEach((button, i) => button.forcedActive = i === index);
+		this.buttons.forEach((button, i) =>
+			button.setPaintMode(i === index ? UiButton.PaintModes.ACTIVE : UiButton.PaintModes.NORMAL));
 		this.uiSets
 			.filter((_, i) => i !== index)
 			.forEach(uis => this.setActiveUis(uis, false));

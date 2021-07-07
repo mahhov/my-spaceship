@@ -12,7 +12,7 @@ class AllocationUi extends Ui {
 		super(coordinate);
 		this.allocation = allocation;
 
-		this.containerButton = this.add(new UiButton(coordinate, '', ''));
+		this.containerButton = this.add(new UiButton(coordinate, ''));
 		this.containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
 		this.bounds = this.containerButton.bounds;
 		this.bubble(this.containerButton, 'hover');
@@ -47,8 +47,7 @@ class AllocationUi extends Ui {
 	}
 
 	updateActive() {
-		// todo [high] visually indicate selected without stopping hover and click events
-		// this.containerButton.forcedActive = this.allocation.value;
+		this.containerButton.setPaintMode(this.allocation.value ? UiButton.PaintModes.ACTIVE : UiButton.PaintModes.NORMAL);
 	}
 }
 
