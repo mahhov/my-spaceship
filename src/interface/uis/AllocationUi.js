@@ -23,7 +23,7 @@ class AllocationUi extends Ui {
 		this.add(new UiText(topLine, allocation.name));
 
 		this.valueText = this.add(new UiText(topLine.clone.shift(0, BOTTOM_LINE_SPACING)));
-		this.updateValueText();
+		this.refreshValue();
 	}
 
 	bind(data, hoverPopup) {
@@ -42,11 +42,8 @@ class AllocationUi extends Ui {
 		return Positions.UI_LINE_HEIGHT * (1 + BOTTOM_LINE_SPACING);
 	}
 
-	updateValueText() {
+	refreshValue() {
 		this.valueText.text = this.allocation.valueText;
-	}
-
-	updateActive() {
 		this.containerButton.setPaintMode(this.allocation.value ? UiButton.PaintModes.ACTIVE : UiButton.PaintModes.NORMAL);
 	}
 }

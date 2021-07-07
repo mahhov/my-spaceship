@@ -1,5 +1,6 @@
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
+import UiButton from '../components/UiButton.js';
 import UiComponent from '../components/UiComponent.js';
 import UiFill from '../components/UiFill.js';
 import UiIconButton from '../components/UiIconButton.js';
@@ -13,10 +14,10 @@ class IconAllocationUi extends Ui {
 		this.allocation = allocation;
 
 		let imagePath = `../../images/allocations/${allocation.imageName}`;
-		let containerButton = this.add(new UiIconButton(coordinate, imagePath));
-		containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
-		this.bounds = containerButton.bounds;
-		this.bubble(containerButton, 'hover');
+		this.containerButton = this.add(new UiIconButton(coordinate, imagePath));
+		this.containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
+		this.bounds = this.containerButton.bounds;
+		this.bubble(this.containerButton, 'hover');
 		let valueCoordinate = coordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.END)
 			.size(UiComponent.textWidth(3), .014)
@@ -25,7 +26,7 @@ class IconAllocationUi extends Ui {
 		this.add(new UiFill(valueCoordinate));
 		this.add(new UiOutline(valueCoordinate));
 		this.valueText = this.add(new UiText(valueCoordinate));
-		this.updateValueText();
+		this.refreshValue();
 	}
 
 	bind(data, hoverPopup) {
@@ -35,8 +36,9 @@ class IconAllocationUi extends Ui {
 		return this;
 	}
 
-	updateValueText() {
+	refreshValue() {
 		this.valueText.text = this.allocation.valueText;
+		this.containerButton.setPaintMode(this.allocation.value ? UiButton.PaintModes.ACTIVE : UiButton.PaintModes.NORMAL);
 	}
 }
 

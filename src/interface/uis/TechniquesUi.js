@@ -50,10 +50,7 @@ class TechniquesUi extends Ui {
 	}
 
 	refresh() {
-		this.allocationUis.forEach(allocationUi => {
-			allocationUi.updateValueText();
-			allocationUi.updateActive();
-		});
+		this.allocationUis.forEach(allocationUi => allocationUi.refreshValue());
 		this.availableText.text = this.techniqueData.availableText;
 	}
 }

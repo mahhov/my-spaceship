@@ -31,7 +31,7 @@ class TraitsUi extends Ui {
 	}
 
 	refresh() {
-		this.allocationUis.forEach(iconAllocationUi => iconAllocationUi.updateValueText());
+		this.allocationUis.forEach(iconAllocationUi => iconAllocationUi.refreshValue());
 		this.availableText.text = this.traitsData.availableText;
 	}
 }
