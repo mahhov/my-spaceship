@@ -70,12 +70,12 @@ class Ability extends EntityObserver {
 		return true;
 	}
 
-	get cooldownDuration() {
-		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_DURATION);
-	}
-
 	get cooldownRate() {
 		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_RATE);
+	}
+
+	get cooldownDuration() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_DURATION);
 	}
 
 	get maxCharges() {

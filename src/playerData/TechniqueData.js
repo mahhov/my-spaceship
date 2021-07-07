@@ -7,7 +7,6 @@ import TechniqueTree from './TechniqueTree.js';
 const TechniqueBase = makeEnum({
 	...Stat.Ids,
 	COOLDOWN_DURATION: 0,
-	COOLDOWN_RATE: 0,
 	MAX_CHARGES: 0,
 	STAMINA_COST: 0,
 	CHANNEL_STAMINA_COST: 0,

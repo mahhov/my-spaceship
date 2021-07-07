@@ -41,7 +41,7 @@ const baseStats = new BaseStats({
 
 	[Stat.Ids.DAMAGE]: [0, 0],
 	[Stat.Ids.DAMAGE_OVER_TIME]: [0, 0],
-	[Stat.Ids.ATTACK_SPEED]: [0, 0], // todo [high]
+	[Stat.Ids.COOLDOWN_RATE]: [1, 1],
 	[Stat.Ids.ATTACK_RANGE]: [0, 0], // todo [high]
 	[Stat.Ids.CRITICAL_CHANCE]: [0, 0], // todo [high]
 	[Stat.Ids.CRITICAL_DAMAGE]: [0, 0], // todo [high]

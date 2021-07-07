@@ -23,7 +23,7 @@ class TraitsData extends AllocationsData {
 				new Stat(Stat.Ids.STAMINA_REGEN, .1),
 			], 6).setImageName('caduceus.png'),
 			new Allocation('Rage', [
-				new Stat(Stat.Ids.ATTACK_SPEED, .1),
+				new Stat(Stat.Ids.COOLDOWN_RATE, .1),
 				new Stat(Stat.Ids.ARMOR, -.05),
 			], 6).setImageName('angry-eyes.png'),
 			new Allocation('Virulent', [
@@ -35,7 +35,7 @@ class TraitsData extends AllocationsData {
 			], 6).setImageName('bleeding-eye.png'),
 			new Allocation('Sharpshooter', [
 				new Stat(Stat.Ids.ATTACK_RANGE, .1),
-				new Stat(Stat.Ids.ATTACK_SPEED, -.05),
+				new Stat(Stat.Ids.COOLDOWN_RATE, -.05),
 			], 6).setImageName('binoculars.png'),
 			new Allocation('Overdrive', [
 				new Stat(Stat.Ids.SHIELD_REGEN, .1),
@@ -75,7 +75,7 @@ class TraitsData extends AllocationsData {
 				new Stat(Stat.Ids.DAMAGE, .1),
 				new Stat(Stat.Ids.STAMINA, -.05),
 				new Stat(Stat.Ids.SHIELD, -.05),
-				new Stat(Stat.Ids.ATTACK_SPEED, -.05),
+				new Stat(Stat.Ids.COOLDOWN_RATE, -.05),
 			], 6).setImageName('brute.png'),
 			new Allocation('The Divine', [
 				new Stat(Stat.Ids.SHIELD, .1),

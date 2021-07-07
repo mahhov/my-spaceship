@@ -16,7 +16,7 @@ const baseStats = new BaseStats({
 	[Stat.Ids.ARMOR]: [.1, 10],
 	[Stat.Ids.DAMAGE]: [.1, 10],
 	[Stat.Ids.DAMAGE_OVER_TIME]: [.1, 10],
-	[Stat.Ids.ATTACK_SPEED]: [.1, 10],
+	[Stat.Ids.COOLDOWN_RATE]: [.1, 10],
 	[Stat.Ids.ATTACK_RANGE]: [.1, 10],
 	[Stat.Ids.CRITICAL_CHANCE]: [.1, 10],
 	[Stat.Ids.CRITICAL_DAMAGE]: [.1, 10],
