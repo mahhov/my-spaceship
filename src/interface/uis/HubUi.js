@@ -40,19 +40,25 @@ class HubUi extends Ui {
 			new Tab('Records', 'Recorded Stats', [this.RecordsUi]),
 		];
 		tabs.forEach(tabData => this.add(tabData.title));
-		this.add(new TabsUi(new Coordinate(Positions.MARGIN, Positions.MARGIN, 0, Positions.UI_BUTTON_HEIGHT),
-			tabs.map(tab => tab.buttonText), tabs.map(tab => tab.uis), true));
+		this.add(
+			new TabsUi(
+				new Coordinate(Positions.MARGIN, Positions.MARGIN, 0, Positions.UI_BUTTON_HEIGHT),
+				tabs.map(tab => tab.buttonText), true))
+			.setUiSets(tabs.map(tab => tab.uis));
 	}
 
 	static createSection(text, isLeft, widthWeight) {
-		return new UiSection(new Coordinate(
+		return new UiSection(HubUi.createSectionCoordinate(isLeft, widthWeight), text);
+	}
+
+	static createSectionCoordinate(isLeft, widthWeight) {
+		return new Coordinate(
 			isLeft ? Positions.MARGIN : 1 - Positions.MARGIN,
 			Positions.UI_FIRST_ROW,
 			1 - 4 * Positions.MARGIN,
 			1 - Positions.UI_FIRST_ROW - Positions.MARGIN)
-				.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START)
-				.scale(widthWeight, 1),
-			text);
+			.align(isLeft ? Coordinate.Aligns.START : Coordinate.Aligns.END, Coordinate.Aligns.START)
+			.scale(widthWeight, 1);
 	}
 }
 

@@ -6,34 +6,29 @@ import UiText from '../components/UiText.js';
 import GridLayout from '../layouts/GridLayout.js';
 import ListLayout from '../layouts/ListLayout.js';
 import AllocationUi from './AllocationUi.js';
+import HubUi from './HubUi.js';
 import TabsUi from './TabsUi.js';
 import Ui from './Ui.js';
 
 // todo [high] re-style allocation uis to be similar to trait uis. e.g. n/n in bottom right
-// todo [high] distinguish technique tabs
 
 class TechniquesUi extends Ui {
 	constructor(techniqueData) {
 		super();
 		this.techniqueData = techniqueData;
 
-		let coordinate = new Coordinate(0, Positions.UI_FIRST_ROW, 1, Positions.UI_BUTTON_HEIGHT)
-			.pad(Positions.MARGIN, 0);
-		let tabsUi = this.add(new TabsUi(coordinate.clone, techniqueData.trees.map(tree => tree.name)));
-
-		this.availableText = this.add(new UiText(coordinate.clone.alignWithoutMove(Coordinate.Aligns.END)));
+		let leftCoordinate = HubUi.createSectionCoordinate(true, .3)
+			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
+			.size(0, Positions.UI_BUTTON_HEIGHT);
+		let tabsUi = this.add(new TabsUi(leftCoordinate, techniqueData.trees.map(tree => tree.name), false, true));
+		this.availableText = this.add(new UiText(tabsUi.nextCoordinate.clone.move(0, Positions.MARGIN)));
 
 		let hoverText = new UiPopupText(new Coordinate(0, 0, .3));
 
-		coordinate
-			.shift(0, 1)
-			.move(0, Positions.BREAK)
-			.size(coordinate.width, 1 - coordinate.top - Positions.MARGIN)
-			.alignWithoutMove(Coordinate.Aligns.CENTER);
+		let rightCoordinate = HubUi.createSectionCoordinate(false, .7);
 		const vertMarginMult = 2.5;
 		let trees = techniqueData.trees.map(tree => {
-			coordinate.size(GridLayout.totalWidth(3, AllocationUi.width, Positions.MARGIN), GridLayout.totalWidth(tree.allocationSets.length, AllocationUi.height, Positions.MARGIN * vertMarginMult));
-			let setsLayout = new ListLayout(coordinate.clone, AllocationUi.height, Positions.MARGIN * vertMarginMult);
+			let setsLayout = new ListLayout(rightCoordinate.clone, AllocationUi.height, Positions.MARGIN * vertMarginMult);
 			return tree.allocationSets.map((allocations, setIndex) => {
 				let setCoordinate = setsLayout.getCoordinates(setIndex).container;
 				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width * 1.5, AllocationUi.height, Positions.MARGIN);
@@ -46,7 +41,7 @@ class TechniquesUi extends Ui {
 			});
 		});
 		this.allocationUis = trees.flatMap(tree => tree.flatMap(allocationSets => allocationSets.allocationUis));
-		tabsUi.uiSets = trees.map(tree => tree.flatMap(allocationSets => [allocationSets.lineUi, ...allocationSets.allocationUis].filter(v => v)));
+		tabsUi.setUiSets(trees.map(tree => tree.flatMap(allocationSets => [allocationSets.lineUi, ...allocationSets.allocationUis].filter(v => v))));
 
 		this.add(hoverText);
 

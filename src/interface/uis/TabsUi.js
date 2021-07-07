@@ -3,31 +3,34 @@ import UiButton from '../components/UiButton.js';
 import Ui from '../uis/Ui.js';
 
 class TabsUi extends Ui {
-	constructor(coordinate, texts, uiSets = texts.map(_ => []), hotkeys = false) {
+	constructor(coordinate, texts, hotkeys = false, vertical = false) {
 		super(coordinate);
 		this.buttons = texts.map((text, i) => {
 			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', false, true));
-			coordinate = coordinate.clone.shift(1, 0).move(Positions.MARGIN / 2, 0);
+			coordinate = coordinate.clone.shift(!vertical, vertical);
+			if (i !== texts.length - 1)
+				coordinate.move(Positions.MARGIN / 2 * !vertical, Positions.MARGIN / 2 * vertical);
 			button.on('click', () => {
 				this.setActiveUiSets(i);
 				this.emit('select', i);
 			});
 			return button;
 		});
-		this.uiSets = uiSets;
+		this.nextCoordinate = coordinate;
 	}
 
-	set uiSets(uiSets) {
-		this.uiSets_ = uiSets;
+	setUiSets(uiSets) {
+		this.uiSets = uiSets;
 		this.setActiveUiSets(0);
+		return this;
 	}
 
 	setActiveUiSets(index) {
 		this.buttons.forEach((button, i) => button.forcedActive = i === index);
-		this.uiSets_
+		this.uiSets
 			.filter((_, i) => i !== index)
 			.forEach(uis => this.setActiveUis(uis, false));
-		this.setActiveUis(this.uiSets_[index], true);
+		this.setActiveUis(this.uiSets[index], true);
 	}
 
 	setActiveUis(uis, visible) {
