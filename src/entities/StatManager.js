@@ -26,7 +26,7 @@ class StatManager {
 		this.buffs = this.buffs.filter(buff => !buff.tick());
 	}
 
-	// todo [high] deprecate and use getBasedStat everywhere
+	// todo [low] deprecate and use getBasedStat everywhere
 	getStat(statId) {
 		return [...this.statValueSets, ...this.buffs.map(buff => buff.statValues)]
 			.map(statValues => statValues.get(statId))

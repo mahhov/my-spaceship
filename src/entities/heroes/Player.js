@@ -116,7 +116,6 @@ class Player extends Hero {
 			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
 			if (monster.materialDrop.probability)
 				this.playerData.equipmentData.gainMaterial(monster.materialDrop.material);
-			// todo [high] gain equipment on kill
 			// todo [high] display gained equipment/exp
 		});
 		super.processQueuedEvents();

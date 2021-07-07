@@ -9,7 +9,7 @@ import AllocationUi from './AllocationUi.js';
 import TabsUi from './TabsUi.js';
 import Ui from './Ui.js';
 
-// todo [high] re-style allocaiton uis to be similar to trait uis. e.g. n/n in bottom right
+// todo [high] re-style allocation uis to be similar to trait uis. e.g. n/n in bottom right
 // todo [high] distinguish technique tabs
 
 class TechniquesUi extends Ui {
@@ -39,7 +39,6 @@ class TechniquesUi extends Ui {
 				let allocationsLayout = GridLayout.createWithFixedColumnWidth(setCoordinate.clone, 3, AllocationUi.width * 1.5, AllocationUi.height, Positions.MARGIN);
 				let lineUi = setIndex && this.add(new UiLine(setCoordinate.size(allocationsLayout.totalWidth, 0).move(0, -Positions.MARGIN * vertMarginMult / 2)));
 				let allocationUis = allocations.map((allocation, allocationIndex) =>
-					// todo [high] some indication of which allocation is selected
 					this.add(
 						new AllocationUi(allocationsLayout.getCoordinates(allocationIndex).container, allocation, true)
 							.bind(techniqueData, hoverText)));
