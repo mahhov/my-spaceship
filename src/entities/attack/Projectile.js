@@ -39,7 +39,7 @@ class Projectile extends Entity {
 			return true;
 		}
 
-		if (!this.time--)
+		if (this.time-- <= 0)
 			return true;
 
 		this.vx *= FRICTION;
