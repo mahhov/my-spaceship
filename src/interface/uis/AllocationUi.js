@@ -9,7 +9,7 @@ const BOTTOM_LINE_SPACING = 1.2, ALLOCATE_BUTTON_SIZE = 0.015;
 // todo [medium] deprecated, replaces usages with IconAllocationUi
 class AllocationUi extends Ui {
 	constructor(coordinate, allocation) {
-		super(coordinate);
+		super();
 		this.allocation = allocation;
 
 		this.containerButton = this.add(new UiButton(coordinate, ''));

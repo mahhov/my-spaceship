@@ -4,7 +4,7 @@ import Ui from '../uis/Ui.js';
 
 class TabsUi extends Ui {
 	constructor(coordinate, texts, hotkeys = false, vertical = false) {
-		super(coordinate);
+		super(null);
 		this.buttons = texts.map((text, i) => {
 			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
 			coordinate = coordinate.clone.shift(!vertical, vertical);

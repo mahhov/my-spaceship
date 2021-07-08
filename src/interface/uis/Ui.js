@@ -1,8 +1,8 @@
 import UiComponent from '../components/UiComponent.js';
 
 class Ui extends UiComponent {
-	constructor(coordinate = null) {
-		super(coordinate);
+	constructor() {
+		super(null);
 		this.components = [];
 	}
 

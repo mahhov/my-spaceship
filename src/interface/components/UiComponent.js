@@ -4,6 +4,10 @@ import Emitter from '../../util/Emitter.js';
 class UiComponent extends Emitter {
 	constructor(coordinate) {
 		super();
+		if (coordinate?.owner_)
+			console.warn('coordinate shared among UiComponents');
+		if (coordinate)
+			coordinate.owner_ = this;
 		this.coordinate = coordinate;
 		this.visible = true; // Checked in Ui iterations.
 	}

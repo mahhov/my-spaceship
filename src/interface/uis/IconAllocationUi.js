@@ -10,7 +10,7 @@ import Ui from '../uis/Ui.js';
 
 class IconAllocationUi extends Ui {
 	constructor(coordinate, allocation) {
-		super(coordinate);
+		super();
 		this.allocation = allocation;
 
 		let imagePath = `../../images/allocations/${allocation.imageName}`;
@@ -24,8 +24,8 @@ class IconAllocationUi extends Ui {
 			.pad(-Positions.BREAK)
 			.alignWithoutMove(Coordinate.Aligns.CENTER);
 		this.add(new UiFill(valueCoordinate));
-		this.add(new UiOutline(valueCoordinate));
-		this.valueText = this.add(new UiText(valueCoordinate));
+		this.add(new UiOutline(valueCoordinate.clone));
+		this.valueText = this.add(new UiText(valueCoordinate.clone));
 		this.refreshValue();
 	}
 

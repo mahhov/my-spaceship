@@ -118,7 +118,7 @@ class EquipmentUi extends Ui {
 
 	createSection(coordinate, sectionTitle, columns, rows, buttonSize) {
 		this.add(new UiSection(coordinate, sectionTitle));
-		let layout = new GridLayout(coordinate, columns, buttonSize);
+		let layout = new GridLayout(coordinate.clone, columns, buttonSize);
 		return [...Array(columns * rows)].map((_, i) =>
 			this.add(new UiIconButton(layout.getCoordinates(i).container)));
 	}
