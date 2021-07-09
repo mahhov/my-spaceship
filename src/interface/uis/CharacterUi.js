@@ -8,6 +8,8 @@ import Ui from './Ui.js';
 
 // todo [medium] display stats as '+3%' instead of '0.03'
 
+const HIDDEN_STATS = [Stat.Ids.DISABLED, Stat.Ids.TAKING_DAMAGE_OVER_TIME];
+
 class CharacterUi extends Ui {
 	constructor(playerData, expData, traitsData, equipmentData) {
 		super();
@@ -20,8 +22,9 @@ class CharacterUi extends Ui {
 		this.expText = this.addTextPair('Experience', 1);
 		this.derivedStatTexts = Object.values(Stat.DerivedStatIds).map(i =>
 			this.addTextPair(Stat.name(i, Stat.DerivedStatIds), i + 3));
-		this.statTexts = Object.values(Stat.Ids).map(i =>
-			this.addTextPair(Stat.name(i), i + 4 + Object.values(Stat.DerivedStatIds).length));
+		this.statTexts = Object.values(Stat.Ids)
+			.filter(i => !HIDDEN_STATS.includes(i))
+			.map(i => this.addTextPair(Stat.name(i), i + 4 + Object.values(Stat.DerivedStatIds).length));
 
 		expData.on('change', () => this.refresh());
 		traitsData.on('change', () => this.refresh());
@@ -46,7 +49,9 @@ class CharacterUi extends Ui {
 	}
 
 	static getStatValuesForUi(statValues, statIds) {
-		return Object.values(statIds).map(statId => round(statValues.get(statId), 2));
+		return Object.values(statIds)
+			.filter(i => !HIDDEN_STATS.includes(i))
+			.map(statId => round(statValues.get(statId), 2));
 	}
 }
 

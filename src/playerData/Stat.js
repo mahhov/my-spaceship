@@ -3,8 +3,6 @@ import {round} from '../util/number.js';
 import {enumName, toUiString} from '../util/string.js';
 
 const Ids = makeEnum({
-	DISABLED: 0,
-
 	LIFE: 0,
 	LIFE_REGEN: 0,
 	LIFE_LEECH: 0,
@@ -25,6 +23,7 @@ const Ids = makeEnum({
 
 	MOVE_SPEED: 0,
 
+	DISABLED: 0,
 	TAKING_DAMAGE_OVER_TIME: 0,
 });
 
