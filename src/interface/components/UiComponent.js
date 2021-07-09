@@ -1,4 +1,5 @@
 import MultilineText from '../../painter/elements/MultilineText.js';
+import {Positions} from '../../util/constants.js';
 import Emitter from '../../util/Emitter.js';
 
 class UiComponent extends Emitter {
@@ -23,9 +24,9 @@ class UiComponent extends Emitter {
 	paint(painter) {
 	}
 
-	static textWidth(textLength) {
+	static textWidth(textLength, size = Positions.UI_DEFAULT_FONT_SIZE) {
 		// todo [low] avoid using magic number 1000
-		return textLength * MultilineText.measureText('14px').width / 1000;
+		return textLength * MultilineText.measureText(size).width / 1000;
 	}
 }
 
