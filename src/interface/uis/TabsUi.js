@@ -4,24 +4,40 @@ import UiIconButton from '../components/UiIconButton.js';
 import Ui from '../uis/Ui.js';
 
 class TabsUi extends Ui {
-	// todo [high] make buttons a param rather than construct here
-	constructor(coordinate, texts, hotkeys = false, vertical = false, imagePaths = []) {
+	constructor(buttons, nextCoordinate) {
 		super(null);
-		this.buttons = texts.map((text, i) => {
-			let button = this.add(
-				imagePaths[i] ?
-					new UiIconButton(coordinate, imagePaths[i], hotkeys ? i + 1 : '', true) :
-					new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
-			coordinate = coordinate.clone.shift(!vertical, vertical);
-			if (i !== texts.length - 1)
-				coordinate.move(Positions.MARGIN / 2 * !vertical, Positions.MARGIN / 2 * vertical);
-			button.on('click', () => {
+		this.buttons = buttons;
+		buttons.forEach((button, i) =>
+			this.add(button).on('click', () => {
 				this.setActiveUiSets(i);
 				this.emit('select', i);
-			});
+			}));
+		this.nextCoordinate = nextCoordinate;
+	}
+
+	static createWithButtons(coordinate, texts, hotkeys = false, vertical = false) {
+		let buttons = texts.map((text, i) => {
+			let button = new UiButton(coordinate, text, hotkeys ? i + 1 : '', true);
+			coordinate = TabsUi.nextCoordinate(coordinate, vertical, i === texts.length - 1);
 			return button;
 		});
-		this.nextCoordinate = coordinate;
+		return new TabsUi(buttons, coordinate);
+	}
+
+	static createWithIconButtons(coordinate, imagePaths, hotkeys = false, vertical = false) {
+		let buttons = imagePaths.map((imagePath, i) => {
+			let button = new UiIconButton(coordinate, imagePath, hotkeys ? i + 1 : '', true);
+			coordinate = TabsUi.nextCoordinate(coordinate, vertical, i === imagePaths.length - 1);
+			return button;
+		});
+		return new TabsUi(buttons, coordinate);
+	}
+
+	static nextCoordinate(coordinate, vertical, isLast) {
+		coordinate = coordinate.clone.shift(!vertical, vertical);
+		if (!isLast)
+			coordinate.move(Positions.MARGIN / 2 * !vertical, Positions.MARGIN / 2 * vertical);
+		return coordinate;
 	}
 
 	setUiSets(uiSets) {

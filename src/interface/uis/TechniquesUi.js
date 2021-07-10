@@ -23,12 +23,12 @@ class TechniquesUi extends Ui {
 		let leftCoordinate = HubUi.createSectionCoordinate(true, .3)
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 			.size(Positions.UI_BUTTON_HEIGHT * 2);
-		let tabsUi = this.add(new TabsUi(
+		let tabsUi = this.add(TabsUi.createWithIconButtons(
 			leftCoordinate,
-			techniqueData.trees.map(tree => tree.name),
+			techniqueData.trees.map(tree => `../../images/techniques/${tree.imageName}`),
 			false,
 			true,
-			techniqueData.trees.map(tree => `../../images/techniques/${tree.imageName}`)));
+		));
 		tabsUi.buttons.forEach((button, i) => button.on('hover', () =>
 			hoverText.beginHover(button.bounds, [techniqueData.trees[i].name])));
 
