@@ -2,9 +2,11 @@ import Icon from '../../painter/elements/Icon.js';
 import {Positions} from '../../util/constants.js';
 import UiButton from './UiButton.js';
 
+// todo [high] try outline
+
 class UiIconButton extends UiButton {
-	constructor(coordinate, imagePath = '') {
-		super(coordinate, '');
+	constructor(coordinate, imagePath = '', hotkey = '') {
+		super(coordinate, '', hotkey);
 		this.imagePath = imagePath;
 	}
 

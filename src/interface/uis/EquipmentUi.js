@@ -15,6 +15,7 @@ import GridLayout from '../layouts/GridLayout.js';
 import HubUi from './HubUi.js';
 import Ui from './Ui.js';
 
+// todo [high] move these constants to data layer to be consistent with Traits
 const ImagePaths = {
 	Equipment: {
 		[Equipment.Types.HULL]: '../../images/equipment/spaceship.png',

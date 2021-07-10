@@ -14,6 +14,11 @@ class TechniqueTree {
 		this.allocationSets = allocationSets;
 	}
 
+	setImageName(imageName) {
+		this.imageName = imageName;
+		return this;
+	}
+
 	get name() {
 		return enumName(this.id, Ids);
 	}

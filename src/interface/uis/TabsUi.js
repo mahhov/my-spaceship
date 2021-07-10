@@ -1,12 +1,17 @@
 import {Positions} from '../../util/constants.js';
 import UiButton from '../components/UiButton.js';
+import UiIconButton from '../components/UiIconButton.js';
 import Ui from '../uis/Ui.js';
 
 class TabsUi extends Ui {
-	constructor(coordinate, texts, hotkeys = false, vertical = false) {
+	// todo [high] make buttons a param rather than construct here
+	constructor(coordinate, texts, hotkeys = false, vertical = false, imagePaths = []) {
 		super(null);
 		this.buttons = texts.map((text, i) => {
-			let button = this.add(new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
+			let button = this.add(
+				imagePaths[i] ?
+					new UiIconButton(coordinate, imagePaths[i], hotkeys ? i + 1 : '') :
+					new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
 			coordinate = coordinate.clone.shift(!vertical, vertical);
 			if (i !== texts.length - 1)
 				coordinate.move(Positions.MARGIN / 2 * !vertical, Positions.MARGIN / 2 * vertical);

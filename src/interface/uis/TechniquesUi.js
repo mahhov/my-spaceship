@@ -17,13 +17,22 @@ class TechniquesUi extends Ui {
 		super();
 		this.techniqueData = techniqueData;
 
+		// todo rename all 'hoverText' to 'hoverPopup' for consistency
+		let hoverText = new UiPopupText(new Coordinate(0, 0, .3));
+
 		let leftCoordinate = HubUi.createSectionCoordinate(true, .3)
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
-			.size(0, Positions.UI_BUTTON_HEIGHT);
-		let tabsUi = this.add(new TabsUi(leftCoordinate, techniqueData.trees.map(tree => tree.name), false, true));
-		this.availableText = this.add(new UiText(tabsUi.nextCoordinate.clone.move(0, Positions.MARGIN)));
+			.size(Positions.UI_BUTTON_HEIGHT * 2);
+		let tabsUi = this.add(new TabsUi(
+			leftCoordinate,
+			techniqueData.trees.map(tree => tree.name),
+			false,
+			true,
+			techniqueData.trees.map(tree => `../../images/techniques/${tree.imageName}`)));
+		tabsUi.buttons.forEach((button, i) => button.on('hover', () =>
+			hoverText.beginHover(button.bounds, [techniqueData.trees[i].name])));
 
-		let hoverText = new UiPopupText(new Coordinate(0, 0, .3));
+		this.availableText = this.add(new UiText(tabsUi.nextCoordinate.clone.move(0, Positions.MARGIN)));
 
 		let rightCoordinate = HubUi.createSectionCoordinate(false, .7);
 		const vertMarginMult = 2.5;

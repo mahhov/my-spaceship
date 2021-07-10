@@ -131,7 +131,7 @@ class TechniqueData extends AllocationsData {
 					new Stat(statIds.ABILITY_SPREAD, -1),
 				], 1, statIds, ''),
 			],
-		]);
+		]).setImageName('bullets.png');
 	}
 
 	static get areaAttackTree() {
@@ -157,7 +157,7 @@ class TechniqueData extends AllocationsData {
 				new Allocation('Slow', [], 1, statIds, ''),
 				new Allocation('Armor debuff', [], 1, statIds, ''),
 			],
-		]);
+		]).setImageName('sprint.png');
 	}
 
 	static get dashTree() {
@@ -183,7 +183,7 @@ class TechniqueData extends AllocationsData {
 				new Allocation('Stamina', [], 1, statIds, ''),
 				new Allocation('Cooldown', [], 1, statIds, ''),
 			],
-		]);
+		]).setImageName('explosion-rays.png');
 	}
 
 	static get defenseTree() {
@@ -204,7 +204,7 @@ class TechniqueData extends AllocationsData {
 				new Allocation('Auto cast on low health', [], 1, statIds, ''),
 				new Allocation('Saving from killing blow', [], 1, statIds, ''),
 			],
-		]);
+		]).setImageName('healing-shield.png');
 	}
 
 	get stored() {
