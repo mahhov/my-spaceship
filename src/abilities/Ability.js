@@ -117,8 +117,6 @@ class Ability extends EntityObserver {
 	}
 
 	paintUi(painter, camera) {
-		// todo [high] share coordinates
-
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN / 2;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
@@ -137,11 +135,12 @@ class Ability extends EntityObserver {
 		}
 
 		// background image
-		painter.add(new Icon(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), `../../images/techniques/${this.imageName}`));
+		let coordinate = new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE);
+		painter.add(new Icon(coordinate.clone, `../../images/techniques/${this.imageName}`));
 
 		// border
 		if (!this.ready)
-			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE))
+			painter.add(new Rect(coordinate)
 				.setOptions({color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
 
 		// channel bar
