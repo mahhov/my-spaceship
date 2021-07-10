@@ -10,7 +10,7 @@ class TabsUi extends Ui {
 		this.buttons = texts.map((text, i) => {
 			let button = this.add(
 				imagePaths[i] ?
-					new UiIconButton(coordinate, imagePaths[i], hotkeys ? i + 1 : '') :
+					new UiIconButton(coordinate, imagePaths[i], hotkeys ? i + 1 : '', true) :
 					new UiButton(coordinate, text, hotkeys ? i + 1 : '', true));
 			coordinate = coordinate.clone.shift(!vertical, vertical);
 			if (i !== texts.length - 1)

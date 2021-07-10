@@ -69,15 +69,18 @@ class UiButton extends UiComponent {
 		return this.paintMode === PaintModes.NORMAL ? this.state : this.paintMode;
 	}
 
+	get primaryColor() {
+		return this.paintState === States.DISABLED ? Colors.Interface.DULL_BORDER : Colors.Interface.PRIMARY;
+	}
+
 	paint(painter) {
 		if (this.paintMode === PaintModes.HIDDEN)
 			return;
 
 		this.paintBack(painter);
-		let color = this.paintState === States.DISABLED ? Colors.Interface.DULL_BORDER.get() : Colors.Interface.PRIMARY.get();
-		painter.add(new RoundedRect(this.coordinate).setOptions({color}));
+		this.paintOutline(painter);
 		painter.add(new Text(this.coordinate.clone.alignWithoutMove(Coordinate.Aligns.CENTER), this.text)
-			.setOptions({...this.textOptions, color}));
+			.setOptions({...this.textOptions, color: this.primaryColor.get()}));
 	}
 
 	paintBack(painter) {
@@ -86,6 +89,10 @@ class UiButton extends UiComponent {
 
 		let color = [Colors.Interface.INACTIVE, Colors.Interface.INACTIVE, Colors.Interface.ACTIVE, Colors.Interface.ACTIVE, Colors.Interface.HOVER][this.paintState].get();
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color}));
+	}
+
+	paintOutline(painter) {
+		painter.add(new RoundedRect(this.coordinate).setOptions({color: this.primaryColor.get()}));
 	}
 }
 
