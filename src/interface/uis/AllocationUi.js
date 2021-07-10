@@ -26,8 +26,8 @@ class AllocationUi extends Ui {
 		this.refreshValue();
 	}
 
-	bind(data, hoverPopup) {
-		this.on('hover', () => hoverPopup.beginHover(this.bounds, this.allocation.descriptionText));
+	bind(data, hoverText) {
+		this.on('hover', () => hoverText.beginHover(this.bounds, this.allocation.descriptionText));
 		this.on('decrease', max => data.allocate(this.allocation, max ? -this.allocation.maxValue : -1));
 		this.on('increase', max => data.allocate(this.allocation, max ? this.allocation.maxValue : 1));
 		return this;

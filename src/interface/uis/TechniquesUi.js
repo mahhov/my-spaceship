@@ -17,7 +17,6 @@ class TechniquesUi extends Ui {
 		super();
 		this.techniqueData = techniqueData;
 
-		// todo rename all 'hoverText' to 'hoverPopup' for consistency
 		let hoverText = new UiPopupText(new Coordinate(0, 0, .3));
 
 		let leftCoordinate = HubUi.createSectionCoordinate(true, .3)
