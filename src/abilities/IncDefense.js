@@ -18,7 +18,7 @@ const baseStats = new BaseStats({
 class IncDefense extends Ability {
 	constructor(statManager) {
 		statManager.mergeBaseStats(baseStats);
-		super('Armor', statManager);
+		super(statManager);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

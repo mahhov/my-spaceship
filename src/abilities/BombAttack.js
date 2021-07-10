@@ -5,7 +5,7 @@ import Ability from './Ability.js';
 class BombAttack extends Ability {
 	// todo [low] this constructor is outdated
 	constructor(paintUiColumn) {
-		super('Mine', 200, 2, 20, false, false, paintUiColumn, Colors.BASIC_ATTACK);
+		super(200, 2, 20, false, false, paintUiColumn, Colors.BASIC_ATTACK);
 	}
 
 	activate(origin, direct, map, intersectionFinder, player) {

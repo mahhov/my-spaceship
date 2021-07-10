@@ -17,7 +17,7 @@ const baseStats = new BaseStats({
 class Dash extends Ability {
 	constructor(statManager) {
 		statManager.mergeBaseStats(baseStats);
-		super('Dash', statManager);
+		super(statManager);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

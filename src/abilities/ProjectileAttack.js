@@ -31,7 +31,7 @@ const baseStats = new BaseStats({
 class ProjectileAttack extends Ability {
 	constructor(statManager) {
 		statManager.mergeBaseStats(baseStats);
-		super('Projectile', statManager);
+		super(statManager);
 	}
 
 	observe(hero) {

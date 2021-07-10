@@ -2,7 +2,7 @@ import Ability from './Ability.js';
 
 class Heal extends Ability {
 	constructor(statManager) {
-		super('Heal', statManager, 720, 1, 30, 0, false, 0);
+		super(statManager, 720, 1, 30, 0, false, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

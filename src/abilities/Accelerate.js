@@ -4,7 +4,7 @@ import Ability from './Ability.js';
 
 class Accelerate extends Ability {
 	constructor(statManager) {
-		super('Haste', statManager, 200, 1, 0, 0, true, -1);
+		super(statManager, 200, 1, 0, 0, true, -1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

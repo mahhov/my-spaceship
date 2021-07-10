@@ -5,7 +5,7 @@ import Ability from './Ability.js';
 
 class ShotgunAttack extends Ability {
 	constructor(statManager) {
-		super('Shotgun', statManager, 50, 1, 12, 0, true, 0);
+		super(statManager, 50, 1, 12, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

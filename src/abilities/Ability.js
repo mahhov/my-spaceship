@@ -1,17 +1,15 @@
-import keyMappings from '../control/keyMappings.js';
 import EntityObserver from '../entities/EntityObserver.js';
 import Bar from '../painter/elements/Bar.js';
+import Icon from '../painter/elements/Icon.js';
 import Rect from '../painter/elements/Rect.js';
-import Text from '../painter/elements/Text.js';
 import TechniqueData from '../playerData/TechniqueData.js';
 import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
 class Ability extends EntityObserver {
-	constructor(name, statManager) {
+	constructor(statManager) {
 		super();
-		this.name = name;
 		this.statManager = statManager;
 
 		this.cooldown = new Pool(this.cooldownDuration, 0);
@@ -19,10 +17,15 @@ class Ability extends EntityObserver {
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
 
-	setUi(uiIndex) {
+	setUiIndex(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiTexts = [this.name, keyMappings.ABILITY_I[uiIndex].string[0]];
+		return this;
+	}
+
+	setUiImageName(imageName) {
+		this.imageName = imageName;
+		return this;
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
@@ -114,11 +117,11 @@ class Ability extends EntityObserver {
 	}
 
 	paintUi(painter, camera) {
-		// background
+		// todo [high] share coordinates
+
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN / 2;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade(.5)}));
 
 		// foreground for current charges
 		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.max;
@@ -133,17 +136,13 @@ class Ability extends EntityObserver {
 				.setOptions({fill: true, color: this.uiColor.getShade(shade)}));
 		}
 
+		// background image
+		painter.add(new Icon(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE), `../../images/techniques/${this.imageName}`));
+
 		// border
 		if (!this.ready)
 			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE))
 				.setOptions({color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
-
-		// text
-		this.uiTexts.forEach((uiText, i) =>
-			painter.add(new Text(
-				new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE).alignWithoutMove(Coordinate.Aligns.CENTER, Coordinate.Aligns.CENTER).shift(0, (i - .5) / 4),
-				uiText)
-				.setOptions({size: '12px'})));
 
 		// channel bar
 		let channelRatio = this.channelRatio;

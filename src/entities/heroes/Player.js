@@ -99,12 +99,13 @@ class Player extends Hero {
 	constructor(playerData) {
 		super(0, 0, .05, .05, baseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
 
+		// todo [medium] avoid duplicating technique tree id
 		let abilities = [
-			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))),
-			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))),
-			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))),
+			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.PROJECTILE_ATTACK)),
+			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.DASH)),
+			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.DEFENSE)),
 		];
-		abilities.forEach((ability, i) => ability.setUi(i));
+		abilities.forEach((ability, i) => ability.setUiIndex(i));
 		let passiveAbilities = [
 			new DelayedRegen(this.statManager.extend(new StatValues())),
 			new Death(this.statManager.extend(new StatValues())),
