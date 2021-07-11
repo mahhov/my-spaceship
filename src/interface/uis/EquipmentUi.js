@@ -81,7 +81,7 @@ class EquipmentUi extends Ui {
 
 		let metalTextCoordinate = UiSection.getTextCoordinate(forgeCoordinate)
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.END);
-		this.metalText = this.add(new UiText(metalTextCoordinate, '0 metal'));
+		this.metalText = this.add(new UiText(metalTextCoordinate, ''));
 
 		let inventoryCoordinate = equippedCoordinate.clone
 			.shift(0, 1)
@@ -168,7 +168,7 @@ class EquipmentUi extends Ui {
 	refresh() {
 		this.buttonSets.forEach(({buttons, images, listType}) => buttons.forEach((button, i) =>
 			button.imagePath = images[this.equipmentData.getList(listType)[i]?.type]));
-		this.metalText.text = this.equipmentData.metal;
+		this.metalText.text = `${this.equipmentData.metal} metal`;
 		this.disableEmptyButtons();
 		this.refreshHoverText();
 	}
