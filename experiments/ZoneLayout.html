@@ -47,7 +47,7 @@
 	ctx.fillStyle = ctx.strokeStyle = `black`;
 
 	let generate = (width, height, roomCount, density, strictDensity) =>
-		new ZoneLayoutGenerator(width, height, roomCount, density, strictDensity);
+		new ZoneLayoutGenerator(width, height, roomCount, density, strictDensity).grid;
 
 	let draw = grid => {
 		ctx.fillStyle = 'white';
