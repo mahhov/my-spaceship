@@ -38,7 +38,7 @@
 
 <script type="module">
 	import {clamp} from '../src/util/number.js';
-	import ZoneLayout from '../src/util/ZoneLayout.js';
+	import ZoneLayoutGenerator from '../src/util/ZoneLayoutGenerator.js';
 
 	let $ = document.querySelector.bind(document);
 
@@ -47,7 +47,7 @@
 	ctx.fillStyle = ctx.strokeStyle = `black`;
 
 	let generate = (width, height, roomCount, density, strictDensity) =>
-		new ZoneLayout(width, height, roomCount, density, strictDensity).grid;
+		new ZoneLayoutGenerator(width, height, roomCount, density, strictDensity);
 
 	let draw = grid => {
 		ctx.fillStyle = 'white';
