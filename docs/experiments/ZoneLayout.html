@@ -1,0 +1,90 @@
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	input {
+		margin-left: 15px;
+	}
+
+	button {
+		background: none;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background: #eee;
+	}
+
+	canvas {
+		border: solid 1px #eee;
+	}
+</style>
+
+<div class="container">
+	<span>
+		<canvas width="1000" height="1000"></canvas>
+	</span>
+	<label>width: <input id="width" min="10" max="200" type="number" step="1" value="50"></label>
+	<label>height: <input id="height" min="10" max="200" type="number" step="1" value="50"></label>
+	<label>number of rooms: <input id="room-count" min="10" max="1500" type="number" step="1" value="700"></label>
+	<label>density: <input id="density" min="0" max="4" type="number" step="1" value="3"></label>
+	<label>strict density: <input id="strict-density" min="0" max="1" type="number" step="1" value="0"></label>
+	<button id="regenerate-button">Regenerate</button>
+</div>
+
+<script type="module">
+	import {clamp} from '../src/util/number.js';
+	import ZoneLayoutGenerator from '../src/util/ZoneLayoutGenerator.js';
+
+	let $ = document.querySelector.bind(document);
+
+	let canvas = $('canvas');
+	let ctx = canvas.getContext('2d');
+	ctx.fillStyle = ctx.strokeStyle = `black`;
+
+	let generate = (width, height, roomCount, density, strictDensity) =>
+		new ZoneLayoutGenerator(width, height, roomCount, density, strictDensity);
+
+	let draw = grid => {
+		ctx.fillStyle = 'white';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		let cw = canvas.width / grid.length / 2, ch = canvas.height / grid[0].length / 2;
+		let s = Math.min(cw, ch);
+		let rect = (x, y) =>
+			ctx.fillRect(x * 2 * s, y * 2 * s, s, s);
+		let line = (x1, y1, x2, y2) => {
+			ctx.beginPath();
+			ctx.moveTo(x1 * 2 * s + s / 2, y1 * 2 * s + s / 2);
+			ctx.lineTo(x2 * 2 * s + s / 2, y2 * 2 * s + s / 2);
+			ctx.closePath();
+			ctx.stroke();
+		};
+
+		grid.forEach((column, x) => column.forEach((room, y) => {
+			if (!room)
+				return;
+			if (x < grid.length - 1 && grid[x + 1][y])
+				line(x, y, x + 1, y);
+			if (y < column.length - 1 && grid[x][y + 1])
+				line(x, y, x, y + 1);
+		}));
+		grid.forEach((column, x) => column.forEach((room, y) => {
+			if (!room)
+				return;
+			ctx.fillStyle = ['', 'black', 'blue', 'blue'][room];
+			rect(x, y);
+		}));
+	};
+
+	let inputs = [$('#width'), $('#height'), $('#room-count'), $('#density'), $('#strict-density')];
+	let getInputValue = input => clamp(parseInt(input.value) || 0, parseInt(input.min), parseInt(input.max));
+	let regenerate = () => draw(generate(...inputs.map(getInputValue)));
+	inputs.forEach(input => input.addEventListener('input', regenerate));
+	$('#regenerate-button').addEventListener('click', regenerate);
+	regenerate();
+</script>

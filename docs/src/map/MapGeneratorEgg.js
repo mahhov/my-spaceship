@@ -13,6 +13,7 @@ import Rock from '../entities/stills/Rock.js';
 import RockMineral from '../entities/stills/RockMineral.js';
 import VShip from '../graphics/VShip.js';
 import Text from '../painter/elements/Text.js';
+import Stat from '../playerData/Stat.js';
 import StatValues from '../playerData/StatValues.js';
 import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
@@ -84,7 +85,7 @@ class MapGeneratorEgg extends MapGenerator {
 		];
 		abilities.forEach((ability, i) => ability.setUi(i)); // some abilities give buffs which require UI colors to be set
 		let passiveAbilities = [
-			new DelayedRegen(),
+			new DelayedRegen(Player.BaseStats[Stat.Ids.LIFE_REGEN]),
 			new Respawn(240, x, y),
 		];
 		return {abilities, passiveAbilities};
@@ -101,7 +102,8 @@ class MapGeneratorEgg extends MapGenerator {
 
 	static generateBotHero(x, y, friendly) {
 		let {abilities, passiveAbilities} = MapGeneratorEgg.generateHeroAbilities(x, y);
-		let botHero = new BotHero(x, y, .05, .05, 1, 80, .13, friendly, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		let botHero = new BotHero(x, y, .05, .05, Player.BaseStats, new StatValues(), friendly, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
+		botHero.initAbilities(abilities, passiveAbilities);
 		botHero.setGraphics(new VShip(.05, .05, {fill: true, color: friendly ? Colors.Entity.FRIENDLY.get() : Colors.Entity.MONSTER.get()}));
 		return botHero;
 	}

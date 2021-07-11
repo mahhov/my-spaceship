@@ -24,7 +24,7 @@ class Bomb extends Entity {
 		map.monsters.find(monster => {
 			let targetDistance = getRectDistance(monster.x - this.x, monster.y - this.y);
 			if (targetDistance < this.range) {
-				monster.changeHealth(-this.damage);
+				monster.takeDamage(this.damage);
 				return !--targetsCount;
 			}
 		});

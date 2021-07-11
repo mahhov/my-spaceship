@@ -10,64 +10,111 @@ import IntersectionFinder from '../../intersection/IntersectionFinder.js';
 import Bar from '../../painter/elements/Bar.js';
 import Rect from '../../painter/elements/Rect.js';
 import Text from '../../painter/elements/Text.js';
+import BaseStats from '../../playerData/BaseStats.js';
 import RecordsData from '../../playerData/RecordsData.js';
 import Stat from '../../playerData/Stat.js';
+import StatValues from '../../playerData/StatValues.js';
 import TechniqueTree from '../../playerData/TechniqueTree.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import {avg} from '../../util/number.js';
-import Buff from '.././Buff.js';
+import EntityObserver from '../EntityObserver.js';
 import Hero from './Hero.js';
 
 const TARGET_LOCK_BORDER_SIZE = .04;
 
+// Formatted: [base value, initial stat value]
+// E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
+const baseStats = new BaseStats({
+	[Stat.Ids.DISABLED]: [1, 0],
+
+	[Stat.Ids.LIFE]: [80, 1],
+	[Stat.Ids.LIFE_REGEN]: [.03, 1],
+	[Stat.Ids.LIFE_LEECH]: [1, 0],
+	[Stat.Ids.STAMINA]: [80, 1],
+	[Stat.Ids.STAMINA_REGEN]: [.1, 1],
+	[Stat.Ids.STAMINA_GAIN]: [1, 0],
+	[Stat.Ids.SHIELD]: [40, 0],
+	[Stat.Ids.SHIELD_REGEN]: [.12, 1],
+	[Stat.Ids.SHIELD_LEECH]: [1, 0],
+	[Stat.Ids.ARMOR]: [1, 1],
+
+	[Stat.Ids.DAMAGE]: [0, 0],
+	[Stat.Ids.DAMAGE_OVER_TIME]: [0, 0],
+	[Stat.Ids.COOLDOWN_RATE]: [1, 1],
+	[Stat.Ids.ATTACK_RANGE]: [0, 0],
+	[Stat.Ids.CRITICAL_CHANCE]: [0, 0],
+	[Stat.Ids.CRITICAL_DAMAGE]: [0, 0],
+
+	[Stat.Ids.MOVE_SPEED]: [.005, 1],
+
+	[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
+});
+
 class PlayerBar {
-	constructor(barCoordinate, color) {
+	constructor(barCoordinate, color, drawBack = true) {
 		this.averagedValue = 0;
 		this.barCoordinate = barCoordinate;
 		this.textCoordinate = barCoordinate.clone.move(-Positions.BREAK, 0);
 		this.color = color;
+		this.drawBack = drawBack;
 	}
 
 	static createAll() {
 		let coordinate = new Coordinate(1 - Positions.MARGIN, 1 - Positions.MARGIN, Positions.PLAYER_BAR_X, Positions.BAR_HEIGHT)
-			.align(Coordinate.Aligns.END, Coordinate.Aligns.END)
-			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER);
+			.align(Coordinate.Aligns.END, Coordinate.Aligns.CENTER);
 		return [
 			new PlayerBar(coordinate.clone, Colors.EXP),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2).clone, Colors.STAMINA),
 			new PlayerBar(coordinate.shift(0, -1).move(0, -Positions.MARGIN / 2), Colors.LIFE),
+			new PlayerBar(coordinate, Colors.SHIELD, false),
 		];
 	}
 
 	paint(painter, fillValue, text) {
 		this.averagedValue = avg(this.averagedValue, fillValue, .8);
-		painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
-		painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+		if (this.drawBack) {
+			painter.add(new Bar(this.barCoordinate, this.averagedValue, this.color.getShade(Colors.BAR_SHADING), this.color.get(), this.color.get(Colors.BAR_SHADING)));
+			painter.add(new Text(this.textCoordinate, text).setOptions({color: '#000'}));
+		} else
+			painter.add(Bar.createFillRect(this.barCoordinate, this.averagedValue, this.color.get()));
+	}
+}
+
+class Notification {
+	constructor(text, duration = 100) {
+		this.text = text;
+		this.duration = duration;
+	}
+
+	paintUi(painter, uiIndex) {
+		let coordinate = new Coordinate(1 - Positions.MARGIN, .5, 0, Positions.UI_LINE_HEIGHT)
+			.alignWithoutMove(Coordinate.Aligns.END)
+			.shift(0, uiIndex);
+		painter.add(new Text(coordinate, this.text));
 	}
 }
 
 class Player extends Hero {
 	constructor(playerData) {
+		super(0, 0, .05, .05, baseStats, playerData.statValues, true, Colors.LIFE, Colors.SHIELD, Colors.STAMINA);
+
+		// todo [medium] avoid duplicating technique tree id
 		let abilities = [
-			new ProjectileAttack(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK)),
-			new Dash(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH)),
-			new IncDefense(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE)),
+			new ProjectileAttack(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.PROJECTILE_ATTACK))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.PROJECTILE_ATTACK)),
+			new Dash(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DASH))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.DASH)),
+			new IncDefense(this.statManager.extend(playerData.getTechniqueStatValues(TechniqueTree.Ids.DEFENSE))).setUiImageName(TechniqueTree.imageName(TechniqueTree.Ids.DEFENSE)),
 		];
-		abilities.forEach((ability, i) => ability.setUi(i));
+		abilities.forEach((ability, i) => ability.setUiIndex(i));
 		let passiveAbilities = [
-			new DelayedRegen(),
-			new Death(),
+			new DelayedRegen(this.statManager.extend(new StatValues())),
+			new Death(this.statManager.extend(new StatValues())),
 		];
-		super(0, 0, .05, .05, 80, 80, .13, true, abilities, passiveAbilities, Colors.LIFE, Colors.STAMINA);
+		this.initAbilities(abilities, passiveAbilities);
+
 		this.playerData = playerData;
 		this.bars = PlayerBar.createAll();
-
-		let traitsBuff = new Buff(0, null, null, false);
-		traitsBuff.statValues = playerData.statValues;
-		this.addBuff(traitsBuff);
-		this.applyInitialBuffs();
-
+		this.notifications = [];
 		this.setGraphics(new VShip(.05, .05, {fill: true, color: Colors.Entity.PLAYER.get()}));
 	}
 
@@ -77,6 +124,24 @@ class Player extends Hero {
 		this.abilityControl(map, controller, intersectionFinder);
 		this.targetLockControl(controller, intersectionFinder);
 		this.createMovementParticle(map);
+	}
+
+	refresh() {
+		this.notifications = this.notifications.filter(notification => notification.duration--);
+		super.refresh();
+	}
+
+	processQueuedEvents() {
+		this.getQueuedEvents(EntityObserver.EventIds.KILLED).forEach(([monster]) => {
+			this.playerData.expData.gainExp(monster.expValue);
+			this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
+			if (monster.materialDrop.probability) {
+				let material = monster.materialDrop.material;
+				this.playerData.equipmentData.gainMaterial(material);
+				this.notifications.push(new Notification(material.name));
+			}
+		});
+		super.processQueuedEvents();
 	}
 
 	moveControl(controller, intersectionFinder) {
@@ -103,7 +168,7 @@ class Player extends Hero {
 			dy = Math.sign(dy) * invSqrt2;
 		}
 
-		this.updateMove(intersectionFinder, dx, dy, .005 * this.getStat(Stat.Ids.MOVE_SPEED));
+		this.updateMove(intersectionFinder, dx, dy, this.statManager.getBasedStat(Stat.Ids.MOVE_SPEED));
 	}
 
 	abilityControl(map, controller, intersectionFinder) {
@@ -137,13 +202,6 @@ class Player extends Hero {
 		this.targetLock = intersectionFinder.hasIntersection(IntersectionFinder.Layers.HOSTILE_UNIT, targetLockBounds);
 	}
 
-	onKill(monster) {
-		this.playerData.expData.gainExp(monster.expValue);
-		this.playerData.recordsData.changeRecord(RecordsData.Ids.KILLS, 1);
-		// todo [high] gain equipment on kill
-		// todo [high] display gained equipment/exp
-	}
-
 	removeUi() {
 		return false;
 	}
@@ -159,20 +217,26 @@ class Player extends Hero {
 		// life, stamina, and exp bars
 		this.bars[0].paint(painter, this.playerData.expData.exp / this.playerData.expData.expRequired, this.playerData.expData.levelExpText);
 		this.bars[1].paint(painter, this.stamina.getRatio(), Math.floor(this.stamina.value));
-		this.bars[2].paint(painter, this.health.getRatio(), Math.floor(this.health.value));
+		this.bars[2].paint(painter, this.health.getRatio(), `${Math.floor(this.shield.value)} | ${Math.floor(this.health.value)}`);
+		this.bars[3].paint(painter, this.shield.getRatio(), '');
 
 		// abilities
 		this.abilities.forEach(ability => ability.paintUi(painter, camera));
 
 		// buffs
-		this.buffs
+		this.statManager.buffs
 			.filter(buff => buff.visible)
 			.forEach((buff, i) => buff.paintUi(painter, i));
+
+		// notifications
+		this.notifications.forEach((notification, i) => notification.paintUi(painter, i));
 
 		// damage overlay
 		let damageColor = Colors.DAMAGE.getAlpha(this.recentDamage.get());
 		painter.add(new Rect(new Coordinate(0, 0, 1)).setOptions({fill: true, color: damageColor}));
 	}
 }
+
+Player.BaseStats = BaseStats;
 
 export default Player;

@@ -12,6 +12,7 @@ class Coordinate {
 	}
 
 	get clone() {
+		// todo [medium] make owners of UiComponents clone coordinates before passing to constructor.
 		return new Coordinate(this.x, this.y, this.width, this.height).align(this.alignment, this.vertAlignment);
 	}
 

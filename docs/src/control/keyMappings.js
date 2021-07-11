@@ -1,10 +1,10 @@
 import State from './State.js';
 
 class KeyMapping {
-	constructor(keys = [], mouse = [], string = [keys[0]]) {
+	constructor(keys = [], mouse = [], string = undefined) {
 		this.keys = keys;
 		this.mouse = mouse;
-		this.string = string;
+		this.string = string ?? mouse.length ? `mb ${mouse[0]}` : keys[0];
 	}
 
 	getState(controller) {
@@ -20,7 +20,7 @@ class KeyMapping {
 				moveUp: new KeyMapping(['w']),
 				moveRight: new KeyMapping(['d']),
 				moveDown: new KeyMapping(['s']),
-				ability1: new KeyMapping([' '], [0], ['space']),
+				ability1: new KeyMapping([' '], [0]),
 				ability2: new KeyMapping(['shift'], [2]),
 				ability3: new KeyMapping(['q']),
 				ability4: new KeyMapping(['e']),

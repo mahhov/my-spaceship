@@ -5,8 +5,8 @@ import Pool from '../util/Pool.js';
 import PassiveAbility from './PassiveAbility.js';
 
 class Respawn extends PassiveAbility {
-	constructor(delay, x, y) {
-		super(true);
+	constructor(statManager, delay, x, y) {
+		super(statManager, true);
 		this.delay = new Pool(delay, -1);
 		this.x = x;
 		this.y = y;

@@ -18,7 +18,7 @@ class Laser extends Entity {
 			this.checkMove(intersectionFinder, this.dx, this.dy, -1, true));
 
 		if (this.intersection)
-			this.intersection.changeHealth(-this.damage);
+			this.intersection.takeDamage(this.damage);
 
 		return !this.time--;
 	}

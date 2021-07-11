@@ -1,4 +1,5 @@
 import Controller from '../control/Controller.js';
+import Rect from '../painter/elements/Rect.js';
 import Text from '../painter/elements/Text.js';
 import PainterCompositor from '../painter/PainterCompositor.js';
 import {Positions} from '../util/constants.js';
@@ -45,10 +46,19 @@ class Looper {
 			this.paintFpsTracker.tick();
 			this.painterSet.clear();
 			this.frame.paint();
+
+			// add fps
 			this.painterSet.uiPainter.add(new Text(
 				new Coordinate(1 - Positions.MARGIN, Positions.MARGIN)
 					.align(Coordinate.Aligns.END, Coordinate.Aligns.START),
 				`fps: ${this.paintFpsTracker.getFps()} / ${this.updateFpsTracker.getFps()}`));
+
+			// add cursor
+			let mouse = this.controller.getRawMouse();
+			let mouseCoordinate = new Coordinate(mouse.x, mouse.y, .008).align(Coordinate.Aligns.CENTER);
+			this.painterSet.uiPainter.add(new Rect(mouseCoordinate).setOptions({color: '#fff', thickness: 2}));
+			this.painterSet.uiPainter.add(new Rect(mouseCoordinate.clone.size(.006)).setOptions({color: '#000', thickness: 2}));
+
 			this.painterSet.paint();
 			await Looper.sleep(10);
 		}

@@ -1,4 +1,5 @@
 import StarShip from '../../graphics/StarShip.js';
+import MaterialDrop from '../../playerData/MaterialDrop.js';
 import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
@@ -9,7 +10,7 @@ const Phases = makeEnum({REST: 0, ATTACK: 0});
 
 class Turret extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, 4, 0);
+		super(x, y, .04, .04, 400, 0, new MaterialDrop(1, false));
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(200, 200);

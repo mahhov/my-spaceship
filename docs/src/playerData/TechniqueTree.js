@@ -17,6 +17,19 @@ class TechniqueTree {
 	get name() {
 		return enumName(this.id, Ids);
 	}
+
+	get imageName() {
+		return TechniqueTree.imageName(this.id);
+	}
+
+	static imageName(id) {
+		return [
+			'bullets.png',
+			'explosion-rays.png',
+			'sprint.png',
+			'healing-shield.png',
+		][id];
+	}
 }
 
 TechniqueTree.Ids = Ids;

@@ -1,4 +1,5 @@
 import OutpostPortalGraphic from '../../graphics/OutpostPortalGraphic.js';
+import MaterialDrop from '../../playerData/MaterialDrop.js';
 import Stat from '../../playerData/Stat.js';
 import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
@@ -14,7 +15,7 @@ const Phases = makeEnum({DORMANT: 0, ACTIVE: 0});
 
 class OutpostPortal extends Monster {
 	constructor(x, y, spawnDamageMultiplier) {
-		super(x, y, .04, .04, 1, 0);
+		super(x, y, .04, .04, 100, 0, new MaterialDrop(1, false));
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(200, 0);

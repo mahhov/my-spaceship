@@ -1,4 +1,5 @@
 import HexagonShip from '../../../graphics/HexagonShip.js';
+import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
@@ -16,7 +17,7 @@ const Phases = makeEnum({ONE: 0});
 
 class DashChaser extends Monster {
 	constructor(x, y) {
-		super(x, y, .06, .06, 1.2, 360);
+		super(x, y, .06, .06, 120, 360, new MaterialDrop(1, false));
 		this.setGraphics(new HexagonShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

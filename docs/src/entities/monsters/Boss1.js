@@ -1,5 +1,6 @@
 import RotatingTurretShip from '../../graphics/RotatingTurretShip.js';
 import Bar from '../../painter/elements/Bar.js';
+import MaterialDrop from '../../playerData/MaterialDrop.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import makeEnum from '../../util/enum.js';
@@ -18,7 +19,7 @@ const Phases = makeEnum({INACTIVE: 0, PRE_DEGEN: 0, DEGEN: 0, PROJECTILE: 0});
 
 class Boss1 extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .4, 0);
+		super(x, y, .04, .04, 40, 0, new MaterialDrop(1, false));
 		this.setGraphics(new RotatingTurretShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0, 100, 100, 200);

@@ -1,4 +1,5 @@
 import Rect1DotsShip from '../../../graphics/Rect1DotsShip.js';
+import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import Phase from '../../../util/Phase.js';
@@ -12,7 +13,7 @@ const Phases = makeEnum({ONE: 0});
 
 class AimingLaserTurret extends Monster {
 	constructor(x, y) {
-		super(x, y, .09, .09, 1.6, 240);
+		super(x, y, .09, .09, 160, 240, new MaterialDrop(1, false));
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		this.attackPhase = new Phase(0);

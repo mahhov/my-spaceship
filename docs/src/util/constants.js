@@ -6,6 +6,7 @@ const Colors = {
 	// bars
 	BAR_SHADING: 1,
 	LIFE: Color.fromHexString('#cb584a'),
+	SHIELD: Color.from255(160, 40, 240, 0.5),
 	STAMINA: Color.fromHexString('#68cd61'),
 	EXP: Color.fromHexString('#61b4cd'),
 	ENRAGE: Color.fromHexString('#616600'),
@@ -25,8 +26,10 @@ const Colors = {
 	PLAYER_ABILITY_NOT_READY: Color.fromHexString('#aaa'),
 
 	// buffs
+	// todo [low] lower case this for consistency
 	PLAYER_BUFFS: {
 		DEAD: Color.from1(.5, .5, .5),
+		DAMAGE_OVER_TIME: Color.fromHexString('3F1358'),
 	},
 
 	Interface: {
@@ -51,7 +54,7 @@ const Colors = {
 		HOSTILE_PROJECTILE: Color.fromHexString('#ef240e'),
 		Bomb: {
 			WARNING_BORDER: Color.fromHexString('#cc8f52'),
-			ENTITY: Color.fromHexString('#00c'),
+			ENTITY: Color.fromHexString('#3f1358'),
 		},
 		AREA_DEGEN: {
 			WARNING_BORDER: Color.from1(1, 0, 0),
@@ -92,6 +95,7 @@ const Positions = {
 	ABILITY_CHANNEL_BAR_SIZE: .01,
 	BUFF_SIZE: .05,
 	STAGE_TEXT_HEIGHT: .03,
+	UI_DEFAULT_FONT_SIZE: '16px',
 	UI_FIRST_ROW: .22,
 	UI_ROW_HEIGHT: .05,
 	UI_LINE_HEIGHT: .02,

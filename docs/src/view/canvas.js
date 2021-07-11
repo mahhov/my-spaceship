@@ -29,5 +29,4 @@ frameCLasses.forEach(FrameClass => {
 let StartFrameClass = frameCLasses.find(FrameClass => `/${FrameClass.name}` === location.pathname) || frameCLasses[0] || Game;
 looper.setFrameClass(StartFrameClass);
 
-// window.r = RecordMp4;
-// window.s = RecordMp4();
+// RecordMp4();

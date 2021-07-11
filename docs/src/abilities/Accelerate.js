@@ -3,8 +3,8 @@ import Stat from '../playerData/Stat.js';
 import Ability from './Ability.js';
 
 class Accelerate extends Ability {
-	constructor(statValues) {
-		super('Haste', statValues, 200, 1, 0, 0, true, -1);
+	constructor(statManager) {
+		super(statManager, 200, 1, 0, 0, true, -1);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

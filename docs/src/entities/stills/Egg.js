@@ -7,6 +7,7 @@ import Coordinate from '../../util/Coordinate.js';
 import {randInt} from '../../util/number.js';
 import Buff from '../Buff.js';
 import Entity from '../Entity.js';
+import EntityObserver from '../EntityObserver.js';
 
 class Egg extends Entity {
 	constructor(possiblePositions) {
@@ -27,17 +28,17 @@ class Egg extends Entity {
 
 	update(map) {
 		if (this.ownerHero && !this.ownerHero.health.isEmpty())
-			this.ownerHero.changeHealth(-.001);
+			this.ownerHero.takeDamage(.001);
 
 		if (this.ownerHero && this.ownerHero.health.isEmpty()) {
 			this.ownerHero = null;
 			this.randomPosition();
 			this.slowDebuff.expire();
-			this.queuedTrackedIntersections = [];
+			this.clearQueuedEvents(EntityObserver.EventIds.INTERSECTION);
 		}
 
-		if (!this.ownerHero && this.queuedTrackedIntersections[0]) {
-			this.ownerHero = this.queuedTrackedIntersections[0];
+		if (!this.ownerHero && this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION).length) {
+			this.ownerHero = this.getQueuedEvents(EntityObserver.EventIds.INTERSECTION)[0][0];
 			this.slowDebuff.reset();
 			this.ownerHero.addBuff(this.slowDebuff);
 		}

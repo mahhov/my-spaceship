@@ -1,9 +1,23 @@
+import BaseStats from '../playerData/BaseStats.js';
+import TechniqueData from '../playerData/TechniqueData.js';
 import {booleanArray} from '../util/number.js';
 import Ability from './Ability.js';
 
+const statIds = TechniqueData.StatIds.Dash;
+
+const baseStats = new BaseStats({
+	[statIds.COOLDOWN_DURATION]: [120, 1],
+	[statIds.MAX_CHARGES]: [3, 1],
+	[statIds.STAMINA_COST]: [15, 1],
+	[statIds.CHANNEL_STAMINA_COST]: [0, 0],
+	[statIds.CHANNEL_DURATION]: [0, 0],
+	[statIds.REPEATABLE]: [0, 0],
+});
+
 class Dash extends Ability {
-	constructor(statValues) {
-		super('Dash', statValues, 120, 3, 15, .1, false, 0);
+	constructor(statManager) {
+		statManager.mergeBaseStats(baseStats);
+		super(statManager);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

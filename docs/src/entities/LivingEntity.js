@@ -1,51 +1,62 @@
 import Stat from '../playerData/Stat.js';
+import {clamp} from '../util/number.js';
 import Pool from '../util/Pool.js';
 import Entity from './Entity.js';
+import EntityObserver from './EntityObserver.js';
+import StatManager from './StatManager.js';
 
 class LivingEntity extends Entity {
-	constructor(x, y, width, height, health, layer) {
+	constructor(x, y, width, height, baseStats, statValues, layer) {
 		super(x, y, width, height, layer);
-		this.health = new Pool(health);
-		this.buffs = [];
-	}
-
-	applyInitialBuffs() {
-		// should be invoked once after buffs are set
-		this.health.max *= this.getStat(Stat.Ids.LIFE);
-		this.health.restore();
+		this.statManager = new StatManager(baseStats, [statValues]);
+		this.health = new Pool(this.statManager.getBasedStat(Stat.Ids.LIFE));
+		this.shield = new Pool(this.statManager.getBasedStat(Stat.Ids.SHIELD));
 	}
 
 	refresh() {
-		this.tickBuffs();
+		let takingDamageOverTime = this.statManager.getBasedStat(Stat.Ids.TAKING_DAMAGE_OVER_TIME);
+		this.takeDamage(takingDamageOverTime);
+		this.statManager.tickBuffs();
+		this.processQueuedEvents();
+	}
+
+	processQueuedEvents() {
+		let lifeLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.LIFE_LEECH), 0);
+		this.changeHealth(lifeLeechAmount);
+		let shieldLeechAmount = this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
+			.reduce((sum, [source, damage]) => sum + damage * source.statManager.getBasedStat(Stat.Ids.SHIELD_LEECH), 0);
+		this.changeShield(shieldLeechAmount);
+		this.clearAllQueuedEvents();
 	}
 
 	changeHealth(amount) {
-		this.health.change(amount / this.getStat(Stat.Ids.ARMOR));
+		this.health.change(amount);
+	}
+
+	changeShield(amount) {
+		this.shield.change(amount);
+	}
+
+	takeDamage(amount) {
+		amount /= this.statManager.getBasedStat(Stat.Ids.ARMOR);
+		amount = clamp(amount, 0, this.shield.value + this.health.value);
+		if (amount > this.shield.value)
+			this.changeHealth(this.shield.value - amount);
+		this.changeShield(-amount);
+		return amount;
+	}
+
+	isDead() {
+		return this.health.isEmpty();
+	}
+
+	addBuff(buff) {
+		this.statManager.addBuff(buff);
 	}
 
 	restoreHealth() {
 		this.health.restore();
-	}
-
-	onKill(monster) {
-	}
-
-	addBuff(buff) {
-		if (this.buffs.indexOf(buff) === -1) {
-			this.buffs.push(buff);
-			return true;
-		}
-	}
-
-	getStat(statId) {
-		let value = this.buffs
-			.map(buff => buff.statValues.get(statId))
-			.reduce((a, b) => a + b, 0);
-		return statId === Stat.Ids.DISABLED ? value : value + 1;
-	}
-
-	tickBuffs() {
-		this.buffs = this.buffs.filter(buff => !buff.tick());
 	}
 
 	removeUi() {

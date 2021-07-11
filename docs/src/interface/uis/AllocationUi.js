@@ -8,42 +8,28 @@ const BOTTOM_LINE_SPACING = 1.2, ALLOCATE_BUTTON_SIZE = 0.015;
 
 // todo [medium] deprecated, replaces usages with IconAllocationUi
 class AllocationUi extends Ui {
-	constructor(coordinate, allocation, singleButton = false) {
-		super(coordinate);
+	constructor(coordinate, allocation) {
+		super();
 		this.allocation = allocation;
+
+		this.containerButton = this.add(new UiButton(coordinate, ''));
+		this.containerButton.on('click', (alt, shift) => this.emit(alt ? 'decrease' : 'increase', shift));
+		this.bounds = this.containerButton.bounds;
+		this.bubble(this.containerButton, 'hover');
 
 		let topLine = coordinate.clone
 			.size(coordinate.width, Positions.UI_LINE_HEIGHT)
 			.alignWithoutMove(Coordinate.Aligns.CENTER);
-		let bottomLine = topLine.clone.shift(0, BOTTOM_LINE_SPACING);
-		let buttonLine = bottomLine.clone.pad(.01, 0);
-		let buttonLeft = buttonLine.clone
-			.alignWithoutMove(Coordinate.Aligns.START, Coordinate.Aligns.CENTER)
-			.size(ALLOCATE_BUTTON_SIZE);
-		let buttonRight = buttonLine.clone
-			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.CENTER)
-			.size(ALLOCATE_BUTTON_SIZE);
-
-		let containerButton = this.add(new UiButton(coordinate, '', '', !singleButton));
-		if (singleButton)
-			containerButton.on('click', alt => this.emit(alt ? 'decrease' : 'increase'));
-		this.bounds = containerButton.bounds;
-		this.bubble(containerButton, 'hover');
 		this.add(new UiText(topLine, allocation.name));
-		this.valueText = this.add(new UiText(bottomLine));
-		this.updateValueText();
-		if (!singleButton) {
-			let decreaseButton = this.add(new UiButton(buttonLeft, '-'));
-			this.bubble(decreaseButton, 'click', 'decrease');
-			let increaseButton = this.add(new UiButton(buttonRight, '+'));
-			this.bubble(increaseButton, 'click', 'increase');
-		}
+
+		this.valueText = this.add(new UiText(topLine.clone.shift(0, BOTTOM_LINE_SPACING)));
+		this.refreshValue();
 	}
 
-	bind(data, hoverPopup) {
-		this.on('hover', () => hoverPopup.beginHover(this.bounds, this.allocation.descriptionText));
-		this.on('decrease', () => data.allocate(this.allocation, -1));
-		this.on('increase', () => data.allocate(this.allocation, 1));
+	bind(data, hoverText) {
+		this.on('hover', () => hoverText.beginHover(this.bounds, this.allocation.descriptionText));
+		this.on('decrease', max => data.allocate(this.allocation, max ? -this.allocation.maxValue : -1));
+		this.on('increase', max => data.allocate(this.allocation, max ? this.allocation.maxValue : 1));
 		return this;
 	}
 
@@ -56,8 +42,9 @@ class AllocationUi extends Ui {
 		return Positions.UI_LINE_HEIGHT * (1 + BOTTOM_LINE_SPACING);
 	}
 
-	updateValueText() {
+	refreshValue() {
 		this.valueText.text = this.allocation.valueText;
+		this.containerButton.setPaintMode(this.allocation.value ? UiButton.PaintModes.ACTIVE : UiButton.PaintModes.NORMAL);
 	}
 }
 

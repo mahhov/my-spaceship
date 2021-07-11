@@ -15,6 +15,7 @@ import GridLayout from '../layouts/GridLayout.js';
 import HubUi from './HubUi.js';
 import Ui from './Ui.js';
 
+// todo [medium] move these constants to data layer to be consistent with Traits and Technique
 const ImagePaths = {
 	Equipment: {
 		[Equipment.Types.HULL]: '../../images/equipment/spaceship.png',
@@ -52,6 +53,7 @@ class EquipmentUi extends Ui {
 			.size(buttonSize * 4, buttonSize);
 		this.equippedButtons = this.createSection(equippedCoordinate, 'Equipped', 4, 1, buttonSize);
 
+		// todo [medium] allow salvaging materials to avoid inventory becoming full
 		let salvageCoordinate = coordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.START)
 			.size(.07, buttonSize);
@@ -79,7 +81,7 @@ class EquipmentUi extends Ui {
 
 		let metalTextCoordinate = UiSection.getTextCoordinate(forgeCoordinate)
 			.alignWithoutMove(Coordinate.Aligns.END, Coordinate.Aligns.END);
-		this.metalText = this.add(new UiText(metalTextCoordinate, '0 metal'));
+		this.metalText = this.add(new UiText(metalTextCoordinate, ''));
 
 		let inventoryCoordinate = equippedCoordinate.clone
 			.shift(0, 1)
@@ -117,7 +119,7 @@ class EquipmentUi extends Ui {
 
 	createSection(coordinate, sectionTitle, columns, rows, buttonSize) {
 		this.add(new UiSection(coordinate, sectionTitle));
-		let layout = new GridLayout(coordinate, columns, buttonSize);
+		let layout = new GridLayout(coordinate.clone, columns, buttonSize);
 		return [...Array(columns * rows)].map((_, i) =>
 			this.add(new UiIconButton(layout.getCoordinates(i).container)));
 	}
@@ -166,7 +168,7 @@ class EquipmentUi extends Ui {
 	refresh() {
 		this.buttonSets.forEach(({buttons, images, listType}) => buttons.forEach((button, i) =>
 			button.imagePath = images[this.equipmentData.getList(listType)[i]?.type]));
-		this.metalText.text = this.equipmentData.metal;
+		this.metalText.text = `${this.equipmentData.metal} metal`;
 		this.disableEmptyButtons();
 		this.refreshHoverText();
 	}

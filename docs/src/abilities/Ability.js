@@ -1,32 +1,36 @@
-import keyMappings from '../control/keyMappings.js';
+import EntityObserver from '../entities/EntityObserver.js';
 import Bar from '../painter/elements/Bar.js';
+import Icon from '../painter/elements/Icon.js';
 import Rect from '../painter/elements/Rect.js';
-import Text from '../painter/elements/Text.js';
+import TechniqueData from '../playerData/TechniqueData.js';
 import {Colors, Positions} from '../util/constants.js';
 import Coordinate from '../util/Coordinate.js';
 import Pool from '../util/Pool.js';
 
-class Ability {
-	constructor(name, statValues, cooldown, charges, stamina, channelStamina, repeatable, channelDuration) {
-		this.name = name;
-		this.statValues = statValues;
-		this.cooldown = new Pool(cooldown, -1);
-		this.charges = new Pool(charges, 1);
-		this.stamina = stamina;
-		this.channelStamina = channelStamina;
-		this.repeatable = repeatable;
-		// todo [low] allow indicating whether channel will force stop upon reaching max or will allow to continue
-		this.maxChannelDuration = channelDuration; // -1 indicates infinite, 0 indicates 1 tick (i.e. not channeled)
+class Ability extends EntityObserver {
+	constructor(statManager) {
+		super();
+		this.statManager = statManager;
+
+		this.cooldown = new Pool(this.cooldownDuration, 0);
+		this.charges = new Pool(this.maxCharges, 1);
 		this.channelDuration = 0; // 0 on start, 1... on subsequent calls
 	}
 
-	setUi(uiIndex) {
+	setUiIndex(uiIndex) {
 		this.uiIndex = uiIndex;
 		this.uiColor = Colors.PLAYER_ABILITIES[uiIndex];
-		this.uiTexts = [this.name, keyMappings.ABILITY_I[uiIndex].string[0]];
+		return this;
+	}
+
+	setUiImageName(imageName) {
+		this.imageName = imageName;
+		return this;
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
+		this.observe(hero);
+		this.clearAllQueuedEvents();
 		this.refresh(hero);
 		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, hero))
 			this.channelDuration++;
@@ -36,14 +40,19 @@ class Ability {
 		}
 	}
 
+	observe(hero) {
+	}
+
 	refresh(hero) {
-		if (!this.charges.isFull() && this.cooldown.increment()) {
+		this.cooldown.setMax(this.cooldownDuration);
+		this.charges.setMax(this.maxCharges);
+		if (!this.charges.isFull() && this.cooldown.change(-this.cooldownRate)) {
 			this.charges.increment();
 			this.cooldown.restore();
 		}
 
-		this.ready = !this.charges.isEmpty() && hero.sufficientStamina(this.stamina) && (this.repeatable || !this.repeating);
-		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && hero.sufficientStamina(this.channelStamina);
+		this.ready = !this.charges.isEmpty() && hero.sufficientStamina(this.staminaCost) && (this.repeatable || !this.repeating);
+		this.readyChannelContinue = this.maxChannelDuration && this.channelDuration && hero.sufficientStamina(this.channelStaminaCost);
 		this.repeating = false;
 	}
 
@@ -56,12 +65,42 @@ class Ability {
 
 		if (this.ready) {
 			this.charges.change(-1);
-			hero.consumeStamina(this.stamina);
+			hero.consumeStamina(this.staminaCost);
 		} else {
-			hero.consumeStamina(this.channelStamina);
-			this.cooldown.value = this.cooldown.max;
+			hero.consumeStamina(this.channelStaminaCost);
+			this.cooldown.restore();
 		}
 		return true;
+	}
+
+	get cooldownRate() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_RATE);
+	}
+
+	get cooldownDuration() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.COOLDOWN_DURATION);
+	}
+
+	get maxCharges() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.MAX_CHARGES);
+	}
+
+	get staminaCost() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.STAMINA_COST);
+	}
+
+	get channelStaminaCost() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.CHANNEL_STAMINA_COST);
+	}
+
+	get maxChannelDuration() {
+		// todo [low] allow indicating whether channel will force stop upon reaching max or will allow to continue
+		// channel duration: -1 indicates infinite, 0 indicates 1 tick (i.e. not channeled)
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.CHANNEL_DURATION);
+	}
+
+	get repeatable() {
+		return this.statManager.getBasedStat(TechniqueData.StatIds.TechniqueBase.REPEATABLE);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
@@ -78,15 +117,13 @@ class Ability {
 	}
 
 	paintUi(painter, camera) {
-		// background
 		const SIZE_WITH_MARGIN = Positions.ABILITY_SIZE + Positions.MARGIN / 2;
 		const LEFT = Positions.MARGIN + this.uiIndex * SIZE_WITH_MARGIN;
 		const TOP = 1 - SIZE_WITH_MARGIN;
-		painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE)).setOptions({fill: true, color: this.uiColor.getShade(.5)}));
 
 		// foreground for current charges
-		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.getMax();
-		const HEIGHT = this.charges.get() * ROW_HEIGHT;
+		const ROW_HEIGHT = Positions.ABILITY_SIZE / this.charges.max;
+		const HEIGHT = this.charges.value * ROW_HEIGHT;
 		painter.add(new Rect(new Coordinate(LEFT, TOP + Positions.ABILITY_SIZE - HEIGHT, Positions.ABILITY_SIZE, HEIGHT))
 			.setOptions({fill: true, color: this.uiColor.get()}));
 
@@ -97,17 +134,14 @@ class Ability {
 				.setOptions({fill: true, color: this.uiColor.getShade(shade)}));
 		}
 
+		// background image
+		let coordinate = new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE);
+		painter.add(new Icon(coordinate.clone, `../../images/techniques/${this.imageName}`));
+
 		// border
 		if (!this.ready)
-			painter.add(new Rect(new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE))
+			painter.add(new Rect(coordinate)
 				.setOptions({color: Colors.PLAYER_ABILITY_NOT_READY.get(), thickness: 2}));
-
-		// text
-		this.uiTexts.forEach((uiText, i) =>
-			painter.add(new Text(
-				new Coordinate(LEFT, TOP, Positions.ABILITY_SIZE).alignWithoutMove(Coordinate.Aligns.CENTER, Coordinate.Aligns.CENTER).shift(0, (i - .5) / 4),
-				uiText)
-				.setOptions({size: '12px'})));
 
 		// channel bar
 		let channelRatio = this.channelRatio;

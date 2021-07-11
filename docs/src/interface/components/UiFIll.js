@@ -9,7 +9,7 @@ class UiFill extends UiComponent {
 	}
 
 	paint(painter) {
-		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: Colors.Interface.TEXT_BACK}));
+		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: Colors.Interface.TEXT_BACK.get()}));
 	}
 }
 

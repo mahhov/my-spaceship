@@ -4,8 +4,8 @@ import {randVector, setMagnitude} from '../util/number.js';
 import Ability from './Ability.js';
 
 class ShotgunAttack extends Ability {
-	constructor(statValues) {
-		super('Shotgun', statValues, 50, 1, 12, 0, true, 0);
+	constructor(statManager) {
+		super(statManager, 50, 1, 12, 0, true, 0);
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {
@@ -25,7 +25,7 @@ class ShotgunAttack extends Ability {
 	}
 
 	static getTime(hero) {
-		return 60 * hero.getStat(Stat.Ids.ATTACK_RANGE);
+		return 60 * (hero.statManager.getStat(Stat.Ids.ATTACK_RANGE) + 1);
 	}
 
 	static get velocity() {

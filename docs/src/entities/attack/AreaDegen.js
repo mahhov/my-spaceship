@@ -16,7 +16,7 @@ class AreaDegen extends Entity {
 
 	update(map, intersectionFinder) {
 		intersectionFinder.intersections(this.layer, this.bounds)
-			.forEach(monster => monster.changeHealth(-this.damage));
+			.forEach(monster => monster.takeDamage(this.damage));
 		return !this.time--;
 	}
 

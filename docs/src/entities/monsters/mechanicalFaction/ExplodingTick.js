@@ -1,4 +1,5 @@
 import DiamondShip from '../../../graphics/DiamondShip.js';
+import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
@@ -14,7 +15,7 @@ const Phases = makeEnum({ONE: 0});
 
 class ExplodingTick extends Monster {
 	constructor(x, y) {
-		super(x, y, .04, .04, .6, 100);
+		super(x, y, .04, .04, 60, 100, new MaterialDrop(1, false));
 		this.setGraphics(new DiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		this.attackPhase = new Phase(0);

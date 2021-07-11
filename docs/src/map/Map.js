@@ -74,7 +74,6 @@ class Map {
 			if (monster.health.isEmpty()) {
 				this.monsters.remove(node);
 				monster.removeIntersectionBounds(this.intersectionFinder);
-				this.player.onKill(monster);
 			} else
 				monster.update(this, this.intersectionFinder, monsterKnowledge);
 		});

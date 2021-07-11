@@ -1,4 +1,5 @@
 import Rect1DotsShip from '../../../graphics/Rect1DotsShip.js';
+import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import Phase from '../../../util/Phase.js';
@@ -15,7 +16,7 @@ const Phases = makeEnum({ONE: 0});
 
 class MechanicalBossEarly extends Monster {
 	constructor(x, y) {
-		super(x, y, .2, .2, 22, 500);
+		super(x, y, .2, .2, 2200, 500, new MaterialDrop(1, false));
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		this.addModules();

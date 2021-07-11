@@ -60,6 +60,10 @@ class EquipmentData extends Emitter {
 		return this.inventory.findIndex(equipment => !equipment);
 	}
 
+	get emptyMaterialIndex() {
+		return this.materials.findIndex(material => !material);
+	}
+
 	getList(listType) {
 		return [this.equipped, this.inventory, this.materials][listType];
 	}
@@ -136,6 +140,14 @@ class EquipmentData extends Emitter {
 		this.materials[materialIndex] = null;
 		this.emit('change');
 		this.emit('craft');
+	}
+
+	gainMaterial(material) {
+		let index = this.emptyMaterialIndex;
+		if (index === -1)
+			return;
+		this.materials[index] = material;
+		this.emit('change');
 	}
 
 	static getForgeCost(equipmentType) {

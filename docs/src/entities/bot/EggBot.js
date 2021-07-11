@@ -41,6 +41,7 @@ class EggBot {
 		let abilitiesDirect = hostiles.length ? EggBot.closestHostileDir(hero, hostiles) : new Vector(0, 0);
 
 		// todo [low] tune
+		// todo [low] getDistance has been removed
 		let projectileAttackDistance = ProjectileAttack.getDistance(hero) + .1;
 		// 0.94 0 Infinity
 		let activeProjectileAttack = rand() < (projectileAttackDistance / abilitiesDirect.magnitude - .9) * 5;

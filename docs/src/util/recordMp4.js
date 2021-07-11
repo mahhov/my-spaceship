@@ -7,11 +7,15 @@ let record = (ms = 0) => {
 
 	recorder.addEventListener('stop', () => {
 		let blob = new Blob(data, {type: 'video/webm'});
-		let exportUrl = URL.createObjectURL(blob);
-		window.open(exportUrl, '_blank');
+		let blobUrl = URL.createObjectURL(blob);
+
+		let link = document.createElement('a');
+		link.href = blobUrl;
+		link.download = "my-spaceship-video.webm";
+		link.click();
 	});
 
-	let stop = () => {
+	window.stopRecording = () => {
 		recorder.stop();
 		stream.getTracks().forEach(track => track.stop());
 	};
@@ -19,8 +23,6 @@ let record = (ms = 0) => {
 	if (ms)
 		setTimeout(() => stop, ms);
 	recorder.start();
-
-	return stop;
 };
 
 export default record;

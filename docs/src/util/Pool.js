@@ -6,6 +6,11 @@ class Pool {
 		this.incrementRate = incrementRate;
 	}
 
+	setMax(value) {
+		this.max = value;
+		return this.change(0);
+	}
+
 	// return true if reached 0 or max
 	increment() {
 		return this.change(this.incrementRate);
@@ -19,14 +24,6 @@ class Pool {
 	change(amount) {
 		this.value = clamp(this.value + amount, 0, this.max);
 		return this.value === 0 || this.value === this.max;
-	}
-
-	get() {
-		return this.value;
-	}
-
-	getMax() {
-		return this.max;
 	}
 
 	getRatio() {

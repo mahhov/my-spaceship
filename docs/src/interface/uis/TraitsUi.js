@@ -18,7 +18,8 @@ class TraitsUi extends Ui {
 
 		let hoverText = new UiPopupText(new Coordinate(0, 0, .22));
 
-		let layout = GridLayout.createWithSquares(innerCoordinate.clone.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 5, Positions.MARGIN * 2, Positions.MARGIN * 2);
+		let layout = GridLayout.createWithSquares(innerCoordinate.clone
+			.move(0, Positions.UI_LINE_HEIGHT + Positions.MARGIN), 5, Positions.MARGIN * 2, Positions.MARGIN * 2);
 		this.allocationUis = traitsData.allocations.map((allocation, i) =>
 			this.add(
 				new IconAllocationUi(layout.getCoordinates(i).container, allocation)
@@ -31,7 +32,7 @@ class TraitsUi extends Ui {
 	}
 
 	refresh() {
-		this.allocationUis.forEach(iconAllocationUi => iconAllocationUi.updateValueText());
+		this.allocationUis.forEach(iconAllocationUi => iconAllocationUi.refreshValue());
 		this.availableText.text = this.traitsData.availableText;
 	}
 }

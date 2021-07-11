@@ -1,15 +1,17 @@
 import Bounds from '../intersection/Bounds.js';
 import {setMagnitude} from '../util/number.js';
+import EntityObserver from './EntityObserver.js';
 
-class Entity {
-	constructor(x, y, width, height, layer) {
+class Entity extends EntityObserver {
+	constructor(x, y, width, height, layer, observer = new EntityObserver()) {
+		super();
 		this.bounds = new Bounds();
 		this.width = width;
 		this.height = height;
 		this.layer = layer;
 		this.setPosition(x, y);
 		this.moveDirection = {x: 0, y: 1};
-		this.queuedTrackedIntersections = [];
+		this.observer = observer;
 	}
 
 	setGraphics(graphics) {
@@ -34,7 +36,7 @@ class Entity {
 	safeMove(intersectionFinder, dx, dy, magnitude, noSlide) {
 		let intersectionMove = intersectionFinder.canMove(this.layer, this.bounds, dx, dy, magnitude, noSlide);
 		this.move(intersectionMove.x, intersectionMove.y);
-		intersectionMove.trackedOnlyReferences.forEach(reference => reference.queueTrackedIntersection(this));
+		intersectionMove.trackedOnlyReferences.forEach(reference => reference.queueEvent(EntityObserver.EventIds.INTERSECTION, this));
 		return intersectionMove;
 	}
 
@@ -64,11 +66,16 @@ class Entity {
 		this.bounds.set(this.x - halfWidth, this.y - halfHeight, this.x + halfWidth, this.y + halfHeight);
 	}
 
-	queueTrackedIntersection(reference) {
-		this.queuedTrackedIntersections.push(reference);
+	takeDamage(amount) {
+		// return damage dealt
+		return 0;
 	}
 
-	changeHealth(amount) {
+	isDead() {
+		return false;
+	}
+
+	addBuff(buff) {
 	}
 
 	removeUi() {

@@ -7,8 +7,7 @@ class GridLayout {
 		this.columns = columns;
 		this.horizMargin = horizMargin;
 		this.vertMargin = vertMargin;
-		// todo [high] make caller responsible for cloning coordinate, and receiver can mutate it however it desires
-		this.coordinate = coordinate.clone
+		this.coordinate = coordinate
 			.alignWithoutMove(Coordinate.Aligns.START)
 			.size(this.width, height);
 	}
