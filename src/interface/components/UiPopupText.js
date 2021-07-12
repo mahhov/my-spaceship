@@ -1,3 +1,4 @@
+import MultilineText from '../../painter/elements/MultilineText.js';
 import Rect from '../../painter/elements/Rect.js';
 import RoundedRect from '../../painter/elements/RoundedRect.js';
 import Text from '../../painter/elements/Text.js';
@@ -6,8 +7,9 @@ import Coordinate from '../../util/Coordinate.js';
 import UiComponent from './UiComponent.js';
 
 class UiPopupText extends UiComponent {
-	constructor(coordinate) {
+	constructor(coordinate, wrap = false) {
 		super(coordinate.align(Coordinate.Aligns.START, Coordinate.Aligns.END));
+		this.wrap = wrap;
 		this.hoverBounds = null;
 		this.texts = [];
 	}
@@ -32,15 +34,20 @@ class UiPopupText extends UiComponent {
 	paint(painter) {
 		if (!this.hoverBounds)
 			return;
-		this.coordinate.size(this.coordinate.width, Positions.UI_LINE_HEIGHT * this.texts.length + Positions.BREAK * 2);
+		if (!this.wrap)
+			this.coordinate.size(this.coordinate.width, Positions.UI_LINE_HEIGHT * this.texts.length + Positions.BREAK * 2);
 		painter.add(new Rect(this.coordinate).setOptions({fill: true, color: Colors.Interface.INACTIVE.get()}));
 		painter.add(new RoundedRect(this.coordinate).setOptions({color: Colors.Interface.PRIMARY.get()}));
 		let textCoordinate = this.coordinate.clone
 			.alignWithoutMove(Coordinate.Aligns.START)
-			.move(Positions.BREAK * 3) // 3 just works well
-			.size(0, Positions.UI_LINE_HEIGHT);
-		this.texts.forEach((text, i) =>
-			painter.add(new Text(textCoordinate.clone.shift(0, i), text).setOptions({...this.textOptions, color: Colors.Interface.PRIMARY.get()})));
+			.move(Positions.BREAK * 3); // 3 just works well
+		if (this.wrap)
+			painter.add(new MultilineText(textCoordinate.size(this.coordinate.width, this.coordinate.height), this.texts.join(' ')));
+		else {
+			textCoordinate.size(0, Positions.UI_LINE_HEIGHT);
+			this.texts.forEach((text, i) =>
+				painter.add(new Text(textCoordinate.clone.shift(0, i), text).setOptions({...this.textOptions, color: Colors.Interface.PRIMARY.get()})));
+		}
 	}
 }
 
