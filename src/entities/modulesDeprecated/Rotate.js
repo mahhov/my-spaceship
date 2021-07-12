@@ -1,11 +1,11 @@
 import makeEnum from '../../util/enum.js';
 import {thetaToVector} from '../../util/number.js';
 import Vector from '../../util/Vector.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
-class Rotate extends Module {
+class Rotate extends ModuleDeprecated {
 	config(origin, rate = 1 / 50, theta = 0, atTarget = false) {
 		this.origin = origin;
 		this.rate = rate;

@@ -3,11 +3,11 @@ import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Vector from '../../util/Vector.js';
 import Laser from '../attack/Laser.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({WARNING: 0, ACTIVE: 0, INACTIVE: 0});
 
-class StaticLaser extends Module {
+class StaticLaser extends ModuleDeprecated {
 	config(origin, spread, range, dirModule, duration, damage, size = .02) {
 		this.origin = origin;
 		this.spread = spread;

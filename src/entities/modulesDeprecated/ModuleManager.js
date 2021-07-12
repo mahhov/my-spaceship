@@ -1,6 +1,6 @@
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
-class ModuleManager extends Module {
+class ModuleManager extends ModuleDeprecated {
 	constructor() {
 		super();
 		this.modules = [];

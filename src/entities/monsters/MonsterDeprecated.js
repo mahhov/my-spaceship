@@ -6,7 +6,7 @@ import StatValues from '../../playerData/StatValues.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
-import ModuleManager from '../modules/ModuleManager.js';
+import ModuleManager from '../modulesDeprecated/ModuleManager.js';
 
 class MonsterDeprecated extends LivingEntity {
 	constructor(x, y, width, height, health, expValue, materialDrop) {

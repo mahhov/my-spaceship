@@ -4,11 +4,11 @@ import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
 import Phase from '../../../util/Phase.js';
-import Aim from '../../modules/Aim.js';
-import Chase from '../../modules/Chase.js';
-import Cooldown from '../../modules/Cooldown.js';
-import Distance from '../../modules/Distance.js';
-import Shotgun from '../../modules/Shotgun.js';
+import Aim from '../../modulesDeprecated/Aim.js';
+import Chase from '../../modulesDeprecated/Chase.js';
+import Cooldown from '../../modulesDeprecated/Cooldown.js';
+import Distance from '../../modulesDeprecated/Distance.js';
+import Shotgun from '../../modulesDeprecated/Shotgun.js';
 import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});

@@ -1,10 +1,10 @@
 import makeEnum from '../../util/enum.js';
 import Vector from '../../util/Vector.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
-class Position extends Module {
+class Position extends ModuleDeprecated {
 	config(origin = null, randMinMag = 0, randMaxMag = 0) {
 		this.origin = origin; // if null, will use target
 		this.randMinMag = randMinMag;

@@ -1,9 +1,9 @@
 import makeEnum from '../../util/enum.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
-class BuffSetter extends Module {
+class BuffSetter extends ModuleDeprecated {
 	config(monster, buff) {
 		this.monster = monster;
 		this.buff = buff;

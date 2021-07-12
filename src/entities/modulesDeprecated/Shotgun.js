@@ -1,11 +1,11 @@
 import makeEnum from '../../util/enum.js';
 import {rand, randVector} from '../../util/number.js';
 import Projectile from '../attack/Projectile.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
-class Shotgun extends Module {
+class Shotgun extends ModuleDeprecated {
 	config(origin, rate, count, velocity, spread, duration, damage, dirModule, predictableRate = false, size = .02) {
 		this.origin = origin;
 		this.rate = rate;

@@ -3,7 +3,7 @@ import MaterialDrop from '../../playerData/MaterialDrop.js';
 import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
-import NearbyDegen from '../modules/NearbyDegen.js';
+import NearbyDegen from '../modulesDeprecated/NearbyDegen.js';
 import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({REST: 0, ATTACK: 0});

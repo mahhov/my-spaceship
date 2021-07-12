@@ -1,10 +1,10 @@
 import makeEnum from '../../util/enum.js';
 
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({ACTIVE: 0, INACTIVE: 0});
 
-class PhaseSetter extends Module {
+class PhaseSetter extends ModuleDeprecated {
 	config(phase, phaseValue) {
 		this.phase = phase;
 		this.phaseValue = phaseValue;

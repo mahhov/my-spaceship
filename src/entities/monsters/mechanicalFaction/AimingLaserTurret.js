@@ -3,10 +3,10 @@ import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import Phase from '../../../util/Phase.js';
-import Aim from '../../modules/Aim.js';
-import Period from '../../modules/Period.js';
-import Rotate from '../../modules/Rotate.js';
-import StaticLaser from '../../modules/StaticLaser.js';
+import Aim from '../../modulesDeprecated/Aim.js';
+import Period from '../../modulesDeprecated/Period.js';
+import Rotate from '../../modulesDeprecated/Rotate.js';
+import StaticLaser from '../../modulesDeprecated/StaticLaser.js';
 import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});

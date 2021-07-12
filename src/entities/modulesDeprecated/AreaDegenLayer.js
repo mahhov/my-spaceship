@@ -1,10 +1,10 @@
 import makeEnum from '../../util/enum.js';
 import AreaDegen from '../attack/AreaDegen.js';
-import Module from './Module.js';
+import ModuleDeprecated from './ModuleDeprecated.js';
 
 const Stages = makeEnum({WARNING: 0, ACTIVE: 0, INACTIVE: 0});
 
-class AreaDegenLayer extends Module {
+class AreaDegenLayer extends ModuleDeprecated {
 	config(origin, range, duration, damage) {
 		this.origin = origin;
 		this.range = range;

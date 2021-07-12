@@ -4,9 +4,9 @@ import {Colors} from '../../../util/constants.js';
 import makeEnum from '../../../util/enum.js';
 import Phase from '../../../util/Phase.js';
 import Vector from '../../../util/Vector.js';
-import Aim from '../../modules/Aim.js';
-import Period from '../../modules/Period.js';
-import Shotgun from '../../modules/Shotgun.js';
+import Aim from '../../modulesDeprecated/Aim.js';
+import Period from '../../modulesDeprecated/Period.js';
+import Shotgun from '../../modulesDeprecated/Shotgun.js';
 import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});

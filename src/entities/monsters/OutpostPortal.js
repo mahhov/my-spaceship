@@ -5,9 +5,9 @@ import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import Buff from '../buff.js';
-import BuffSetter from '../modules/BuffSetter.js';
-import Rotate from '../modules/Rotate.js';
-import Spawn from '../modules/Spawn.js';
+import BuffSetter from '../modulesDeprecated/BuffSetter.js';
+import Rotate from '../modulesDeprecated/Rotate.js';
+import Spawn from '../modulesDeprecated/Spawn.js';
 import MeleeDart from './MeleeDart.js';
 import MonsterDeprecated from './MonsterDeprecated.js';
 

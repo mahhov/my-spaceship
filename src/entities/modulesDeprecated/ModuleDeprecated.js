@@ -1,4 +1,4 @@
-class Module {
+class ModuleDeprecated {
 	constructor() {
 		this.stage = 0;
 	}
@@ -22,4 +22,4 @@ class Module {
 	}
 }
 
-export default Module;
+export default ModuleDeprecated;
