@@ -21,7 +21,7 @@ const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
 	[
-		[ExplodingTick, 3],
+		[ExplodingTick, 1],
 	],
 	[
 		[ExplodingTick, 2],

@@ -1,66 +1,55 @@
 import DiamondShip from '../../../graphics/DiamondShip.js';
 import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
-import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
-import Phase from '../../../util/Phase.js';
-import Aim from '../../modules/Aim.js';
-import Chase from '../../modules/Chase.js';
-import Distance from '../../modules/Distance.js';
-import NearbyDegen from '../../modules/NearbyDegen.js';
-import PatternedPeriod from '../../modules/PatternedPeriod.js';
-import Monster from '.././Monster.js';
+import Aim from '../../modules2/Aim.js';
+import Chase from '../../modules2/Chase.js';
+import Distance from '../../modules2/Distance.js';
+import NearbyDegen from '../../modules2/NearbyDegen.js';
+import PatternedPeriod from '../../modules2/PatternedPeriod.js';
+import Monster2 from '../Monster2.js';
 
-const Phases = makeEnum({ONE: 0});
-
-class ExplodingTick extends Monster {
+class ExplodingTick extends Monster2 {
 	constructor(x, y) {
 		super(x, y, .04, .04, 60, 100, new MaterialDrop(1, false));
 		this.setGraphics(new DiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		this.attackPhase = new Phase(0);
-
-		let distance = new Distance();
+		let distance = this.addModule(new Distance());
 		distance.config(this, .1, 1);
-		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
+		distance.setStage(Distance.Stages.ACTIVE);
 
-		let patternedPeriod = new PatternedPeriod();
+		let patternedPeriod = this.addModule(new PatternedPeriod());
 		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true]);
-		distance.addModule(patternedPeriod, {
-			0: [PatternedPeriod.PrimaryStages.LOOP, 1],
-			1: [PatternedPeriod.PrimaryStages.PLAY, 2],
-			2: [PatternedPeriod.PrimaryStages.STOP],
+		distance.on('change', segment => {
+			let stagePattern = [
+				[PatternedPeriod.Stages.LOOP, 1],
+				[PatternedPeriod.Stages.PLAY, 2],
+				[PatternedPeriod.Stages.STOP, 0],
+			][segment];
+			patternedPeriod.setStage(stagePattern[0]);
+			patternedPeriod.setPattern(stagePattern[1]);
 		});
 
-		let aim = new Aim();
+		let aim = this.addModule(new Aim());
 		aim.config(this, PI / 20, 50, .1);
-		patternedPeriod.addModule(aim, {
-			0: Aim.Stages.INACTIVE,
-			1: Aim.Stages.INACTIVE,
-			2: Aim.Stages.INACTIVE,
-			3: Aim.Stages.ACTIVE,
-		});
 
-		let chase = new Chase();
+		let chase = this.addModule(new Chase());
 		chase.config(this, .003, aim);
-		patternedPeriod.addModule(chase, {
-			0: Chase.Stages.INACTIVE,
-			1: Chase.Stages.INACTIVE,
-			2: Chase.Stages.INACTIVE,
-			3: Chase.Stages.ACTIVE,
-		});
 
-		let degen = new NearbyDegen();
+		let degen = this.addModule(new NearbyDegen());
 		degen.config(this, .15, .3);
-		patternedPeriod.addModule(degen, {
-			0: NearbyDegen.Stages.INACTIVE,
-			1: NearbyDegen.Stages.WARNING,
-			2: NearbyDegen.Stages.ACTIVE,
-			3: NearbyDegen.Stages.INACTIVE,
-		});
 
-		distance.modulesSetStage(0);
-		this.moduleManager.modulesSetStage(this.attackPhase.get());
+		patternedPeriod.on('change', period => {
+			let degenStage = [
+				NearbyDegen.Stages.INACTIVE,
+				NearbyDegen.Stages.WARNING,
+				NearbyDegen.Stages.ACTIVE,
+				NearbyDegen.Stages.INACTIVE,
+			][period];
+			degen.setStage(degenStage);
+			aim.setStage(period === 3 ? Aim.Stages.ACTIVE : Aim.Stages.INACTIVE);
+			chase.setStage(period === 3 ? Chase.Stages.ACTIVE : Chase.Stages.INACTIVE);
+		});
 	}
 }
 

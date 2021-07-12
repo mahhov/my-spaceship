@@ -1,0 +1,29 @@
+import makeEnum from '../../util/enum.js';
+import AreaDegen from '../attack/AreaDegen.js';
+import Module2 from './Module2.js';
+
+const Stages = makeEnum({INACTIVE: 0, WARNING: 0, ACTIVE: 0});
+
+class NearbyDegen extends Module2 {
+	config(origin, range, damage) {
+		this.origin = origin;
+		this.areaDegen = new AreaDegen(origin.x, origin.y, range, -1, damage, false);
+	}
+
+	apply(map, intersectionFinder, target) {
+		if (this.stage !== Stages.INACTIVE)
+			this.areaDegen.setPosition(this.origin.x, this.origin.y);
+		if (this.stage === Stages.ACTIVE)
+			this.areaDegen.update(map, intersectionFinder);
+	}
+
+	paint(painter, camera) {
+		if (this.stage !== Stages.INACTIVE)
+			this.areaDegen.paint(painter, camera, this.stage === Stages.WARNING);
+
+	}
+}
+
+NearbyDegen.Stages = Stages;
+
+export default NearbyDegen;
