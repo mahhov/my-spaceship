@@ -34,11 +34,10 @@ class ProjectileAttack extends Ability {
 		super(statManager);
 	}
 
-	observe(hero) {
+	processQueuedEvents(hero) {
 		this.getQueuedEvents(EntityObserver.EventIds.DEALT_DAMAGE)
 			.forEach(([damage]) => hero.queueEvent(EntityObserver.EventIds.DEALT_DAMAGE, this, damage));
 		this.bubbleTo(EntityObserver.EventIds.KILLED, hero);
-		this.clearAllQueuedEvents();
 	}
 
 	activate(origin, direct, map, intersectionFinder, hero) {

@@ -29,7 +29,7 @@ class Ability extends EntityObserver {
 	}
 
 	update(origin, direct, map, intersectionFinder, hero, wantActive) {
-		this.observe(hero);
+		this.processQueuedEvents(hero);
 		this.clearAllQueuedEvents();
 		this.refresh(hero);
 		if (wantActive && this.safeActivate(origin, direct, map, intersectionFinder, hero))
@@ -40,7 +40,7 @@ class Ability extends EntityObserver {
 		}
 	}
 
-	observe(hero) {
+	processQueuedEvents(hero) {
 	}
 
 	refresh(hero) {
