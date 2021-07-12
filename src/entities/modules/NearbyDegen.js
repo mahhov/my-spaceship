@@ -1,10 +1,10 @@
 import makeEnum from '../../util/enum.js';
 import AreaDegen from '../attack/AreaDegen.js';
-import Module2 from './Module2.js';
+import Module from './Module.js';
 
 const Stages = makeEnum({INACTIVE: 0, WARNING: 0, ACTIVE: 0});
 
-class NearbyDegen extends Module2 {
+class NearbyDegen extends Module {
 	config(origin, range, damage) {
 		this.origin = origin;
 		this.areaDegen = new AreaDegen(origin.x, origin.y, range, -1, damage, false);

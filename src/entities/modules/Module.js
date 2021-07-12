@@ -1,6 +1,6 @@
 import PolledEmitter from '../../util/PolledEmitter.js';
 
-class Module2 extends PolledEmitter {
+class Module extends PolledEmitter {
 	constructor() {
 		super();
 		this.stage = 0;
@@ -18,4 +18,4 @@ class Module2 extends PolledEmitter {
 	}
 }
 
-export default Module2;
+export default Module;

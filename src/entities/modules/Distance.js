@@ -1,10 +1,10 @@
 import makeEnum from '../../util/enum.js';
 import {getMagnitude} from '../../util/number.js';
-import Module2 from './Module2.js';
+import Module from './Module.js';
 
 const Stages = makeEnum({INACTIVE: 0, ACTIVE: 0});
 
-class Distance extends Module2 {
+class Distance extends Module {
 	// distances should be in increasing order
 	// if this.distances = [10, 20], then phase 1 = [10, 20)
 	config(origin, ...distances) {

@@ -1,9 +1,9 @@
 import makeEnum from '../../util/enum.js';
-import Module2 from './Module2.js';
+import Module from './Module.js';
 
 const Stages = makeEnum({STOP: 0, PLAY: 0, LOOP: 0, PAUSE: 0});
 
-class PatternedPeriod extends Module2 {
+class PatternedPeriod extends Module {
 	config(periods, patterns, queues) {
 		this.periods = periods;
 		this.patterns = patterns;

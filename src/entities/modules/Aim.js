@@ -1,11 +1,11 @@
 import makeEnum from '../../util/enum.js';
 import {cos, sin} from '../../util/number.js';
 import Vector from '../../util/Vector.js';
-import Module2 from './Module2.js';
+import Module from './Module.js';
 
 const Stages = makeEnum({INACTIVE: 0, ACTIVE: 0, REVERSE: 0});
 
-class Aim extends Module2 {
+class Aim extends Module {
 	config(origin, rotationSpeed = 0, skirmishTime = 0, skirmishDistance = 0, initialDirVector = null) {
 		this.origin = origin;
 		this.rotationSpeed = rotationSpeed;

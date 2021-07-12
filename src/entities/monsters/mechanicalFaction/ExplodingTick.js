@@ -2,11 +2,11 @@ import DiamondShip from '../../../graphics/DiamondShip.js';
 import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
 import {PI} from '../../../util/number.js';
-import Aim from '../../modules2/Aim.js';
-import Chase from '../../modules2/Chase.js';
-import Distance from '../../modules2/Distance.js';
-import NearbyDegen from '../../modules2/NearbyDegen.js';
-import PatternedPeriod from '../../modules2/PatternedPeriod.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Distance from '../../modules/Distance.js';
+import NearbyDegen from '../../modules/NearbyDegen.js';
+import PatternedPeriod from '../../modules/PatternedPeriod.js';
 import Monster from '../Monster.js';
 
 class ExplodingTick extends Monster {
