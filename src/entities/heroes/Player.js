@@ -26,8 +26,6 @@ const TARGET_LOCK_BORDER_SIZE = .04;
 // Formatted: [base value, initial stat value]
 // E.g., if baseStat = [80, 1] and stat is .5, then basedStat is 80 * (1 +.5)
 const baseStats = new BaseStats({
-	[Stat.Ids.DISABLED]: [1, 0],
-
 	[Stat.Ids.LIFE]: [80, 1],
 	[Stat.Ids.LIFE_REGEN]: [.03, 1],
 	[Stat.Ids.LIFE_LEECH]: [1, 0],
@@ -48,6 +46,7 @@ const baseStats = new BaseStats({
 
 	[Stat.Ids.MOVE_SPEED]: [.005, 1],
 
+	[Stat.Ids.DISABLED]: [1, 0],
 	[Stat.Ids.TAKING_DAMAGE_OVER_TIME]: [1, 0],
 });
 
