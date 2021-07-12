@@ -24,7 +24,7 @@ class HubUi extends Ui {
 	constructor(playerData) {
 		super();
 
-		this.encounterUi = this.add(new EncounterUi());
+		this.encounterUi = this.add(new EncounterUi(playerData.encounterData));
 		this.bubble(this.encounterUi, 'begin-encounter');
 		this.techniquesUi = this.add(new TechniquesUi(playerData.techniqueData));
 		this.characterUi = this.add(new CharacterUi(playerData, playerData.expData, playerData.traitsData, playerData.equipmentData));

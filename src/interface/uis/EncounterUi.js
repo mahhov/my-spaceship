@@ -8,7 +8,7 @@ import ListLayout from '../layouts/ListLayout.js';
 import Ui from './Ui.js';
 
 class EncounterUi extends Ui {
-	constructor() {
+	constructor(encounterData) {
 		super();
 		let descriptionText = this.add(new UiTextArea(new Coordinate(.11, .51, .78, .32), ''));
 		let layout = new ListLayout(new Coordinate(.42, Positions.UI_FIRST_ROW, .16), Positions.UI_BUTTON_HEIGHT, Positions.UI_ROW_HEIGHT - Positions.UI_BUTTON_HEIGHT);
