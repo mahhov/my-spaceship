@@ -1,3 +1,4 @@
+import MapGeneratorStaged from '../../map/MapGeneratorStaged.js';
 import MapGeneratorTimed from '../../map/MapGeneratorTimed.js';
 import {Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
@@ -25,7 +26,7 @@ class EncounterUi extends Ui {
 			description: 'Continuous spawn of monsters of increasing difficulty and frequency.',
 		}, {
 			name: 'Waves',
-			MapGeneratorClass: MapGeneratorTimed, // MapGeneratorWaves,
+			MapGeneratorClass: MapGeneratorStaged,
 			description: 'Fight 5 waves of monsters.',
 		}];
 	}

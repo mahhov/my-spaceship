@@ -97,7 +97,7 @@ class MapGeneratorStaged extends MapGenerator {
 	}
 
 	update() {
-		super.udpate();
+		super.update();
 		if (this.stageEntities.every(entity => entity.health.isEmpty())) {
 			let entities = this.createMonsters(this.stage++);
 			entities.forEach(([entity, ui]) => {
