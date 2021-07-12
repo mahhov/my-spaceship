@@ -14,8 +14,8 @@ class Line extends Path {
 		super(xys, true);
 	}
 
-	setOptions({color = '#000', thickness = 1} = {}) {
-		return super.setOptions({color, thickness});
+	setOptions({fill = false, color = '#000', thickness = 1} = {}) {
+		return super.setOptions({fill, color, thickness});
 	}
 
 	// todo [medium] use Coordinate and camera.transformCoordinates

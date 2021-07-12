@@ -8,7 +8,7 @@ class Path extends PainterElement {
 		this.closed = closed;
 	}
 
-	setOptions({fill, color = '#000', thickness = 1} = {}) {
+	setOptions({fill = false, color = '#000', thickness = 1} = {}) {
 		this.fill = fill;
 		this.color = color;
 		this.thickness = thickness;
