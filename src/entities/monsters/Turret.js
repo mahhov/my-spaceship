@@ -4,11 +4,11 @@ import {Colors} from '../../util/constants.js';
 import makeEnum from '../../util/enum.js';
 import Phase from '../../util/Phase.js';
 import NearbyDegen from '../modules/NearbyDegen.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({REST: 0, ATTACK: 0});
 
-class Turret extends Monster {
+class Turret extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .04, .04, 400, 0, new MaterialDrop(1, false));
 		this.setGraphics(new StarShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

@@ -9,11 +9,11 @@ import BuffSetter from '../modules/BuffSetter.js';
 import Rotate from '../modules/Rotate.js';
 import Spawn from '../modules/Spawn.js';
 import MeleeDart from './MeleeDart.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({DORMANT: 0, ACTIVE: 0});
 
-class OutpostPortal extends Monster {
+class OutpostPortal extends MonsterDeprecated {
 	constructor(x, y, spawnDamageMultiplier) {
 		super(x, y, .04, .04, 100, 0, new MaterialDrop(1, false));
 		this.setGraphics(new OutpostPortalGraphic(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

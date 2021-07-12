@@ -7,9 +7,9 @@ import Chase from '../../modules2/Chase.js';
 import Distance from '../../modules2/Distance.js';
 import NearbyDegen from '../../modules2/NearbyDegen.js';
 import PatternedPeriod from '../../modules2/PatternedPeriod.js';
-import Monster2 from '../Monster2.js';
+import Monster from '../Monster.js';
 
-class ExplodingTick extends Monster2 {
+class ExplodingTick extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, 60, 100, new MaterialDrop(1, false));
 		this.setGraphics(new DiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

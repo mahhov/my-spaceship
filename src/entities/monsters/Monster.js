@@ -6,14 +6,13 @@ import StatValues from '../../playerData/StatValues.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
-import ModuleManager from '../modules/ModuleManager.js';
 
 class Monster extends LivingEntity {
 	constructor(x, y, width, height, health, expValue, materialDrop) {
 		super(x, y, width, height, Monster.createBaseStats(health), new StatValues(), IntersectionFinder.Layers.HOSTILE_UNIT);
 		this.expValue = expValue;
 		this.materialDrop = materialDrop;
-		this.moduleManager = new ModuleManager();
+		this.modules = [];
 	}
 
 	static createBaseStats(health) {
@@ -26,16 +25,20 @@ class Monster extends LivingEntity {
 		});
 	}
 
+	addModule(module) {
+		this.modules.push(module);
+		return module;
+	}
+
 	update(map, intersectionFinder, monsterKnowledge) {
 		this.refresh();
-		if (this.attackPhase.sequentialTick())
-			this.moduleManager.modulesSetStage(this.attackPhase.get());
-		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
+		this.modules.forEach(module => module.poll());
+		this.modules.forEach(module => module.apply(map, intersectionFinder, monsterKnowledge.getPlayer()));
 	}
 
 	paint(painter, camera) {
 		super.paint(painter, camera);
-		this.moduleManager.paint(painter, camera);
+		this.modules.forEach(module => module.paint(painter, camera));
 		let transformedHealthCoordinate = camera.transformCoordinates(
 			new Coordinate(this.x, this.y - this.height, .1, .01)
 				.align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START));

@@ -10,11 +10,11 @@ import NearbyDegen from '../../modules/NearbyDegen.js';
 import Period from '../../modules/Period.js';
 import Shotgun from '../../modules/Shotgun.js';
 import StaticLaser from '../../modules/StaticLaser.js';
-import Monster from '.././Monster.js';
+import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class MechanicalBossEarly extends Monster {
+class MechanicalBossEarly extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .2, .2, 2200, 500, new MaterialDrop(1, false));
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));

@@ -10,11 +10,11 @@ import NearbyDegen from '../modules/NearbyDegen.js';
 import Period from '../modules/Period.js';
 import Shotgun from '../modules/Shotgun.js';
 import Trigger from '../modules/Trigger.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class Dueler extends Monster {
+class Dueler extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .05, .05, 100, 0, new MaterialDrop(1, false));
 		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

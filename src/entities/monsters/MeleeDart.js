@@ -8,11 +8,11 @@ import Aim from '../modules/Aim.js';
 import Chase from '../modules/Chase.js';
 import Distance from '../modules/Distance.js';
 import Shotgun from '../modules/Shotgun.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class MeleeDart extends Monster {
+class MeleeDart extends MonsterDeprecated {
 	constructor(x, y, damageMultiplier) {
 		super(x, y, .02, .02, 30, 0, new MaterialDrop(1, false));
 		this.setGraphics(new AShip(this.width, this.height, {color: Colors.Entity.MONSTER.get()}));

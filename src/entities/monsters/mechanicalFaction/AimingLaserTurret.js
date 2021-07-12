@@ -7,11 +7,11 @@ import Aim from '../../modules/Aim.js';
 import Period from '../../modules/Period.js';
 import Rotate from '../../modules/Rotate.js';
 import StaticLaser from '../../modules/StaticLaser.js';
-import Monster from '.././Monster.js';
+import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class AimingLaserTurret extends Monster {
+class AimingLaserTurret extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .09, .09, 160, 240, new MaterialDrop(1, false));
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));

@@ -11,11 +11,11 @@ import Distance from '../../modules/Distance.js';
 import NearbyDegen from '../../modules/NearbyDegen.js';
 import Period from '../../modules/Period.js';
 import Trigger from '../../modules/Trigger.js';
-import Monster from '.././Monster.js';
+import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class DashChaser extends Monster {
+class DashChaser extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .06, .06, 120, 360, new MaterialDrop(1, false));
 		this.setGraphics(new HexagonShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

@@ -7,11 +7,11 @@ import Aim from '../modules/Aim.js';
 import Chase from '../modules/Chase.js';
 import Distance from '../modules/Distance.js';
 import Shotgun from '../modules/Shotgun.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class ShotgunWarrior extends Monster {
+class ShotgunWarrior extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .04, .04, 4, 0, new MaterialDrop(1, false));
 		this.setGraphics(new WShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

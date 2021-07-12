@@ -9,11 +9,11 @@ import AreaDegenLayer from '../../modules/AreaDegenLayer.js';
 import Chase from '../../modules/Chase.js';
 import Cooldown from '../../modules/Cooldown.js';
 import Distance from '../../modules/Distance.js';
-import Monster from '.././Monster.js';
+import MonsterDeprecated from '.././MonsterDeprecated.js';
 
 const Phases = makeEnum({ONE: 0});
 
-class BombLayer extends Monster {
+class BombLayer extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .04, .04, 120, 300, new MaterialDrop(1, false));
 		this.setGraphics(new DoubleHorizDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));

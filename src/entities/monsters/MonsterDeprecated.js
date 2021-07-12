@@ -6,13 +6,14 @@ import StatValues from '../../playerData/StatValues.js';
 import {Colors, Positions} from '../../util/constants.js';
 import Coordinate from '../../util/Coordinate.js';
 import LivingEntity from '../LivingEntity.js';
+import ModuleManager from '../modules/ModuleManager.js';
 
-class Monster2 extends LivingEntity {
+class MonsterDeprecated extends LivingEntity {
 	constructor(x, y, width, height, health, expValue, materialDrop) {
-		super(x, y, width, height, Monster2.createBaseStats(health), new StatValues(), IntersectionFinder.Layers.HOSTILE_UNIT);
+		super(x, y, width, height, MonsterDeprecated.createBaseStats(health), new StatValues(), IntersectionFinder.Layers.HOSTILE_UNIT);
 		this.expValue = expValue;
 		this.materialDrop = materialDrop;
-		this.modules = [];
+		this.moduleManager = new ModuleManager();
 	}
 
 	static createBaseStats(health) {
@@ -25,20 +26,16 @@ class Monster2 extends LivingEntity {
 		});
 	}
 
-	addModule(module) {
-		this.modules.push(module);
-		return module;
-	}
-
 	update(map, intersectionFinder, monsterKnowledge) {
 		this.refresh();
-		this.modules.forEach(module => module.poll());
-		this.modules.forEach(module => module.apply(map, intersectionFinder, monsterKnowledge.getPlayer()));
+		if (this.attackPhase.sequentialTick())
+			this.moduleManager.modulesSetStage(this.attackPhase.get());
+		this.moduleManager.apply(map, intersectionFinder, monsterKnowledge.getPlayer());
 	}
 
 	paint(painter, camera) {
 		super.paint(painter, camera);
-		this.modules.forEach(module => module.paint(painter, camera));
+		this.moduleManager.paint(painter, camera);
 		let transformedHealthCoordinate = camera.transformCoordinates(
 			new Coordinate(this.x, this.y - this.height, .1, .01)
 				.align(Coordinate.Aligns.CENTER, Coordinate.Aligns.START));
@@ -70,4 +67,4 @@ class Monster2 extends LivingEntity {
 	}
 }
 
-export default Monster2;
+export default MonsterDeprecated;

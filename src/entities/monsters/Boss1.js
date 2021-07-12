@@ -13,11 +13,11 @@ import PhaseSetter from '../modules/PhaseSetter.js';
 import Restore from '../modules/Restore.js';
 import Shotgun from '../modules/Shotgun.js';
 import Trigger from '../modules/Trigger.js';
-import Monster from './Monster.js';
+import MonsterDeprecated from './MonsterDeprecated.js';
 
 const Phases = makeEnum({INACTIVE: 0, PRE_DEGEN: 0, DEGEN: 0, PROJECTILE: 0});
 
-class Boss1 extends Monster {
+class Boss1 extends MonsterDeprecated {
 	constructor(x, y) {
 		super(x, y, .04, .04, 40, 0, new MaterialDrop(1, false));
 		this.setGraphics(new RotatingTurretShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
