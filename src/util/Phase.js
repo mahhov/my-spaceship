@@ -9,6 +9,7 @@ class Phase {
 	}
 
 	setSequentialStartPhase(phase) {
+		// the start phase when looping back
 		this.sequentialStartPhase = phase;
 	}
 
@@ -22,10 +23,10 @@ class Phase {
 	}
 
 	nextPhase() {
-		this.setPhase(++this.phase < this.durations.length ? this.phase : this.sequentialStartPhase);
+		this.setPhase(this.phase < this.durations.length - 1 ? this.phase + 1 : this.sequentialStartPhase);
 	}
 
-	// return true if phase ends (e.g., duration equaled 1)
+	// return true if phase ends (i.e., duration equaled 1)
 	tick() {
 		return this.duration && !--this.duration;
 	}

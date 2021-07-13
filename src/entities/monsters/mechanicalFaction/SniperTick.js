@@ -1,72 +1,54 @@
 import SplitDiamondShip from '../../../graphics/SplitDiamondShip.js';
 import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
-import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
-import Phase from '../../../util/Phase.js';
-import Aim from '../../modulesDeprecated/Aim.js';
-import Chase from '../../modulesDeprecated/Chase.js';
-import Cooldown from '../../modulesDeprecated/Cooldown.js';
-import Distance from '../../modulesDeprecated/Distance.js';
-import Shotgun from '../../modulesDeprecated/Shotgun.js';
-import MonsterDeprecated from '.././MonsterDeprecated.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Cooldown from '../../modules/Cooldown.js';
+import Distance from '../../modules/Distance.js';
+import Shotgun from '../../modules/Shotgun.js';
+import Monster from '../Monster.js';
 
-const Phases = makeEnum({ONE: 0});
-
-class SniperTick extends MonsterDeprecated {
+class SniperTick extends Monster {
 	constructor(x, y) {
 		super(x, y, .04, .04, 60, 120, new MaterialDrop(1, false));
 		this.setGraphics(new SplitDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		this.attackPhase = new Phase(0);
-
-		let distance = new Distance();
+		let distance = this.addModule(new Distance());
 		distance.config(this, .5, .7, 1);
-		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
+		distance.setStage(Distance.Stages.ACTIVE);
 
-		let chaseAim = new Aim();
+		let chaseAim = this.addModule(new Aim());
 		chaseAim.config(this, PI / 20, 100, 1);
-		distance.addModule(chaseAim, {
-			0: Aim.Stages.REVERSE,
-			1: Aim.Stages.INACTIVE,
-			2: Aim.Stages.ACTIVE,
-			3: Aim.Stages.INACTIVE,
-		});
 
-		let chase = new Chase();
+		let chase = this.addModule(new Chase());
 		chase.config(this, .003, chaseAim);
-		distance.addModule(chase, {
-			0: Chase.Stages.ACTIVE,
-			1: Chase.Stages.INACTIVE,
-			2: Chase.Stages.ACTIVE,
-			3: Chase.Stages.INACTIVE,
-		});
 
-		let cooldown = new Cooldown();
+		let cooldown = this.addModule(new Cooldown());
 		cooldown.config(200);
-		distance.addModule(cooldown, {
-			0: Cooldown.Stages.ACTIVE,
-			1: Cooldown.Stages.ACTIVE,
-			2: Cooldown.Stages.COOLDOWN,
-			3: Cooldown.Stages.COOLDOWN,
+
+		distance.on('change', segment => {
+			let stages = [
+				[Aim.Stages.REVERSE, Chase.Stages.ACTIVE, Cooldown.Stages.ACTIVE],
+				[Aim.Stages.INACTIVE, Chase.Stages.INACTIVE, Cooldown.Stages.ACTIVE],
+				[Aim.Stages.ACTIVE, Chase.Stages.ACTIVE, Cooldown.Stages.COOLDOWN],
+				[Aim.Stages.INACTIVE, Chase.Stages.INACTIVE, Cooldown.Stages.COOLDOWN],
+			][segment];
+			chaseAim.setStage(stages[0]);
+			chase.setStage(stages[1]);
+			cooldown.setStage(stages[2]);
 		});
 
-		let shotgunAim = new Aim();
+		let shotgunAim = this.addModule(new Aim());
 		shotgunAim.config(this);
-		cooldown.addModule(shotgunAim, {
-			[Cooldown.Phases.UNTRIGGERED]: Shotgun.Stages.INACTIVE,
-			[Cooldown.Phases.TRIGGERED]: Shotgun.Stages.ACTIVE,
-		});
 
-		let shotgun = new Shotgun();
+		let shotgun = this.addModule(new Shotgun());
 		shotgun.config(this, 1, 1, .01, .001, 100, 6, shotgunAim);
-		cooldown.addModule(shotgun, {
-			[Cooldown.Phases.UNTRIGGERED]: Shotgun.Stages.INACTIVE,
-			[Cooldown.Phases.TRIGGERED]: Shotgun.Stages.ACTIVE,
-		});
 
-		distance.modulesSetStage(0);
-		this.moduleManager.modulesSetStage(this.attackPhase.get());
+		cooldown.on('change', trigger => {
+			shotgunAim.setStage([Aim.Stages.INACTIVE, Aim.Stages.ACTIVE][trigger]);
+			shotgun.setStage([Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE][trigger]);
+		});
 	}
 }
 

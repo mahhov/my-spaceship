@@ -7,7 +7,6 @@ class Module extends PolledEmitter {
 	}
 
 	setStage(stage) {
-		// Used externally
 		this.stage = stage;
 	}
 
