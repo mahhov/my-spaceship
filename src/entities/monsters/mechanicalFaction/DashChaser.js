@@ -1,91 +1,54 @@
 import HexagonShip from '../../../graphics/HexagonShip.js';
 import MaterialDrop from '../../../playerData/MaterialDrop.js';
 import {Colors} from '../../../util/constants.js';
-import makeEnum from '../../../util/enum.js';
 import {PI} from '../../../util/number.js';
-import Phase from '../../../util/Phase.js';
-import Aim from '../../modulesDeprecated/Aim.js';
-import Chase from '../../modulesDeprecated/Chase.js';
-import Dash from '../../modulesDeprecated/Dash.js';
-import Distance from '../../modulesDeprecated/Distance.js';
-import NearbyDegen from '../../modulesDeprecated/NearbyDegen.js';
-import Period from '../../modulesDeprecated/Period.js';
-import Trigger from '../../modulesDeprecated/Trigger.js';
-import MonsterDeprecated from '.././MonsterDeprecated.js';
+import Aim from '../../modules/Aim.js';
+import Chase from '../../modules/Chase.js';
+import Dash from '../../modules/Dash.js';
+import Distance from '../../modules/Distance.js';
+import NearbyDegen from '../../modules/NearbyDegen.js';
+import Period from '../../modules/Period.js';
+import Trigger from '../../modules/Trigger.js';
+import Monster from '../Monster.js';
 
-const Phases = makeEnum({ONE: 0});
-
-class DashChaser extends MonsterDeprecated {
+class DashChaser extends Monster {
 	constructor(x, y) {
 		super(x, y, .06, .06, 120, 360, new MaterialDrop(1, false));
 		this.setGraphics(new HexagonShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		this.attackPhase = new Phase(0);
-
-		let distance = new Distance();
+		let distance = this.addModule(new Distance());
 		distance.config(this, .8, 1);
-		this.moduleManager.addModule(distance, {[Phases.ONE]: Distance.Stages.ACTIVE});
+		distance.setStage(Distance.Stages.ACTIVE);
 
-		let period = new Period();
-		period.config(125, 35, 15, 20, 1);
-		distance.addModule(period, {
-			0: Period.Stages.LOOP,
-			1: Period.Stages.PLAY,
-			2: Period.Stages.PLAY,
-		});
+		let period = this.addModule(new Period());
+		period.config(125, 35, 15, 20, 1); // chase, aim, warn, dashing until collided, inactive
+		distance.onChangeSetModuleStages([period, Period.Stages.LOOP, Period.Stages.PLAY, Period.Stages.PLAY]);
 
-		let aim = new Aim();
-		aim.config(this, PI / 80, 80, .2);
-		period.addModule(aim, {
-			0: Aim.Stages.ACTIVE,
-			1: Aim.Stages.INACTIVE,
-			2: Aim.Stages.INACTIVE,
-			3: Aim.Stages.INACTIVE,
-			4: Aim.Stages.ACTIVE,
-		});
+		let chaseAim = this.addModule(new Aim());
+		chaseAim.config(this, PI / 80, 80, .2);
 
-		let chase = new Chase();
-		chase.config(this, .002, aim);
-		period.addModule(chase, {
-			0: Chase.Stages.ACTIVE,
-			1: Chase.Stages.INACTIVE,
-			2: Chase.Stages.INACTIVE,
-			3: Chase.Stages.INACTIVE,
-			4: Chase.Stages.ACTIVE,
-		});
+		let chase = this.addModule(new Chase());
+		chase.config(this, .002, chaseAim);
 
-		let dash = new Dash();
+		let dash = this.addModule(new Dash());
 		dash.config(this, .25, 20);
-		period.addModule(dash, {
-			0: Dash.Stages.INACTIVE,
-			1: Dash.Stages.AIMING,
-			2: Dash.Stages.WARNING,
-			3: Dash.Stages.DASHING,
-			4: Dash.Stages.INACTIVE,
-		});
 
-		let triggerDashEnd = new Trigger();
-		triggerDashEnd.config(1);
-		dash.addModule(triggerDashEnd, {
-			[Dash.Phases.INACTIVE]: Trigger.Stages.ACTIVE,
-			[Dash.Phases.AIMING]: Trigger.Stages.INACTIVE,
-			[Dash.Phases.WARNING]: Trigger.Stages.INACTIVE,
-			[Dash.Phases.DASHING]: Trigger.Stages.INACTIVE,
-		});
+		let dashEndTrigger = this.addModule(new Trigger());
+		dashEndTrigger.config(1);
+		dash.on('collide', () => dashEndTrigger.setStage(Trigger.Stages.ACTIVE));
 
-		let nearbyDegen = new NearbyDegen();
+		let nearbyDegen = this.addModule(new NearbyDegen());
 		nearbyDegen.config(dash.target, .15, 6);
-		triggerDashEnd.addModule(nearbyDegen, {
-			[Trigger.Phases.UNTRIGGERED]: NearbyDegen.Stages.INACTIVE,
-			[Trigger.Phases.TRIGGERED]: NearbyDegen.Stages.ACTIVE,
-		});
-		dash.addModule(nearbyDegen, {
-			[Dash.Phases.INACTIVE]: NearbyDegen.Stages.INACTIVE,
-			[Dash.Phases.AIMING]: NearbyDegen.Stages.WARNING,
-			[Dash.Phases.WARNING]: NearbyDegen.Stages.WARNING,
-		});
+		dashEndTrigger.on('trigger', () => nearbyDegen.setStage(NearbyDegen.Stages.ACTIVE));
+		dashEndTrigger.on('end-trigger', () => nearbyDegen.setStage(NearbyDegen.Stages.INACTIVE));
 
-		this.moduleManager.modulesSetStage(this.attackPhase.get());
+		period.onChangeSetModuleStages(
+			[chaseAim, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
+			[chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE],
+			[dash, Dash.Stages.INACTIVE, Dash.Stages.AIMING, Dash.Stages.WARNING, Dash.Stages.DASHING, Dash.Stages.INACTIVE],
+			[dashEndTrigger, null, null, null, Trigger.Stages.INACTIVE, Trigger.Stages.ACTIVE],
+			[nearbyDegen, null, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.WARNING, null, null],
+		);
 	}
 }
 
