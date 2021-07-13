@@ -6,6 +6,11 @@ class Module extends PolledEmitter {
 		this.stage = 0;
 	}
 
+	onChangeSetModuleStages(...moduleTuples) {
+		this.on('change', value => moduleTuples.forEach(([module, ...stages]) =>
+			module.setStage(stages[value])));
+	}
+
 	setStage(stage) {
 		this.stage = stage;
 	}

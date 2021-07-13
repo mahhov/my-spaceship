@@ -27,17 +27,11 @@ class SniperTick extends Monster {
 		let cooldown = this.addModule(new Cooldown());
 		cooldown.config(200);
 
-		distance.on('change', segment => {
-			let stages = [
-				[Aim.Stages.REVERSE, Chase.Stages.ACTIVE, Cooldown.Stages.ACTIVE],
-				[Aim.Stages.INACTIVE, Chase.Stages.INACTIVE, Cooldown.Stages.ACTIVE],
-				[Aim.Stages.ACTIVE, Chase.Stages.ACTIVE, Cooldown.Stages.COOLDOWN],
-				[Aim.Stages.INACTIVE, Chase.Stages.INACTIVE, Cooldown.Stages.COOLDOWN],
-			][segment];
-			chaseAim.setStage(stages[0]);
-			chase.setStage(stages[1]);
-			cooldown.setStage(stages[2]);
-		});
+		distance.onChangeSetModuleStages(
+			[chaseAim, Aim.Stages.REVERSE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE],
+			[chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE],
+			[cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN, Cooldown.Stages.COOLDOWN],
+		);
 
 		let shotgunAim = this.addModule(new Aim());
 		shotgunAim.config(this);
@@ -45,10 +39,10 @@ class SniperTick extends Monster {
 		let shotgun = this.addModule(new Shotgun());
 		shotgun.config(this, 1, 1, .01, .001, 100, 6, shotgunAim);
 
-		cooldown.on('change', trigger => {
-			shotgunAim.setStage([Aim.Stages.INACTIVE, Aim.Stages.ACTIVE][trigger]);
-			shotgun.setStage([Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE][trigger]);
-		});
+		cooldown.onChangeSetModuleStages(
+			[shotgunAim, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
+			[shotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE],
+		);
 	}
 }
 

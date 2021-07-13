@@ -39,17 +39,11 @@ class ExplodingTick extends Monster {
 		let degen = this.addModule(new NearbyDegen());
 		degen.config(this, .15, .3);
 
-		patternedPeriod.on('change', period => {
-			let degenStage = [
-				NearbyDegen.Stages.INACTIVE,
-				NearbyDegen.Stages.WARNING,
-				NearbyDegen.Stages.ACTIVE,
-				NearbyDegen.Stages.INACTIVE,
-			][period];
-			degen.setStage(degenStage);
-			aim.setStage(period === 3 ? Aim.Stages.ACTIVE : Aim.Stages.INACTIVE);
-			chase.setStage(period === 3 ? Chase.Stages.ACTIVE : Chase.Stages.INACTIVE);
-		});
+		patternedPeriod.onChangeSetModuleStages(
+			[degen, NearbyDegen.Stages.INACTIVE, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.ACTIVE, NearbyDegen.Stages.INACTIVE],
+			[aim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
+			[chase, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE],
+		);
 	}
 }
 
