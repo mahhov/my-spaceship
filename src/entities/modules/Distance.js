@@ -10,6 +10,7 @@ class Distance extends Module {
 	config(origin, ...distances) {
 		this.origin = origin;
 		this.distances = distances;
+		this.lastSegment = null;
 	}
 
 	apply(map, intersectionFinder, target) {
@@ -21,7 +22,9 @@ class Distance extends Module {
 		let segment = this.distances.findIndex(distance => targetDistance < distance);
 		if (segment === -1)
 			segment = this.distances.length;
-		this.emit('change', segment);
+
+		if (this.lastSegment !== segment)
+			this.emit('change', this.lastSegment = segment);
 	}
 }
 

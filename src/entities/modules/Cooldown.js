@@ -10,13 +10,14 @@ class Cooldown extends Module {
 	}
 
 	apply(map, intersectionFinder, target) {
+		if (this.cooldown.get() === 0 && this.cooldown.isNew())
+			this.emit('post-trigger');
 		if (this.stage !== Stages.INACTIVE)
 			this.cooldown.sequentialTick();
 		if (this.cooldown.get() === 1 && this.stage === Stages.ACTIVE) {
 			this.cooldown.setPhase(0);
-			this.emit('change', 1);
-		} else
-			this.emit('change', 0);
+			this.emit('trigger');
+		}
 	}
 }
 

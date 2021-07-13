@@ -35,7 +35,8 @@ class BombLayer extends Monster {
 
 		let areaDegen = this.addModule(new AreaDegenLayer());
 		areaDegen.config(this, .1, 200, .3);
-		cooldown.onChangeSetModuleStages([areaDegen, AreaDegenLayer.Stages.INACTIVE, AreaDegenLayer.Stages.ACTIVE]);
+		cooldown.on('trigger', () => areaDegen.setStage(AreaDegenLayer.Stages.ACTIVE));
+		cooldown.on('post-trigger', () => areaDegen.setStage(AreaDegenLayer.Stages.INACTIVE));
 	}
 }
 

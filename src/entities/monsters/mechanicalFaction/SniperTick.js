@@ -39,10 +39,14 @@ class SniperTick extends Monster {
 		let shotgun = this.addModule(new Shotgun());
 		shotgun.config(this, 1, 1, .01, .001, 100, 6, shotgunAim);
 
-		cooldown.onChangeSetModuleStages(
-			[shotgunAim, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
-			[shotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE],
-		);
+		cooldown.on('trigger', () => {
+			shotgunAim.setStage(Aim.Stages.ACTIVE);
+			shotgun.setStage(Shotgun.Stages.ACTIVE);
+		});
+		cooldown.on('post-trigger', () => {
+			shotgunAim.setStage(Aim.Stages.INACTIVE);
+			shotgun.setStage(Shotgun.Stages.INACTIVE);
+		});
 	}
 }
 

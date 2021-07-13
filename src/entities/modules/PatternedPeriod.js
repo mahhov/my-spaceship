@@ -11,6 +11,7 @@ class PatternedPeriod extends Module {
 		// else if queues[nextPatternI] is false, will update curPatternI to nextPatternI immediately.
 		this.queues = queues;
 		this.nextPatternI = 0;
+		this.lastPeriod = null;
 	}
 
 	setPattern(patternI) {
@@ -51,7 +52,8 @@ class PatternedPeriod extends Module {
 			}
 		}
 
-		this.emit('change', this.period);
+		if (this.lastPeriod !== this.period)
+			this.emit('change', this.lastPeriod = this.period);
 	}
 }
 

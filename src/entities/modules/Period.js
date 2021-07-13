@@ -8,6 +8,7 @@ class Period extends Module {
 	config(...periods) {
 		this.periodCount = periods.length;
 		this.periods = new Phase(...periods, 0);
+		this.lastPeriod = null;
 	}
 
 	apply(map, intersectionFinder, target) {
@@ -20,7 +21,8 @@ class Period extends Module {
 				this.periods.setPhase(0);
 		}
 
-		this.emit('change', this.periods.get());
+		if (this.lastPeriod !== this.periods.get())
+			this.emit('change', this.lastPeriod = this.periods.get());
 	}
 }
 
