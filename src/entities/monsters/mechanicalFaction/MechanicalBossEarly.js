@@ -15,16 +15,16 @@ class MechanicalBossEarly extends Monster {
 		super(x, y, .2, .2, 2200, 500, new MaterialDrop(1, false));
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
-		this.distance = this.addModule(new Distance());
-		this.distance.config(this, .25, .75);
-		this.distance.setStage(Distance.Stages.ACTIVE);
+		let distance = this.addModule(new Distance());
+		distance.config(this, .25, .75);
+		distance.setStage(Distance.Stages.ACTIVE);
 
 		let nearbyDegenPeriod = this.addModule(new Period());
 		nearbyDegenPeriod.print = true;
 		nearbyDegenPeriod.config(50, 150, 1); // warning, active, inactive
 		nearbyDegenPeriod.setStage(Period.Stages.PLAY);
 		nearbyDegenPeriod.periods.setPhase(2);
-		this.distance.onChangeSetModuleStages(nearbyDegenPeriod, Period.Stages.LOOP, Period.Stages.PLAY, Period.Stages.PLAY);
+		distance.onChangeSetModuleStages(nearbyDegenPeriod, Period.Stages.LOOP, Period.Stages.PLAY, Period.Stages.PLAY);
 
 		let nearbyDegen = this.addModule(new NearbyDegen());
 		nearbyDegen.config(this, .5, .2);
@@ -32,11 +32,11 @@ class MechanicalBossEarly extends Monster {
 
 		let farAwayShotgunAim = this.addModule(new Aim());
 		farAwayShotgunAim.config(this, 0);
-		this.distance.onChangeSetModuleStages(farAwayShotgunAim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE);
+		distance.onChangeSetModuleStages(farAwayShotgunAim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE);
 
 		let farAwayShotgun = this.addModule(new Shotgun());
 		farAwayShotgun.config(this, .1, 1, .01, 0, 200, 1, farAwayShotgunAim, true);
-		this.distance.onChangeSetModuleStages(farAwayShotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE);
+		distance.onChangeSetModuleStages(farAwayShotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE);
 
 		this.period = this.addModule(new Period());
 		this.period.config(100, 200, 100, 200); // rest, laser, pause, shotgun
