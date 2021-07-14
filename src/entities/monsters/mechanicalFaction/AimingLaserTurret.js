@@ -13,24 +13,21 @@ class AimingLaserTurret extends Monster {
 		this.setGraphics(new Rect1DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
 		let period = this.addModule(new Period());
-		period.config(50, 70, 80, 1);
+		period.config(50, 70, 80, 1); // rest, aim, warn, laser
 		period.periods.setRandomTick();
 		period.setStage(Period.Stages.LOOP);
 
 		let rotate = this.addModule(new Rotate());
 		rotate.config(this, 0, 0, true);
+		period.onChangeSetModuleStages(rotate, Rotate.Stages.INACTIVE, Rotate.Stages.ACTIVE, Rotate.Stages.INACTIVE, Rotate.Stages.INACTIVE);
 
 		let aim = this.addModule(new Aim());
 		aim.config(this, 0);
+		period.onChangeSetModuleStages(aim, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE);
 
 		let staticLaser = this.addModule(new StaticLaser());
 		staticLaser.config(this, .005, .5, aim, 50, .5);
-
-		period.onChangeSetModuleStages(
-			[rotate, Rotate.Stages.INACTIVE, Rotate.Stages.ACTIVE, Rotate.Stages.INACTIVE, Rotate.Stages.INACTIVE],
-			[aim, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE],
-			[staticLaser, StaticLaser.Stages.INACTIVE, StaticLaser.Stages.INACTIVE, StaticLaser.Stages.WARNING, StaticLaser.Stages.ACTIVE],
-		);
+		period.onChangeSetModuleStages(staticLaser, StaticLaser.Stages.INACTIVE, StaticLaser.Stages.INACTIVE, StaticLaser.Stages.WARNING, StaticLaser.Stages.ACTIVE);
 	}
 }
 

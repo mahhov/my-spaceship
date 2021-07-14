@@ -19,7 +19,7 @@ class ExplodingTick extends Monster {
 		distance.setStage(Distance.Stages.ACTIVE);
 
 		let patternedPeriod = this.addModule(new PatternedPeriod());
-		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true]);
+		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true]); // stop, (chase, warn, attack loop), chase
 		distance.on('change', segment => {
 			let stagePattern = [
 				[PatternedPeriod.Stages.LOOP, 1],
@@ -32,18 +32,16 @@ class ExplodingTick extends Monster {
 
 		let aim = this.addModule(new Aim());
 		aim.config(this, PI / 20, 50, .1);
+		patternedPeriod.onChangeSetModuleStages(aim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE);
 
 		let chase = this.addModule(new Chase());
 		chase.config(this, .003, aim);
+		patternedPeriod.onChangeSetModuleStages(chase, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE);
 
 		let degen = this.addModule(new NearbyDegen());
 		degen.config(this, .15, .3);
+		patternedPeriod.onChangeSetModuleStages(degen, NearbyDegen.Stages.INACTIVE, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.ACTIVE, NearbyDegen.Stages.INACTIVE);
 
-		patternedPeriod.onChangeSetModuleStages(
-			[degen, NearbyDegen.Stages.INACTIVE, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.ACTIVE, NearbyDegen.Stages.INACTIVE],
-			[aim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
-			[chase, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE],
-		);
 	}
 }
 

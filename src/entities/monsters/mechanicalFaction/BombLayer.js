@@ -15,23 +15,20 @@ class BombLayer extends Monster {
 		this.setGraphics(new DoubleHorizDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
 		let distance = this.addModule(new Distance());
-		distance.config(this, .1, 1);
+		distance.config(this, .1, 1); // reverse chase + degen, chase + degen, rest + cooldown
 		distance.setStage(Distance.Stages.ACTIVE);
 
 		let aim = this.addModule(new Aim());
 		aim.config(this, PI / 80, 80, .2);
+		distance.onChangeSetModuleStages(aim, Aim.Stages.REVERSE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE);
 
 		let chase = this.addModule(new Chase());
 		chase.config(this, .003, aim);
+		distance.onChangeSetModuleStages(chase, Chase.Stages.ACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE);
 
 		let cooldown = this.addModule(new Cooldown());
 		cooldown.config(80);
-
-		distance.onChangeSetModuleStages(
-			[aim, Aim.Stages.REVERSE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE],
-			[chase, Chase.Stages.ACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE],
-			[cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN],
-		);
+		distance.onChangeSetModuleStages(cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN);
 
 		let areaDegen = this.addModule(new AreaDegenLayer());
 		areaDegen.config(this, .1, 200, .3);

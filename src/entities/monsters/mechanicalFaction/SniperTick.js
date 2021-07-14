@@ -20,18 +20,15 @@ class SniperTick extends Monster {
 
 		let chaseAim = this.addModule(new Aim());
 		chaseAim.config(this, PI / 20, 100, 1);
+		distance.onChangeSetModuleStages(chaseAim, Aim.Stages.REVERSE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE);
 
 		let chase = this.addModule(new Chase());
 		chase.config(this, .003, chaseAim);
+		distance.onChangeSetModuleStages(chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE);
 
 		let cooldown = this.addModule(new Cooldown());
 		cooldown.config(200);
-
-		distance.onChangeSetModuleStages(
-			[chaseAim, Aim.Stages.REVERSE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE],
-			[chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE],
-			[cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN, Cooldown.Stages.COOLDOWN],
-		);
+		distance.onChangeSetModuleStages(cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN, Cooldown.Stages.COOLDOWN);
 
 		let shotgunAim = this.addModule(new Aim());
 		shotgunAim.config(this);

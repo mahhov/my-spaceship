@@ -4,13 +4,15 @@ class Module extends PolledEmitter {
 	constructor() {
 		super();
 		this.stage = 0;
+		this.onChangeModuleTuples = [];
 	}
 
-	onChangeSetModuleStages(...moduleTuples) {
-		this.on('change', value => moduleTuples.forEach(([module, ...stages]) => {
-			if (stages[value] !== null)
-				module.setStage(stages[value]);
-		}));
+	onChangeSetModuleStages(module, ...stages) {
+		if (!this.onChangeModuleTuples.length)
+			this.on('change', value => this.onChangeModuleTuples
+				.filter(({stages}) => stages[value] !== null && stages[value] !== undefined)
+				.forEach(({module, stages}) => module.setStage(stages[value])));
+		this.onChangeModuleTuples.push({module, stages});
 	}
 
 	setStage(stage) {

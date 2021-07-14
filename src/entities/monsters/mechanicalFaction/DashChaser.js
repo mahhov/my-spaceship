@@ -22,33 +22,30 @@ class DashChaser extends Monster {
 
 		let period = this.addModule(new Period());
 		period.config(125, 35, 15, 20, 1); // chase, aim, warn, dashing until collided, inactive
-		distance.onChangeSetModuleStages([period, Period.Stages.LOOP, Period.Stages.PLAY, Period.Stages.PLAY]);
+		distance.onChangeSetModuleStages(period, Period.Stages.LOOP, Period.Stages.PLAY, Period.Stages.PLAY);
 
 		let chaseAim = this.addModule(new Aim());
 		chaseAim.config(this, PI / 80, 80, .2);
+		period.onChangeSetModuleStages(chaseAim, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE);
 
 		let chase = this.addModule(new Chase());
 		chase.config(this, .002, chaseAim);
+		period.onChangeSetModuleStages(chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE);
 
 		let dash = this.addModule(new Dash());
 		dash.config(this, .25, 20);
+		period.onChangeSetModuleStages(dash, Dash.Stages.INACTIVE, Dash.Stages.AIMING, Dash.Stages.WARNING, Dash.Stages.DASHING, Dash.Stages.INACTIVE);
 
 		let dashEndTrigger = this.addModule(new Trigger());
 		dashEndTrigger.config(1);
 		dash.on('collide', () => dashEndTrigger.setStage(Trigger.Stages.ACTIVE));
+		period.onChangeSetModuleStages(dashEndTrigger, null, null, null, Trigger.Stages.INACTIVE, Trigger.Stages.ACTIVE);
 
 		let nearbyDegen = this.addModule(new NearbyDegen());
 		nearbyDegen.config(dash.target, .15, 6);
 		dashEndTrigger.on('trigger', () => nearbyDegen.setStage(NearbyDegen.Stages.ACTIVE));
 		dashEndTrigger.on('end-trigger', () => nearbyDegen.setStage(NearbyDegen.Stages.INACTIVE));
-
-		period.onChangeSetModuleStages(
-			[chaseAim, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE],
-			[chase, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE],
-			[dash, Dash.Stages.INACTIVE, Dash.Stages.AIMING, Dash.Stages.WARNING, Dash.Stages.DASHING, Dash.Stages.INACTIVE],
-			[dashEndTrigger, null, null, null, Trigger.Stages.INACTIVE, Trigger.Stages.ACTIVE],
-			[nearbyDegen, null, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.WARNING, null, null],
-		);
+		period.onChangeSetModuleStages(nearbyDegen, null, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.WARNING, null, null);
 	}
 }
 
