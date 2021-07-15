@@ -1,5 +1,6 @@
 import PathCreator from './PathCreator.js';
 
+// todo [medium] use Graphics2. If it works fine, deprecate this.
 class Graphics {
 	constructor() {
 		this.pathCreators = [];

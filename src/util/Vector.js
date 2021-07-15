@@ -87,9 +87,9 @@ class Vector {
 
 	// rotates clockwise
 	rotateByCosSin(cos, sin) {
-		let tempX = this.x;
-		this.x = this.x * cos - this.y * sin;
-		this.y = tempX * sin + this.y * cos;
+		[this.x, this.y] = [
+			this.x * cos - this.y * sin,
+			this.x * sin + this.y * cos];
 		return this;
 	}
 

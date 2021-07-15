@@ -1,7 +1,6 @@
 import PainterElement from './PainterElement.js';
 
 class Path extends PainterElement {
-	// todo [medium] replace constructor param with setOptions() like Text & Rect
 	constructor(xys, closed) {
 		super();
 		this.xys = xys;
