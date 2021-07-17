@@ -12,8 +12,7 @@ class Static4DirTurret extends Monster {
 		super(x, y, .09, .09, 160, 200, new MaterialDrop(1, false));
 		this.setGraphics(new Rect4DotsShip(this.width, this.height, Colors.Entity.MONSTER.get()));
 
-		let period = this.addModule(new Period());
-		period.config(120, 80); // rest, attack
+		let period = this.addModule(new Period(120, 80));
 		period.setStage(Period.Stages.LOOP);
 
 		[
@@ -22,10 +21,8 @@ class Static4DirTurret extends Monster {
 			{x: -1, y: 0},
 			{x: 0, y: -1},
 		].forEach(dir => {
-			let aim = this.addModule(new Aim());
-			aim.config(this, 0, 0, 0, Vector.fromObj(dir));
-			let shotgun = this.addModule(new Shotgun());
-			shotgun.config(this, .05, 1, .003, .0001, 100, 4, aim, true);
+			let aim = this.addModule(new Aim(this, 0, 0, 0, Vector.fromObj(dir)));
+			let shotgun = this.addModule(new Shotgun(this, .05, 1, .003, .0001, 100, 4, aim, true));
 			period.onChangeSetModuleStages(shotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE);
 		});
 

@@ -14,24 +14,19 @@ class BombLayer extends Monster {
 		super(x, y, .04, .04, 120, 300, new MaterialDrop(1, false));
 		this.setGraphics(new DoubleHorizDiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		let distance = this.addModule(new Distance());
-		distance.config(this, .1, 1); // reverse chase + degen, chase + degen, rest + cooldown
+		let distance = this.addModule(new Distance(this, .1, 1));
 		distance.setStage(Distance.Stages.ACTIVE);
 
-		let aim = this.addModule(new Aim());
-		aim.config(this, PI / 80, 80, .2);
+		let aim = this.addModule(new Aim(this, PI / 80, 80, .2));
 		distance.onChangeSetModuleStages(aim, Aim.Stages.REVERSE, Aim.Stages.ACTIVE, Aim.Stages.INACTIVE);
 
-		let chase = this.addModule(new Chase());
-		chase.config(this, .003, aim);
+		let chase = this.addModule(new Chase(this, .003, aim));
 		distance.onChangeSetModuleStages(chase, Chase.Stages.ACTIVE, Chase.Stages.ACTIVE, Chase.Stages.INACTIVE);
 
-		let cooldown = this.addModule(new Cooldown());
-		cooldown.config(80);
+		let cooldown = this.addModule(new Cooldown((80)));
 		distance.onChangeSetModuleStages(cooldown, Cooldown.Stages.ACTIVE, Cooldown.Stages.ACTIVE, Cooldown.Stages.COOLDOWN);
 
-		let areaDegen = this.addModule(new AreaDegenLayer());
-		areaDegen.config(this, .1, 200, .3);
+		let areaDegen = this.addModule(new AreaDegenLayer(this, .1, 200, .3));
 		cooldown.on('trigger', () => areaDegen.setStage(AreaDegenLayer.Stages.ACTIVE));
 		cooldown.on('post-trigger', () => areaDegen.setStage(AreaDegenLayer.Stages.INACTIVE));
 	}

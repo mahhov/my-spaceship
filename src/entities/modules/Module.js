@@ -1,10 +1,14 @@
 import PolledEmitter from '../../util/PolledEmitter.js';
 
 class Module extends PolledEmitter {
-	constructor() {
+	constructor(...args) {
 		super();
 		this.stage = 0;
 		this.onChangeModuleTuples = [];
+		this.config(...args);
+	}
+
+	config() {
 	}
 
 	onChangeSetModuleStages(module, ...stages) {

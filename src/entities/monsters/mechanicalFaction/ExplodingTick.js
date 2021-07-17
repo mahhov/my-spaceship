@@ -14,12 +14,10 @@ class ExplodingTick extends Monster {
 		super(x, y, .04, .04, 60, 100, new MaterialDrop(1, false));
 		this.setGraphics(new DiamondShip(this.width, this.height, {fill: true, color: Colors.Entity.MONSTER.get()}));
 
-		let distance = this.addModule(new Distance());
-		distance.config(this, .1, 1);
+		let distance = this.addModule(new Distance(this, .1, 1));
 		distance.setStage(Distance.Stages.ACTIVE);
 
-		let patternedPeriod = this.addModule(new PatternedPeriod());
-		patternedPeriod.config([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true]); // stop, (chase, warn, attack loop), chase
+		let patternedPeriod = this.addModule(new PatternedPeriod([0, 60, 60, 60])); // stop, (chase, warn, attack loop), chase
 		distance.on('change', segment => {
 			let stagePattern = [
 				[PatternedPeriod.Stages.LOOP, 1],
@@ -30,16 +28,13 @@ class ExplodingTick extends Monster {
 			patternedPeriod.setPattern(stagePattern[1]);
 		});
 
-		let aim = this.addModule(new Aim());
-		aim.config(this, PI / 20, 50, .1);
+		let aim = this.addModule(new Aim(this, PI / 20, 50, .1));
 		patternedPeriod.onChangeSetModuleStages(aim, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.INACTIVE, Aim.Stages.ACTIVE);
 
-		let chase = this.addModule(new Chase());
-		chase.config(this, .003, aim);
+		let chase = this.addModule(new Chase(this, .003, aim));
 		patternedPeriod.onChangeSetModuleStages(chase, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.INACTIVE, Chase.Stages.ACTIVE);
 
-		let degen = this.addModule(new NearbyDegen());
-		degen.config(this, .15, .3);
+		let degen = this.addModule(new NearbyDegen(this, .15, .3));
 		patternedPeriod.onChangeSetModuleStages(degen, NearbyDegen.Stages.INACTIVE, NearbyDegen.Stages.WARNING, NearbyDegen.Stages.ACTIVE, NearbyDegen.Stages.INACTIVE);
 
 	}
