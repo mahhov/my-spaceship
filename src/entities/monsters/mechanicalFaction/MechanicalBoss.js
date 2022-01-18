@@ -3,15 +3,13 @@ import Period from '../../modules/Period.js';
 import Position from '../../modules/Position.js';
 import MechanicalBossEarly from './MechanicalBossEarly.js';
 
-// todo [high] none of these are working
-
 class MechanicalBoss extends MechanicalBossEarly {
 	// todo [low] set expValue higher than MechanicalBossEarly
 
 	constructor(x, y) {
 		super(x, y);
 
-		// this.period = rest, laser + random degen, pause, shotgun + chasing degen
+		// this.period = pause, laser + random degen, pause, shotgun + chasing degen
 
 		let surroundDegenPeriod = this.addModule(new Period(1, 38, 1));
 		this.period.onChangeSetModuleStages(surroundDegenPeriod, Period.Stages.STOP, Period.Stages.LOOP, Period.Stages.STOP, Period.Stages.STOP);

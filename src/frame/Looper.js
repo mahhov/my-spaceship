@@ -37,7 +37,7 @@ class Looper {
 				this.frame.update();
 				this.controller.expire();
 			}
-			await Looper.sleep(10);
+			await Looper.sleep(0);
 		}
 	}
 
@@ -60,7 +60,6 @@ class Looper {
 			this.painterSet.uiPainter.add(new Rect(mouseCoordinate.clone.size(.006)).setOptions({color: '#000', thickness: 2}));
 
 			this.painterSet.paint();
-			await Looper.sleep(10);
 		}
 		requestAnimationFrame(() => this.paintLoop());
 	}

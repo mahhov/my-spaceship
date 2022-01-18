@@ -32,7 +32,7 @@ class MechanicalBossEarly extends Monster {
 		let farAwayShotgun = this.addModule(new Shotgun(this, .1, 1, .01, 0, 200, 1, farAwayShotgunAim, true));
 		distance.onChangeSetModuleStages(farAwayShotgun, Shotgun.Stages.INACTIVE, Shotgun.Stages.INACTIVE, Shotgun.Stages.ACTIVE);
 
-		this.period = this.addModule(new Period(100, 200, 100, 200)); // rest, laser, pause, shotgun
+		this.period = this.addModule(new Period(100, 200, 100, 200)); // pause, laser, pause, shotgun
 		this.period.setStage(Period.Stages.LOOP);
 
 		let laserPeriod = this.addModule(new Period(1, 38, 1));

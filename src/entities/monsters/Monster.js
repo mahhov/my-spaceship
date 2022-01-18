@@ -71,3 +71,13 @@ class Monster extends LivingEntity {
 }
 
 export default Monster;
+
+// todo [medium] monster ideas
+// circle that puts aoes
+// wave generator from edge of map
+// snake
+// projectile boss
+// spear boss
+// explosive that only becomes visible when nearby
+// laser strolling enemy that only becomes visible when charging & firing
+//
