@@ -80,4 +80,4 @@ export default Monster;
 // spear boss
 // explosive that only becomes visible when nearby
 // laser strolling enemy that only becomes visible when charging & firing
-//
+// bull boss - charge while shooting side projectiles, melee stun, melee dmg without delay, ranged splitting smash

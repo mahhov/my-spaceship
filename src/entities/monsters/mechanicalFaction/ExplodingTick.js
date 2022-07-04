@@ -17,7 +17,7 @@ class ExplodingTick extends Monster {
 		let distance = this.addModule(new Distance(this, .1, 1));
 		distance.setStage(Distance.Stages.ACTIVE);
 
-		let patternedPeriod = this.addModule(new PatternedPeriod([0, 60, 60, 60])); // stop, (chase, warn, attack loop), chase
+		let patternedPeriod = this.addModule(new PatternedPeriod([0, 60, 60, 60], [[0], [1, 2, 3], [3]], [false, false, true])); // stop, (chase, warn, attack loop), chase
 		distance.on('change', segment => {
 			let stagePattern = [
 				[PatternedPeriod.Stages.LOOP, 1],

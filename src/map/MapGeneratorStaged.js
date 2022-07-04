@@ -1,3 +1,4 @@
+import Snake from '../entities/monsters/keepOutOfRedFaction/Snake.js';
 import AimingLaserTurret from '../entities/monsters/mechanicalFaction/AimingLaserTurret.js';
 import BombLayer from '../entities/monsters/mechanicalFaction/BombLayer.js';
 import DashChaser from '../entities/monsters/mechanicalFaction/DashChaser.js';
@@ -21,7 +22,7 @@ const SPAWN_DIST = 3 / 4;
 
 const STAGE_SPAWNS = [
 	[
-		[ExplodingTick, 3],
+		[Snake, 1],
 	],
 	[
 		[ExplodingTick, 2],

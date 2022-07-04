@@ -1,4 +1,3 @@
-import {Colors} from '../util/constants.js';
 import Graphics2 from './Graphics2.js';
 
 const TOP_WIDTH = .5, BOTTOM_WIDTH = .8, HEIGHT = .4, BOTTOM_INSET_HEIGHT = .125;
@@ -18,16 +17,13 @@ const DIAMOND = [
 	[-1, 0], // left
 ];
 
-const COLOR = Colors.Entity.MONSTER.get();
-
-class TestShip extends Graphics2 {
-	constructor(width, height) {
+class SnakeShip extends Graphics2 {
+	constructor(width, height, color) {
 		super(width, height);
-		this.addPath(new Graphics2.GraphicsPath(TRAPEZOID, true, 0, 0, 1, true)); // top
-		this.addPath(new Graphics2.GraphicsPath(DIAMOND, false, -.22, .25, .1, true, '#f00')); // left
-		this.addPath(new Graphics2.GraphicsPath(DIAMOND, false, .22, .25, .1, true, '#f00')); // right
+		this.addPath(new Graphics2.GraphicsPath(TRAPEZOID, true, 0, 0, 1, true, color)); // body
+		this.addPath(new Graphics2.GraphicsPath(DIAMOND, false, -.22, .25, .1, true, '#f00')); // left eye
+		this.addPath(new Graphics2.GraphicsPath(DIAMOND, false, .22, .25, .1, true, '#f00')); // right eye
 	}
 }
 
-export default TestShip;
-
+export default SnakeShip;
